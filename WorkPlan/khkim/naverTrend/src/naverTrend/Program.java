@@ -1,8 +1,10 @@
 package naverTrend;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -56,11 +58,10 @@ public class Program {
 			
 			body = jobj.toString(); //fault toJsonString
 			System.out.println(body);
+			
 		} catch (IOException | ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	private static void response() throws Exception {
@@ -78,8 +79,11 @@ public class Program {
 			response.append(inputLine);
 		}
 		br.close();
+		
 		System.out.println(response.toString());
-
+		BufferedWriter writer = new BufferedWriter(new FileWriter("src/result.json"));
+		writer.write(response.toString());
+		writer.close();
 	}
 
 	private static void connect() throws Exception {
