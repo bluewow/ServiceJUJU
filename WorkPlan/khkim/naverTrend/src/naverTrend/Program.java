@@ -29,9 +29,9 @@ public class Program {
 	public static void main(String[] args) throws Exception {
 
 		parseLocalJson();
-		init();
-		connect();
-		response();
+//		init();
+//		connect();
+//		response();
 	}
 
 	private static void parseLocalJson() {
