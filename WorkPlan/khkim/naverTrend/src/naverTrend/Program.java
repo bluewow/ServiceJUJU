@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -26,25 +29,32 @@ public class Program {
 	private static JSONArray jarray;
 	private static JSONParser jsonParser;
 	private static InputData data;
+	private static Map<String, Double> trendResult; 
 	
 	public static void main(String[] args) throws Exception {
-		makeJsonFile();
-//		parseLocalJson();
-		init();
-		connect();
-		response();
+		trendResult = new HashMap<String, Double>();
+//		makeJsonFile();
+		parseJson();
+		
+		Set<Map.Entry<String, Double>> entries = trendResult.entrySet();
+		for(Map.Entry<String, Double> entry : entries) {
+			System.out.println("key : " + entry.getKey());
+			System.out.println(", value : " + entry.getValue());
+		}
+//		init();
+//		connect();
+//		response();
 	}
 
 	@SuppressWarnings("unchecked")
 	private static void makeJsonFile() {
 		JSONObject obj = new JSONObject();
 		JSONObject date = new JSONObject();
-		JSONArray jarray = new JSONArray();
+		JSONArray array = new JSONArray();
 
-		
 		data = new InputData();
 		
-		//mode - put the date info predefined.
+		//init(true) => put the date info predefined.
 		data.init(true);
 		
 		date.put("startDate", data.getStartDate());
@@ -64,39 +74,34 @@ public class Program {
 				tempArray.add(data.getGroupName(i));
 				
 			keyword.put("keywords", tempArray);
-			jarray.add(keyword);
+			array.add(keyword);
 		}
 		
-		obj.put("keywordGroups", jarray);
+		obj.put("keywordGroups", array);
 		System.out.println(obj);
 		body = obj.toString(); //fault toJsonString
 	}
 
-	private static void parseLocalJson() {
+	private static void parseJson() {
 		JSONParser parser = new JSONParser();
+		JSONArray array = new JSONArray();
+		JSONArray arrayDummy = new JSONArray();
 		
 		try {
-			Object obj = parser.parse(new FileReader("src/test.json"));
+			Object obj = parser.parse(new FileReader("src/result.json"));
 			JSONObject jobj = (JSONObject) obj;
+			array = (JSONArray) jobj.get("results");
 			
-			System.out.println(jobj.get("startDate"));
-			System.out.println(jobj.get("endDate"));
-			System.out.println(jobj.get("timeUnit"));
-			
-			JSONArray keywordGroup = (JSONArray) jobj.get("keywordGroups");
-			for(int i = 0; i < keywordGroup.size(); i++) {
-				JSONObject result = (JSONObject) keywordGroup.get(i);
-				System.out.println(result.get("groupName"));
-				
-				JSONArray keywords = (JSONArray) result.get("keywords");
-				for(int j = 0; j < keywords.size(); j++) {
-					System.out.println(keywords.get(j));
+			for(int i = 0 ; i < array.size(); i++) {
+				JSONObject data = (JSONObject) array.get(i);
+				arrayDummy = (JSONArray) data.get("data");
+				for(int j = 0; j < arrayDummy.size(); j++) {
+					data = (JSONObject) arrayDummy.get(j);
+					trendResult.put((String)data.get("period"), (double)data.get("ratio"));
+//					System.out.print(data.get("period"));
+//					System.out.println(data.get("ratio"));
 				}
 			}
-			
-			body = jobj.toString(); //fault toJsonString
-			System.out.println(body);
-			
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		}
