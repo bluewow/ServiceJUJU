@@ -17,21 +17,59 @@ import org.json.simple.parser.ParseException;
 
 
 public class Program {
-	static String clientId;
-	static String clientSecret;
-	static String apiURL;
-	static String body;
-	static HttpURLConnection con;
-	static JSONObject json;
-	static JSONArray jarray;
-	static JSONParser jsonParser;
+	private static String clientId;
+	private static String clientSecret;
+	private static String apiURL;
+	private static String body;
+	private static HttpURLConnection con;
+	private static JSONObject json;
+	private static JSONArray jarray;
+	private static JSONParser jsonParser;
+	private static InputData data;
 	
 	public static void main(String[] args) throws Exception {
+		makeJsonFile();
+//		parseLocalJson();
+		init();
+		connect();
+		response();
+	}
 
-		parseLocalJson();
-//		init();
-//		connect();
-//		response();
+	@SuppressWarnings("unchecked")
+	private static void makeJsonFile() {
+		JSONObject obj = new JSONObject();
+		JSONObject date = new JSONObject();
+		JSONArray jarray = new JSONArray();
+
+		
+		data = new InputData();
+		
+		//mode - put the date info predefined.
+		data.init(true);
+		
+		date.put("startDate", data.getStartDate());
+		date.put("endDate", data.getEndDate());
+		date.put("timeUnit", data.getTimeUnit());
+		obj.putAll(date);
+		
+		for(int i = 0; i < data.getCnt(); i++) {
+			JSONObject keyword = new JSONObject();
+			JSONArray tempArray = new JSONArray();
+			
+			keyword.put("groupName", data.getGroupName(i));
+			for(int j = 0; j < data.getKeyCnt(i); j++) {
+				tempArray.add(data.getKeyWords(i, j));
+			}
+			if(data.getKeyCnt(i) == 0)
+				tempArray.add(data.getGroupName(i));
+				
+			keyword.put("keywords", tempArray);
+			jarray.add(keyword);
+		}
+		
+		obj.put("keywordGroups", jarray);
+		System.out.println(obj);
+		body = obj.toString(); //fault toJsonString
 	}
 
 	private static void parseLocalJson() {

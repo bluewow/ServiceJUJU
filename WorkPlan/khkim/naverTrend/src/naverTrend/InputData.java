@@ -8,7 +8,7 @@ public class InputData {
 	private String timeUnit;
 	private String groupName[];
 	private String keyWords[][];
-	private int cnt, keyCnt;
+	private int cnt, keyCnt[];
 	
 	private static String START_DATE = "2017-01-01";
 	private static String END_DATE = "2019-01-01";
@@ -19,29 +19,33 @@ public class InputData {
 	public InputData() {
 		groupName = new String[5];
 		keyWords = new String[5][20];
+		keyCnt = new int[5];
 	}
 	
 	public InputData init(boolean mode) {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("┌───────────┐");
-		System.out.print("Input START_DATE(20xx-0x-0x) : ");
 		if(mode)
 			startDate = START_DATE;
-		else
+		else {
+			System.out.print("Input START_DATE(20xx-0x-0x) : ");
 			startDate = sc.next();
+		}
 		
-		System.out.print("Input END_DATE(20xx-0x-0x) : ");
 		if(mode)
 			endDate = END_DATE;
-		else
+		else {
+			System.out.print("Input END_DATE(20xx-0x-0x) : ");
 			endDate = sc.next();
+		}
 		
-		System.out.print("Input TIMEUNIT(date, week, month) : ");
 		if(mode)
 			timeUnit = TIMEUNIT;
-		else
+		else {
 			timeUnit = sc.next();
+			System.out.print("Input TIMEUNIT(date, week, month) : ");
+		}
 		
 		System.out.println("Input Subject Number : ");
 		cnt = sc.nextInt();
@@ -51,8 +55,8 @@ public class InputData {
 			groupName[i] = sc.next();
 		
 			System.out.println("Input Subject KeyWord Num : ");
-			keyCnt = sc.nextInt();
-			for(int j = 0; j < keyCnt; j++) {
+			keyCnt[i] = sc.nextInt();
+			for(int j = 0; j < keyCnt[i]; j++) {
 				System.out.print("Input KEYWORDS : ");
 				keyWords[i][j] = sc.next();
 			}
@@ -68,12 +72,8 @@ public class InputData {
 		this.cnt = cnt;
 	}
 
-	public int getKeyCnt() {
-		return keyCnt;
-	}
-
-	public void setKeyCnt(int keyCnt) {
-		this.keyCnt = keyCnt;
+	public int getKeyCnt(int i) {
+		return keyCnt[i];
 	}
 
 	public String getStartDate() {
@@ -116,8 +116,8 @@ public class InputData {
 		return keyWords[i].length;
 	}
 
-	public String[] getKeyWords(int i) {
-		return keyWords[i];
+	public String getKeyWords(int i, int j) {
+		return keyWords[i][j];
 	}
 
 	public void setKeyWords(String[][] keyWords) {
