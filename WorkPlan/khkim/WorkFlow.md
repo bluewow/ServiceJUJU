@@ -10,7 +10,8 @@ STEP1(5일) -> STEP2(2일) -> STEP3(2일) -> STEP4(5~7일)
   - 트렌드 검색 결과 데이터 수집 가능 확인 = 일 1000회, 광고시 제한신청 ----- (완료)
     <img src="https://user-images.githubusercontent.com/16996054/67277431-bc092880-f501-11e9-9e52-7fb57850c475.jpg" width="70%">
     - 한글입력 문제있음
-    - parsing 
+    - parsing 된 결과를 ResutData 에 저장
+    - refactoring 
   - 자바와 연동. 데이터수집하여 DB 에 저장
     - 트렌드
     - 키움API
