@@ -8,9 +8,9 @@ STEP1(5일) -> STEP2(2일) -> STEP3(2일) -> STEP4(5~7일)
 - 증권사 API
   - 트렌드 검색 결과 데이터 수집 가능 확인 = 일 1000회, 광고시 제한신청, 제휴권한 ----- (완료)
     <img src="https://user-images.githubusercontent.com/16996054/67345323-93227b00-f575-11e9-836e-befc3839f656.jpg" width="70%">
-    - 한글입력 문제있음
+    - 한글입력 문제있음 -> System.in encoding 문제
     - parsing 된 결과를 ResutData 에 저장
-    - refactoring 
+    - refactoring 요함 
   - 키움 API 를 사용. KOAStudioSA 를 사용하여 데이터 수집 가능 확인 ----- (진행중)
     
 - 웹크롤링(차선책)
