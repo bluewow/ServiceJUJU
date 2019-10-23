@@ -9,9 +9,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -29,21 +28,24 @@ public class Program {
 	private static JSONArray jarray;
 	private static JSONParser jsonParser;
 	private static InputData data;
-	private static Map<String, Double> trendResult; 
+	private static List<ResultData> resultData;
 	
 	public static void main(String[] args) throws Exception {
-		trendResult = new HashMap<String, Double>();
+		resultData = new ArrayList<ResultData>();
 //		makeJsonFile();
-		parseJson();
 		
-		Set<Map.Entry<String, Double>> entries = trendResult.entrySet();
-		for(Map.Entry<String, Double> entry : entries) {
-			System.out.println("key : " + entry.getKey());
-			System.out.println(", value : " + entry.getValue());
-		}
 //		init();
 //		connect();
 //		response();
+		parseJson();
+		
+		for(ResultData data : resultData) {
+			System.out.println(data.getTitle());
+			for(String period : data.getPeriod())
+				System.out.println(period);
+			for(int ratio : data.getRatio())
+				System.out.println(ratio);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -93,14 +95,21 @@ public class Program {
 			array = (JSONArray) jobj.get("results");
 			
 			for(int i = 0 ; i < array.size(); i++) {
+				ResultData temp = new ResultData();
 				JSONObject data = (JSONObject) array.get(i);
+//				System.out.println(data.get("title"));
+				temp.setTitle((String) data.get("title"));
 				arrayDummy = (JSONArray) data.get("data");
 				for(int j = 0; j < arrayDummy.size(); j++) {
 					data = (JSONObject) arrayDummy.get(j);
-					trendResult.put((String)data.get("period"), (double)data.get("ratio"));
+					temp.setPeriod((String) data.get("period"));
+					//ratio 값이 double 과 long 이 섞여있어서 String 변환후 반올린하여 Int 로 반환
+					String ratio = String.valueOf(data.get("ratio"));
+					temp.setRatio((int)Math.round(Double.parseDouble(ratio)));
 //					System.out.print(data.get("period"));
 //					System.out.println(data.get("ratio"));
 				}
+				resultData.add(temp);
 			}
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
