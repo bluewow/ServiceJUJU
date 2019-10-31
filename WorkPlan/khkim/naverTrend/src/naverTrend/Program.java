@@ -32,11 +32,11 @@ public class Program {
 	
 	public static void main(String[] args) throws Exception {
 		resultData = new ArrayList<ResultData>();
-//		makeJsonFile();
+		makeJsonFile();
 		
-//		init();
-//		connect();
-//		response();
+		init();
+		connect();
+		response();
 		parseJson();
 		
 		for(ResultData data : resultData) {
