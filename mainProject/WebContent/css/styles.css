@@ -246,7 +246,7 @@ select:focus {
     border: none;
     height: 50px; }
 
-#sidebar {
+/* #sidebar {
   position: fixed;
   z-index: 0;
   width: 20% !important;
@@ -275,7 +275,7 @@ select:focus {
           margin-right: 5px; }
       #sidebar ul li a:hover {
         color: #35cebe;
-        background-color: #f9f9f9; }
+        background-color: #f9f9f9; } */
 
 #main-content {
   width: 80% !important;
