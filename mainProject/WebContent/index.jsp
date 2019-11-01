@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -8,16 +10,16 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700" rel="stylesheet">
 	
 	<!-- Template Styles -->
-	<link rel="stylesheet" href="template/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="template/css/font-awesome.min.css">
 	
 	<!-- CSS Reset -->
-	<link rel="stylesheet" href="template/css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="template/css/normalize.css">
 	
 	<!-- Milligram CSS minified -->
-	<link rel="stylesheet" href="template/css/milligram.min.css">
+	<link rel="stylesheet" type="text/css" href="template/css/milligram.min.css">
 	
 	<!-- Main Styles -->
-	<link rel="stylesheet" href="template/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="template/css/styles.css">
 	
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -234,7 +236,7 @@
 										<option value="24+">24+</option>
 									</select>
 									<label for="commentField">Comment</label>
-									<textarea placeholder="Hi Jane…" id="commentField"></textarea>
+									<textarea placeholder="Hi Janeâ¦" id="commentField"></textarea>
 									<div class="float-right">
 										<input type="checkbox" id="confirmField">
 										<label class="label-inline" for="confirmField">Send a copy to yourself</label>
