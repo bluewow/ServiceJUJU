@@ -18,7 +18,7 @@ public class CSVWrite {
 	}
 
 	public void writeCsv(List<String[]> data) throws IOException {
-		CSVWriter cw = new CSVWriter(new OutputStreamWriter(new FileOutputStream(filename), "EUC-KR"));
+		CSVWriter cw = new CSVWriter(new OutputStreamWriter(new FileOutputStream(filename), "UTF-8"));
 		Iterator<String[]> it = data.iterator();
 		
 		while (it.hasNext()) {
