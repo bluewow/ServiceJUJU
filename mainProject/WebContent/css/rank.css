@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+#contaner {
+    width: 90%;
+    min-width: 460px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+}
+
+    #rankTable {
+        width: 100%;
+        text-align: center;
+        font-size: 11pt;
+    }
+        #rankTable tr {
+            height: 40px;
+        }
+
+        #rankTable > .rankInfo{
+            font-weight: bold;
+        }
+
+        #rankTable .rank, .profileImg{
+            min-width: 50px;
+            width: 10%;
+        }
+
+        #rankTable .name, .assets, .assetsGrowth{
+            min-width: 50px;
+            width: 26.66666%;
+        }
+
+        tbody .assetsGrowth{
+            color: #cf969c;    
+        }
