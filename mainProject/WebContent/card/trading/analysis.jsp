@@ -3,13 +3,12 @@
 
 <html>
 <head>
-<meta charset="utf-8">
 
+<meta charset="utf-8">
 <!-- CSS Reset -->
 <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
-
 <!-- ref analysis.css -->
-<link rel="stylesheet" href="../../css/trading/analysis.css">
+<link rel="stylesheet" href="../../css/trading/trading.css">
 
 </head>
 <body>
