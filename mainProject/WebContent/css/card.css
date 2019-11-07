@@ -1,50 +1,53 @@
 @charset "UTF-8";
 
 .card {
-   background: #f2f2f2;
-   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05);
-   margin-bottom: 2.2rem;
-   border-radius: 3%;
-    border: hidden;
-    
+	background: #f2f2f2;
+	box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05);
+	margin-bottom: 2.2rem;
+	border-radius: 3%;
+	border: hidden;
+	/*  overflow: hidden; */
+	height: 0;
+	padding-bottom: 120%;
 }
 
 .card .canvas-wrapper {
-   width: 98%;
+	width: 98%;
 }
 
 .card .card-block {
-   padding: 5px 5px;
-   height:500px;
-   border-radius: 5%;
-    border: 1px rgba(0,0,0,.125);
+	position: absolute;
+	padding: 5px 5px;
+	width: 98%;
+	height: 100%;
+	border-radius: 5%;
+	border: 1px rgba(0, 0, 0, .125);
 }
 
 .card .card-block iframe {
-   width: 100%;
-   padding: 0px;
-   border-radius: 3%;
-   border: none;
+	width: 100%;
+	padding: 0px;
+	border-radius: 3%;
+	border: none;
 }
 
 .nav-tabs .nav-link {
-    border: 1px solid transparent;
-    border-top-left-radius: 1.4rem;
-    border-top-right-radius: 1.4rem;
+	border: 1px solid transparent;
+	border-top-left-radius: 1.4rem;
+	border-top-right-radius: 1.4rem;
 }
 
-
-li a{
-   color:#85888a;
-   font-weight:600;
+li a {
+	color: #85888a;
+	font-weight: 600;
 }
 
 .nav-link-s {
-   text-align: center; 
-    width:80px;
+	text-align: center;
+	width: 80px;
 }
 
-.tab-content{
-	background: white; 
+.tab-content {
+	background: white;
 	height: 93%;
 }

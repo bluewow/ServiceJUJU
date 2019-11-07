@@ -66,196 +66,204 @@
 	</header>
 	<!-- =============================================================================================================== -->
 	<main class="row">
-	<h1 style="display: none;">cards</h1>
-	<section id="main-content" class="column">
-		<!-- 첫번째 로우 -->
-		<div class="row grid-responsive">
-			<!-- 검색카드 -->
-			<section class="column column-33">
-				<div class="card">
-					<div class="card-block">
-						<section class="search">
+		<h1 style="display: none;">cards</h1>
+		<section id="main-content" class="column">
+			<!-- 첫번째 로우 -->
+			<div class="row grid-responsive">
+				<!-- 검색카드 -->
+				<section class="column column-33">
+					<div class="card">
+						<div class="card-block">
+							<section class="search">
 
-							<ul class="nav nav-tabs" id="myTab" role="tablist style"
-								style="border: none">
-								<li class="nav-item"><a class="nav-link nav-link-s active"
-									id="search-tab" data-toggle="tab" href="#search" role="tab"
-									aria-controls="index1" aria-selected="true">검 색</a></li>
-							</ul>
-							<div class="tab-content" id="myTabContent">
-								<div class="tab-pane fade show active" id="search"
-									role="tabpanel" aria-labelledby="search-tab">
-									검색
-									<iframe height="0" src="" scrolling="no">
-										<!-- 여기에 html 삽입 -->
-									</iframe>
+								<ul class="nav nav-tabs" id="myTab" role="tablist style"
+									style="border: none">
+									<li class="nav-item"><a class="nav-link nav-link-s active"
+										id="search-tab" data-toggle="tab" href="#search" role="tab"
+										aria-controls="index1" aria-selected="true">검 색</a></li>
+								</ul>
+								<div class="tab-content" id="myTabContent">
+									<div class="tab-pane fade show active" id="search"
+										role="tabpanel" aria-labelledby="search-tab">
+										검색
+										<iframe height="0" src="" scrolling="no">
+											<!-- 여기에 html 삽입 -->
+										</iframe>
+									</div>
 								</div>
-							</div>
-						</section>
+							</section>
+						</div>
+
 					</div>
+				</section>
 
-				</div>
-			</section>
-
-			<!-- 분석 매매 예측 카드 -->
-			<section class="column column-33">
-				<div class="card">
-					<div class="card-block">
-						<section class="analysis/trading">
-							<ul class="nav nav-tabs" id="myTab" role="tablist style"
-								style="border: none">
-								<li class="nav-item"><a class="nav-link nav-link-s active"
-									id="analysis-tab" data-toggle="tab" href="#analysis" role="tab"
-									aria-controls="index1" aria-selected="true">분 석</a></li>
-								<li class="nav-item"><a class="nav-link nav-link-s "
-									id="trading-tab" data-toggle="tab" href="#trading" role="tab"
-									aria-controls="index2" aria-selected="false">매 매</a></li>
-							</ul>
-							<div class="tab-content" id="myTabContent">
-								<div class="tab-pane fade show active" id="analysis"
-									role="tabpanel" aria-labelledby="analysis-tab">분석</div>
-								<div class="tab-pane fade" id="trading" role="tabpanel"
-									aria-labelledby="trading-tab">매매</div>
-							</div>
-						</section>
+				<!-- 분석 매매 예측 카드 -->
+				<section class="column column-33">
+					<div class="card">
+						<div class="card-block">
+							<section class="analysis/trading">
+								<ul class="nav nav-tabs" id="myTab" role="tablist style"
+									style="border: none">
+									<li class="nav-item"><a class="nav-link nav-link-s active"
+										id="analysis-tab" data-toggle="tab" href="#analysis"
+										role="tab" aria-controls="index1" aria-selected="true">분 석</a></li>
+									<li class="nav-item"><a class="nav-link nav-link-s "
+										id="trading-tab" data-toggle="tab" href="#trading" role="tab"
+										aria-controls="index2" aria-selected="false">매 매</a></li>
+								</ul>
+								<div class="tab-content" id="myTabContent">
+									<div class="tab-pane fade show active" id="analysis"
+										role="tabpanel" aria-labelledby="analysis-tab">
+											<iframe height="100%" src="./card/trading/analysis.jsp" scrolling="no">
+											</iframe>
+										</div>
+									<div class="tab-pane fade" id="trading" role="tabpanel"
+										aria-labelledby="trading-tab">
+											<iframe height="100%" src="./card/trading/trading.jsp" scrolling="no">
+											</iframe>
+										</div>
+									
+								</div>
+							</section>
+						</div>
 					</div>
-				</div>
-			</section>
+				</section>
 
-			<!-- 주식 캡처 카드 -->
-			<section class="column column-33">
-				<div class="card">
-					<div class="card-block">
-						<section class="capture">
-							<ul class="nav nav-tabs" id="myTab" role="tablist style"
-								style="border: none">
-								<li class="nav-item"><a class="nav-link nav-link-s active"
-									id="capture-tab" data-toggle="tab" href="#capture" role="tab"
-									aria-controls="index1" aria-selected="true">캡 쳐</a></li>
-							</ul>
-							<div class="tab-content" id="myTabContent">
-								<div class="tab-pane fade show active" id="capture"
-									role="tabpanel" aria-labelledby="capture-tab">캡쳐</div>
-							</div>
-						</section>
+				<!-- 주식 캡처 카드 -->
+				<section class="column column-33">
+					<div class="card">
+						<div class="card-block">
+							<section class="capture">
+								<ul class="nav nav-tabs" id="myTab" role="tablist style"
+									style="border: none">
+									<li class="nav-item"><a class="nav-link nav-link-s active"
+										id="capture-tab" data-toggle="tab" href="#capture" role="tab"
+										aria-controls="index1" aria-selected="true">캡 쳐</a></li>
+								</ul>
+								<div class="tab-content" id="myTabContent">
+									<div class="tab-pane fade show active" id="capture"
+										role="tabpanel" aria-labelledby="capture-tab">캡쳐</div>
+								</div>
+							</section>
+						</div>
 					</div>
-				</div>
-			</section>
-		</div>
+				</section>
+			</div>
 
-		<!-- 두번째 로우 -->
-		<div class="row grid-responsive">
-			<!-- 커뮤니티 카드 -->
-			<section class="column column-33">
-				<div class="card ">
-					<div class="card-block">
-						<section class="news/community/eventcommunity">
-							<ul class="nav nav-tabs" id="myTab" role="tablist style"
-								style="border: none">
-								<li class="nav-item"><a class="nav-link active"
-									id="news-tab" data-toggle="tab" href="#news" role="tab"
-									aria-controls="index1" aria-selected="true">뉴스&이슈</a></li>
-								<li class="nav-item"><a class="nav-link" id="community-tab"
-									data-toggle="tab" href="#community" role="tab"
-									aria-controls="index2" aria-selected="false">전체 커뮤니티</a></li>
-								<li class="nav-item"><a class="nav-link"
-									id="eventcommunity-tab" data-toggle="tab"
-									href="#eventcommunity" role="tab" aria-controls="index3"
-									aria-selected="false">종목별 커뮤니티</a></li>
-							</ul>
-							<div class="tab-content" id="myTabContent">
-								<div class="tab-pane fade show active" id="news" role="tabpanel"
-									aria-labelledby="news-tab">뉴스</div>
-								<div class="tab-pane fade" id="community" role="tabpanel"
-									aria-labelledby="community-tab">전체커뮤니티</div>
-								<div class="tab-pane fade" id="eventcommunity" role="tabpanel"
-									aria-labelledby="eventcommunity-tab">종목별커뮤니티</div>
-							</div>
-						</section>
+			<!-- 두번째 로우 -->
+			<div class="row grid-responsive">
+				<!-- 커뮤니티 카드 -->
+				<section class="column column-33">
+					<div class="card ">
+						<div class="card-block">
+							<section class="news/community/eventcommunity">
+								<ul class="nav nav-tabs" id="myTab" role="tablist style"
+									style="border: none">
+									<li class="nav-item"><a class="nav-link active"
+										id="news-tab" data-toggle="tab" href="#news" role="tab"
+										aria-controls="index1" aria-selected="true">뉴스&이슈</a></li>
+									<li class="nav-item"><a class="nav-link"
+										id="community-tab" data-toggle="tab" href="#community"
+										role="tab" aria-controls="index2" aria-selected="false">전체
+											커뮤니티</a></li>
+									<li class="nav-item"><a class="nav-link"
+										id="eventcommunity-tab" data-toggle="tab"
+										href="#eventcommunity" role="tab" aria-controls="index3"
+										aria-selected="false">종목별 커뮤니티</a></li>
+								</ul>
+								<div class="tab-content" id="myTabContent">
+									<div class="tab-pane fade show active" id="news"
+										role="tabpanel" aria-labelledby="news-tab">뉴스</div>
+									<div class="tab-pane fade" id="community" role="tabpanel"
+										aria-labelledby="community-tab">전체커뮤니티</div>
+									<div class="tab-pane fade" id="eventcommunity" role="tabpanel"
+										aria-labelledby="eventcommunity-tab">종목별커뮤니티</div>
+								</div>
+							</section>
+						</div>
 					</div>
-				</div>
-			</section>
+				</section>
 
-			<!-- 보유 목록/관심 목록 카드 -->
-			<section class="column column-33">
-				<div class="card">
-					<div class="card-block">
-						<section class="Purchase list/Interest List">
-							<ul class="nav nav-tabs" id="myTab" role="tablist style"
-								style="border: none">
-								<li class="nav-item"><a class="nav-link active"
-									id="Purchaselist-tab" data-toggle="tab" href="#Purchaselist"
-									role="tab" aria-controls="index1" aria-selected="true">보유목록</a></li>
-								<li class="nav-item"><a class="nav-link" id="Interest-tab"
-									data-toggle="tab" href="#Interest" role="tab"
-									aria-controls="index2" aria-selected="false">관심목록</a></li>
-							</ul>
-							<div class="tab-content" id="myTabContent">
-								<div class="tab-pane fade show active" id="Purchaselist"
-									role="tabpanel" aria-labelledby="Purchaselist-tab">보유목록</div>
-								<div class="tab-pane fade" id="Interest" role="tabpanel"
-									aria-labelledby="Interest-tab">관심 목록</div>
-							</div>
-						</section>
+				<!-- 보유 목록/관심 목록 카드 -->
+				<section class="column column-33">
+					<div class="card">
+						<div class="card-block">
+							<section class="Purchase list/Interest List">
+								<ul class="nav nav-tabs" id="myTab" role="tablist style"
+									style="border: none">
+									<li class="nav-item"><a class="nav-link active"
+										id="Purchaselist-tab" data-toggle="tab" href="#Purchaselist"
+										role="tab" aria-controls="index1" aria-selected="true">보유목록</a></li>
+									<li class="nav-item"><a class="nav-link" id="Interest-tab"
+										data-toggle="tab" href="#Interest" role="tab"
+										aria-controls="index2" aria-selected="false">관심목록</a></li>
+								</ul>
+								<div class="tab-content" id="myTabContent">
+									<div class="tab-pane fade show active" id="Purchaselist"
+										role="tabpanel" aria-labelledby="Purchaselist-tab">보유목록</div>
+									<div class="tab-pane fade" id="Interest" role="tabpanel"
+										aria-labelledby="Interest-tab">관심 목록</div>
+								</div>
+							</section>
+						</div>
 					</div>
-				</div>
-			</section>
+				</section>
 
-			<!-- 자산추이 카드 -->
-			<section class="column column-33">
-				<div class="card">
-					<div class="card-block">
-						<section class="asset graph/compare">
-							<ul class="nav nav-tabs" id="myTab" role="tablist style"
-								style="border: none">
-								<li class="nav-item"><a class="nav-link active"
-									id="assetgraph-tab" data-toggle="tab" href="#assetgraph"
-									role="tab" aria-controls="index1" aria-selected="true">자산추이</a></li>
-								<li class="nav-item"><a class="nav-link" id="compare-tab"
-									data-toggle="tab" href="#compare" role="tab"
-									aria-controls="index2" aria-selected="false">종목비교</a></li>
-							</ul>
-							<div class="tab-content" id="myTabContent">
-								<div class="tab-pane fade show active" id="assetgraph"
-									role="tabpanel" aria-labelledby="assetgraph-tab">자산추이</div>
-								<div class="tab-pane fade" id="compare" role="tabpanel"
-									aria-labelledby="compare-tab">종목비교</div>
-							</div>
-						</section>
+				<!-- 자산추이 카드 -->
+				<section class="column column-33">
+					<div class="card">
+						<div class="card-block">
+							<section class="asset graph/compare">
+								<ul class="nav nav-tabs" id="myTab" role="tablist style"
+									style="border: none">
+									<li class="nav-item"><a class="nav-link active"
+										id="assetgraph-tab" data-toggle="tab" href="#assetgraph"
+										role="tab" aria-controls="index1" aria-selected="true">자산추이</a></li>
+									<li class="nav-item"><a class="nav-link" id="compare-tab"
+										data-toggle="tab" href="#compare" role="tab"
+										aria-controls="index2" aria-selected="false">종목비교</a></li>
+								</ul>
+								<div class="tab-content" id="myTabContent">
+									<div class="tab-pane fade show active" id="assetgraph"
+										role="tabpanel" aria-labelledby="assetgraph-tab">자산추이</div>
+									<div class="tab-pane fade" id="compare" role="tabpanel"
+										aria-labelledby="compare-tab">종목비교</div>
+								</div>
+							</section>
+						</div>
 					</div>
-				</div>
-			</section>
-		</div>
+				</section>
+			</div>
 
-		<!-- 세번째 로우 -->
-		<div class="row grid-responsive">
-			<!-- 빈 공간 -->
-			<div class="column column-33"></div>
+			<!-- 세번째 로우 -->
+			<div class="row grid-responsive">
+				<!-- 빈 공간 -->
+				<div class="column column-33"></div>
 
-			<!-- 빈 공간 -->
-			<div class="column column-33"></div>
+				<!-- 빈 공간 -->
+				<div class="column column-33"></div>
 
-			<!-- 랭킹 카드 -->
-			<section class="column column-33">
-				<div class="card">
-					<div class="card-block">
-						<section class="rangking">
-							<ul class="nav nav-tabs" id="myTab" role="tablist style"
-								style="border: none">
-								<li class="nav-item"><a class="nav-link nav-link-s active"
-									id="rangking-tab" data-toggle="tab" href="rangking" role="tab"
-									aria-controls="index1" aria-selected="true">랭킹</a></li>
-							</ul>
-							<div class="tab-content" id="myTabContent">
-								<div class="tab-pane fade show active" id="rangking"
-									role="tabpanel" aria-labelledby="rangking-tab">랭킹</div>
-							</div>
-						</section>
+				<!-- 랭킹 카드 -->
+				<section class="column column-33">
+					<div class="card">
+						<div class="card-block">
+							<section class="rangking">
+								<ul class="nav nav-tabs" id="myTab" role="tablist style"
+									style="border: none">
+									<li class="nav-item"><a class="nav-link nav-link-s active"
+										id="rangking-tab" data-toggle="tab" href="rangking" role="tab"
+										aria-controls="index1" aria-selected="true">랭킹</a></li>
+								</ul>
+								<div class="tab-content" id="myTabContent">
+									<div class="tab-pane fade show active" id="rangking"
+										role="tabpanel" aria-labelledby="rangking-tab">랭킹</div>
+								</div>
+							</section>
+						</div>
 					</div>
-				</div>
-			</section>
-		</div>
-	</section>
+				</section>
+			</div>
+		</section>
 	</main>
 	<!-- =============================================================================================================== -->
 	<footer>
