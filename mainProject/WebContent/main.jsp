@@ -30,6 +30,7 @@
 <link rel="stylesheet" type="text/css" href="./css/main.css">
 
 
+
 <!--[if lt IE 9]>
    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
@@ -147,6 +148,7 @@
 							</section>
 						</div>
 					</div>
+
 				</section>
 			</div>
 
@@ -181,33 +183,37 @@
 								</div>
 							</section>
 						</div>
+
+				</div>
+			</section>
+
+			<!-- 보유 목록/관심 목록 카드 -->
+			<section class="column column-33">
+				<div class="card">
+					<div class="card-block">
+						<section class="Purchase list/Interest List">
+							<ul class="nav nav-tabs" id="myTab" role="tablist style"
+								style="border: none">
+								<li class="nav-item"><a class="nav-link active"
+									id="Purchaselist-tab" data-toggle="tab" href="#Purchaselist"
+									role="tab" aria-controls="index1" aria-selected="true">보유목록</a></li>
+								<li class="nav-item"><a class="nav-link" id="Interest-tab"
+									data-toggle="tab" href="#Interest" role="tab"
+									aria-controls="index2" aria-selected="false">관심목록</a></li>
+							</ul>
+							<div class="tab-content" id="myTabContent">
+								<div class="tab-pane fade show active" id="Purchaselist"
+									role="tabpanel" aria-labelledby="Purchaselist-tab">
+								<iframe height="100%" src="./card/list/holdinglist.jsp" scrolling="no">
+									</iframe>
+									</div>
+								<div class="tab-pane fade" id="Interest" role="tabpanel"
+									aria-labelledby="Interest-tab">관심 목록</div>
+							</div>
+						</section>
 					</div>
 				</section>
 
-				<!-- 보유 목록/관심 목록 카드 -->
-				<section class="column column-33">
-					<div class="card">
-						<div class="card-block">
-							<section class="Purchase list/Interest List">
-								<ul class="nav nav-tabs" id="myTab" role="tablist style"
-									style="border: none">
-									<li class="nav-item"><a class="nav-link active"
-										id="Purchaselist-tab" data-toggle="tab" href="#Purchaselist"
-										role="tab" aria-controls="index1" aria-selected="true">보유목록</a></li>
-									<li class="nav-item"><a class="nav-link" id="Interest-tab"
-										data-toggle="tab" href="#Interest" role="tab"
-										aria-controls="index2" aria-selected="false">관심목록</a></li>
-								</ul>
-								<div class="tab-content" id="myTabContent">
-									<div class="tab-pane fade show active" id="Purchaselist"
-										role="tabpanel" aria-labelledby="Purchaselist-tab">보유목록</div>
-									<div class="tab-pane fade" id="Interest" role="tabpanel"
-										aria-labelledby="Interest-tab">관심 목록</div>
-								</div>
-							</section>
-						</div>
-					</div>
-				</section>
 
 				<!-- 자산추이 카드 -->
 				<section class="column column-33">

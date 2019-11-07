@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+header{
+	width:100%;
+}
+
+button{
+    
+}
+
+.btposition{
+
+	text-align:right;
+	margin: 20px
+}
+tr td{
+text-align:left;	
+    
+}
+table {
+	margin-top:20px;
+	width:100%;
+}
+td{
+	text-align:center;
+	 border-bottom: 1px solid #ada8a8;
+	 margin-top: 10px;
+	 padding: 10px;
+}
+th{
+	text-align:center;
+	border-bottom:3px solid #ada8a8;
+	border-left:none;
+}
+tr{
+	 padding: 10px;
+}
+
+span{
+	font-size:small;
+	
+}
+.down{
+	color:blue;
+	text-align:center;
+}
+
+.up{
+	color:red;
+	text-align:center;
+}
