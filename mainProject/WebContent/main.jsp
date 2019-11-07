@@ -11,14 +11,17 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700"
 	rel="stylesheet">
+
 <!-- Bootstrap Styles -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
 
+
 <!-- Template Styles -->
 <link rel="stylesheet" type="text/css" href="./css/font-awesome.min.css">
+
 
 <!-- CSS Reset -->
 <link rel="stylesheet" type="text/css" href="./css/normalize.css">
@@ -33,6 +36,27 @@
 <!--[if lt IE 9]>
    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+
+<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" ></script>
+   
+   <script type="text/javascript">
+   $(function() {
+
+	    $("#sortable").sortable();
+
+	    $("#sortable").disableSelection();
+
+	});
+   </script>
+   <style type="text/css">
+   </style>
 </head>
 
 <body>
@@ -65,13 +89,14 @@
 		</section>
 	</header>
 	<!-- =============================================================================================================== -->
-	<main class="row">
+	<main class="row" >
 	<h1 style="display: none;">cards</h1>
-	<section id="main-content" class="column">
+	<section id="main-content" class="column" >
 		<!-- 첫번째 로우 -->
-		<div class="row grid-responsive">
+
+		<div class="row grid-responsive" id="sortable">
 			<!-- 검색카드 -->
-			<section class="column column-33">
+			<section class="column column-33 " >
 				<div class="card">
 					<div class="card-block">
 						<section class="search">
@@ -98,7 +123,7 @@
 			</section>
 
 			<!-- 분석 매매 예측 카드 -->
-			<section class="column column-33">
+			<section class="column column-33 " >
 				<div class="card">
 					<div class="card-block">
 						<section class="analysis/trading">
@@ -141,12 +166,12 @@
 					</div>
 				</div>
 			</section>
-		</div>
+
 
 		<!-- 두번째 로우 -->
-		<div class="row grid-responsive">
+
 			<!-- 커뮤니티 카드 -->
-			<section class="column column-33">
+			<section class="column column-33 " >
 				<div class="card ">
 					<div class="card-block">
 						<section class="news/community/eventcommunity">
@@ -228,7 +253,7 @@
 		</div>
 
 		<!-- 세번째 로우 -->
-		<div class="row grid-responsive">
+		
 			<!-- 빈 공간 -->
 			<div class="column column-33"></div>
 
@@ -236,7 +261,7 @@
 			<div class="column column-33"></div>
 
 			<!-- 랭킹 카드 -->
-			<section class="column column-33">
+			<section class="column column-33" >
 				<div class="card">
 					<div class="card-block">
 						<section class="rangking">
@@ -262,10 +287,6 @@
 		<section></section>
 	</footer>
 	<!-- =============================================================================================================== -->
-
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -274,6 +295,7 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
+
 
 </body>
 
