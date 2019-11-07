@@ -256,7 +256,10 @@
 								</ul>
 								<div class="tab-content" id="myTabContent">
 									<div class="tab-pane fade show active" id="rangking"
-										role="tabpanel" aria-labelledby="rangking-tab">랭킹</div>
+										role="tabpanel" aria-labelledby="rangking-tab">
+										<iframe src="./card/rank/ranking.jsp" scrolling="no">
+										</iframe>
+									</div>
 								</div>
 							</section>
 						</div>
