@@ -1,9 +1,9 @@
-package com.stockmarket.www.service.jdbc;
+package com.stockmarket.www.dao.jdbc;
 
 import java.sql.*;
 
-public class JdbcContext {
-	public static Connection getConnection() throws ClassNotFoundException, SQLException {
+public class JdbcDaoContext {
+	private static Connection getConnection() throws ClassNotFoundException, SQLException {
         String url = "jdbc:oracle:thin:@112.223.37.243:1521/xepdb1";
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection connection = DriverManager.getConnection(url, "ACORNGROUP1", "month100man");
