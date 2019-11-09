@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+.page-top {
+	background: rgb(210, 231, 21);
+	/* height: 80px; */
+	height: 20%;
+	 }
+
+	.page-top .stockName {
+		position: relative;
+		top: 30%; left : 10%;
+		width: 80%;
+		color: blue;
+	}
+
+.page-left {
+	position: relative;
+	display: inline-block;
+	background: rgb(226, 8, 190);
+	width: 49%;
+	height: 40%;
+	
+	margin-left:auto;
+	text-align: center;
+}
+
+.page-right {
+	position: relative;
+	display: inline-block; 
+	background: rgb(224, 12, 12);
+	width: 49%;
+	height: 40%;
+	
+	margin-right:auto;
+	text-align: center;
+}
+
+.page-bottom {
+	background: rgb(116, 148, 27);
+	height: 40%;
+	
+	text-align: center;
+}
