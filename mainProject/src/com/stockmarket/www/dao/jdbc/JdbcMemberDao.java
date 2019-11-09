@@ -40,7 +40,7 @@ public class JdbcMemberDao implements MemberDao {
 	@Override
 	public List<Member> getMemberList() {
 		// 가상머니 상위 50위까지 뽑아오는 쿼리 
-		String sql = "SELECT * FROM MEMBER ORDER BY VMONEY" +
+		String sql = "SELECT * FROM MEMBER ORDER BY VMONEY " +
 				"DESC OFFSET 1 ROWS FETCH NEXT 50 ROWS ONLY";
 		List<Member> members = new ArrayList<>();
 		try {
