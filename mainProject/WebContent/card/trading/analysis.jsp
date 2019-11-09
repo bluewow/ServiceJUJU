@@ -8,20 +8,27 @@
 <!-- CSS Reset -->
 <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
 <!-- ref analysis.css -->
-<link rel="stylesheet" href="../../css/trading/trading.css">
+<link rel="stylesheet" href="../../css/trading/analysis.css">
 
 </head>
 <body>
+<div id="analysis-container">
+	<!-- --------------- page-top -------------- -->
 	<header class="page-top">
-		<div class="stockName">
+		<div id="stockName">
 			<div>기현 알고리즘</div>
 			<div>204,000</div>
 		</div>
 	</header>
 
-	<section class="page-left">차트1</section>
-	<section class="page-right">차트2</section>
+	<!-- --------------- page-mid -------------- -->
+	<section class="page-mid">
+		<div class="page-left-chart">차트1</div>
+		<div class="page-right-chart">차트2</div>
+	</section>
 
-	<footer class="page-bottom">차트3</footer>
+	<!-- --------------- page-bottom -------------- -->
+	<section class="page-bottom">차트3</section>
+</div>	
 </body>
 </html>
