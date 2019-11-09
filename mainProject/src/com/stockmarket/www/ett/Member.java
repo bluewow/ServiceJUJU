@@ -5,22 +5,29 @@ import java.util.Date;
 public class Member {
 	private int id;
 	private String email;
-	private String password;
 	private String nickName;
+	private String password;
 	private int vMoney;
 	private Date regdate;
 	
-	public Member(){
-		this("", "", "", 0);
-	}
-	
-	public Member(String email, String password, String nickName, int vMoney) {
+	// insert, update를 위한 생성자
+	public Member(String email, String nickName, String password, int vMoney) {
 		this.email = email;
 		this.password = password;
 		this.nickName = nickName;
 		this.vMoney = vMoney;
 	}
 	
+	// select를 위한 생성자
+	public Member(int id, String email, String nickName, String password, int vMoney, Date regdate) {
+		this.id = id;
+		this.email = email;
+		this.password = password;
+		this.nickName = nickName;
+		this.vMoney = vMoney;
+		this.regdate = regdate;
+	}
+
 	// getter and setter
 	public int getId() {
 		return id;
