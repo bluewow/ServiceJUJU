@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.stockmarket.www.ett.Member;
 import com.stockmarket.www.service.RankingService;
@@ -19,10 +20,23 @@ public class RankingController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RankingService service = new JdbcRankingService();
 		
+		// 가상머니 소유자를 상위 50위까지 가져온다.
 		List<Member> rankers = service.getMemberList();
-		Member myRank = service.getMember();
 		
 		request.setAttribute("rankers", rankers);
+
+		// 세션을 이용하여 현재 사용자의 아이디를 가져온다.
+		HttpSession session = request.getSession();
+		Object tempId = session.getAttribute("id");
+		
+		int id = -1;
+		
+		if(tempId != null)
+			id = (Integer)tempId;
+		
+		// 본인의 랭킹을 가져온다.
+		Member myRank = service.getMember(id);
+		
 		request.setAttribute("myRank", myRank);
 		
 		// jsp 파일을 요청하여 브라우저에 보여준다.
