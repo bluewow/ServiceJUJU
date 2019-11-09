@@ -33,20 +33,22 @@
 		<section class="page-bottom">
 		<div id="page-bottom-box">
 			<div class="show-button-align">
-				<div class="hidden">----------</div>
 				<input class="button button-status" type="button" value="자산 상황">
 				<div>176,000</div>
 				<input class="button button-status" type="button" value="구매 수량">
-				<div>x</div>
-				<input class="button button-status" type="button" value="매수">
+				<div>
+					<input id="text">
+				</div>
+				<input class="button button-button" type="button" value="매       수">
 			</div>
 			<div class="show-button-align">
-				<div class="hidden">----------</div>
 				<input class="button button-status" type="button" value="보유 상황">
 				<div>0</div>	
 				<input class="button button-status" type="button" value="매도 수량">
-				<div>y</div>
-				<input class="button button-status" type="button" value="매도">
+				<div>
+					<input id="text">
+				</div>
+				<input class="button button-button" type="button" value="매       도">
 			</div>
 		</div>
 	</section>
