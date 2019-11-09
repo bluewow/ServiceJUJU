@@ -6,7 +6,7 @@
 	button 기능 : https://nanati.me/css-button-design/
  */
  
-body #trading-container {
+#trading-container {
 	width: 90%;
 	min-width: 300px;
     max-width: 600px;
