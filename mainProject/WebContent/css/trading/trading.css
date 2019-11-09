@@ -1,43 +1,80 @@
 @charset "UTF-8";
 
+/* 
+참조 사이트 
+	flex 기능 : https://heropy.blog/2018/11/24/css-flexible-box/
+	button 기능 : https://nanati.me/css-button-design/
+ */
+ 
+body #trading-container {
+	width: 90%;
+	min-width: 300px;
+    max-width: 600px;
+	margin-left: auto;
+    margin-right: auto;
+    padding-left: 8%;
+    box-sizing: border-box; /*for fit container*/
+
+}
 .page-top {
-	background: rgb(210, 231, 21);
-	/* height: 80px; */
-	height: 20%;
+	min-height: 18%;
 	 }
 
-	.page-top .stockName {
-		position: relative;
-		top: 30%; left : 10%;
-		width: 80%;
-		color: blue;
+	.page-top > #stockName {
+		text-align:left;
+		font-weight: bold;
+		font-size: 1.5em;
+		line-height: 150%;
+		padding-top: 5%;
 	}
 
-.page-left {
-	position: relative;
-	display: inline-block;
-	background: rgb(226, 8, 190);
-	width: 49%;
-	height: 40%;
-	
-	margin-left:auto;
-	text-align: center;
-}
-
-.page-right {
-	position: relative;
-	display: inline-block; 
-	background: rgb(224, 12, 12);
-	width: 49%;
-	height: 40%;
-	
-	margin-right:auto;
-	text-align: center;
+.page-mid {
+	min-height: 40%;
 }
 
 .page-bottom {
-	background: rgb(116, 148, 27);
-	height: 40%;
-	
-	text-align: center;
+	min-height: 40%;
+	}
+	.page-bottom > #page-bottom-box {
+		padding: 10% 20% 10% 10%;
+ 		display: flex;
+		justify-content: space-between;
+		text-align: center;
+	}
+	.page-bottom #page-bottom-box .show-button-align {
+	 	display: flex; 
+		flex-flow: column; 
+	} 
+
+.hidden {  /* for align */
+	visibility: hidden;
 }
+
+/* default button */
+.button {
+	border-radius: 30%;
+	font-size: 0.75em;
+	padding: 1% 2%; /* button font<->wrapper interval  */	
+	border: none;	
+	outline: none;
+}
+
+.button-chart {
+	margin: 0% 1%;
+}
+
+.button-chart:hover {
+	background-color: #13bfd7; 
+	color: white;
+}
+
+.button-status {
+    padding: 5% 0%;
+    margin: 15% 0 5% 0;
+}
+
+
+
+
+	
+	

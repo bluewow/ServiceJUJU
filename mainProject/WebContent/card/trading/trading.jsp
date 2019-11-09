@@ -12,14 +12,44 @@
 
 </head>
 <body>
+<div id="trading-container">
+	<!-- --------------- page-top -------------- -->
 	<header class="page-top">
-		<div class="stockName">
+		<div id="stockName">
 			<div>기현 알고리즘</div>
 			<div>204,000</div>
 		</div>
 	</header>
 	
-	<section class="page-bottom">차트1</section>
-	<section class="page-bottom">매수/매도</section>
+	<!-- --------------- page-mid -------------- -->
+	<section class="page-mid">
+		<input class="button button-chart" type="button" value="일봉">
+		<input class="button button-chart" type="button" value="주봉">
+		<input class="button button-chart" type="button" value="월봉">
+		<div>차트</div>
+	</section>
+	
+	<!-- --------------- page-bottom -------------- -->
+		<section class="page-bottom">
+		<div id="page-bottom-box">
+			<div class="show-button-align">
+				<div class="hidden">----------</div>
+				<input class="button button-status" type="button" value="자산 상황">
+				<div>176,000</div>
+				<input class="button button-status" type="button" value="구매 수량">
+				<div>x</div>
+				<input class="button button-status" type="button" value="매수">
+			</div>
+			<div class="show-button-align">
+				<div class="hidden">----------</div>
+				<input class="button button-status" type="button" value="보유 상황">
+				<div>0</div>	
+				<input class="button button-status" type="button" value="매도 수량">
+				<div>y</div>
+				<input class="button button-status" type="button" value="매도">
+			</div>
+		</div>
+	</section>
+</div>	
 </body>
 </html>
