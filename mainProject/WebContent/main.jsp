@@ -175,7 +175,9 @@
 								</ul>
 								<div class="tab-content" id="myTabContent">
 									<div class="tab-pane fade show active" id="news"
-										role="tabpanel" aria-labelledby="news-tab">뉴스</div>
+										role="tabpanel" aria-labelledby="news-tab">
+										<iframe src="./card/board/news_board" scrolling="no">
+										</iframe></div>
 									<div class="tab-pane fade" id="community" role="tabpanel"
 										aria-labelledby="community-tab">전체커뮤니티</div>
 									<div class="tab-pane fade" id="eventcommunity" role="tabpanel"
@@ -263,7 +265,7 @@
 								<div class="tab-content" id="myTabContent">
 									<div class="tab-pane fade show active" id="rangking"
 										role="tabpanel" aria-labelledby="rangking-tab">
-										<iframe src="./card/rank/ranking.jsp" scrolling="no">
+										<iframe src="./card/rank/ranking" scrolling="no">
 										</iframe>
 									</div>
 								</div>
