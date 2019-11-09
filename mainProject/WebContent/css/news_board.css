@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+#newsScroll {
+	overflow: scroll;
+	width: 96%;
+	height: 96%;
+	padding: 10px;
+}

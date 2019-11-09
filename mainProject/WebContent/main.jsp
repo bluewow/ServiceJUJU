@@ -176,7 +176,7 @@
 								<div class="tab-content" id="myTabContent">
 									<div class="tab-pane fade show active" id="news"
 										role="tabpanel" aria-labelledby="news-tab">
-										<iframe src="./card/board/news_board" scrolling="no">
+										<iframe height="100%" src="./card/board/news_board" scrolling="no">
 										</iframe></div>
 									<div class="tab-pane fade" id="community" role="tabpanel"
 										aria-labelledby="community-tab">전체커뮤니티</div>
