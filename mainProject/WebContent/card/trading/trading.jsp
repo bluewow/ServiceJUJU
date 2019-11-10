@@ -37,7 +37,7 @@
 				<div>176,000</div>
 				<input class="button button-status" type="button" value="구매 수량">
 				<div>
-					<input id="text">
+					<input id="text" autocomplete="off">
 				</div>
 				<input class="button button-button" type="button" value="매       수">
 			</div>
@@ -46,7 +46,7 @@
 				<div>0</div>	
 				<input class="button button-status" type="button" value="매도 수량">
 				<div>
-					<input id="text">
+					<input id="text" autocomplete="off">
 				</div>
 				<input class="button button-button" type="button" value="매       도">
 			</div>
