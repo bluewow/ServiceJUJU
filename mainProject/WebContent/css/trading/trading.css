@@ -12,20 +12,20 @@
     max-width: 600px;
 	margin-left: auto;
     margin-right: auto;
-    padding: 0% 8%;
     box-sizing: border-box; /*for fit container*/
 }
 
 .page-top {
 	min-height: 18%;
+	padding: 0% 8%;
 	 }
 
 	.page-top > #stockName {
-		font-size: 1.5em;
 		text-align:left;
+		font-weight: bold;
+		font-size: 1.5em;
 		line-height: 150%;
 		padding-top: 5%;
-		font-weight: bold;
 	}
 
 .page-mid {
