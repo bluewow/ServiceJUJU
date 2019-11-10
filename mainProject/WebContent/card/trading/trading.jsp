@@ -10,6 +10,9 @@
 <!-- ref analysis.css -->
 <link rel="stylesheet" href="../../css/trading/trading.css">
 
+<script type="text/javascript">
+/* 팝업창 띄우기 */
+</script>
 </head>
 <body>
 <div id="trading-container">
@@ -23,9 +26,11 @@
 	
 	<!-- --------------- page-mid -------------- -->
 	<section class="page-mid">
-		<input class="button button-chart" type="button" value="일봉">
-		<input class="button button-chart" type="button" value="주봉">
-		<input class="button button-chart" type="button" value="월봉">
+		<form action="trade" method="get">
+			<input class="button button-chart" type="submit" name="date" value="일봉">
+			<input class="button button-chart" type="submit" name="date" value="주봉">
+			<input class="button button-chart" type="submit" name="date" value="월봉">
+		</form>
 		<div>차트</div>
 	</section>
 	
@@ -39,7 +44,9 @@
 				<div>
 					<input id="text" autocomplete="off">
 				</div>
-				<input class="button button-button" type="button" value="매       수">
+				<form action="trade" method="get">
+					<input class="button button-button" type="submit" name="buy" value="매       수">
+				</form>
 			</div>
 			<div class="show-button-align">
 				<input class="button button-status" type="button" value="보유 상황">
@@ -48,7 +55,9 @@
 				<div>
 					<input id="text" autocomplete="off">
 				</div>
-				<input class="button button-button" type="button" value="매       도">
+				<form action="trade" method="get">
+					<input class="button button-button" type="submit" name="sell" value="매       도">
+				</form>
 			</div>
 		</div>
 	</section>
