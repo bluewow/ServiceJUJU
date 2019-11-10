@@ -1,4 +1,4 @@
-package com.stockmarket.www.board.controller;
+package com.stockmarket.www.controller.board;
 
 import java.io.IOException;
 import java.util.ArrayList;
