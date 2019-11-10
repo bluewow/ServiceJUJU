@@ -28,7 +28,11 @@
 	</section>
 
 	<!-- --------------- page-bottom -------------- -->
-	<section class="page-bottom">차트3</section>
+	<section class="page-bottom">
+		<div id="comment">분석 내용</div>
+		<div id="chart-bottom"></div>
+		
+	</section>
 </div>	
 </body>
 </html>
