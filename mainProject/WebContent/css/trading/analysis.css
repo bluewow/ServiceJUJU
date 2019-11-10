@@ -57,9 +57,9 @@
 	.page-bottom > #chart-bottom{
 		position: absolute;
 		z-index:-1;
-		margin:32px 0px 20px 0px;
+		margin:32px 0px 20px 15px;
 		background-color: rgb(242, 242, 242);
-		width: 300px;
-		width: 90%;
+		width: 85%;
   		min-height: -webkit-fill-available;
+  		border-radius: 15px;
 	}
