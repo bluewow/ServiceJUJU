@@ -14,4 +14,9 @@ public class AnalysisService implements AnalysisInterface{
 		
 	}
 
+	@Override
+	public void refreshPrice() {
+		
+	}
+
 }
