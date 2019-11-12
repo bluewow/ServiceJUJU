@@ -25,9 +25,8 @@ public class JdbcMemberDao implements MemberDao {
 				String nickName = resultSet.getString("NICKNAME");
 				String password = resultSet.getString("PASSWORD");
 				int vmoney = resultSet.getInt("VMONEY");
-				Date regdate = resultSet.getDate("REGDATE");
 				
-				member = new Member(id, email, nickName, password, vmoney, regdate);
+				member = new Member(id, email, nickName, password, vmoney);
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -55,7 +54,7 @@ public class JdbcMemberDao implements MemberDao {
 				int vmoney = resultSet.getInt("VMONEY");
 				Date regdate = resultSet.getDate("REGDATE");
 				
-				Member member = new Member(id, email, nickName, password, vmoney, regdate);
+				Member member = new Member(id, email, nickName, password, vmoney);
 				members.add(member);
 			}
 		} catch (ClassNotFoundException e) {
