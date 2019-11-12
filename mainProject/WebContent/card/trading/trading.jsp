@@ -21,7 +21,7 @@
 	<!-- --------------- page-top -------------- -->
 	<header class="page-top">
 		<div id="stockName">
-			<div>기현 알고리즘</div>
+			<div>${companyName }</div>
 			<div>204,000</div>
 		</div>
 	</header>
@@ -41,7 +41,7 @@
 		<div id="page-bottom-box">
 			<div class="show-button-align">
 				<input class="button button-status" type="button" value="자산 상황">
-				<div>176,000</div>
+				<div>${myAssets }</div>
 				<input class="button button-status" type="button" value="구매 수량">
 				<div>
 					<input id="text" autocomplete="off">
@@ -52,7 +52,7 @@
 			</div>
 			<div class="show-button-align">
 				<input class="button button-status" type="button" value="보유 상황">
-				<div>0</div>	
+				<div>${myQuantity }</div>	
 				<input class="button button-status" type="button" value="매도 수량">
 				<div>
 					<input id="text" autocomplete="off">

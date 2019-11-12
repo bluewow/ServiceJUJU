@@ -4,23 +4,29 @@ import com.stockmarket.www.service.repository.TradeInterface;
 
 public class TradeService implements TradeInterface{
 	@Override
-	public void updatePurchaseQty() {
-		
+	public boolean updatePurchaseQty(int qty) {
+		//성공/실패 DB(수량)		
+		return false;
 	}
 
 	@Override
-	public void updateSoldQty() {
-		
+	public boolean updateSoldQty(int qty) {
+		//성공/실패 DB(수량)
+		return false;
 	}
 
 	@Override
-	public void getAssert() {
-		
+	public int getAssets() {
+		//get Member
+		//자산 DB(member)
+		return 0;
 	}
 
 	@Override
-	public void getQty() {
-		
+	public int getQty() {
+		//get Member
+		//수량 DB(member)
+		return 0;
 	}
 
 	@Override

@@ -5,34 +5,32 @@ public interface TradeInterface {
 	/*
 	 * 구매수량을 입력받아 처리한다
 	 * TODO
-	 * Post 방식
 	 * DB -> 보유종목 테이블을 이용
 	 * DB -> 회원 테이블을 이용
 	 */
-	void updatePurchaseQty();
+	boolean updatePurchaseQty(int qty);
 	
 	/*
 	 * 매도수량을 입력받아 처리한다
 	 * TODO
-	 * Post 방식
 	 * DB -> 보유종목 테이블을 이용
 	 * DB -> 회원 테이블을 이용
 	 */
-	void updateSoldQty();
+	boolean updateSoldQty(int qty);
 	
 	/*
 	 * 자산정보를 갱신한다
 	 * TODO
 	 * DB -> 회원 테이블을 이용
 	 */
-	void getAssert();
+	int getAssets();
 	
 	/*
 	 * 종목수량을 갱신한다
 	 * TODO
 	 * DB -> 보유종목 테이블을 이용
 	 */
-	void getQty();
+	int getQty();
 	
 	/*
 	 * 일봉/주봉/월봉 데이터를 가져온다
