@@ -13,7 +13,7 @@ import com.stockmarket.www.ett.Stock;
 public class JdbcStockDao implements StockDao{
 
 	@Override
-	public Stock getStockCodeNum(int codeNum) {
+	public String getStockName(int codeNum) {
 		String sql = "SELECT * FROM STOCK WHERE CODENUM=" + codeNum;
 		
 		try {
@@ -21,10 +21,7 @@ public class JdbcStockDao implements StockDao{
 			ResultSet rs = statement.executeQuery(sql);
 			
 			if(rs.next()) {
-				Stock stock = new Stock();
-				stock.setCodeNum(rs.getInt("CODENUM"));
-				stock.setName(rs.getString("NAME"));
-				return stock;
+				return rs.getString("NAME");
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -33,4 +30,5 @@ public class JdbcStockDao implements StockDao{
 		}
 		return null;
 	}
+
 }
