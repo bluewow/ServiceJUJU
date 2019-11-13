@@ -5,7 +5,7 @@ import java.util.List;
 import com.stockmarket.www.ett.Member;
 
 //회원제재
-public interface MemberRestrainDAO {
+public interface MemberRestrictDAO {
 	List<Member> getMemberList();
 	Member getMember(int id);
 }

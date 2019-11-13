@@ -2,10 +2,10 @@ package com.stockmarket.www.dao.jdbc;
 
 import java.util.List;
 
-import com.stockmarket.www.dao.MemberRestrainDAO;
+import com.stockmarket.www.dao.MemberRestrictDAO;
 import com.stockmarket.www.ett.Member;
 
-public class JdbcMemberRestrainDao implements MemberRestrainDAO {
+public class JdbcMemberRestrictDao implements MemberRestrictDAO {
 
 	@Override
 	public List<Member> getMemberList() {
