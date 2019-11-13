@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -58,7 +59,13 @@
 				<div>
 					<input id="text" type="text" name="SoldQty" autocomplete="off">
 				</div>
-					<input class="button button-button" type="submit" name="trade" value="매       도">
+					<c:set var="shadow" value=""/>
+					<c:if test= "${myQuantity <= 0 }">
+						<c:set var="shadow" value="shadow"/>
+						<c:set var="disable" value="disabled"/>
+					</c:if>
+						
+					<input class="button button-button ${shadow }" type="submit" ${disable } name="trade" value="매       도">
 				</form>
 			</div>
 		</div>

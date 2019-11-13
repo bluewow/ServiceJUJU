@@ -62,7 +62,7 @@ public class TradeController extends HttpServlet{
 
 		//보유수량
 //		request.setAttribute("assets", service.getQty());
-		request.setAttribute("myQuantity", "130");
+		request.setAttribute("myQuantity", "0");
 		
 		request.getRequestDispatcher("trading.jsp").forward(request, response);
 	}
