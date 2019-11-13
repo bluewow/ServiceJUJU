@@ -3,7 +3,7 @@ package com.stockmarket.www.ett;
 import java.util.LinkedHashMap;
 
 public class Stock {
-	private int codeNum;
+	private String codeNum;
 	private String name;
 	
 	//이하 데이터를 얻기위해 CSV 를 참조한다
