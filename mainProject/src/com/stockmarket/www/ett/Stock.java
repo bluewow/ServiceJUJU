@@ -18,10 +18,10 @@ public class Stock {
 	//자산총계
 	//부채
 	
-	public int getCodeNum() {
+	public String getCodeNum() {
 		return codeNum;
 	}
-	public void setCodeNum(int codeNum) {
+	public void setCodeNum(String codeNum) {
 		this.codeNum = codeNum;
 	}
 	public String getName() {
