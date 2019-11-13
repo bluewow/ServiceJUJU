@@ -31,7 +31,19 @@ public class TradeController extends HttpServlet{
 		
 		//종목가격 
 		//종목 등락률
+		
 		//일봉, 주봉, 월봉
+		String date = request.getParameter("date");
+		if(date != null) {
+			switch(date) {
+			case "일봉":	request.setAttribute("day", "on");		break;
+			case "주봉":	request.setAttribute("week", "on");		break;
+			case "월봉":	request.setAttribute("month", "on");	break;
+			}
+		} else {
+			request.setAttribute("day", "on"); //default			
+		}
+			
 		
 		//자산상황 from 회원테이블(DB)
 //		request.setAttribute("assets", service.getAssets(id));
@@ -46,9 +58,8 @@ public class TradeController extends HttpServlet{
 			//구매수량, 매도수량
 			case "매       수":
 				qty = request.getParameter("PurchaseQty");
-				if(qty != null && qty != "") {
+				if(qty != null && qty != "") 
 					service.setQty(dummy, Integer.parseInt(qty));
-				}
 				break;
 			case "매       도":
 				qty = request.getParameter("SoldQty");

@@ -2,6 +2,24 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<!-- 매도버튼 음영처리 및 disable 처리 -->
+<c:set var="shadow" value=""/>
+<c:if test= "${myQuantity <= 0 }">
+	<c:set var="shadow" value="shadow"/>
+	<c:set var="disable" value="disabled"/>
+</c:if>
+
+<!-- 일봉/주봉/월봉 Check 처리 -->
+<c:if test= "${day == 'on'}">
+	<c:set var="day_" value="day_"/>
+</c:if>
+<c:if test= "${week == 'on'}">
+	<c:set var="week_" value="week_"/>
+</c:if>
+<c:if test= "${month == 'on'}">
+	<c:set var="month_" value="month_"/>
+</c:if>
+					
 <html>
 <head>
 
@@ -30,9 +48,9 @@
 	<!-- --------------- page-mid -------------- -->
 	<section class="page-mid">
 		<form action="trade" method="get">
-			<input class="button button-chart" type="submit" name="date" value="일봉">
-			<input class="button button-chart" type="submit" name="date" value="주봉">
-			<input class="button button-chart" type="submit" name="date" value="월봉">
+			<input class="button button-chart ${day_ }" type="submit" name="date" value="일봉">
+			<input class="button button-chart ${week_ }" type="submit" name="date" value="주봉">
+			<input class="button button-chart ${month_ }" type="submit" name="date" value="월봉">
 		</form>
 		<div id="chart_div"></div>
 	</section>
@@ -59,12 +77,6 @@
 				<div>
 					<input id="text" type="text" name="SoldQty" autocomplete="off">
 				</div>
-					<c:set var="shadow" value=""/>
-					<c:if test= "${myQuantity <= 0 }">
-						<c:set var="shadow" value="shadow"/>
-						<c:set var="disable" value="disabled"/>
-					</c:if>
-						
 					<input class="button button-button ${shadow }" type="submit" ${disable } name="trade" value="매       도">
 				</form>
 			</div>
