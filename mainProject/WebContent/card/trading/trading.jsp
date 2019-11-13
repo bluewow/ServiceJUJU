@@ -43,22 +43,22 @@
 				<input class="button button-status" type="button" value="자산 상황">
 				<div>${myAssets }</div>
 				<input class="button button-status" type="button" value="구매 수량">
-				<div>
-					<input id="text" autocomplete="off">
-				</div>
 				<form action="trade" method="get">
-					<input class="button button-button" type="submit" name="buy" value="매       수">
+				<div>
+					<input id="text" type="text" name="PurchaseQty" autocomplete="off">
+				</div>
+					<input class="button button-button" type="submit" name="trade" value="매       수">
 				</form>
 			</div>
 			<div class="show-button-align">
 				<input class="button button-status" type="button" value="보유 상황">
 				<div>${myQuantity }</div>	
 				<input class="button button-status" type="button" value="매도 수량">
-				<div>
-					<input id="text" autocomplete="off">
-				</div>
 				<form action="trade" method="get">
-					<input class="button button-button" type="submit" name="sell" value="매       도">
+				<div>
+					<input id="text" type="text" name="SoldQty" autocomplete="off">
+				</div>
+					<input class="button button-button" type="submit" name="trade" value="매       도">
 				</form>
 			</div>
 		</div>
@@ -67,6 +67,7 @@
 </body>
 
 <script>
+
 
 /*
 	visualization 
