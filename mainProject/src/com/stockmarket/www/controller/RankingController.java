@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.stockmarket.www.ett.Member;
 import com.stockmarket.www.service.RankingService;
-import com.stockmarket.www.service.jdbc.JdbcRankingService;
+import com.stockmarket.www.service.repository.JdbcRankingService;
 
 @WebServlet("/card/rank/ranking")
 public class RankingController extends HttpServlet{
