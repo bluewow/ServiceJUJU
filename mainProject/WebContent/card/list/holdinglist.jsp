@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+   pageEncoding="UTF-8"%>
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -14,23 +14,23 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 <div class="btposition" >
 <button type="button" class="btn btn-secondary btn-sm" >편집</button>
 </div>
-	<table >
-	<thead>
-	<tr>
-		<th>종목명</th>
-		<th>현재가</th>
-	</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td >제주항공</td>
-			<td class="up">24,896    <span class="fa fa-caret-up"></span><span>1.46%</span></td>
-		</tr>
-		<tr>
-			<td >네오위즈 홀딩스</td>
-			<td class="down">24,150   <span class="fa fa-caret-down"></span><span>4.17%</span></td>
-		</tr>
-		</tbody>
-	</table>
+   <table >
+   <thead>
+   <tr>
+      <th>종목명</th>
+      <th>현재가</th>
+   </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td >제주항공</td>
+         <td class="up">24,896    <span class="fa fa-caret-up"></span><span>1.46%</span></td>
+      </tr>
+      <tr>
+         <td >네오위즈 홀딩스</td>
+         <td class="down">24,150   <span class="fa fa-caret-down"></span><span>4.17%</span></td>
+      </tr>
+      </tbody>
+   </table>
 </body>
 </html>
