@@ -9,17 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.stockmarket.www.service.TradeService;
-import com.stockmarket.www.service.repository.TradeInterface;
+import com.stockmarket.www.service.basic.BasicTradeService;
 
 //TODO
 //Return false 처리
 
 @WebServlet("/card/trading/trade")
 public class TradeController extends HttpServlet{
-	TradeInterface service;
+	TradeService service;
 	
 	public TradeController() {
-		service = new TradeService();
+		service = new BasicTradeService();
 	}
 	
 	@Override

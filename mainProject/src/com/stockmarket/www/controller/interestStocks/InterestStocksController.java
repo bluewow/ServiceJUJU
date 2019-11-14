@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.stockmarket.www.service.InterestStocksService;
-import com.stockmarket.www.service.repository.InterestStocksInterface;
+import com.stockmarket.www.service.basic.BasicInterestStocksService;
 
 
 @WebServlet("/card/list")
 public class InterestStocksController extends HttpServlet {
 
-	private InterestStocksInterface interestStocksInterface;
+	private InterestStocksService interestStocksInterface;
 
 	public InterestStocksController() {
-		interestStocksInterface = new InterestStocksService();
+		interestStocksInterface = new BasicInterestStocksService();
 		
 	}
 	

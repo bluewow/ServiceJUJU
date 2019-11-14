@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.stockmarket.www.service.CommunityBoardServiceInterface;
+import com.stockmarket.www.service.CommunityBoardService;
 
 @WebServlet("/card/board/community_board")
 public class CommunityBoardController extends HttpServlet {
-	private CommunityBoardServiceInterface communityBoardService;
+	private CommunityBoardService communityBoardService;
 	public CommunityBoardController() {
 	}
 

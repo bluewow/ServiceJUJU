@@ -12,13 +12,13 @@ import javax.servlet.http.HttpSession;
 
 import com.stockmarket.www.ett.Member;
 import com.stockmarket.www.service.RankingService;
-import com.stockmarket.www.service.repository.JdbcRankingService;
+import com.stockmarket.www.service.basic.BasicRankingService;
 
 @WebServlet("/card/rank/ranking")
 public class RankingController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RankingService service = new JdbcRankingService();
+		RankingService service = new BasicRankingService();
 		
 		// 가상머니 소유자를 상위 50위까지 가져온다.
 		List<Member> rankers = service.getMemberList();

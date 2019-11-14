@@ -1,15 +1,15 @@
-package com.stockmarket.www.service.repository;
+package com.stockmarket.www.service.basic;
 
 import java.util.List;
 
 import com.stockmarket.www.ett.CommunityBoard;
-import com.stockmarket.www.service.CommunityBoardServiceInterface;
+import com.stockmarket.www.service.CommunityBoardService;
 
-public class CommunityBoardService implements CommunityBoardServiceInterface {
+public class BasicCommunityBoardService implements CommunityBoardService {
 
 	private CommunityBoard communityBoard;
 
-	public CommunityBoardService() {
+	public BasicCommunityBoardService() {
 		communityBoard = new CommunityBoard();
 	}
 

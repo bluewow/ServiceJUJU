@@ -1,64 +1,46 @@
 package com.stockmarket.www.service;
 
-import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
-import com.stockmarket.www.ett.Member;
-import com.stockmarket.www.service.repository.TradeInterface;
-
-public class TradeService implements TradeInterface{
-	JdbcMemberDao memberDao;
+//Quantity -> Qty
+public interface TradeService {
+	/*
+	 * 구매수량을 입력받아 처리한다
+	 * TODO
+	 * DB -> 보유종목 테이블을 이용
+	 * DB -> 회원 테이블을 이용
+	 */
+	boolean updatePurchaseQty(int qty);
 	
-	public TradeService() {
-		memberDao = new JdbcMemberDao();
-	}
+	/*
+	 * 매도수량을 입력받아 처리한다
+	 * TODO
+	 * DB -> 보유종목 테이블을 이용
+	 * DB -> 회원 테이블을 이용
+	 */
+	boolean updateSoldQty(int qty);
 	
-	@Override
-	public boolean updatePurchaseQty(int qty) {
-		//성공/실패 DB(수량)		
-		return false;
-	}
-
-	@Override
-	public boolean updateSoldQty(int qty) {
-		//성공/실패 DB(수량)
-		return false;
-	}
-
-	@Override
-	public int getAssets(int id) {
-		Member member = new Member();
-		member = memberDao.getMember(id);
-		
-		return member.getvMoney();
-	}
-
-	@Override
-	public int getQty(int id) {
-		//get Member
-		//수량 DB(member)
-		return 0;
-	}
+	/*
+	 * 자산정보를 갱신한다 
+	 */
+	int getAssets(int id);
 	
-	@Override
-	public boolean setQty(int id, int qty) {
-		//set Member
-		//set 수량 db
-		int memberQty = 0;
-		
-		memberQty = getQty(id);
-		if(memberQty + qty < 0) {
-			System.out.println("마이너스 수량");
-			return false;
-		} else {
-			//set 수량 db
-			return true;
-		}
-	}
+	/*
+	 * 종목수량을 갱신한다
+	 * TODO
+	 * DB -> 보유종목 테이블을 이용
+	 */
+	int getQty(int id);
+
+	/*
+	 * 종목수량을 변경한다
+	 * TODO
+	 * DB -> 보유종목 테이블을 이용
+	 */
+	boolean setQty(int id, int qty);
 	
-
-	@Override
-	public void getStock(int date) {
-		
-	}
-
-
+	/*
+	 * 일봉/주봉/월봉 데이터를 가져온다
+	 * TODO
+	 * Stock 정보 사용(Not DB)
+	 */
+	void getStock(int date);
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.stockmarket.www.ett.CommunityBoard;
 
-public interface CommunityBoardServiceInterface {
+public interface CommunityBoardService {
 	/*
 	 * 게시판 목록
 	 * */
