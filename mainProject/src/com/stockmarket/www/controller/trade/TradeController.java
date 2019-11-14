@@ -9,13 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.stockmarket.www.service.TradeService;
+import com.stockmarket.www.service.repository.TradeInterface;
 
 //TODO
 //Return false 처리
 
 @WebServlet("/card/trading/trade")
 public class TradeController extends HttpServlet{
-	TradeService service;
+	TradeInterface service;
 	
 	public TradeController() {
 		service = new TradeService();
