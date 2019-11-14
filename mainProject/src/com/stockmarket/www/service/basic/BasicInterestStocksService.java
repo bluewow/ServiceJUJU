@@ -20,14 +20,14 @@ public class BasicInterestStocksService implements InterestStocksService {
 	@Override
 	public List<InterestStocks> getInterestStockList() {
 		
-		return null;
+		return interestStocksDao.getInterestStockList();
 	}
 
-	@Override
-	public List<InterestStocks> getInterestStockList(String stockName, int currentPrice, int quentity) {
-		
-		return null;
-	}
+//	@Override
+//	public List<InterestStocks> getInterestStockList(String stockName, int currentPrice, int quentity) {
+//		
+//		return null;
+//	}
 
 	@Override
 	public int delete(int id) {
