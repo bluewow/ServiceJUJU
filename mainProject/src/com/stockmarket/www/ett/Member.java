@@ -9,6 +9,10 @@ public class Member {
 	private String password;
 	private int vMoney;
 	
+	public Member() {
+	
+	}
+	
 	// insert, update를 위한 생성자
 	public Member(String email, String nickName, String password, int vMoney) {
 		this.email = email;
@@ -25,6 +29,8 @@ public class Member {
 		this.nickName = nickName;
 		this.vMoney = vMoney;
 	}
+
+
 
 	// getter and setter
 	public int getId() {

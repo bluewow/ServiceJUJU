@@ -1,4 +1,4 @@
-package com.stockmarket.www.service.jdbc;
+package com.stockmarket.www.service.repository;
 
 import java.util.List;
 

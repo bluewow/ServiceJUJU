@@ -19,18 +19,23 @@ public interface TradeInterface {
 	boolean updateSoldQty(int qty);
 	
 	/*
-	 * 자산정보를 갱신한다
-	 * TODO
-	 * DB -> 회원 테이블을 이용
+	 * 자산정보를 갱신한다 
 	 */
-	int getAssets();
+	int getAssets(int id);
 	
 	/*
 	 * 종목수량을 갱신한다
 	 * TODO
 	 * DB -> 보유종목 테이블을 이용
 	 */
-	int getQty();
+	int getQty(int id);
+
+	/*
+	 * 종목수량을 변경한다
+	 * TODO
+	 * DB -> 보유종목 테이블을 이용
+	 */
+	boolean setQty(int id, int qty);
 	
 	/*
 	 * 일봉/주봉/월봉 데이터를 가져온다
