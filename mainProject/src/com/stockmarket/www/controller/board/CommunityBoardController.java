@@ -1,15 +1,6 @@
 package com.stockmarket.www.controller.board;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,51 +8,49 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/card/board/board")
-public class BoardController extends HttpServlet {
+import com.stockmarket.www.service.CommunityBoardServiceInterface;
+
+@WebServlet("/card/board/community_board")
+public class CommunityBoardController extends HttpServlet {
+	private CommunityBoardServiceInterface communityBoardService;
+	public CommunityBoardController() {
+	}
+
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		super.init();
+	}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		int page = 1;
+		String field = "board";
+		String query= "";
 		
-		List<Map<String, Object>> list = new ArrayList<>();
-
-		String url = "jdbc:oracle:thin:@112.223.37.243:1521/xepdb1";
-		String sql = "SELECT * FROM NOTICE";
-	
-		try {
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		Connection con = DriverManager.getConnection(url, "ACORNGROUP1", "month100man");
-		PreparedStatement st = con.prepareStatement(sql);
-		ResultSet rs = st.executeQuery();
-
-				while(rs.next()) {
-					
-				Map<String, Object> notice = new HashMap();
-				
-				notice.put("id", rs.getInt("ID"));
-				notice.put("title", rs.getString("TITLE"));
-				notice.put("writerId", rs.getString("WRITER_ID"));
-				notice.put("regdate", rs.getDate("REGDATE"));
-				notice.put("hit", rs.getInt("HIT"));
-				notice.put("content", rs.getInt("CONTENT"));
-				notice.put("stockcode", rs.getInt("STOCKCODE"));
-				
-				list.add(notice);
-			}; 
-			rs.close();
-			st.close();
-			con.close();
-		} catch (ClassNotFoundException e) {
-
-			e.printStackTrace();
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("board.jsp").forward(request, response);
-
+		String page_ = request.getParameter("p");
+		if(page_ != null && !page_.equals(""))
+			page = Integer.parseInt(page_);
 		
+		String field_ = request.getParameter("f");
+		if(field_ !=null && !field_.equals(""))
+			field = field_;
+
+		String query_ = request.getParameter("q");
+		if(query_ !=null && !query_.equals(""))
+			query = query_;
+		
+		request.setAttribute("CommunityBoard", communityBoardService.getCommunityBoardList(page)); // 컨트롤러가 할 일은 데이터를 준비하는 일
+		request.getRequestDispatcher("/card/board/community_board").forward(request, response);
+		System.out.println("노티스 리스트 두겟");
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		super.doPost(request, response);
 	}
 }
