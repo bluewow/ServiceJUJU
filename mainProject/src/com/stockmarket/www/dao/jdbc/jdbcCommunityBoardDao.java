@@ -16,19 +16,19 @@ public class jdbcCommunityBoardDao implements CommunityBoardDao {
 	@Override
 	public List<CommunityBoard> getCommunityBoardList() {
 
-		return getCommunityBoardList(1, "title", "");
+		return getCommunityBoardList(1, "title", "", "");
 	}
 
 	@Override
 	public List<CommunityBoard> getCommunityBoardList(int page) {
 
-		return getCommunityBoardList(page, "title", "");
+		return getCommunityBoardList(page, "title", "", "");
 	}
 
 	@Override
 	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return getCommunityBoardList(1, field, query, "");
 	}
 
 	@Override
