@@ -2,39 +2,41 @@ package com.stockmarket.www.service.basic;
 
 import java.util.List;
 
+import com.stockmarket.www.dao.CommunityBoardDao;
+import com.stockmarket.www.dao.jdbc.JdbcCommunityBoardDao;
 import com.stockmarket.www.ett.CommunityBoard;
 import com.stockmarket.www.service.CommunityBoardService;
 
 public class BasicCommunityBoardService implements CommunityBoardService {
 
-	private CommunityBoard communityBoard;
+	private CommunityBoardDao communityBoardDao;
 
 	public BasicCommunityBoardService() {
-		communityBoard = new CommunityBoard();
+		communityBoardDao = new JdbcCommunityBoardDao();
 	}
 
 	@Override
 	public List<CommunityBoard> getCommunityBoardList(int page) {
-
-		return getCommunityBoardList(page);
+		// TODO Auto-generated method stub
+		return communityBoardDao.getCommunityBoardList(page, "title", "", "");
 	}
 
 	@Override
 	public List<CommunityBoard> getStockBoardList(int page, String code) {
 		// TODO Auto-generated method stub
-		return null;
+		return communityBoardDao.getCommunityBoardList(page, "title", "", code);
 	}
 
 	@Override
 	public List<CommunityBoard> getSearchBoardList(int page, String field, String query) {
 		// TODO Auto-generated method stub
-		return null;
+		return communityBoardDao.getCommunityBoardList(page, field, query, "");
 	}
 
 	@Override
 	public List<CommunityBoard> getSearchStockBoardList(int page, String field, String query, String code) {
-		// TODO Auto-generated method stub
-		return null;
+		// communityBoardDao
+		return communityBoardDao.getCommunityBoardList(page, field, query, code);
 	}
 
 	@Override
@@ -84,5 +86,6 @@ public class BasicCommunityBoardService implements CommunityBoardService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 }

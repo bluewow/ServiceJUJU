@@ -179,7 +179,7 @@
 										<iframe height="100%" src="./card/board/news_board" scrolling="no">
 										</iframe></div>
 									<div class="tab-pane fade" id="community" role="tabpanel"
-										aria-labelledby="community-tab">전체커뮤니티</div>
+										aria-labelledby="community-tab"><iframe height="100%" src="./card/board/community_board" scrolling="no"></div>
 									<div class="tab-pane fade" id="eventcommunity" role="tabpanel"
 										aria-labelledby="eventcommunity-tab">종목별커뮤니티</div>
 								</div>

@@ -10,27 +10,27 @@
 </head>
 <body>
 	<table border=1>
-		<thead>
+		<thead align="center">
 			<tr>
 				<th></th>
-				<th>제목</th>
+				<th width="200">제목</th>
 				<th>작성일</th>
 				<th>조회</th>
 				<th></th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody align="center">
 			<c:forEach var="n" items="${CommunityBoard }">
 				<tr>
 					<td>${n.id}</td>
-					<td rowspan="2">1*2 셀</td>
-					<td rowspan="1">1*3 셀</td>
-					<td>1*4 셀</td>
-					<td rowspan="2">1*5 셀</td>
+					<td rowspan="2">${n.title}</td>
+					<td rowspan="1">${n.regdate}</td>
+					<td>${n.hit}</td>
+					<td rowspan="2"><input type="button" name="Favorite" value="Favorite"></td>
 				</tr>
 				<tr>
-					<td>2*1 셀</td>
-					<td colspan="2">2*3 셀</td>
+					<td><input type="button" name="Del"  value="Del"></td>
+					<td colspan="2">${n.writerId}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

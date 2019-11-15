@@ -11,10 +11,11 @@ public class CommunityBoard {
 	private String content;
 	private String stockcode;
 
-	//select
-	
+	// select
+
 	public CommunityBoard() {
 	}
+
 	public CommunityBoard(int id, String title, String writerId, Date regdate, int hit, String content,
 			String stockcode) {
 		this.id = id;
@@ -26,9 +27,8 @@ public class CommunityBoard {
 		this.stockcode = stockcode;
 	}
 
-	//insert, update
-	public CommunityBoard(String title, String writerId, Date regdate, int hit, String content,
-			String stockcode) {
+	// insert, update
+	public CommunityBoard(String title, String writerId, Date regdate, int hit, String content, String stockcode) {
 		this.title = title;
 		this.writerId = writerId;
 		this.regdate = regdate;
@@ -59,6 +59,14 @@ public class CommunityBoard {
 
 	public void setWriterId(String writerId) {
 		this.writerId = writerId;
+	}
+
+	public Date getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
 	}
 
 	public int getHit() {
