@@ -9,11 +9,23 @@
 <title>Community</title>
 </head>
 <body>
+	<div>
+		<a href= ></a>
+	</div>
+	<div>
+		<input type="button" name="글쓰기"  value="글쓰기">		
+	</div>
+	<br>
+	<div>
+		<input type="button" name="My"  value="My">
+		<input type="button" name="관심"  value="관심">
+	</div>
+	<br>
 	<table border=1>
 		<thead align="center">
 			<tr>
 				<th></th>
-				<th width="200">제목</th>
+				<th>제목</th>
 				<th>작성일</th>
 				<th>조회</th>
 				<th></th>

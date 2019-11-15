@@ -9,7 +9,7 @@ public class CommunityBoard {
 	private Date regdate;
 	private int hit;
 	private String content;
-	private String stockcode;
+	private String stockName;
 
 	// select
 
@@ -24,17 +24,17 @@ public class CommunityBoard {
 		this.regdate = regdate;
 		this.hit = hit;
 		this.content = content;
-		this.stockcode = stockcode;
+		this.stockName = stockcode;
 	}
 
 	// insert, update
-	public CommunityBoard(String title, String writerId, Date regdate, int hit, String content, String stockcode) {
+	public CommunityBoard(String title, String writerId, Date regdate, int hit, String content, String stockName) {
 		this.title = title;
 		this.writerId = writerId;
 		this.regdate = regdate;
 		this.hit = hit;
 		this.content = content;
-		this.stockcode = stockcode;
+		this.stockName = stockName;
 	}
 
 	public int getId() {
@@ -85,18 +85,18 @@ public class CommunityBoard {
 		this.content = content;
 	}
 
-	public String getStockcode() {
-		return stockcode;
+	public String getStockName() {
+		return stockName;
 	}
 
-	public void setStockcode(String stockcode) {
-		this.stockcode = stockcode;
+	public void setStockName(String stockName) {
+		this.stockName = stockName;
 	}
 
 	@Override
 	public String toString() {
 		return "CommunityBoard [id=" + id + ", title=" + title + ", writerId=" + writerId + ", regdate=" + regdate
-				+ ", hit=" + hit + ", content=" + content + ", stockcode=" + stockcode + "]";
+				+ ", hit=" + hit + ", content=" + content + ", stockName=" + stockName + "]";
 	}
 
 }

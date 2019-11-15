@@ -29,8 +29,8 @@
 			<c:forEach var="n" items="${CommunityBoard}">
 				<tr>
 					<td>${n.id}</td>
-					<td rowspan="2">${n.title}</td>
-					<td rowspan="1"><fmt:formatDate value="${n.regdate}" pattern="yy/MM/dd"/></td>
+					<td rowspan="2">[${n.stockName}] ${n.title}</td>
+					<td rowspan="1"><fmt:formatDate value="${n.regdate}" pattern="yy/MM/dd hh:mm"/></td>
 					<td>${n.hit}</td>
 					<td rowspan="2"><input type="button" name="Favo" value="Favo"></td>
 				</tr>

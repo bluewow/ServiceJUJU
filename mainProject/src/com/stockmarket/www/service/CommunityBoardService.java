@@ -11,7 +11,7 @@ public interface CommunityBoardService {
 	List<CommunityBoard> getCommunityBoardList(int page);
 	List<CommunityBoard> getStockBoardList(int page, String code);
 	List<CommunityBoard> getSearchBoardList(int page, String field, String query);
-	List<CommunityBoard> getSearchStockBoardList(int page, String field, String query, String code);
+	List<CommunityBoard> getSearchStockBoardList(int page, String field, String query, String stockName);
 	
 	/*
 	 * 게시판 내용

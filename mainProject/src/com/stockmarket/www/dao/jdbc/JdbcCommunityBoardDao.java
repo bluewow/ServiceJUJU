@@ -14,12 +14,12 @@ import com.stockmarket.www.entity.CommunityBoard;
 public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 	@Override
-	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockCode) {
+	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockName) {
 
 		List<CommunityBoard> list = new ArrayList<>();
 
-		String sql = "SELECT * FROM (SELECT ROWNUM NUM, N.* FROM(SELECT * FROM (SELECT * FROM BOARD WHERE STOCKCODE LIKE '%"
-				+ stockCode + "%') WHERE " + field + " LIKE ? ORDER BY REGDATE DESC) N) WHERE NUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM (SELECT ROWNUM NUM, N.* FROM(SELECT * FROM (SELECT * FROM BOARD_VIEW WHERE STOCKNAME LIKE '%"
+				+ stockName + "%') WHERE " + field + " LIKE ? ORDER BY REGDATE DESC) N) WHERE NUM BETWEEN ? AND ?";
 
 		String url = "jdbc:oracle:thin:@112.223.37.243:1521/xepdb1";
 
@@ -36,8 +36,8 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 			while (rs.next()) {
 				CommunityBoard communityBoard = new CommunityBoard(rs.getInt("ID"), rs.getString("TITLE"),
-						rs.getString("WRITER_ID"), rs.getDate("REGDATE"), rs.getInt("HIT"), rs.getString("CONTENT"),
-						rs.getString("STOCKCODE"));
+						rs.getString("WRITER"), rs.getDate("REGDATE"), rs.getInt("HIT"), rs.getString("CONTENT"),
+						rs.getString("STOCKNAME"));
 				list.add(communityBoard);
 			}
 

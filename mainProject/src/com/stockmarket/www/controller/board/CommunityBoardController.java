@@ -31,7 +31,7 @@ public class CommunityBoardController extends HttpServlet {
 		int page = 1;
 		String field = "title";
 		String query= "";
-		String stockCode= "";
+		String stockName= "";
 		
 		String page_ = request.getParameter("p");
 		if(page_ != null && !page_.equals(""))
@@ -45,9 +45,9 @@ public class CommunityBoardController extends HttpServlet {
 		if(query_ !=null && !query_.equals(""))
 			query = query_;
 		
-		String stockCode_ = request.getParameter("s");
-		if(stockCode_ !=null && !stockCode_.equals(""))
-			stockCode = stockCode_;
+		String stockName_ = request.getParameter("s");
+		if(stockName_ !=null && !stockName_.equals(""))
+			stockName = stockName_;
 		
 		request.setAttribute("CommunityBoard", communityBoardService.getCommunityBoardList(page)); // 컨트롤러가 할 일은 데이터를 준비하는 일
 		
