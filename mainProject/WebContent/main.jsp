@@ -115,12 +115,12 @@
 								<div class="tab-content" id="myTabContent">
 									<div class="tab-pane fade show active" id="analysis"
 										role="tabpanel" aria-labelledby="analysis-tab">
-											<iframe height="100%" src="./card/trading/analysis" scrolling="no">
+											<iframe height="100%" src="./card/trade/analysis" scrolling="no">
 											</iframe>
 										</div>
 									<div class="tab-pane fade" id="trading" role="tabpanel"
 										aria-labelledby="trading-tab">
-											<iframe height="100%" src="./card/trading/trade" scrolling="no">
+											<iframe height="100%" src="./card/trade/trading" scrolling="no">
 											</iframe>
 										</div>
 									

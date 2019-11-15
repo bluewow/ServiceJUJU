@@ -14,7 +14,7 @@ import com.stockmarket.www.service.basic.BasicTradeService;
 //TODO
 //Return false 처리
 
-@WebServlet("/card/trading/trade")
+@WebServlet("/card/trade/trading")
 public class TradeController extends HttpServlet{
 	TradeService service;
 	
