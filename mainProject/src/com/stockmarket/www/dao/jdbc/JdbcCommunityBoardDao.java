@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.stockmarket.www.dao.CommunityBoardDao;
-import com.stockmarket.www.ett.CommunityBoard;
+import com.stockmarket.www.entity.CommunityBoard;
 
 public class JdbcCommunityBoardDao implements CommunityBoardDao {
 

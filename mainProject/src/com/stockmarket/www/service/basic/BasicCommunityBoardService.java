@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.stockmarket.www.dao.CommunityBoardDao;
 import com.stockmarket.www.dao.jdbc.JdbcCommunityBoardDao;
-import com.stockmarket.www.ett.CommunityBoard;
+import com.stockmarket.www.entity.CommunityBoard;
 import com.stockmarket.www.service.CommunityBoardService;
 
 public class BasicCommunityBoardService implements CommunityBoardService {

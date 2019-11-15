@@ -1,4 +1,4 @@
-package com.stockmarket.www.ett;
+package com.stockmarket.www.entity;
 
 import java.util.LinkedHashMap;
 

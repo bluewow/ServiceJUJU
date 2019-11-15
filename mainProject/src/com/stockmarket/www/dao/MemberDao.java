@@ -2,7 +2,7 @@ package com.stockmarket.www.dao;
 
 import java.util.List;
 
-import com.stockmarket.www.ett.Member;
+import com.stockmarket.www.entity.Member;
 
 public interface MemberDao {
 	List<Member> getMemberList();

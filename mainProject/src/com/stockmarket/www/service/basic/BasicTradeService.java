@@ -1,7 +1,7 @@
 package com.stockmarket.www.service.basic;
 
 import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
-import com.stockmarket.www.ett.Member;
+import com.stockmarket.www.entity.Member;
 import com.stockmarket.www.service.TradeService;
 
 public class BasicTradeService implements TradeService{

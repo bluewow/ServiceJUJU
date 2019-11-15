@@ -2,7 +2,7 @@ package com.stockmarket.www.service;
 //업무적인...
 import java.util.List;
 
-import com.stockmarket.www.ett.CommunityBoard;
+import com.stockmarket.www.entity.CommunityBoard;
 
 public interface CommunityBoardService {
 	/*

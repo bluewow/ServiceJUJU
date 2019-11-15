@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.stockmarket.www.dao.InterestStocksDao;
 import com.stockmarket.www.dao.jdbc.JdbcInterestStocksDao;
-import com.stockmarket.www.ett.InterestStocks;
+import com.stockmarket.www.entity.InterestStocks;
 import com.stockmarket.www.service.InterestStocksService;
 
 public class BasicInterestStocksService implements InterestStocksService {

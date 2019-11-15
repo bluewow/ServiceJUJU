@@ -8,8 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.stockmarket.www.dao.InterestStocksDao;
-import com.stockmarket.www.ett.InterestStocks;
-import com.stockmarket.www.ett.Member;
+import com.stockmarket.www.entity.InterestStocks;
+import com.stockmarket.www.entity.Member;
 
 public class JdbcInterestStocksDao implements InterestStocksDao {
 
