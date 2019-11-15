@@ -15,15 +15,13 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 	@Override
 	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockCode) {
-		
+
 		List<CommunityBoard> list = new ArrayList<>();
-		
-		String sql = "SELECT * FROM (SELECT ROWNUM NUM, N.* FROM(SELECT * FROM (SELECT * FROM BOARD WHERE STOCKCODE LIKE '%"+stockCode+"%') WHERE "+field+" LIKE ? ORDER BY REGDATE DESC) N) WHERE NUM BETWEEN ? AND ?";
-		/*String sql = "SELECT * FROM (SELECT ROWNUM NUM, N.* FROM("
-						+ "SELECT * FROM (SELECT * FROM BOARD WHERE STOCKCODE LIKE "+stockCode+") "
-						+ "WHERE "+field+" LIKE ? ORDER BY REGDATE DESC) N)WHERE NUM BETWEEN ? AND ?";*/
+
+		String sql = "SELECT * FROM (SELECT ROWNUM NUM, N.* FROM(SELECT * FROM (SELECT * FROM BOARD WHERE STOCKCODE LIKE '%"
+				+ stockCode + "%') WHERE " + field + " LIKE ? ORDER BY REGDATE DESC) N) WHERE NUM BETWEEN ? AND ?";
+
 		String url = "jdbc:oracle:thin:@112.223.37.243:1521/xepdb1";
-		
 
 		try {
 
@@ -37,13 +35,8 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
-				CommunityBoard communityBoard = new CommunityBoard(
-						rs.getInt("ID"), 
-						rs.getString("TITLE"), 
-						rs.getString("WRITER_ID"), 
-						rs.getDate("REGDATE"), 
-						rs.getInt("HIT"), 
-						rs.getString("CONTENT"), 
+				CommunityBoard communityBoard = new CommunityBoard(rs.getInt("ID"), rs.getString("TITLE"),
+						rs.getString("WRITER_ID"), rs.getDate("REGDATE"), rs.getInt("HIT"), rs.getString("CONTENT"),
 						rs.getString("STOCKCODE"));
 				list.add(communityBoard);
 			}
@@ -62,6 +55,5 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 
 }
