@@ -31,7 +31,7 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 			st.setString(1, "%" + query + "%");
 			st.setInt(2, 1 + 10 * (page - 1));
-			st.setInt(3, 10 * page);
+			st.setInt(3, 20 * page);
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
