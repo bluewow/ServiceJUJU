@@ -27,7 +27,7 @@
 <!-- CSS Reset -->
 <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
 <!-- ref analysis.css -->
-<link rel="stylesheet" href="../../css/trading/trading.css">
+<link rel="stylesheet" href="../../css/trade/trading.css">
 
 
 <!--  팝업창 띄우기
