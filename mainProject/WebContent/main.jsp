@@ -120,7 +120,7 @@
 										</div>
 									<div class="tab-pane fade" id="trading" role="tabpanel"
 										aria-labelledby="trading-tab">
-											<iframe height="100%" src="./card/trade/trading" scrolling="no">
+											<iframe height="100%" src="./card/trade/trade" scrolling="no">
 											</iframe>
 										</div>
 									
