@@ -25,17 +25,21 @@
     		padding: 10px;
   		}
   		
-  			#rankTable thead td {
-   				/*border-bottom: 1px solid #444444;
-   				border-bottom-color: #85888a;
-    			padding: 10px;*/
-    			border-bottom-width: 3px;
-  			}
+  		#rankTable thead td {
+   			/*border-bottom: 1px solid #444444;
+   			border-bottom-color: #85888a;
+   			padding: 10px;*/
+   			border-bottom-width: 3px;
+ 		}
 
-        #rankTable > .rankInfo{
+        #rankTable>.rankInfo{
             font-weight: bold;
         }
 
+		#rankTable>#myRank{
+			
+		}
+		
         #rankTable .rank, .profileImg{
             min-width: 30px;
             width: 5%;
@@ -49,3 +53,4 @@
         tbody .assetsGrowth{
             color: #cf969c;    
         }
+        
