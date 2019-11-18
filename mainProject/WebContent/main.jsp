@@ -29,16 +29,27 @@
 <!-- Main Styles -->
 <link rel="stylesheet" type="text/css" href="./css/main.css">
 
+<link rel="stylesheet" type="text/css" href="./css/tablet.css">
+
+
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<link rel="stylesheet" type="text/css" href="./css/tablet.css">
 <!--[if lt IE 9]>
    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
+   <style>
+   @media only screen and (min-width:800px) and (max-width: 1200px) {
+	.row .column.column-33, .row .column.column-34 {
+		flex: none;
+		max-width: 49.3333%;
+	}
+}
+   </style>
 
 
 </head>
