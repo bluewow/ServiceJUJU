@@ -1,4 +1,4 @@
-package com.stockmarket.www.controller;
+package com.stockmarket.www.controller.rank;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,7 +22,6 @@ public class RankingController extends HttpServlet{
 		
 		// 가상머니 소유자를 상위 50위까지 가져온다.
 		List<Member> rankers = service.getMemberList();
-		
 		request.setAttribute("rankers", rankers);
 
 		// 세션을 이용하여 현재 사용자의 아이디를 가져온다.

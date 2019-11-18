@@ -185,9 +185,8 @@
 								</div>
 							</section>
 						</div>
-
-				</div>
-			</section>
+					</div>
+				</section>
 
 			<!-- 보유 목록/관심 목록 카드 -->
 			<section class="column column-33">
@@ -214,7 +213,8 @@
 							</div>
 						</section>
 					</div>
-				</section>
+				</div>>
+			</section>
 
 
 				<!-- 자산추이 카드 -->
@@ -265,7 +265,7 @@
 								<div class="tab-content" id="myTabContent">
 									<div class="tab-pane fade show active" id="rangking"
 										role="tabpanel" aria-labelledby="rangking-tab">
-										<iframe src="./card/rank/ranking" scrolling="no">
+										<iframe height="100%" src="./card/rank/ranking" scrolling="no">
 										</iframe>
 									</div>
 								</div>
