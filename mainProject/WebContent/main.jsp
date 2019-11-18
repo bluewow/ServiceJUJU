@@ -226,16 +226,15 @@
 									style="border: none">
 									<li class="nav-item"><a class="nav-link active"
 										id="assetgraph-tab" data-toggle="tab" href="#assetgraph"
-										role="tab" aria-controls="index1" aria-selected="true">자산추이</a></li>
-									<li class="nav-item"><a class="nav-link" id="compare-tab"
-										data-toggle="tab" href="#compare" role="tab"
-										aria-controls="index2" aria-selected="false">종목비교</a></li>
+										role="tab" aria-controls="index1" aria-selected="true">MY 자산</a></li>
+					
 								</ul>
 								<div class="tab-content" id="myTabContent">
 									<div class="tab-pane fade show active" id="assetgraph"
-										role="tabpanel" aria-labelledby="assetgraph-tab">자산추이</div>
-									<div class="tab-pane fade" id="compare" role="tabpanel"
-										aria-labelledby="compare-tab">종목비교</div>
+										role="tabpanel" aria-labelledby="assetgraph-tab">
+										<iframe height="100%" src="./card/asset/myAsset.jsp" scrolling="no">
+										</iframe></div>
+				
 								</div>
 							</section>
 						</div>
