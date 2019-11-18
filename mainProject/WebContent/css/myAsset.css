@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+#assetTrend {
+	background: #ffff00;
+	height: 384px;
+	width: 550px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#header1 {
+	background: #ff80c0;
+	height: 100px;
+	width: inherit;
+}
+
+#header1>div {
+	height: 40px;
+	width: 200px;
+	background: #0080ff;
+	text-align: center;
+}
+
+#listPole {
+	height: 60px;
+	width: 200px;
+	background: #8080ff;
+	text-align: center;	
+}
+
+#body1 {
+	background: #0080ff;
+	height: 284px;
+	width: inherit;
+
+}
+
+#graph-assetTrend {
+	background: #8080c0;
+	height: 234px;
+	width: inherit;
+	
+}
+
+#setPeriodgraph-assetTrend {
+	background: #ff8040;
+	height: 50px;
+	width: inherit;
+	
+}
+
+#assetDistr {
+	background: #ffff00;
+	height: 284px;
+	width: 550px;
+		margin-left: auto;
+	margin-right: auto;
+}
