@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.stockmarket.www.ett.Member;
+import com.stockmarket.www.entity.Member;
 import com.stockmarket.www.service.RankingService;
 import com.stockmarket.www.service.basic.BasicRankingService;
 

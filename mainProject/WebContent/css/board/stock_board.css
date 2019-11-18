@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+#contaner {
+	width: 90%;
+	min-width: 460px;
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 15px;
+}
+
+#stockScroll {
+	overflow: scroll;
+	width: 96%;
+	height: 100%;
+	padding: 10px;
+}
+
+#stockTable {
+	width: 100%;
+	text-align: left;
+	font-size: 11pt;
+	border-collapse: collapse;
+}
+
+#stockTable tr {
+	height: 40px;
+}
+
+#stockTable td {
+	border-bottom: 1px solid #444444;
+	border-bottom-color: #85888a;
+	padding: 10px;
+}
+
+#stockTable thead td {
+	border-bottom-width: 0px;
+}
+
+#stockTable>.content {
+	font-weight: bold;
+	font-size: 12pt;
+}
+
+thead .title {
+	min-width: 50px;
+	width: 30%;
+}
+
+a { text-decoration:none ; color:#000000}
+
+#origin {
+	font-weight: bold;
+	  font-size: 11pt;
+	  text-align: right;
+}

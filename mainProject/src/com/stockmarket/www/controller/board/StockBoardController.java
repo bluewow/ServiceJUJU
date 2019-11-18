@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.stockmarket.www.service.CommunityBoardService;
 import com.stockmarket.www.service.basic.BasicCommunityBoardService;
 
-@WebServlet("/card/board/community_board")
-public class CommunityBoardController extends HttpServlet {
+@WebServlet("/card/board/stock_board")
+public class StockBoardController extends HttpServlet {
 	private CommunityBoardService communityBoardService;
-	public CommunityBoardController() {
+	public StockBoardController() {
 		communityBoardService = new BasicCommunityBoardService();
 	}
 
@@ -31,7 +31,7 @@ public class CommunityBoardController extends HttpServlet {
 		int page = 1;
 		String field = "title";
 		String query= "";
-		String stockName= "";
+		String stockCode= "";
 		
 		String page_ = request.getParameter("p");
 		if(page_ != null && !page_.equals(""))
@@ -45,13 +45,13 @@ public class CommunityBoardController extends HttpServlet {
 		if(query_ !=null && !query_.equals(""))
 			query = query_;
 		
-		String stockName_ = request.getParameter("s");
-		if(stockName_ !=null && !stockName_.equals(""))
-			stockName = stockName_;
+		String stockCode_ = request.getParameter("s");
+		if(stockCode_ !=null && !stockCode_.equals(""))
+			stockCode = stockCode_;
 		
 		request.setAttribute("CommunityBoard", communityBoardService.getCommunityBoardList(page)); // 컨트롤러가 할 일은 데이터를 준비하는 일
 		
-		request.getRequestDispatcher("/card/board/community_board.jsp").forward(request, response);
+		request.getRequestDispatcher("/card/board/stock_board.jsp").forward(request, response);
 		System.out.println("노티스 리스트 두겟");
 	}
 

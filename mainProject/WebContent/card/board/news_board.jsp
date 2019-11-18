@@ -17,7 +17,7 @@
 <!-- CSS Reset -->
 <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
 
-<link href="../../css/news_board.css" type="text/css" rel="stylesheet">
+<link href="../../css/board/news_board.css" type="text/css" rel="stylesheet">
 
 
 </head>

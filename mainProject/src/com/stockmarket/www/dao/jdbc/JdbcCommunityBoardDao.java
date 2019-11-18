@@ -9,34 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.stockmarket.www.dao.CommunityBoardDao;
-import com.stockmarket.www.ett.CommunityBoard;
+import com.stockmarket.www.entity.CommunityBoard;
 
-public class jdbcCommunityBoardDao implements CommunityBoardDao {
-
-	@Override
-	public List<CommunityBoard> getCommunityBoardList() {
-
-		return getCommunityBoardList(1, "title", "", "");
-	}
+public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 	@Override
-	public List<CommunityBoard> getCommunityBoardList(int page) {
+	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockName) {
 
-		return getCommunityBoardList(page, "title", "", "");
-	}
-
-	@Override
-	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query) {
-		
-		return getCommunityBoardList(1, field, query, "");
-	}
-
-	@Override
-	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String Code) {
-		
 		List<CommunityBoard> list = new ArrayList<>();
 
-		String sql = "SELECT * FROM (SELECT ROWNUM NUM, N.* FROM(SELECT * FROM NOTICE_VIEW WHERE "+field+" LIKE ? ORDER BY REGDATE DESC) N )WHERE NUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM (SELECT ROWNUM NUM, N.* FROM(SELECT * FROM (SELECT * FROM BOARD_VIEW WHERE STOCKNAME LIKE '%"
+				+ stockName + "%') WHERE " + field + " LIKE ? ORDER BY REGDATE DESC) N) WHERE NUM BETWEEN ? AND ?";
+
 		String url = "jdbc:oracle:thin:@112.223.37.243:1521/xepdb1";
 
 		try {
@@ -47,12 +31,13 @@ public class jdbcCommunityBoardDao implements CommunityBoardDao {
 
 			st.setString(1, "%" + query + "%");
 			st.setInt(2, 1 + 10 * (page - 1));
-			st.setInt(3, 10 * page);
-
+			st.setInt(3, 20 * page);
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
-				CommunityBoard communityBoard = new CommunityBoard(rs.getInt("ID"), rs.getString("TITLE"), rs.getString("WRTIER_ID"), rs.getDate("REGDATE"),rs.getInt("ID"), rs.getString("TITLE"), rs.getString("WRTIER_ID"));
+				CommunityBoard communityBoard = new CommunityBoard(rs.getInt("ID"), rs.getString("TITLE"),
+						rs.getString("WRITER"), rs.getDate("REGDATE"), rs.getInt("HIT"), rs.getString("CONTENT"),
+						rs.getString("STOCKNAME"));
 				list.add(communityBoard);
 			}
 
@@ -70,6 +55,5 @@ public class jdbcCommunityBoardDao implements CommunityBoardDao {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 
 }

@@ -1,4 +1,4 @@
-package com.stockmarket.www.ett;
+package com.stockmarket.www.entity;
 
 public class InterestStocks {
 	private int id;

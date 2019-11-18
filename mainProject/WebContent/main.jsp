@@ -119,12 +119,12 @@
 								<div class="tab-content" id="myTabContent">
 									<div class="tab-pane fade show active" id="analysis"
 										role="tabpanel" aria-labelledby="analysis-tab">
-											<iframe height="100%" src="./card/trading/analysis" scrolling="no">
+											<iframe height="100%" src="./card/trade/analysis" scrolling="no">
 											</iframe>
 										</div>
 									<div class="tab-pane fade" id="trading" role="tabpanel"
 										aria-labelledby="trading-tab">
-											<iframe height="100%" src="./card/trading/trade" scrolling="no">
+											<iframe height="100%" src="./card/trade/trade" scrolling="no">
 											</iframe>
 										</div>
 									
@@ -183,9 +183,9 @@
 										<iframe height="100%" src="./card/board/news_board" scrolling="no">
 										</iframe></div>
 									<div class="tab-pane fade" id="community" role="tabpanel"
-										aria-labelledby="community-tab">전체커뮤니티</div>
+										aria-labelledby="community-tab"><iframe height="100%" src="./card/board/community_board" scrolling="no"></iframe></div>
 									<div class="tab-pane fade" id="eventcommunity" role="tabpanel"
-										aria-labelledby="eventcommunity-tab">종목별커뮤니티</div>
+										aria-labelledby="eventcommunity-tab"><iframe height="100%" src="./card/board/stock_board" scrolling="no"></iframe></div>
 								</div>
 							</section>
 						</div>

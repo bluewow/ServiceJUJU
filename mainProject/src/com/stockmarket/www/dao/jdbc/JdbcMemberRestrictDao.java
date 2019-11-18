@@ -3,7 +3,7 @@ package com.stockmarket.www.dao.jdbc;
 import java.util.List;
 
 import com.stockmarket.www.dao.MemberRestrictDAO;
-import com.stockmarket.www.ett.Member;
+import com.stockmarket.www.entity.Member;
 
 public class JdbcMemberRestrictDao implements MemberRestrictDAO {
 

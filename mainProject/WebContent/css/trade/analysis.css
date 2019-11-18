@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+/* 
+참조 사이트 
+	flex 기능 : https://heropy.blog/2018/11/24/css-flexible-box/
+	button 기능 : https://nanati.me/css-button-design/
+ */
+ 
+#analysis-container {
+	width: 90%;
+	min-width: 300px;
+    max-width: 600px;
+	margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box; /*for fit container*/
+}
+
+
+.page-top {
+	min-height: 18%;
+	padding: 0% 8%;
+	 }
+
+	.page-top > #stockName {
+		text-align:left;
+		font-weight: bold;
+		font-size: 1.5em;
+		line-height: 150%;
+		padding-top: 5%;
+	}
+
+.page-mid {
+	display: flex;
+	min-height: 34%;
+	}
+	.page-mid > .page-left-chart {
+		width: 50%;
+	}
+
+	.page-mid > .page-right-chart {
+		width: 50%;
+	}
+
+.page-bottom {
+	min-height: 40%;
+	position: relative;
+	padding: 0% 4%;
+	}
+	.page-bottom > #comment {
+		position: absolute;
+		font-size: 1.5em;
+		background-color: #13bfd7; 
+		color: white;
+		padding: 3.5%;
+		border-radius: 15px 15px 0px 15px;
+	}
+	.page-bottom > #chart-bottom{
+	  	display: flex;
+		position: absolute;
+		z-index:-1;
+		margin:32px 0px 20px 15px;
+		background-color: rgb(242, 242, 242);
+		width: 85%;
+  		border-radius: 15px;
+  		min-height: 80%;
+
+	}
+
+	#chart-bottom > .left-content {
+		/* background-color: green; */
+		font-weight: 550;
+		font-size: 1.2em;
+		justify-content: space-around;
+		width: 22%;
+		flex-direction: column;
+		display: flex;
+		margin: 9% 0% 1% 4%;	
+	}
+	
+	#chart-bottom > .mid-content {
+		/* background-color: yellow; */
+		justify-content: space-around;
+		width: 63%;
+		flex-direction: column;
+		display: flex;
+		margin: 16% 0% 0% 0%;	
+	}
+	#chart-bottom > .right-content {
+/* 		background-color: pink; */
+		justify-content: space-around;
+		width: 15%;
+		flex-direction: column;
+		display: flex;
+		margin: 7% 0% 0% 0%;	
+	}		
+	
+	
+.progress {
+   /*  position: relative; */
+	min-height: 17%;
+	overflow: hidden;
+    margin-bottom: 14%;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    /* -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1); */
+    box-shadow: none;
+    background-color: rgb(226, 227, 227);
+    
+}
+
+.progress .progress-bar {
+	line-height: 30px;
+	text-align: left;
+	font-size: 1.2em;
+}
+
+.progress .progress-type {
+	/* position: absolute; */
+	left: 0px;
+	font-weight: 550;
+	padding-left: 10px;
+	color: rgb(255, 255, 255);
+}
+
+.progress-red {
+	background-color: rgb(191, 115, 124);	
+}
+
+.progress-blue {
+	background-color: rgb(104, 154, 188);
+}

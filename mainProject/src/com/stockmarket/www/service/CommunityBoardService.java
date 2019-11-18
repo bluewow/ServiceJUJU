@@ -2,7 +2,7 @@ package com.stockmarket.www.service;
 //업무적인...
 import java.util.List;
 
-import com.stockmarket.www.ett.CommunityBoard;
+import com.stockmarket.www.entity.CommunityBoard;
 
 public interface CommunityBoardService {
 	/*
@@ -11,7 +11,7 @@ public interface CommunityBoardService {
 	List<CommunityBoard> getCommunityBoardList(int page);
 	List<CommunityBoard> getStockBoardList(int page, String code);
 	List<CommunityBoard> getSearchBoardList(int page, String field, String query);
-	List<CommunityBoard> getSearchStockBoardList(int page, String field, String query, String code);
+	List<CommunityBoard> getSearchStockBoardList(int page, String field, String query, String stockName);
 	
 	/*
 	 * 게시판 내용
