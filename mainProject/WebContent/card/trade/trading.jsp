@@ -83,7 +83,6 @@
 		</div>
 	</section>
 </div>	
-</body>
 
 <script>
 
@@ -144,4 +143,6 @@ function drawBasic() {
 }
 </script>
 
+
+</body>
 </html>
