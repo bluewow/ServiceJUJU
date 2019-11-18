@@ -62,32 +62,26 @@
 	<section class="page-bottom">
 		<div id="comment">분석 내용 </div>
 		<div id="chart-bottom">
-	        <div class="left-content">
-	        	<div>관심도<i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></div> 
-	        	<div>재무상황<i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></div>
-	        	<div>미정<i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></div>
-	        </div>
-	        <div class="mid-content">
-			    <div class="progress">
-		            <div class="progress-bar progress-red" style="width: 80%;">
-		            <span class="progress-type">80%</span>
-		            </div>
-		        </div>		       	
-		        <div class="progress">
-		            <div class="progress-bar progress-red" style="width: 30%">
-		            <span class="progress-type">30%</span>
-		            </div>
+	        <div class="content margin-content">
+	        	<div class="test-first">관심도<i class="fa fa-question-circle fa-lg ho" aria-hidden="true"></i></div> 
+	        	<div class="progress test-second">
+		            <div class="progress-bar progress-red" style="width: 80%;">80%</div>
 		        </div>
-		        <div class="progress">
-		            <div class="progress-bar progress-blue" style="width: 60%">
-		            <span class="progress-type">60%</span>
-		            </div>
-		        </div>		        
+	     	   <div class="test-third"><i class="fa fa-arrow-up" aria-hidden="true"></i></div>
 	        </div>
-	        <div class="right-content">
-	        	<div><i class="fa fa-arrow-up fa-2x" aria-hidden="true"></i></div>
-	        	<div><i class="fa fa-arrow-down fa-2x" aria-hidden="true"></i></div>
-	        	<div><i class="fa fa-arrow-down fa-2x" aria-hidden="true"></i></div>
+	        <div class="content">
+				<div class="test-first">재무상황<i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></div>       	
+		        <div class="progress test-second">
+		            <div class="progress-bar progress-red" style="width: 50%">30%</div>
+		        </div>
+		        <div class="test-third"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>  
+	        </div>
+	        <div class="content">
+	        	<div class="test-first">미정<i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></div>
+	        	 <div class="progress test-second">
+		            <div class="progress-bar progress-blue" style="width: 60%">60%</div>
+		        </div>		     
+	        	<div class="test-third"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
 	        </div>
 		</div>
 	</section>
