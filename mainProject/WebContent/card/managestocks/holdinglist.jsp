@@ -13,7 +13,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
 <body>
 <div class="btposition" >
-<button type="button" class="btn btn-secondary btn-sm" >편집</button>
+
 </div>
    <table >
    <thead>
@@ -27,7 +27,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
    <tbody>
     <c:forEach var="n" items="${list}">
        <tr>
-         <td >${n.stockName}</td>
+         <td style="text-align:center">${n.stockName}</td>
          <td class="up">24,896    <span class="fa fa-caret-up"></span><br>
          <span>1.46%</span></td>
           <td class="up">16주</td>

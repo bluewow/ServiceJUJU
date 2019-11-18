@@ -29,15 +29,17 @@
 <!-- Main Styles -->
 <link rel="stylesheet" type="text/css" href="./css/main.css">
 
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
 
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <!--[if lt IE 9]>
    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
+
 </head>
 
 <body>
@@ -71,9 +73,10 @@
 	</header>
 	<!-- =============================================================================================================== -->
 	<main class="row">
-		<h1 style="display: none;">cards</h1>
-		<section id="main-content" class="column">
-			<!-- 첫번째 로우 -->
+	<h1 style="display: none;">cards</h1>
+	<section id="main-content" class="column">
+		<!-- 첫번째 로우 -->
+
 			<div class="row grid-responsive" id="dragdiv">
 				<!-- 검색카드 -->
 				<section class="column column-33">
@@ -103,6 +106,7 @@
 				</section>
 
 				<!-- 분석 매매 예측 카드 -->
+
 				<section class="column column-33">
 					<div class="card">
 						<div class="card-block">
@@ -119,22 +123,24 @@
 								<div class="tab-content" id="myTabContent">
 									<div class="tab-pane fade show active" id="analysis"
 										role="tabpanel" aria-labelledby="analysis-tab">
-											<iframe height="100%" src="./card/trade/analysis" scrolling="no">
-											</iframe>
-										</div>
+										<iframe height="100%" src="./card/trade/analysis"
+											scrolling="no"> </iframe>
+									</div>
 									<div class="tab-pane fade" id="trading" role="tabpanel"
 										aria-labelledby="trading-tab">
-											<iframe height="100%" src="./card/trade/trade" scrolling="no">
-											</iframe>
-										</div>
-									
+										<iframe height="100%" src="./card/trade/trade" scrolling="no">
+										</iframe>
+									</div>
+
 								</div>
 							</section>
 						</div>
 					</div>
 				</section>
 
-				<!-- 주식 캡처 카드 -->
+
+			<!-- 주식 캡처 카드 -->
+	
 				<section class="column column-33">
 					<div class="card">
 						<div class="card-block">
@@ -156,7 +162,7 @@
 				</section>
 
 
-			<!-- 두번째 로우 -->
+				<!-- 두번째 로우 -->
 
 				<!-- 커뮤니티 카드 -->
 				<section class="column column-33">
@@ -180,18 +186,26 @@
 								<div class="tab-content" id="myTabContent">
 									<div class="tab-pane fade show active" id="news"
 										role="tabpanel" aria-labelledby="news-tab">
-										<iframe height="100%" src="./card/board/news_board" scrolling="no">
-										</iframe></div>
+										<iframe height="100%" src="./card/board/news_board"
+											scrolling="no"> </iframe>
+									</div>
 									<div class="tab-pane fade" id="community" role="tabpanel"
-										aria-labelledby="community-tab"><iframe height="100%" src="./card/board/community_board" scrolling="no"></iframe></div>
+										aria-labelledby="community-tab">
+										<iframe height="100%" src="./card/board/community_board"
+											scrolling="no"></iframe>
+									</div>
 									<div class="tab-pane fade" id="eventcommunity" role="tabpanel"
-										aria-labelledby="eventcommunity-tab"><iframe height="100%" src="./card/board/stock_board" scrolling="no"></iframe></div>
+										aria-labelledby="eventcommunity-tab">
+										<iframe height="100%" src="./card/board/stock_board"
+											scrolling="no"></iframe>
+									</div>
 								</div>
 							</section>
 						</div>
 
-				</div>
-			</section>
+					</div>
+				</section>
+		
 
 			<!-- 보유 목록/관심 목록 카드 -->
 			<section class="column column-33">
@@ -210,75 +224,77 @@
 							<div class="tab-content" id="myTabContent">
 								<div class="tab-pane fade show active" id="Purchaselist"
 									role="tabpanel" aria-labelledby="Purchaselist-tab">
-								<iframe height="100%" src="./card/managestocks/holdinglist" scrolling="no">
-									</iframe>
-									</div>
+									<iframe height="100%" src="./card/managestocks/holdinglist"
+										scrolling="no"> </iframe>
+								</div>
 								<div class="tab-pane fade" id="Interest" role="tabpanel"
-									aria-labelledby="Interest-tab">관심 목록</div>
+									aria-labelledby="Interest-tab">
+									<iframe height="100%" src="./card/managestocks/interestlist"
+										scrolling="no"> </iframe>
+								</div>
 							</div>
 						</section>
 					</div>
-				</section>
+			</section>
 
 
-				<!-- 자산추이 카드 -->
-				<section class="column column-33">
-					<div class="card">
-						<div class="card-block">
-							<section class="asset graph/compare">
-								<ul class="nav nav-tabs" id="myTab" role="tablist style"
-									style="border: none">
-									<li class="nav-item"><a class="nav-link active"
-										id="assetgraph-tab" data-toggle="tab" href="#assetgraph"
-										role="tab" aria-controls="index1" aria-selected="true">자산추이</a></li>
-									<li class="nav-item"><a class="nav-link" id="compare-tab"
-										data-toggle="tab" href="#compare" role="tab"
-										aria-controls="index2" aria-selected="false">종목비교</a></li>
-								</ul>
-								<div class="tab-content" id="myTabContent">
-									<div class="tab-pane fade show active" id="assetgraph"
-										role="tabpanel" aria-labelledby="assetgraph-tab">자산추이</div>
-									<div class="tab-pane fade" id="compare" role="tabpanel"
-										aria-labelledby="compare-tab">종목비교</div>
-								</div>
-							</section>
-						</div>
+			<!-- 자산추이 카드 -->
+			<section class="column column-33">
+				<div class="card">
+					<div class="card-block">
+						<section class="asset graph/compare">
+							<ul class="nav nav-tabs" id="myTab" role="tablist style"
+								style="border: none">
+								<li class="nav-item"><a class="nav-link active"
+									id="assetgraph-tab" data-toggle="tab" href="#assetgraph"
+									role="tab" aria-controls="index1" aria-selected="true">자산추이</a></li>
+								<li class="nav-item"><a class="nav-link" id="compare-tab"
+									data-toggle="tab" href="#compare" role="tab"
+									aria-controls="index2" aria-selected="false">종목비교</a></li>
+							</ul>
+							<div class="tab-content" id="myTabContent">
+								<div class="tab-pane fade show active" id="assetgraph"
+									role="tabpanel" aria-labelledby="assetgraph-tab">자산추이</div>
+								<div class="tab-pane fade" id="compare" role="tabpanel"
+									aria-labelledby="compare-tab">종목비교</div>
+							</div>
+						</section>
 					</div>
-				</section>
+				</div>
+			</section>
 
 
 			<!-- 세번째 로우 -->
 
-				<!-- 빈 공간 -->
-				<div class="column column-33"></div>
+			<!-- 빈 공간 -->
+			<div class="column column-33"></div>
 
-				<!-- 빈 공간 -->
-				<div class="column column-33"></div>
+			<!-- 빈 공간 -->
+			<div class="column column-33"></div>
 
-				<!-- 랭킹 카드 -->
-				<section class="column column-33">
-					<div class="card">
-						<div class="card-block">
-							<section class="rangking">
-								<ul class="nav nav-tabs" id="myTab" role="tablist style"
-									style="border: none">
-									<li class="nav-item"><a class="nav-link nav-link-s active"
-										id="rangking-tab" data-toggle="tab" href="rangking" role="tab"
-										aria-controls="index1" aria-selected="true">랭킹</a></li>
-								</ul>
-								<div class="tab-content" id="myTabContent">
-									<div class="tab-pane fade show active" id="rangking"
-										role="tabpanel" aria-labelledby="rangking-tab">
-										<iframe src="./card/rank/ranking" scrolling="no">
-										</iframe>
-									</div>
+			<!-- 랭킹 카드 -->
+			<section class="column column-33">
+				<div class="card">
+					<div class="card-block">
+						<section class="rangking">
+							<ul class="nav nav-tabs" id="myTab" role="tablist style"
+								style="border: none">
+								<li class="nav-item"><a class="nav-link nav-link-s active"
+									id="rangking-tab" data-toggle="tab" href="rangking" role="tab"
+									aria-controls="index1" aria-selected="true">랭킹</a></li>
+							</ul>
+							<div class="tab-content" id="myTabContent">
+								<div class="tab-pane fade show active" id="rangking"
+									role="tabpanel" aria-labelledby="rangking-tab">
+									<iframe src="./card/rank/ranking" scrolling="no"> </iframe>
 								</div>
-							</section>
-						</div>
+							</div>
+						</section>
 					</div>
-				</section>
-			</div>
-		</section>
+				</div>
+			</section>
+		</div>
+	</section>
 	</main>
 	<!-- =============================================================================================================== -->
 	<footer>

@@ -12,9 +12,10 @@ import com.stockmarket.www.service.InterestStocksService;
 import com.stockmarket.www.service.basic.BasicInterestStocksService;
 
 
-@WebServlet("/card/managestocks/interestlist")
-public class InterestStocksController extends HttpServlet {
+@WebServlet("/card/managestocks/holdinglist")
+public class HoldingStocksController extends HttpServlet{
 
+   
 	private InterestStocksService interestStocksInterface;
 	
 	@Override
@@ -23,22 +24,15 @@ public class InterestStocksController extends HttpServlet {
 	}
 	
 
-	public InterestStocksController() {
+	public HoldingStocksController() {
 		interestStocksInterface = new BasicInterestStocksService();
 	}
 	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		super.doPost(request, response);
-	}
-
+	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("list", interestStocksInterface.getInterestStockList());
-		request.getRequestDispatcher("interestlist.jsp").forward(request, response);
-
+		request.getRequestDispatcher("holdinglist.jsp").forward(request, response);
 	}
 
 }
