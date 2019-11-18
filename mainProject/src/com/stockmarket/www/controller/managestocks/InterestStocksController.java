@@ -1,4 +1,4 @@
-package com.stockmarket.www.controller.interestStocks;
+package com.stockmarket.www.controller.managestocks;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ import com.stockmarket.www.service.InterestStocksService;
 import com.stockmarket.www.service.basic.BasicInterestStocksService;
 
 
-@WebServlet("/card/list/holdinglist")
+@WebServlet("/card/managestocks/holdinglist")
 public class InterestStocksController extends HttpServlet {
 
 	private InterestStocksService interestStocksInterface;

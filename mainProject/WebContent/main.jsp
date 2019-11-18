@@ -29,8 +29,12 @@
 <!-- Main Styles -->
 <link rel="stylesheet" type="text/css" href="./css/main.css">
 
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
 
-
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
 <!--[if lt IE 9]>
    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
@@ -70,7 +74,7 @@
 		<h1 style="display: none;">cards</h1>
 		<section id="main-content" class="column">
 			<!-- 첫번째 로우 -->
-			<div class="row grid-responsive">
+			<div class="row grid-responsive" id="dragdiv">
 				<!-- 검색카드 -->
 				<section class="column column-33">
 					<div class="card">
@@ -150,10 +154,10 @@
 					</div>
 
 				</section>
-			</div>
+
 
 			<!-- 두번째 로우 -->
-			<div class="row grid-responsive">
+
 				<!-- 커뮤니티 카드 -->
 				<section class="column column-33">
 					<div class="card ">
@@ -206,7 +210,7 @@
 							<div class="tab-content" id="myTabContent">
 								<div class="tab-pane fade show active" id="Purchaselist"
 									role="tabpanel" aria-labelledby="Purchaselist-tab">
-								<iframe height="100%" src="./card/list/holdinglist.jsp" scrolling="no">
+								<iframe height="100%" src="./card/managestocks/holdinglist" scrolling="no">
 									</iframe>
 									</div>
 								<div class="tab-pane fade" id="Interest" role="tabpanel"
@@ -241,10 +245,10 @@
 						</div>
 					</div>
 				</section>
-			</div>
+
 
 			<!-- 세번째 로우 -->
-			<div class="row grid-responsive">
+
 				<!-- 빈 공간 -->
 				<div class="column column-33"></div>
 
