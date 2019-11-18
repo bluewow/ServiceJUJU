@@ -13,7 +13,6 @@ public class AnalysisController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("analysis");
 		request.getRequestDispatcher("analysis.jsp").forward(request, response);
 	}
 }
