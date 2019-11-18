@@ -15,13 +15,15 @@ public class JdbcMemberDao implements MemberDao {
 	@Override
 	public List<Member> getMemberList() {
 		// 가상머니 상위 50위까지 뽑아오는 쿼리
-		String sql = "SELECT * FROM MEMBER ORDER BY VMONEY " + "DESC OFFSET 1 ROWS FETCH NEXT 50 ROWS ONLY";
+		String sql = "SELECT * FROM MEMBER ORDER BY VMONEY " + 
+		"DESC OFFSET 0 ROWS FETCH NEXT 50 ROWS ONLY";
 		List<Member> members = new ArrayList<>();
+		
 		try {
 			Statement statement = JdbcDaoContext.getStatement();
 			ResultSet resultSet = statement.executeQuery(sql);
 
-			if (resultSet.next()) {
+			while (resultSet.next()) {
 				int id = resultSet.getInt("ID");
 				String email = resultSet.getString("EMAIL");
 				String nickName = resultSet.getString("NICKNAME");
@@ -32,6 +34,8 @@ public class JdbcMemberDao implements MemberDao {
 				Member member = new Member(id, email, nickName, password, vmoney);
 				members.add(member);
 			}
+			resultSet.close();
+			statement.close();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -57,6 +61,8 @@ public class JdbcMemberDao implements MemberDao {
 
 				member = new Member(id, email, nickName, password, vmoney);
 			}
+			resultSet.close();
+			statement.close();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -77,6 +83,7 @@ public class JdbcMemberDao implements MemberDao {
 			statement.setInt(2, id);
 			
 			result = statement.executeUpdate();
+			statement.close();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

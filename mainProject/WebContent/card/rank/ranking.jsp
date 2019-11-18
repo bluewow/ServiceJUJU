@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="kr">
 
 <head>
@@ -31,16 +32,18 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td class="rank">1</td>
-					<td class="profileImg"></td>
-					<td class="name">갓광동</td>
-					<td class="assets">122,001,000</td>
-					<td class="assetsGrowth">1,543,03%</td>
-				</tr>
+				<c:forEach var="ranker" items="${rankers}" varStatus="status">
+					<tr>
+						<td class="rank">${status.count}</td>
+						<td class="profileImg"></td>
+						<td class="name">${ranker.nickName}</td>
+						<td class="assets"><fmt:formatNumber value="${ranker.vMoney}" pattern="#,###"/></td>
+						<td class="assetsGrowth"><fmt:formatNumber value="${ranker.vMoney/10000}" pattern="#,###"/>%</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 
-			<tbody>
+			<tbody id="myRank">
 				<tr>
 					<td class="rank">121</td>
 					<td class="profileImg"></td>

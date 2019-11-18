@@ -40,6 +40,7 @@
    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
 
+
 </head>
 
 <body>
@@ -77,135 +78,134 @@
 	<section id="main-content" class="column">
 		<!-- 첫번째 로우 -->
 
-			<div class="row grid-responsive" id="dragdiv">
-				<!-- 검색카드 -->
-				<section class="column column-33">
-					<div class="card">
-						<div class="card-block">
-							<section class="search">
+		<div class="row grid-responsive" id="dragdiv">
+			<!-- 검색카드 -->
+			<section class="column column-33">
+				<div class="card">
+					<div class="card-block">
+						<section class="search">
 
-								<ul class="nav nav-tabs" id="myTab" role="tablist style"
-									style="border: none">
-									<li class="nav-item"><a class="nav-link nav-link-s active"
-										id="search-tab" data-toggle="tab" href="#search" role="tab"
-										aria-controls="index1" aria-selected="true">검 색</a></li>
-								</ul>
-								<div class="tab-content" id="myTabContent">
-									<div class="tab-pane fade show active" id="search"
-										role="tabpanel" aria-labelledby="search-tab">
-										검색
-										<iframe height="0" src="" scrolling="no">
-											<!-- 여기에 html 삽입 -->
-										</iframe>
-									</div>
+							<ul class="nav nav-tabs" id="myTab" role="tablist style"
+								style="border: none">
+								<li class="nav-item"><a class="nav-link nav-link-s active"
+									id="search-tab" data-toggle="tab" href="#search" role="tab"
+									aria-controls="index1" aria-selected="true">검 색</a></li>
+							</ul>
+							<div class="tab-content" id="myTabContent">
+								<div class="tab-pane fade show active" id="search"
+									role="tabpanel" aria-labelledby="search-tab">
+									검색
+									<iframe height="0" src="" scrolling="no">
+										<!-- 여기에 html 삽입 -->
+									</iframe>
 								</div>
-							</section>
-						</div>
-
+							</div>
+						</section>
 					</div>
-				</section>
 
-				<!-- 분석 매매 예측 카드 -->
+				</div>
+			</section>
 
-				<section class="column column-33">
-					<div class="card">
-						<div class="card-block">
-							<section class="analysis/trading">
-								<ul class="nav nav-tabs" id="myTab" role="tablist style"
-									style="border: none">
-									<li class="nav-item"><a class="nav-link nav-link-s active"
-										id="analysis-tab" data-toggle="tab" href="#analysis"
-										role="tab" aria-controls="index1" aria-selected="true">분 석</a></li>
-									<li class="nav-item"><a class="nav-link nav-link-s "
-										id="trading-tab" data-toggle="tab" href="#trading" role="tab"
-										aria-controls="index2" aria-selected="false">매 매</a></li>
-								</ul>
-								<div class="tab-content" id="myTabContent">
-									<div class="tab-pane fade show active" id="analysis"
-										role="tabpanel" aria-labelledby="analysis-tab">
-										<iframe height="100%" src="./card/trade/analysis"
-											scrolling="no"> </iframe>
-									</div>
-									<div class="tab-pane fade" id="trading" role="tabpanel"
-										aria-labelledby="trading-tab">
-										<iframe height="100%" src="./card/trade/trade" scrolling="no">
-										</iframe>
-									</div>
+			<!-- 분석 매매 예측 카드 -->
 
+			<section class="column column-33">
+				<div class="card">
+					<div class="card-block">
+						<section class="analysis/trading">
+							<ul class="nav nav-tabs" id="myTab" role="tablist style"
+								style="border: none">
+								<li class="nav-item"><a class="nav-link nav-link-s active"
+									id="analysis-tab" data-toggle="tab" href="#analysis" role="tab"
+									aria-controls="index1" aria-selected="true">분 석</a></li>
+								<li class="nav-item"><a class="nav-link nav-link-s "
+									id="trading-tab" data-toggle="tab" href="#trading" role="tab"
+									aria-controls="index2" aria-selected="false">매 매</a></li>
+							</ul>
+							<div class="tab-content" id="myTabContent">
+								<div class="tab-pane fade show active" id="analysis"
+									role="tabpanel" aria-labelledby="analysis-tab">
+									<iframe height="100%" src="./card/trade/analysis"
+										scrolling="no"> </iframe>
 								</div>
-							</section>
-						</div>
+								<div class="tab-pane fade" id="trading" role="tabpanel"
+									aria-labelledby="trading-tab">
+									<iframe height="100%" src="./card/trade/trade" scrolling="no">
+									</iframe>
+								</div>
+
+							</div>
+						</section>
 					</div>
-				</section>
+				</div>
+			</section>
 
 
 			<!-- 주식 캡처 카드 -->
-	
-				<section class="column column-33">
-					<div class="card">
-						<div class="card-block">
-							<section class="capture">
-								<ul class="nav nav-tabs" id="myTab" role="tablist style"
-									style="border: none">
-									<li class="nav-item"><a class="nav-link nav-link-s active"
-										id="capture-tab" data-toggle="tab" href="#capture" role="tab"
-										aria-controls="index1" aria-selected="true">캡 쳐</a></li>
-								</ul>
-								<div class="tab-content" id="myTabContent">
-									<div class="tab-pane fade show active" id="capture"
-										role="tabpanel" aria-labelledby="capture-tab">캡쳐</div>
+
+			<section class="column column-33">
+				<div class="card">
+					<div class="card-block">
+						<section class="capture">
+							<ul class="nav nav-tabs" id="myTab" role="tablist style"
+								style="border: none">
+								<li class="nav-item"><a class="nav-link nav-link-s active"
+									id="capture-tab" data-toggle="tab" href="#capture" role="tab"
+									aria-controls="index1" aria-selected="true">캡 쳐</a></li>
+							</ul>
+							<div class="tab-content" id="myTabContent">
+								<div class="tab-pane fade show active" id="capture"
+									role="tabpanel" aria-labelledby="capture-tab">캡쳐</div>
+							</div>
+						</section>
+					</div>
+				</div>
+
+			</section>
+
+
+			<!-- 두번째 로우 -->
+
+			<!-- 커뮤니티 카드 -->
+			<section class="column column-33">
+				<div class="card ">
+					<div class="card-block">
+						<section class="news/community/eventcommunity">
+							<ul class="nav nav-tabs" id="myTab" role="tablist style"
+								style="border: none">
+								<li class="nav-item"><a class="nav-link active"
+									id="news-tab" data-toggle="tab" href="#news" role="tab"
+									aria-controls="index1" aria-selected="true">뉴스&이슈</a></li>
+								<li class="nav-item"><a class="nav-link" id="community-tab"
+									data-toggle="tab" href="#community" role="tab"
+									aria-controls="index2" aria-selected="false">전체 커뮤니티</a></li>
+								<li class="nav-item"><a class="nav-link"
+									id="eventcommunity-tab" data-toggle="tab"
+									href="#eventcommunity" role="tab" aria-controls="index3"
+									aria-selected="false">종목별 커뮤니티</a></li>
+							</ul>
+							<div class="tab-content" id="myTabContent">
+								<div class="tab-pane fade show active" id="news" role="tabpanel"
+									aria-labelledby="news-tab">
+									<iframe height="100%" src="./card/board/news_board"
+										scrolling="no"> </iframe>
 								</div>
-							</section>
-						</div>
+								<div class="tab-pane fade" id="community" role="tabpanel"
+									aria-labelledby="community-tab">
+									<iframe height="100%" src="./card/board/community_board"
+										scrolling="no"></iframe>
+								</div>
+								<div class="tab-pane fade" id="eventcommunity" role="tabpanel"
+									aria-labelledby="eventcommunity-tab">
+									<iframe height="100%" src="./card/board/stock_board"
+										scrolling="no"></iframe>
+								</div>
+							</div>
+						</section>
 					</div>
 
-				</section>
+				</div>
+			</section>
 
-
-				<!-- 두번째 로우 -->
-
-				<!-- 커뮤니티 카드 -->
-				<section class="column column-33">
-					<div class="card ">
-						<div class="card-block">
-							<section class="news/community/eventcommunity">
-								<ul class="nav nav-tabs" id="myTab" role="tablist style"
-									style="border: none">
-									<li class="nav-item"><a class="nav-link active"
-										id="news-tab" data-toggle="tab" href="#news" role="tab"
-										aria-controls="index1" aria-selected="true">뉴스&이슈</a></li>
-									<li class="nav-item"><a class="nav-link"
-										id="community-tab" data-toggle="tab" href="#community"
-										role="tab" aria-controls="index2" aria-selected="false">전체
-											커뮤니티</a></li>
-									<li class="nav-item"><a class="nav-link"
-										id="eventcommunity-tab" data-toggle="tab"
-										href="#eventcommunity" role="tab" aria-controls="index3"
-										aria-selected="false">종목별 커뮤니티</a></li>
-								</ul>
-								<div class="tab-content" id="myTabContent">
-									<div class="tab-pane fade show active" id="news"
-										role="tabpanel" aria-labelledby="news-tab">
-										<iframe height="100%" src="./card/board/news_board"
-											scrolling="no"> </iframe>
-									</div>
-									<div class="tab-pane fade" id="community" role="tabpanel"
-										aria-labelledby="community-tab">
-										<iframe height="100%" src="./card/board/community_board"
-											scrolling="no"></iframe>
-									</div>
-									<div class="tab-pane fade" id="eventcommunity" role="tabpanel"
-										aria-labelledby="eventcommunity-tab">
-										<iframe height="100%" src="./card/board/stock_board"
-											scrolling="no"></iframe>
-									</div>
-								</div>
-							</section>
-						</div>
-
-					</div>
-				</section>
-		
 
 			<!-- 보유 목록/관심 목록 카드 -->
 			<section class="column column-33">
@@ -235,6 +235,7 @@
 							</div>
 						</section>
 					</div>
+				</div>
 			</section>
 
 
@@ -269,8 +270,6 @@
 			<!-- 빈 공간 -->
 			<div class="column column-33"></div>
 
-			<!-- 빈 공간 -->
-			<div class="column column-33"></div>
 
 			<!-- 랭킹 카드 -->
 			<section class="column column-33">
@@ -286,7 +285,8 @@
 							<div class="tab-content" id="myTabContent">
 								<div class="tab-pane fade show active" id="rangking"
 									role="tabpanel" aria-labelledby="rangking-tab">
-									<iframe src="./card/rank/ranking" scrolling="no"> </iframe>
+									<iframe height="100%" src="./card/rank/ranking" scrolling="no">
+									</iframe>
 								</div>
 							</div>
 						</section>
