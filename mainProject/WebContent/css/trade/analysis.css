@@ -33,12 +33,24 @@
 	display: flex;
 	min-height: 34%;
 	}
+	.page-mid .page-right-write {
+		font-size: 1.1em;
+		color: rgb(88, 91, 94); 
+		margin-bottom: 1px;
+	}
+	
 	.page-mid > .page-left-chart {
 		width: 50%;
 	}
 
 	.page-mid > .page-right-chart {
 		width: 50%;
+	}
+	
+	.page-mid > .page-right-chart .progress-right-chart {
+		height: 4px;
+	    margin-bottom: 8%;
+	    width: 80%;
 	}
 
 .page-bottom {
@@ -77,13 +89,13 @@
 	#chart-bottom .margin-content {
 		margin: 9% 0% 1% 4%;
 	}
-	.content .test-first {
+	.content .content-first {
 		width: 25%;
 	}
-	.content .test-second{
+	.content .content-second{
 		width: 60%;
 	}
-	.content .test-third {
+	.content .content-third {
 		width: 15%;
 		padding-left: 3%;
 	}
@@ -99,7 +111,7 @@
 .progress .progress-bar {
     text-align: left;
     text-indent: 10px;
-    line-height: 1.7em;
+    line-height: 1.5em;
     font-size: 1.1em;
 }
 
