@@ -10,20 +10,20 @@ import com.stockmarket.www.service.SearchCompanyService;
 public class BasicSearchCompanyService implements SearchCompanyService {
 
 	@Override
-	public String[] searchCompany(String search) {
-		 String csvFile = "../dataStroage/KOSPI.csv";
+	public String[] searchCompany(String search, String csvFilePath) {
+		 
 		 CSVReader reader = null;
 //		 String companyname = "";
 //		 String stockcode = "";
 //		 String homepageAddress="";
 		 
-		 String[] searchResult = new String[2]; 
+		 search = "대한항공";
+		 String[] searchResult = new String[3]; 
 		 
 	        try {
-	            
-	            try {
-	                reader = new CSVReader(new FileReader(csvFile));
-	                String[] line;
+	        	reader = new CSVReader(new FileReader(csvFilePath));
+	        	String[] line;
+	           try {
 	                while ((line = reader.readNext()) != null) {
 	                    if (line[0].equals(search)) {
 	                    	
