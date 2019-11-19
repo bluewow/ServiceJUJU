@@ -72,6 +72,37 @@ public class JdbcMemberDao implements MemberDao {
 	}
 
 	@Override
+	public Member getMember(String field, String query) {
+		String sql = "SELECT * FROM MEMBER WHERE " + field + "=?";
+		Member member = null;
+
+		try {
+			PreparedStatement statement = JdbcDaoContext.getPreparedStatement(sql);
+
+			statement.setString(1, query);
+			
+			ResultSet resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				int id = resultSet.getInt("ID");
+				String email = resultSet.getString("EMAIL");
+				String nickName = resultSet.getString("NICKNAME");
+				String password = resultSet.getString("PASSWORD");
+				int vmoney = resultSet.getInt("VMONEY");
+
+				member = new Member(id, email, nickName, password, vmoney);
+			}
+			resultSet.close();
+			statement.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return member;
+	}
+	
+	@Override
 	public int updateMember(int id, int vmoney) {
 		int result = 0;
 
