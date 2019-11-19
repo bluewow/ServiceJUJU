@@ -12,7 +12,7 @@
 	<section>
 		<!-- style="visibility: hidden" -->
 		<!-- <h1>주식회사검색</h1> -->
-		<form action ="/card/search/search" method="get">
+		<form action ="./card/search/search" method="get">
 			<div>
 				<input type="text" name="search">
 				<button>검색</button>

@@ -275,7 +275,7 @@
 								<div class="tab-content" id="myTabContent">
 									<div class="tab-pane fade show active" id="assetgraph"
 										role="tabpanel" aria-labelledby="assetgraph-tab">
-										<iframe height="100%" src="./card/asset/myAsset.jsp" scrolling="no">
+										<iframe height="100%" src="./card/asset/myAsset" scrolling="no">
 										</iframe></div>
 								</div>
 							</section>
