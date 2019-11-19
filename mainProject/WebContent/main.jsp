@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
 
@@ -69,11 +70,19 @@
 						<a href="#"> <img src="http://via.placeholder.com/50x50"
 							alt="profile photo" class="circle float-left profile-photo"
 							width="50" height="auto">
-							<div class="username">
-								<h4>bluewow</h4>
-								<p>Administrator</p>
-							</div>
 						</a>
+						<!-- TODO -->						
+						<form id="dummy" action="login" method="post">
+							<c:if test="${empty sessionScope.loginId }">
+								<input type="text" name="userId" placeholder="Input the Id">
+								<input type="password" name="pwd" placeholder="Input the Password">
+								<input type="submit" value="Dummy 로그인">
+							</c:if>
+							<c:if test="${not empty sessionScope.loginId }">
+								<input type="hidden" name="userId" value="null">
+								<input type="submit" value="Dummy 로그아웃">
+							</c:if>
+						</form>
 					</div>
 				</section>
 			</section>

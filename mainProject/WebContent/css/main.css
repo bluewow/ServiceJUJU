@@ -244,3 +244,10 @@ body {
       display: block;
       height: 10px;
       border-radius: 499rem; }
+      
+      
+#dummy {
+	width: 50%;
+	height: 30%;
+	display: flex;
+}
