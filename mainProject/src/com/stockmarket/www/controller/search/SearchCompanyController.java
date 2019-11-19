@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.stockmarket.www.service.SearchCompanyService;
 import com.stockmarket.www.service.basic.BasicSearchCompanyService;
 
-@WebServlet("/card/searchCompany")
+@WebServlet("/card/search/search")
 public class SearchCompanyController extends HttpServlet{
 
 	private SearchCompanyService seachCompanyService;
@@ -24,10 +24,14 @@ public class SearchCompanyController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String search = "";
+//		String search = "대한항공";
 		
 		ServletContext application = request.getServletContext();
 		String csvUrlPath = "/KOSPI.csv";
 		String csvFilePath = application.getRealPath(csvUrlPath);
+		
+//		System.out.println("csvUrlPath :"  +csvUrlPath);
+//		System.out.println("csvFilePath :"  +csvFilePath);
 		
 		
 		String search_ = request.getParameter("search");
@@ -35,7 +39,10 @@ public class SearchCompanyController extends HttpServlet{
 			search = search_;
 		}
 		
+		
+		
 		request.setAttribute("search", seachCompanyService.searchCompany(search, csvFilePath));
-		request.getRequestDispatcher("searchCompany").forward(request, response);
+		request.getRequestDispatcher("search.jsp").forward(request, response);
+		///card/board/community_board.jsp
 	}
 }

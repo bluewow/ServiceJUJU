@@ -105,8 +105,8 @@
 							<div class="tab-content" id="myTabContent">
 								<div class="tab-pane fade show active" id="search"
 									role="tabpanel" aria-labelledby="search-tab">
-									검색
-									<iframe height="0" src="" scrolling="no">
+									
+									<iframe height="100%" src="./card/search/search" scrolling="no">
 										<!-- 여기에 html 삽입 -->
 									</iframe>
 								</div>

@@ -5,12 +5,17 @@ import java.io.IOException;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+import com.stockmarket.www.entity.Company;
 import com.stockmarket.www.service.SearchCompanyService;
 
 public class BasicSearchCompanyService implements SearchCompanyService {
+	
+	private Company company;
 
+	
+	
 	@Override
-	public String[] searchCompany(String search, String csvFilePath) {
+	public Company searchCompany(String search, String csvFilePath) {
 		 
 		 CSVReader reader = null;
 //		 String companyname = "";
@@ -18,7 +23,7 @@ public class BasicSearchCompanyService implements SearchCompanyService {
 //		 String homepageAddress="";
 		 
 		 search = "대한항공";
-		 String[] searchResult = new String[3]; 
+		 //String[] searchResult = new String[3]; 
 		 
 	        try {
 	        	reader = new CSVReader(new FileReader(csvFilePath));
@@ -27,12 +32,8 @@ public class BasicSearchCompanyService implements SearchCompanyService {
 	                while ((line = reader.readNext()) != null) {
 	                    if (line[0].equals(search)) {
 	                    	
-	                    	searchResult[0] = line[0];
-	                    	searchResult[1] = line[2];
-	                    	searchResult[2] = line[7];
-	                        
-	                        
-	                        System.out.println("회사명 : " + line[0] + ", 종목코드 : " + line[2] + ",  웹사이트 : " + line[7] + "]");
+	                    	company = new Company(line[0],line[2],line[7]);
+	                    	//System.out.println("회사명 : " + line[0] + ", 종목코드 : " + line[2] + ",  웹사이트 : " + line[7] );
 	                    }
 	                }
 	            } catch (CsvValidationException e) {
@@ -43,7 +44,8 @@ public class BasicSearchCompanyService implements SearchCompanyService {
 	            e.printStackTrace();
 	        }
 
-	        return searchResult;
+	        
+	        return company;
 	    }
 	
 	    
