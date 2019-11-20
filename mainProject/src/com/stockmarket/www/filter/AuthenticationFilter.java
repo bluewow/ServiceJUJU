@@ -17,9 +17,6 @@ public class AuthenticationFilter implements Filter{
 
 	private static final String[] noAuthUrls = {
 			//TODO
-			//main.jsp 삭제
-			"/main.jsp",
-			"/login",
 			"/card/search/search",
 			"/card/trade/analysis", 
 			"/card/board/news_board",
@@ -33,18 +30,20 @@ public class AuthenticationFilter implements Filter{
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		HttpSession session = httpRequest.getSession();
 		String urlPath = httpRequest.getServletPath();
-		boolean pass = false;
+		boolean filterPass = false;
 		
 		if(session.getAttribute("loginId") == null) {
 			//로그인 이전 권한 세팅
 			for(String url : noAuthUrls) {
-				if(url.equals(urlPath)) {
-					pass = true;
+				// 1. /card 외에는 pass
+				// 2. 1번 조건에 noAuthUrls path 는 pass
+				if(!urlPath.substring(0, 5).equals("/card") || url.equals(urlPath)) {
+					filterPass = true;
 					break;
 				}
 			}
 			
-			if(pass == true) 
+			if(filterPass == true) 
 				chain.doFilter(request, response);
 			else 
 				httpRequest.getRequestDispatcher("/error/403.jsp").forward(httpRequest, httpResponse);
