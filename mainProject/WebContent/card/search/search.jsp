@@ -15,7 +15,7 @@
 </head>
 <!-- style="overflow:scroll" -->
 <body>
-	<section>
+	<section id="search-form">
 		<h1 class="d-none">주식회사검색</h1>
 		<form action ="search" method="get">
 			<div>
