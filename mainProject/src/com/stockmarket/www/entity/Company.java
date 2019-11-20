@@ -2,7 +2,7 @@ package com.stockmarket.www.entity;
 
 public class Company {
 //("회사명 : " + line[0] + ", 종목코드 : " + line[2] + ",  웹사이트 : " + line[7] );
-	private String company;
+	private String companyName;
 	private String stockItemName;
 	private String website;
 	
@@ -10,21 +10,21 @@ public class Company {
 		
 	}
 	
-	public Company(String company, String stockItemName, String website) {
+	public Company(String companyName, String stockItemName, String website) {
 	
-		this.company = company;
+		this.companyName = companyName;
 		this.stockItemName = stockItemName;
 		this.website = website;
 	}
 
 	
 
-	public String getCompany() {
-		return company;
+	public String getcompanyName() {
+		return companyName;
 	}
 
-	public void setCompany(String company) {
-		this.company = company;
+	public void setcompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
 	public String getStockItemName() {
@@ -45,7 +45,7 @@ public class Company {
 
 	@Override
 	public String toString() {
-		return "Company [company=" + company + ", stockItemName=" + stockItemName + ", website=" + website + "]";
+		return "Company [companyName=" + companyName + ", stockItemName=" + stockItemName + ", website=" + website + "]";
 	}
 	
 	

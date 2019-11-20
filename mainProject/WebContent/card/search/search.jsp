@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <!-- style="overflow:scroll" -->
-<body >
+<body>
 	<section>
 		<!-- style="visibility: hidden" -->
 		<!-- <h1>주식회사검색</h1> -->
@@ -61,13 +61,14 @@
 			</tbody>
 			
 			<tbody>
-			
+			<%-- <c:set var="n" items="${search}">
 				<tr>
 					<th>3</th>
-					<td><a href=""></a></td>
-					<td>은행</td>
-					<td>관심?</td>
+					<td><a href=""></a>${n.companyName}</td>
+					<td>${n.stockItemName}</td>
+					<td>${n.website}</td>
 				</tr>
+			</c:set> --%>
 			
 			</tbody>
 		</table>
