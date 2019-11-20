@@ -5,17 +5,18 @@
 <%@ taglib prefix="fn" uri ="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var ="n" value="${search}" />
 
-<!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
+
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../../css/search/search.css">
 </head>
 <!-- style="overflow:scroll" -->
 <body>
 	<section>
-		<!-- style="visibility: hidden" -->
-		<!-- <h1>주식회사검색</h1> -->
+		<h1 class="d-none">주식회사검색</h1>
 		<form action ="search" method="get">
 			<div>
 				<input type="text" name="search">
@@ -24,9 +25,10 @@
 		</form>
 	</section>
 		
-	<section>
-		<h1>추천 검색어</h1>
+	<section id="recommendKeyword">
+		<!-- <h1>추천 검색어</h1> -->
 		<ul>
+			<li id="recommendKeyword_fixed">추천검색어</li>
 			<li>광동 사운드</li>
 			<li>기현 알고리즘</li>
 			<li>나람 금융</li>
@@ -35,11 +37,11 @@
 	</section>
 	
 	<section >
-		<h1>주식회사 검색 결과</h1>
+		<h1 class="d-none">주식회사 검색 결과</h1>
 		<table>
 			<thead>
 				<tr>
-					<td>번호</th>
+					<td>번호</td>
 					<td>종목명</td>
 					<td>산업분류</td>
 					<td>홈페이지</td>

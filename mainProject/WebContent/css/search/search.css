@@ -1,1 +1,43 @@
 @charset "UTF-8";
+
+/* 요소(element) 초기화 && 제목요소*/ 
+h1{
+	margin:0;
+    padding:0;
+    font-size:inherit;   
+	font-weight:inherit; 
+}
+/* 목록 */
+ol, ul { 
+	list-style: none;
+}
+
+.d-none{
+    display: none;  
+  }
+
+#search-form{
+    text-align: center;
+}
+
+#recommendKeyword{
+    display: inline-block;
+    text-align: center;
+   
+   
+}
+
+ #recommendKeyword_fixed{
+    
+ }
+
+    #recommendKeyword>ul{
+        display: flex;
+        
+        
+    }
+    #recommendKeyword>ul>li{
+        display: flex;
+        padding-left: 20px;
+        
+    }
