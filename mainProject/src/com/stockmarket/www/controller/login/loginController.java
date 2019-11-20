@@ -25,6 +25,7 @@ public class loginController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//returnURL 처리 생략
+		request.getRequestDispatcher("main.jsp").forward(request, response);
 	}
 	
 	@Override
