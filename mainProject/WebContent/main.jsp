@@ -74,8 +74,8 @@
 						<!-- TODO -->						
 						<form id="dummy" action="login" method="post">
 							<c:if test="${empty sessionScope.loginId }">
-								<input type="text" name="userId" placeholder="Input the Id">
-								<input type="password" name="pwd" placeholder="Input the Password">
+								<input type="text" name="userId" placeholder="Enter the Email...">
+								<input type="password" name="pwd" placeholder="Enter the Password...">
 								<input type="submit" value="Dummy 로그인">
 							</c:if>
 							<c:if test="${not empty sessionScope.loginId }">
