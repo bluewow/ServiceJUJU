@@ -42,14 +42,14 @@
 <!--[if lt IE 9]>
    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
-   <style>
-   @media only screen and (min-width:800px) and (max-width: 1200px) {
+<style>
+@media only screen and (min-width:800px) and (max-width: 1200px) {
 	.row .column.column-33, .row .column.column-34 {
 		flex: none;
 		max-width: 49.3333%;
 	}
 }
-   </style>
+</style>
 
 
 </head>
@@ -251,26 +251,27 @@
 
 
 
-				<!-- 자산추이 카드 -->
-				<section class="column column-33">
-					<div class="card">
-						<div class="card-block">
-							<section class="asset graph/compare">
-								<ul class="nav nav-tabs" id="myTab" role="tablist style"
-									style="border: none">
-									<li class="nav-item"><a class="nav-link active"
-										id="assetgraph-tab" data-toggle="tab" href="#assetgraph"
-										role="tab" aria-controls="index1" aria-selected="true">MY 자산</a></li>
-					
-								</ul>
-								<div class="tab-content" id="myTabContent">
-									<div class="tab-pane fade show active" id="assetgraph"
-										role="tabpanel" aria-labelledby="assetgraph-tab">
-										<iframe height="100%" src="./card/asset/myAsset.jsp" scrolling="no">
-										</iframe></div>
+			<!-- 자산추이 카드 -->
+			<section class="column column-33">
+				<div class="card">
+					<div class="card-block">
+						<section class="asset graph/compare">
+							<ul class="nav nav-tabs" id="myTab" role="tablist style"
+								style="border: none">
+								<li class="nav-item"><a class="nav-link active"
+									id="assetgraph-tab" data-toggle="tab" href="#assetgraph"
+									role="tab" aria-controls="index1" aria-selected="true">MY
+										자산</a></li>
+
+							</ul>
+							<div class="tab-content" id="myTabContent">
+								<div class="tab-pane fade show active" id="assetgraph"
+									role="tabpanel" aria-labelledby="assetgraph-tab">
+									<iframe height="100%" src="./card/asset/myAsset.jsp"
+										scrolling="no"> </iframe>
 								</div>
-							</section>
-						</div>
+							</div>
+						</section>
 					</div>
 				</div>
 			</section>
@@ -279,6 +280,8 @@
 			<!-- 세번째 로우 -->
 
 			<!-- 빈 공간 -->
+			<div class="column column-33"></div>
+
 			<div class="column column-33"></div>
 
 
