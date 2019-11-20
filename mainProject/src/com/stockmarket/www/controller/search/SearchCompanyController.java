@@ -39,10 +39,11 @@ public class SearchCompanyController extends HttpServlet{
 			search = search_;
 		}
 		
+		//System.out.println(search);
 		
 		
 		request.setAttribute("search", seachCompanyService.searchCompany(search, csvFilePath));
 		request.getRequestDispatcher("search.jsp").forward(request, response);
-		///card/board/community_board.jsp
+		
 	}
 }

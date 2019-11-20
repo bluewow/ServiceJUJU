@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri ="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var ="n" value="${search}" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +16,7 @@
 	<section>
 		<!-- style="visibility: hidden" -->
 		<!-- <h1>주식회사검색</h1> -->
-		<form action ="./card/search/search" method="get">
+		<form action ="search" method="get">
 			<div>
 				<input type="text" name="search">
 				<button>검색</button>
@@ -43,14 +47,17 @@
 			</thead>
 			
 			<tbody>
+			<%-- <c:forEach var="n" items="${search}"> --%>
 				<tr>
 					<th>1</th>
-					<td><a href="">광동 사운드</a></td>
-					<td>기술 하드웨어</td>
-					<td>관심?</td>
+					<td><a href=""></a>${n.companyName}</td>
+					<td>${n.stockItemName}</td>
+					<td>${n.website}</td>
 				</tr>
+			<%-- </c:forEach> --%>
 			</tbody>
-			<tbody>
+			
+			<!-- <tbody>
 				<tr>
 					<th>2</th>
 					<td><a href="">경인 일보</a></td>
@@ -58,19 +65,9 @@
 					<td>관심?</td>
 					
 				</tr>
-			</tbody>
+			</tbody> -->
 			
-			<tbody>
-			<%-- <c:set var="n" items="${search}">
-				<tr>
-					<th>3</th>
-					<td><a href=""></a>${n.companyName}</td>
-					<td>${n.stockItemName}</td>
-					<td>${n.website}</td>
-				</tr>
-			</c:set> --%>
 			
-			</tbody>
 		</table>
 	</section>
 	
