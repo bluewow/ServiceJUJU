@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <html>
 <head>
@@ -19,13 +21,21 @@
 <!-- ref analysis.css -->
 <link rel="stylesheet" href="../../css/trade/analysis.css">
 
+<!-- arrow 처리 -->
+<%-- <c:if test= "${direction == 'up'}">
+	<c:set var="arrow-direction" value="fa-arrow-up"/>
+</c:if>
+<c:if test= "${direction == 'down'}">
+	<c:set var="arrow-direction" value="fa-arrow-down"/>
+</c:if> --%>
+
 </head>
 <body>
 <div id="analysis-container">
 	<!-- --------------- page-top -------------- -->
 	<header class="page-top">
 		<div id="stockName">
-			<div>기현 알고리즘</div>
+			<div>${companyName }</div>
 			<div>204,000</div>
 		</div>
 		<input id="capture" type="button" value="캡쳐하기">
@@ -35,21 +45,21 @@
 	<section class="page-mid">
 		<div class="page-left-chart">차트1</div>
 		<div class="page-right-chart">
-			<div class="page-right-write">급등 (24%)</div>
+			<div class="page-right-write">급등 (${predict_1 }%)</div>
 			<div class="progress progress-right-chart">
-	            <div class="progress-bar progress-red" style="width: 40%;">40%</div>
+	            <div class="progress-bar progress-red" style="width: ${predict_1 }%;"></div>
 	        </div>
-	        <div class="page-right-write">우상향 (36%)</div>
+	        <div class="page-right-write">우상향 (${predict_2 }%)</div>
 			<div class="progress progress-right-chart">
-	            <div class="progress-bar progress-red" style="width: 40%;">40%</div>
+	            <div class="progress-bar progress-red-weak" style="width: ${predict_2 }%;"></div>
 	        </div>	      
-	        <div class="page-right-write">우하향 (25%)</div>  
+	        <div class="page-right-write">우하향 (${predict_3 }%)</div>  
 			<div class="progress progress-right-chart">
-	            <div class="progress-bar progress-red" style="width: 40%;">40%</div>
+	            <div class="progress-bar progress-blue" style="width: ${predict_3 }%;"></div>
 	        </div>
-	        <div class="page-right-write">급락 (25%)</div>
+	        <div class="page-right-write">급락 (${predict_4 }%)</div>
 	        <div class="progress progress-right-chart">
-	            <div class="progress-bar progress-red" style="width: 80%;">40%</div>
+	            <div class="progress-bar progress-blue-weak" style="width: ${predict_4 }%;"></div>
 	        </div>	        
 		</div>
 	</section>
@@ -61,21 +71,21 @@
 	        <div class="content margin-content">
 	        	<div class="content-first">관심도<i class="fa fa-question-circle fa-lg ho" aria-hidden="true"></i></div> 
 	        	<div class="progress content-second">
-		            <div class="progress-bar progress-red" style="width: 40%;">40%</div>
+		            <div class="progress-bar progress-red" style="width: 40%;">${content_1 }%</div>
 		        </div>
 	     	   <div class="content-third"><i class="fa fa-arrow-up" aria-hidden="true"></i></div>
 	        </div>
 	        <div class="content">
 				<div class="content-first">재무상황<i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></div>       	
 		        <div class="progress content-second">
-		            <div class="progress-bar progress-red" style="width: 50%">50%</div>
+		            <div class="progress-bar progress-red" style="width: 50%">${content_2 }%</div>
 		        </div>
 		        <div class="content-third"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>  
 	        </div>
 	        <div class="content">
 	        	<div class="content-first">미정<i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></div>
 	        	 <div class="progress content-second">
-		            <div class="progress-bar progress-blue" style="width: 60%">60%</div>
+		            <div class="progress-bar progress-blue" style="width: 60%">${content_3 }%</div>
 		        </div>		     
 	        	<div class="content-third"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
 	        </div>

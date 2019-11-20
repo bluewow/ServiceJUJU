@@ -133,8 +133,16 @@
 	background-color: rgb(191, 115, 124);	
 }
 
+.progress-red-weak {
+	background-color: rgb(229, 199, 199);	
+}
+
 .progress-blue {
-	background-color: rgb(104, 154, 188);
+	background-color: rgb(191, 115, 124);	
+}
+
+.progress-blue-weak {
+	background-color: rgb(179, 204, 221);
 }
 
 /* icon */
