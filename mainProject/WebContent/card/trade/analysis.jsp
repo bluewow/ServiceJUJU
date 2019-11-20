@@ -28,6 +28,7 @@
 			<div>기현 알고리즘</div>
 			<div>204,000</div>
 		</div>
+		<input id="capture" type="button" value="캡쳐하기">
 	</header>
 
 	<!-- --------------- page-mid -------------- -->
