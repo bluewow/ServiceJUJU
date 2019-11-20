@@ -31,12 +31,12 @@ public class loginController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String userId = request.getParameter("userId");
+		String userEmail = request.getParameter("userEmail");
 		String pwd = request.getParameter("pwd");
 		HttpSession session = request.getSession();
 		
-		if(isValidLogInfo(userId, pwd)) {
-			session.setAttribute("loginId", userId);
+		if(isValidLogInfo(userEmail, pwd)) {
+			session.setAttribute("loginId", userEmail);
 			request.getRequestDispatcher("main.jsp").forward(request, response);
 		} else {
 			if(session != null)

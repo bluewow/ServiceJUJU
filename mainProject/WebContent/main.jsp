@@ -73,12 +73,12 @@
 						<!-- TODO -->						
 						<form id="dummy" action="login" method="post">
 							<c:if test="${empty sessionScope.loginId }">
-								<input type="text" name="userId" placeholder="Enter the Email...">
+								<input type="text" name="userEmail" placeholder="Enter the Email...">
 								<input type="password" name="pwd" placeholder="Enter the Password...">
 								<input type="submit" value="Dummy 로그인">
 							</c:if>
 							<c:if test="${not empty sessionScope.loginId }">
-								<input type="hidden" name="userId" value="null">
+								<input type="hidden" name="userEmail" value="null">
 								<input type="submit" value="Dummy 로그아웃">
 							</c:if>
 						</form>
