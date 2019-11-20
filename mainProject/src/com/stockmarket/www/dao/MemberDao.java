@@ -8,5 +8,6 @@ public interface MemberDao {
 	List<Member> getMemberList();
 	
 	Member getMember(int id);
+	Member getMember(String field, String query);	
 	int updateMember(int id, int vmoney);
 }
