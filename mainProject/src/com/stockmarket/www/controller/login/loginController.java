@@ -36,7 +36,7 @@ public class loginController extends HttpServlet{
 		HttpSession session = request.getSession();
 		
 		if(isValidLogInfo(userEmail, pwd)) {
-			session.setAttribute("loginId", userEmail);
+			session.setAttribute("userEmail", userEmail);
 			request.getRequestDispatcher("main.jsp").forward(request, response);
 		} else {
 			if(session != null)
@@ -46,14 +46,14 @@ public class loginController extends HttpServlet{
 		}
 	}
 
-	private boolean isValidLogInfo(String userId, String pwd) {
+	private boolean isValidLogInfo(String email, String pwd) {
 		//TODO 
 		//제재 회원
 		
-		if(userId == null && userId.equals("")) 
+		if(email == null || email.equals("")) 
 			return false;
 
-		if(loginService.isValidMember(userId, pwd)) 
+		if(loginService.isValidMember(email, pwd)) 
 			return true;
 		else 
 			return false;
