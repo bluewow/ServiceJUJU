@@ -72,12 +72,12 @@
 						</a>
 						<!-- TODO -->						
 						<form id="dummy" action="login" method="post">
-							<c:if test="${empty sessionScope.userEmail }">
+							<c:if test="${empty sessionScope.id }">
 								<input type="text" name="userEmail" placeholder="Enter the Email...">
 								<input type="password" name="pwd" placeholder="Enter the Password...">
 								<input type="submit" value="Dummy 로그인">
 							</c:if>
-							<c:if test="${not empty sessionScope.userEmail }">
+							<c:if test="${not empty sessionScope.id }">
 								<input type="hidden" name="userEmail" value="null">
 								<input type="submit" value="Dummy 로그아웃">
 							</c:if>
