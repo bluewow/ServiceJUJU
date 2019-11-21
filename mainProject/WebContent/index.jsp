@@ -20,7 +20,9 @@
             <h2>주식을 쇼핑하다</h2>
             <div>
                 <a href="#" class="search-btn fa fa-search"></a>
-                <input type="text" name="search" value="" autocomplete="off">
+                <form action="/main">
+                	<input type="submit" name="search" value="검색">
+                </form>
             </div>
         </section>
     </main>
