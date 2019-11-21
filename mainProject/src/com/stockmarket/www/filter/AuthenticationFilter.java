@@ -32,7 +32,7 @@ public class AuthenticationFilter implements Filter{
 		String urlPath = httpRequest.getServletPath();
 		boolean filterPass = false;
 		
-		if(session.getAttribute("loginId") == null) {
+		if(session.getAttribute("id") == null) {
 			//로그인 이전 권한 세팅
 			for(String url : noAuthUrls) {
 				// 1. /card 외에는 pass

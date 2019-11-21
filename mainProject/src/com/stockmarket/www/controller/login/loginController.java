@@ -36,7 +36,8 @@ public class loginController extends HttpServlet{
 		HttpSession session = request.getSession();
 		
 		if(isValidLogInfo(userEmail, pwd)) {
-			session.setAttribute("userEmail", userEmail);
+			int id = loginService.getIdbyEmail(userEmail);
+			session.setAttribute("id", id);
 			request.getRequestDispatcher("main.jsp").forward(request, response);
 		} else {
 			if(session != null)
