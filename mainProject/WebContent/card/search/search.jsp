@@ -19,7 +19,7 @@
 		<h1 class="d-none">주식회사검색</h1>
 		<form action ="search" method="get">
 			<div>
-				<input type="text" name="search">
+				<input id ="search-text" type="text" name="search">
 				<button>검색</button>
 			</div>
 		</form>

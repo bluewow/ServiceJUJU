@@ -18,26 +18,41 @@ ol, ul {
 
 #search-form{
     text-align: center;
+    padding-top: 20px;
+    /* height: 100px; */
+	/* width: 400px; */
+}
+
+#search-text{
+	height: 40px;
+	width: 350px;
 }
 
 #recommendKeyword{
-    display: inline-block;
-    text-align: center;
-   
+	display: inline-block;
+	text-align: center;
+	
    
 }
 
+#recommendKeyword>ul{
+	padding-left: 0px;
+}
+
  #recommendKeyword_fixed{
-    
+     position: absolute;
+   	 left:15px;
+	 top:80px;
  }
 
     #recommendKeyword>ul{
         display: flex;
         
-        
-    }
+     }
     #recommendKeyword>ul>li{
         display: flex;
-        padding-left: 20px;
+        padding-left: 15px;
+        font-size:15px;
+       
         
     }
