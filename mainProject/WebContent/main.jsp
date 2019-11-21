@@ -59,7 +59,7 @@
 	<header class="navbar">
 		<h1 style="display: none;">Stock Market</h1>
 		<section class="row">
-			<h1 style="display: none;">hedaer</h1>
+			<h1 style="display: none;">header</h1>
 			<section class="column column-30 col-site-title">
 				<h1 style="display: none;">site title</h1>
 				<a href="#" class="site-title float-left">Stock Market</a>
