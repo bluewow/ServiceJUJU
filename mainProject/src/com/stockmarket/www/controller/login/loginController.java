@@ -12,6 +12,10 @@ import javax.websocket.RemoteEndpoint.Basic;
 
 import com.stockmarket.www.service.basic.BasicLoginService;
 
+//TODO
+//제재 회원 처리
+//session 시간이 지날경우 화면상에 로그아웃 표시 또는 팝업창을 구현해야한다 
+
 @WebServlet("/login")
 public class loginController extends HttpServlet{
 	
@@ -35,8 +39,10 @@ public class loginController extends HttpServlet{
 		String pwd = request.getParameter("pwd");
 		HttpSession session = request.getSession();
 		
+		//회원가입상태를 체크
 		if(isValidLogInfo(userEmail, pwd)) {
 			int id = loginService.getIdbyEmail(userEmail);
+			//id 값을 session 에 저장한다
 			session.setAttribute("id", id);
 			request.getRequestDispatcher("main.jsp").forward(request, response);
 		} else {
@@ -48,9 +54,7 @@ public class loginController extends HttpServlet{
 	}
 
 	private boolean isValidLogInfo(String email, String pwd) {
-		//TODO 
-		//제재 회원
-		
+
 		if(email == null || email.equals("")) 
 			return false;
 
