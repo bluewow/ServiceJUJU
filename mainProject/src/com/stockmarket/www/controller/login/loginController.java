@@ -39,6 +39,7 @@ public class loginController extends HttpServlet{
 			int id = loginService.getIdbyEmail(userEmail);
 			session.setAttribute("id", id);
 			request.getRequestDispatcher("main.jsp").forward(request, response);
+			
 		} else {
 			if(session != null)
 				session.invalidate();
@@ -55,6 +56,7 @@ public class loginController extends HttpServlet{
 			return false;
 
 		if(loginService.isValidMember(email, pwd)) 
+
 			return true;
 		else 
 			return false;

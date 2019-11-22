@@ -115,6 +115,7 @@ public class JdbcMemberDao implements MemberDao {
 			
 			result = statement.executeUpdate();
 			statement.close();
+			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

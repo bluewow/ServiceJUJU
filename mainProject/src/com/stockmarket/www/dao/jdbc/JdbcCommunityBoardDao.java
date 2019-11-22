@@ -24,6 +24,8 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		String url = "jdbc:oracle:thin:@112.223.37.243:1521/xepdb1";
 
 		try {
+			
+			
 
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection(url, "ACORNGROUP1", "month100man");

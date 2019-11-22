@@ -50,8 +50,14 @@ public class JdbcInterestStocksDao implements InterestStocksDao {
 	@Override
 	public int delete(int id) {
 
-		
-		
+
+		return 0;
+	}
+
+
+	@Override
+	public int insert(int id, String email, String stockname) {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 
