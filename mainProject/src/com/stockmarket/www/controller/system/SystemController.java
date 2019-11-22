@@ -45,7 +45,7 @@ public class SystemController extends HttpServlet {
 
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String format_time1 = date.format(System.currentTimeMillis());
-		System.out.println(format_time1);
+//		System.out.println(format_time1);
 		
 		//주식정보 크롤링
 		
