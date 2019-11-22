@@ -10,12 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.stockmarket.www.service.InterestStocksService;
+import com.stockmarket.www.service.InterestViewService;
 import com.stockmarket.www.service.basic.BasicInterestStocksService;
+import com.stockmarket.www.service.basic.BasicInterestViewService;
 
 @WebServlet("/card/managestocks/interestlist")
 public class InterestStocksController extends HttpServlet {
 
 	private InterestStocksService interestStocksInterface;
+	private InterestViewService interestViewInterface;
 
 	@Override
 	public void init() throws ServletException {
@@ -23,7 +26,9 @@ public class InterestStocksController extends HttpServlet {
 	}
 
 	public InterestStocksController() {
-		interestStocksInterface = new BasicInterestStocksService();
+		interestStocksInterface =
+				new BasicInterestStocksService();
+		interestViewInterface = new BasicInterestViewService();
 	}
 
 	@Override
@@ -38,14 +43,9 @@ public class InterestStocksController extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		String result = (String) session.getAttribute("loginId");
+		int userid = (int)session.getAttribute("id");
 
-		if (result == null)
-			response.sendRedirect("/error?code=2");
-		else
-			response.sendRedirect("main");
-
-		request.setAttribute("list", interestStocksInterface.getInterestStockList());
+		request.setAttribute("list", interestViewInterface.getInterestViewList(userid));
 		request.getRequestDispatcher("interestlist.jsp").forward(request, response);
 	}
 

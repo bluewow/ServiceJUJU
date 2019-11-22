@@ -8,9 +8,8 @@ public class InterestStocks {
 	public InterestStocks() {
 		
 	}
-	
 	public InterestStocks(String stockName) {
-		this.stockName = stockName;
+	this.stockName = stockName;
 	}
 	public InterestStocks(int id, String stockName, int currentPrice, int quantity) {
 		this.id = id;
