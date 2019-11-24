@@ -62,23 +62,30 @@ public class SystemController extends HttpServlet {
 	private void systemThread() throws InterruptedException, IOException {
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String str = date.format(System.currentTimeMillis());
-//		System.out.println(str);
 		
-		//주식가격 refresh by 크롤링
+		//오전 5시 하루에 한번 KOSPI.csv KOSDAQ.csv 파일을 갱신한다.
 
+		//주식가격 refresh by 크롤링 9시 ~ 6시까지 실행
 		service.refreshStockPrice(pathOfKospi, pathOfKosdaq);
 		
 		//6시 장종료후 주식데이터 갱신 
-		
-		//하루에 한번 KOSPI.csv KOSDAQ.csv 파일을 갱신한다.
-		
 
-		//5분주기
-		Thread.sleep(1000 * 60 * 5);
+		//10분주기 - refreshStockPrice 함수실행시 약 7분소요
+		Thread.sleep(1000 * 60 * 10);
 	}
 
 	//for Test
+//	/*
+	void timeTest(String mm, String ss) {
+		//오전 5시 하루에 한번 KOSPI.csv KOSDAQ.csv 파일을 갱신한다.
+
+		//주식가격 refresh by 크롤링 9시 ~ 6시까지 실행
+		
+		//6시 장종료후 주식데이터 갱신
+	}
+	
 	public static void main(String[] args) {
 	
 	}
+//	*/
 }

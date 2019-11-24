@@ -10,8 +10,7 @@ public interface SystemService {
 	*/
 	
 	/*
-	 *  5분간격으로 현재가 데이터를 갱신한다. 
-	 *  갱신된 데이터를 공유한다
+	 *  실시가 종목 가격 갱신 및 공유
 	*/ 
 	void refreshStockPrice(String pathOfKospi, String pathOfKosdaq);
 }

@@ -23,6 +23,10 @@ public class CurrentStockInfo {
 	}
 	
 
+	public String getCodeNum() {
+		return codeNum;
+	}
+
 	public String getPrice() {
 		return price;
 	}
