@@ -63,8 +63,8 @@ public class CSVStockDataDao {
 		return list;
 	}
 	
-	//Unit Test
-	/*
+/*	
+//Unit Test
 	public static void main(String[] args) {
 		int testIndex = 0;
 		CSVStockDataDao data = new CSVStockDataDao();
@@ -74,12 +74,8 @@ public class CSVStockDataDao {
 		System.out.println("숫자를 입력하시오");
 		testIndex = sc.nextInt();
 
-		//TEST
-		//1 - 코스피 종목코드 얻기
-		//2 - 코스닥 종목코드 얻기
-		//3 - 유효하지 않은 Path
 		switch(testIndex) {
-		case 1:
+		case 1: // 코스피 종목코드 얻기
 			String Path1 = "C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSPI.csv";
 			test = data.getColumnData(1, Path1);
 			
@@ -88,7 +84,7 @@ public class CSVStockDataDao {
 			
 			break;
 			
-		case 2:
+		case 2: // 코스닥 종목코드 얻기
 			String Path2 = "C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSDAQ.csv";
 			test = data.getColumnData(1, Path2);
 			
@@ -97,7 +93,7 @@ public class CSVStockDataDao {
 			
 			break;
 		
-		case 3:
+		case 3: // 유효하지 않은 Path
 			test = data.getColumnData(1, "abcd");
 			
 			for(String str : test) 
@@ -106,5 +102,5 @@ public class CSVStockDataDao {
 			break;
 		}
 	}
-	*/
+*/	
 }

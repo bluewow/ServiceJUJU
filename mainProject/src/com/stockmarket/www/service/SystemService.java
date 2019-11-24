@@ -6,7 +6,7 @@ public interface SystemService {
 	 * 하루에 한번 KOSPI.csv KOSDAQ.csv 파일을 갱신한다.
 	 * 장종료후 주식데이터 갱신
 	 * log 시스템
-	 * 
+	 * 토, 일요일 및 장쉬는 날 tracking
 	*/
 	
 	/*

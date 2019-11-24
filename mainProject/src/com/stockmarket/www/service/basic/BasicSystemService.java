@@ -67,8 +67,8 @@ public class BasicSystemService implements SystemService{
 		return data;
 	}
 
-	//	for TEST
-	/*
+/*	
+//	for TEST
 	public static void main(String[] args) throws IOException {
 		int testIndex = 0;
 		BasicSystemService sys = new BasicSystemService();
@@ -77,19 +77,14 @@ public class BasicSystemService implements SystemService{
 		System.out.println("숫자를 입력하시오");
 		testIndex = sc.nextInt();
 		
-//		TEST
-//		1 - 코스피 코스닥 전종목 현재가 갱신
-//		2 - refreshStockPrice 함수 처리 시간 체크(100M 환경에서 약 7분 소요)
-//			2019-11-24 20:37:54
-//			2019-11-24 20:44:53
 		switch(testIndex) {
-		case 1:
+		case 1: //코스피 코스닥 전종목 현재가 갱신
 			//TEST - KOSPI, KOSDAQ 데이터 크롤링 및 callback
 			sys.refreshStockPrice("C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSPI.csv",
 							      "C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSDAQ.csv");
 			break;
 		
-		case 2:
+		case 2: //refreshStockPrice 함수 처리 시간 체크(100M 환경에서 약 7분 소요) 2019-11-24 20:37:54 ~ 2019-11-24 20:44:53
 			SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			System.out.println(date.format(System.currentTimeMillis()));
 
@@ -100,5 +95,5 @@ public class BasicSystemService implements SystemService{
 			break;
 		}
 	}
-	*/
+*/	
 }
