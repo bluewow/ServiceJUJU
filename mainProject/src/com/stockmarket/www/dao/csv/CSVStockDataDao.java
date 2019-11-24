@@ -1,12 +1,21 @@
 package com.stockmarket.www.dao.csv;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServlet;
+
 import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
 import com.stockmarket.www.entity.Company;
 
@@ -61,6 +70,17 @@ public class CSVStockDataDao {
 		}
 		
 		return list;
+	}
+	
+	public void makeCSV(String filePath, List<String[]> data) throws IOException {
+		CSVWriter cw = new CSVWriter(new OutputStreamWriter(new FileOutputStream(filePath+".csv"), "UTF-8"));
+		Iterator<String[]> it = data.iterator();
+		
+		while (it.hasNext()) {
+			String[] s = (String[]) it.next();
+			cw.writeNext(s);
+		}
+		cw.close();
 	}
 	
 /*	

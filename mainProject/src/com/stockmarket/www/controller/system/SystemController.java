@@ -2,6 +2,7 @@ package com.stockmarket.www.controller.system;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Scanner;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -21,6 +22,7 @@ import com.stockmarket.www.service.basic.BasicSystemService;
 public class SystemController extends HttpServlet {
 	//thread 함수를 한번만 실행시키기 위한 flag
 	static boolean oneShotFlag;
+	static String preHour; 
 	String pathOfKospi = null;
 	String pathOfKosdaq = null;
 	BasicSystemService service;
@@ -60,32 +62,70 @@ public class SystemController extends HttpServlet {
 	}
 
 	private void systemThread() throws InterruptedException, IOException {
-		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String str = date.format(System.currentTimeMillis());
+		SimpleDateFormat date = new SimpleDateFormat("HH"); //HH : 0~23시  기타형식예 "yyyy-MM-dd HH:mm:ss"
+		String curHour = date.format(System.currentTimeMillis());
 		
 		//오전 5시 하루에 한번 KOSPI.csv KOSDAQ.csv 파일을 갱신한다.
-
-		//주식가격 refresh by 크롤링 9시 ~ 6시까지 실행
-		service.refreshStockPrice(pathOfKospi, pathOfKosdaq);
+		if(curHour.equals("5") && preHour.equals("4")) {
+			service.updateMarket("KOSPI");
+			service.updateMarket("KOSDAQ");
+		}
+			
+		//주식가격 refresh by 크롤링 9시 ~ 18시까지 실행
+		if(Integer.parseInt(curHour) >= 9 && Integer.parseInt(curHour) <= 18)
+			service.refreshStockPrice(pathOfKospi, pathOfKosdaq);
 		
-		//6시 장종료후 주식데이터 갱신 
-
-		//10분주기 - refreshStockPrice 함수실행시 약 7분소요
+		//18시 장종료후 19시 주식데이터 갱신 
+		if(curHour.equals("19") && preHour.equals("18")) {
+//			TODO
+		}
+		
+		//현재 시간을 preHour flag 에 저장
+		preHour = curHour;
+		
+		//10분주기 - refreshStockPrice 함수실행시 약 7분소요로 10분주기로 변경
 		Thread.sleep(1000 * 60 * 10);
 	}
 
-	//for Test
 	/*
-	void timeTest(String mm, String ss) {
-		//오전 5시 하루에 한번 KOSPI.csv KOSDAQ.csv 파일을 갱신한다.
-
-		//주식가격 refresh by 크롤링 9시 ~ 6시까지 실행
+// for Test
+	void timeTest(String mm) {
+		String curHour = mm;
 		
-		//6시 장종료후 주식데이터 갱신
+		//오전 5시 하루에 한번 KOSPI.csv KOSDAQ.csv 파일을 갱신한다.
+		if(curHour.equals("5") && preHour.equals("4"))  
+			System.out.println("success-1");
+
+		//주식가격 refresh by 크롤링 9시 ~ 18시까지 실행
+		if(Integer.parseInt(curHour) >= 9 && Integer.parseInt(curHour) <= 18)
+			System.out.println("success-2");
+			
+		//18시 장종료후 19시에 주식데이터 갱신
+		if(curHour.equals("19") && preHour.equals("18"))  
+			System.out.println("success-3");
+		
+		preHour = curHour;
 	}
 	
 	public static void main(String[] args) {
-	
+		int testIndex = 0;
+		SystemController system = new SystemController();
+		
+		Scanner input = new Scanner(System.in);
+		System.out.println("숫자를 입력하시오");
+		testIndex = input.nextInt();
+		
+		switch(testIndex) {
+		case 1:	//시간 조건문 Test
+			while(true) {
+				Scanner sc = new Scanner(System.in);
+				System.out.println("시간을 입력하시오 : ");
+				system.timeTest(sc.next());
+			}
+		case 2:
+			break;
+		}
+		
 	}
 	*/
 }

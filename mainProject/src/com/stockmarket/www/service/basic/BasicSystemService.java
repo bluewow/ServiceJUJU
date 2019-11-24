@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
@@ -16,7 +17,15 @@ import com.stockmarket.www.service.SystemService;
 
 public class BasicSystemService implements SystemService{
 	private static final int STOCK_CODE_NUM = 1;
+	// for update Market 
+	//<th> 회사명|종목코드|업종|주요제품|상장일|결산월|대표자명|홈페이지|지역 </th>
+	private static final int COMPANY_INFO_COLUMN = 9;    
+	private static final String KOSPI = "stockMkt";
+	private static final String KOSDAQ = "kosdaqMkt";
+	List<String[]> companyList;
+	String[] dataBuffer;
 	
+	/*-------------------------- refreshStockPrice ----------------------------*/
 	public void refreshStockPrice(String pathOfKospi, String pathOfKosdaq) {
 		CSVStockDataDao data = new CSVStockDataDao();
 		List<String> codeNums = new ArrayList<>();
@@ -67,6 +76,76 @@ public class BasicSystemService implements SystemService{
 		return data;
 	}
 
+	
+	/*-------------------------- update Market ----------------------------*/
+	@Override
+	public boolean updateMarket(String market) {
+		Document doc = null;
+		CSVStockDataDao data = new CSVStockDataDao();
+		companyList = new ArrayList<String[]>();
+		dataBuffer = new String[COMPANY_INFO_COLUMN];
+		String type = null;
+		
+		if(market.equals("KOSPI"))
+			type = "stockMkt";
+		
+		if(market.equals("KOSDAQ"))
+			type = "kosdaqMkt";
+		
+		String url = "http://kind.krx.co.kr/corpgeneral/corpList.do"
+				+ "?method=download"
+				+ "&searchType=13"
+				+ "&orderMode=3"
+				+ "&orderStat=D"
+				+ "&marketType=" + type; //stockMkt 코스피  kosdaqMkt 코스닥
+		
+		try {
+			doc = Jsoup.connect(url).ignoreContentType(true)
+									.timeout(5000)
+									.post();
+		} catch (IOException e) {
+			//TODO
+			//LOG 기록
+			e.printStackTrace();
+		}
+		
+		//tr Tag 이하를 선택
+		Elements contents = doc.select("tr");
+		if(contents == null) {
+			//TODO
+			//LOG 기록
+			return false;
+		}
+
+		//반복되는 th, td tag 로 sorting 한다
+		write(contents, "th"); 
+		write(contents, "td"); 
+		try {
+			// KOSPI.csv or KOSDAQ.csv 를 생성한다
+			data.makeCSV(market, companyList);
+		} catch (IOException e) {
+			//TODO
+			//LOG 기록
+			e.printStackTrace();
+		}
+		return true;
+	}
+
+	private void write(Elements contents, String tag) {
+		int cnt = 0;
+		for(Element element : contents.select(tag)) {
+			dataBuffer[cnt] = element.text();
+			cnt++;
+			if(cnt % COMPANY_INFO_COLUMN == 0) {
+				cnt = 0;
+				String[] data = new String[COMPANY_INFO_COLUMN];
+				for(int i = 0; i < data.length; i++)
+					data[i] = dataBuffer[i];
+				
+				companyList.add(data);
+			}
+		}
+	}
 /*	
 //	for TEST
 	public static void main(String[] args) throws IOException {
@@ -92,6 +171,11 @@ public class BasicSystemService implements SystemService{
 				      			  "C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSDAQ.csv");
 					
 			System.out.println(date.format(System.currentTimeMillis()));
+			break;
+		case 3: //kospi.csv kosdaq.csv 파일 생성 TEST
+				sys.updateMarket("KOSPI");
+				sys.updateMarket("KOSDAQ");
+				System.out.println("finished");
 			break;
 		}
 	}
