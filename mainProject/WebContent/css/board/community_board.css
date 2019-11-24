@@ -16,9 +16,43 @@
 	padding: 10px;
 }
 
+#my-button {
+	background: url( "../../images/my.png" ) no-repeat;
+	width: 61px;
+	height: 31px;
+	border: none;
+	cursor: pointer;
+	text-indent: -300px;
+	overflow: hidden;
+}
+
+#favo-button {
+	background: url( "../../images/favo.png" ) no-repeat;
+	width: 61px;
+	height: 31px;
+	border: none;
+	cursor: pointer;
+	text-indent: -300px;
+	overflow: hidden;
+}
+
+#del-button {
+	background: url( "../../images/trash.png" ) no-repeat;
+	border: none;
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+	text-indent: -300px;
+	overflow: hidden;
+}
+
+#board-title {
+	cursor: pointer;
+}
+
 #communityTable {
 	width: 100%;
-	text-align: left;
+	text-align: center;
 	font-size: 11pt;
 	border-collapse: collapse;
 }
@@ -27,14 +61,10 @@
 	height: 40px;
 }
 
-#communityTable td {
-	border-bottom: 1px solid #444444;
+#communityTable thead th {
+	border-bottom: 2px solid #444444;
 	border-bottom-color: #85888a;
 	padding: 10px;
-}
-
-#communityTable thead td {
-	border-bottom-width: 0px;
 }
 
 #communityTable>.content {
@@ -47,10 +77,34 @@ thead .title {
 	width: 30%;
 }
 
-a { text-decoration:none ; color:#000000}
+td.border_bottom {
+	border-bottom: 1px solid #444444;
+	border-bottom-color: #85888a;
+	padding: 10px;
+}
 
-#origin {
-	font-weight: bold;
-	  font-size: 11pt;
-	  text-align: right;
+a {
+	text-decoration: none;
+	color: #000000
+}
+
+.checkbox-wrap {
+	cursor: pointer;
+}
+
+.checkbox-wrap .check-icon {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	background: url(../../images/favo-off.png) left center no-repeat;
+	vertical-align: middle;
+	transition-duration: .3s;
+}
+
+.checkbox-wrap input[type=checkbox] {
+	display: none;
+}
+
+.checkbox-wrap input[type=checkbox]:checked+.check-icon {
+	background-image: url(../../images/favo-on.png);
 }

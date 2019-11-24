@@ -52,7 +52,7 @@ public class StockBoardController extends HttpServlet {
 		request.setAttribute("CommunityBoard", communityBoardService.getCommunityBoardList(page)); // 컨트롤러가 할 일은 데이터를 준비하는 일
 		
 		request.getRequestDispatcher("/card/board/stock_board.jsp").forward(request, response);
-		System.out.println("노티스 리스트 두겟");
+		System.out.println("스탁보드컨트롤러두겟");
 	}
 
 	@Override

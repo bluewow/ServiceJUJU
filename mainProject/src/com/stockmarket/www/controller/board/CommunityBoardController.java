@@ -13,14 +13,16 @@ import com.stockmarket.www.service.basic.BasicCommunityBoardService;
 
 @WebServlet("/card/board/community_board")
 public class CommunityBoardController extends HttpServlet {
+	
 	private CommunityBoardService communityBoardService;
+	
+	
 	public CommunityBoardController() {
 		communityBoardService = new BasicCommunityBoardService();
 	}
 
 	@Override
 	public void init() throws ServletException {
-		// TODO Auto-generated method stub
 		super.init();
 	}
 
@@ -29,7 +31,7 @@ public class CommunityBoardController extends HttpServlet {
 			throws ServletException, IOException {
 
 		int page = 1;
-		String field = "title";
+		String field = "TITLE";
 		String query= "";
 		String stockName= "";
 		
@@ -49,10 +51,11 @@ public class CommunityBoardController extends HttpServlet {
 		if(stockName_ !=null && !stockName_.equals(""))
 			stockName = stockName_;
 		
-		request.setAttribute("CommunityBoard", communityBoardService.getCommunityBoardList(page)); // 컨트롤러가 할 일은 데이터를 준비하는 일
+		request.setAttribute("CommunityBoard", communityBoardService.getCommunityBoardList(page,field,query,stockName)); // 컨트롤러가 할 일은 데이터를 준비하는 일
+//		request.setAttribute("replyCnt", communityBoardService.getCommunityBoardreplyCnt(field,query,stockName)); 
 		
 		request.getRequestDispatcher("/card/board/community_board.jsp").forward(request, response);
-		System.out.println("노티스 리스트 두겟");
+		System.out.println("커뮤보드컨트롤러 두겟");
 	}
 
 	@Override
