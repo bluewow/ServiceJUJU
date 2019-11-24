@@ -75,7 +75,7 @@ public class SystemController extends HttpServlet {
 	}
 
 	//for Test
-//	/*
+	/*
 	void timeTest(String mm, String ss) {
 		//오전 5시 하루에 한번 KOSPI.csv KOSDAQ.csv 파일을 갱신한다.
 
@@ -87,5 +87,5 @@ public class SystemController extends HttpServlet {
 	public static void main(String[] args) {
 	
 	}
-//	*/
+	*/
 }
