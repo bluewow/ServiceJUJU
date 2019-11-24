@@ -10,6 +10,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
+import com.stockmarket.www.entity.CurrentStockInfo;
 import com.stockmarket.www.service.SystemService;
 
 public class BasicSystemService implements SystemService{
@@ -23,8 +24,8 @@ public class BasicSystemService implements SystemService{
 		codeNums = data.getColumnData(STOCK_CODE_NUM, pathOfKospi);
 		getCurrentStockPrice(codeNums);
 		
-//		codeNums = data.getColumnData(STOCK_CODE_NUM, pathOfKosdaq);
-//		getCurrentStockPrice(codeNums);
+		codeNums = data.getColumnData(STOCK_CODE_NUM, pathOfKosdaq);
+		getCurrentStockPrice(codeNums);
 		
 		
 		//TODO
@@ -34,6 +35,8 @@ public class BasicSystemService implements SystemService{
 	
 	private void getCurrentStockPrice(List<String> codeNums) {
 		Document doc = null;
+		CurrentStockInfo curStockInfo = new CurrentStockInfo();
+		List<CurrentStockInfo> data = new ArrayList<>();
 		
 		for(String codeNum : codeNums) {
 			String url = "https://finance.naver.com/item/main.nhn?code=" + codeNum;
@@ -55,11 +58,10 @@ public class BasicSystemService implements SystemService{
 				return;
 			}
 			
-			//요청한 페이지에 대한 실패시 데이터를 저장하지 않는다.
-//			if(status.text().length() != 0)
-//			System.out.println(status.text()+"%");
+			//요청한 페이지에 대한 실패시 데이터를 저장하지 않는다. codeNum + 크롤링 데이타  + %
+			if(status.text().length() != 0) 
+				data.add(curStockInfo.parser(codeNum + " " + status.text()+"%"));
 		}
-			
 	}
 
 	//	for TEST
@@ -72,13 +74,19 @@ public class BasicSystemService implements SystemService{
 		System.out.println("숫자를 입력하시오");
 		testIndex = sc.nextInt();
 		
+		//TEST
+		//1 - 코스피 코스닥 현재가 갱신
+		//2 - refreshStockPrice 함수 처리 시간 체크
 		switch(testIndex) {
 		case 1:
 			//TEST - KOSPI, KOSDAQ 데이터 크롤링 및 callback
 			sys.refreshStockPrice("C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSPI.csv",
-					"KOSDQ.csv");
+							      "C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSDAQ.csv");
 			break;
 		
+		case 2:
+			//TODO
+			break;
 		}
 	}
 	*/
