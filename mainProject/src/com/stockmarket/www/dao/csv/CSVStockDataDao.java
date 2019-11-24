@@ -34,11 +34,11 @@ public class CSVStockDataDao {
 			file = new CSVReader(new FileReader(Path));
 			String[] data;
 	
-			int fileLine = 0;
+			boolean firstFileLine = true;
 			while ((data = file.readNext()) != null) {
 				//CSV 파일의 유효하지 않은 data인 첫번째 라인을  무시한다
-				if(fileLine == 0) {
-					fileLine++;
+				if(firstFileLine == true) {
+					firstFileLine = false;
 					continue;
 				}
 				
@@ -73,10 +73,12 @@ public class CSVStockDataDao {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("숫자를 입력하시오");
 		testIndex = sc.nextInt();
-		
+
+		//TEST
+		//1 - 코스피 종목코드 얻기
+		//2 - 유효하지 않은 Path
 		switch(testIndex) {
 		case 1:
-			//TEST - 코스피 종목코드 얻기
 			String Path = "C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSPI.csv";
 			test = data.getColumnData(1, Path);
 			
@@ -86,7 +88,6 @@ public class CSVStockDataDao {
 			break;
 		
 		case 2:
-			//TEST - 유효하지 않은 Path
 			test = data.getColumnData(1, "abcd");
 			
 			for(String str : test) 
