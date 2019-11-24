@@ -1,6 +1,7 @@
 package com.stockmarket.www.service.basic;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,21 +20,22 @@ public class BasicSystemService implements SystemService{
 	public void refreshStockPrice(String pathOfKospi, String pathOfKosdaq) {
 		CSVStockDataDao data = new CSVStockDataDao();
 		List<String> codeNums = new ArrayList<>();
+		List<CurrentStockInfo> kospi;
+		List<CurrentStockInfo> kosdaq;
 		
 		//CSV 를 참조하여 KOSPI, KOSDAQ 모든 종목에 대한 종목코드를 가져온다
 		codeNums = data.getColumnData(STOCK_CODE_NUM, pathOfKospi);
-		getCurrentStockPrice(codeNums);
+		kospi = getCurrentStockPrice(codeNums);
 		
 		codeNums = data.getColumnData(STOCK_CODE_NUM, pathOfKosdaq);
-		getCurrentStockPrice(codeNums);
-		
+		kosdaq = getCurrentStockPrice(codeNums);
 		
 		//TODO
 		//갱신된 데이터를 넘겨주는 작업
 		
 	}
 	
-	private void getCurrentStockPrice(List<String> codeNums) {
+	private List<CurrentStockInfo> getCurrentStockPrice(List<String> codeNums) {
 		Document doc = null;
 		CurrentStockInfo curStockInfo = new CurrentStockInfo();
 		List<CurrentStockInfo> data = new ArrayList<>();
@@ -55,13 +57,14 @@ public class BasicSystemService implements SystemService{
 			if(status == null) {
 				//TODO
 				//LOG 기록
-				return;
+				return null;
 			}
 			
 			//요청한 페이지에 대한 실패시 데이터를 저장하지 않는다. codeNum + 크롤링 데이타  + %
 			if(status.text().length() != 0) 
 				data.add(curStockInfo.parser(codeNum + " " + status.text()+"%"));
 		}
+		return data;
 	}
 
 	//	for TEST
@@ -74,9 +77,11 @@ public class BasicSystemService implements SystemService{
 		System.out.println("숫자를 입력하시오");
 		testIndex = sc.nextInt();
 		
-		//TEST
-		//1 - 코스피 코스닥 현재가 갱신
-		//2 - refreshStockPrice 함수 처리 시간 체크
+//		TEST
+//		1 - 코스피 코스닥 전종목 현재가 갱신
+//		2 - refreshStockPrice 함수 처리 시간 체크(100M 환경에서 약 7분 소요)
+//			2019-11-24 20:37:54
+//			2019-11-24 20:44:53
 		switch(testIndex) {
 		case 1:
 			//TEST - KOSPI, KOSDAQ 데이터 크롤링 및 callback
@@ -85,7 +90,13 @@ public class BasicSystemService implements SystemService{
 			break;
 		
 		case 2:
-			//TODO
+			SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			System.out.println(date.format(System.currentTimeMillis()));
+
+			sys.refreshStockPrice("C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSPI.csv",
+				      			  "C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSDAQ.csv");
+					
+			System.out.println(date.format(System.currentTimeMillis()));
 			break;
 		}
 	}
