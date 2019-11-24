@@ -3,20 +3,20 @@ package com.stockmarket.www.entity;
 import java.util.Date;
 
 public class CommunityBoardView extends CommunityBoard {
-	private int replyCount;
+	private int replyCnt;
 	
-	public int getCmtCount() {
-		return replyCount;
+	public int getReplyCnt() {
+		return replyCnt;
 	}
 
-	public void setCmtCount(int replyCount) {
-		this.replyCount = replyCount;
+	public void setReplyCnt(int replyCnt) {
+		this.replyCnt = replyCnt;
 	}
 
 	public CommunityBoardView(int id, String title, String writerId, Date regdate, int hit, String content,
-			String stockName, int replyCount) {
+			String stockName, int replyCnt) {
 		super(id, title, writerId, regdate, hit, content, stockName);
-		this.replyCount = replyCount;
+		this.replyCnt = replyCnt;
 	}
 	
 }

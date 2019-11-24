@@ -18,28 +18,27 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 		List<CommunityBoard> list = new ArrayList<>();
 
-		String sql = "SELECT * FROM (SELECT ROWNUM NUM, N.* FROM(SELECT * FROM (SELECT * FROM BOARD_VIEW WHERE STOCKNAME LIKE '%"
-				+ stockName + "%') WHERE " + field + " LIKE ? ORDER BY REGDATE DESC) N) WHERE NUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM (SELECT ROWNUM NUM, B.* FROM(SELECT * FROM (SELECT * FROM BOARD_VIEW WHERE STOCKNAME LIKE ?) WHERE "
+				+ field + " LIKE ? ORDER BY ID DESC) B) WHERE NUM BETWEEN ? AND ?";
 
 		String url = "jdbc:oracle:thin:@112.223.37.243:1521/xepdb1";
 
 		try {
-			
-			
 
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection(url, "ACORNGROUP1", "month100man");
 			PreparedStatement st = con.prepareStatement(sql);
 
-			st.setString(1, "%" + query + "%");
-			st.setInt(2, 1 + 10 * (page - 1));
-			st.setInt(3, 20 * page);
+			st.setString(1, "%" + stockName + "%");
+			st.setString(2, "%" + query + "%");
+			st.setInt(3, 1 + 10 * (page - 1));
+			st.setInt(4, 20 * page);
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
 				CommunityBoard communityBoard = new CommunityBoard(rs.getInt("ID"), rs.getString("TITLE"),
-						rs.getString("WRITER"), rs.getDate("REGDATE"), rs.getInt("HIT"), rs.getString("CONTENT"),
-						rs.getString("STOCKNAME"));
+						rs.getString("WRITER_ID"), rs.getDate("REGDATE"), rs.getInt("HIT"), rs.getString("STOCKNAME"),
+						rs.getInt("REPLY_CNT"));
 				list.add(communityBoard);
 			}
 
@@ -53,9 +52,38 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 	}
 
 	@Override
-	public int getCommunityBoardListCount(String field, String query) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getReplyCnt(String field, String query, String stockName) {
+
+		int count = 0;
+
+		String sql = "SELECT REPLY_CNT FROM BOARD_VIEW WHERE " + field + " LIKE ?";
+		String url = "jdbc:oracle:thin:@112.223.37.243:1521/xepdb1";
+
+		try {
+
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, "ACORN", "newlec");
+			PreparedStatement st = con.prepareStatement(sql);
+
+			/*
+			 * page number 1 : 1 ~ 5 2 : 6 ~ 10
+			 */
+			// 1 6 11 16 ... -> 1 + (page-1)5
+			// 5 10 15 20 ... -> page*5
+			st.setString(1, "%" + query + "%");
+
+			ResultSet rs = st.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt("COUNT");
+			}
+			st.close();
+			con.close();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
 	}
 
 }

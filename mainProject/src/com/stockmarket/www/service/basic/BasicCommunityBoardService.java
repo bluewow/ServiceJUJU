@@ -16,27 +16,19 @@ public class BasicCommunityBoardService implements CommunityBoardService {
 	}
 
 	@Override
+	public List<CommunityBoard> getCommunityBoardList() {
+		return getCommunityBoardList(1, "title", "", "");
+	}
+
+	@Override
 	public List<CommunityBoard> getCommunityBoardList(int page) {
-		// TODO Auto-generated method stub
-		return communityBoardDao.getCommunityBoardList(page, "title", "", "");
+		return getCommunityBoardList(page, "title", "", "");
 	}
 
 	@Override
-	public List<CommunityBoard> getStockBoardList(int page, String code) {
+	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockName) {
 		// TODO Auto-generated method stub
-		return communityBoardDao.getCommunityBoardList(page, "title", "", code);
-	}
-
-	@Override
-	public List<CommunityBoard> getSearchBoardList(int page, String field, String query) {
-		// TODO Auto-generated method stub
-		return communityBoardDao.getCommunityBoardList(page, field, query, "");
-	}
-
-	@Override
-	public List<CommunityBoard> getSearchStockBoardList(int page, String field, String query, String code) {
-		// communityBoardDao
-		return communityBoardDao.getCommunityBoardList(page, field, query, code);
+		return communityBoardDao.getCommunityBoardList(page, field, query, stockName);
 	}
 
 	@Override
@@ -86,6 +78,13 @@ public class BasicCommunityBoardService implements CommunityBoardService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public int getCommunityBoardreplyCnt(String field, String query, String stockName) {
+		// TODO Auto-generated method stub
+		return communityBoardDao.getReplyCnt(field,query,stockName);
+	}
+
 
 
 }
