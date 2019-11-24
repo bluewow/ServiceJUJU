@@ -25,14 +25,21 @@ import com.stockmarket.www.entity.Company;
  * */
 public class CSVStockDataDao {
 	public List<String> getColumnData(int column, String Path) {
-		CSVReader reader = null;
+		CSVReader file = null;
 		List<String> list = new ArrayList<>();
 
 		try {
-			reader = new CSVReader(new FileReader(Path));
+			file = new CSVReader(new FileReader(Path));
 			String[] data;
 	
-			while ((data = reader.readNext()) != null) {
+			int fileLine = 0;
+			while ((data = file.readNext()) != null) {
+				//CSV 파일의 유효하지 않은 data인 첫번째 라인을  무시한다
+				if(fileLine == 0) {
+					fileLine++;
+					continue;
+				}
+				
 				int index = 0;
 				for(String str : data) {
 					if(index == column) 
@@ -59,13 +66,14 @@ public class CSVStockDataDao {
 	public static void main(String[] args) {
 		CSVStockDataDao data = new CSVStockDataDao();
 		List<String> test = new ArrayList<>();
-		String Path = "C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSPI.csv";
+		
 
 		//TEST - 코스피 종목코드 얻기
-		test = data.getColumnData(1, Path);
-		
-		for(String str : test) 
-			System.out.println(str);
+//		String Path = "C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSPI.csv";
+//		test = data.getColumnData(1, Path);
+//		
+//		for(String str : test) 
+//			System.out.println(str);
 		
 		//TEST - 유효하지 않은 Path
 		test = data.getColumnData(1, "abcd");
