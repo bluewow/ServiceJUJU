@@ -4,10 +4,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import com.stockmarket.www.entity.Company;
+
 
 /*
  * Column 인덱스를 통해 특정 데이타를 가져온다
@@ -61,24 +63,37 @@ public class CSVStockDataDao {
 		return list;
 	}
 	
-//for Test
-	
+	//Unit Test
+	/*	
 	public static void main(String[] args) {
+		int testIndex = 0;
 		CSVStockDataDao data = new CSVStockDataDao();
 		List<String> test = new ArrayList<>();
 		
-
-		//TEST - 코스피 종목코드 얻기
-//		String Path = "C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSPI.csv";
-//		test = data.getColumnData(1, Path);
-//		
-//		for(String str : test) 
-//			System.out.println(str);
+		Scanner sc = new Scanner(System.in);
+		System.out.println("숫자를 입력하시오");
+		testIndex = sc.nextInt();
 		
-		//TEST - 유효하지 않은 Path
-		test = data.getColumnData(1, "abcd");
+		switch(testIndex) {
+		case 1:
+			//TEST - 코스피 종목코드 얻기
+			String Path = "C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSPI.csv";
+			test = data.getColumnData(1, Path);
+			
+			for(String str : test) 
+				System.out.println(str);
+			
+			break;
 		
-		for(String str : test) 
-			System.out.println(str);
+		case 2:
+			//TEST - 유효하지 않은 Path
+			test = data.getColumnData(1, "abcd");
+			
+			for(String str : test) 
+				System.out.println(str);
+			
+			break;
+		}
 	}
+	 */
 }

@@ -3,6 +3,7 @@ package com.stockmarket.www.service.basic;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -56,17 +57,29 @@ public class BasicSystemService implements SystemService{
 			
 			//요청한 페이지에 대한 실패시 데이터를 저장하지 않는다.
 //			if(status.text().length() != 0)
-//				System.out.println(status.text()+"%");
+//			System.out.println(status.text()+"%");
 		}
 			
 	}
 
 	//	for TEST
+	/*
 	public static void main(String[] args) throws IOException {
+		int testIndex = 0;
 		BasicSystemService sys = new BasicSystemService();
 		
-		//TEST - KOSPI, KOSDAQ 데이터 크롤링 및 callback
-		sys.refreshStockPrice("C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSPI.csv",
-								"KOSDQ.csv");
+		Scanner sc = new Scanner(System.in);
+		System.out.println("숫자를 입력하시오");
+		testIndex = sc.nextInt();
+		
+		switch(testIndex) {
+		case 1:
+			//TEST - KOSPI, KOSDAQ 데이터 크롤링 및 callback
+			sys.refreshStockPrice("C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSPI.csv",
+					"KOSDQ.csv");
+			break;
+		
+		}
 	}
+	*/
 }
