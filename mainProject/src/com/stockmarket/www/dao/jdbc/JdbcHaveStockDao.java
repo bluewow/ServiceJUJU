@@ -7,8 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import com.stockmarket.www.dao.HaveStockDao;
+import com.stockmarket.www.dao.csv.CSVStockDataDao;
 import com.stockmarket.www.entity.HaveStock;
 
 public class JdbcHaveStockDao implements HaveStockDao {
@@ -97,9 +99,9 @@ public class JdbcHaveStockDao implements HaveStockDao {
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url, "ACORN", "newlec");
+			Connection con = DriverManager.getConnection(url, "ACORNGROUP1","month100man");
 			PreparedStatement st = con.prepareStatement(sql);
-			st.setInt(1, haveStock.getQuantuty());
+			st.setInt(1, haveStock.getQuantity());
 			st.setInt(2, haveStock.getMemberId());
 			st.setString(3, haveStock.getStockId());
 
@@ -127,11 +129,11 @@ public class JdbcHaveStockDao implements HaveStockDao {
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url, "ACORN", "newlec");
+			Connection con = DriverManager.getConnection(url, "ACORNGROUP1","month100man");
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1, haveStock.getMemberId());
 			st.setString(2, haveStock.getStockId());
-			st.setInt(3, haveStock.getQuantuty());
+			st.setInt(3, haveStock.getQuantity());
 
 			result = st.executeUpdate();
 
@@ -157,7 +159,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url, "ACORN", "newlec");
+			Connection con = DriverManager.getConnection(url, "ACORNGROUP1","month100man");
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1, memberId);
 			st.setString(2, stockId);
@@ -175,5 +177,29 @@ public class JdbcHaveStockDao implements HaveStockDao {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	/*
+	 * =======================================================================
+	 * ============================= for Test ================================
+	 * =======================================================================
+	 */	
+	public static void main(String[] args) {
+		int testIndex = 0;
+		HaveStock haveStock = new HaveStock();
+		JdbcHaveStockDao stockDao = new JdbcHaveStockDao();
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("숫자를 입력하시오");
+		testIndex = sc.nextInt();
+
+		switch(testIndex) {
+		case 1:	//update 문 Test
+			haveStock.setMemberId(2);// 2 - dogseen@gamil.com
+			haveStock.setQuantity(500);	
+			haveStock.setStockId("095660"); 
+			stockDao.update(haveStock);
+			break;
+		}
 	}
 }

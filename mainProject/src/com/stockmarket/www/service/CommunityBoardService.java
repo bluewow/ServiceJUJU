@@ -8,10 +8,9 @@ public interface CommunityBoardService {
 	/*
 	 * 게시판 목록
 	 * */
+	List<CommunityBoard> getCommunityBoardList();
 	List<CommunityBoard> getCommunityBoardList(int page);
-	List<CommunityBoard> getStockBoardList(int page, String code);
-	List<CommunityBoard> getSearchBoardList(int page, String field, String query);
-	List<CommunityBoard> getSearchStockBoardList(int page, String field, String query, String stockName);
+	List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockName);
 	
 	/*
 	 * 게시판 내용
@@ -30,6 +29,8 @@ public interface CommunityBoardService {
 	 * */
 	int insertFavoriteCommunityBoard(CommunityBoard communityBoard);
 	int deleteFavoriteCommunityBoard(CommunityBoard communityBoard);
+	int getCommunityBoardreplyCnt(String field, String query, String stockName);
+
 
 }
 

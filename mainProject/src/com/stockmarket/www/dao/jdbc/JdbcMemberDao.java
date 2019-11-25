@@ -72,8 +72,8 @@ public class JdbcMemberDao implements MemberDao {
 	}
 
 	@Override
-	public Member getMember(String field, String query) {
-		String sql = "SELECT * FROM MEMBER WHERE " + field + "=?";
+	public Member getMemberByEmail(String query) {
+		String sql = "SELECT * FROM MEMBER WHERE EMAIL=?";
 		Member member = null;
 
 		try {
@@ -115,6 +115,7 @@ public class JdbcMemberDao implements MemberDao {
 			
 			result = statement.executeUpdate();
 			statement.close();
+			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

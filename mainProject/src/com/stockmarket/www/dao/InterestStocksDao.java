@@ -9,4 +9,6 @@ public interface InterestStocksDao {
 	List<InterestStocks> getInterestStockList();
 	
 	int delete(int id);
+	int insert(int id, String email,String stockname);
+	
 }

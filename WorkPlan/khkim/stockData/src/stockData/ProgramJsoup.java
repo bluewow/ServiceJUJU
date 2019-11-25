@@ -45,7 +45,8 @@ public class ProgramJsoup {
 		
 		//tr Tag 이하를 선택
 		Elements contents = doc.select("tr");
-		
+		System.out.println(doc.toString());
+
 		CSVWrite cw = new CSVWrite("KOSPI"); //KOSPI.csv or KOSDAQ.csv 를 생성한다
 		pj.makeCSV(contents, "th"); 
 		pj.makeCSV(contents, "td"); 

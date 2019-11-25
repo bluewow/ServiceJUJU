@@ -35,7 +35,6 @@
 
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -43,14 +42,14 @@
 <!--[if lt IE 9]>
    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
-   <style>
-   @media only screen and (min-width:800px) and (max-width: 1200px) {
+<style>
+@media only screen and (min-width:800px) and (max-width: 1200px) {
 	.row .column.column-33, .row .column.column-34 {
 		flex: none;
 		max-width: 49.3333%;
 	}
 }
-   </style>
+</style>
 
 
 </head>
@@ -60,7 +59,7 @@
 	<header class="navbar">
 		<h1 style="display: none;">Stock Market</h1>
 		<section class="row">
-			<h1 style="display: none;">hedaer</h1>
+			<h1 style="display: none;">header</h1>
 			<section class="column column-30 col-site-title">
 				<h1 style="display: none;">site title</h1>
 				<a href="#" class="site-title float-left">Stock Market</a>
@@ -73,13 +72,13 @@
 						</a>
 						<!-- TODO -->						
 						<form id="dummy" action="login" method="post">
-							<c:if test="${empty sessionScope.loginId }">
-								<input type="text" name="userId" placeholder="Input the Id">
-								<input type="password" name="pwd" placeholder="Input the Password">
+							<c:if test="${empty sessionScope.id }">
+								<input type="text" name="userEmail" placeholder="Enter the Email...">
+								<input type="password" name="pwd" placeholder="Enter the Password...">
 								<input type="submit" value="Dummy 로그인">
 							</c:if>
-							<c:if test="${not empty sessionScope.loginId }">
-								<input type="hidden" name="userId" value="null">
+							<c:if test="${not empty sessionScope.id }">
+								<input type="hidden" name="userEmail" value="null">
 								<input type="submit" value="Dummy 로그아웃">
 							</c:if>
 						</form>
@@ -258,8 +257,6 @@
 				</div>
 			</section>
 
-
-
 				<!-- 자산추이 카드 -->
 				<section class="column column-33">
 					<div class="card">
@@ -277,9 +274,10 @@
 										role="tabpanel" aria-labelledby="assetgraph-tab">
 										<iframe height="100%" src="./card/asset/myAsset" scrolling="no">
 										</iframe></div>
+
 								</div>
-							</section>
-						</div>
+							</div>
+						</section>
 					</div>
 				</div>
 			</section>
@@ -288,6 +286,8 @@
 			<!-- 세번째 로우 -->
 
 			<!-- 빈 공간 -->
+			<div class="column column-33"></div>
+
 			<div class="column column-33"></div>
 
 

@@ -1,6 +1,8 @@
 package com.stockmarket.www.service.basic;
 
+import com.stockmarket.www.dao.jdbc.JdbcHaveStockDao;
 import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
+import com.stockmarket.www.entity.HaveStock;
 import com.stockmarket.www.entity.Member;
 import com.stockmarket.www.service.TradeService;
 
@@ -32,24 +34,27 @@ public class BasicTradeService implements TradeService{
 	}
 
 	@Override
-	public int getQty(int id) {
-		//get Member
-		//수량 DB(member)
-		return 0;
+	public int getQty(int id, String stockId) {
+		HaveStock haveStock = new HaveStock();
+		JdbcHaveStockDao stockDao = new JdbcHaveStockDao();
+		
+		haveStock = stockDao.get(id, stockId);
+		
+		return haveStock.getQuantity();
 	}
 	
 	@Override
-	public boolean setQty(int id, int qty) {
-		//set Member
-		//set 수량 db
-		int memberQty = 0;
+	public boolean setQty(int id, String stockId, int qty) {
+		HaveStock haveStock = new HaveStock();
+		JdbcHaveStockDao stockDao = new JdbcHaveStockDao();
 		
-		memberQty = getQty(id);
-		if(memberQty + qty < 0) {
+		haveStock = stockDao.get(id, stockId);
+		if(haveStock.getQuantity() + qty < 0) {
 			System.out.println("마이너스 수량");
 			return false;
 		} else {
-			//set 수량 db
+			haveStock.setQuantity(haveStock.getQuantity() + qty);
+			stockDao.update(haveStock);
 			return true;
 		}
 	}

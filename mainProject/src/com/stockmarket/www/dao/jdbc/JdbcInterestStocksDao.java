@@ -4,12 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 import com.stockmarket.www.dao.InterestStocksDao;
 import com.stockmarket.www.entity.InterestStocks;
-import com.stockmarket.www.entity.Member;
 
 public class JdbcInterestStocksDao implements InterestStocksDao {
 
@@ -33,8 +32,6 @@ public class JdbcInterestStocksDao implements InterestStocksDao {
 				stocklist.add(interesctStocks);
 			}
 			
-			
-			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,8 +47,14 @@ public class JdbcInterestStocksDao implements InterestStocksDao {
 	@Override
 	public int delete(int id) {
 
-		
-		
+
+		return 0;
+	}
+
+
+	@Override
+	public int insert(int id, String email, String stockname) {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 

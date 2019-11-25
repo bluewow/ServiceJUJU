@@ -40,5 +40,6 @@ public class Program {
 		}
 
 		reader.close();
+		
 	}
 }

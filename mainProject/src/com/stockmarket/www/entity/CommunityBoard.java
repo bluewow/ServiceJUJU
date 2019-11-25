@@ -10,25 +10,31 @@ public class CommunityBoard {
 	private int hit;
 	private String content;
 	private String stockName;
+	private int replyCnt;
 
 	// select
 
 	public CommunityBoard() {
 	}
-
-	public CommunityBoard(int id, String title, String writerId, Date regdate, int hit, String content,
-			String stockcode) {
+	
+	public CommunityBoard(int id, String title, String writerId, Date regdate, int hit, String stockName,
+			int replyCnt) {
 		this.id = id;
 		this.title = title;
 		this.writerId = writerId;
 		this.regdate = regdate;
 		this.hit = hit;
 		this.content = content;
-		this.stockName = stockcode;
+		this.stockName = stockName;
+		this.replyCnt = replyCnt;
 	}
 
-	// insert, update
-	public CommunityBoard(String title, String writerId, Date regdate, int hit, String content, String stockName) {
+// insert, update
+	
+	public CommunityBoard(int id, String title, String writerId, Date regdate, int hit, String content,
+			String stockName) {
+		super();
+		this.id = id;
 		this.title = title;
 		this.writerId = writerId;
 		this.regdate = regdate;
@@ -36,6 +42,8 @@ public class CommunityBoard {
 		this.content = content;
 		this.stockName = stockName;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -93,10 +101,18 @@ public class CommunityBoard {
 		this.stockName = stockName;
 	}
 
+	public int getReplyCnt() {
+		return replyCnt;
+	}
+
+	public void setReplyCnt(int replyCnt) {
+		this.replyCnt = replyCnt;
+	}
+
 	@Override
 	public String toString() {
 		return "CommunityBoard [id=" + id + ", title=" + title + ", writerId=" + writerId + ", regdate=" + regdate
-				+ ", hit=" + hit + ", content=" + content + ", stockName=" + stockName + "]";
+				+ ", hit=" + hit + ", content=" + content + ", stockName=" + stockName + ", replyCnt=" + replyCnt + "]";
 	}
 
 }

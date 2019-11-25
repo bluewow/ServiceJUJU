@@ -23,43 +23,51 @@
 
 <link href="../../css/board/community_board.css" type="text/css"
 	rel="stylesheet">
-
-
+<script src="../../js/board/community_board.js"></script>
 </head>
 <body>
-	<div id="communityScroll">
-		<div>
-			<input type="button" name="my_board_view" value="My"> <input
-				type="button" name="favo_board_view" value="관심">
-		</div>
+	<section id="communityScroll">
 		<br>
-		<table border=1>
-			<thead align="center">
+		<nav id="my-menu">
+			<input type="button" id="my-button" name="my_board_view" value="My">
+			<input type="button" id="favo-button" name="favo_board_view"
+				value="관심">
+		</nav>
+
+		<table id="communityTable">
+			<thead class="content">
 				<tr>
 					<th></th>
-					<th width="200">제목</th>
+					<th>제목</th>
 					<th>작성일</th>
 					<th>조회</th>
 					<th></th>
 				</tr>
 			</thead>
-			<tbody align="center">
-				<c:forEach var="n" items="${CommunityBoard}">
+	  
+			<tbody>
+				  <c:forEach var="n" items="${CommunityBoard}">
 					<tr>
-						<td>${n.id}</td>
-						<td rowspan="2">[${n.stockName}] ${n.title}</td>
-						<td rowspan="1"><fmt:formatDate value="${n.regdate}"
-								pattern="yy/MM/dd hh:mm" /></td>
-						<td>${n.hit}</td>
-						<td rowspan="2"><input type="button" name="Favo" value="Favo"></td>
+							<td>${n.id}</td>
+							<td rowspan="2" class="border_bottom" id="board-title">[${n.stockName}]
+								${n.title} (${n.replyCnt})</td>
+							<td rowspan="1"><fmt:formatDate value="${n.regdate}"
+									pattern="yy/MM/dd" /></td>
+							<td>${n.hit}</td>
+                        
+							<td rowspan="2" class="border_bottom">
+							<label class="checkbox-wrap">
+								<input type="checkbox" name="" value= "" id="favo-check"><i class="check-icon"></i></label></td>             
 					</tr>
 					<tr>
-						<td><input type="button" name="del" value="del"></td>
-						<td colspan="2">${n.writerId}</td>
+						<td class="border_bottom"><input type="button"
+							id="del-button" name="del" value="del"></td>
+						<td colspan="2" class="border_bottom">${n.writerId}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
+
 		</table>
-	</div>
+	</section>
 </body>
 </html>

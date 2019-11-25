@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.stockmarket.www.service.TradeService;
 import com.stockmarket.www.service.basic.BasicTradeService;
@@ -24,6 +25,9 @@ public class TradeController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		int memberId = (int)session.getAttribute("id");
+		
 		//종목정보 from 검색페이지
 //		request.setAttribute("companyName", request.getAttribute("companyName"));
 		request.setAttribute("companyName", "네오위즈");
@@ -34,23 +38,21 @@ public class TradeController extends HttpServlet{
 		//일봉, 주봉, 월봉
 		dateButtonStatus(request);
 		
-		//자산상황 from 회원테이블(DB)
-//		request.setAttribute("assets", service.getAssets(id));
-		request.setAttribute("myAssets", "50,000");
+		//자산상황 
+		request.setAttribute("myAssets", service.getAssets(memberId));
 		
 		//매수-매도
-		tradeProcess(request);
+		//TODO 매수 매도시 자산상황 변동 
+		tradeProcess(memberId, request);
 
-
+		//TODO fix stockId
 		//보유수량
-//		request.setAttribute("assets", service.getQty());
-		request.setAttribute("myQuantity", "0");
+		request.setAttribute("myQuantity", service.getQty(memberId, "095660"));
 		
 		request.getRequestDispatcher("trading.jsp").forward(request, response);
 	}
 
-	private boolean tradeProcess(HttpServletRequest request) {
-		int dummy = 0;
+	private boolean tradeProcess(int memberId, HttpServletRequest request) {
 		String trade = request.getParameter("trade");
 		
 		if(trade != null) {
@@ -61,12 +63,12 @@ public class TradeController extends HttpServlet{
 			case "매       수":
 				qty = request.getParameter("PurchaseQty");
 				if(qty != null && qty != "") 
-					service.setQty(dummy, Integer.parseInt(qty));
+					service.setQty(memberId, "095660", Integer.parseInt(qty));
 				break;
 			case "매       도":
 				qty = request.getParameter("SoldQty");
 				if(qty != null && qty != "")
-					service.setQty(dummy, -Integer.parseInt(qty));
+					service.setQty(memberId, "095660", -Integer.parseInt(qty));
 				break;
 			default:
 				break;

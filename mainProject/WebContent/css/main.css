@@ -247,7 +247,12 @@ body {
       
       
 #dummy {
+	position: absolute;
+	right: 10px;
+	
 	width: 50%;
 	height: 30%;
 	display: flex;
+	justify-content: flex-end;
 }
+

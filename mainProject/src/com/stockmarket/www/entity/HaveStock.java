@@ -4,7 +4,7 @@ public class HaveStock {
 	
 	private int memberId;
 	private String stockId;
-	private int quantuty;
+	private int quantity;
 	
 	public HaveStock() {
 		// TODO Auto-generated constructor stub
@@ -13,7 +13,7 @@ public class HaveStock {
 	public HaveStock(int memberId, String stockId, int quantuty) {
 		this.memberId = memberId;
 		this.stockId = stockId;
-		this.quantuty = quantuty;
+		this.quantity = quantuty;
 	}
 
 	public int getMemberId() {
@@ -28,16 +28,16 @@ public class HaveStock {
 	public void setStockId(String stockId) {
 		this.stockId = stockId;
 	}
-	public int getQuantuty() {
-		return quantuty;
+	public int getQuantity() {
+		return quantity;
 	}
-	public void setQuantuty(int quantuty) {
-		this.quantuty = quantuty;
+	public void setQuantity(int quantuty) {
+		this.quantity = quantuty;
 	}
 	
 	@Override
 	public String toString() {
-		return "HaveStock [memberId=" + memberId + ", stockId=" + stockId + ", quantuty=" + quantuty + "]";
+		return "HaveStock [memberId=" + memberId + ", stockId=" + stockId + ", quantuty=" + quantity + "]";
 	}
 	
 }
