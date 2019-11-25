@@ -44,9 +44,9 @@ public class InterestStocksController extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		int userid = (int)session.getAttribute("id");
-
+//        String stockName = request.getParameter("stockname");
+		
 		request.setAttribute("list", interestViewInterface.getInterestViewList(userid));
 		request.getRequestDispatcher("interestlist.jsp").forward(request, response);
 	}
-
 }

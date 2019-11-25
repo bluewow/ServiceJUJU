@@ -23,11 +23,12 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
    </tr>
    </thead>
    <tbody>
+   
     <c:forEach var="n" items="${list}">
        <tr>
-         <td style="text-align:center">${n.stockName}</td>
+         <td style="text-align:center">${n.stockname}</td>
          <td class="up">24,896    <span class="fa fa-caret-up"></span>
-         <span>1.46%</span></td>
+         <span>1.46%</span></td>         
          <td style="text-align:center"><a><span class="fa fa-trash-o"></span></a></td>
       </tr>
     </c:forEach>  
