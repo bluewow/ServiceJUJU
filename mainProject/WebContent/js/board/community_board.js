@@ -2,10 +2,11 @@ window.addEventListener("load", function () {
     var section = document.querySelector("#communityScroll");
     var myButton = section.querySelector("#my-button");
     var favoButton = section.querySelector("#favo-button");
-    var delButton = section.querySelector("#del-button");
+    var delButton = section.querySelectorAll("#del-button");
     var favoCheck = section.querySelector("#favo-check");
     var boardTitle = section.querySelector("#board-title");
     
+    var arr = [];
 
     myButton.onclick = function () {
     	alert("my-button")
