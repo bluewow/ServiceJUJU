@@ -122,7 +122,7 @@ public class BasicSystemService implements SystemService{
 		write(contents, "td"); 
 		try {
 			// KOSPI.csv or KOSDAQ.csv 를 생성한다
-			data.makeCSV(market, companyList);
+			data.makeCSV("WebContent/fileUpload/"+market, companyList);
 		} catch (IOException e) {
 			//TODO
 			//LOG 기록
@@ -146,8 +146,14 @@ public class BasicSystemService implements SystemService{
 			}
 		}
 	}
-/*	
-//	for TEST
+	
+	
+	
+/*
+ * =======================================================================
+ * ============================= for Test ================================
+ * =======================================================================
+ */
 	public static void main(String[] args) throws IOException {
 		int testIndex = 0;
 		BasicSystemService sys = new BasicSystemService();
@@ -179,5 +185,4 @@ public class BasicSystemService implements SystemService{
 			break;
 		}
 	}
-*/	
 }

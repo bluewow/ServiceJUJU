@@ -19,14 +19,14 @@ public class JdbcInterestViewDao implements InterestViewDao {
 	
 	@Override
 	public List<InterestView> getInterestStockList(int id) {
-		String sql = "SELECT * FROM INTEREST_STOCK_VIEW WHERE ID ?";
+		String sql = "SELECT * FROM INTEREST_STOCK_VIEW WHERE ID = ?";
 		
 		List<InterestView> interestlist = new ArrayList<>();
 		
 		try {
 			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
 			st.setInt(1, id);
-			ResultSet rs =st.executeQuery(sql);
+			ResultSet rs =st.executeQuery();
 			
 			while(rs.next()) {
 				String stockname = rs.getString("STOCKNAME");
@@ -35,7 +35,8 @@ public class JdbcInterestViewDao implements InterestViewDao {
 				interestlist.add(interestview);
 				
 			}
-			
+			rs.close();
+			st.close();	
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -46,9 +47,4 @@ public class JdbcInterestViewDao implements InterestViewDao {
 		}
 		return interestlist;
 	}
-
-
-
-
-	
 }
