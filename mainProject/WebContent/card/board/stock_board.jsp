@@ -23,8 +23,7 @@
 
 <link href="../../css/board/stock_board.css" type="text/css"
 	rel="stylesheet">
-
-
+<script src="../../js/board/community_board.js"></script>
 </head>
 <body>
 	<div id="stockScroll">
@@ -39,67 +38,46 @@
 
 			<div style="color: black; font-weight: bold; font-size: 20px">
 				기현 알고리즘</div>
-			<div>
-				<input type="button" name="my_board_view" value="My"> <input
-					type="button" name="favo_board_view" value="관심"> <input
-					type="button" name="reg_board" value="글쓰기">
-			</div>
 			<br>
-			<table border=1>
-				<thead align="center">
+			<nav id="my-menu">
+				<input type="button" id="my-button" name="my_board_view" value="My">
+				<input type="button" id="favo-button" name="favo_board_view" value="관심">
+				<input type="button" id="reg-button" name="reg_board" value="글쓰기">
+			</nav>
+					
+
+		<table id="stockTable">
+			<thead class="content">
+				<tr>
+					<th></th>
+					<th>제목</th>
+					<th>작성일</th>
+					<th>조회</th>
+					<th></th>
+				</tr>
+			</thead>
+	  
+			<tbody>
+				  <c:forEach var="n" items="${CommunityBoard}">
 					<tr>
-						<th></th>
-						<th width="200">제목</th>
-						<th>작성일</th>
-						<th>조회</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody align="center">
-					<c:forEach var="n" items="${CommunityBoard}">
-						<tr>
-							<td rowspan="2">${n.id}</td>
-							<td rowspan="2">[${n.stockName}] ${n.title}</td>
+							<td>${n.id}</td>
+							<td rowspan="2" class="border_bottom" id="board-title">[${n.stockName}]
+								${n.title} (${n.replyCnt})</td>
 							<td rowspan="1"><fmt:formatDate value="${n.regdate}"
-									pattern="yy/MM/dd hh:mm" /></td>
+									pattern="yy/MM/dd" /></td>
 							<td>${n.hit}</td>
-							<td rowspan="2"><input type="button" name="Favo"
-								value="Favo"></td>
-						</tr>
-						<tr>
-							<td colspan="2">${n.writerId}</td>
-						</tr>
-						<tr>
-							<td colspan="5">
-								<div align="left">${n.content}</div>
-								<div align="right">
-									<input type="button" name="modify" value="수정">
-								</div>
-								<div align="left">댓글목록</div>
-								<hr>
-								<div>
-									<textarea class="message_area" style="width: 80%;"
-										placeholder="주제와 무관한 댓글이나 악플은 경고 조치 없이 삭제되며 징계 대상이 될 수 있습니다."></textarea>
-									<input type="button" name="reg" value="등록">
-								</div>
-								<div style="text-align: left">
-									갓광동 2019-10-31 10:30 <input type="button" name="modify_reply"
-										value="댓글수정"> <input type="button" name="delete_reply"
-										value="댓글삭제">
-									<div>잘 확인했습니다.</div>
-								</div>
-								<hr>
-								<div style="text-align: left">
-									디비신명훈 2019-10-31 10:28 <input type="button" name="modify_reply"
-										value="댓글수정"> <input type="button" name="delete_reply"
-										value="댓글삭제">
-									<div>넵! ㅎㅎ</div>
-								</div>
-								<hr>
-							</td>
-						</tr>
-					</c:forEach>
-				</tbody>
+                        
+							<td rowspan="2" class="border_bottom">
+							<label class="checkbox-wrap">
+								<input type="checkbox" name="" value= "" id="favo-check"><i class="check-icon"></i></label></td>             
+					</tr>
+					<tr>
+						<td class="border_bottom"><input type="button"
+							id="del-button" name="del" value="del"></td>
+						<td colspan="2" class="border_bottom">${n.writerId}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
 			</table>
 		</c:if>
 	</div>
