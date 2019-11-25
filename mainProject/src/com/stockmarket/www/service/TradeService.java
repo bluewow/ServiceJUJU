@@ -28,14 +28,14 @@ public interface TradeService {
 	 * TODO
 	 * DB -> 보유종목 테이블을 이용
 	 */
-	int getQty(int id);
+	int getQty(int id, String stockId);
 
 	/*
 	 * 종목수량을 변경한다
 	 * TODO
 	 * DB -> 보유종목 테이블을 이용
 	 */
-	boolean setQty(int id, int qty);
+	boolean setQty(int id, String stockId, int qty);
 	
 	/*
 	 * 일봉/주봉/월봉 데이터를 가져온다
