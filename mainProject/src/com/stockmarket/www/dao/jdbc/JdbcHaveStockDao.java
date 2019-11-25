@@ -15,19 +15,18 @@ import com.stockmarket.www.entity.HaveStock;
 
 public class JdbcHaveStockDao implements HaveStockDao {
 
+	
+	
 	@Override
 	public List<HaveStock> getList(int id) {
 		
 		List<HaveStock> stockList = new ArrayList<>();
 		
 		String sql = "SELECT * FROM HAVE_STOCK WHERE MEMBER_ID = ?";		
-		String url = "jdbc:oracle:thin:@112.223.37.243:1521/xepdb1";
 		
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url,"ACORNGROUP1","month100man");
-			PreparedStatement st = con.prepareStatement(sql);
-			st.setInt(1, id);;
+			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
+			st.setInt(1, id);
 			ResultSet rs = st.executeQuery();
 			
 			while (rs.next()) {
@@ -40,8 +39,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 			}
 			
 			rs.close();
-			st.close();
-			con.close();		
+			st.close();	
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -59,12 +57,10 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		HaveStock haveStock = null;
 		
 		String sql = "SELECT * FROM HAVE_STOCK WHERE MEMBER_ID = ? AND STOCK_ID = ?";		
-		String url = "jdbc:oracle:thin:@112.223.37.243:1521/xepdb1";
 		
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url,"ACORNGROUP1","month100man");
-			PreparedStatement st = con.prepareStatement(sql);
+
+			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
 			st.setInt(1, memberId);
 			st.setString(2, stockId);
 			ResultSet rs = st.executeQuery();
@@ -76,9 +72,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 							,rs.getInt("QUANTITY"));
 			}
 			rs.close();
-			st.close();
-			con.close();
-			
+			st.close();			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -95,12 +89,9 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		int result = 0;
 
 		String sql = "UPDATE HAVE_STOCK SET QUANTITY=? WHERE MEMBER_ID = ? AND STOCK_ID = ?";
-		String url = "jdbc:oracle:thin:@112.223.37.243:1521/xepdb1";
 
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url, "ACORNGROUP1","month100man");
-			PreparedStatement st = con.prepareStatement(sql);
+			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
 			st.setInt(1, haveStock.getQuantity());
 			st.setInt(2, haveStock.getMemberId());
 			st.setString(3, haveStock.getStockId());
@@ -108,7 +99,6 @@ public class JdbcHaveStockDao implements HaveStockDao {
 			result = st.executeUpdate();
 
 			st.close();
-			con.close();
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -125,12 +115,9 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		int result = 0;
 
 		String sql = "INSERT INTO HAVE_STOCK(MEMBER_ID, STOCK_ID, QUANTITY) VALUES (?,?,?)";
-		String url = "jdbc:oracle:thin:@112.223.37.243:1521/xepdb1";
 
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url, "ACORNGROUP1","month100man");
-			PreparedStatement st = con.prepareStatement(sql);
+			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
 			st.setInt(1, haveStock.getMemberId());
 			st.setString(2, haveStock.getStockId());
 			st.setInt(3, haveStock.getQuantity());
@@ -138,8 +125,6 @@ public class JdbcHaveStockDao implements HaveStockDao {
 			result = st.executeUpdate();
 
 			st.close();
-			con.close();
-
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -155,20 +140,15 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		int result = 0;
 
 		String sql = "DELETE HAVE_STOCK WHERE MEMBER_ID = ? AND STOCK_ID = ?";
-		String url = "jdbc:oracle:thin:@112.223.37.243:1521/xepdb1";
 
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url, "ACORNGROUP1","month100man");
-			PreparedStatement st = con.prepareStatement(sql);
+			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
 			st.setInt(1, memberId);
 			st.setString(2, stockId);
 
 			result = st.executeUpdate();
 
 			st.close();
-			con.close();
-
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -184,22 +164,22 @@ public class JdbcHaveStockDao implements HaveStockDao {
 	 * ============================= for Test ================================
 	 * =======================================================================
 	 */	
-	public static void main(String[] args) {
-		int testIndex = 0;
-		HaveStock haveStock = new HaveStock();
-		JdbcHaveStockDao stockDao = new JdbcHaveStockDao();
-		
-		Scanner sc = new Scanner(System.in);
-		System.out.println("숫자를 입력하시오");
-		testIndex = sc.nextInt();
-
-		switch(testIndex) {
-		case 1:	//update 문 Test
-			haveStock.setMemberId(2);// 2 - dogseen@gamil.com
-			haveStock.setQuantity(500);	
-			haveStock.setStockId("095660"); 
-			stockDao.update(haveStock);
-			break;
-		}
-	}
+//	public static void main(String[] args) {
+//		int testIndex = 0;
+//		HaveStock haveStock = new HaveStock();
+//		JdbcHaveStockDao stockDao = new JdbcHaveStockDao();
+//		
+//		Scanner sc = new Scanner(System.in);
+//		System.out.println("숫자를 입력하시오");
+//		testIndex = sc.nextInt();
+//
+//		switch(testIndex) {
+//		case 1:	//update 문 Test
+//			haveStock.setMemberId(2);// 2 - dogseen@gamil.com
+//			haveStock.setQuantity(500);	
+//			haveStock.setStockId("095660"); 
+//			stockDao.update(haveStock);
+//			break;
+//		}
+//	}
 }
