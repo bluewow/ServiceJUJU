@@ -146,8 +146,14 @@ public class BasicSystemService implements SystemService{
 			}
 		}
 	}
-/*	
-//	for TEST
+	
+	
+	
+/*
+ * =======================================================================
+ * ============================= for Test ================================
+ * =======================================================================
+ */
 	public static void main(String[] args) throws IOException {
 		int testIndex = 0;
 		BasicSystemService sys = new BasicSystemService();
@@ -179,5 +185,4 @@ public class BasicSystemService implements SystemService{
 			break;
 		}
 	}
-*/	
 }

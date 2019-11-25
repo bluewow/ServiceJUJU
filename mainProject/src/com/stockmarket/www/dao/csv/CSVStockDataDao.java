@@ -83,8 +83,11 @@ public class CSVStockDataDao {
 		cw.close();
 	}
 	
-/*	
-//Unit Test
+/*
+ * =======================================================================
+ * ============================= for Test ================================
+ * =======================================================================
+ */
 	public static void main(String[] args) {
 		int testIndex = 0;
 		CSVStockDataDao data = new CSVStockDataDao();
@@ -122,5 +125,4 @@ public class CSVStockDataDao {
 			break;
 		}
 	}
-*/	
 }

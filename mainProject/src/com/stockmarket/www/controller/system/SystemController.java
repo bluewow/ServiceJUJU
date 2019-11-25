@@ -87,8 +87,11 @@ public class SystemController extends HttpServlet {
 		Thread.sleep(1000 * 60 * 10);
 	}
 
-	/*
-// for Test
+/*
+ * =======================================================================
+ * ============================= for Test ================================
+ * =======================================================================
+ */
 	void timeTest(String mm) {
 		String curHour = mm;
 		
@@ -127,5 +130,4 @@ public class SystemController extends HttpServlet {
 		}
 		
 	}
-	*/
 }
