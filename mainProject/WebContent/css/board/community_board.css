@@ -37,10 +37,10 @@
 }
 
 #del-button {
-	background: url( "../../images/trash.png" ) no-repeat;
+	background: url( "../../images/trashCan.png" ) no-repeat;
 	border: none;
-	width: 25px;
-	height: 25px;
+	width: 22px;
+	height: 22px;
 	cursor: pointer;
 	text-indent: -300px;
 	overflow: hidden;
@@ -96,7 +96,7 @@ a {
 	display: inline-block;
 	width: 25px;
 	height: 25px;
-	background: url(../../images/favo-off.png) left center no-repeat;
+	background: url(../../images/interest_no.png) left center no-repeat;
 	vertical-align: middle;
 	transition-duration: .3s;
 }
@@ -106,5 +106,5 @@ a {
 }
 
 .checkbox-wrap input[type=checkbox]:checked+.check-icon {
-	background-image: url(../../images/favo-on.png);
+	background-image: url(../../images/interest_yes.png);
 }
