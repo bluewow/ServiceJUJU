@@ -122,7 +122,7 @@ public class BasicSystemService implements SystemService{
 		write(contents, "td"); 
 		try {
 			// KOSPI.csv or KOSDAQ.csv 를 생성한다
-			data.makeCSV(market, companyList);
+			data.makeCSV("WebContent/fileUpload/"+market, companyList);
 		} catch (IOException e) {
 			//TODO
 			//LOG 기록
