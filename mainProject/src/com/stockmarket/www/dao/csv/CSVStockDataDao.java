@@ -35,6 +35,9 @@ import com.stockmarket.www.entity.Company;
  * Path : 해당 CSV 파일의 realPath 를 요구한다
  * */
 public class CSVStockDataDao {
+	
+	private Company company;
+	
 	public List<String> getColumnData(int column, String Path) {
 		CSVReader file = null;
 		List<String> list = new ArrayList<>();
@@ -83,6 +86,88 @@ public class CSVStockDataDao {
 		cw.close();
 	}
 	
+//	public Company searchCompany(String search, String csvFilePath) {
+//
+//		CSVReader reader = null;
+////		 String companyname = "";
+////		 String stockcode = "";
+////		 String homepageAddress="";
+//
+//		//search = "대한항공";
+//		// String[] searchResult = new String[3];
+//
+//		try {
+//			reader = new CSVReader(new FileReader(csvFilePath));
+//			String[] line;
+//
+//			while ((line = reader.readNext()) != null) {
+//				if (line[0].equals(search)) {
+//					
+//					company = new Company(line[0], line[2], line[7]);
+//					
+////					System.out.println("회사명 : " + line[0] + ", 종목코드 : " + line[2] + ", 웹사이트 : " +
+////					line[7] );
+//				}
+//			}
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//
+//		} catch (CsvValidationException e) {
+//
+//			e.printStackTrace();
+//		}
+//
+//		return company;
+//	}
+
+	public Company searchCompany (String search, String csvFilePath) {
+		CSVReader reader = null;
+//		 String companyname = "";
+//		 String stockcode = "";
+//		 String homepageAddress="";
+
+		//search = "대한항공";
+		// String[] searchResult = new String[3];
+
+		try {
+			reader = new CSVReader(new FileReader(csvFilePath));
+			String[] line;
+
+			while ((line = reader.readNext()) != null) {
+				if (line[0].equals(search)) {
+					
+					company = new Company(line[0], line[2], line[7]);
+					
+//					System.out.println("회사명 : " + line[0] + ", 종목코드 : " + line[2] + ", 웹사이트 : " +
+//					line[7] );
+				}
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+
+		} catch (CsvValidationException e) {
+
+			e.printStackTrace();
+		}
+
+		return company;
+	}
+
+}
+
+	
+
+//	public Company searchCompany(String search, String csvFilePath) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//	
+	
+	
+	
+	
 /*	
 //Unit Test
 	public static void main(String[] args) {
@@ -123,4 +208,4 @@ public class CSVStockDataDao {
 		}
 	}
 */	
-}
+

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /* 요소(element) 초기화 && 제목요소*/ 
-h1{
+h1, div, ul, ol, li{
 	margin:0;
     padding:0;
     font-size:inherit;   
@@ -31,6 +31,8 @@ ol, ul {
 #recommendKeyword{
 	display: inline-block;
 	text-align: center;
+	width: 500px;
+	
 	
    
 }
@@ -38,6 +40,9 @@ ol, ul {
 #recommendKeyword>ul{
 	padding-left: 0px;
 }
+
+
+
 
  #recommendKeyword_fixed{
      position: absolute;
@@ -53,6 +58,4 @@ ol, ul {
         display: flex;
         padding-left: 15px;
         font-size:15px;
-       
-        
     }

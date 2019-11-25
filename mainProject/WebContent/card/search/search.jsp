@@ -28,7 +28,7 @@
 	<section id="recommendKeyword">
 		<!-- <h1>추천 검색어</h1> -->
 		<ul>
-			<li id="recommendKeyword_fixed">추천검색어</li>
+			<li id="recommendKeyword_fixed">추천검색어 </li>
 			<li>광동 사운드</li>
 			<li>기현 알고리즘</li>
 			<li>나람 금융</li>
