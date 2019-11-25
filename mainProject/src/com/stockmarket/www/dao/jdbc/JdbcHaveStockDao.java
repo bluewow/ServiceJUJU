@@ -99,7 +99,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection(url, "ACORN", "newlec");
 			PreparedStatement st = con.prepareStatement(sql);
-			st.setInt(1, haveStock.getQuantuty());
+			st.setInt(1, haveStock.getQuantity());
 			st.setInt(2, haveStock.getMemberId());
 			st.setString(3, haveStock.getStockId());
 
@@ -131,7 +131,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1, haveStock.getMemberId());
 			st.setString(2, haveStock.getStockId());
-			st.setInt(3, haveStock.getQuantuty());
+			st.setInt(3, haveStock.getQuantity());
 
 			result = st.executeUpdate();
 
@@ -175,5 +175,15 @@ public class JdbcHaveStockDao implements HaveStockDao {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	/*
+	 * =======================================================================
+	 * ============================= for Test ================================
+	 * =======================================================================
+	 */	
+	public static void main(String[] args) {
+		JdbcHaveStockDao stockDao = new JdbcHaveStockDao();
+		
 	}
 }
