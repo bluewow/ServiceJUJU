@@ -1,7 +1,5 @@
 package com.stockmarket.www.entity;
 
-import java.util.Date;
-
 public class Member {
 	private int id;
 	private String email;
@@ -29,8 +27,6 @@ public class Member {
 		this.nickName = nickName;
 		this.vMoney = vMoney;
 	}
-
-
 
 	// getter and setter
 	public int getId() {

@@ -9,5 +9,6 @@ public interface MemberDao {
 	
 	Member getMember(int id);
 	Member getMemberByEmail(String query);	
+	int getMemberRank(int id);
 	int updateMember(int id, int vmoney);
 }

@@ -103,6 +103,31 @@ public class JdbcMemberDao implements MemberDao {
 	}
 	
 	@Override
+	public int getMemberRank(int id) {
+		int rank = 0;
+		String sql = "SELECT * FROM (\r\n" + 
+				"    SELECT DENSE_RANK() OVER (ORDER BY VMONEY DESC) AS \"RANK\", MEMBER.* FROM MEMBER\r\n" + 
+				"    ) \r\n" + 
+				"WHERE id = " + id;
+		
+		try {
+			Statement statement = JdbcDaoContext.getStatement();
+			ResultSet resultSet = statement.executeQuery(sql);
+
+			if (resultSet.next()) {
+				rank = resultSet.getInt("RANK");
+			}
+			resultSet.close();
+			statement.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rank;
+	}
+	
+	@Override
 	public int updateMember(int id, int vmoney) {
 		int result = 0;
 
