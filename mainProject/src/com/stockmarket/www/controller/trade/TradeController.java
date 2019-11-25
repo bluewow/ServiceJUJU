@@ -39,10 +39,10 @@ public class TradeController extends HttpServlet{
 		dateButtonStatus(request);
 		
 		//자산상황 
+		//TODO 현재가  기준으로 X보유수량 
 		request.setAttribute("myAssets", service.getAssets(memberId));
 		
 		//매수-매도
-		//TODO 매수 매도시 자산상황 변동 
 		tradeProcess(memberId, request);
 
 		//TODO fix stockId
