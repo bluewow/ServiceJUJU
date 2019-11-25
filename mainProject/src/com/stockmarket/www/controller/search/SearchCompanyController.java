@@ -27,7 +27,7 @@ public class SearchCompanyController extends HttpServlet{
 //		String search = "대한항공";
 		
 		ServletContext application = request.getServletContext();
-		String csvUrlPath = "/KOSPI.csv";
+		String csvUrlPath = "/fileUpload/KOSPI.csv";
 		String csvFilePath = application.getRealPath(csvUrlPath);
 		
 //		System.out.println("csvUrlPath :"  +csvUrlPath);

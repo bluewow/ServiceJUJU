@@ -20,7 +20,7 @@
 		<form action ="search" method="get">
 			<div>
 				<input id ="search-text" type="text" name="search">
-				<button>검색</button>
+				<button class="img-button"></button>
 			</div>
 		</form>
 	</section>
@@ -29,23 +29,23 @@
 		<!-- <h1>추천 검색어</h1> -->
 		<ul>
 			<li id="recommendKeyword_fixed">추천검색어 </li>
-			<li>광동 사운드</li>
+			<!-- <li>광동 사운드</li>
 			<li>기현 알고리즘</li>
 			<li>나람 금융</li>
-			<li>명훈 소프트</li>
+			<li>명훈 소프트</li> -->
 		</ul>
 	</section>
 	
-	<section >
+	<section id ="search-result">
 		<h1 class="d-none">주식회사 검색 결과</h1>
 		<table>
 			<thead>
 				<tr>
-					<td>번호</td>
-					<td>종목명</td>
-					<td>산업분류</td>
-					<td>홈페이지</td>
-					<td>관심유무?</td>
+					<th>번호</th>
+					<th>종목명</th>
+					<th>산업분류</th>
+					<th>홈페이지</th>
+					<th>관심유무?</th>
 				</tr>
 			</thead>
 			
