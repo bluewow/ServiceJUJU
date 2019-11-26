@@ -31,6 +31,8 @@ public class JdbcInterestStocksDao implements InterestStocksDao {
 				InterestStocks interesctStocks = new InterestStocks(stockName);
 				stocklist.add(interesctStocks);
 			}
+			rs.close();
+			st.close();
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -43,18 +45,17 @@ public class JdbcInterestStocksDao implements InterestStocksDao {
 		return stocklist;
 	}
 
-
 	@Override
-	public int delete(int id) {
-
-
+	public int insert(int id, String email, String stockname) {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 
 
 	@Override
-	public int insert(int id, String email, String stockname) {
-		// TODO Auto-generated method stub
+	public int delete(int id, String deletestock) {
+//         String sql =" delete  where id=? ,  "
+		
 		return 0;
 	}
 

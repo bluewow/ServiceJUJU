@@ -40,6 +40,9 @@ public class BasicLoginService implements LoginService{
 		Member member = new Member();
 		
 		member = memberDao.getMemberByEmail(email);
+		if(member == null)
+			return 0; //0 is illegal
+		
 		return member.getId();
 	}
 

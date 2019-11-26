@@ -1,56 +1,79 @@
 @charset "UTF-8";
 
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
 #contaner {
     width: 90%;
     min-width: 460px;
-    max-width: 600px;
+    min-height: 100%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
+    padding-bottom: 50px;
+    --position: relative;
 }
 
-    #rankTable {
-        width: 100%;
-        text-align: center;
-        font-size: 11pt;
-        border-collapse: collapse;
+/* ===레이아웃============================================== */
+#contaner>div:first-child {
+    width: 100%;
+
+    align-content: center;
+}
+
+#contaner>div:last-child {
+    background: #f2f2f2;
+    border: 5px solid #31bfd7;
+    width: inherit;
+    height: 50px;
+    align-content: center;
+    
+    position: fixed;
+    bottom: 0px;
+}
+
+/* ===컨턴츠============================================== */
+.rank-Table {
+    width: 100%;
+}
+
+.rank-Table table {
+    width: 100%;
+    text-align: center;
+    font-size: 11pt;
+    border-collapse: collapse;
+}
+
+.rank-Table table tr {
+    height: 50px;
+}
+
+.rank-Table table:first-child > thead{
+    font-weight: bold;
+}
+
+.rank-Table table:first-child > thead td {
+    border-bottom-width: 3px;
+}
+
+.rank-Table table:first-child td {
+    border-bottom: 1px solid #444444;
+    border-bottom-color: #85888a;
+}  	
+        
+    .rank-Table .rank, .profileImg{
+        min-width: 30px;
+        max-width: 150px;
     }
-        #rankTable tr {
-            height: 40px;
-        }
-        
-        #rankTable td {
-   			border-bottom: 1px solid #444444;
-   			border-bottom-color: #85888a;
-    		padding: 10px;
-  		}
-  		
-  		#rankTable thead td {
-   			/*border-bottom: 1px solid #444444;
-   			border-bottom-color: #85888a;
-   			padding: 10px;*/
-   			border-bottom-width: 3px;
- 		}
 
-        #rankTable>.rankInfo{
-            font-weight: bold;
-        }
+    .rank-Table .name, .assets, .assetsGrowth{
+        min-width: 50px;
+        width: 300px;
+    }
 
-		#rankTable>#myRank{
-			
-		}
-		
-        #rankTable .rank, .profileImg{
-            min-width: 30px;
-            width: 5%;
-        }
-
-        #rankTable .name, .assets, .assetsGrowth{
-            min-width: 50px;
-            width: 30%;
-        }
-
-        tbody .assetsGrowth{
-            color: #cf969c;    
-        }
-        
+    tbody .assetsGrowth{
+        color: #cf969c;    
+    }

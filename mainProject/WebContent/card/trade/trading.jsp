@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!-- 매도버튼 음영처리 및 disable 처리 -->
 <c:set var="shadow" value=""/>
@@ -57,30 +58,25 @@
 	
 	<!-- --------------- page-bottom -------------- -->
 		<section class="page-bottom">
-		<div id="page-bottom-box">
+		<form id="page-bottom-box" action="trade" method="get">
 			<div class="show-button-align">
-				<input class="button button-status" type="button" value="자산 상황">
-				<div>${myAssets }</div>
-				<input class="button button-status" type="button" value="구매 수량">
-				<form action="trade" method="get">
-				<div>
-					<input id="text" type="text" name="PurchaseQty" autocomplete="off">
-				</div>
-					<input class="button button-button" type="submit" name="trade" value="매       수">
-				</form>
-			</div>
-			<div class="show-button-align">
-				<input class="button button-status" type="button" value="보유 상황">
+				<input class="button button-status" type="button" value="종목 상황">
+				<div><fmt:formatNumber value="${myAssets }" pattern="#,###" />원</div>
+				<input class="button button-status" type="button" value="보유 수량">
 				<div>${myQuantity }</div>	
-				<input class="button button-status" type="button" value="매도 수량">
-				<form action="trade" method="get">
-				<div>
-					<input id="text" type="text" name="SoldQty" autocomplete="off">
-				</div>
-					<input class="button button-button ${shadow }" type="submit" ${disable } name="trade" value="매       도">
-				</form>
+				<input class="button button-button" type="submit" name="trade" value="매       수">
+
 			</div>
-		</div>
+			<div class="show-button-align">
+				<input class="button button-status" type="button" value="평균 매수">
+				<div>10,000</div>	
+				<input class="button button-status" type="button" value="구매/매도">
+				<div>
+					<input id="text" type="text" name="Purse/Sold" autocomplete="off">
+				</div>
+				<input class="button button-button ${shadow }" type="submit" ${disable } name="trade" value="매       도">
+			</div>
+		</form>
 	</section>
 </div>	
 

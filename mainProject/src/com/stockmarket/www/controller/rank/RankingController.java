@@ -34,9 +34,10 @@ public class RankingController extends HttpServlet{
 			id = (Integer)tempId;
 		
 		// 본인의 랭킹을 가져온다.
-		Member myRank = service.getMember(id);
+		Member myInfo = service.getMember(id);
 		
-		request.setAttribute("myRank", myRank);
+		request.setAttribute("myRank", service.getMemberRank(id));
+		request.setAttribute("myInfo", myInfo);
 		
 		// jsp 파일을 요청하여 브라우저에 보여준다.
 		request.getRequestDispatcher("ranking.jsp").forward(request, response);

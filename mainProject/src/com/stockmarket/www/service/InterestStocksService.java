@@ -7,6 +7,6 @@ import com.stockmarket.www.entity.InterestStocks;
 public interface InterestStocksService {
 	
 	List<InterestStocks> getInterestStockList(); 
-    
-	int delete(int id);
+
+	void deleteStock(int userid, String deletestock);
 }

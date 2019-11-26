@@ -16,9 +16,65 @@
 	padding: 10px;
 }
 
+#my-button {
+	top: 5%;
+   	left: 5%;
+    position: relative;
+	font-size: 1em;
+	background-color: #808080; 
+	color: white;
+	padding: 6px 10px;
+	border-radius: 11px;
+ 	border: none; 	
+	outline: none;
+	cursor: pointer;
+} 
+
+#favo-button {
+	top: 5%;
+   	left: 5%;
+    position: relative;
+	font-size: 1em;
+	background-color: #808080; 
+	color: white;
+	padding: 6px 10px;
+	border-radius: 11px;
+ 	border: none; 	
+	outline: none;
+	cursor: pointer;
+}
+
+#reg-button {
+	top: 0%;
+   	right: -40%;
+    position: relative;
+	font-size: 1.5em;
+	background-color: #13bfd7; 
+	color: white;
+	padding: 6px 20px;
+	border-radius: 11px;
+ 	border: none; 	
+	outline: none;
+	cursor: pointer;
+}
+
+#del-button {
+	background: url( "../../images/trashCan.png" ) no-repeat;
+	border: none;
+	width: 22px;
+	height: 22px;
+	cursor: pointer;
+	text-indent: -300px;
+	overflow: hidden;
+}
+
+#board-title {
+	cursor: pointer;
+}
+
 #stockTable {
 	width: 100%;
-	text-align: left;
+	text-align: center;
 	font-size: 11pt;
 	border-collapse: collapse;
 }
@@ -27,14 +83,10 @@
 	height: 40px;
 }
 
-#stockTable td {
-	border-bottom: 1px solid #444444;
+#stockTable thead th {
+	border-bottom: 2px solid #444444;
 	border-bottom-color: #85888a;
 	padding: 10px;
-}
-
-#stockTable thead td {
-	border-bottom-width: 0px;
 }
 
 #stockTable>.content {
@@ -47,10 +99,34 @@ thead .title {
 	width: 30%;
 }
 
-a { text-decoration:none ; color:#000000}
+td.border_bottom {
+	border-bottom: 1px solid #444444;
+	border-bottom-color: #85888a;
+	padding: 10px;
+}
 
-#origin {
-	font-weight: bold;
-	  font-size: 11pt;
-	  text-align: right;
+a {
+	text-decoration: none;
+	color: #000000
+}
+
+.checkbox-wrap {
+	cursor: pointer;
+}
+
+.checkbox-wrap .check-icon {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	background: url(../../images/interest_no.png) left center no-repeat;
+	vertical-align: middle;
+	transition-duration: .3s;
+}
+
+.checkbox-wrap input[type=checkbox] {
+	display: none;
+}
+
+.checkbox-wrap input[type=checkbox]:checked+.check-icon {
+	background-image: url(../../images/interest_yes.png);
 }
