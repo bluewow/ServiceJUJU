@@ -9,7 +9,7 @@ public interface RecoedAssetDao {
 	// 자산추이 그래프
 	List<RecordAsset> getList(int memberId);
 	
-	int insert(int memberId, String regdate, int asset);
+	int insert(RecordAsset recordAsset);
 	int delete(int memberId);
 
 }
