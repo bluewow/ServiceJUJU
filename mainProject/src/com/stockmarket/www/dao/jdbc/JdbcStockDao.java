@@ -35,6 +35,7 @@ public class JdbcStockDao implements StockDao{
 		return null;
 	}
 
+	
 	@Override
 	public String getStockCodeNum(String name) {
 		String sql = "SELECT * FROM STOCK WHERE name=?";
@@ -56,7 +57,9 @@ public class JdbcStockDao implements StockDao{
 		}
 		return null;
 	}
-
+	
+	
+     //단위 검사
 	public static void main(String[] args) {
 		JdbcStockDao stockDao = new JdbcStockDao();
 		
