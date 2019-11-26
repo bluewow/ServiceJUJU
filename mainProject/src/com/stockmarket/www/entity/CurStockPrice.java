@@ -1,15 +1,30 @@
 package com.stockmarket.www.entity;
 
-public class CurrentStockInfo {
+public class CurStockPrice {
 	private String codeNum;
 	private String price;
 	private String status; //상승 or 하락
 	private String stuatsPrice; //
 	private String statusPercent; //+ or -
-	private String percent;
+	private String percent; //%
 	
-	public CurrentStockInfo parser(String text) {
-		CurrentStockInfo curStockInfo = new CurrentStockInfo();
+	public CurStockPrice() {
+	}
+	
+	public CurStockPrice(String codeNum, String price, String status, String stuatsPrice, String statusPercent,
+			String percent) {
+		super();
+		this.codeNum = codeNum;
+		this.price = price;
+		this.status = status;
+		this.stuatsPrice = stuatsPrice;
+		this.statusPercent = statusPercent;
+		this.percent = percent;
+	}
+
+
+	public CurStockPrice parser(String text) {
+		CurStockPrice curStockInfo = new CurStockPrice();
 		
 		String[] data = text.split(" ");
 		curStockInfo.codeNum = data[0];
@@ -47,12 +62,18 @@ public class CurrentStockInfo {
 		return percent;
 	}
 
-
 	@Override
 	public String toString() {
 		return "CurrentStockInfo [codeNum=" + codeNum + ", price=" + price + ", status=" + status + ", stuatsPrice="
 				+ stuatsPrice + ", statusPercent=" + statusPercent + ", percent=" + percent + "]";
 	}
-	
+
+
+	public static void main(String[] args) {
+		CurStockPrice stock = new CurStockPrice();
+
+		/*종목코드, 현재가, 상승 or 하강, 가격, +/-, %*/
+		System.out.println(stock.parser("005960 13,000 상승 3,000 + 23.2").toString());
+	}
 	
 }

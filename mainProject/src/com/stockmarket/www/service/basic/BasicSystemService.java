@@ -12,7 +12,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
-import com.stockmarket.www.entity.CurrentStockInfo;
+import com.stockmarket.www.entity.CurStockPrice;
 import com.stockmarket.www.service.SystemService;
 
 public class BasicSystemService implements SystemService{
@@ -30,8 +30,8 @@ public class BasicSystemService implements SystemService{
 	public void refreshStockPrice(String pathOfKospi, String pathOfKosdaq) {
 		CSVStockDataDao data = new CSVStockDataDao();
 		List<String> codeNums = new ArrayList<>();
-		List<CurrentStockInfo> kospi;
-		List<CurrentStockInfo> kosdaq;
+		List<CurStockPrice> kospi;
+		List<CurStockPrice> kosdaq;
 		
 		//CSV 를 참조하여 KOSPI, KOSDAQ 모든 종목에 대한 종목코드를 가져온다
 		codeNums = data.getColumnData(STOCK_CODE_NUM, pathOfKospi);
@@ -45,10 +45,10 @@ public class BasicSystemService implements SystemService{
 		
 	}
 	
-	private List<CurrentStockInfo> getCurrentStockPrice(List<String> codeNums) {
+	private List<CurStockPrice> getCurrentStockPrice(List<String> codeNums) {
 		Document doc = null;
-		CurrentStockInfo curStockInfo = new CurrentStockInfo();
-		List<CurrentStockInfo> data = new ArrayList<>();
+		CurStockPrice curStockInfo = new CurStockPrice();
+		List<CurStockPrice> data = new ArrayList<>();
 		
 		for(String codeNum : codeNums) {
 			String url = "https://finance.naver.com/item/main.nhn?code=" + codeNum;
@@ -70,7 +70,7 @@ public class BasicSystemService implements SystemService{
 			
 			//요청한 페이지에 대한 실패시 데이터를 저장하지 않는다. codeNum + 크롤링 데이타  + %
 			if(status.text().length() != 0) 
-				data.add(curStockInfo.parser(codeNum + " " + status.text()+"%"));
+				data.add(curStockInfo.parser(codeNum + " " + status.text()));
 		}
 		return data;
 	}
