@@ -52,7 +52,7 @@ else
 				<tr>
 					<th></th>
 					<th>제목</th>
-					<th>작성일</th>
+					<th>작성일</th> 
 					<th>조회</th>
 					<th></th>
 				</tr>
