@@ -27,7 +27,7 @@
 </head>
 <body>
 	<div id="stockScroll">
-		<c:if test="${empty selectStockName}">
+		<c:if test="${not empty selectStockName}">
 			<div style="color: cyan; font-weight: bold; font-size: 30px">
 				종목을 선택하면 나타납니다.</div>
 

@@ -43,7 +43,9 @@ public class loginController extends HttpServlet{
 		if(isValidLogInfo(userEmail, pwd)) {
 			int id = loginService.getIdbyEmail(userEmail);
 			//id 값을 session 에 저장한다
-			session.setAttribute("id", id);
+			if(id != 0)
+				session.setAttribute("id", id);
+			
 			request.getRequestDispatcher("main.jsp").forward(request, response);
 			
 		} else {
