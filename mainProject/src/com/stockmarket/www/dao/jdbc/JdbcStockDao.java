@@ -23,7 +23,7 @@ public class JdbcStockDao implements StockDao{
 			ResultSet rs = statement.executeQuery();
 			
 			if(rs.next()) {
-				return rs.getString("CODENUM");
+				return rs.getString("NAME");
 			}
 			rs.close();
 			statement.close();
@@ -45,7 +45,7 @@ public class JdbcStockDao implements StockDao{
 			ResultSet rs = statement.executeQuery();
 			
 			if(rs.next()) {
-				return rs.getString("NAME");
+				return rs.getString("CODENUM");
 			}
 			rs.close();
 			statement.close();
