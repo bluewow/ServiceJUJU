@@ -38,13 +38,28 @@
 				<tbody>
 					<c:forEach var="ranker" items="${rankers}" varStatus="status">
 						<tr>
-							<td class="rank">${status.count}</td>
+							<c:if test="${status.count == 1}">
+								<td class="rank"
+									style="background: url('../../images/medal_geom.png') no-repeat center;">${status.count}</td>
+							</c:if>
+							<c:if test="${status.count == 2}">
+								<td class="rank"
+									style="background: url('../../images/medal_eon.png') no-repeat center;">${status.count}</td>
+							</c:if>
+							<c:if test="${status.count == 3}">
+								<td class="rank"
+									style="background: url('../../images/medal_dong.png') no-repeat center;">${status.count}</td>
+							</c:if>
+							<c:if test="${status.count > 3}">
+								<td class="rank">${status.count}</td>
+							</c:if>
 							<td class="profileImg"></td>
 							<td class="name">${ranker.nickName}</td>
 							<td class="assets"><fmt:formatNumber
-									value="${ranker.vMoney}" pattern="#,###" /></td>
+									value="${ranker.vMoney}" type="number" /></td>
 							<td class="assetsGrowth"><fmt:formatNumber
-									value="${ranker.vMoney/10000}" pattern="#,###" />%</td>
+									value="${(ranker.vMoney - 1000000) / 1000000}" type="number"
+									pattern="0.00%" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -57,10 +72,11 @@
 						<td class="rank">${myRank}</td>
 						<td class="profileImg"></td>
 						<td class="name">${myInfo.nickName}</td>
-						<td class="assets"><fmt:formatNumber value="${myInfo.vMoney}"
-								pattern="#,###" /></td>
+						<td class="assets"><fmt:formatNumber type="number"
+								value="${myInfo.vMoney}" /></td>
 						<td class="assetsGrowth"><fmt:formatNumber
-								value="${myInfo.vMoney/10000}" pattern="#,###" />%</td>
+								value="${(myInfo.vMoney - 1000000) / 1000000}" type="number"
+								pattern="0.00%" /></td>
 					</tr>
 				</tbody>
 			</table>
