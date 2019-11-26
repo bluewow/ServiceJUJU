@@ -57,16 +57,15 @@ public class TradeController extends HttpServlet{
 		
 		if(trade != null) {
 			String qty = null;
-			
 			switch(trade) {
 			//구매수량, 매도수량
 			case "매       수":
-				qty = request.getParameter("PurchaseQty");
+				qty = request.getParameter("Purse/Sold");
 				if(qty != null && qty != "") 
 					service.setQty(memberId, "095660", Integer.parseInt(qty));
 				break;
 			case "매       도":
-				qty = request.getParameter("SoldQty");
+				qty = request.getParameter("Purse/Sold");
 				if(qty != null && qty != "")
 					service.setQty(memberId, "095660", -Integer.parseInt(qty));
 				break;
