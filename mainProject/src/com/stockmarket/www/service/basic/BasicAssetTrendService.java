@@ -31,7 +31,7 @@ public class BasicAssetTrendService implements AssetTrendService {
 	public int getAssetPresent(int memberId) {
 		// 현재 보유 자산
 		// 가상머니+(현재가*보유수량)+(현재가*보유수량).....
-		//List<HaveStock> quantHaveStocks = haveStockDao.getQuantity(memberId);
+		// List<HaveStock> quantHaveStocks = haveStockDao.getQuantity(memberId);
 		return 0;
 	}
 
