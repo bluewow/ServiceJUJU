@@ -20,7 +20,7 @@
 		<form action ="search" method="get">
 			<div>
 				<input id ="search-text" type="text" name="search">
-				<button class="img-button"></button>
+				<button class="search-button"></button>
 			</div>
 		</form>
 	</section>
@@ -41,10 +41,10 @@
 		<table>
 			<thead>
 				<tr>
-					<th>번호</th>
-					<th>종목명</th>
-					<th>산업분류</th>
-					<th>관심</th>
+					<td>번호</td>
+					<td>종목명</td>
+					<td>산업분류</td>
+					<td>관심</td>
 				</tr>
 			</thead>
 			
@@ -62,26 +62,25 @@
 			
 			<tbody>
 				<tr>
-					<th>1</th>
+					<td>1</td>
 					<td>광동 사운드 <img src="/css/search/link.png" alt=""></td>
 					<td>기술,하드웨어</td>
-					<td>관심O</td>
-					
+					<td><img src="/css/search/interest_no.png" alt=""></td>
 				</tr>
 			</tbody>
 			
 			<tbody>
 				<tr>
-					<th>2</th>
+					<td>2</td>
 					<td>경인 일보</td>
 					<td>미디어</td>
-					<td>관심x</td>
+					<td><img src="/css/search/interest_yes.png" alt=""></td>
 				</tr>
 			</tbody>
 			
 			<tbody>
 				<tr>
-					<th>3</th>
+					<td>3</td>
 					<td>기업 은행</td>
 					<td>은행</td>
 					<td>관심x</td>
@@ -90,7 +89,7 @@
 			
 			<tbody>
 				<tr>
-					<th>4</th>
+					<td>4</td>
 					<td>경인 일보</td>
 					<td>미디어</td>
 					<td>관심</td>
@@ -99,7 +98,7 @@
 			
 			<tbody>
 				<tr>
-					<th>5</th>
+					<td>5</td>
 					<td>경인 일보</td>
 					<td>미디어</td>
 					<td>관심</td>
@@ -108,7 +107,7 @@
 			
 			<tbody>
 				<tr>
-					<th>6</th>
+					<td>6</td>
 					<td>경인 일보</td>
 					<td>미디어</td>
 					<td>관심</td>
@@ -117,7 +116,7 @@
 			
 			<tbody>
 				<tr>
-					<th>7</th>
+					<td>7</td>
 					<td>경인 일보</td>
 					<td>미디어</td>
 					<td>관심</td>
@@ -126,7 +125,7 @@
 			
 			<tbody>
 				<tr>
-					<th>8</th>
+					<td>8</td>
 					<td>경인 일보</td>
 					<td>미디어</td>
 					<td>관심</td>
@@ -135,7 +134,7 @@
 			
 			<tbody>
 				<tr>
-					<th>9</th>
+					<td>9</td>
 					<td>경인 일보</td>
 					<td>미디어</td>
 					<td>관심</td>
@@ -145,7 +144,7 @@
 			
 			<tbody>
 				<tr>
-					<th>10</th>
+					<td>10</td>
 					<td>경인 일보</td>
 					<td>미디어</td>
 					<td>관심</td>
