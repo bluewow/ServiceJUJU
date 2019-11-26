@@ -23,28 +23,6 @@ public class JdbcStockDao implements StockDao{
 			ResultSet rs = statement.executeQuery();
 			
 			if(rs.next()) {
-				return rs.getString("CODENUM");
-			}
-			rs.close();
-			statement.close();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public String getStockCodeNum(String name) {
-		String sql = "SELECT * FROM STOCK WHERE name=?";
-
-		try {
-			PreparedStatement statement = JdbcDaoContext.getPreparedStatement(sql);
-			statement.setString(1, name);
-			ResultSet rs = statement.executeQuery();
-			
-			if(rs.next()) {
 				return rs.getString("NAME");
 			}
 			rs.close();
@@ -56,9 +34,32 @@ public class JdbcStockDao implements StockDao{
 		}
 		return null;
 	}
-	
-	
 
+	
+	@Override
+	public String getStockCodeNum(String name) {
+		String sql = "SELECT * FROM STOCK WHERE name=?";
+
+		try {
+			PreparedStatement statement = JdbcDaoContext.getPreparedStatement(sql);
+			statement.setString(1, name);
+			ResultSet rs = statement.executeQuery();
+			
+			if(rs.next()) {
+				return rs.getString("CODENUM");
+			}
+			rs.close();
+			statement.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+     //단위 검사
 	public static void main(String[] args) {
 		JdbcStockDao stockDao = new JdbcStockDao();
 		

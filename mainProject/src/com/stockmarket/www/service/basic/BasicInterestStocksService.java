@@ -30,9 +30,9 @@ public class BasicInterestStocksService implements InterestStocksService {
 //	}
 
 	@Override
-	public int delete(int id) {
-	
-		return 0;
+	public void deleteStock(int userid, String deletestock) {
+		interestStocksDao.delete(userid,deletestock);
+		
 	}
 
 }
