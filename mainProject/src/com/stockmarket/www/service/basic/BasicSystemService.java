@@ -12,6 +12,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
+import com.stockmarket.www.entity.RecordAsset;
 import com.stockmarket.www.entity.CurStockPrice;
 import com.stockmarket.www.service.SystemService;
 
@@ -180,5 +181,11 @@ public class BasicSystemService implements SystemService{
 				System.out.println("finished");
 			break;
 		}
+	}
+
+	@Override
+	public int insertRecordAsset(RecordAsset recordAsset) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
