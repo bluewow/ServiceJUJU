@@ -23,4 +23,9 @@ public class BasicRankingService implements RankingService{
 	public Member getMember(int id) {
 		return memberDao.getMember(id);
 	}
+
+	@Override
+	public int getMemberRank(int id) {
+		return memberDao.getMemberRank(id);
+	}
 }

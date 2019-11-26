@@ -8,4 +8,5 @@ public interface RankingService {
 	List<Member> getMemberList();
 	
 	Member getMember(int id);
+	int getMemberRank(int id);
 }

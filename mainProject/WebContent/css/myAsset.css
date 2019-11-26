@@ -1,4 +1,9 @@
 @charset "UTF-8";
+@import url("reset.css");
+
+.d-none{
+	display: none;
+}
 
 #assetTrend {
 	background: #ffff00;
@@ -53,6 +58,6 @@
 	background: #ffff00;
 	height: 284px;
 	width: 550px;
-		margin-left: auto;
+	margin-left: auto;
 	margin-right: auto;
 }
