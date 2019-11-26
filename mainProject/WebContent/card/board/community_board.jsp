@@ -24,6 +24,20 @@
 <link href="../../css/board/community_board.css" type="text/css"
 	rel="stylesheet">
 <script src="../../js/board/community_board.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<script type="text/javascript">
+function check()
+{
+if(document.category.checked)
+{
+ document.category.submit();
+}
+else
+  return false;
+}
+</script> 
+
 </head>
 <body>
 	<section id="communityScroll">
@@ -33,7 +47,7 @@
 			<input type="button" id="favo-button" name="favo_board_view"
 				value="관심">
 		</nav>
-
+  	<form action="/card/managestocks/interestlist" method="post">
 		<table id="communityTable">
 			<thead class="content">
 				<tr>
@@ -44,7 +58,6 @@
 					<th></th>
 				</tr>
 			</thead>
-	  
 			<tbody>
 				  <c:forEach var="n" items="${CommunityBoard}">
 					<tr>
@@ -57,7 +70,8 @@
                         
 							<td rowspan="2" class="border_bottom">
 							<label class="checkbox-wrap">
-								<input type="checkbox" name="" value= "" id="favo-check"><i class="check-icon"></i></label></td>             
+								<input type="checkbox" name="stockname" value="${n.stockName}" id="favo-check"><i class="check-icon"></i></label>
+								</td>             
 					</tr>
 					<tr>
 						<td class="border_bottom"><input type="button"
@@ -66,8 +80,8 @@
 					</tr>
 				</c:forEach>
 			</tbody>
-
 		</table>
+	  </form>
 	</section>
 </body>
 </html>

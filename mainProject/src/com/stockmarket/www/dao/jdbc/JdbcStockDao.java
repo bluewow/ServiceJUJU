@@ -30,5 +30,7 @@ public class JdbcStockDao implements StockDao{
 		}
 		return null;
 	}
+	
+	
 
 }

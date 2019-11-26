@@ -31,6 +31,8 @@ public class JdbcInterestStocksDao implements InterestStocksDao {
 				InterestStocks interesctStocks = new InterestStocks(stockName);
 				stocklist.add(interesctStocks);
 			}
+			rs.close();
+			st.close();
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
