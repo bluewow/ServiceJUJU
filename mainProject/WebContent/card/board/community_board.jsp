@@ -44,8 +44,7 @@ else
 		<br>
 		<nav id="my-menu">
 			<input type="button" id="my-button" name="my_board_view" value="My">
-			<input type="button" id="favo-button" name="favo_board_view"
-				value="관심">
+			<input type="button" id="favo-button" name="favo_board_view" value="관심">
 		</nav>
   	<form action="/card/managestocks/interestlist" method="post">
 		<table id="communityTable">

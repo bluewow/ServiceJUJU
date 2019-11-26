@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!-- 매도버튼 음영처리 및 disable 처리 -->
 <c:set var="shadow" value=""/>
@@ -60,7 +61,7 @@
 		<div id="page-bottom-box">
 			<div class="show-button-align">
 				<input class="button button-status" type="button" value="자산 상황">
-				<div>${myAssets }</div>
+				<div><fmt:formatNumber value="${myAssets }" pattern="#,###" />원</div>
 				<input class="button button-status" type="button" value="구매 수량">
 				<form action="trade" method="get">
 				<div>
@@ -70,7 +71,7 @@
 				</form>
 			</div>
 			<div class="show-button-align">
-				<input class="button button-status" type="button" value="보유 상황">
+				<input class="button button-status" type="button" value="보유 수량">
 				<div>${myQuantity }</div>	
 				<input class="button button-status" type="button" value="매도 수량">
 				<form action="trade" method="get">

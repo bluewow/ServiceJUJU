@@ -21,29 +21,25 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		String sql = "SELECT * FROM (SELECT ROWNUM NUM, B.* FROM(SELECT * FROM (SELECT * FROM BOARD_VIEW WHERE STOCKNAME LIKE ?) WHERE "
 				+ field + " LIKE ? ORDER BY ID DESC) B) WHERE NUM BETWEEN ? AND ?";
 
-		String url = "jdbc:oracle:thin:@112.223.37.243:1521/xepdb1";
-
 		try {
 
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url, "ACORNGROUP1", "month100man");
-			PreparedStatement st = con.prepareStatement(sql);
+			PreparedStatement statement = JdbcDaoContext.getPreparedStatement(sql);
 
-			st.setString(1, "%" + stockName + "%");
-			st.setString(2, "%" + query + "%");
-			st.setInt(3, 1 + 10 * (page - 1));
-			st.setInt(4, 20 * page);
-			ResultSet rs = st.executeQuery();
+			statement.setString(1, "%" + stockName + "%");
+			statement.setString(2, "%" + query + "%");
+			statement.setInt(3, 1 + 10 * (page - 1));
+			statement.setInt(4, 20 * page);
 
-			while (rs.next()) {
-				CommunityBoard communityBoard = new CommunityBoard(rs.getInt("ID"), rs.getString("TITLE"),
-						rs.getString("WRITER_ID"), rs.getDate("REGDATE"), rs.getInt("HIT"), rs.getString("STOCKNAME"),
-						rs.getInt("REPLY_CNT"));
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				CommunityBoard communityBoard = new CommunityBoard(resultSet.getInt("ID"), resultSet.getString("TITLE"),
+						resultSet.getString("WRITER_ID"), resultSet.getDate("REGDATE"), resultSet.getInt("HIT"), resultSet.getString("STOCKNAME"),
+						resultSet.getInt("REPLY_CNT"));
 				list.add(communityBoard);
 			}
 
-			st.close();
-			con.close();
+			resultSet.close();
+			statement.close();
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
@@ -57,19 +53,11 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		int count = 0;
 
 		String sql = "SELECT REPLY_CNT FROM BOARD_VIEW WHERE " + field + " LIKE ?";
-		String url = "jdbc:oracle:thin:@112.223.37.243:1521/xepdb1";
 
 		try {
+			
+			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
 
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url, "ACORN", "newlec");
-			PreparedStatement st = con.prepareStatement(sql);
-
-			/*
-			 * page number 1 : 1 ~ 5 2 : 6 ~ 10
-			 */
-			// 1 6 11 16 ... -> 1 + (page-1)5
-			// 5 10 15 20 ... -> page*5
 			st.setString(1, "%" + query + "%");
 
 			ResultSet rs = st.executeQuery();
@@ -77,8 +65,8 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 			if (rs.next()) {
 				count = rs.getInt("COUNT");
 			}
+			rs.close();
 			st.close();
-			con.close();
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();

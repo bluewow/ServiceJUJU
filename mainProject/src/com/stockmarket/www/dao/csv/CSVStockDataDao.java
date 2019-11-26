@@ -3,9 +3,11 @@ package com.stockmarket.www.dao.csv;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
+import com.opencsv.CSVWriterBuilder;
 import com.opencsv.exceptions.CsvValidationException;
 import com.stockmarket.www.entity.Company;
 
@@ -86,7 +89,30 @@ public class CSVStockDataDao {
 		cw.close();
 	}
 	
+	public void makeCSV(String level) {
+		CSVWriter cw;
+		String[] data = new String[2];
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		String curHour = date.format(System.currentTimeMillis());
+		String filePath = "WebContent/fileUpload/LOG";
+		
+		data[0] = level;	//로그번호
+		data[1] = curHour;	//로그시간
+		
+		try {
+			cw = new CSVWriter(new FileWriter(filePath+".csv", true));
+			cw.writeNext(data);
+			cw.close();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
+		
+	}
 
 
 	public Company searchCompany (String search, String csvFilePath) {
@@ -117,18 +143,7 @@ public class CSVStockDataDao {
 		return company;
 	}
 
-
-
 	
-
-
-	
-	
-	
-	
-/*	
-//Unit Test
-=======
 /*
  * =======================================================================
  * ============================= for Test ================================
@@ -169,6 +184,11 @@ public class CSVStockDataDao {
 			for(String str : test) 
 				System.out.println(str);
 			
+			break;
+		case 4: //LOG file write Test
+			CSVStockDataDao log = new CSVStockDataDao();
+
+			log.makeCSV("10");
 			break;
 		}
 	}

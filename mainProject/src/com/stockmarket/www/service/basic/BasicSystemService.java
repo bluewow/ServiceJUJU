@@ -24,6 +24,7 @@ public class BasicSystemService implements SystemService{
 	private static final String KOSDAQ = "kosdaqMkt";
 	List<String[]> companyList;
 	String[] dataBuffer;
+	CSVStockDataDao log = new CSVStockDataDao();
 	
 	/*-------------------------- refreshStockPrice ----------------------------*/
 	public void refreshStockPrice(String pathOfKospi, String pathOfKosdaq) {
@@ -56,16 +57,14 @@ public class BasicSystemService implements SystemService{
 										.timeout(5000)
 										.get();
 			} catch (IOException e) {
-				//TODO
-				//LOG 기록
+				log.makeCSV("1");
 				e.printStackTrace();
 			}
 			
 			//현재가, 상태(상승 or 하락), 금액, +/-, percent 를 가져오는 CSS query 문 
 			Elements status = doc.select(".no_today span:eq(0), .no_exday em span:lt(2)");
 			if(status == null) {
-				//TODO
-				//LOG 기록
+				log.makeCSV("2");
 				return null;
 			}
 			
@@ -104,16 +103,14 @@ public class BasicSystemService implements SystemService{
 									.timeout(5000)
 									.post();
 		} catch (IOException e) {
-			//TODO
-			//LOG 기록
+			log.makeCSV("3");
 			e.printStackTrace();
 		}
 		
 		//tr Tag 이하를 선택
 		Elements contents = doc.select("tr");
 		if(contents == null) {
-			//TODO
-			//LOG 기록
+			log.makeCSV("4");
 			return false;
 		}
 
@@ -124,8 +121,7 @@ public class BasicSystemService implements SystemService{
 			// KOSPI.csv or KOSDAQ.csv 를 생성한다
 			data.makeCSV("WebContent/fileUpload/"+market, companyList);
 		} catch (IOException e) {
-			//TODO
-			//LOG 기록
+			log.makeCSV("5");
 			e.printStackTrace();
 		}
 		return true;
