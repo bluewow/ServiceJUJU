@@ -11,7 +11,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.stockmarket.www.dao.MemberDao;
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
+import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
 import com.stockmarket.www.entity.RecordAsset;
 import com.stockmarket.www.entity.CurStockPrice;
 import com.stockmarket.www.service.SystemService;
@@ -26,6 +28,7 @@ public class BasicSystemService implements SystemService{
 	List<String[]> companyList;
 	String[] dataBuffer;
 	CSVStockDataDao log = new CSVStockDataDao();
+	MemberDao memberDao;
 	
 	/*-------------------------- refreshStockPrice ----------------------------*/
 	public void refreshStockPrice(String pathOfKospi, String pathOfKosdaq) {
@@ -143,7 +146,22 @@ public class BasicSystemService implements SystemService{
 			}
 		}
 	}
+	/*-------------------------- insert Asset Record ----------------------------*/
 	
+	@Override
+	public int insertRecordAsset(RecordAsset recordAsset) {
+		memberDao = new JdbcMemberDao();
+	
+		List<Integer> memberId = new ArrayList<Integer>();
+		
+		for (int i = 0; i < memberDao.getMemberList().size(); i++) {
+			memberId.add(memberDao.getMemberList().get(i).getId());
+		}
+		for (int i = 0; i < memberId.size(); i++) {
+								
+		}
+		return 0;	
+	}
 	
 	
 /*
@@ -183,9 +201,4 @@ public class BasicSystemService implements SystemService{
 		}
 	}
 
-	@Override
-	public int insertRecordAsset(RecordAsset recordAsset) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }
