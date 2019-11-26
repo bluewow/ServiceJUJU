@@ -14,7 +14,8 @@
 <link rel="stylesheet" type="text/css" href="../../css/search/search.css">
 </head>
 <!-- style="overflow:scroll" -->
-<body>
+<body >
+	<div id ="bodyScroll">
 	<section id="search-form">
 		<h1 class="d-none">주식회사검색</h1>
 		<form action ="search" method="get">
@@ -153,6 +154,6 @@
 			
 		</table>
 	</section>
-	
+	</div>
 </body>
 </html>
