@@ -44,8 +44,7 @@
 					<th>번호</th>
 					<th>종목명</th>
 					<th>산업분류</th>
-					<th>홈페이지</th>
-					<th>관심유무?</th>
+					<th>관심</th>
 				</tr>
 			</thead>
 			
@@ -64,9 +63,8 @@
 			<tbody>
 				<tr>
 					<th>1</th>
-					<td><a href="">광동 사운드</a></td>
+					<td>광동 사운드 <img src="/css/search/link.png" alt=""></td>
 					<td>기술,하드웨어</td>
-					<td>홈페이지</td>
 					<td>관심O</td>
 					
 				</tr>
@@ -75,9 +73,8 @@
 			<tbody>
 				<tr>
 					<th>2</th>
-					<td><a href="">경인 일보</a></td>
+					<td>경인 일보</td>
 					<td>미디어</td>
-					<td>홈페이지</td>
 					<td>관심x</td>
 				</tr>
 			</tbody>
@@ -85,101 +82,75 @@
 			<tbody>
 				<tr>
 					<th>3</th>
-					<td><a href="">기업 은행</a></td>
+					<td>기업 은행</td>
 					<td>은행</td>
-					<td>홈페이지</td>
 					<td>관심x</td>
-					
 				</tr>
 			</tbody>
 			
 			<tbody>
 				<tr>
 					<th>4</th>
-					<td><a href="">경인 일보</a></td>
+					<td>경인 일보</td>
 					<td>미디어</td>
-					<td>홈페이지</td>
 					<td>관심</td>
-					
 				</tr>
 			</tbody>
 			
 			<tbody>
 				<tr>
 					<th>5</th>
-					<td><a href="">경인 일보</a></td>
+					<td>경인 일보</td>
 					<td>미디어</td>
-					<td>홈페이지</td>
 					<td>관심</td>
-					
 				</tr>
 			</tbody>
 			
 			<tbody>
 				<tr>
 					<th>6</th>
-					<td><a href="">경인 일보</a></td>
+					<td>경인 일보</td>
 					<td>미디어</td>
-					<td>홈페이지</td>
 					<td>관심</td>
-					
 				</tr>
 			</tbody>
 			
 			<tbody>
 				<tr>
 					<th>7</th>
-					<td><a href="">경인 일보</a></td>
+					<td>경인 일보</td>
 					<td>미디어</td>
-					<td>홈페이지</td>
 					<td>관심</td>
-					
 				</tr>
 			</tbody>
 			
 			<tbody>
 				<tr>
 					<th>8</th>
-					<td><a href="">경인 일보</a></td>
+					<td>경인 일보</td>
 					<td>미디어</td>
-					<td>홈페이지</td>
 					<td>관심</td>
-					
 				</tr>
 			</tbody>
 			
 			<tbody>
 				<tr>
 					<th>9</th>
-					<td><a href="">경인 일보</a></td>
+					<td>경인 일보</td>
 					<td>미디어</td>
-					<td>홈페이지</td>
 					<td>관심</td>
-					
 				</tr>
 			</tbody>
-			
-			<tbody>
-				<tr>
-					<th>2</th>
-					<td><a href="">경인 일보</a></td>
-					<td>미디어</td>
-					<td>홈페이지</td>
-					<td>관심</td>
 					
-				</tr>
-			</tbody>
 			
 			<tbody>
 				<tr>
 					<th>10</th>
-					<td><a href="">경인 일보</a></td>
+					<td>경인 일보</td>
 					<td>미디어</td>
 					<td>관심</td>
-					
 				</tr>
 			</tbody>
-			
 			
 		</table>
 	</section>
