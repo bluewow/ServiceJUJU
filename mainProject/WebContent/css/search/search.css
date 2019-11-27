@@ -23,21 +23,51 @@ body{
     display: none;  
 }
 
-#search-form{
+#search-div{
+    margin-top: 4%;
+    margin-right: 2%;
+    padding-left: 30px;
+    width:105%;
+}
+
+/* #search-form{
     text-align:center;
     margin-top: 4%;
+    margin-right: 2%;
     padding-left: 30px;
-}
+} */
 
 #search-text{
     height: 40px;
-	width: 85%;
+	width: calc(100% - 70px);
+	display: inline-block; 
+	 
 }
 
-#recommendKeyword{
+
+/* #search-text{
+    height: 40px;
+	width: 87%; 
+	 
+} */
+
+#recommendKeyword ul{
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+/* #recommendKeyword{
+
 	display: inline-block;
 	text-align: center;
     width: 40%;
+    font-size: 80%;
+    font-weight: bold;
+} */
+
+#recommendKeyword_fixed{
+	display: inline-block;
+	text-align: center;
     font-size: 80%;
     font-weight: bold;
 }
@@ -52,16 +82,17 @@ body{
 #search-result{
     padding-top: 3%;
     
-   
 }
 
 table{
     text-align: center;
     border-collapse: collapse;
-    width: 79%;
+   /*  width: 82%; */
+    width: 90%;
     margin-right: 10%;
-    margin-left: 10%;
+    margin-left: 4%;
     font-size: 80%;
+    
  }
 
 .search-button{
@@ -99,4 +130,11 @@ thead{
 td{
     padding: 10px; 
     border-bottom: 1px solid #ccc; 
+    width:27px;
+}
+
+span{
+	font-size: 80%;
+    color: red;
+    margin-left: 2%;
 }
