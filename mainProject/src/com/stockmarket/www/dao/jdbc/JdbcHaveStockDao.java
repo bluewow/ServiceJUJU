@@ -48,6 +48,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 					stockList.add(haveStockView);		
 					break;
 				}		
+				System.out.println(stockList.toString());
 			}
 			rs.close();
 			st.close();	

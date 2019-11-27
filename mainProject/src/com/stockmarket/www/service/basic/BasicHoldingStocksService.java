@@ -20,6 +20,14 @@ public class BasicHoldingStocksService implements HoldingStocksService {
 	@Override
 	public List<HaveStockView> getInterestHoldingList(int userId) {
 		
+		List<HaveStockView> list = jdbcHaveStockDao.getList(userId);
+		
+		for(HaveStockView data : list) {
+			
+		    int price = Integer.parseInt(data.getPrice().replaceAll(",", ""));
+		    data.setIntprice(price);
+		}
+		
 		return jdbcHaveStockDao.getList(userId);
 	}
 	
@@ -31,10 +39,11 @@ public class BasicHoldingStocksService implements HoldingStocksService {
 		for(HaveStockView data : list) {
 			String StockName = data.getStockName();
 			int quantity = data.getQuantity();
-			double price = Integer.parseInt(data.getPrice().replaceAll(",", ""));
+			
+		    int price = Integer.parseInt(data.getPrice().replaceAll(",", ""));
 			
 			
-			System.out.println("StockName:"+StockName+"price:"+price+"quntity:"+ quantity);
+			System.out.println(list.toString());
 	    }
 	}
 }
