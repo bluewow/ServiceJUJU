@@ -29,10 +29,12 @@
 	<section id="recommendKeyword">
 		<ul>
 			<li id="recommendKeyword_fixed">추천검색어 </li>
+
 			
 			<c:forEach var="r" items="${recommendKeyword}">
 				<a href="search?search=${r}"><span>${r}</span></a>
 			</c:forEach>
+
 		</ul>
 	</section>
 	
