@@ -30,10 +30,11 @@ public class BasicHoldingStocksService implements HoldingStocksService {
 		
 		for(HaveStockView data : list) {
 			String StockName = data.getStockName();
+			int quantity = data.getQuantity();
 			double price = Integer.parseInt(data.getPrice().replaceAll(",", ""));
 			
 			
-//			System.out.println("StockName:"+StockName+"price:"+price+"quntity:"+"");
+			System.out.println("StockName:"+StockName+"price:"+price+"quntity:"+ quantity);
 	    }
 	}
 }
