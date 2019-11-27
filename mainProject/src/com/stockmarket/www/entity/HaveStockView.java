@@ -50,4 +50,5 @@ public class HaveStockView extends HaveStock {
 		return "HaveStockView [stockName=" + stockName + ", price=" + price + ", gain=" + gain + ", percent=" + percent
 				+ ", toString()=" + super.toString() + "]";
 	}
+
 }

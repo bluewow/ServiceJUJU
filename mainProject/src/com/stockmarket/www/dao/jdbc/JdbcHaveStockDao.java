@@ -17,8 +17,6 @@ import com.stockmarket.www.entity.HaveStockView;
 
 public class JdbcHaveStockDao implements HaveStockDao {
 
-	
-	
 	@Override
 	public List<HaveStockView> getList(int id) {
 		
@@ -109,7 +107,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 			st.setInt(1, haveStock.getQuantity());
 			st.setInt(2, haveStock.getAvg());
 			st.setInt(3, haveStock.getMemberId());
-			st.setString(3, haveStock.getStockId());
+			st.setString(4, haveStock.getStockId());
 
 			result = st.executeUpdate();
 
