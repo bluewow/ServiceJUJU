@@ -5,13 +5,13 @@ public class HaveStock {
 	private int memberId;
 	private String stockId;
 	private int quantity;
-	private double avg;
+	private int avg;
 	
 	public HaveStock() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public HaveStock(int memberId, String stockId, int quantity, double avg) {
+	public HaveStock(int memberId, String stockId, int quantity, int avg) {
 		super();
 		this.memberId = memberId;
 		this.stockId = stockId;
@@ -39,11 +39,11 @@ public class HaveStock {
 		this.quantity = quantuty;
 	}
 	
-	public double getAvg() {
+	public int getAvg() {
 		return avg;
 	}
 
-	public void setAvg(double avg) {
+	public void setAvg(int avg) {
 		this.avg = avg;
 	}
 
