@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <html>
-
 <head>
 <meta charset="utf-8">
 <title>stock market</title>
@@ -32,16 +30,13 @@
 
 <link rel="stylesheet" type="text/css" href="./css/tablet.css">
 
-
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="./css/tablet.css">
-<!--[if lt IE 9]>
-   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-   <![endif]-->
+
 <style>
 @media only screen and (min-width:800px) and (max-width: 1200px) {
 	.row .column.column-33, .row .column.column-34 {
@@ -50,6 +45,12 @@
 	}
 }
 </style>
+
+<script type="text/javascript">
+$( function() {
+    $( "#draggable" ).draggable();
+  } );
+</script>
 
 
 </head>
@@ -276,9 +277,11 @@
 										</iframe></div>
 
 								</div>
-							</div>
-						</section>
+							</section>
+						
+						</div>
 					</div>
+					</section>
 				</div>
 			</section>
 
