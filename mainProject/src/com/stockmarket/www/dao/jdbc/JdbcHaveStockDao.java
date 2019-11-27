@@ -36,6 +36,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 				int memberId = rs.getInt("MEMBER_ID");
 				String stockId = rs.getString("STOCK_ID");
 				int quantity = rs.getInt("QUANTITY");
+				int avg = rs.getInt("AVG");
 				String stockName = rs.getString("NAME");
 				//while (memberId.equals(new CurStock(stockId).getCodeNum())) {
 				if (stockId.equals(curStock.getCodeNum())){ // foreach.....(if...break)forEach문을 종료시키기 위한 if;
@@ -43,7 +44,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 					String gain = curStock.getGain(); 
 					String percent = curStock.getPercent();
 					
-					HaveStockView haveStockView = new HaveStockView(memberId, stockId, quantity, stockName, price, gain, percent);
+					HaveStockView haveStockView = new HaveStockView(memberId, stockId, quantity, avg, stockName, price, gain, percent);
 					stockList.add(haveStockView);		
 					break;
 				}		
@@ -79,7 +80,8 @@ public class JdbcHaveStockDao implements HaveStockDao {
 				haveStock = new HaveStock(
 							rs.getInt("MEMBER_ID")
 							,rs.getString("STOCK_ID")
-							,rs.getInt("QUANTITY"));
+							,rs.getInt("QUANTITY")
+							,rs.getInt("AVG"));
 			}
 			rs.close();
 			st.close();			
@@ -98,12 +100,13 @@ public class JdbcHaveStockDao implements HaveStockDao {
 	public int update(HaveStock haveStock) {
 		int result = 0;
 
-		String sql = "UPDATE HAVE_STOCK SET QUANTITY=? WHERE MEMBER_ID = ? AND STOCK_ID = ?";
+		String sql = "UPDATE HAVE_STOCK SET QUANTITY=?, AVG=? WHERE MEMBER_ID = ? AND STOCK_ID = ?";
 
 		try {
 			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
 			st.setInt(1, haveStock.getQuantity());
-			st.setInt(2, haveStock.getMemberId());
+			st.setInt(2, haveStock.getAvg());
+			st.setInt(3, haveStock.getMemberId());
 			st.setString(3, haveStock.getStockId());
 
 			result = st.executeUpdate();
@@ -124,13 +127,14 @@ public class JdbcHaveStockDao implements HaveStockDao {
 	public int insert(HaveStock haveStock) {
 		int result = 0;
 
-		String sql = "INSERT INTO HAVE_STOCK(MEMBER_ID, STOCK_ID, QUANTITY) VALUES (?,?,?)";
+		String sql = "INSERT INTO HAVE_STOCK(MEMBER_ID, STOCK_ID, QUANTITY, AVG) VALUES (?,?,?,?)";
 
 		try {
 			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
 			st.setInt(1, haveStock.getMemberId());
 			st.setString(2, haveStock.getStockId());
 			st.setInt(3, haveStock.getQuantity());
+			st.setDouble(4, haveStock.getAvg());
 
 			result = st.executeUpdate();
 
