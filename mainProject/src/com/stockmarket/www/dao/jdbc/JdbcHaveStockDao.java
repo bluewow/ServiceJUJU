@@ -195,7 +195,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 
 		switch(testIndex) {
 		case 1:	//update 문 Test
-			haveStock.setMemberId(2);// 2 - dogseen@gamil.com
+			haveStock.setMemberId(2); // 2 - dogseen@gamil.com
 			haveStock.setQuantity(500);	
 			haveStock.setStockId("095660"); 
 			stockDao.update(haveStock);
