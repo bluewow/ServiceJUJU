@@ -17,21 +17,30 @@ public class JdbcStockDao implements StockDao{
 	@Override
 	public String getStockName(String codeNum) {
 		String sql = "SELECT * FROM STOCK WHERE CODENUM=?";
-
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		
 		try {
-			PreparedStatement statement = JdbcDaoContext.getPreparedStatement(sql);
+			statement = JdbcDaoContext.getPreparedStatement(sql);
 			statement.setString(1, codeNum);
-			ResultSet rs = statement.executeQuery();
+			rs = statement.executeQuery();
 			
 			if(rs.next()) {
 				return rs.getString("NAME");
 			}
-			rs.close();
-			statement.close();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null)
+					rs.close();
+				if(statement != null)
+					statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
@@ -40,22 +49,31 @@ public class JdbcStockDao implements StockDao{
 	@Override
 	public String getStockCodeNum(String name) {
 		String sql = "SELECT * FROM STOCK WHERE name=?";
-
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		
 		try {
-			PreparedStatement statement = JdbcDaoContext.getPreparedStatement(sql);
+			statement = JdbcDaoContext.getPreparedStatement(sql);
 			statement.setString(1, name);
-			ResultSet rs = statement.executeQuery();
+			rs = statement.executeQuery();
 			
 			if(rs.next()) {
 				return rs.getString("CODENUM");
 			}
 			
-			rs.close();
-			statement.close();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null)
+					rs.close();
+				if(statement != null)
+					statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
