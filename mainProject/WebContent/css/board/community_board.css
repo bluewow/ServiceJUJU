@@ -17,37 +17,39 @@
 }
 
 #my-button {
-	top: 5%;
-   	left: 2%;
-    position: relative;
+	top: 3%;
+	left: 5%;
+	font-weight: bold;
 	font-size: 1em;
-	width:60px;
-	background-color: #efefef; 
+	width: 60px;
+	background-color: #efefef;
 	color: #58585b;
 	padding: 6px 10px;
 	border-radius: 16px;
- 	border: none; 	
+	border: none;
 	outline: none;
 	cursor: pointer;
-} 
+}
+
 #my-button:hover {
 	opacity: 0.7;
 }
 
 #favo-button {
-	top: 5%;
-   	left: 3%;
-    position: relative;
+	top: 3%;
+	left: 18%;
+	font-weight: bold;
 	font-size: 1em;
-	width:60px;
-	background-color: #efefef; 
+	width: 60px;
+	background-color: #efefef;
 	color: #58585b;
 	padding: 6px 10px;
 	border-radius: 16px;
- 	border: none; 	
+	border: none;
 	outline: none;
 	cursor: pointer;
 }
+
 #favo-button:hover {
 	opacity: 0.7;
 }
@@ -62,6 +64,7 @@
 	overflow: hidden;
 	cursor: pointer;
 }
+
 #del-button:hover {
 	opacity: 0.7;
 }
@@ -77,8 +80,21 @@
 	border-collapse: collapse;
 }
 
+.subject th {
+	color: #58585E;
+	font-weight: bold;
+}
+
+.content td {
+	color: #58585E;
+	font-weight: lighter;
+}
+
+#board-title {
+	font-weight: bold;
+}
 #communityTable tr {
-	height: 40px;
+	height: 30px;
 }
 
 #communityTable thead th {
