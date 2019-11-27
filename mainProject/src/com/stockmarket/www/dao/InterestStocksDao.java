@@ -8,7 +8,7 @@ public interface InterestStocksDao {
 	
 	List<InterestStocks> getInterestStockList();
 	
-	int delete(int id, String deletestock);
-	int insert(int id, String email,String stockname);
+	int delete(int id, String delStockName);
+	int insert(int id, String email,String stockName);
 	
 }
