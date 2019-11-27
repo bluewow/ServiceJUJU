@@ -80,6 +80,11 @@ public class SystemController extends HttpServlet {
 //			TODO
 		}
 		
+		if(curHour.equals("20") && preHour.equals("19")) {
+			// TODO
+		}
+		
+		
 		//현재 시간을 preHour flag 에 저장
 		preHour = curHour;
 		

@@ -6,6 +6,7 @@ import com.stockmarket.www.entity.Member;
 
 public interface MemberDao {
 	List<Member> getMemberList();
+	List<Member> getRankerList();
 	
 	Member getMember(int id);
 	Member getMemberByEmail(String query);	

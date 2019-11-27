@@ -14,11 +14,40 @@ import com.stockmarket.www.entity.Member;
 public class JdbcMemberDao implements MemberDao {
 	@Override
 	public List<Member> getMemberList() {
-		// 가상머니 상위 50위까지 뽑아오는 쿼리
-		String sql = "SELECT * FROM MEMBER ORDER BY VMONEY " + 
-		"DESC OFFSET 0 ROWS FETCH NEXT 50 ROWS ONLY";
+		String sql = "SELECT * FROM MEMBER";
 		List<Member> members = new ArrayList<>();
-		
+
+		try {
+			Statement statement = JdbcDaoContext.getStatement();
+			ResultSet resultSet = statement.executeQuery(sql);
+
+			while (resultSet.next()) {
+				int id = resultSet.getInt("ID");
+				String email = resultSet.getString("EMAIL");
+				String nickName = resultSet.getString("NICKNAME");
+				String password = resultSet.getString("PASSWORD");
+				int vmoney = resultSet.getInt("VMONEY");
+				Date regdate = resultSet.getDate("REGDATE");
+
+				Member member = new Member(id, email, nickName, password, vmoney);
+				members.add(member);
+			}
+			resultSet.close();
+			statement.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return members;
+	}
+
+	@Override
+	public List<Member> getRankerList() {
+		// 가상머니 상위 50위까지 뽑아오는 쿼리
+		String sql = "SELECT * FROM MEMBER ORDER BY VMONEY " + "DESC OFFSET 0 ROWS FETCH NEXT 50 ROWS ONLY";
+		List<Member> members = new ArrayList<>();
+
 		try {
 			Statement statement = JdbcDaoContext.getStatement();
 			ResultSet resultSet = statement.executeQuery(sql);
@@ -80,9 +109,9 @@ public class JdbcMemberDao implements MemberDao {
 			PreparedStatement statement = JdbcDaoContext.getPreparedStatement(sql);
 
 			statement.setString(1, query);
-			
+
 			ResultSet resultSet = statement.executeQuery();
-			
+
 			if (resultSet.next()) {
 				int id = resultSet.getInt("ID");
 				String email = resultSet.getString("EMAIL");
@@ -101,15 +130,14 @@ public class JdbcMemberDao implements MemberDao {
 		}
 		return member;
 	}
-	
+
 	@Override
 	public int getMemberRank(int id) {
 		int rank = 0;
-		String sql = "SELECT * FROM (\r\n" + 
-				"    SELECT DENSE_RANK() OVER (ORDER BY VMONEY DESC) AS \"RANK\", MEMBER.* FROM MEMBER\r\n" + 
-				"    ) \r\n" + 
-				"WHERE id = " + id;
-		
+		String sql = "SELECT * FROM (\r\n"
+				+ "    SELECT DENSE_RANK() OVER (ORDER BY VMONEY DESC) AS \"RANK\", MEMBER.* FROM MEMBER\r\n"
+				+ "    ) \r\n" + "WHERE id = " + id;
+
 		try {
 			Statement statement = JdbcDaoContext.getStatement();
 			ResultSet resultSet = statement.executeQuery(sql);
@@ -126,7 +154,7 @@ public class JdbcMemberDao implements MemberDao {
 		}
 		return rank;
 	}
-	
+
 	@Override
 	public int updateMember(int id, int vmoney) {
 		int result = 0;
@@ -137,10 +165,10 @@ public class JdbcMemberDao implements MemberDao {
 
 			statement.setInt(1, vmoney);
 			statement.setInt(2, id);
-			
+
 			result = statement.executeUpdate();
 			statement.close();
-			
+
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

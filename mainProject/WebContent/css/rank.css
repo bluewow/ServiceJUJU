@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/* ===레이아웃============================================== */
 body {
     margin: 0;
     padding: 0;
@@ -9,27 +10,29 @@ body {
 #contaner {
     width: 90%;
     min-width: 460px;
+    max-width: 600px;
     min-height: 100%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
-    padding-bottom: 50px;
-    --position: relative;
+    position: relative;
 }
 
-/* ===레이아웃============================================== */
 #contaner>div:first-child {
-    width: 100%;
-
+    border: 5px solid #fff;
     align-content: center;
+    box-sizing: border-box;
 }
 
 #contaner>div:last-child {
     background: #f2f2f2;
     border: 5px solid #31bfd7;
-    width: inherit;
-    height: 50px;
+    width: 90%;
+    min-width: 460px;
+    max-width: 600px;
+    height: 60px;
     align-content: center;
+    box-sizing: border-box;
     
     position: fixed;
     bottom: 0px;
@@ -37,11 +40,9 @@ body {
 
 /* ===컨턴츠============================================== */
 .rank-Table {
-    width: 100%;
 }
 
 .rank-Table table {
-    width: 100%;
     text-align: center;
     font-size: 11pt;
     border-collapse: collapse;
@@ -51,29 +52,36 @@ body {
     height: 50px;
 }
 
-.rank-Table table:first-child > thead{
+#contaner>div:first-child thead{
     font-weight: bold;
 }
 
-.rank-Table table:first-child > thead td {
+#contaner>div:first-child thead td {
     border-bottom-width: 3px;
 }
 
-.rank-Table table:first-child td {
+#contaner>div:first-child td {
     border-bottom: 1px solid #444444;
-    border-bottom-color: #85888a;
+    border-bottom-color: #b6b6b6;
 }  	
         
     .rank-Table .rank, .profileImg{
-        min-width: 30px;
+        min-width: 50px;
         max-width: 150px;
     }
-
+    
+    tbody .profileImg{
+        background: no-repeat url("../images/sample.png") center;
+        background-size: 40px 40px;
+    }
     .rank-Table .name, .assets, .assetsGrowth{
         min-width: 50px;
         width: 300px;
     }
 
+    .rank-Table tbody .name {
+        text-align: left;
+    }
     tbody .assetsGrowth{
         color: #cf969c;    
     }

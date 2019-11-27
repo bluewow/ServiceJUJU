@@ -1,86 +1,102 @@
 @charset "UTF-8";
 
 /* 요소(element) 초기화 && 제목요소*/ 
-h1, div, ul, ol, li{
+h1, div, ul, ol, li, table{
 	margin:0;
     padding:0;
     font-size:inherit;   
 	font-weight:inherit; 
+}
+li{
+    display: inline-flex;
 }
 /* 목록 */
 ol, ul { 
 	list-style: none;
 }
 
+body{
+	overflow: scroll;
+}
+
 .d-none{
     display: none;  
-  }
+}
 
 #search-form{
-    text-align: center;
-    padding-top: 20px;
-    /* height: 100px; */
-	/* width: 400px; */
+    text-align:center;
+    margin-top: 4%;
+    padding-left: 30px;
 }
 
 #search-text{
-	height: 40px;
-	width: 350px;
+    height: 40px;
+	width: 85%;
 }
 
 #recommendKeyword{
 	display: inline-block;
 	text-align: center;
-	width: 500px;
-	
+    width: 40%;
+    font-size: 80%;
+    font-weight: bold;
 }
-	#recommendKeyword_fixed{
-	     position: absolute;
-	   	 left:25px;
-		 top:75px;
-		 
-	 }
 
+#bodyScroll{
+	overflow: scroll;
+	width: 98%;
+	height: 100%;
+	padding: 10px;
+}
 
 #search-result{
-	padding-top:20px;
-    border-collapse: collapse;
-    text-align: left;
-    line-height: 1.5;
+    padding-top: 3%;
+    
+   
 }
 
-#search-result thead th{
-    padding: 10px;
-    font-weight: bold;
-    vertical-align: top;
-    color: #369;
-    border-bottom: 3px solid #036;
+table{
+    text-align: center;
+    border-collapse: collapse;
+    width: 79%;
+    margin-right: 10%;
+    margin-left: 10%;
+    font-size: 80%;
+ }
 
-} 
-
- 
-
-    #recommendKeyword>ul{
-        display: flex;
-        
-     }
-    #recommendKeyword>ul>li{
-        display: flex;
-        padding-left: 15px;
-        font-size:15px;
-    }
-    
-    
-.img-button{
-    background: url(/css/search/button_search.png) no-repeat;
+.search-button{
+    background: url(../../images/button_search.png) no-repeat;
     background-size: cover;
-    border: none;
     width: 30px;
     height: 30px;
+    border: none;
     cursor: pointer;
     position: relative;
-    right:60px;
-    top:10px;
+    top: 10px; 
+    right: 50px;
+
+    /* 위치 조절 top, right =>  자동 조절 됨*/
+}
+
+.company-address-image{
+    background: url(../images/link.png) no-repeat;
+    border: none;
+    width: 2px;
+    height: 2px; 
+}
 
 
+
+thead{
+    text-align:center;
+	border-bottom:3px solid #ada8a8;
+    border-left:none;
+     
+}
+
+
+
+td{
+    padding: 10px; 
+    border-bottom: 1px solid #ccc; 
 }

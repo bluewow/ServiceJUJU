@@ -1,5 +1,7 @@
 package com.stockmarket.www.service;
 
+import com.stockmarket.www.entity.RecordAsset;
+
 public interface SystemService {
 	/*
 	 * TODO
@@ -21,4 +23,7 @@ public interface SystemService {
 	 *  하루에 한번 KOSPI.csv KOSDAQ.csv 파일을 갱신한다. 
 	*/
 	boolean updateMarket(String market);
+	
+	// 하루에 한번 모든 회원의 당일 자산값을 등록한다.
+	int insertRecordAsset(RecordAsset recordAsset);
 }

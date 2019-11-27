@@ -38,9 +38,11 @@ public class TradeController extends HttpServlet{
 		//일봉, 주봉, 월봉
 		dateButtonStatus(request);
 		
-		//자산상황 
-		//TODO 현재가  기준으로 X보유수량 
+		//보유 자산
 		request.setAttribute("myAssets", service.getAssets(memberId));
+		
+		//평균 매수
+		request.setAttribute("aveAssets", "10000");
 		
 		//매수-매도
 		tradeProcess(memberId, request);
@@ -57,16 +59,15 @@ public class TradeController extends HttpServlet{
 		
 		if(trade != null) {
 			String qty = null;
-			
 			switch(trade) {
 			//구매수량, 매도수량
 			case "매       수":
-				qty = request.getParameter("PurchaseQty");
+				qty = request.getParameter("Purse/Sold");
 				if(qty != null && qty != "") 
 					service.setQty(memberId, "095660", Integer.parseInt(qty));
 				break;
 			case "매       도":
-				qty = request.getParameter("SoldQty");
+				qty = request.getParameter("Purse/Sold");
 				if(qty != null && qty != "")
 					service.setQty(memberId, "095660", -Integer.parseInt(qty));
 				break;

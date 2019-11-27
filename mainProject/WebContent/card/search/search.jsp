@@ -15,12 +15,13 @@
 </head>
 <!-- style="overflow:scroll" -->
 <body>
+	<div id ="bodyScroll">
 	<section id="search-form">
 		<h1 class="d-none">주식회사검색</h1>
 		<form action ="search" method="get">
 			<div>
 				<input id ="search-text" type="text" name="search">
-				<button class="img-button"></button>
+				<button class="search-button"></button>
 			</div>
 		</form>
 	</section>
@@ -41,148 +42,126 @@
 		<table>
 			<thead>
 				<tr>
-					<th>번호</th>
-					<th>종목명</th>
-					<th>산업분류</th>
-					<th>홈페이지</th>
-					<th>관심유무?</th>
+					<td>번호</td>
+					<td>종목명</td>
+					<td>산업분류</td>
+					<td>관심</td>
 				</tr>
 			</thead>
 			
-			<%-- <tbody>
-			(아래) 나중에 사용할 코드
-			<c:forEach var="n" items="${search}">
+			<tbody>
+			
+			<%-- <c:forEach var="n" items="${search}"> --%>
 				<tr>
-					<th>1</th>
-					<td><a href=""></a>${n.companyName}</td>
+					<td>1</td>
+					<td>${n.companyName}<a href="${n.website}"><img src="/css/search/link.png" alt=""></a></td>
 					<td>${n.stockItemName}</td>
-					<td>${n.website}</td>
+					<td><img src="/css/search/interest_no.png" alt=""></td>
 				</tr>
-			</c:forEach>
-			</tbody> --%>
+			<%-- </c:forEach> --%>
+			</tbody>
 			
-			<tbody>
-				<tr>
+			<%-- 	<tr>
 					<th>1</th>
-					<td><a href="">광동 사운드</a></td>
+					<td><a href=""></a>${n.companyName}<img src="/css/search/link.png" alt=""></td>
+					<td>${n.stockItemName}</td>
+					<td><img src="/css/search/interest_no.png" alt="">${n.website}</td>
+				</tr> --%>
+			
+			
+			<!-- <tbody>
+				<tr>
+					<td>1</td>
+					<td>광동 사운드 <img src="/css/search/link.png" alt=""></td>
 					<td>기술,하드웨어</td>
-					<td>홈페이지</td>
-					<td>관심O</td>
-					
+					<td><img src="/css/search/interest_no.png" alt=""></td>
 				</tr>
-			</tbody>
+			</tbody> -->
 			
 			<tbody>
 				<tr>
-					<th>2</th>
-					<td><a href="">경인 일보</a></td>
+					<td>2</td>
+					<td>경인 일보</td>
 					<td>미디어</td>
-					<td>홈페이지</td>
-					<td>관심x</td>
+					<td><img src="/css/search/interest_yes.png" alt=""></td>
 				</tr>
 			</tbody>
 			
 			<tbody>
 				<tr>
-					<th>3</th>
-					<td><a href="">기업 은행</a></td>
+					<td>3</td>
+					<td>기업 은행</td>
 					<td>은행</td>
-					<td>홈페이지</td>
 					<td>관심x</td>
-					
 				</tr>
 			</tbody>
 			
 			<tbody>
 				<tr>
-					<th>4</th>
-					<td><a href="">경인 일보</a></td>
+					<td>4</td>
+					<td>경인 일보</td>
 					<td>미디어</td>
-					<td>홈페이지</td>
 					<td>관심</td>
-					
 				</tr>
 			</tbody>
 			
 			<tbody>
 				<tr>
-					<th>5</th>
-					<td><a href="">경인 일보</a></td>
+					<td>5</td>
+					<td>경인 일보</td>
 					<td>미디어</td>
-					<td>홈페이지</td>
 					<td>관심</td>
-					
 				</tr>
 			</tbody>
 			
 			<tbody>
 				<tr>
-					<th>6</th>
-					<td><a href="">경인 일보</a></td>
+					<td>6</td>
+					<td>경인 일보</td>
 					<td>미디어</td>
-					<td>홈페이지</td>
 					<td>관심</td>
-					
 				</tr>
 			</tbody>
 			
 			<tbody>
 				<tr>
-					<th>7</th>
-					<td><a href="">경인 일보</a></td>
+					<td>7</td>
+					<td>경인 일보</td>
 					<td>미디어</td>
-					<td>홈페이지</td>
 					<td>관심</td>
-					
 				</tr>
 			</tbody>
 			
 			<tbody>
 				<tr>
-					<th>8</th>
-					<td><a href="">경인 일보</a></td>
+					<td>8</td>
+					<td>경인 일보</td>
 					<td>미디어</td>
-					<td>홈페이지</td>
 					<td>관심</td>
-					
 				</tr>
 			</tbody>
 			
 			<tbody>
 				<tr>
-					<th>9</th>
-					<td><a href="">경인 일보</a></td>
+					<td>9</td>
+					<td>경인 일보</td>
 					<td>미디어</td>
-					<td>홈페이지</td>
 					<td>관심</td>
-					
 				</tr>
 			</tbody>
+					
 			
 			<tbody>
 				<tr>
-					<th>2</th>
-					<td><a href="">경인 일보</a></td>
-					<td>미디어</td>
-					<td>홈페이지</td>
-					<td>관심</td>
-					
-				</tr>
-			</tbody>
-			
-			<tbody>
-				<tr>
-					<th>10</th>
-					<td><a href="">경인 일보</a></td>
+					<td>10</td>
+					<td>경인 일보</td>
 					<td>미디어</td>
 					<td>관심</td>
-					
 				</tr>
 			</tbody>
-			
 			
 		</table>
 	</section>
-	
+	</div>
 </body>
 </html>
