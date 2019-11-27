@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="../../css/search/search.css">
 </head>
 <!-- style="overflow:scroll" -->
-<body >
+<body>
 	<div id ="bodyScroll">
 	<section id="search-form">
 		<h1 class="d-none">주식회사검색</h1>
@@ -49,26 +49,34 @@
 				</tr>
 			</thead>
 			
-			<%-- <tbody>
-			(아래) 나중에 사용할 코드
-			<c:forEach var="n" items="${search}">
-				<tr>
-					<th>1</th>
-					<td><a href=""></a>${n.companyName}</td>
-					<td>${n.stockItemName}</td>
-					<td>${n.website}</td>
-				</tr>
-			</c:forEach>
-			</tbody> --%>
-			
 			<tbody>
+			
+			<%-- <c:forEach var="n" items="${search}"> --%>
+				<tr>
+					<td>1</td>
+					<td>${n.companyName}<a href="${n.website}"><img src="/css/search/link.png" alt=""></a></td>
+					<td>${n.stockItemName}</td>
+					<td><img src="/css/search/interest_no.png" alt=""></td>
+				</tr>
+			<%-- </c:forEach> --%>
+			</tbody>
+			
+			<%-- 	<tr>
+					<th>1</th>
+					<td><a href=""></a>${n.companyName}<img src="/css/search/link.png" alt=""></td>
+					<td>${n.stockItemName}</td>
+					<td><img src="/css/search/interest_no.png" alt="">${n.website}</td>
+				</tr> --%>
+			
+			
+			<!-- <tbody>
 				<tr>
 					<td>1</td>
 					<td>광동 사운드 <img src="/css/search/link.png" alt=""></td>
 					<td>기술,하드웨어</td>
 					<td><img src="/css/search/interest_no.png" alt=""></td>
 				</tr>
-			</tbody>
+			</tbody> -->
 			
 			<tbody>
 				<tr>
