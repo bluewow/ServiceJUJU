@@ -11,19 +11,24 @@ import java.util.Scanner;
 
 import com.stockmarket.www.dao.HaveStockDao;
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
+import com.stockmarket.www.entity.CurStock;
 import com.stockmarket.www.entity.HaveStock;
+import com.stockmarket.www.entity.HaveStockView;
 
 public class JdbcHaveStockDao implements HaveStockDao {
 
 	
 	
 	@Override
-	public List<HaveStock> getList(int id) {
+	public List<HaveStockView> getList(int id) {
 		
-		List<HaveStock> stockList = new ArrayList<>();
+		List<HaveStockView> stockList = new ArrayList<>();
+		// List 필요할 듯.... .... ....... // 담을 그릇 ㅠㅠㅠㅠㅠㅠㅠㅠ 힝 ㅠㅠㅠㅠㅠㅠ
+		CurStock curStock = new CurStock("095660", "13,000", "상승", "3,000", "+", "23.2");
+		// curStock.getList(String codenum);
 		
-		String sql = "SELECT * FROM HAVE_STOCK WHERE MEMBER_ID = ?";		
-		
+		String sql = "SELECT * FROM HAVESTOCK_VIEW WHERE MEMBER_ID = ?";
+	
 		try {
 			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
 			st.setInt(1, id);
@@ -33,11 +38,18 @@ public class JdbcHaveStockDao implements HaveStockDao {
 				int memberId = rs.getInt("MEMBER_ID");
 				String stockId = rs.getString("STOCK_ID");
 				int quantity = rs.getInt("QUANTITY");
-
-				HaveStock haveStock = new HaveStock(memberId, stockId, quantity);
-				stockList.add(haveStock);
+				String stockName = rs.getString("NAME");
+				//while (memberId.equals(new CurStock(stockId).getCodeNum())) {
+				if (stockId.equals(curStock.getCodeNum())){ // foreach.....(if...break)forEach문을 종료시키기 위한 if;
+					String price = curStock.getPrice();
+					String gain = curStock.getGain(); 
+					String percent = curStock.getPercent();
+					
+					HaveStockView haveStockView = new HaveStockView(memberId, stockId, quantity, stockName, price, gain, percent);
+					stockList.add(haveStockView);		
+					break;
+				}		
 			}
-			
 			rs.close();
 			st.close();	
 		} catch (ClassNotFoundException e) {
@@ -164,22 +176,26 @@ public class JdbcHaveStockDao implements HaveStockDao {
 	 * ============================= for Test ================================
 	 * =======================================================================
 	 */	
-//	public static void main(String[] args) {
-//		int testIndex = 0;
-//		HaveStock haveStock = new HaveStock();
-//		JdbcHaveStockDao stockDao = new JdbcHaveStockDao();
-//		
-//		Scanner sc = new Scanner(System.in);
-//		System.out.println("숫자를 입력하시오");
-//		testIndex = sc.nextInt();
-//
-//		switch(testIndex) {
-//		case 1:	//update 문 Test
-//			haveStock.setMemberId(2);// 2 - dogseen@gamil.com
-//			haveStock.setQuantity(500);	
-//			haveStock.setStockId("095660"); 
-//			stockDao.update(haveStock);
-//			break;
-//		}
-//	}
+	public static void main(String[] args) {
+		int testIndex = 0;
+		HaveStock haveStock = new HaveStock();
+		JdbcHaveStockDao stockDao = new JdbcHaveStockDao();
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("숫자를 입력하시오");
+		testIndex = sc.nextInt();
+
+		switch(testIndex) {
+		case 1:	//update 문 Test
+			haveStock.setMemberId(2);// 2 - dogseen@gamil.com
+			haveStock.setQuantity(500);	
+			haveStock.setStockId("095660"); 
+			stockDao.update(haveStock);
+			break;
+		case 2:
+			System.out.println(stockDao.getList(1));
+			break;
+		}
+		System.out.println("종료");
+	}
 }

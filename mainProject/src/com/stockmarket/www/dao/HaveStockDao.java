@@ -3,10 +3,11 @@ package com.stockmarket.www.dao;
 import java.util.List;
 
 import com.stockmarket.www.entity.HaveStock;
+import com.stockmarket.www.entity.HaveStockView;
 
 public interface HaveStockDao {
 	
-	List<HaveStock> getList(int memberId);
+	List<HaveStockView> getList(int memberId);
 	
 	HaveStock get(int memberId, String stockId);
 
