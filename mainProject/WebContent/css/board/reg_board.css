@@ -52,7 +52,7 @@ body {
 	height: 90%;
 	display: inline-block;
 	border: none;
-	background-color: #ececec;
+	background-color: #efefef;
 	resize: none;
 }
 
@@ -71,7 +71,7 @@ body {
 	right: 20%;
 	font-size: 1em;
 	width:60px;
-	background-color: #ececec;
+	background-color: #efefef;
 	color: black;
 	padding: 6px 10px;
 	border-radius: 16px;
@@ -90,7 +90,7 @@ body {
 	right: 5%;
 	font-size: 1em;
 	width:60px;
-	background-color: #ececec;
+	background-color: #efefef;
 	color: black;
 	padding: 6px 10px;
 	border-radius: 16px;
