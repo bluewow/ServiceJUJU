@@ -48,9 +48,10 @@ public class HaveStockView extends HaveStock {
 	@Override
 	public String toString() {
 		return "HaveStockView [stockName=" + stockName + ", price=" + price + ", gain=" + gain + ", percent=" + percent
-				+ ", getStockName()=" + getStockName() + ", getPrice()=" + getPrice() + ", getGain()=" + getGain()
-				+ ", getPercent()=" + getPercent() + "]";
+				+ ", toString()=" + super.toString() + "]";
 	}
+
+
 	
 //	@Override
 //	public String toString() {
