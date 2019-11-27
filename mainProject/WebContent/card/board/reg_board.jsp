@@ -26,7 +26,6 @@
 			<textarea class="content" maxlength="400" placeholder="내용을 입력하시오"></textarea>
 		</div>
 		<div id=commit-row>
-			<span style="color:#aaa;" id="counter">(0 / 최대 400자)</span>
 			<input type="button" class="cancel" name="cancel" value="취소">
 			<input type="button" class="reg" name="reg" value="확인">
 		</div>
