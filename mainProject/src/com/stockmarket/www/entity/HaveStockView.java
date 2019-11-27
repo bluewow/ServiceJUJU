@@ -51,12 +51,5 @@ public class HaveStockView extends HaveStock {
 				+ ", getStockName()=" + getStockName() + ", getPrice()=" + getPrice() + ", getGain()=" + getGain()
 				+ ", getPercent()=" + getPercent() + "]";
 	}
-	
-//	@Override
-//	public String toString() {
-//		return "HaveStockView [stockName=" + stockName + ", price=" + price + ", gain=" + gain + ", percent=" + percent
-//				+ "]";
-//	}
-	
-	
+
 }

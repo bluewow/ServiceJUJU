@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
@@ -10,13 +10,13 @@
 
 <!-- Google Fonts -->
 <link
-   href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700"
-   rel="stylesheet">
+	href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700"
+	rel="stylesheet">
 <!-- Bootstrap Styles -->
 <link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-   integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-   crossorigin="anonymous">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
 
 <!-- Template Styles -->
 <link rel="stylesheet" type="text/css" href="./css/font-awesome.min.css">
@@ -33,8 +33,8 @@
 <link rel="stylesheet" type="text/css" href="./css/tablet.css">
 
 
-<link rel="stylesheet"
-   href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -44,10 +44,10 @@
    <![endif]-->
 <style>
 @media only screen and (min-width:800px) and (max-width: 1200px) {
-   .row .column.column-33, .row .column.column-34 {
-      flex: none;
-      max-width: 49.3333%;
-   }
+	.row .column.column-33, .row .column.column-34 {
+		flex: none;
+		max-width: 49.3333%;
+	}
 }
 </style>
 
