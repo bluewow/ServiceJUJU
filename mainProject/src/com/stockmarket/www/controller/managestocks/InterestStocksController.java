@@ -44,11 +44,12 @@ public class InterestStocksController extends HttpServlet {
 			throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		int userid = (int)session.getAttribute("id");
-		String deletestock = request.getParameter("deletestock");
-		interestStocksInterface.deleteStock(userid,deletestock);
-        
-		request.setAttribute("list", interestViewInterface.getInterestViewList(userid));
+		int userId = (int)session.getAttribute("id");
+		String delStockName = request.getParameter("delStockName");
+		interestStocksInterface.deleteStock(userId,delStockName);
+ 
+		request.setAttribute("list", interestViewInterface.getInterestViewList(userId));
 		request.getRequestDispatcher("interestlist.jsp").forward(request, response);
+		
 	}
 }
