@@ -1,5 +1,9 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
+encoding//WebContent/card/rank/rank.html=UTF-8
+=======
 encoding//WebContent/card/managestocks/interestlist.jsp=UTF-8
+>>>>>>> branch 'master' of https://github.com/bluewow/ServiceJUJU.git
 encoding//WebContent/card/rank/ranking.jsp=UTF-8
 encoding//WebContent/fileUpload/KOSDAQ.csv=UTF-8
 encoding/src=UTF-8
