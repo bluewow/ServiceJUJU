@@ -34,13 +34,31 @@ body{
 	width: 85%;
 }
 
-#recommendKeyword{
+#recommendKeyword ul{
+	margin-left: 10%;
+	margin-right: 10%;
+}
+#recommendKeyword_fixed{
 	display: inline-block;
 	text-align: center;
-    width: 40%;
     font-size: 80%;
     font-weight: bold;
 }
+
+span{
+    font-size: 80%;
+    color: red;
+    margin-left: 2%;
+}
+
+/* #recommendKeyword_fixed{
+	display: inline-block;
+	text-align: center;
+    margin-left: 10%;
+    font-size: 80%;
+    font-weight: bold;
+} */
+
 
 #bodyScroll{
 	overflow: scroll;
