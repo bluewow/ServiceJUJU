@@ -46,7 +46,9 @@ public class SearchCompanyController extends HttpServlet{
 		
 		
 //==== (아래는) 크롤링을 위한 코드====================================
-//https://finance.naver.com/sise/lastsearch2.nhn에서 검색 상위종목 4개 추출		
+//https://finance.naver.com/sise/lastsearch2.nhn(네이버 증권)에서 검색 상위종목 4개 추출		
+		
+		
 		String url = "https://finance.naver.com/sise/lastsearch2.nhn";
 		Document doc = null;
 		
