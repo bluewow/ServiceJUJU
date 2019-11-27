@@ -69,21 +69,48 @@
 		<div id="comment">분석 내용 </div>
 		<div id="chart-bottom">
 	        <div class="content margin-content">
-	        	<div class="content-first">관심도<i class="fa fa-question-circle fa-lg ho" aria-hidden="true"></i></div> 
+	        	<div class="content-first">관심도
+					<div class="tool-tip">
+						<span><i class="fa fa-question-circle fa-lg ho" aria-hidden="true"></i></span>
+						<div class="tool-tip-content">
+							<p><span style="color:rgb(204,102,102);">데이터 베이스</span>를 통해 검출한 통계량을 가지고 분석한 관측치입니다.</p>
+							<hr>
+							<div>신뢰도 %</div>
+						</div>
+					</div>
+	        	</div> 
 	        	<div class="progress content-second">
 		            <div class="progress-bar progress-red" style="width: 40%;">${content_1 }%</div>
 		        </div>
 	     	   <div class="content-third"><i class="fa fa-arrow-up" aria-hidden="true"></i></div>
 	        </div>
 	        <div class="content">
-				<div class="content-first">재무상황<i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></div>       	
+				<div class="content-first">재무상황
+					<div class="tool-tip">
+						<span><i class="fa fa-question-circle fa-lg ho" aria-hidden="true"></i></span>
+						<div class="tool-tip-content">
+							<p><span style="color:rgb(204,102,102);">데이터 베이스</span>를 통해 검출한 통계량을 가지고 분석한 관측치입니다.</p>
+							<hr>
+							<div>신뢰도 %</div>
+						</div>
+					</div>
+				</div>       	
 		        <div class="progress content-second">
 		            <div class="progress-bar progress-red" style="width: 50%">${content_2 }%</div>
 		        </div>
 		        <div class="content-third"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>  
 	        </div>
 	        <div class="content">
-	        	<div class="content-first">미정<i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></div>
+	        	<div class="content-first">미정
+	        		<div class="tool-tip">
+	        			<span><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></span>
+	        			<div class="tool-tip-content">
+							<p><span style="color:rgb(204,102,102);">데이터 베이스</span>를 통해 검출한 통계량을 가지고 분석한 관측치입니다.</p>
+							<hr>
+							<div>신뢰도 %</div>
+						</div>
+	        		</div>
+	        	</div>
 	        	 <div class="progress content-second">
 		            <div class="progress-bar progress-blue" style="width: 60%">${content_3 }%</div>
 		        </div>		     
