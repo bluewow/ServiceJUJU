@@ -7,8 +7,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.stockmarket.www.service.HoldingStocksService;
 import com.stockmarket.www.service.InterestStocksService;
+import com.stockmarket.www.service.basic.BasicHoldingStocksService;
 import com.stockmarket.www.service.basic.BasicInterestStocksService;
 
 
@@ -16,7 +19,7 @@ import com.stockmarket.www.service.basic.BasicInterestStocksService;
 public class HoldingStocksController extends HttpServlet{
 
    
-	private InterestStocksService interestStocksInterface;
+	private HoldingStocksService HoldingStocksInterface;
 	
 	@Override
 	public void init() throws ServletException {
@@ -25,13 +28,16 @@ public class HoldingStocksController extends HttpServlet{
 	
 
 	public HoldingStocksController() {
-		interestStocksInterface = new BasicInterestStocksService();
+		HoldingStocksInterface = new BasicHoldingStocksService();
 	}
-	
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("list", interestStocksInterface.getInterestStockList());
+		
+		HttpSession session = request.getSession();
+		int userId = (int)session.getAttribute("id");
+		
+		request.setAttribute("list", HoldingStocksInterface.getInterestHoldingList(userId));
 		request.getRequestDispatcher("holdinglist.jsp").forward(request, response);
 	}
 
