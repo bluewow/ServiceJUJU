@@ -22,7 +22,6 @@ public class CurStock {
 		this.percent = percent;
 	}
 
-
 	public CurStock parser(String text) {
 		CurStock curStockInfo = new CurStock();
 		
@@ -37,29 +36,52 @@ public class CurStock {
 		return curStockInfo;
 	}
 	
-
 	public String getCodeNum() {
 		return codeNum;
+	}
+
+	public void setCodeNum(String codeNum) {
+		this.codeNum = codeNum;
 	}
 
 	public String getPrice() {
 		return price;
 	}
 
-	public String getStatus() {
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	public String getGain() {
 		return gain;
 	}
 
-	public String getStuatsPrice() {
+	public void setGain(String gain) {
+		this.gain = gain;
+	}
+
+	public String getGainPrice() {
 		return gainPrice;
 	}
 
-	public String getStatusPercent() {
+	public void setGainPrice(String gainPrice) {
+		this.gainPrice = gainPrice;
+	}
+
+	public String getSignMark() {
 		return signMark;
+	}
+
+	public void setSignMark(String signMark) {
+		this.signMark = signMark;
 	}
 
 	public String getPercent() {
 		return percent;
+	}
+
+	public void setPercent(String percent) {
+		this.percent = percent;
 	}
 
 	@Override
@@ -73,7 +95,7 @@ public class CurStock {
 		CurStock stock = new CurStock();
 
 		/*종목코드, 현재가, 상승 or 하강, 가격, +/-, %*/
-		System.out.println(stock.parser("005960 13,000 상승 3,000 + 23.2").toString());
+		System.out.println(stock.parser("095660 13,000 상승 3,000 + 23.2").toString());
 	}
 	
 }
