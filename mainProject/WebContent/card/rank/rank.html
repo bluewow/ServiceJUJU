@@ -33,13 +33,11 @@
                 <tbody>
                     <tr>
                         <td class="rank">1</td>
-                        <td class="profileImg"></td>
-                        <td class="name">ff</td>
-                        <td class="assets">1111</td>
-                        <td class="assetsGrowth">11%</td>
+                        <td class="profileImg" rowspan="2"></td>
+                        <td class="name" rowspan="2">ff</td>
+                        <td class="assets" rowspan="2">1111</td>
+                        <td class="assetsGrowth" rowspan="2">11%</td>
                     </tr>
-                 
-                    <!-- </c:forEach> -->
                 </tbody>
             </table>
 
@@ -48,13 +46,13 @@
             <table>
                 <tbody id="myRank">
                     <tr>
-                        <td class="rank">${myRank}</td>
-                        <td class="profileImg"></td>
-                        <td class="name">${myInfo.nickName}</td>
-                        <td class="assets">
+                        <td class="rank">1</td>
+                        <td class="profileImg" rowspan="2"></td>
+                        <td class="name" rowspan="2">${myInfo.nickName}</td>
+                        <td class="assets" rowspan="2">
                             <fmt:formatNumber value="${myInfo.vMoney}" pattern="#,###" />
                         </td>
-                        <td class="assetsGrowth">
+                        <td class="assetsGrowth" rowspan="2">
                             <fmt:formatNumber value="${myInfo.vMoney/10000}" pattern="#,###" />%</td>
                     </tr>
                 </tbody>

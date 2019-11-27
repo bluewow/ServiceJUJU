@@ -24,5 +24,6 @@ public interface SystemService {
 	*/
 	boolean updateMarket(String market);
 	
+	// 하루에 한번 모든 회원의 당일 자산값을 등록한다.
 	int insertRecordAsset(RecordAsset recordAsset);
 }

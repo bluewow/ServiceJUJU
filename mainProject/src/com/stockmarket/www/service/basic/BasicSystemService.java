@@ -11,9 +11,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.stockmarket.www.dao.MemberDao;
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
+import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
 import com.stockmarket.www.entity.RecordAsset;
-import com.stockmarket.www.entity.CurStockPrice;
+import com.stockmarket.www.entity.CurStock;
 import com.stockmarket.www.service.SystemService;
 
 public class BasicSystemService implements SystemService{
@@ -26,13 +28,14 @@ public class BasicSystemService implements SystemService{
 	List<String[]> companyList;
 	String[] dataBuffer;
 	CSVStockDataDao log = new CSVStockDataDao();
+	MemberDao memberDao;
 	
 	/*-------------------------- refreshStockPrice ----------------------------*/
 	public void refreshStockPrice(String pathOfKospi, String pathOfKosdaq) {
 		CSVStockDataDao data = new CSVStockDataDao();
 		List<String> codeNums = new ArrayList<>();
-		List<CurStockPrice> kospi;
-		List<CurStockPrice> kosdaq;
+		List<CurStock> kospi;
+		List<CurStock> kosdaq;
 		
 		//CSV 를 참조하여 KOSPI, KOSDAQ 모든 종목에 대한 종목코드를 가져온다
 		codeNums = data.getColumnData(STOCK_CODE_NUM, pathOfKospi);
@@ -46,10 +49,10 @@ public class BasicSystemService implements SystemService{
 		
 	}
 	
-	private List<CurStockPrice> getCurrentStockPrice(List<String> codeNums) {
+	private List<CurStock> getCurrentStockPrice(List<String> codeNums) {
 		Document doc = null;
-		CurStockPrice curStockInfo = new CurStockPrice();
-		List<CurStockPrice> data = new ArrayList<>();
+		CurStock curStockInfo = new CurStock();
+		List<CurStock> data = new ArrayList<>();
 		
 		for(String codeNum : codeNums) {
 			String url = "https://finance.naver.com/item/main.nhn?code=" + codeNum;
@@ -143,7 +146,22 @@ public class BasicSystemService implements SystemService{
 			}
 		}
 	}
+	/*-------------------------- insert Asset Record ----------------------------*/
 	
+	@Override
+	public int insertRecordAsset(RecordAsset recordAsset) {
+		memberDao = new JdbcMemberDao();
+	
+		List<Integer> memberId = new ArrayList<Integer>();
+		
+		for (int i = 0; i < memberDao.getMemberList().size(); i++) {
+			memberId.add(memberDao.getMemberList().get(i).getId());
+		}
+		for (int i = 0; i < memberId.size(); i++) {
+								
+		}
+		return 0;	
+	}
 	
 	
 /*
@@ -183,9 +201,4 @@ public class BasicSystemService implements SystemService{
 		}
 	}
 
-	@Override
-	public int insertRecordAsset(RecordAsset recordAsset) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }

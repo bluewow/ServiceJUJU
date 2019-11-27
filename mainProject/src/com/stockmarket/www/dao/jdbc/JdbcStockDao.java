@@ -12,6 +12,7 @@ import com.stockmarket.www.entity.Member;
 import com.stockmarket.www.entity.Stock;
 
 public class JdbcStockDao implements StockDao{
+	
 
 	@Override
 	public String getStockName(String codeNum) {
@@ -48,6 +49,7 @@ public class JdbcStockDao implements StockDao{
 			if(rs.next()) {
 				return rs.getString("CODENUM");
 			}
+			
 			rs.close();
 			statement.close();
 		} catch (ClassNotFoundException e) {

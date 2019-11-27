@@ -45,9 +45,9 @@
 						</td>
 					</tr>
 					
-					<form id="deleteForm" action="interestlist" method="get">
-                            <input type="hidden" name="deletestock" value="${n.stockname}" />
-					 </form>
+					        <form id="deleteForm" action="interestlist" method="get">
+                            <input type="hidden" name="delStockName" value="${n.stockname}" />
+					         </form>
 				</c:forEach>
 
 				<!--        <tr>

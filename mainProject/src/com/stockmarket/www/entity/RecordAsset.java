@@ -6,11 +6,16 @@ public class RecordAsset {
 	private String regdate;
 	private int value;
 	
-	@Override
-	public String toString() {
-		return "RecordAsset [memberId=" + memberId + ", regdate=" + regdate + ", value=" + value + "]";
+
+	// 생성용
+	public RecordAsset(int memberId, String regdate, int value) {
+		this.memberId = memberId;
+		this.regdate = regdate;
+		this.value = value;
 	}
 	
+
+	// 게터세터
 	public int getMemberId() {
 		return memberId;
 	}
@@ -30,6 +35,9 @@ public class RecordAsset {
 		this.value = value;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "RecordAsset [memberId=" + memberId + ", regdate=" + regdate + ", value=" + value + "]";
+	}
 
 }
