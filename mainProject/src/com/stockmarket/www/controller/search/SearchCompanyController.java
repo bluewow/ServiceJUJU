@@ -43,25 +43,33 @@ public class SearchCompanyController extends HttpServlet{
 		}
 
 		request.setAttribute("search", seachCompanyService.searchCompany(search, csvFilePath));
-		request.getRequestDispatcher("search.jsp").forward(request, response);
+		
 		
 //==== (아래는) 크롤링을 위한 코드====================================
+//https://finance.naver.com/sise/lastsearch2.nhn(네이버 증권)에서 검색 상위종목 4개 추출		
 		
-		String url = "http://www.financipe.com/snc";
+		
+		String url = "https://finance.naver.com/sise/lastsearch2.nhn";
+
+		
+	
 		Document doc = null;
 		
 		String[] recommendKeyword = new String[4];
 		doc = Jsoup.connect(url).get();
 		
-		Elements element = doc.select("div#cloud_container");
-		Iterator<Element> ie1 = element.select("#div_cloud_word_0").iterator();
+		Elements element = doc.select("tbody");
+		Iterator<Element> ie1 = element.select("a.tltle").iterator();
 		
-		
-		
-		
-		while (ie1.hasNext()) {
-			System.out.println(ie1.next().text());
+		for (int i = 0; i < 4; i++) {
+			recommendKeyword[i] = ie1.next().text();
+			System.out.println(recommendKeyword[i]);
 		}
+		
+		request.setAttribute("recommendKeyword", recommendKeyword);
+		request.getRequestDispatcher("search.jsp").forward(request, response);
+		
+		
 		
 		
 		
