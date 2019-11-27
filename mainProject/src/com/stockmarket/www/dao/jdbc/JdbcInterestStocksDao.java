@@ -68,7 +68,7 @@ public class JdbcInterestStocksDao implements InterestStocksDao {
  						
  			result = st.executeUpdate();
 
- 			System.out.println("stockname:" + stockName +"," + id + delStockName);
+// 			System.out.println("stockname:" + stockName +"," + id + delStockName);
      	} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
