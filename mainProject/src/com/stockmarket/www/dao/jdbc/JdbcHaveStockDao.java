@@ -58,6 +58,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 			}
 			rs.close();
 			st.close();	
+			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
