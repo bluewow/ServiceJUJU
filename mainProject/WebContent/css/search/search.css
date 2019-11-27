@@ -56,11 +56,18 @@ body{
 	margin-right: 10%;
 }
 
-#recommendKeyword{
+/* #recommendKeyword{
 
 	display: inline-block;
 	text-align: center;
     width: 40%;
+    font-size: 80%;
+    font-weight: bold;
+} */
+
+#recommendKeyword_fixed{
+	display: inline-block;
+	text-align: center;
     font-size: 80%;
     font-weight: bold;
 }
@@ -85,6 +92,7 @@ table{
     margin-right: 10%;
     margin-left: 4%;
     font-size: 80%;
+    
  }
 
 .search-button{
@@ -123,4 +131,10 @@ td{
     padding: 10px; 
     border-bottom: 1px solid #ccc; 
     width:27px;
+}
+
+span{
+	font-size: 80%;
+    color: red;
+    margin-left: 2%;
 }
