@@ -136,7 +136,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 			st.setInt(1, haveStock.getMemberId());
 			st.setString(2, haveStock.getStockId());
 			st.setInt(3, haveStock.getQuantity());
-			st.setDouble(4, haveStock.getAvg());
+			st.setInt(4, haveStock.getAvg());
 
 			result = st.executeUpdate();
 
