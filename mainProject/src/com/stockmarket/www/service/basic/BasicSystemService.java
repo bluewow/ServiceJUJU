@@ -16,6 +16,7 @@ import com.stockmarket.www.dao.csv.CSVStockDataDao;
 import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
 import com.stockmarket.www.entity.RecordAsset;
 import com.stockmarket.www.entity.CurStock;
+import com.stockmarket.www.entity.HaveStockView;
 import com.stockmarket.www.service.SystemService;
 
 public class BasicSystemService implements SystemService{
@@ -152,14 +153,18 @@ public class BasicSystemService implements SystemService{
 	public int insertRecordAsset(RecordAsset recordAsset) {
 		memberDao = new JdbcMemberDao();
 	
-		List<Integer> memberId = new ArrayList<Integer>();
+		int sum = 0;
+		sum = memberDao.getMember(memberId).getvMoney();
 		
-		for (int i = 0; i < memberDao.getMemberList().size(); i++) {
-			memberId.add(memberDao.getMemberList().get(i).getId());
+		List<HaveStockView> list = new ArrayList<>();
+		list.addAll(haveStockDao.getList(memberId));
+		for (HaveStockView data : list) {
+			// (보유종목당 현재가 및 보유수량 확인용)
+			// System.out.println(data.getPrice()+","+data.getQuantity()); 
+			sum += Integer.parseInt(data.getPrice().replaceAll(",",""))*data.getQuantity();
 		}
-		for (int i = 0; i < memberId.size(); i++) {
-								
-		}
+		// 가상머니+(현재가*보유수량)+(현재가*보유수량).....
+		// List<HaveStock> quantHaveStocks = haveStockDao.getQuantity(memberId);
 		return 0;	
 	}
 	

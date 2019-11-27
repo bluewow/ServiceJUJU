@@ -19,13 +19,18 @@ public class JdbcHaveStockDao implements HaveStockDao {
 
 	@Override
 	public List<HaveStockView> getList(int id) {
+		String sql = "SELECT * FROM HAVESTOCK_VIEW WHERE MEMBER_ID = ?";
 		
 		List<HaveStockView> stockList = new ArrayList<>();
 		// List 필요할 듯.... .... ....... // 담을 그릇 ㅠㅠㅠㅠㅠㅠㅠㅠ 힝 ㅠㅠㅠㅠㅠㅠ
-		CurStock curStock = new CurStock("095660", "13,000", "상승", "3,000", "+", "23.2");
-		// curStock.getList(String codenum);
+        List<CurStock> list = new ArrayList<>();
+        list.add(new CurStock("035420", "13,000", "상승", "3,000", "+", "2.5"));
+        list.add(new CurStock("000660", "15,000", "하강", "3,000", "-", "3.4"));
+        list.add(new CurStock("020560", "16,000", "보합", "3,000", "", "1.5"));
+        list.add(new CurStock("005930", "12,000", "상승", "3,000", "+", "1.6"));
+        list.add(new CurStock("005380", "11,000", "상승", "3,000", "+", "8.9"));
+        list.add(new CurStock("095660", "10,500", "상승", "3,000", "+", "10.2"));
 		
-		String sql = "SELECT * FROM HAVESTOCK_VIEW WHERE MEMBER_ID = ?";
 	
 		try {
 			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
@@ -39,15 +44,17 @@ public class JdbcHaveStockDao implements HaveStockDao {
 				int avg = rs.getInt("AVG");
 				String stockName = rs.getString("NAME");
 				//while (memberId.equals(new CurStock(stockId).getCodeNum())) {
-				if (stockId.equals(curStock.getCodeNum())){ // foreach.....(if...break)forEach문을 종료시키기 위한 if;
-					String price = curStock.getPrice();
-					String gain = curStock.getGain(); 
-					String percent = curStock.getPercent();
-					
-					HaveStockView haveStockView = new HaveStockView(memberId, stockId, quantity, avg, stockName, price, gain, percent);
-					stockList.add(haveStockView);		
-					break;
-				}		
+                //if (stockId.equals(list.getCodeNum())){ // foreach.....(if...break)forEach문을 종료시키기 위한 if;
+                for(CurStock data : list) {
+                    if (stockId.equals(data.getCodeNum())) {
+                        String price = data.getPrice();
+                        String gain = data.getGain(); 
+                        String percent = data.getPercent();
+                        
+                        HaveStockView haveStockView = new HaveStockView(memberId, stockId, quantity, avg, stockName, price, gain, percent);
+                        stockList.add(haveStockView);
+                        break;
+                    }
 			}
 			rs.close();
 			st.close();	
@@ -195,7 +202,9 @@ public class JdbcHaveStockDao implements HaveStockDao {
 			stockDao.update(haveStock);
 			break;
 		case 2:
-			System.out.println(stockDao.getList(1));
+            System.out.println(stockDao.getList(3));
+            System.out.println("-------------------");
+            System.out.println(stockDao.getList(6));
 			break;
 		}
 		System.out.println("종료");
