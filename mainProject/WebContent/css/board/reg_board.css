@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+body {
+    width:100%;
+    height:100%;
+    position:relative;
+}
+
+#frame {
+	width:500px;
+	height:420px;    
+	margin-left:auto;
+    margin-right:auto;
+    border-radius: 15px;
+	background-color: #13bfd7;
+}
+
+#title-row {
+    position:relative;
+	height:60px;
+	text-align: center;
+	
+}
+
+.title {
+	width:400px;
+	margin-top:20px;
+	color:white;
+	display: inline-block;
+	text-align:center;
+	border:none;
+	background-color: transparent;
+	line-height:20px;
+	font-size:16px;
+}
+.title::placeholder {
+	color:white;
+	
+}
+
+#content-row {
+	text-align: center;
+    position:relative;
+	height:294px;
+	background: white;
+	  margin: 0px 4px;
+}
+
+.content {
+	margin-top:25px;
+	padding:10px;
+	width:90%;
+	height:90%;
+	display: inline-block;
+	border:none;
+	background-color: #ececec;
+	resize:none;
+	
+}
+
+#commit-row {
+    position:relative;
+	height:60px;
+	background: white;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    margin: 0px 4px;
+}
+
+.cancel {
+    position: absolute;
+    top:10%;
+    right: 20%;
+	font-size: 1em;
+	background-color: #ececec; 
+	color: black;
+	padding: 6px 10px;
+	border-radius: 16px;
+ 	border: none; 	
+	outline: none;
+	cursor: pointer;
+}
+
+.reg {
+    position: absolute;
+    top:10%;
+    right: 5%;
+	font-size: 1em;
+	background-color: #ececec; 
+	color: black;
+	padding: 6px 10px;
+	border-radius: 16px;
+ 	border: none; 	
+	outline: none;
+	cursor: pointer;
+}
