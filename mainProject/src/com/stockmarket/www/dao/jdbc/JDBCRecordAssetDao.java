@@ -63,7 +63,6 @@ public class JDBCRecordAssetDao implements RecoedAssetDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return result;
 	}
 }

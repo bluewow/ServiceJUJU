@@ -17,8 +17,6 @@ import com.stockmarket.www.entity.HaveStockView;
 
 public class JdbcHaveStockDao implements HaveStockDao {
 
-	
-	
 	@Override
 	public List<HaveStockView> getList(int id) {
 		
