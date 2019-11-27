@@ -33,7 +33,7 @@ public class BasicHoldingStocksService implements HoldingStocksService {
 			int price = Integer.parseInt(data.getPrice().replaceAll(",", ""));
 			
 			
-			System.out.println("StockName:"+StockName+"price:"+price+"quntity:"+);
+//			System.out.println("StockName:"+StockName+"price:"+price+"quntity:"+"");
 	    }
 	}
 }
