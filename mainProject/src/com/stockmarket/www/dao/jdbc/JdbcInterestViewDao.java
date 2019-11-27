@@ -30,7 +30,7 @@ public class JdbcInterestViewDao implements InterestViewDao {
 			
 			while(rs.next()) {
 				String stockname = rs.getString("STOCKNAME");
-				
+
 				InterestView interestview = new InterestView(stockname);
 				interestlist.add(interestview);
 				

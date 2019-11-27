@@ -17,23 +17,29 @@
 }
 
 #my-button {
-	background: url( "../../images/my.png" ) no-repeat;
-	width: 61px;
-	height: 31px;
-	border: none;
-	cursor: pointer;
-	text-indent: -300px;
-	overflow: hidden;
-}
+	top: 5%;
+   	left: 5%;
+    position: relative;
+	font-size: 1em;
+	background-color: #13bfd7; 
+	color: white;
+	padding: 6px 10px;
+	border-radius: 11px;
+ 	border: none; 	
+	outline: none;
+} 
 
 #favo-button {
-	background: url( "../../images/favo.png" ) no-repeat;
-	width: 61px;
-	height: 31px;
-	border: none;
-	cursor: pointer;
-	text-indent: -300px;
-	overflow: hidden;
+	top: 5%;
+   	left: 5%;
+    position: relative;
+	font-size: 1em;
+	background-color: #13bfd7; 
+	color: white;
+	padding: 6px 10px;
+	border-radius: 11px;
+ 	border: none; 	
+	outline: none;
 }
 
 #del-button {
