@@ -48,7 +48,7 @@ else
 		</nav>
   	<form action="/card/managestocks/interestlist" method="post">
 		<table id="communityTable">
-			<thead class="content">
+			<thead class="subject">
 				<tr>
 					<th></th>
 					<th>제목</th>
@@ -57,7 +57,7 @@ else
 					<th></th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="content">
 				  <c:forEach var="n" items="${CommunityBoard}">
 					<tr>
 							<td>${n.id}</td>

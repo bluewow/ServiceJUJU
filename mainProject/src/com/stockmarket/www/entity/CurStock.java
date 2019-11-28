@@ -1,5 +1,14 @@
 package com.stockmarket.www.entity;
 
+/*
+ * 
+ * 크롤링 데이터 형태
+ * CurrentStockInfo [codeNum=002900, price=948, gain=보합, stuatsPrice=0, signMark=0.00, percent=0]
+ * CurrentStockInfo [codeNum=003780, price=3,960, gain=하락, stuatsPrice=50, signMark=-, percent=1.25]
+ * CurrentStockInfo [codeNum=003520, price=6,320, gain=상승, stuatsPrice=20, signMark=+, percent=0.32]
+ *
+ * 
+*/
 public class CurStock {
 	private String codeNum;
 	private String price;

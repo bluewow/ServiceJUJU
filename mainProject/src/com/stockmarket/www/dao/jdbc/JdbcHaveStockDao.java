@@ -37,10 +37,9 @@ public class JdbcHaveStockDao implements HaveStockDao {
 				int memberId = rs.getInt("MEMBER_ID");
 				String stockId = rs.getString("STOCK_ID");
 				int quantity = rs.getInt("QUANTITY");
-				int avg = rs.getInt("AVG");
+				float avg = rs.getFloat("AVG");
 				String stockName = rs.getString("NAME");
 				// while (memberId.equals(new CurStock(stockId).getCodeNum())) {
-
 				// if (stockId.equals(list.getCodeNum())){ // foreach.....(if...break)forEach문을
 				// 종료시키기 위한 if;
 				for (CurStock data : list) {
@@ -48,13 +47,11 @@ public class JdbcHaveStockDao implements HaveStockDao {
 						String price = data.getPrice();
 						String gain = data.getGain();
 						String percent = data.getPercent();
-
 						HaveStockView haveStockView = new HaveStockView(memberId, stockId, quantity, avg, stockName,
 								price, gain, percent);
 						stockList.add(haveStockView);
 						break;
 					}
-
 				}
 			}
 			rs.close();
@@ -110,7 +107,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		try {
 			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
 			st.setInt(1, haveStock.getQuantity());
-			st.setInt(2, haveStock.getAvg());
+			st.setFloat(2, haveStock.getAvg());
 			st.setInt(3, haveStock.getMemberId());
 			st.setString(4, haveStock.getStockId());
 
@@ -139,7 +136,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 			st.setInt(1, haveStock.getMemberId());
 			st.setString(2, haveStock.getStockId());
 			st.setInt(3, haveStock.getQuantity());
-			st.setInt(4, haveStock.getAvg());
+			st.setFloat(4, haveStock.getAvg());
 
 			result = st.executeUpdate();
 
