@@ -12,6 +12,8 @@
 
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../../css/search/search.css">
+<script src="../../js/search/search.js"></script>
+
 </head>
 <!-- style="overflow:scroll" -->
 <body>
@@ -57,7 +59,7 @@
 					<td>1</td>
 					<td>${n.companyName}<a href="${n.website}" target="_blank"><img src="/css/search/link.png" alt=""></a></td>
 					<td>${n.stockItemName}</td>
-					<td><img src="/css/search/interest_no.png" alt=""></td>
+					<td class="attention"><img src="/css/search/interest_no.png" ></td>
 				</tr>
 			<%-- </c:forEach> --%>
 			</tbody>
