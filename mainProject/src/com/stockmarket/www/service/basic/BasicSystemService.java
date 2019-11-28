@@ -11,6 +11,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.stockmarket.www.controller.system.AppContext;
 import com.stockmarket.www.dao.MemberDao;
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
 import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
@@ -63,14 +64,14 @@ public class BasicSystemService implements SystemService{
 										.timeout(5000)
 										.get();
 			} catch (IOException e) {
-				log.makeCSV("1");
+				AppContext.setLog("네이버 금융 크롤링도중 IOException 발생", BasicSystemService.class.getName());
 				e.printStackTrace();
 			}
 			
 			//현재가, 상태(상승 or 하락), 금액, +/-, percent 를 가져오는 CSS query 문 
 			Elements status = doc.select(".no_today span:eq(0), .no_exday em span:lt(2)");
 			if(status == null) {
-				log.makeCSV("2");
+				AppContext.setLog("네이버 금융 크롤링 데이터가 null 일 경우", BasicSystemService.class.getName());
 				return null;
 			}
 			
@@ -109,14 +110,14 @@ public class BasicSystemService implements SystemService{
 									.timeout(5000)
 									.post();
 		} catch (IOException e) {
-			log.makeCSV("3");
+			AppContext.setLog("코스피/코스닥 excel 파일다운로드시 IOException 발생", BasicSystemService.class.getName());
 			e.printStackTrace();
 		}
 		
 		//tr Tag 이하를 선택
 		Elements contents = doc.select("tr");
 		if(contents == null) {
-			log.makeCSV("4");
+			AppContext.setLog("코스피/코스닥 파일다운로드 데이터가 null 인경우", BasicSystemService.class.getName());
 			return false;
 		}
 
@@ -127,7 +128,7 @@ public class BasicSystemService implements SystemService{
 			// KOSPI.csv or KOSDAQ.csv 를 생성한다
 			data.makeCSV("WebContent/fileUpload/"+market, companyList);
 		} catch (IOException e) {
-			log.makeCSV("5");
+			AppContext.setLog("코스피/코스닥 csv 파일 생성중 IOException 발생", BasicSystemService.class.getName());
 			e.printStackTrace();
 		}
 		return true;
