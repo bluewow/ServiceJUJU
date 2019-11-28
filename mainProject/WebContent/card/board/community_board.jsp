@@ -50,7 +50,7 @@ else
 		<table id="communityTable">
 			<thead class="subject">
 				<tr>
-					<th> </th>
+					<th></th>
 					<th>제목</th>
 					<th>작성일</th> 
 					<th>조회</th>
