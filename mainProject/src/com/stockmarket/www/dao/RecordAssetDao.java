@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.stockmarket.www.entity.RecordAsset;
 
-public interface RecoedAssetDao {
+public interface RecordAssetDao {
 	
 	// 자산추이 그래프
 	List<RecordAsset> getList(int memberId);
