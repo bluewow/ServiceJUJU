@@ -12,10 +12,6 @@ import com.stockmarket.www.dao.InterestViewDao;
 import com.stockmarket.www.entity.InterestView;
 
 public class JdbcInterestViewDao implements InterestViewDao {
-
-	
-
-	
 	
 	@Override
 	public List<InterestView> getInterestStockList(int id) {

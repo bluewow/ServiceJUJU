@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+/* 
+	Modal 팝업
+ */
+ 
+#pop-up {
+	visibility:hidden;
+    z-index: 100;
+    position: absolute;
+    background-color: rgb(255, 255, 255); 
+    width: calc(23vw);
+    height: calc(71vh);
+    left: 40%;
+    top: 21%;
+}
+
+#pop-up #pop-up-top {
+	background-color: rgb(19, 191, 215); 
+	height: 17%;
+	color: white;
+}
+
+#pop-up #pop-up-content {
+	height: 83%;
+	
+}
+

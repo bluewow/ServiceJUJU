@@ -20,7 +20,9 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.CSVWriterBuilder;
 import com.opencsv.exceptions.CsvValidationException;
+import com.stockmarket.www.controller.system.AppContext;
 import com.stockmarket.www.entity.Company;
+import com.stockmarket.www.service.basic.BasicSystemService;
 
 
 /*
@@ -89,15 +91,16 @@ public class CSVStockDataDao {
 		cw.close();
 	}
 	
-	public void makeCSV(String level) {
+	public void makeCSV(String reason, String className) {
 		CSVWriter cw;
-		String[] data = new String[2];
+		String[] data = new String[3];
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 		String curHour = date.format(System.currentTimeMillis());
 		String filePath = "WebContent/fileUpload/LOG";
 		
-		data[0] = level;	//로그번호
-		data[1] = curHour;	//로그시간
+		data[0] = curHour;	//로그시간
+		data[1] = reason;	//원인
+		data[2] = className; //Class Name
 		
 		try {
 			cw = new CSVWriter(new FileWriter(filePath+".csv", true));
@@ -188,7 +191,7 @@ public class CSVStockDataDao {
 		case 4: //LOG file write Test
 			CSVStockDataDao log = new CSVStockDataDao();
 
-			log.makeCSV("10");
+			AppContext.setLog("TEST", BasicSystemService.class.getName());
 			break;
 		}
 	}

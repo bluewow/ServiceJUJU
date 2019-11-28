@@ -18,30 +18,38 @@
 
 #my-button {
 	top: 5%;
-   	left: 5%;
+   	left: 2%;
     position: relative;
 	font-size: 1em;
-	background-color: #808080; 
-	color: white;
+	width:60px;
+	background-color: #efefef; 
+	color: #58585b;
 	padding: 6px 10px;
-	border-radius: 11px;
+	border-radius: 16px;
  	border: none; 	
 	outline: none;
 	cursor: pointer;
 } 
+#my-button:hover {
+	opacity: 0.7;
+}
 
 #favo-button {
 	top: 5%;
-   	left: 5%;
+   	left: 3%;
     position: relative;
 	font-size: 1em;
-	background-color: #808080; 
-	color: white;
+	width:60px;
+	background-color: #efefef; 
+	color: #58585b;
 	padding: 6px 10px;
-	border-radius: 11px;
+	border-radius: 16px;
  	border: none; 	
 	outline: none;
 	cursor: pointer;
+}
+#favo-button:hover {
+	opacity: 0.7;
 }
 
 #reg-button {

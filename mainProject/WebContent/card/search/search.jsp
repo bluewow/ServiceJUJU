@@ -12,6 +12,8 @@
 
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../../css/search/search.css">
+<script src="../../js/search/search.js"></script>
+
 </head>
 <!-- style="overflow:scroll" -->
 <body>
@@ -19,7 +21,7 @@
 	<section id="search-form">
 		<h1 class="d-none">주식회사검색</h1>
 		<form action ="search" method="get">
-			<div>
+			<div id ="search-div">
 				<input id ="search-text" type="text" name="search">
 				<button class="search-button"></button>
 			</div>
@@ -27,13 +29,14 @@
 	</section>
 		
 	<section id="recommendKeyword">
-		<!-- <h1>추천 검색어</h1> -->
 		<ul>
 			<li id="recommendKeyword_fixed">추천검색어 </li>
-			<!-- <li>광동 사운드</li>
-			<li>기현 알고리즘</li>
-			<li>나람 금융</li>
-			<li>명훈 소프트</li> -->
+
+			
+			<c:forEach var="r" items="${recommendKeyword}">
+				<a href="search?search=${r}"><span>${r}</span></a>
+			</c:forEach>
+
 		</ul>
 	</section>
 	
@@ -54,9 +57,9 @@
 			<%-- <c:forEach var="n" items="${search}"> --%>
 				<tr>
 					<td>1</td>
-					<td>${n.companyName}<a href="${n.website}"><img src="/css/search/link.png" alt=""></a></td>
+					<td>${n.companyName}<a href="${n.website}" target="_blank"><img src="/css/search/link.png" alt=""></a></td>
 					<td>${n.stockItemName}</td>
-					<td><img src="/css/search/interest_no.png" alt=""></td>
+					<td class="attention"><img src="/css/search/interest_no.png" ></td>
 				</tr>
 			<%-- </c:forEach> --%>
 			</tbody>
@@ -81,7 +84,7 @@
 			<tbody>
 				<tr>
 					<td>2</td>
-					<td>경인 일보</td>
+					<td>테스트</td>
 					<td>미디어</td>
 					<td><img src="/css/search/interest_yes.png" alt=""></td>
 				</tr>
@@ -90,7 +93,7 @@
 			<tbody>
 				<tr>
 					<td>3</td>
-					<td>기업 은행</td>
+					<td>테스트</td>
 					<td>은행</td>
 					<td>관심x</td>
 				</tr>
@@ -99,7 +102,7 @@
 			<tbody>
 				<tr>
 					<td>4</td>
-					<td>경인 일보</td>
+					<td>테스트</td>
 					<td>미디어</td>
 					<td>관심</td>
 				</tr>
@@ -108,7 +111,7 @@
 			<tbody>
 				<tr>
 					<td>5</td>
-					<td>경인 일보</td>
+					<td>테스트</td>
 					<td>미디어</td>
 					<td>관심</td>
 				</tr>
@@ -117,7 +120,7 @@
 			<tbody>
 				<tr>
 					<td>6</td>
-					<td>경인 일보</td>
+					<td>테스트</td>
 					<td>미디어</td>
 					<td>관심</td>
 				</tr>
@@ -126,7 +129,7 @@
 			<tbody>
 				<tr>
 					<td>7</td>
-					<td>경인 일보</td>
+					<td>테스트</td>
 					<td>미디어</td>
 					<td>관심</td>
 				</tr>
@@ -135,7 +138,7 @@
 			<tbody>
 				<tr>
 					<td>8</td>
-					<td>경인 일보</td>
+					<td>테스트</td>
 					<td>미디어</td>
 					<td>관심</td>
 				</tr>
@@ -144,7 +147,7 @@
 			<tbody>
 				<tr>
 					<td>9</td>
-					<td>경인 일보</td>
+					<td>테스트</td>
 					<td>미디어</td>
 					<td>관심</td>
 				</tr>
@@ -154,7 +157,7 @@
 			<tbody>
 				<tr>
 					<td>10</td>
-					<td>경인 일보</td>
+					<td>테스트</td>
 					<td>미디어</td>
 					<td>관심</td>
 				</tr>

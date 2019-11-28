@@ -4,20 +4,38 @@ public class HaveStockView extends HaveStock {
 	
 	private String stockName;
 	private String price;
+	private int intPrice;
 	private String gain;
 	private String percent;
 	
 	public HaveStockView() {
-		super();
+		// TODO Auto-generated constructor stub
 	}
 	
-	public HaveStockView(int memberId, String stockId, int quantity,
-			String stockName, String price, String gain, String percent) {
-		super(memberId, stockId, quantity);
+	public HaveStockView(int memberId, String stockId, int quantity, float avg, String stockName, String price,
+			String gain, String percent) {
+		super(memberId, stockId, quantity, avg);
 		this.stockName = stockName;
 		this.price = price;
 		this.gain = gain;
 		this.percent = percent;
+	}
+	
+	public HaveStockView(int memberId, String stockId, int quantity, int avg, String stockName, int intprice,
+			String gain, String percent) {
+		super(memberId, stockId, quantity, avg);
+		this.stockName = stockName;
+		this.intPrice = intprice;
+		this.gain = gain;
+		this.percent = percent;
+	}
+
+	public int getIntprice() {
+		return intPrice;
+	}
+
+	public void setIntprice(int intprice) {
+		this.intPrice = intprice;
 	}
 
 	public String getStockName() {
@@ -48,15 +66,7 @@ public class HaveStockView extends HaveStock {
 	@Override
 	public String toString() {
 		return "HaveStockView [stockName=" + stockName + ", price=" + price + ", gain=" + gain + ", percent=" + percent
-				+ ", getStockName()=" + getStockName() + ", getPrice()=" + getPrice() + ", getGain()=" + getGain()
-				+ ", getPercent()=" + getPercent() + "]";
+				+ ", toString()=" + super.toString() + "]";
 	}
-	
-//	@Override
-//	public String toString() {
-//		return "HaveStockView [stockName=" + stockName + ", price=" + price + ", gain=" + gain + ", percent=" + percent
-//				+ "]";
-//	}
-	
-	
+
 }
