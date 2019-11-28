@@ -4,25 +4,53 @@
 	Modal 팝업
  */
  
-#pop-up {
-	visibility:hidden;
+.pop-up {
+	/* visibility:hidden; */
+	border:1px solid red;
     z-index: 100;
     position: absolute;
     background-color: rgb(255, 255, 255); 
     width: calc(23vw);
     height: calc(71vh);
-    left: 40%;
+    left: 40vw;
     top: 21%;
+    border-radius: 15px;
+    min-width: 350px;
 }
 
-#pop-up #pop-up-top {
-	background-color: rgb(19, 191, 215); 
-	height: 17%;
-	color: white;
+.pop-up .pop-up-top {
+    background-color: rgb(19, 191, 215);
+    height: 17%;
+    color: white;
+    border-radius: 15px 15px 0px 0px;
+    font-weight: bold;
+    font-size: 1.8em;
+    padding: 3% 0% 0% 12%;
 }
 
-#pop-up #pop-up-content {
+.pop-up .pop-up-border {
 	height: 83%;
+	
+	}
+
+	.pop-up .pop-up-border .pop-up-context{
+		border:1px solid red;
+	    width: 80%;
+	    height: 100%;
+	    margin-left: 10%;
+	    margin-right: 10%;
+	
+	}
+
+.pop-up-context .text {
+	
+}
+
+.pop-up-context .box {
+	
+}
+
+.pop-up-context .login-box {
 	
 }
 
