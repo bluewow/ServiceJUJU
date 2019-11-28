@@ -32,6 +32,9 @@
 
 <link rel="stylesheet" type="text/css" href="./css/tablet.css">
 
+<!--  pop-up -->
+<link rel="stylesheet" type="text/css" href="./css/popup.css">
+
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
@@ -56,6 +59,10 @@
 
 <body>
    <!-- =============================================================================================================== -->
+   <div id=pop-up>
+		<div id="pop-up-top">STOCK MARKET<br>로그인</div>
+   		<div id="pop-up-content">Context</div>
+   </div>
    <header class="navbar">
       <h1 style="display: none;">Stock Market</h1>
       <section class="row">
