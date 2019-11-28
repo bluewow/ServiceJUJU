@@ -11,6 +11,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.stockmarket.www.controller.system.AppContext;
 import com.stockmarket.www.dao.HaveStockDao;
 import com.stockmarket.www.dao.MemberDao;
 import com.stockmarket.www.dao.RecordAssetDao;
@@ -51,10 +52,9 @@ public class BasicSystemService implements SystemService {
 
 		codeNums = data.getColumnData(STOCK_CODE_NUM, pathOfKosdaq);
 		kosdaq = getCurrentStockPrice(codeNums);
-
-		// TODO
-		// 갱신된 데이터를 넘겨주는 작업
-
+		
+		AppContext.setKospi(kospi);
+		AppContext.setKosdaq(kosdaq);
 	}
 
 	private List<CurStock> getCurrentStockPrice(List<String> codeNums) {
@@ -67,14 +67,14 @@ public class BasicSystemService implements SystemService {
 			try {
 				doc = Jsoup.connect(url).ignoreContentType(true).timeout(5000).get();
 			} catch (IOException e) {
-				log.makeCSV("1");
+				AppContext.setLog("네이버 금융 크롤링도중 IOException 발생", BasicSystemService.class.getName());
 				e.printStackTrace();
 			}
 
 			// 현재가, 상태(상승 or 하락), 금액, +/-, percent 를 가져오는 CSS query 문
 			Elements status = doc.select(".no_today span:eq(0), .no_exday em span:lt(2)");
-			if (status == null) {
-				log.makeCSV("2");
+			if(status == null) {
+				AppContext.setLog("네이버 금융 크롤링 데이터가 null 일 경우", BasicSystemService.class.getName());
 				return null;
 			}
 
@@ -106,14 +106,14 @@ public class BasicSystemService implements SystemService {
 		try {
 			doc = Jsoup.connect(url).ignoreContentType(true).timeout(5000).post();
 		} catch (IOException e) {
-			log.makeCSV("3");
+			AppContext.setLog("코스피/코스닥 excel 파일다운로드시 IOException 발생", BasicSystemService.class.getName());
 			e.printStackTrace();
 		}
 
 		// tr Tag 이하를 선택
 		Elements contents = doc.select("tr");
-		if (contents == null) {
-			log.makeCSV("4");
+		if(contents == null) {
+			AppContext.setLog("코스피/코스닥 파일다운로드 데이터가 null 인경우", BasicSystemService.class.getName());
 			return false;
 		}
 
@@ -124,7 +124,7 @@ public class BasicSystemService implements SystemService {
 			// KOSPI.csv or KOSDAQ.csv 를 생성한다
 			data.makeCSV("WebContent/fileUpload/" + market, companyList);
 		} catch (IOException e) {
-			log.makeCSV("5");
+			AppContext.setLog("코스피/코스닥 csv 파일 생성중 IOException 발생", BasicSystemService.class.getName());
 			e.printStackTrace();
 		}
 		return true;
@@ -184,43 +184,67 @@ public class BasicSystemService implements SystemService {
 	 */
 	public static void main(String[] args) throws IOException {
 		int testIndex = 0;
-		SystemService sys = new BasicSystemService();
-
-		Scanner sc = new Scanner(System.in);
-		System.out.println("숫자를 입력하시오");
-		testIndex = sc.nextInt();
-
-		switch (testIndex) {
-		case 1: // 코스피 코스닥 전종목 현재가 갱신
-			// TEST - KOSPI, KOSDAQ 데이터 크롤링 및 callback
-			sys.refreshStockPrice(
-					"C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSPI.csv",
-					"C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSDAQ.csv");
-			break;
-
-		case 2: // refreshStockPrice 함수 처리 시간 체크(100M 환경에서 약 7분 소요) 2019-11-24 20:37:54 ~
-				// 2019-11-24 20:44:53
-			SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			System.out.println(date.format(System.currentTimeMillis()));
-
-			sys.refreshStockPrice(
-					"C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSPI.csv",
-					"C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSDAQ.csv");
-
-			System.out.println(date.format(System.currentTimeMillis()));
-			break;
-		case 3: // kospi.csv kosdaq.csv 파일 생성 TEST
-			sys.updateMarket("KOSPI");
-			sys.updateMarket("KOSDAQ");
-			System.out.println("finished");
-			break;
+		BasicSystemService sys = new BasicSystemService();
+		
+		while(true) {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("숫자를 입력하시오");
+			testIndex = sc.nextInt();
 			
-		case 4: // 보유 자산 리스트 업로드 테스트
-			System.out.println("케이스 4");
-			sys.insertRecordAsset();
-			break;
+			switch(testIndex) {
+			case 1: //코스피 코스닥 전종목 현재가 갱신
+				//TEST - KOSPI, KOSDAQ 데이터 크롤링 및 callback
+				sys.refreshStockPrice("C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSPI.csv",
+								      "C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSDAQ.csv");
+				break;
+			
+			case 2: 
+				//refreshStockPrice 함수 처리 시간 체크(100Mbps 이하 환경(기현집) 에서 약 7분 소요) 2019-11-24 20:37:54 ~ 2019-11-24 20:44:53
+				//refreshStockPrice 함수 처리 시간 체크(100Mbps 환경에서 약 4~5분 소요) 2019-11-28 16:21:19 ~ 2019-11-28 16:17:33
+				SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				System.out.println(date.format(System.currentTimeMillis()));
+	
+				sys.refreshStockPrice("C:\\Users\\acorn\\Desktop\\Work\\Recent\\mainProject\\WebContent\\fileUpload\\KOSPI.csv",
+					      			  "C:\\Users\\acorn\\Desktop\\Work\\Recent\\mainProject\\WebContent\\fileUpload\\KOSDAQ.csv");
+						
+				System.out.println(date.format(System.currentTimeMillis()));
+				break;
+			case 3: //kospi.csv kosdaq.csv 파일 생성 TEST
+					sys.updateMarket("KOSPI");
+					sys.updateMarket("KOSDAQ");
+					System.out.println("finished");
+				break;
+			case 4: //single tone Test for 코스피/코스닥 크롤링 데이터
+					List<CurStock> kospi;
+					List<CurStock> kosdaq;
+					
+					kospi = AppContext.getKospi();
+					kosdaq = AppContext.getKosdaq();
+
+					if(kospi != null) {
+						for(CurStock cur : kospi) {
+							System.out.println(cur.toString());
+						}
+					}
+					System.out.println("next");
+					sc.nextInt();
+					if(kosdaq != null) {
+						for(CurStock cur : kosdaq) {
+							System.out.println(cur.toString());
+						}
+					}
+					System.out.println("finished-4");
+				break;
+			case 5: // 보유 자산 리스트 업로드 테스트
+				System.out.println("케이스 5");
+				sys.insertRecordAsset();
+				break;
+			case 6: 
+				return;
+				
+			}
+			System.out.println("종료");
 		}
-		System.out.println("종료");
 	}
 
 }
