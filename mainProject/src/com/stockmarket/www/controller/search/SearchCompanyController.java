@@ -52,7 +52,7 @@ public class SearchCompanyController extends HttpServlet{
 			search = search_;
 		}
 		
-		search = "제지";
+		//search = "패션";
 		//request.setAttribute("search", seachCompanyService.searchCompany(search, csvFilePath));
 		
 		
@@ -117,7 +117,8 @@ public class SearchCompanyController extends HttpServlet{
 			String key = (String)iterator.next();
 			//System.out.println(key);
 			if (key.equals(search)) {
-				//System.out.println("search == key 찾았다"); ==== 여기까진 출력이 잘 됨========================
+				
+				//System.out.println("search == key 찾았다"); ==== 여기까진 출력이 됨========================
 				
 				String sectorUrl = "https://finance.naver.com/" +sector.get(key);
 				Document sectorUrlDoc = null;
@@ -133,7 +134,7 @@ public class SearchCompanyController extends HttpServlet{
 //				while (stockElement_.hasNext()) {
 //					System.out.println(stockElement_.next().text());
 //				}
-				
+//				
 				
 				Map<String, Object> newscontent = new HashMap();
 				ArrayList<Company> companyArrayList = new ArrayList<Company>();
@@ -144,6 +145,7 @@ public class SearchCompanyController extends HttpServlet{
 					companyArrayList.add((seachCompanyService.searchCompany(stockElement_.next().text(), csvFilePath)));
 					
 					//System.out.println(companyArrayList.get(num));
+					//System.out.println(num);
 					//num++;
 					//newscontent.put("sector", seachCompanyService.searchCompany(stockElement_.next().text(), csvFilePath));
 					//sectorList.add(newscontent);
@@ -152,29 +154,18 @@ public class SearchCompanyController extends HttpServlet{
 				
 				HashSet<Company> arr2 = new HashSet<Company>(companyArrayList); // HashSet에 arr데이터 삽입
 				ArrayList<Company> arr3 = new ArrayList<Company>(arr2); // 중복이 제거된 HashSet을 다시 ArrayList에 삽입
-				System.out.println(arr3);
+				//System.out.println(companyArrayList);
 				
 				request.setAttribute("sectorList", arr3);
+				//request.setAttribute("search", arr3);
+				
+				
 				
 			}
 		}
 		
 		request.setAttribute("search", seachCompanyService.searchCompany(search, csvFilePath));
 		request.getRequestDispatcher("search.jsp").forward(request, response);
-		
-		
-		
-		
-			
-			
-		
-		
-		
-//		while (ie1Atag.hasNext()) {
-//			Map<Object, Object> sector = new HashMap();
-//			sector.put("섹터명",ie1Atag.next().text());
-//			sector.put("주소명","https://finance.naver.com" + SectorAtag.get(cnt).attr("href"));
-//		};
 		
 		
 	}
