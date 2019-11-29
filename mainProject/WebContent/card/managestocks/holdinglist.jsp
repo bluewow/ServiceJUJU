@@ -13,8 +13,6 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
 <body>
 <div class="btposition" >
-
-</div>
    <table >
    <thead>
    <tr>
@@ -30,7 +28,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
          <td style="text-align:center">${n.stockName}</td>
          <td class="up">${n.price}<span class="fa fa-caret-up"></span><br>
          <span>${n.percent}%</span></td>
-          <td class="up">{n.quantity}주</td>
+          <td class="up">${n.quantity}주</td>
            <td class="up"><span>4,418</span><br>
            <span>1.15%</span></td>
            </td>
@@ -46,5 +44,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
       </tr>  -->
       </tbody>
    </table>
+   
+</div>
 </body>
 </html>

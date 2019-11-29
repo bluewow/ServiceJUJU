@@ -107,7 +107,7 @@
 	        			<div class="tool-tip-content">
 							<p><span style="color:rgb(204,102,102);">데이터 베이스</span>를 통해 검출한 통계량을 가지고 분석한 관측치입니다.</p>
 							<hr>
-							<div>신뢰도 %</div>
+							<div>신뢰도  %</div>
 						</div>
 	        		</div>
 	        	</div>

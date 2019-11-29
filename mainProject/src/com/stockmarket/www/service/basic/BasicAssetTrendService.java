@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import com.stockmarket.www.dao.HaveStockDao;
 import com.stockmarket.www.dao.MemberDao;
-import com.stockmarket.www.dao.RecoedAssetDao;
+import com.stockmarket.www.dao.RecordAssetDao;
 import com.stockmarket.www.dao.jdbc.JDBCRecordAssetDao;
 import com.stockmarket.www.dao.jdbc.JdbcHaveStockDao;
 import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
@@ -16,7 +16,7 @@ import com.stockmarket.www.service.AssetTrendService;
 
 public class BasicAssetTrendService implements AssetTrendService {
 	
-	private RecoedAssetDao recordAssetDao; 
+	private RecordAssetDao recordAssetDao; 
 	private HaveStockDao haveStockDao; 
 	private MemberDao memberDao;
 	

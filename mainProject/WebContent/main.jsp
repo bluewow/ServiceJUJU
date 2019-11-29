@@ -39,6 +39,10 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="./css/tablet.css">
+
+<!--  pop-up -->
+<link rel="stylesheet" type="text/css" href="./css/popup.css">
+
 <!--[if lt IE 9]>
    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
@@ -55,7 +59,34 @@
 </head>
 
 <body>
+<!-- TODO 
+아이디/비번 잘못입력시 문구
+로그인 실패시 문구
+팝업창 
+modal
+무료회원가입
+이메일/비밀번호찾기
+-->
    <!-- =============================================================================================================== -->
+   <div class=pop-up>
+		<div class="pop-up-top">STOCK MARKET<br>로그인</div>
+   		<div class="pop-up-border">
+   			<div class="pop-up-context">
+	   				<div class="text">이메일</div>
+	   				<input class="box" type="text" name="userEmail" placeholder="Enter the Email..." form="user">
+	   				<div class="text">비밀번호</div>
+	   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
+   					<form class="login-box" action="login" method="post" id="user">
+	   					<input type="submit" value="로그인">
+   					</form>
+	   				<hr>
+	   				<form class="check-box">   				
+	   					<input class="box" type="submit" value="무료회원가입">
+	   					<input class="box" type="submit" value="이메일/비밀번호 찾기">
+	   				</form>
+   			</div>
+   		</div>
+   </div>
    <header class="navbar">
       <h1 style="display: none;">Stock Market</h1>
       <section class="row">
@@ -115,7 +146,7 @@
                            role="tabpanel" aria-labelledby="search-tab">
                            
                            <iframe height="100%" src="./card/search/search" scrolling="no">
-                              <!-- 여기에 html 삽입 -->
+                              	<!-- 여기에 html 삽입 -->
                            </iframe>
                         </div>
                      </div>
