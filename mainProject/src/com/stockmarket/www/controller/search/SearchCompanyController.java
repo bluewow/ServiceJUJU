@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
@@ -21,6 +23,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.stockmarket.www.entity.Company;
 import com.stockmarket.www.service.SearchCompanyService;
 import com.stockmarket.www.service.basic.BasicSearchCompanyService;
 
@@ -38,6 +41,7 @@ public class SearchCompanyController extends HttpServlet{
 //	====CSV 파일을 읽고, 검색된 회사 정보를 찾아 jsp에 전달하는 코드
 		
 		String search = "";
+		//String search = "제지";
 
 		ServletContext application = request.getServletContext();
 		String csvUrlPath = "/fileUpload/KOSPI.csv";
@@ -47,8 +51,9 @@ public class SearchCompanyController extends HttpServlet{
 		if (search_ !=null && !search_.equals("")) {
 			search = search_;
 		}
-
-		request.setAttribute("search", seachCompanyService.searchCompany(search, csvFilePath));
+		
+		search = "제지";
+		//request.setAttribute("search", seachCompanyService.searchCompany(search, csvFilePath));
 		
 		
 //==== (아래는) 크롤링을 위한 코드====================================
@@ -90,56 +95,71 @@ public class SearchCompanyController extends HttpServlet{
 		
 		//참고: https://finance.naver.com/ + 주소값
 		int cnt = 0;
-//		while (ie1Sector.hasNext()) {
-//			Map<Object, Object> sector = new HashMap();
-//			sector.put("섹터명",ie1Sector.next());
-//			sector.put("주소명",SectorAtag.get(cnt).attr("href"));
-//		}
-		
+
 		ArrayList<String> sectorName = new ArrayList<String>();
 		ArrayList<String> sectorHomepageNumber = new ArrayList<String>();
 		Map<Object, Object> sector = new HashMap();
 		List<Map<String, Object>> sectorList = new ArrayList<>();
 		
-		while (ie1Atag.hasNext()) {
-			sectorName.add(SectorAtag.get(cnt).attr("href"));
-			sectorHomepageNumber.add(ie1Sector.next().text());
-			cnt++;
-		}
 		
-		while (ie1Atag.hasNext()) {
+		for (int i = 0; i <= 39; i++) {
+			sectorHomepageNumber.add(SectorAtag.get(cnt).attr("href"));
+			sectorName.add(ie1Sector.next().text());
 			sector.put(sectorName.get(cnt), sectorHomepageNumber.get(cnt));
-		}
+			//System.out.println(sectorName.get(cnt));
+			cnt++;
+		};
 		
 		Set set = sector.keySet();
 		Iterator iterator = set.iterator();
 		
 		while (iterator.hasNext()) {
 			String key = (String)iterator.next();
-			if (search == key) {
+			//System.out.println(key);
+			if (key.equals(search)) {
+				//System.out.println("search == key 찾았다"); ==== 여기까진 출력이 잘 됨========================
+				
 				String sectorUrl = "https://finance.naver.com/" +sector.get(key);
 				Document sectorUrlDoc = null;
 				sectorUrlDoc = Jsoup.connect(sectorUrl).get();
 				
-				Elements stockElement = sectorUrlDoc.select("tbody");
-				Iterator<Element> stockElement_ = element.select("td a").iterator();
+				//System.out.println(sectorUrl); //===== url 출력 확인...
+				
+				Elements stockElement = sectorUrlDoc.select(".type_5");
+				Iterator<Element> stockElement_ = stockElement.select("td a").iterator();
+				
+				//System.out.println(stockElement);
+				
+//				while (stockElement_.hasNext()) {
+//					System.out.println(stockElement_.next().text());
+//				}
+				
 				
 				Map<String, Object> newscontent = new HashMap();
-				int sectorCrawlingCnt = 0;
+				ArrayList<Company> companyArrayList = new ArrayList<Company>();
+				
+				int num =0;
 				while (stockElement_.hasNext()) {
 					
-					newscontent.put("sector", seachCompanyService.searchCompany(stockElement_.next().text(), csvFilePath));
+					companyArrayList.add((seachCompanyService.searchCompany(stockElement_.next().text(), csvFilePath)));
 					
-					sectorList.add(newscontent);
-					
-					
+					//System.out.println(companyArrayList.get(num));
+					//num++;
+					//newscontent.put("sector", seachCompanyService.searchCompany(stockElement_.next().text(), csvFilePath));
+					//sectorList.add(newscontent);
 					
 				}
-				request.setAttribute("sectorList", sectorList);
+				
+				HashSet<Company> arr2 = new HashSet<Company>(companyArrayList); // HashSet에 arr데이터 삽입
+				ArrayList<Company> arr3 = new ArrayList<Company>(arr2); // 중복이 제거된 HashSet을 다시 ArrayList에 삽입
+				System.out.println(arr3);
+				
+				request.setAttribute("sectorList", arr3);
 				
 			}
 		}
 		
+		request.setAttribute("search", seachCompanyService.searchCompany(search, csvFilePath));
 		request.getRequestDispatcher("search.jsp").forward(request, response);
 		
 		
