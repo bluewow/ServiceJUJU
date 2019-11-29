@@ -80,8 +80,8 @@
                   		<input type="button" value="로그인">
                   	</c:if>
                   	<c:if test="${not empty sessionScope.id }">
-	                  	<input type="button" value="USERasfsdsd">
-	                  	<input type="button" value="로그아웃">
+	                  	<input class="small" type="button" value="USERasfsdsd">
+	                  	<input class="small" type="button" value="로그아웃">
                   	</c:if>
                   </div>
                </div>
