@@ -19,31 +19,30 @@ public class BasicHoldingStocksService implements HoldingStocksService {
 	
 	@Override
 	public List<HaveStockView> getInterestHoldingList(int userId) {
-		
 		List<HaveStockView> list = jdbcHaveStockDao.getList(userId);
-		
-		for(HaveStockView data : list) {
+		for(HaveStockView data :list) {
+			System.out.println(data.getGain());
 			
-		    int price = Integer.parseInt(data.getPrice().replaceAll(",", ""));
-		    data.setIntprice(price);
 		}
+
 		
 		return jdbcHaveStockDao.getList(userId);
 	}
 	
-	public static void main(String[] args) {
-		
-		HaveStockDao jdbcHaveStockDao = new JdbcHaveStockDao();
-		List<HaveStockView> list = jdbcHaveStockDao.getList(3);
-		
-		for(HaveStockView data : list) {
-			String StockName = data.getStockName();
-			int quantity = data.getQuantity();
-			
-		    int price = Integer.parseInt(data.getPrice().replaceAll(",", ""));
-
-	    }
-	}
+//	public static void main(String[] args) {
+//		
+//		HaveStockDao jdbcHaveStockDao = new JdbcHaveStockDao();
+//		List<HaveStockView> list = jdbcHaveStockDao.getList(3);
+//		
+//		for(HaveStockView data : list) {
+//			String StockName = data.getStockName();
+//			int quantity = data.getQuantity();
+//			
+//		    int price = Integer.parseInt(data.getPrice().replaceAll(",", ""));
+// 
+//		    System.out.println(StockName);
+//	    }
+//	}
 }
 
 

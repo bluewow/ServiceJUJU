@@ -35,25 +35,46 @@ public class loginController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession session = request.getSession();
 		String userEmail = request.getParameter("userEmail");
 		String pwd = request.getParameter("pwd");
-		HttpSession session = request.getSession();
+		//LOGOUT / LOGIN / ELSE
+//		String status = request.getHeader("status");
+//
+//		
+//		if(status == null) {
+//			request.getRequestDispatcher("main.jsp").forward(request, response);
+//			return;
+//		}
 		
-		//회원가입상태를 체크
-		if(isValidLogInfo(userEmail, pwd)) {
-			int id = loginService.getIdbyEmail(userEmail);
-			//id 값을 session 에 저장한다
-			if(id != 0)
-				session.setAttribute("id", id);
-			
-			request.getRequestDispatcher("main.jsp").forward(request, response);
-			
-		} else {
-			if(session != null)
-				session.invalidate();
-
-			request.getRequestDispatcher("main.jsp").forward(request, response);
-		}
+		//로그아웃 시도
+//		if(status.equals("LOGOUT")) {
+//			if(session != null)
+//				session.invalidate();
+//			
+//			request.getRequestDispatcher("main.jsp").forward(request, response);
+//			return;
+//		}
+		
+		//로그인 시도
+//		if(status.equals("LOGIN")) {
+			//회원가입상태를 체크
+			if(isValidLogInfo(userEmail, pwd)) {
+				int id = loginService.getIdbyEmail(userEmail);
+				//id 값을 session 에 저장한다
+				if(id != 0)
+					session.setAttribute("id", id);
+				
+				request.getRequestDispatcher("main.jsp").forward(request, response);
+				
+			} else {
+				if(session != null)
+					session.invalidate();
+				
+				request.getRequestDispatcher("main.jsp").forward(request, response);
+			}
+//		}
+		
 	}
 
 	private boolean isValidLogInfo(String email, String pwd) {

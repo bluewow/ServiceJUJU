@@ -3,7 +3,7 @@
 
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri ="http://java.sun.com/jsp/jstl/functions" %>
-<c:set var ="n" value="${search}" />
+<c:set var ="n" value="${search}"/>
 
 <html>
 <head>
@@ -32,11 +32,10 @@
 		<ul>
 			<li id="recommendKeyword_fixed">추천검색어 </li>
 
-			
 			<c:forEach var="r" items="${recommendKeyword}">
 				<a href="search?search=${r}"><span>${r}</span></a>
 			</c:forEach>
-
+			
 		</ul>
 	</section>
 	
@@ -54,7 +53,7 @@
 			
 			<tbody>
 			
-			<%-- <c:forEach var="n" items="${search}"> --%>
+			<%-- <c:forEach var="n" items="${search}" varStatus="status"> --%>
 				<tr>
 					<td>1</td>
 					<td>${n.companyName}<a href="${n.website}" target="_blank"><img src="/css/search/link.png" alt=""></a></td>
@@ -64,24 +63,20 @@
 			<%-- </c:forEach> --%>
 			</tbody>
 			
-			<%-- 	<tr>
-					<th>1</th>
-					<td><a href=""></a>${n.companyName}<img src="/css/search/link.png" alt=""></td>
-					<td>${n.stockItemName}</td>
-					<td><img src="/css/search/interest_no.png" alt="">${n.website}</td>
-				</tr> --%>
+			<tbody>
+			<c:forEach var="sector" items="${sectorList}" varStatus="status" >
+				<tr>
+					<td>${status.count}</td>
+					<td>${sector.companyName}<a href="${sector.website}" target="_blank"><img src="/css/search/link.png" alt=""></a></td>
+					<td>${sector.stockItemName}</td>
+					<td class="attention"><img src="/css/search/interest_no.png" ></td>
+				</tr>
+			</c:forEach>
+			</tbody>
+			
 			
 			
 			<!-- <tbody>
-				<tr>
-					<td>1</td>
-					<td>광동 사운드 <img src="/css/search/link.png" alt=""></td>
-					<td>기술,하드웨어</td>
-					<td><img src="/css/search/interest_no.png" alt=""></td>
-				</tr>
-			</tbody> -->
-			
-			<tbody>
 				<tr>
 					<td>2</td>
 					<td>테스트</td>
@@ -161,7 +156,7 @@
 					<td>미디어</td>
 					<td>관심</td>
 				</tr>
-			</tbody>
+			</tbody> -->
 			
 		</table>
 	</section>

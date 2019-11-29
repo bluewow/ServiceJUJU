@@ -4,25 +4,116 @@
 	Modal 팝업
  */
  
-#pop-up {
-	visibility:hidden;
+.pop-up {
+	visibility:hidden;  
+	border: 1px solid;
     z-index: 100;
     position: absolute;
     background-color: rgb(255, 255, 255); 
-    width: calc(23vw);
-    height: calc(71vh);
-    left: 40%;
-    top: 21%;
+    width: calc(22vw);
+    left: 37.5vw;
+    top: 15%;
+    border-radius: 15px;
+    min-width: 300px;
+    min-height: 530px;
 }
 
-#pop-up #pop-up-top {
-	background-color: rgb(19, 191, 215); 
-	height: 17%;
-	color: white;
+.pop-up .pop-up-top {
+    background-color: rgb(19, 191, 215);
+    min-height: 17%;
+    color: white;
+    border-radius: 15px 15px 0px 0px;
+    font-weight: bold;
+    font-size: 1.8em;
+    padding: 3% 0% 0% 12%;
 }
 
-#pop-up #pop-up-content {
+.pop-up .pop-up-border {
 	height: 83%;
 	
+	}
+
+	.pop-up .pop-up-border .pop-up-context{
+	    width: 80%;
+	    height: 100%;
+	    margin-left: 10%;
+	    margin-right: 10%;
+	
+	}
+
+.pop-up-context .text {
+    margin: 8% 0% 0% 0%;
+    font-size: 1.2em;
+    font-weight: 550;
+    padding-left: 5%;
+    color: #585B5E;
 }
+
+.pop-up-context .box {
+	border-radius: 10px;
+    border: 2px solid #dee2e6 !important;
+    margin-bottom: 0px;
+}
+
+.pop-up-context .box:hover {
+	border-radius: 10px;
+    border: 2px solid #35CEBE !important;
+    margin-bottom: 0px;
+}
+ 
+.pop-up-context .login-box input {
+	background-color: #F2F2F2;
+	margin: 12% 0% 0% 0%;
+    color: #585B5E;
+    font-size: 1.2em;
+    border: none;
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.pop-up-context hr {
+	border: 1px solid #dee2e6;
+	margin: 8% 0% 0% 0%;
+}
+
+.pop-up-context .check-box input {
+	background-color: white;
+	margin: 12% 0% 0% 0%;
+    color: #909090;;
+    font-size: 1em;
+    border: none;
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.pop-up-context .check-box input:last-child {
+	background-color: white;
+	margin: 12% 0% 12% 0%;
+    color: #909090;;
+    font-size: 1em;
+    border: none;
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.personal {
+    display: flex;
+    right: 10rem;
+    position: absolute;
+    bottom: 2.1rem;
+}
+ .personal input {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5em; 
+
+}
+
+ .personal input:before {
+ 	background-color: transparent;
+    border: none;
+ }
 

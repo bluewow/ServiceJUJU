@@ -32,9 +32,6 @@
 
 <link rel="stylesheet" type="text/css" href="./css/tablet.css">
 
-<!--  pop-up -->
-<link rel="stylesheet" type="text/css" href="./css/popup.css">
-
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
@@ -42,6 +39,11 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="./css/tablet.css">
+
+<!--  pop-up -->
+<link rel="stylesheet" type="text/css" href="./css/popup.css">
+<script src="./js/popup/popup.js"></script>
+
 <!--[if lt IE 9]>
    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
    <![endif]-->
@@ -58,10 +60,33 @@
 </head>
 
 <body>
+<!-- TODO 
+아이디/비번 잘못입력시 문구
+로그인 실패시 문구
+팝업창 
+modal
+무료회원가입
+이메일/비밀번호찾기
+-->
    <!-- =============================================================================================================== -->
-   <div id=pop-up>
-		<div id="pop-up-top">STOCK MARKET<br>로그인</div>
-   		<div id="pop-up-content">Context</div>
+   <div class=pop-up>
+		<div class="pop-up-top">STOCK MARKET<br>로그인</div>
+   		<div class="pop-up-border">
+   			<div class="pop-up-context">
+	   				<div class="text">이메일</div>
+	   					<input class="box" type="text" name="userEmail" placeholder="Enter the Email..." form="user">
+	   				<div class="text">비밀번호</div>
+	   					<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
+   					<form class="login-box" action="login" method="post" id="user">
+	   					<input type="submit" value="로그인">
+   					</form>
+	   				<hr>
+	   				<form class="check-box">   				
+	   					<input class="box" type="submit" value="무료회원가입">
+	   					<input class="box" type="submit" value="이메일/비밀번호 찾기">
+	   				</form>
+   			</div>
+   		</div>
    </div>
    <header class="navbar">
       <h1 style="display: none;">Stock Market</h1>
@@ -77,18 +102,26 @@
                      alt="profile photo" class="circle float-left profile-photo"
                      width="50" height="auto">
                   </a>
-                  <!-- TODO -->                  
-                  <form id="dummy" action="login" method="post">
+                  <div class="personal">
+                  	<c:if test="${empty sessionScope.id }">
+                  		<input type="button" value="로그인">
+                  	</c:if>
+                  	<c:if test="${not empty sessionScope.id }">
+	                  	<input type="button" value="USERasfsdsd">
+	                  	<input type="button" value="로그아웃">
+                  	</c:if>
+                  </div>
+                 <%--  <form class="personal" action="login" method="post">
                      <c:if test="${empty sessionScope.id }">
-                        <input type="text" name="userEmail" placeholder="Enter the Email...">
-                        <input type="password" name="pwd" placeholder="Enter the Password...">
-                        <input type="submit" value="Dummy 로그인">
+                        <div class="personal1"><input type="button" value="로그인"></div>
                      </c:if>
                      <c:if test="${not empty sessionScope.id }">
-                        <input type="hidden" name="userEmail" value="null">
-                        <input type="submit" value="Dummy 로그아웃">
+                     	<div class="personal2">
+	                        <input type="button" value="USER">
+	                        <input type="button" value="로그아웃">
+                        </div>
                      </c:if>
-                  </form>
+                  </form> --%>
                </div>
             </section>
          </section>
@@ -122,7 +155,7 @@
                            role="tabpanel" aria-labelledby="search-tab">
                            
                            <iframe height="100%" src="./card/search/search" scrolling="no">
-                              <!-- 여기에 html 삽입 -->
+                              	<!-- 여기에 html 삽입 -->
                            </iframe>
                         </div>
                      </div>
