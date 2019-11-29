@@ -38,7 +38,8 @@ public class loginController extends HttpServlet{
 		HttpSession session = request.getSession();
 		String userEmail = request.getParameter("userEmail");
 		String pwd = request.getParameter("pwd");
-		//LOGOUT / LOGIN / ELSE
+		//null / LOGOUT / LOGIN / ELSE
+		
 //		String status = request.getHeader("status");
 //
 //		

@@ -106,14 +106,8 @@
     bottom: 2.1rem;
 }
  .personal input {
-    background-color: transparent;
+    background-color: transparent !important; 
     border: none;
     font-size: 1.5em; 
 
 }
-
- .personal input:before {
- 	background-color: transparent;
-    border: none;
- }
-

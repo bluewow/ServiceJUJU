@@ -1,15 +1,15 @@
 window.addEventListener("load", function(){
-    var login = document.querySelector(".personal");
-    var popup = document.querySelector(".pop-up");
-    
-    login.onclick = function(e) {
+    var loginBox = document.querySelector(".personal");
+    var loginPopup = document.querySelector(".pop-up");
+
+    loginBox.onclick = function(e) {
         if(e.target.nodeName != "INPUT")
             return;
 
         e.preventDefault();
 
         if(e.target.value == "로그인") {
-            popup.style.visibility = "visible";
+        	loginPopup.style.visibility = "visible";
 
         } else if(e.target.value == "로그아웃") {
             var request = new XMLHttpRequest();
@@ -18,7 +18,8 @@ window.addEventListener("load", function(){
             request.send();
 
         } else {
-        	
+        	//userName
         }
     }
+    
 });
