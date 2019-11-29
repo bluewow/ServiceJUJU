@@ -16,6 +16,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.stockmarket.www.service.SystemService;
 import com.stockmarket.www.service.basic.BasicSystemService;
 
 @WebServlet("/main")
@@ -25,7 +26,7 @@ public class SystemController extends HttpServlet {
 	static String preHour; 
 	String pathOfKospi = null;
 	String pathOfKosdaq = null;
-	BasicSystemService service;
+	SystemService service;
 	
 	public SystemController() {
 		oneShotFlag = false;
@@ -80,8 +81,8 @@ public class SystemController extends HttpServlet {
 //			TODO
 		}
 		
-		if(curHour.equals("20") && preHour.equals("19")) {
-			// TODO
+		if(curHour.equals("17") && preHour.equals("18")) {
+			service.insertRecordAsset();
 		}
 		
 		

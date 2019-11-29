@@ -45,7 +45,7 @@
 			<div>204,000</div>
 		</div>
 	</header>
-	
+	<!-- TODO 장이마감되었습니다 -->
 	<!-- --------------- page-mid -------------- -->
 	<section class="page-mid">
 		<form action="trade" method="get">

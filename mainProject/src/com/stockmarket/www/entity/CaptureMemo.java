@@ -14,7 +14,15 @@ public class CaptureMemo {
 	private String favorite;
 
 	public CaptureMemo() {
+		
 
+	}
+	
+	public CaptureMemo(String title, Date regdate, String memo) {
+		
+		this.title = title;
+		this.regdate = regdate;
+		this.memo = memo;
 	}
 
 	// for inserting

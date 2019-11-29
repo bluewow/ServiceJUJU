@@ -6,10 +6,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.stockmarket.www.dao.RecoedAssetDao;
+import com.stockmarket.www.dao.RecordAssetDao;
 import com.stockmarket.www.entity.RecordAsset;
 
-public class JDBCRecordAssetDao implements RecoedAssetDao {
+public class JDBCRecordAssetDao implements RecordAssetDao {
 
 	@Override
 	public List<RecordAsset> getList(int id) {
