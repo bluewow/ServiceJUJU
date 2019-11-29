@@ -1,8 +1,13 @@
 @charset "UTF-8";
 @import "reset.css";
 
-body::-webkit-scrollbar{
-  display: none;
+body {
+  /* -ms-overflow-style: none; */
+  overflow: hidden;
+}
+
+body::-webkit-scrollbar {
+  /* display: none; */
 }
 
 #main-page{

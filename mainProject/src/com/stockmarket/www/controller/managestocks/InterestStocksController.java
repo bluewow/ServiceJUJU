@@ -45,6 +45,7 @@ public class InterestStocksController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("id");
+		
 		String delStockName = request.getParameter("delStockName");
 		interestStocksInterface.deleteStock(userId,delStockName);
  
