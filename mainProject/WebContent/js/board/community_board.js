@@ -1,3 +1,52 @@
+window.addEventListener("load", function () {
+	
+	var section =  document.querySelector("#communityScroll");
+	
+	console.log(section);
+	
+    var pager = section.querySelector(".pager");
+    pager.onclick = function (e) {
+        e.preventDefault();
+        if (e.target.nodeName != "A") {
+            return;
+        }
+
+        var tbody = section.querySelector("table tbody");
+
+        var request = new XMLHttpRequest();
+        request.open("GET", "../../card/board/community_board_list?p=" + e.target.innerText, false); //주소창에 내가 뭘 원하는지
+        request.send();
+
+        var list = JSON.parse(request.responseText);
+        var trTemplate = section.querySelector(".tr-template");
+
+        tbody.innerHTML = "";
+
+        for (var i = 0; i < list.length; i++) {
+            var cloneTr = document.importNode(trTemplate.content, true);
+
+            var tds = cloneTr.querySelectorAll("td");
+            tds[0].innerText = list[i].id;
+            var title = "["+list[i].stockName+"] "+list[i].title+"("+list[i].replyCnt+")";
+            tds[1].firstElementChild.innerText = title;
+            tds[2].innerText = list[i].regdate;
+            tds[3].innerText = list[i].hit;
+            tds[4].firstElementChild.innerText = list[i].stockName;
+            tds[5].firstElementChild.innerText = list[i].id;
+            tds[6].innerText = list[i].writerId;
+            tbody.append(cloneTr);
+            console.log(title);
+        }
+        
+    }
+	
+	
+	//communityBoardFrame.onload = function(){		
+		
+	//};		
+	
+	
+
 //window.addEventListener("load", function () {
 //    var section = document.querySelector("#communityScroll");
 //    var myButton = section.querySelector("#my-button");
@@ -28,4 +77,4 @@
 //    	alert("board-title")
 //    }
 //    
-//})
+})
