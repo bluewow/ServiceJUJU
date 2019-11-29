@@ -17,31 +17,15 @@ public class BasicCaptureMemo implements CaptureMemoService {
 	}
 
 	@Override
-	public int insertCaptuerMemo(CaptureMemo captureMemo) {
-	
-		return captureMemoDao.insert(captureMemo);
-	}
-	@Override
-	public List<CaptureMemo> getCaptureMemmoList(int page) {
-	
-		return getCaptureMemmoList(page);
-	}
-
-
-
-
-	@Override
-	public int updateCaptureMemo(CaptureMemo captureMemo) {
+	public List<CaptureMemo> getcCaptureMemoList() {
 		
-		return captureMemoDao.update(captureMemo);
+		return getCaptureMemoList (1,"stockName","","");
 	}
 
-
-
 	@Override
-	public int deleteCaptureMemo(int id) {
-		
-		return captureMemoDao.delete(id);
+	public List<CaptureMemo> getCaptureMemoList(int page) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -50,20 +34,26 @@ public class BasicCaptureMemo implements CaptureMemoService {
 		return null;
 	}
 
+	@Override
+	public int insertCaptuerMemo(CaptureMemo captureMemo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateCaptureMemo(CaptureMemo captureMemo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteCaptureMemo(CaptureMemo captureMemo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 
 
 
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

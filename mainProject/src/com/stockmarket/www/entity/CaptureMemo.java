@@ -6,7 +6,7 @@ public class CaptureMemo {
 	private int id;
 	private String title;
 	private Date regdate;
-	private String memo;
+	private String content;
 	private int highprice;
 	private int maketprice;
 	private int dealingnum;
@@ -18,29 +18,29 @@ public class CaptureMemo {
 
 	}
 	
-	public CaptureMemo(String title, Date regdate, String memo) {
+	public CaptureMemo(String title, Date regdate, String content) {
 		
 		this.title = title;
 		this.regdate = regdate;
-		this.memo = memo;
+		this.content = content;
 	}
 
 	// for inserting
-	public CaptureMemo(String title, String memo) {
+	public CaptureMemo(String title, String content) {
 
 		this.title = title;
-		this.memo = memo;
+		this.content = content;
 
 	}
 
    //for selecting
-	public CaptureMemo(int id, String title, Date regdate, String memo, int highprice, int maketprice, int dealingnum,
+	public CaptureMemo(int id, String title, Date regdate, String content, int highprice, int maketprice, int dealingnum,
 			int preclosingprice, String favorite) {
 	
 		this.id = id;
 		this.title = title;
 		this.regdate = regdate;
-		this.memo = memo;
+		this.content = content;
 		this.highprice = highprice;
 		this.maketprice = maketprice;
 		this.dealingnum = dealingnum;
@@ -72,12 +72,12 @@ public class CaptureMemo {
 		this.regdate = regdate;
 	}
 
-	public String getMemo() {
-		return memo;
+	public String getContent() {
+		return content;
 	}
 
-	public void setMemo(String memo) {
-		this.memo = memo;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public int getHighprice() {
@@ -122,7 +122,7 @@ public class CaptureMemo {
 
 	@Override
 	public String toString() {
-		return "CaptureMemo [id=" + id + ", title=" + title + ", redate=" + regdate + ", memo=" + memo + ", highprice="
+		return "CaptureMemo [id=" + id + ", title=" + title + ", redate=" + regdate + ", content=" + content + ", highprice="
 				+ highprice + ", maketprice=" + maketprice + ", dealingnum=" + dealingnum + ", preclosingprice="
 				+ preclosingprice + ",favorite=" + favorite + "]";
 	}

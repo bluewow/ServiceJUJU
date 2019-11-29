@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri ="http://java.sun.com/jsp/jstl/functions" %>
-<c:set var ="n" value="${captureList}" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:set var="n" value="${captureList}" />
 
 <html>
 <head>
@@ -17,7 +17,7 @@
 <body>
 	<main id="contaner">
 		<div class="capture-table">
-			<table border=1>
+			<table class="table">
 				<thead>
 					<tr>
 						<td class="stoc">종목명</td>
@@ -25,30 +25,20 @@
 						<td class="capturedate">캡쳐날짜</td>
 					</tr>
 				</thead>
-				<%--- <tbody>
+				<tbody>
 					<c:forEach var="n" items="${captureList}">
 						<tr>
-							<td>${n.MEMO}</td>
-							<td>${n.title}</td>
-							<td>${n.regdate}</td>
+							<td class="stoc">${n.MEMO}</td>
+							<td  class="title">${n.title}</td>
+							<td class="capturedata">${n.regdate}</td>
+							<td class="button"><input type="button" id="button" name="delbutton" value="del"></td>
 						</tr>
 					</c:forEach>
-				</tbody>--%>
-				<tbody>
-					<tr>
-					<td class="stoc">test</td>
-					<td class="title">test</td>
-					<td class="capturedate">19/11/27</td>
-					</tr>
-					<tr>
-					<td class="stoc">test</td>
-					<td class="title">test</td>
-					<td class="capturedate">19/11/27</td>
-					</tr>
 				</tbody>
+
 				</div>
-			</main>
-				</table>
+				</main>
+			</table>
 		</div>
 	</main>
 </body>
