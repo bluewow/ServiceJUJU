@@ -24,7 +24,7 @@
 </head>
 
 <body>
-	<div class="btposition"></div>
+	<div class="btposition">
 		<table>
 			<thead>
 				<tr>
@@ -60,5 +60,6 @@
       </tr>  -->
 			</tbody>
 		</table>
+		</div>
 </body>
 </html>
