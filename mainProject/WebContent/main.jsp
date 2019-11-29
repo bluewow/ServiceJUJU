@@ -63,36 +63,10 @@
 <!-- TODO 
 아이디/비번 잘못입력시 문구
 로그인 실패시 문구
-팝업창 
-modal
 무료회원가입
 이메일/비밀번호찾기
 -->
    <!-- =============================================================================================================== -->
-   <div class="pop-up">
-		<div class="pop-up-top">STOCK MARKET<br>로그인</div>
-   		<div class="pop-up-border">
-   			<div class="pop-up-context">
-	   				<div class="text">이메일</div>
-	   				<input class="box" type="text" name="userEmail" placeholder="Enter the Email..." form="user">
-	   				
-	   				<div class="text">비밀번호</div>
-	   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
-   					
-   					<form class="login-box" action="login" method="post" id="user">
-	   					<input type="submit" value="로그인">
-   					</form>
-	   				
-	   				<hr>
-	   				
-	   				<form class="check-box">   				
-	   					<input class="box" type="submit" value="무료회원가입">
-	   					<input class="box" type="submit" value="이메일/비밀번호 찾기">
-	   				</form>
-   			</div>
-   		</div>
-   </div>
-   
    <header class="navbar">
       <h1 style="display: none;">Stock Market</h1>
       <section class="row">
@@ -116,17 +90,6 @@ modal
 	                  	<input type="button" value="로그아웃">
                   	</c:if>
                   </div>
-                 <%--  <form class="personal" action="login" method="post">
-                     <c:if test="${empty sessionScope.id }">
-                        <div class="personal1"><input type="button" value="로그인"></div>
-                     </c:if>
-                     <c:if test="${not empty sessionScope.id }">
-                     	<div class="personal2">
-	                        <input type="button" value="USER">
-	                        <input type="button" value="로그아웃">
-                        </div>
-                     </c:if>
-                  </form> --%>
                </div>
             </section>
          </section>
@@ -367,7 +330,33 @@ modal
       <section></section>
    </footer>
    <!-- =============================================================================================================== -->
-
+	<!-- ===== POPUP ========================================================================================================== -->   
+	<div class="pop-up-wrapper">
+	   <div class="pop-up">
+			<div class="pop-up-top">STOCK MARKET<br>로그인</div>
+	   		<div class="pop-up-border">
+	   			<div class="pop-up-context">
+		   				<div class="text">이메일</div>
+		   				<input class="box" type="text" name="userEmail" placeholder="Enter the Email..." form="user">
+		   				
+		   				<div class="text">비밀번호</div>
+		   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
+	   					
+	   					<form class="login-box" action="login" method="post" id="user">
+		   					<input type="submit" value="로그인">
+	   					</form>
+		   				
+		   				<hr>
+		   				
+		   				<form class="check-box">   				
+		   					<input class="box" type="submit" value="무료회원가입">
+		   					<input class="box" type="submit" value="이메일/비밀번호 찾기">
+		   				</form>
+	   			</div>
+	   		</div>
+	   </div>
+   </div>
+   <!-- =============================================================================================================== -->
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
       crossorigin="anonymous"></script>

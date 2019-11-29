@@ -6,7 +6,6 @@
  
 .pop-up {
 	visibility:hidden;  
-	border: 1px solid;
     z-index: 100;
     position: absolute;
     background-color: rgb(255, 255, 255); 
@@ -16,6 +15,7 @@
     border-radius: 15px;
     min-width: 300px;
     min-height: 530px;
+    box-shadow: 5px 5px 10px 5px grey;
 }
 
 .pop-up .pop-up-top {
@@ -25,14 +25,13 @@
     border-radius: 15px 15px 0px 0px;
     font-weight: bold;
     font-size: 1.8em;
-    padding: 3% 0% 0% 12%;
+	padding: 6% 0% 4% 12%;
+    line-height: normal;
 }
 
 .pop-up .pop-up-border {
 	height: 83%;
-	
 	}
-
 	.pop-up .pop-up-border .pop-up-context{
 	    width: 80%;
 	    height: 100%;
@@ -110,4 +109,13 @@
     border: none;
     font-size: 1.5em; 
 
+}
+
+.pop-up-wrapper {
+	visibility: hidden;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 2;
 }
