@@ -23,7 +23,7 @@
 
 <link href="../../css/board/stock_board.css" type="text/css"
 	rel="stylesheet">
-<script src="../../js/board/stock_board.js"></script>
+<script src="../../js/board/community_board.js"></script>
 </head>
 <body>
 	<div id="stockScroll">

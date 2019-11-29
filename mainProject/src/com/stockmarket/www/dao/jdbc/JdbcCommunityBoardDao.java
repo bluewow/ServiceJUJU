@@ -28,7 +28,7 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 			pst.setString(1, "%" + stockName + "%");
 			pst.setString(2, "%" + query + "%");
 			pst.setInt(3, 1 + 10 * (page - 1));
-			pst.setInt(4, 10 * page);
+			pst.setInt(4, 20 * page);
 
 			rs = pst.executeQuery();
 			while (rs.next()) {

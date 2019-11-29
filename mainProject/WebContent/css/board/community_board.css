@@ -17,7 +17,7 @@
 }
 
 #my-button {
-	top: 5%;
+	top: 3%;
 	left: 5%;
 	font-weight: bold;
 	font-size: 1em;
@@ -29,7 +29,6 @@
 	border: none;
 	outline: none;
 	cursor: pointer;
-	position: absolute;
 }
 
 #my-button:hover {
@@ -37,8 +36,8 @@
 }
 
 #favo-button {
-	top: 5%;
-	left: 15%;
+	top: 3%;
+	left: 18%;
 	font-weight: bold;
 	font-size: 1em;
 	width: 60px;
@@ -49,7 +48,6 @@
 	border: none;
 	outline: none;
 	cursor: pointer;
-	position: absolute;
 }
 
 #favo-button:hover {
@@ -71,27 +69,11 @@
 	opacity: 0.7;
 }
 
-#favo-add {
-	background: url( "../../images/interest_no.png" ) no-repeat;
-	border: none;
-	width: 22px;
-	height: 22px;
-	cursor: pointer;
-	text-indent: -300px;
-	overflow: hidden;
-	cursor: pointer;
-}
-
-#favo-add:hover {
-	background: url( "../../images/interest_yes.png" ) no-repeat;
-}
-
 #board-title {
 	cursor: pointer;
 }
 
 #communityTable {
-	margin-top:30px;
 	width: 100%;
 	text-align: center;
 	font-size: 11pt;
@@ -138,4 +120,25 @@ td.border_bottom {
 a {
 	text-decoration: none;
 	color: #000000
+}
+
+.checkbox-wrap {
+	cursor: pointer;
+}
+
+.checkbox-wrap .check-icon {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	background: url(../../images/interest_no.png) left center no-repeat;
+	vertical-align: middle;
+	transition-duration: .3s;
+}
+
+.checkbox-wrap input[type=checkbox] {
+	display: none;
+}
+
+.checkbox-wrap input[type=checkbox]:checked+.check-icon {
+	background-image: url(../../images/interest_yes.png);
 }

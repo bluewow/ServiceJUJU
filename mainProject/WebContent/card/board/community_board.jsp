@@ -21,10 +21,22 @@
 <!-- CSS Reset -->
 <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
 
-<link href="../../css/board/community_board.css" type="text/css" rel="stylesheet">
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<link href="../../css/board/community_board.css" type="text/css"
+	rel="stylesheet">
 <script src="../../js/board/community_board.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 
+<script type="text/javascript">
+function check()
+{
+if(document.category.checked)
+{
+ document.category.submit();
+}
+else
+  return false;
+}
+</script> 
 
 </head>
 <body>
@@ -32,46 +44,43 @@
 		<br>
 		<nav id="my-menu">
 			<input type="button" id="my-button" name="my_board_view" value="My">
-			<input type="button" id="favo-button" name="favo_board_view"
-				value="관심">
+			<input type="button" id="favo-button" name="favo_board_view" value="관심">
 		</nav>
+  	<form action="/card/managestocks/interestlist" method="post">
 		<table id="communityTable">
 			<thead class="subject">
 				<tr>
 					<th></th>
 					<th>제목</th>
-					<th>작성일</th>
+					<th>작성일</th> 
 					<th>조회</th>
 					<th></th>
 				</tr>
 			</thead>
-			
 			<tbody class="content">
-				<tr>
-                   <td colspan="5" style="text-align:center; height:50px; line-height:50px;">게시된 글이 없습니다.</td>
-               </tr>
+				  <c:forEach var="n" items="${CommunityBoard}">
+					<tr>
+							<td>${n.id}</td>
+							<td rowspan="2" class="border_bottom" id="board-title">[${n.stockName}]
+								${n.title} (${n.replyCnt})</td>
+							<td rowspan="1"><fmt:formatDate value="${n.regdate}"
+									pattern="yy/MM/dd" /></td>
+							<td>${n.hit}</td>
+                        
+							<td rowspan="2" class="border_bottom">
+							<label class="checkbox-wrap">
+								<input type="checkbox" name="stockname" value="${n.stockName}" id="favo-check"><i class="check-icon"></i></label>
+								</td>             
+					</tr>
+					<tr>
+						<td class="border_bottom"><input type="button"
+							id="del-button" name="del" value="del"></td>
+						<td colspan="2" class="border_bottom">${n.writerId}</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
-		
-		<div class="pager">
-			<a href="?p=1">1</a> <a href="?p=2">2</a> <a href="?p=3">3</a>
-		</div>
-		
-		<template class="tr-template">
-			<tr>
-			<td></td>
-			<td rowspan="2" class="border_bottom" id="board-title"><a href="detail.html"></a></td>
-			<td rowspan="1"></td>
-			<td></td>
-
-			<td rowspan="2" class="border_bottom" id="favo-add"><a href="detail.html"></td>
-		</tr>
-		<tr>
-			<td class="border_bottom" id="del-button"><a href="detail.html"></td>
-			<td colspan="2" class="border_bottom"></td>
-		</tr>
-		</template>
-		
+	  </form>
 	</section>
 </body>
 </html>
