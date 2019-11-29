@@ -2,6 +2,8 @@ package com.stockmarket.www.entity;
 
 public class InterestView {
 	private String stockname;
+	private String price;
+	private String percent;
 	private int id;
 	
 	public InterestView() {
@@ -12,8 +14,31 @@ public class InterestView {
 		this.stockname = stockname;
 	}
 	
-	public InterestView(String stockname, int id) {
+	public InterestView(String stockname, String price, String percent) {
 		this.stockname = stockname;
+		this.price = price;
+		this.percent = percent;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	public String getPercent() {
+		return percent;
+	}
+
+	public void setPercent(String percent) {
+		this.percent = percent;
+	}
+
+	public InterestView(String stockname, String price, int id) {
+		this.stockname = stockname;
+		this.price = price;
 		this.id = id;
 	}
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -19,7 +20,7 @@
             <h1 id="logo">STOCK<br>MARKET</h1>
             <div class="bg-img"></div>
             <div class="main-contents">
-                <h1>주식을 쇼핑하다</h1>         
+                <h1>주식을 쇼핑하다</h1>
                 <form action="/main">
                     <input type="submit" name="search" value="시작하기">
                 </form>

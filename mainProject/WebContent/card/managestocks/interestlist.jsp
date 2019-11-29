@@ -24,7 +24,7 @@
 </head>
 
 <body>
-	<div class="btposition"></div>
+	<div class="btposition">
 		<table>
 			<thead>
 				<tr>
@@ -40,7 +40,7 @@
 
 					<tr>
 						<td style="text-align: center">${n.stockname}</td>
-						<td class="up">24,896 <span class="fa fa-caret-up"></span> <span>1.46%</span></td>
+						<td class="up">${n.price}<span class="fa fa-caret-up"></span> <span>${n.percent}%</span></td>
 						<td style="text-align: center"><button style="border:none; background:white" class="fa fa-trash-o" onclick="goDelete()"></button>
 						</td>
 					</tr>
@@ -60,5 +60,6 @@
       </tr>  -->
 			</tbody>
 		</table>
+		</div>
 </body>
 </html>
