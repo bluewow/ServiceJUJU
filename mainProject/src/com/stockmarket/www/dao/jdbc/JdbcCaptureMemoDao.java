@@ -36,7 +36,7 @@ public class JdbcCaptureMemoDao implements CaptureMemoDao {
 			while(rs.next()){ 
 				
 				
-				String memo = rs.getString("MEMO");
+				String memo = rs.getString("CONTENT");
 				String title = rs.getString("TITLE");
 				Date regdate = rs.getDate("DATE");
 				

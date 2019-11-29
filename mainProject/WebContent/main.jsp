@@ -180,7 +180,9 @@
                      </ul>
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="capture"
-                           role="tabpanel" aria-labelledby="capture-tab">캡쳐</div>
+                           role="tabpanel" aria-labelledby="capture-tab"></div>
+                            <iframe height="100%" src="/card/capturememo/captureMemo" scrolling="no">
+                           </iframe>
                      </div>
                   </section>
                </div>
