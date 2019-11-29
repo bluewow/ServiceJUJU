@@ -61,7 +61,6 @@ public class JdbcHaveStockDao implements HaveStockDao {
                   HaveStockView haveStockView = new HaveStockView(memberId, stockId, quantity, avg, stockName,
                         price, gain, percent, intPrice);
                   stockList.add(haveStockView);
-                  System.out.println(data.getGain());
                   break;
                }
             }
