@@ -39,25 +39,25 @@ public class loginController extends HttpServlet{
 		String userEmail = request.getParameter("userEmail");
 		String pwd = request.getParameter("pwd");
 		//LOGOUT / LOGIN / ELSE
-		String status = request.getHeader("status");
-
-		
-		if(status == null) {
-			request.getRequestDispatcher("main.jsp").forward(request, response);
-			return;
-		}
+//		String status = request.getHeader("status");
+//
+//		
+//		if(status == null) {
+//			request.getRequestDispatcher("main.jsp").forward(request, response);
+//			return;
+//		}
 		
 		//로그아웃 시도
-		if(status.equals("LOGOUT")) {
-			if(session != null)
-				session.invalidate();
-			
-			request.getRequestDispatcher("main.jsp").forward(request, response);
-			return;
-		}
+//		if(status.equals("LOGOUT")) {
+//			if(session != null)
+//				session.invalidate();
+//			
+//			request.getRequestDispatcher("main.jsp").forward(request, response);
+//			return;
+//		}
 		
 		//로그인 시도
-		if(status.equals("LOGIN")) {
+//		if(status.equals("LOGIN")) {
 			//회원가입상태를 체크
 			if(isValidLogInfo(userEmail, pwd)) {
 				int id = loginService.getIdbyEmail(userEmail);
@@ -73,7 +73,7 @@ public class loginController extends HttpServlet{
 				
 				request.getRequestDispatcher("main.jsp").forward(request, response);
 			}
-		}
+//		}
 		
 	}
 
