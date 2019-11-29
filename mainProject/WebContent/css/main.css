@@ -245,14 +245,4 @@ body {
       height: 10px;
       border-radius: 499rem; }
       
-      
-#dummy {
-	position: absolute;
-	right: 10px;
-	
-	width: 50%;
-	height: 30%;
-	display: flex;
-	justify-content: flex-end;
-}
-
+    

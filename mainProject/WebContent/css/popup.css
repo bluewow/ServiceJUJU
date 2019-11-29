@@ -5,7 +5,7 @@
  */
  
 .pop-up {
-	visibility:hidden; 
+	visibility:hidden;  
 	border: 1px solid;
     z-index: 100;
     position: absolute;
@@ -99,4 +99,21 @@
     text-align: center;
 }
 
+.personal {
+    display: flex;
+    right: 10rem;
+    position: absolute;
+    bottom: 2.1rem;
+}
+ .personal input {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5em; 
+
+}
+
+ .personal input:before {
+ 	background-color: transparent;
+    border: none;
+ }
 

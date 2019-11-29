@@ -42,6 +42,7 @@
 
 <!--  pop-up -->
 <link rel="stylesheet" type="text/css" href="./css/popup.css">
+<script src="./js/popup/popup.js"></script>
 
 <!--[if lt IE 9]>
    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -73,9 +74,9 @@ modal
    		<div class="pop-up-border">
    			<div class="pop-up-context">
 	   				<div class="text">이메일</div>
-	   				<input class="box" type="text" name="userEmail" placeholder="Enter the Email..." form="user">
+	   					<input class="box" type="text" name="userEmail" placeholder="Enter the Email..." form="user">
 	   				<div class="text">비밀번호</div>
-	   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
+	   					<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
    					<form class="login-box" action="login" method="post" id="user">
 	   					<input type="submit" value="로그인">
    					</form>
@@ -101,18 +102,26 @@ modal
                      alt="profile photo" class="circle float-left profile-photo"
                      width="50" height="auto">
                   </a>
-                  <!-- TODO -->                  
-                  <form id="dummy" action="login" method="post">
+                  <div class="personal">
+                  	<c:if test="${empty sessionScope.id }">
+                  		<input type="button" value="로그인">
+                  	</c:if>
+                  	<c:if test="${not empty sessionScope.id }">
+	                  	<input type="button" value="USERasfsdsd">
+	                  	<input type="button" value="로그아웃">
+                  	</c:if>
+                  </div>
+                 <%--  <form class="personal" action="login" method="post">
                      <c:if test="${empty sessionScope.id }">
-                        <input type="text" name="userEmail" placeholder="Enter the Email...">
-                        <input type="password" name="pwd" placeholder="Enter the Password...">
-                        <input type="submit" value="Dummy 로그인">
+                        <div class="personal1"><input type="button" value="로그인"></div>
                      </c:if>
                      <c:if test="${not empty sessionScope.id }">
-                        <input type="hidden" name="userEmail" value="null">
-                        <input type="submit" value="Dummy 로그아웃">
+                     	<div class="personal2">
+	                        <input type="button" value="USER">
+	                        <input type="button" value="로그아웃">
+                        </div>
                      </c:if>
-                  </form>
+                  </form> --%>
                </div>
             </section>
          </section>
