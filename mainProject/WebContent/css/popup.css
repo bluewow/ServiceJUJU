@@ -4,7 +4,8 @@
 	Modal 팝업
  */
  
-.pop-up {
+ .pop-up, 
+.sign-up-pop-up {
 	visibility:hidden;  
     z-index: 100;
     position: absolute;
@@ -18,7 +19,8 @@
     box-shadow: 5px 5px 10px 5px grey;
 }
 
-.pop-up .pop-up-top {
+.pop-up .pop-up-top, 
+.sign-up-pop-up .pop-up-top {
     background-color: rgb(19, 191, 215);
     min-height: 17%;
     color: white;
@@ -29,10 +31,12 @@
     line-height: normal;
 }
 
-.pop-up .pop-up-border {
+.pop-up .pop-up-border, 
+.sign-up-pop-up .pop-up-border {
 	height: 83%;
 	}
-	.pop-up .pop-up-border .pop-up-context{
+	.pop-up .pop-up-border .pop-up-context, 
+	.sign-up-pop-up .pop-up-border .pop-up-context{
 	    width: 80%;
 	    height: 100%;
 	    margin-left: 10%;
@@ -98,6 +102,23 @@
     text-align: center;
 }
 
+.pop-up-wrapper {
+	visibility: hidden;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 2;
+}
+
+input.top-bottom-margin {
+	margin: 12% 0% 12% 0 !important;
+}
+
+/* 
+	로그인/로그아웃/회원 Button
+ */
+ 
 .personal {
     right: 10rem;
     position: absolute;
@@ -114,11 +135,3 @@
 	font-size: 1.2em;
 }
 
-.pop-up-wrapper {
-	visibility: hidden;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    background-color: rgba(0,0,0,0.4);
-    z-index: 2;
-}

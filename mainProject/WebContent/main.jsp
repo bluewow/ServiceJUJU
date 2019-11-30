@@ -337,21 +337,47 @@
 		   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
 	   					
 	   					<form class="login-box" action="login" method="post" id="user">
-		   					<input type="submit" value="로그인">
+		   					<input type="button" value="로그인">
 	   					</form>
 		   				
 		   				<hr>
 		   				
-		   				<form class="check-box">   				
-		   					<input class="box" type="submit" value="무료회원가입">
-		   					<input class="box" type="submit" value="이메일/비밀번호 찾기">
-		   				</form>
+		   				<div class="check-box">   			
+		   					<input class="box" type="button" value="무료회원가입">
+		   					<input class="box" type="button" value="이메일/비밀번호 찾기">
+		   				</div>
 	   			</div>
 	   		</div>
 	   </div>
    </div>
    <!-- =============================================================================================================== -->
-   
+ 	<!-- ===== 회원가입 POPUP ========================================================================================================== -->   
+ 	<div class="pop-up-wrapper">
+	   <div class="sign-up-pop-up">
+			<div class="pop-up-top">STOCK MARKET<br>회원가입</div>
+	   		<div class="pop-up-border">
+	   			<div class="pop-up-context">
+		   				<div class="text">이메일</div>
+		   				<input class="box" type="text" name="userEmail" placeholder="Enter the Email..." form="user">
+		   				
+		   				<div class="text">닉네임</div>
+		   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
+		   				
+		   				<div class="text">비밀번호</div>
+		   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
+	   					
+	   					<div class="text">비밀번호 확인</div>
+		   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
+		   				
+	   					<form class="login-box" action="login" method="post" id="user">
+		   					<input class="top-bottom-margin" type="button" value="회원가입">
+	   					</form>
+	   			</div>
+	   		</div>
+	   </div>
+   </div> 
+   <!-- =============================================================================================================== -->
+      
    </main>
    <!-- =============================================================================================================== -->
    <footer>
