@@ -1,6 +1,7 @@
 package com.stockmarket.www.controller.login;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +15,8 @@ import com.stockmarket.www.service.basic.BasicLoginService;
 
 //TODO
 //제재 회원 처리
-//session 시간이 지날경우 화면상에 로그아웃 표시 또는 팝업창을 구현해야한다 
+//session 시간이 지날경우 화면상에 로그아웃 표시 또는 팝업창을 구현해야한다 (session 만료처리) 
+
 
 @WebServlet("/login")
 public class loginController extends HttpServlet{
@@ -27,54 +29,45 @@ public class loginController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		HttpSession session = request.getSession();
+		String logout = request.getParameter("loginStatus");
+
+		if(logout == null) 
+			response.sendRedirect("/main.jsp");
 		
-		//returnURL 처리 생략
-		request.getRequestDispatcher("main.jsp").forward(request, response);
+		//로그아웃 시도
+		if(logout.equals("logout")) {
+			//invalidate 는 session 객체를 무효화 시킨다. 메모리에는 여전히 남아있어 sessionScope 로 참조됨.
+			if(request.isRequestedSessionIdValid()) {
+				session.setAttribute("id", null);
+				session.invalidate(); //sessionScope.id 가 유효함??
+
+				response.sendRedirect("/main.jsp");
+			}
+		}
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println("TEST--Post");
 		HttpSession session = request.getSession();
 		String userEmail = request.getParameter("userEmail");
 		String pwd = request.getParameter("pwd");
-		//null / LOGOUT / LOGIN / ELSE
 		
-//		String status = request.getHeader("status");
-//
-//		
-//		if(status == null) {
-//			request.getRequestDispatcher("main.jsp").forward(request, response);
-//			return;
-//		}
-		
-		//로그아웃 시도
-//		if(status.equals("LOGOUT")) {
-//			if(session != null)
-//				session.invalidate();
-//			
-//			request.getRequestDispatcher("main.jsp").forward(request, response);
-//			return;
-//		}
-		
+		System.out.println("post:" + request.isRequestedSessionIdValid());
+		System.out.println(userEmail);
+		System.out.println(pwd);
 		//로그인 시도
-//		if(status.equals("LOGIN")) {
-			//회원가입상태를 체크
-			if(isValidLogInfo(userEmail, pwd)) {
-				int id = loginService.getIdbyEmail(userEmail);
-				//id 값을 session 에 저장한다
-				if(id != 0)
-					session.setAttribute("id", id);
-				
-				request.getRequestDispatcher("main.jsp").forward(request, response);
-				
-			} else {
-				if(session != null)
-					session.invalidate();
-				
-				request.getRequestDispatcher("main.jsp").forward(request, response);
-			}
-//		}
+		//회원가입상태를 체크
+		if(isValidLogInfo(userEmail, pwd)) {
+			int id = loginService.getIdbyEmail(userEmail);
+			//id 값을 session 에 저장한다
+			if(id != 0)
+				session.setAttribute("id", id);
+		} 
+
+		response.sendRedirect("/main.jsp");
 		
 	}
 
@@ -84,7 +77,6 @@ public class loginController extends HttpServlet{
 			return false;
 
 		if(loginService.isValidMember(email, pwd)) 
-
 			return true;
 		else 
 			return false;

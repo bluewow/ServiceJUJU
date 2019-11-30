@@ -3,6 +3,7 @@ window.addEventListener("load", function(){
     var wrapper = document.querySelector(".pop-up-wrapper");
     var loginPopup = document.querySelector(".pop-up");
 
+    //click 시 popup hidden 처리
     window.onclick = function(e) {
         if (e.target == wrapper) {
             wrapper.style.visibility = "hidden";
@@ -26,12 +27,15 @@ window.addEventListener("load", function(){
         } else if(e.target.value == "로그아웃") {
         	//로그아웃시 session 만료
             var request = new XMLHttpRequest();
-            request.open("POST", "/login", true);
-            request.setRequestHeader("status","LOGOUT");
+            request.open("GET", "/login?loginStatus=logout");
             request.send();
+            request.onload = function() {
+            	location.reload(true);
+            }
 
         } else {
         	//userName
+        	
         }
     }
     
