@@ -51,6 +51,14 @@
 				</tr>
 			</thead>
 			
+			
+			<%-- - <c:if test="${not empty name}">
+
+				출처: https://offbyone.tistory.com/367 [쉬고 싶은 개발자] --%>
+			
+			
+			
+			
 			<tbody>
 			
 			<%-- <c:forEach var="n" items="${search}" varStatus="status"> --%>
