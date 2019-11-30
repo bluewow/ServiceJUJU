@@ -13,6 +13,6 @@ public interface LoginService {
 //	회원탈퇴
 	boolean deleteMember();
 	
-//  getIDby Member Table
-	int getIdbyEmail(String email);
+//  get Member by eMail
+	Member getMember(String email);
 }

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.RemoteEndpoint.Basic;
 
+import com.stockmarket.www.entity.Member;
 import com.stockmarket.www.service.basic.BasicLoginService;
 
 //TODO
@@ -41,6 +42,7 @@ public class loginController extends HttpServlet{
 			//invalidate 는 session 객체를 무효화 시킨다. 메모리에는 여전히 남아있어 sessionScope 로 참조됨.
 			if(request.isRequestedSessionIdValid()) {
 				session.setAttribute("id", null);
+				session.setAttribute("nickName", null);
 				session.invalidate(); //sessionScope.id 가 유효함??
 
 				response.sendRedirect("/main.jsp");
@@ -58,10 +60,12 @@ public class loginController extends HttpServlet{
 		//로그인 시도
 		//회원가입상태를 체크
 		if(isValidLogInfo(userEmail, pwd)) {
-			int id = loginService.getIdbyEmail(userEmail);
+			Member member = loginService.getMember(userEmail);
 			//id 값을 session 에 저장한다
-			if(id != 0)
-				session.setAttribute("id", id);
+			if(member.getId() != 0) {
+				session.setAttribute("id", member.getId());
+				session.setAttribute("nickName", member.getNickName());
+			}
 		} 
 
 		response.sendRedirect("/main.jsp");
