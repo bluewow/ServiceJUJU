@@ -50,14 +50,11 @@ public class loginController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("TEST--Post");
+
 		HttpSession session = request.getSession();
 		String userEmail = request.getParameter("userEmail");
 		String pwd = request.getParameter("pwd");
 		
-		System.out.println("post:" + request.isRequestedSessionIdValid());
-		System.out.println(userEmail);
-		System.out.println(pwd);
 		//로그인 시도
 		//회원가입상태를 체크
 		if(isValidLogInfo(userEmail, pwd)) {
