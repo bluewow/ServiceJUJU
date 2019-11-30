@@ -324,7 +324,7 @@
 무료회원가입
 이메일/비밀번호찾기
 -->
-   	<!-- ===== POPUP ========================================================================================================== -->   
+   	<!-- ===== 로그인 POPUP ========================================================================================================== -->   
 	<div class="pop-up-wrapper">
 	   <div class="pop-up">
 			<div class="pop-up-top">STOCK MARKET<br>로그인</div>
@@ -350,7 +350,6 @@
 	   		</div>
 	   </div>
    </div>
-   <!-- =============================================================================================================== -->
  	<!-- ===== 회원가입 POPUP ========================================================================================================== -->   
  	<div class="pop-up-wrapper">
 	   <div class="sign-up-pop-up">
@@ -376,6 +375,33 @@
 	   		</div>
 	   </div>
    </div> 
+   <!-- ===== 개인 프로필 POPUP ========================================================================================================== -->
+<!--       
+ 	<div class="pop-up-wrapper">
+	   <div class="sign-up-pop-up">
+			<div class="pop-up-top">STOCK MARKET<br>회원가입</div>
+	   		<div class="pop-up-border">
+	   			<div class="pop-up-context">
+		   				<div class="text">이메일</div>
+		   				<input class="box" type="text" name="userEmail" placeholder="Enter the Email..." form="user">
+		   				
+		   				<div class="text">닉네임</div>
+		   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
+		   				
+		   				<div class="text">비밀번호</div>
+		   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
+	   					
+	   					<div class="text">비밀번호 확인</div>
+		   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
+		   				
+	   					<form class="login-box" action="login" method="post" id="user">
+		   					<input class="top-bottom-margin" type="button" value="회원가입">
+	   					</form>
+	   			</div>
+	   		</div>
+	   </div>
+   </div>
+ -->   
    <!-- =============================================================================================================== -->
       
    </main>
