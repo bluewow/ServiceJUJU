@@ -27,28 +27,25 @@ public class BasicTradeService implements TradeService{
 
 	@Override
 	public int getAssets(int id) {
-		Member member = new Member();
-		member = memberDao.getMember(id);
+		Member member = memberDao.getMember(id);
 		
 		return member.getvMoney();
 	}
 
 	@Override
 	public int getQty(int id, String stockId) {
-		HaveStock haveStock = new HaveStock();
 		JdbcHaveStockDao stockDao = new JdbcHaveStockDao();
 		
-		haveStock = stockDao.get(id, stockId);
+		HaveStock haveStock = stockDao.get(id, stockId);
 		
 		return haveStock.getQuantity();
 	}
 	
 	@Override
 	public boolean setQty(int id, String stockId, int qty) {
-		HaveStock haveStock = new HaveStock();
 		JdbcHaveStockDao stockDao = new JdbcHaveStockDao();
 		
-		haveStock = stockDao.get(id, stockId);
+		HaveStock haveStock = stockDao.get(id, stockId);
 		if(haveStock.getQuantity() + qty < 0) {
 			System.out.println("마이너스 수량");
 			return false;
