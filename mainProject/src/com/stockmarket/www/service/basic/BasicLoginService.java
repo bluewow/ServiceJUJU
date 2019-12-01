@@ -25,13 +25,15 @@ public class BasicLoginService implements LoginService{
 	}
 
 	@Override
-	public boolean insertMember(Member member) {
-		return false;
+	public int signUpMember(Member member) {
+		int result = memberDao.insertMember(member);
+		
+		return result;
 	}
 
 	@Override
-	public boolean deleteMember() {
-		return false;
+	public int deleteMember() {
+		return 0;
 	}
 
 	public Member getMember(String email) {

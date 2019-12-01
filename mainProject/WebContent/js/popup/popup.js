@@ -21,7 +21,7 @@ function loginFunc() {
 
         if(e.target.value =="로그인") {
             //TODO 이메일 양식 비밀번호 체크
-        	var form = document.querySelector(".login-box");
+        	var form = loginPopup.querySelector(".login-box");
         	form.submit();
             
         }
@@ -95,11 +95,18 @@ function signUpFunc() {
         //prevent Event Bubble
         e.preventDefault();
 
-        console.log(e.target);
-        console.log(e.target.name);
         if(e.target.nodeName == "userEmail") {
             alert("TEST");
-        } 
-        // else if(e.target.value == "로그인")
+        } else if(e.target.nodeName == "nickName") {
+
+        } else if(e.target.nodeName == "pwd") {
+        
+        } else if(e.target.nodeName == "checkPwd") {
+        
+        } else if(e.target.value == "회원가입") {
+            var form = signupPopup.querySelector(".login-box");
+        	form.submit();
+        	
+        }
     }
 }
