@@ -357,16 +357,16 @@
 	   		<div class="pop-up-border">
 	   			<div class="pop-up-context">
 		   				<div class="text">이메일</div>
-		   				<input class="box" type="text" name="userEmail" placeholder="Enter the Email..." form="user">
+		   				<input class="box" type="text" name="userEmail" form="user">
 		   				
 		   				<div class="text">닉네임</div>
-		   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
+		   				<input class="box" type="password" name="nickName" placeholder="4 ~ 14자 이내로 입력하세요 " form="user">
 		   				
 		   				<div class="text">비밀번호</div>
-		   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
+		   				<input class="box" type="password" name="pwd" placeholder="1 ~ 16자 이내로 입력 하시오" form="user">
 	   					
 	   					<div class="text">비밀번호 확인</div>
-		   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
+		   				<input class="box" type="password" name="checkPwd" form="user">
 		   				
 	   					<form class="login-box" action="login" method="post" id="user">
 		   					<input class="top-bottom-margin" type="button" value="회원가입">

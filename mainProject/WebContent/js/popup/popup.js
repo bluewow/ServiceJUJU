@@ -95,6 +95,11 @@ function signUpFunc() {
         //prevent Event Bubble
         e.preventDefault();
 
-        alert("회원가입");
+        console.log(e.target);
+        console.log(e.target.name);
+        if(e.target.nodeName == "userEmail") {
+            alert("TEST");
+        } 
+        // else if(e.target.value == "로그인")
     }
 }
