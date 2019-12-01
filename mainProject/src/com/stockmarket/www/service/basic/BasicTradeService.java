@@ -37,6 +37,8 @@ public class BasicTradeService implements TradeService{
 		JdbcHaveStockDao stockDao = new JdbcHaveStockDao();
 		
 		HaveStock haveStock = stockDao.get(id, stockId);
+		if(haveStock == null)
+			return 0;
 		
 		return haveStock.getQuantity();
 	}
