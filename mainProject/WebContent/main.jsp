@@ -379,13 +379,13 @@
 	   </div>
    </div> 
    <!-- ===== 개인 프로필 POPUP ========================================================================================================== -->
-<!--       
+
  	<div class="pop-up-wrapper">
-	   <div class="sign-up-pop-up">
-			<div class="pop-up-top">STOCK MARKET<br>회원가입</div>
+	   <div class="profile-pop-up">
+			<div class="pop-up-top">STOCK MARKET<br>프로필수정</div>
 	   		<div class="pop-up-border">
 	   			<div class="pop-up-context">
-		   				<div class="text">이메일</div>
+		   			<!-- 	<div class="text">이메일</div>
 		   				<input class="box" type="text" name="userEmail" placeholder="Enter the Email..." form="user">
 		   				
 		   				<div class="text">닉네임</div>
@@ -399,12 +399,12 @@
 		   				
 	   					<form class="login-box" action="login" method="post" id="user">
 		   					<input class="top-bottom-margin" type="button" value="회원가입">
-	   					</form>
+	   					</form> -->
 	   			</div>
 	   		</div>
 	   </div>
    </div>
- -->   
+   
    <!-- =============================================================================================================== -->
       
    </main>

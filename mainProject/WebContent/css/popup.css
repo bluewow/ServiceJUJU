@@ -5,7 +5,8 @@
  */
  
  .pop-up, 
-.sign-up-pop-up {
+.sign-up-pop-up, 
+.profile-pop-up {
 	visibility:hidden;  
     z-index: 100;
     position: absolute;
@@ -20,7 +21,8 @@
 }
 
 .pop-up .pop-up-top, 
-.sign-up-pop-up .pop-up-top {
+.sign-up-pop-up .pop-up-top,
+.profile-pop-up .pop-up-top{
     background-color: rgb(19, 191, 215);
     min-height: 17%;
     color: white;
@@ -32,11 +34,13 @@
 }
 
 .pop-up .pop-up-border, 
-.sign-up-pop-up .pop-up-border {
+.sign-up-pop-up .pop-up-border,
+.profile-pop-up .pop-up-border {
 	height: 83%;
 	}
 	.pop-up .pop-up-border .pop-up-context, 
-	.sign-up-pop-up .pop-up-border .pop-up-context{
+	.sign-up-pop-up .pop-up-border .pop-up-context,
+	.profile-pop-up .pop-up-border .pop-up-context {
 	    width: 80%;
 	    height: 100%;
 	    margin-left: 10%;
