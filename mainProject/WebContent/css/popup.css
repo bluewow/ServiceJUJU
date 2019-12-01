@@ -120,7 +120,7 @@ input.top-bottom-margin {
  */
  
 .personal {
-    right: 10rem;
+    right: 3rem;
     position: absolute;
     bottom: 1.5rem;
 }
@@ -135,3 +135,10 @@ input.top-bottom-margin {
 	font-size: 1.2em;
 }
 
+/*
+	아이콘
+*/
+
+.user-section a {
+	float: none;
+}

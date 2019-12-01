@@ -71,11 +71,12 @@
             <section class="column column-30">
                <h1 style="display: none;">user section</h1>
                <div class="user-section">
-                  <a href="#"> <img src="http://via.placeholder.com/50x50"
-                     alt="profile photo" class="circle float-left profile-photo"
-                     width="50" height="auto">
-                  </a>
                   <div class="personal">
+                  <a href="#">
+                  	 <img src="http://via.placeholder.com/50x50"
+                    	 alt="profile photo" class="circle float-left profile-photo"
+                     	width="50" height="auto">
+                  </a>
                   	<c:if test="${empty sessionScope.id }">
                   		<input type="button" value="로그인">
                   	</c:if>
