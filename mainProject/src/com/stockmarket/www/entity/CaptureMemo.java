@@ -6,38 +6,51 @@ public class CaptureMemo {
 	private int id;
 	private String title;
 	private Date regdate;
-	private String memo;
-	private int highprice;
-	private int maketprice;
-	private int dealingnum;
-	private int preclosingprice;
+	private String content;
+	private int highPrice;
+	private int maketPrice;
+	private int tradingVolume;
+	private int preClosingPrice;
 	private String favorite;
+	private String codeNum;
+	private int memberId;
 
-	public CaptureMemo() {
-
-	}
-
-	// for inserting
-	public CaptureMemo(String title, String memo) {
-
+	public CaptureMemo(String title, String content) {
 		this.title = title;
-		this.memo = memo;
-
+		this.content = content;
 	}
 
-   //for selecting
-	public CaptureMemo(int id, String title, Date regdate, String memo, int highprice, int maketprice, int dealingnum,
-			int preclosingprice, String favorite) {
-	
+	public CaptureMemo(String title, Date regdate) {
+		this.title = title;
+		this.regdate = regdate;
+	}
+
+	public CaptureMemo(String title, String content, int highPrice, int maketPrice, int tradingVolume,
+			int preClosingPrice, String favorite, String codeNum, int memberId) {
+		this.title = title;
+		this.content = content;
+		this.highPrice = highPrice;
+		this.maketPrice = maketPrice;
+		this.tradingVolume = tradingVolume;
+		this.preClosingPrice = preClosingPrice;
+		this.favorite = favorite;
+		this.codeNum = codeNum;
+		this.memberId = memberId;
+	}
+
+	public CaptureMemo(int id, String title, Date regdate, String content, int highPrice, int maketPrice,
+			int tradingVolume, int preClosingPrice, String favorite, String codeNum, int memberId) {
 		this.id = id;
 		this.title = title;
 		this.regdate = regdate;
-		this.memo = memo;
-		this.highprice = highprice;
-		this.maketprice = maketprice;
-		this.dealingnum = dealingnum;
-		this.preclosingprice = preclosingprice;
+		this.content = content;
+		this.highPrice = highPrice;
+		this.maketPrice = maketPrice;
+		this.tradingVolume = tradingVolume;
+		this.preClosingPrice = preClosingPrice;
 		this.favorite = favorite;
+		this.codeNum = codeNum;
+		this.memberId = memberId;
 	}
 
 	public int getId() {
@@ -64,44 +77,44 @@ public class CaptureMemo {
 		this.regdate = regdate;
 	}
 
-	public String getMemo() {
-		return memo;
+	public String getContent() {
+		return content;
 	}
 
-	public void setMemo(String memo) {
-		this.memo = memo;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	public int getHighprice() {
-		return highprice;
+	public int getHighPrice() {
+		return highPrice;
 	}
 
-	public void setHighprice(int highprice) {
-		this.highprice = highprice;
+	public void setHighPrice(int highPrice) {
+		this.highPrice = highPrice;
 	}
 
-	public int getMaketprice() {
-		return maketprice;
+	public int getMaketPrice() {
+		return maketPrice;
 	}
 
-	public void setMaketprice(int maketprice) {
-		this.maketprice = maketprice;
+	public void setMaketPrice(int maketPrice) {
+		this.maketPrice = maketPrice;
 	}
 
-	public int getDealingnum() {
-		return dealingnum;
+	public int getTradingVolume() {
+		return tradingVolume;
 	}
 
-	public void setDealingnum(int dealingnum) {
-		this.dealingnum = dealingnum;
+	public void setTradingVolume(int tradingVolume) {
+		this.tradingVolume = tradingVolume;
 	}
 
-	public int getPreclosingprice() {
-		return preclosingprice;
+	public int getPreClosingPrice() {
+		return preClosingPrice;
 	}
 
-	public void setPreclosingprice(int preclosingprice) {
-		this.preclosingprice = preclosingprice;
+	public void setPreClosingPrice(int preClosingPrice) {
+		this.preClosingPrice = preClosingPrice;
 	}
 
 	public String getFavorite() {
@@ -112,11 +125,28 @@ public class CaptureMemo {
 		this.favorite = favorite;
 	}
 
+	public String getCodeNum() {
+		return codeNum;
+	}
+
+	public void setCodeNum(String codeNum) {
+		this.codeNum = codeNum;
+	}
+
+	public int getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(int memberId) {
+		this.memberId = memberId;
+	}
+
 	@Override
 	public String toString() {
-		return "CaptureMemo [id=" + id + ", title=" + title + ", redate=" + regdate + ", memo=" + memo + ", highprice="
-				+ highprice + ", maketprice=" + maketprice + ", dealingnum=" + dealingnum + ", preclosingprice="
-				+ preclosingprice + ",favorite=" + favorite + "]";
+		return "CaptureMemo [id=" + id + ", title=" + title + ", redate=" + regdate + ", content=" + content
+				+ ", highprice=" + highPrice + ", maketprice=" + maketPrice + ", dealingnum=" + tradingVolume
+				+ ", preclosingprice=" + preClosingPrice + ",favorite=" + favorite + ", codeNum=" + codeNum
+				+ ", memberId=" + memberId + "]";
 	}
 
 }

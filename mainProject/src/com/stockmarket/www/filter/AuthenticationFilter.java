@@ -35,8 +35,8 @@ public class AuthenticationFilter implements Filter{
 		if(session.getAttribute("id") == null) {
 			//로그인 이전 권한 세팅
 			for(String url : noAuthUrls) {
-				// 1. /card 외에는 pass
-				// 2. 1번 조건에 noAuthUrls path 는 pass
+				// 1. /card 외에는 bypass
+				// 2. noAuthUrls path 는 bypass
 				if(!urlPath.substring(0, 5).equals("/card") || url.equals(urlPath)) {
 					filterPass = true;
 					break;
@@ -48,7 +48,7 @@ public class AuthenticationFilter implements Filter{
 			else 
 				httpRequest.getRequestDispatcher("/error/403.jsp").forward(httpRequest, httpResponse);
 		} else {
-			//로그인 이후
+			//로그인 이후 No filter for auth 
 			chain.doFilter(request, response);
 		}
 	}

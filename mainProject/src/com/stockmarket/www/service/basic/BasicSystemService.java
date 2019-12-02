@@ -34,7 +34,6 @@ public class BasicSystemService implements SystemService {
 	private static final String KOSDAQ = "kosdaqMkt";
 	List<String[]> companyList;
 	String[] dataBuffer;
-	CSVStockDataDao log = new CSVStockDataDao();
 	MemberDao memberDao;
 	HaveStockDao haveStockDao;
 	RecordAssetDao recordAssetDao;

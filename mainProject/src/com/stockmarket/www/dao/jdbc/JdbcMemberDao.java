@@ -242,4 +242,56 @@ public class JdbcMemberDao implements MemberDao {
 		}
 		return result;
 	}
+
+	@Override
+	public int insertMember(Member member) {
+		int result = 0;
+		ResultSet resultSet = null;
+		PreparedStatement statement = null;
+		String sql = "INSERT INTO MEMBER (EMAIL, NICKNAME, PASSWORD, VMONEY) "
+				+ "VALUES (?, ?, ?, ?)";
+		
+		try {
+			statement = JdbcDaoContext.getPreparedStatement(sql);
+
+			statement.setString(1, member.getEmail());
+			statement.setString(2, member.getNickName());
+			statement.setString(3, member.getPassword());
+			statement.setInt(4, member.getvMoney());
+
+			result = statement.executeUpdate();
+			statement.close();
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (resultSet != null)
+					resultSet.close();
+				if (statement != null)
+					statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
+	
+/*
+ * =======================================================================
+ * ============================= for Test ================================
+ * =======================================================================
+ */
+	public static void main(String[] args) {
+		
+		JdbcMemberDao memberDao = new JdbcMemberDao();
+		Member member = new Member("test-5@test.com", "a", "123", 500);
+		
+		System.out.println("TEST---");
+		int result= memberDao.insertMember(member);
+		System.out.println(result);
+	}
 }

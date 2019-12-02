@@ -1,17 +1,13 @@
 package com.stockmarket.www.dao;
 
 import java.util.List;
-
 import com.stockmarket.www.entity.CaptureMemo;
+import com.stockmarket.www.entity.CaptureMemoView;
 
 public interface CaptureMemoDao {
+	List<CaptureMemoView> getList(int page);	// 캡처메모 리스트 가져오기
 
-	List<CaptureMemo> getCaptureMemoList(int page);
-	
-	int insert(CaptureMemo captureMemo);//저장
-	int update(CaptureMemo captureMemo);//수정
-	int delete(int id);//삭제 
-
-	
-
+	int insert(CaptureMemo captureMemo);	// 캡처메모 저장
+	int update(CaptureMemo captureMemo);	// 캡처메모 수정
+	int delete(int id);						// 캡처메모 삭제 
 }

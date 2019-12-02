@@ -14,9 +14,7 @@ public class BasicLoginService implements LoginService{
 	
 	@Override
 	public boolean isValidMember(String email, String pwd) {
-		Member member = new Member();
-		
-		member = memberDao.getMemberByEmail(email);
+		Member member = memberDao.getMemberByEmail(email);
 		if(member != null) { 
 			if(member.getPassword().equals(pwd))
 				return true;
@@ -27,23 +25,23 @@ public class BasicLoginService implements LoginService{
 	}
 
 	@Override
-	public boolean insertMember(Member member) {
-		return false;
+	public int signUpMember(Member member) {
+		int result = memberDao.insertMember(member);
+		
+		return result;
 	}
 
 	@Override
-	public boolean deleteMember() {
-		return false;
+	public int deleteMember() {
+		return 0;
 	}
 
-	public int getIdbyEmail(String email) {
-		Member member = new Member();
+	public Member getMember(String email) {
+		Member member = memberDao.getMemberByEmail(email);
+		if(member != null)
+			return member; 
 		
-		member = memberDao.getMemberByEmail(email);
-		if(member == null)
-			return 0; //0 is illegal
-		
-		return member.getId();
+		return null;
 	}
 
 }

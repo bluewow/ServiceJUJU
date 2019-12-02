@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.stockmarket.www.controller.system.AppContext;
 import com.stockmarket.www.dao.HaveStockDao;
 import com.stockmarket.www.entity.CurStock;
 import com.stockmarket.www.entity.HaveStock;
@@ -59,10 +58,11 @@ public class JdbcHaveStockDao implements HaveStockDao {
 						String price = data.getPrice();
 						String gain = data.getGain();
 						String percent = data.getPercent();
-
-						HaveStockView haveStockView = new HaveStockView(memberId, stockId, quantity, sum, stockName,
-								price, gain, percent);
-						stockList.add(haveStockView);
+						int intPrice = Integer.parseInt(data.getPrice().replaceAll(",", ""));
+		                  
+		                  HaveStockView haveStockView = new HaveStockView(memberId, stockId, quantity, sum, stockName,
+		                        price, gain, percent, intPrice);
+		                  stockList.add(haveStockView);
 						break;
 					}
 				}
@@ -143,9 +143,10 @@ public class JdbcHaveStockDao implements HaveStockDao {
 						String price = data.getPrice();
 						String gain = data.getGain();
 						String percent = data.getPercent();
+						int intPrice = Integer.parseInt(data.getPrice().replaceAll(",", ""));
 
-						haveStockView = new HaveStockView(memberId_, stockId_, quantity, sum, stockName, price, gain,
-								percent);
+
+						haveStockView = new HaveStockView(memberId_, stockId_, quantity, sum, stockName, price, gain, percent, intPrice);
 						break;
 					}
 				}
@@ -272,3 +273,4 @@ public class JdbcHaveStockDao implements HaveStockDao {
 	}
 
 }
+
