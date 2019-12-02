@@ -24,8 +24,7 @@ public class BasicAssetDistrService implements AssetDistrService {
 		assetTrendService = new BasicAssetTrendService();
 	}
 	
-	private int getProfitByStockId(String stockId, int memberId) {
-		int value = 0;
+	private float getProfitByStockId(String stockId, int memberId) {
 		
 		int quantity = haveStockDao.getView(memberId, stockId).getQuantity();
 		int sum = haveStockDao.getView(memberId, stockId).getSum();
@@ -35,14 +34,10 @@ public class BasicAssetDistrService implements AssetDistrService {
 		//System.out.println("누적값: "+sum);
 		//System.out.println("현재값: "+presentValue);
 		
-		value = sum - (quantity*presentValue);
-		
-		return value;	
+		return sum - (quantity*presentValue);	
 	}
 	
-	private int getProfitAll(int memberId) {
-		
-		
+	private float getProfitAll(int memberId) {
 		int value = 0;
 		
 		List<HaveStockView> list = new ArrayList<>();
@@ -54,26 +49,20 @@ public class BasicAssetDistrService implements AssetDistrService {
 	}
 
 	@Override
-	public List<HaveStockView> getHaveStockList(int memberId) {
-		List<Map<String, Double>> distrList = new ArrayList<>();
-		
-		String stockId = "";
+	public List<Map<String, Object>> getHaveStockList(int memberId) {
+		List<Map<String, Object>> distrList = new ArrayList<>();
 
 		List<HaveStockView> list = new ArrayList<>();
 		list.addAll(haveStockDao.getList(memberId));
 		for(HaveStockView data:list) {
-			
-			//stockId = get
-			
-			Map<String, Double> distr = new HashMap<>();
-			
-			//distr.
-			
-			//distrList.add();
-			
+			Map<String, Object> distr = new HashMap<>();
+			float ratio = (getProfitByStockId(data.getStockId(), memberId))/(getProfitAll(memberId))*100;
+			System.out.println(ratio);
+			distr.put("ratio", ratio);
+			distr.put("stockName", data.getStockName());
+			distrList.add(distr);
 		}
-		
-		return list;
+		return distrList;
 	}
 	
 	/*
@@ -95,6 +84,9 @@ public class BasicAssetDistrService implements AssetDistrService {
 			break;
 		case 2:	// getRecordAsset용 테스트
 			System.out.println(assetDistr.getProfitAll(3));
+			break;
+		case 3:	// getRecordAsset용 테스트
+			System.out.println(assetDistr.getHaveStockList(3));
 			break;
 		}
 		System.out.println("종료");

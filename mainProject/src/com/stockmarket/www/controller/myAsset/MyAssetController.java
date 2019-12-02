@@ -31,6 +31,8 @@ public class MyAssetController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int presnetAsset = assetTrendService.getAssetPresent(3);
+		
 		List<RecordAsset> list = assetTrendService.getRecordAsset(3);
 				
 		StringBuilder builder = new StringBuilder();
@@ -53,6 +55,7 @@ public class MyAssetController extends HttpServlet{
 	       
 	       PrintWriter out = response.getWriter();
 	       out.write(json); 
+	       out.write(presnetAsset);
 		
 		
 		request.getRequestDispatcher("myAsset.jsp").forward(request, response);
