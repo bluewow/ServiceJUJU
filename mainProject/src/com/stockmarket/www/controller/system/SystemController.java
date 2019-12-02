@@ -81,7 +81,8 @@ public class SystemController extends HttpServlet {
 //			TODO
 		}
 		
-		if(curHour.equals("17") && preHour.equals("18")) {
+		if(curHour.equals("18") && preHour.equals("17")) {
+			System.out.println("실행 중인가");
 			service.insertRecordAsset();
 		}
 		
@@ -89,6 +90,8 @@ public class SystemController extends HttpServlet {
 		//현재 시간을 preHour flag 에 저장
 		preHour = curHour;
 		
+		SimpleDateFormat date1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //HH : 0~23시  기타형식예 "yyyy-MM-dd HH:mm:ss"
+		System.out.println(date1.format(System.currentTimeMillis()));
 		//10분주기 - refreshStockPrice 함수실행시 약 7분소요로 10분주기로 변경
 		Thread.sleep(1000 * 60 * 10);
 	}
@@ -112,6 +115,11 @@ public class SystemController extends HttpServlet {
 		//18시 장종료후 19시에 주식데이터 갱신
 		if(curHour.equals("19") && preHour.equals("18"))  
 			System.out.println("success-3");
+		
+		if(curHour.equals("18") && preHour.equals("17")) {
+			System.out.println("success-4");
+			service.insertRecordAsset();
+		}
 		
 		preHour = curHour;
 	}

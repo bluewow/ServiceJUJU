@@ -10,6 +10,7 @@ public interface HaveStockDao {
 	List<HaveStockView> getList(int memberId);
 	
 	HaveStock get(int memberId, String stockId);
+	HaveStockView getView(int memberId, String stockId);
 
 	int update(HaveStock haveStock);
 	int insert(HaveStock haveStock);

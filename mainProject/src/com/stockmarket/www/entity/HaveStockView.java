@@ -11,9 +11,9 @@ public class HaveStockView extends HaveStock {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public HaveStockView(int memberId, String stockId, int quantity, float avg, String stockName, String price,
+	public HaveStockView(int memberId, String stockId, int quantity, int sum, String stockName, String price,
 			String gain, String percent) {
-		super(memberId, stockId, quantity, avg);
+		super(memberId, stockId, quantity, sum);
 		this.stockName = stockName;
 		this.price = price;
 		this.gain = gain;
