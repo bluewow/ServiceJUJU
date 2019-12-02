@@ -13,7 +13,6 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../../css/search/search.css">
 <script src="../../js/search/search.js"></script>
-
 </head>
 <!-- style="overflow:scroll" -->
 <body>
@@ -22,8 +21,10 @@
 		<h1 class="d-none">주식회사검색</h1>
 		<form action ="search" method="get">
 			<div id ="search-div">
-				<input id ="search-text" type="text" name="search">
-				<button class="search-button"></button>
+				<!-- <label for= "search-text"> -->
+					<input id ="search-text" type="text" name="search">
+					<button class="search-button"></button>
+				<!-- </label> -->
 			</div>
 		</form>
 	</section>
@@ -51,36 +52,45 @@
 				</tr>
 			</thead>
 			
-			
-			<%-- - <c:if test="${not empty name}">
-
-				출처: https://offbyone.tistory.com/367 [쉬고 싶은 개발자] --%>
-			
-			
-			
-			
+			<%-- <c:choose> --%>
 			<tbody>
-			
-			<%-- <c:forEach var="n" items="${search}" varStatus="status"> --%>
-				<tr>
-					<td>1</td>
-					<td>${n.companyName}<a href="${n.website}" target="_blank"><img src="/css/search/link.png" alt=""></a></td>
-					<td>${n.stockItemName}</td>
-					<td class="attention"><img src="/css/search/interest_no.png" ></td>
-				</tr>
-			<%-- </c:forEach> --%>
+				<c:forEach var="sector" items="${sectorList}" varStatus="status" >
+					<tr>
+						<td>${status.count}</td>
+						<td id="companyName">${sector.companyName}<a href="${sector.website}" target="_blank"><img src="/css/search/link.png" alt=""></a></td>
+						<td>${sector.stockItemName}</td>
+						<td class="attention"><img src="/css/search/interest_no.png" ></td>
+					</tr>
+				</c:forEach>
 			</tbody>
 			
-			<tbody>
-			<c:forEach var="sector" items="${sectorList}" varStatus="status" >
-				<tr>
-					<td>${status.count}</td>
-					<td>${sector.companyName}<a href="${sector.website}" target="_blank"><img src="/css/search/link.png" alt=""></a></td>
-					<td>${sector.stockItemName}</td>
-					<td class="attention"><img src="/css/search/interest_no.png" ></td>
-				</tr>
-			</c:forEach>
-			</tbody>
+			
+			<%-- <c:set var ="n" value="${search}"/> --%>
+			<%-- <c:if test="${!empty n}"> --%>
+		
+			<%-- <c:when test="$(!empty n)"> --%>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>${n.companyName}<a href="${n.website}" target="_blank"><img src="/css/search/link.png" alt=""></a></td>
+						<td>${n.stockItemName}</td>
+						<td class="attention"><img src="/css/search/interest_no.png"></td>
+					</tr>
+				</tbody>
+			<%-- </c:when> --%>
+			<%-- </c:if> --%>
+			<%-- </c:choose> --%>
+			
+				<%-- <tbody>
+					<c:forEach var="sector" items="${sectorList}" varStatus="status" >
+						<tr>
+							<td>${status.count}</td>
+							<td>${sector.companyName}<a href="${sector.website}" target="_blank"><img src="/css/search/link.png" alt=""></a></td>
+							<td>${sector.stockItemName}</td>
+							<td class="attention"><img src="/css/search/interest_no.png" ></td>
+						</tr>
+					</c:forEach>
+				</tbody> --%>
 			
 			
 			

@@ -11,26 +11,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/card/search/search-logIncheck")
+import sun.swing.SwingUtilities2.Section;
+
+@WebServlet("/card/search/search-json")
 public class SearchCompanyJSONController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("불러지니?");
+		
 		HttpSession session = request.getSession();
+		Object tempId = session.getAttribute("id");
+		//랭크 참조..
 		
-		if (session.getAttribute("id") == null) {
-			response.setCharacterEncoding("UTF-8");
-	        response.setContentType("text/html; charset=UTF-8");
-	        PrintWriter out = response.getWriter();
-	        out.println("<script>\r\n" +
-                    "    window.alert(\"인증이 필요한 요청입니다.. \\r\\n\" +\r\n" +
-                    "             \"로그인페이지로 이동합니다..\");\r\n" +
-                    "    \r\n" +
-                 
-                    "</script>");
-		}
+		int id = -1;
 		
-		request.getRequestDispatcher("search.jsp").forward(request, response);
+		if(tempId != null)
+			id = (Integer)tempId;
+		
+		String companyName = request.getParameter("cn");
+		
+		System.out.println(id);
+		System.out.println(companyName);
+		
 				
 	}
 	
