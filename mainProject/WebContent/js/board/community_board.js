@@ -30,7 +30,6 @@ window.addEventListener("load", function () {
             tds[5].firstElementChild.innerText = list[i].id;
             tds[6].innerText = list[i].writerId;
             tbody.append(cloneTr);
-            console.log(title);
         };
         
     };

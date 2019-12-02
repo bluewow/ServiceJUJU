@@ -51,14 +51,14 @@ window.addEventListener("load", function() {
 	};
 	
 	tbody.onclick = function (e) {
-		 if(!e.target.parentNode.classList.contains("board-title"));
+		 if(!e.target.parentNode.classList.contains("board-title"))
+			 return;
 	        e.preventDefault();
-	        alert("title click");
 	        
            var currentTr = e.target.parentNode.parentNode;
            var nextTr = currentTr.nextElementSibling.nextElementSibling;
            
-           if(nextTr.classList.contains("detail")) {
+           if(nextTr.classList.contains("content-row")) {
            	alert("이미 있잖아~");
            	return;
            }            
@@ -75,17 +75,19 @@ window.addEventListener("load", function() {
 	        
 	        var request = new XMLHttpRequest();  
 	        request.open("GET", "../../card/board/detail?id="+id, true);
-	        console.log("request"+request);
 	        request.onload = function () {
 	        	var detail = JSON.parse(request.responseText);
 	        	var template = section.querySelector(".detail-template");
 	        	var cloneTr = document.importNode(template.content, true);
-
 	            var td = cloneTr.querySelector(".content-row td");
 	            td.innerHTML = detail.board.content;
-	            console.log(td);
 	            var replyContent = cloneTr.querySelector(".replyTable tbody tr td");
-	            replyContent.innerHTML = detail.replys[0].reContent;
+	            var contentSum = "";
+	            
+	            for (var i = 0; i < detail.replys.length; i++) {
+						contentSum += detail.replys[i].writerId+" : "+detail.replys[i].reContent+"</br>";
+	            }
+	            replyContent.innerHTML = contentSum;
 	            console.log(replyContent);
 	            
 

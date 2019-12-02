@@ -52,10 +52,7 @@ public class CommunityBoardController extends HttpServlet {
 			stockName = stockName_;
 		
 		request.setAttribute("CommunityBoard", communityBoardService.getCommunityBoardList(page,field,query,stockName)); // 컨트롤러가 할 일은 데이터를 준비하는 일
-//		request.setAttribute("replyCnt", communityBoardService.getCommunityBoardreplyCnt(field,query,stockName)); 
-		
 		request.getRequestDispatcher("/card/board/community_board.jsp").forward(request, response);
-		System.out.println("커뮤보드컨트롤러 두겟");
 	}
 
 	@Override

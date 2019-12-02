@@ -45,9 +45,6 @@ public class DetailJsonController extends HttpServlet {
 		
 		List<CommunityBoard> replyList = communityBoardService.getCommunityBoardReplyList(boardId);
 
-		System.out.println(communityBoard);
-		System.out.println(replyList);
-		
 		HashMap<String,Object> hm = new HashMap<String, Object>();
  
 		hm.put("board", communityBoard);

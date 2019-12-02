@@ -53,7 +53,6 @@ public class StockBoardController extends HttpServlet {
 		request.setAttribute("CommunityBoard", communityBoardService.getCommunityBoardList(page)); // 컨트롤러가 할 일은 데이터를 준비하는 일
 		
 		request.getRequestDispatcher("/card/board/stock_board.jsp").forward(request, response);
-		System.out.println("스탁보드컨트롤러두겟");
 		
 		// 세션을 이용하여 현재 사용자의 아이디를 가져온다.
 		HttpSession session = request.getSession();

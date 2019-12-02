@@ -93,7 +93,7 @@
 						<tr>
 							<td style="text-align:center; height:50px; line-height:50px;">
 								<textarea id="reply-content" maxlength="200"
-									placeholder="주제와 무관한 댓글이나 악플은 경고조치없이 삭제되며 징계 대상일 될 수 있습니다."></textarea>
+									placeholder="주제와 무관한 댓글이나 악플은 경고조치없이 삭제되며 징계 대상이 될 수 있습니다."></textarea>
 							</td>
 							<td> <input type="button" id="reg-reply-button" name="reg-reply-button" value="등록">
 							</td>
@@ -102,7 +102,7 @@
 		
 					<tbody>
 						<tr>
-							<td colspan="2" style="text-align:left; height:50px; line-height:50px;">게시된 글이 없습니다.</td>
+							<td colspan="2" style="text-align:left; height:25px; line-height:25px;">게시된 글이 없습니다.</td>
 						</tr>
 					</tbody>
 				</table>
