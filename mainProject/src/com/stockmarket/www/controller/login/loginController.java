@@ -40,12 +40,8 @@ public class loginController extends HttpServlet{
 		
 		//로그아웃 시도
 		if(logout.equals("logout")) {
-			//invalidate 는 session 객체를 무효화 시킨다. 메모리에는 여전히 남아있어 sessionScope 로 참조됨.
 			if(request.isRequestedSessionIdValid()) {
-				session.setAttribute("id", null);
-				session.setAttribute("nickName", null);
-				session.invalidate(); //sessionScope.id 가 유효함??
-
+				session.invalidate();
 				response.sendRedirect("/main.jsp");
 			}
 		}
