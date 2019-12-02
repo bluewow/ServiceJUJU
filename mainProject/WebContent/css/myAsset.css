@@ -1,63 +1,102 @@
 @charset "UTF-8";
 @import url("reset.css");
 
-.d-none{
+.wrap {
+	position: relative;
+}
+
+.visable-none{
 	display: none;
 }
 
-#assetTrend {
-	background: #ffff00;
-	height: 384px;
-	width: 550px;
+#card {
+	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
+	padding-top: 5%;
 }
 
-#header1 {
-	background: #ff80c0;
-	height: 100px;
-	width: inherit;
-}
+	#card > section:first-child {
 
-#header1>div {
-	height: 40px;
-	width: 200px;
-	background: #0080ff;
+	}
+	
+	#card > section:last-child {
+		--border: red 1px solid;
+		
+	}
+	
+	.asset-graph-title  {
+		display: inline-block;
+		font-weight: bold;
+		font-size: 14pt;
+	}
+
+	#titleAssetTrend > div:first-child+div {
+		position: absolute;
+		top: 5px;
+		right: 0px;
+		display: inline-block;
+		font-weight: bold;
+		font-size: 11pt;
+		background: #efefef;
+		padding: 2px 15px;
+		border-radius: 10px;
+	}
+
+	.my-asset-info{
+		display: block;
+		margin-top: 10px;
+	}
+	
+	.my-asset-info .buttons {
+		display: flex;
+	}
+
+	.my-asset-info .buttons li {
+		font-weight: bold;
+		font-size: 11pt;
+		margin-left: 15px;
+		background: #efefef;
+		padding: 4px 15px;
+		border-radius: 10px;
+		cursor: pointer;
+	}
+
+	.my-asset-info .buttons li:first-of-type {
+		margin-left: 0px;
+	}
+
+	.my-asset-info+p {
+		font-weight: bold;
+		font-size: 16pt;
+		vertical-align: middle;
+		position: absolute;
+		top: 35px;
+		right: 0px;
+
+	}
+
+#assetTrend {
+	margin-top: 5px;
 	text-align: center;
 }
 
-#listPole {
-	height: 60px;
-	width: 200px;
-	background: #8080ff;
-	text-align: center;	
-}
+	#assetTrend #graph-assetTrend {
+		background: #8080c0;
+		height: 234px;
+		width: inherit;
+		
+	}
 
-#body1 {
-	background: #0080ff;
-	height: 284px;
-	width: inherit;
+	#assetTrend	#setPeriodgraph-assetTrend {
+		background: #ff8040;
+		height: 50px;
+		width: inherit;
+		
+	}
 
-}
-
-#graph-assetTrend {
-	background: #8080c0;
-	height: 234px;
-	width: inherit;
-	
-}
-
-#setPeriodgraph-assetTrend {
-	background: #ff8040;
-	height: 50px;
-	width: inherit;
-	
-}
-
-#assetDistr {
-	background: #ffff00;
-	height: 284px;
-	width: 550px;
-	margin-left: auto;
-	margin-right: auto;
-}
+	.asset-distribution {
+		border: red 1px solid;
+		width: 100%;
+		height: 100px;
+	}
