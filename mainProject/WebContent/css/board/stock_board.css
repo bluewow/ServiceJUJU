@@ -11,76 +11,123 @@
 
 #stockScroll {
 	overflow: scroll;
-	width: 96%;
-	height: 100%;
-	padding: 10px;
+	width: 89%;
+	height: 93%;
+	padding: 30px;
 }
 
-#my-button {
-	top: 5%;
-   	left: 2%;
-    position: relative;
-	font-size: 1em;
-	width:60px;
-	background-color: #efefef; 
+#selected-stock {
+	top: 2%;
+	left: 5%;
+	font-weight: bold;
+	font-size: 1.2em;
+	width: 350px;
 	color: #58585b;
 	padding: 6px 10px;
 	border-radius: 16px;
- 	border: none; 	
+	border: none;
 	outline: none;
 	cursor: pointer;
-} 
+	position: absolute;
+}
+
+#my-button {
+	top: 8%;
+	left: 7%;
+	font-weight: bold;
+	font-size: 1em;
+	width: 36px;
+	background-color: #efefef;
+	color: #58585b;
+	padding: 6px 10px;
+	border-radius: 16px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	position: absolute;
+	text-align: center;
+}
+
 #my-button:hover {
 	opacity: 0.7;
 }
 
 #favo-button {
-	top: 5%;
-   	left: 3%;
-    position: relative;
+	top: 8%;
+	left: 18%;
+	font-weight: bold;
 	font-size: 1em;
-	width:60px;
-	background-color: #efefef; 
+	width: 36px;
+	background-color: #efefef;
 	color: #58585b;
 	padding: 6px 10px;
 	border-radius: 16px;
- 	border: none; 	
+	border: none;
 	outline: none;
 	cursor: pointer;
+	position: absolute;
+	text-align: center;
 }
+
 #favo-button:hover {
 	opacity: 0.7;
 }
 
 #reg-button {
-	top: 0%;
-   	right: -40%;
-    position: relative;
+	top: 5%;
+	left: 70%;
 	font-size: 1.5em;
-	background-color: #13bfd7; 
-	color: white;
-	padding: 6px 20px;
-	border-radius: 11px;
- 	border: none; 	
+	color:#ffffff;
+	width: 80px;
+	height: 27px;
+	background-color: #13bfd7;
+	padding: 8px 20px;
+	border-radius: 14px;
+	border: none;
 	outline: none;
 	cursor: pointer;
+	position: absolute;
+	text-align: center;
 }
 
-#del-button {
+#reg-button:hover {
+	opacity: 0.7;
+}
+.del a {
 	background: url( "../../images/trashCan.png" ) no-repeat;
+	display: inline-block;
 	border: none;
-	width: 22px;
-	height: 22px;
-	cursor: pointer;
+	width: 25px;
+	height: 25px;
 	text-indent: -300px;
 	overflow: hidden;
+	cursor: pointer;
+	opacity: 0.7;
 }
 
-#board-title {
-	cursor: pointer;
+.del a:hover {
+	opacity: 1;
 }
+
+.favo-add a {
+	background: url( "../../images/interest_no.png" ) no-repeat;
+	display: inline-block;
+	border: none;
+	width: 25px;
+	height: 25px;
+	text-indent: -300px;
+	overflow: hidden;
+	cursor: pointer;
+	opacity: 0.7;
+}
+
+.favo-add a:hover {
+	opacity: 1;
+}
+
 
 #stockTable {
+	margin-top: 70px;
 	width: 100%;
 	text-align: center;
 	font-size: 11pt;
@@ -88,29 +135,40 @@
 }
 
 #stockTable tr {
-	height: 40px;
+	height: 30px;
 }
 
-#stockTable thead th {
-	border-bottom: 2px solid #444444;
-	border-bottom-color: #85888a;
-	padding: 10px;
+.content-row td {
+	padding-left:5%;
+	text-align: left;
 }
 
-#stockTable>.content {
+.subject th {
+	color: #58585E;
+	font-weight: bold;
+	border-bottom: 3px solid #c9c9c9;
+	padding: 5px;
+}
+
+
+.content {
 	font-weight: bold;
 	font-size: 12pt;
 }
 
-thead .title {
-	min-width: 50px;
-	width: 30%;
+.content td {
+	color: #58585E;
+	font-weight: lighter;
 }
 
-td.border_bottom {
-	border-bottom: 1px solid #444444;
-	border-bottom-color: #85888a;
-	padding: 10px;
+#board-title {
+	font-weight: bold;
+	cursor: pointer;
+}
+
+td.border-bottom {
+	border-bottom: 1.5px solid #c9c9c9;
+	padding: 5px;
 }
 
 a {
@@ -118,23 +176,16 @@ a {
 	color: #000000
 }
 
-.checkbox-wrap {
-	cursor: pointer;
+.replyTable {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+	width: 90%;
 }
-
-.checkbox-wrap .check-icon {
-	display: inline-block;
-	width: 25px;
-	height: 25px;
-	background: url(../../images/interest_no.png) left center no-repeat;
-	vertical-align: middle;
-	transition-duration: .3s;
+.replyTable thead{
+	text-align: center;
 }
-
-.checkbox-wrap input[type=checkbox] {
-	display: none;
-}
-
-.checkbox-wrap input[type=checkbox]:checked+.check-icon {
-	background-image: url(../../images/interest_yes.png);
+#reply-content {
+	width:100%;
+	height: 60px;
 }

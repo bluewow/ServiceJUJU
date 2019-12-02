@@ -30,14 +30,14 @@
 	<section id="stockScroll">
 		<br>
 		<nav id="my-menu">
-			<a href="?p=1" id="selected-stock">기현알고리즘</a> <a href="?p=1"
-				id="my-button">My</a> <a href="?p=2" id="favo-button">관심</a> <a
-				href="../../css/board/reg_board" id="reg-button">글쓰기</a>
+			<input type="button" id="my-button" name="my_board_view" value="My">
+			<input type="button" id="favo-button" name="favo_board_view"
+				value="관심">
 		</nav>
 		<table id="stockTable">
 			<thead class="subject">
 				<tr>
-					<th>번호</th>
+					<th></th>
 					<th>제목</th>
 					<th>작성일</th>
 					<th>조회</th>
@@ -51,10 +51,6 @@
 						style="text-align: center; height: 50px; line-height: 50px;">게시된
 						글이 없습니다.</td>
 				</tr>
-				<tr class="detail">
-					<td colspan=5>디테일의 내용이 나올 공간.</br>
-					</td>
-				</tr>
 			</tbody>
 		</table>
 
@@ -65,51 +61,16 @@
 		<template class="tr-template">
 		<tr>
 			<td></td>
-			<td rowspan="2" class="border-bottom board-title"><a href=""></a></td>
+			<td rowspan="2" class="border-bottom" id="board-title"><a href=""></a></td>
 			<td rowspan="1"></td>
 			<td></td>
 
-			<td rowspan="2" class="border-bottom favo-add"><a href=""></a></td>
+			<td rowspan="2" class="border-bottom" id="favo-add-button"><a href=""></a></td>
 		</tr>
 		<tr>
-			<td class="border-bottom del"><a href=""></a></td>
+			<td class="border-bottom" id="del-button"><a href=></a></td>
 			<td colspan="2" class="border-bottom"></td>
 		</tr>
-		</template>
-
-		<template class="detail-template">
-		<tr class="content-row">
-			<td colspan=5>
-			</td>
-			</tr>
-			<tr>
-			<td colspan=5>
-				<table class="replyTable">
-					<colgroup>
-						<col width="90%">
-						<col width="10%">
-					</colgroup>
-					<thead>
-						<tr>
-							<td style="text-align:center; height:50px; line-height:50px;">
-								<textarea id="reply-content" maxlength="200"
-									placeholder="주제와 무관한 댓글이나 악플은 경고조치없이 삭제되며 징계 대상일 될 수 있습니다."></textarea>
-							</td>
-							<td> <input type="button" id="reg-reply-button" name="reg-reply-button" value="등록">
-							</td>
-						</tr>
-					</thead>
-		
-					<tbody>
-						<tr>
-							<td colspan="2" style="text-align:left; height:50px; line-height:50px;">게시된 글이 없습니다.</td>
-						</tr>
-					</tbody>
-				</table>
-
-			</td>
-		</tr>
-
 		</template>
 	</section>
 </body>

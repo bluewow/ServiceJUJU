@@ -11,6 +11,11 @@ public interface CommunityBoardService {
 	List<CommunityBoard> getCommunityBoardList();
 	List<CommunityBoard> getCommunityBoardList(int page);
 	List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockName);
+
+	/*
+	 * 댓글목록
+	 * */
+	List<CommunityBoard> getCommunityBoardReplyList(int boardId);
 	
 	/*
 	 * 게시판 내용

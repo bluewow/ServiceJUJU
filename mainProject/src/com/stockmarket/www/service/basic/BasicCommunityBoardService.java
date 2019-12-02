@@ -34,7 +34,7 @@ public class BasicCommunityBoardService implements CommunityBoardService {
 	@Override
 	public CommunityBoard getBoard(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return communityBoardDao.getCommunityBoardDetail(id);
 	}
 
 	@Override
@@ -83,6 +83,12 @@ public class BasicCommunityBoardService implements CommunityBoardService {
 	public int getCommunityBoardreplyCnt(String field, String query, String stockName) {
 		// TODO Auto-generated method stub
 		return communityBoardDao.getReplyCnt(field,query,stockName);
+	}
+
+	@Override
+	public List<CommunityBoard> getCommunityBoardReplyList(int boardId) {
+		// TODO Auto-generated method stub
+		return communityBoardDao.getReplyList(boardId);
 	}
 
 

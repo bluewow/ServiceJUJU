@@ -1,54 +1,100 @@
-window.addEventListener("load", function () {
-    var section = document.querySelector("#stockScroll");
-    var myButton = section.querySelector("#my-button");
-    var favoButton = section.querySelector("#favo-button");
-    var delButton = section.querySelectorAll("#del-button");
-    var favoCheck = section.querySelector("#favo-check");
-    var boardTitle = section.querySelector("#board-title");
-    
-    var arr = [];
+window.addEventListener("load", function() {
 
-    myButton.onclick = function () {
-    	alert("my-button")
-    }
-
-    favoButton.onclick = function () {
-    	alert("favo-button")
-    }
-
-    delButton.onclick = function () {
-    	alert("del-button")
-    }
-
-    favoCheck.onclick = function () {
-    	alert("favo-check")
-    }
-
-    boardTitle.onclick = function () {
-    	alert("board-title")
-    }
-
-    var modal = document.querySelector(".modal"); 
-    var trigger = document.querySelector(".trigger"); 
-    var closeButton = document.querySelector(".close-button"); 
-    var cancelButton = document.querySelector("#cancel");
-
-   //console.log(modal);
-
-   function toggleModal() { 
-        modal.classList.toggle("show-modal"); 
-    }
-
-   function windowOnClick(event) { 
-        if (event.target === modal) { 
-            toggleModal(); 
-        } 
-    }
-
-   trigger.addEventListener("click", toggleModal); 
-    closeButton.addEventListener("click", toggleModal); 
-    cancel.addEventListener("click", toggleModal); 
-    window.addEventListener("click", windowOnClick); 
+	var section = document.querySelector("#stockScroll");
+	var tbody = section.querySelector("table tbody");
+	var pager = section.querySelector(".pager");
 
 
+	var load = function(page) {
+
+		var request = new XMLHttpRequest();
+		request.open("GET", "../../card/board/stock_board_list?p=" + page);
+
+		request.onload = function() {
+			var list = JSON.parse(request.responseText);
+			var trTemplate = section.querySelector(".tr-template");
+
+			tbody.innerHTML = "";
+
+			for (var i = 0; i < list.length; i++) {
+				var cloneTr = document.importNode(trTemplate.content, true);
+
+				var tds = cloneTr.querySelectorAll("td");
+				var title = "[" + list[i].stockName + "] " + list[i].title
+						+ "(" + list[i].replyCnt + ")";
+				
+				tds[0].innerText = list[i].id;
+                var aTagDetail = tds[1].firstElementChild;
+                aTagDetail.dataset.id = list[i].id;
+                aTagDetail.innerText = list[i].title;
+                tds[2].innerText = list[i].regdate;
+				tds[3].innerText = list[i].hit;
+                var aTagFavo = tds[4].firstElementChild;
+                aTagFavo.dataset.id = list[i].id;
+                var aTagDel = tds[5].firstElementChild;
+                aTagDel.dataset.id = list[i].id;
+				tds[6].innerText = list[i].writerId;
+				tbody.append(cloneTr);
+			};
+		};
+		request.send();
+	}
+
+	load(1);
+	
+	pager.onclick = function(e) {
+		if (e.target.nodeName != "A")
+			return;
+
+	       e.preventDefault();
+		load(e.target.innerText);
+	};
+	
+	tbody.onclick = function (e) {
+		 if(!e.target.parentNode.classList.contains("board-title"));
+	        e.preventDefault();
+	        alert("title click");
+	        
+           var currentTr = e.target.parentNode.parentNode;
+           var nextTr = currentTr.nextElementSibling.nextElementSibling;
+           
+           if(nextTr.classList.contains("detail")) {
+           	alert("이미 있잖아~");
+           	return;
+           }            
+           
+           if(e.target.parentNode.lastChild.nodeName=="IMG") {
+           	alert("로딩중입니다~");
+           	return;
+           }
+	        var id = e.target.dataset.id;
+	        
+	        var ajaxIcon = document.createElement("img");
+	        ajaxIcon.src = "../../images/delay-icon.gif";
+	        e.target.parentNode.append(ajaxIcon);
+	        
+	        var request = new XMLHttpRequest();  
+	        request.open("GET", "../../card/board/detail?id="+id, true);
+	        console.log("request"+request);
+	        request.onload = function () {
+	        	var detail = JSON.parse(request.responseText);
+	        	var template = section.querySelector(".detail-template");
+	        	var cloneTr = document.importNode(template.content, true);
+
+	            var td = cloneTr.querySelector(".content-row td");
+	            td.innerHTML = detail.board.content;
+	            console.log(td);
+	            var replyContent = cloneTr.querySelector(".replyTable tbody tr td");
+	            replyContent.innerHTML = detail.replys[0].reContent;
+	            console.log(replyContent);
+	            
+
+	            tbody.insertBefore(cloneTr, nextTr);
+	            
+	            console.log(nextTr);
+	            ajaxIcon.remove();
+	            ajaxIcon=undefined;
+	        };
+	        request.send();
+	        };
 })

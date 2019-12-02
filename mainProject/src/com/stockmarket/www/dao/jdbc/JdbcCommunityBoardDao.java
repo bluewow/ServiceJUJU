@@ -28,7 +28,7 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 			pst.setString(1, "%" + stockName + "%");
 			pst.setString(2, "%" + query + "%");
 			pst.setInt(3, 1 + 10 * (page - 1));
-			pst.setInt(4, 20 * page);
+			pst.setInt(4, 10 * page);
 
 			rs = pst.executeQuery();
 			while (rs.next()) {
@@ -91,6 +91,90 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 			}
 		}
 		return count;
+	}
+
+	@Override
+	public CommunityBoard getCommunityBoardDetail(int id) {
+
+		String sql = "SELECT b.ID ID, B.TITLE TITLE, B.WRITER_ID WRITER_ID, B.REGDATE REGDATE, B.CONTENT CONTENT, B.HIT HIT , S.NAME STOCKNAME FROM BOARD B LEFT OUTER JOIN STOCK S ON b.STOCKCODE = s.CODENUM WHERE ID=?";
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		CommunityBoard communityBoard = null;
+		try {
+			pst = JdbcDaoContext.getPreparedStatement(sql);
+			pst.setInt(1, id);
+
+			rs = pst.executeQuery();
+			rs.next();		
+			communityBoard = new CommunityBoard(
+					rs.getInt("ID"), 
+					rs.getString("TITLE"),
+					rs.getString("WRITER_ID"), 
+					rs.getDate("REGDATE"), 
+					rs.getInt("HIT"), 
+					rs.getString("CONTENT"),
+					rs.getString("STOCKNAME"));
+
+			rs.close();
+			pst.close();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pst != null)
+					pst.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return communityBoard;
+	}
+
+	@Override
+	public List<CommunityBoard> getReplyList(int boardId) {
+
+		List<CommunityBoard> list = new ArrayList<>();
+
+		String sql ="SELECT * FROM REPLY WHERE BOARD_ID=? ORDER BY REGDATE DESC";
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+
+		try {
+
+			pst = JdbcDaoContext.getPreparedStatement(sql);
+
+			pst.setInt(1, boardId);
+
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				CommunityBoard communityBoard = new CommunityBoard(
+						rs.getInt("ID"), 
+						rs.getString("RE_CONTENT"),
+						rs.getString("WRITER_ID"), 
+						rs.getDate("REGDATE"), 
+						rs.getInt("BOARD_ID"));
+						list.add(communityBoard);
+			}
+
+			rs.close();
+			pst.close();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pst != null)
+					pst.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 
 }

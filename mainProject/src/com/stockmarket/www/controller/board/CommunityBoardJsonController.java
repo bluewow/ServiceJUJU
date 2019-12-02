@@ -1,27 +1,32 @@
 package com.stockmarket.www.controller.board;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+import com.stockmarket.www.entity.CommunityBoard;
 import com.stockmarket.www.service.CommunityBoardService;
 import com.stockmarket.www.service.basic.BasicCommunityBoardService;
 
-@WebServlet("/card/board/stock_board")
-public class StockBoardController extends HttpServlet {
+@WebServlet("/card/board/community_board_list")
+public class CommunityBoardJsonController extends HttpServlet {
+	
 	private CommunityBoardService communityBoardService;
-	public StockBoardController() {
+	
+	
+	public CommunityBoardJsonController() {
 		communityBoardService = new BasicCommunityBoardService();
 	}
 
 	@Override
 	public void init() throws ServletException {
-		// TODO Auto-generated method stub
 		super.init();
 	}
 
@@ -30,9 +35,9 @@ public class StockBoardController extends HttpServlet {
 			throws ServletException, IOException {
 
 		int page = 1;
-		String field = "title";
+		String field = "TITLE";
 		String query= "";
-		String stockCode= "";
+		String stockName= "";
 		
 		String page_ = request.getParameter("p");
 		if(page_ != null && !page_.equals(""))
@@ -46,26 +51,23 @@ public class StockBoardController extends HttpServlet {
 		if(query_ !=null && !query_.equals(""))
 			query = query_;
 		
-		String stockCode_ = request.getParameter("s");
-		if(stockCode_ !=null && !stockCode_.equals(""))
-			stockCode = stockCode_;
-		
-		request.setAttribute("CommunityBoard", communityBoardService.getCommunityBoardList(page)); // 컨트롤러가 할 일은 데이터를 준비하는 일
-		
-		request.getRequestDispatcher("/card/board/stock_board.jsp").forward(request, response);
-		System.out.println("스탁보드컨트롤러두겟");
-		
-		// 세션을 이용하여 현재 사용자의 아이디를 가져온다.
-		HttpSession session = request.getSession();
-		Object tempId = session.getAttribute("id");
-		System.out.println(tempId);
-		int id = -1;
-		
-		if(tempId != null)
-			id = (Integer)tempId;
-
-		request.setAttribute("loginId", communityBoardService.getCommunityBoardList(id));
-		
+		String stockName_ = request.getParameter("s");
+		if(stockName_ !=null && !stockName_.equals(""))
+			stockName = stockName_;
+		List<CommunityBoard> list = communityBoardService.getCommunityBoardList(page,field,query,stockName);
+	      Gson gson = new Gson();
+	      String json = gson.toJson(list);
+	      
+	      response.setCharacterEncoding("UTF-8");
+	       response.setContentType("text/html; charset=UTF-8");
+	       
+	       PrintWriter out = response.getWriter();
+	       out.write(json); 
+//		request.setAttribute("CommunityBoard", communityBoardService.getCommunityBoardList(page,field,query,stockName)); // 컨트롤러가 할 일은 데이터를 준비하는 일
+//		request.setAttribute("replyCnt", communityBoardService.getCommunityBoardreplyCnt(field,query,stockName)); 
+//		
+//		request.getRequestDispatcher("/card/board/community_board.jsp").forward(request, response);
+//		System.out.println("커뮤보드컨트롤러 두겟");
 	}
 
 	@Override
