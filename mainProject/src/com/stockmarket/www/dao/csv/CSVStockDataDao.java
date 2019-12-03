@@ -40,9 +40,45 @@ import com.stockmarket.www.service.basic.BasicSystemService;
  * Path : 해당 CSV 파일의 realPath 를 요구한다
  * */
 public class CSVStockDataDao {
-	
+		
 	private Company company;
 	
+	private List<Company> list;
+	private String path;
+	
+	public CSVStockDataDao() {
+		
+	}
+	public CSVStockDataDao(String path) {
+		this.path = path;
+		
+		
+		if(list != null)
+			return;
+		
+		list = new ArrayList<>();
+		CSVReader reader = null;
+		
+		try {
+			reader = new CSVReader(new FileReader(path));
+			String[] cols;
+
+			while ((cols = reader.readNext()) != null) {
+				Company company = new Company(cols[0], cols[2], cols[7]);
+				list.add(company);
+			}			
+			
+
+		} catch (IOException e) {
+			e.printStackTrace();
+
+		} catch (CsvValidationException e) {
+
+			e.printStackTrace();
+		}
+		
+	}
+
 	public List<String> getColumnData(int column, String Path) {
 		CSVReader file = null;
 		List<String> list = new ArrayList<>();
@@ -116,36 +152,17 @@ public class CSVStockDataDao {
 
 		
 	}
-
-
-	public Company searchCompany (String search, String csvFilePath) {
-		CSVReader reader = null;
-
-		try {
-			reader = new CSVReader(new FileReader(csvFilePath));
-			String[] cols;
-
-			while ((cols = reader.readNext()) != null) {
-				if (cols[0].equals(search)) {
-					
-					company = new Company(cols[0], cols[2], cols[7]);
-					
-					// 
-					
-//					System.out.println("회사명 : " + line[0] + ", 종목코드 : " + line[2] + ", 웹사이트 : " +
-//					line[7] );
-				}
+	
+	public Company searchCompany (String search) {
+	
+		for (int i = 0; i < list.size(); i++) {
+			Company company = list.get(i);
+			if (company.getcompanyName().equals(search)) {
+				return company;
 			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-
-		} catch (CsvValidationException e) {
-
-			e.printStackTrace();
 		}
-
-		return company;
+		
+		return null;
 	}
 
 	
@@ -166,7 +183,7 @@ public class CSVStockDataDao {
 
 		switch(testIndex) {
 		case 1: // 코스피 종목코드 얻기
-			String Path1 = "C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSPI.csv";
+			String Path1 = "C:\\Users\\acorn\\Documents\\프로젝트\\ServiceJUJU\\mainProject\\WebContent\\fileUpload\\KOSPI.csv";
 			test = data.getColumnData(1, Path1);
 			
 			for(String str : test) 

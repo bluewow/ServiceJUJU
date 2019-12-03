@@ -1,4 +1,4 @@
-package com.stockmarket.www.controller.search;
+package com.stockmarket.www.controller.list;
 
 import java.io.IOException;
 import java.io.PrintWriter;
