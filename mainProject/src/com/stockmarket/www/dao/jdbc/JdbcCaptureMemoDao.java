@@ -23,7 +23,8 @@ public class JdbcCaptureMemoDao implements CaptureMemoDao {
 				+ "FROM CAPTURE_MEMO C JOIN STOCK S ON C.CODENUM = S.CODENUM";
 
 		try {
-			Statement statement = JdbcDaoContext.getStatement();
+			JdbcDaoContext daoContext = new JdbcDaoContext();
+			Statement statement = daoContext.getStatement();
 			ResultSet resultSet = statement.executeQuery(sql);
 
 			while (resultSet.next()) {				
@@ -35,8 +36,7 @@ public class JdbcCaptureMemoDao implements CaptureMemoDao {
 				
 				captureMemos.add(captureMemo);
 			}
-			resultSet.close();
-			statement.close();
+			daoContext.close(resultSet, statement);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -54,7 +54,8 @@ public class JdbcCaptureMemoDao implements CaptureMemoDao {
 				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
-			PreparedStatement statement = JdbcDaoContext.getPreparedStatement(sql);
+			JdbcDaoContext daoContext = new JdbcDaoContext();
+			PreparedStatement statement = daoContext.getPreparedStatement(sql);
 			statement.setString(1, captureMemo.getContent());
 			statement.setString(2, captureMemo.getTitle());
 			statement.setInt(3, captureMemo.getPER());
@@ -67,7 +68,7 @@ public class JdbcCaptureMemoDao implements CaptureMemoDao {
 
 			result = statement.executeUpdate();
 
-			statement.close();
+			daoContext.close(statement);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -83,13 +84,14 @@ public class JdbcCaptureMemoDao implements CaptureMemoDao {
 		String sql = "DELETE CAPTURE_MEMO WHERE ID=?";
 
 		try {
-			PreparedStatement statement = JdbcDaoContext.getPreparedStatement(sql);
+			JdbcDaoContext daoContext = new JdbcDaoContext();
+			PreparedStatement statement = daoContext.getPreparedStatement(sql);
 
 			statement.setInt(1, id);
 
 			result = statement.executeUpdate();
 
-			statement.close();
+			daoContext.close(statement);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -105,14 +107,15 @@ public class JdbcCaptureMemoDao implements CaptureMemoDao {
 		String sql = "UPDATE CAPTURE_MEMO SET TITLE=?, CONTENT=? WHERE ID=?";
 
 		try {
-			PreparedStatement statement = JdbcDaoContext.getPreparedStatement(sql);
+			JdbcDaoContext daoContext = new JdbcDaoContext();
+			PreparedStatement statement = daoContext.getPreparedStatement(sql);
 			statement.setString(1, captureMemo.getTitle());
 			statement.setString(2, captureMemo.getTitle());
 			statement.setInt(3, captureMemo.getId());
 
 			result = statement.executeUpdate();
 
-			statement.close();
+			daoContext.close(statement);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
