@@ -13,10 +13,12 @@ import com.stockmarket.www.entity.HaveStock;
 import com.stockmarket.www.entity.HaveStockView;
 
 public class JdbcHaveStockDao implements HaveStockDao {
+	
 
 	@Override
 	public List<HaveStockView> getList(int id) {
 		String sql = "SELECT * FROM HAVESTOCK_VIEW WHERE MEMBER_ID = ?";
+		JdbcDaoContext context = new JdbcDaoContext();
 
 		List<HaveStockView> stockList = new ArrayList<>();
 		// List 필요할 듯.... .... ....... // 담을 그릇 ㅠㅠㅠㅠㅠㅠㅠㅠ 힝 ㅠㅠㅠㅠㅠㅠ
@@ -40,7 +42,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		list.add(new CurStock("095660", "10,500", "상승", "3,000", "+", "10.2"));
 
 		try {
-			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
+			PreparedStatement st = context.getPreparedStatement(sql);
 			st.setInt(1, id);
 			ResultSet rs = st.executeQuery();
 
@@ -67,8 +69,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 					}
 				}
 			}
-			rs.close();
-			st.close();
+			context.close(rs, st);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -82,14 +83,16 @@ public class JdbcHaveStockDao implements HaveStockDao {
 
 	@Override
 	public HaveStock get(int memberId, String stockId) {
-
 		HaveStock haveStock = null;
-
 		String sql = "SELECT * FROM HAVE_STOCK WHERE MEMBER_ID = ? AND STOCK_ID = ?";
+
+		JdbcDaoContext context = new JdbcDaoContext();
+
+
 
 		try {
 
-			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
+			PreparedStatement st = context.getPreparedStatement(sql);
 			st.setInt(1, memberId);
 			st.setString(2, stockId);
 			ResultSet rs = st.executeQuery();
@@ -98,8 +101,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 				haveStock = new HaveStock(rs.getInt("MEMBER_ID"), rs.getString("STOCK_ID"), rs.getInt("QUANTITY"),
 						rs.getInt("SUM"));
 			}
-			rs.close();
-			st.close();
+			context.close(rs, st);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -114,9 +116,10 @@ public class JdbcHaveStockDao implements HaveStockDao {
 	@Override
 	public HaveStockView getView(int memberId, String stockId) {
 		HaveStockView haveStockView = null;
-
 		String sql = "SELECT * FROM HAVESTOCK_VIEW WHERE MEMBER_ID = ? AND STOCK_ID = ?";
 
+		JdbcDaoContext context = new JdbcDaoContext();
+		
 		List<CurStock> list = new ArrayList<>();
 		list.add(new CurStock("035420", "13,000", "상승", "3,000", "+", "2.5"));
 		list.add(new CurStock("000660", "15,000", "하강", "3,000", "-", "3.4"));
@@ -127,7 +130,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 
 		try {
 
-			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
+			PreparedStatement st = context.getPreparedStatement(sql);
 			st.setInt(1, memberId);
 			st.setString(2, stockId);
 			ResultSet rs = st.executeQuery();
@@ -151,8 +154,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 					}
 				}
 			}
-			rs.close();
-			st.close();
+			context.close(rs, st);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -168,11 +170,12 @@ public class JdbcHaveStockDao implements HaveStockDao {
 	@Override
 	public int update(HaveStock haveStock) {
 		int result = 0;
-
 		String sql = "UPDATE HAVE_STOCK SET QUANTITY=?, SUM=? WHERE MEMBER_ID = ? AND STOCK_ID = ?";
 
+		JdbcDaoContext context = new JdbcDaoContext();
+		
 		try {
-			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
+			PreparedStatement st = context.getPreparedStatement(sql);
 			st.setInt(1, haveStock.getQuantity());
 			st.setInt(2, haveStock.getSum());
 			st.setInt(3, haveStock.getMemberId());
@@ -180,7 +183,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 
 			result = st.executeUpdate();
 
-			st.close();
+			context.close(st);
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -195,11 +198,12 @@ public class JdbcHaveStockDao implements HaveStockDao {
 	@Override
 	public int insert(HaveStock haveStock) {
 		int result = 0;
-
 		String sql = "INSERT INTO HAVE_STOCK(MEMBER_ID, STOCK_ID, QUANTITY, SUM) VALUES (?,?,?,?)";
 
+		JdbcDaoContext context = new JdbcDaoContext();
+		
 		try {
-			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
+			PreparedStatement st = context.getPreparedStatement(sql);
 			st.setInt(1, haveStock.getMemberId());
 			st.setString(2, haveStock.getStockId());
 			st.setInt(3, haveStock.getQuantity());
@@ -207,7 +211,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 
 			result = st.executeUpdate();
 
-			st.close();
+			context.close(st);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -221,17 +225,18 @@ public class JdbcHaveStockDao implements HaveStockDao {
 	@Override
 	public int delete(int memberId, String stockId) {
 		int result = 0;
-
 		String sql = "DELETE HAVE_STOCK WHERE MEMBER_ID = ? AND STOCK_ID = ?";
 
+		JdbcDaoContext context = new JdbcDaoContext();
+		
 		try {
-			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
+			PreparedStatement st = context.getPreparedStatement(sql);
 			st.setInt(1, memberId);
 			st.setString(2, stockId);
 
 			result = st.executeUpdate();
 
-			st.close();
+			context.close(st);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
