@@ -21,9 +21,10 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 
+		JdbcDaoContext daoContext = new JdbcDaoContext();
 		try {
 
-			pst = JdbcDaoContext.getPreparedStatement(sql);
+			pst = daoContext.getPreparedStatement(sql);
 
 			pst.setString(1, "%" + stockName + "%");
 			pst.setString(2, "%" + query + "%");
@@ -38,20 +39,10 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 				list.add(communityBoard);
 			}
 
-			rs.close();
-			pst.close();
-
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pst != null)
-					pst.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			daoContext.close(rs, pst);
 		}
 		return list;
 	}
@@ -64,9 +55,10 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		String sql = "SELECT REPLY_CNT FROM BOARD_VIEW WHERE " + field + " LIKE ?";
 		PreparedStatement pst = null;
 		ResultSet rs = null;
+		JdbcDaoContext daoContext = new JdbcDaoContext();
 		try {
 
-			pst = JdbcDaoContext.getPreparedStatement(sql);
+			pst = daoContext.getPreparedStatement(sql);
 
 			pst.setString(1, "%" + query + "%");
 
@@ -75,20 +67,11 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 			if (rs.next()) {
 				count = rs.getInt("COUNT");
 			}
-			rs.close();
-			pst.close();
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pst != null)
-					pst.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			daoContext.close(rs, pst);
 		}
 		return count;
 	}
@@ -100,35 +83,20 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		CommunityBoard communityBoard = null;
+		JdbcDaoContext daoContext = new JdbcDaoContext();
 		try {
-			pst = JdbcDaoContext.getPreparedStatement(sql);
+			pst = daoContext.getPreparedStatement(sql);
 			pst.setInt(1, id);
 
 			rs = pst.executeQuery();
-			rs.next();		
-			communityBoard = new CommunityBoard(
-					rs.getInt("ID"), 
-					rs.getString("TITLE"),
-					rs.getString("WRITER_ID"), 
-					rs.getDate("REGDATE"), 
-					rs.getInt("HIT"), 
-					rs.getString("CONTENT"),
-					rs.getString("STOCKNAME"));
-
-			rs.close();
-			pst.close();
+			rs.next();
+			communityBoard = new CommunityBoard(rs.getInt("ID"), rs.getString("TITLE"), rs.getString("WRITER_ID"),
+					rs.getDate("REGDATE"), rs.getInt("HIT"), rs.getString("CONTENT"), rs.getString("STOCKNAME"));
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pst != null)
-					pst.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			daoContext.close(rs, pst);
 		}
 		return communityBoard;
 	}
@@ -138,41 +106,27 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 		List<CommunityBoard> list = new ArrayList<>();
 
-		String sql ="SELECT * FROM REPLY WHERE BOARD_ID=? ORDER BY REGDATE DESC";
+		String sql = "SELECT * FROM REPLY WHERE BOARD_ID=? ORDER BY REGDATE DESC";
 		PreparedStatement pst = null;
 		ResultSet rs = null;
-
+		JdbcDaoContext daoContext = new JdbcDaoContext();
 		try {
 
-			pst = JdbcDaoContext.getPreparedStatement(sql);
+			pst = daoContext.getPreparedStatement(sql);
 
 			pst.setInt(1, boardId);
 
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				CommunityBoard communityBoard = new CommunityBoard(
-						rs.getInt("ID"), 
-						rs.getString("RE_CONTENT"),
-						rs.getString("WRITER_ID"), 
-						rs.getDate("REGDATE"), 
-						rs.getInt("BOARD_ID"));
-						list.add(communityBoard);
+				CommunityBoard communityBoard = new CommunityBoard(rs.getInt("ID"), rs.getString("RE_CONTENT"),
+						rs.getString("WRITER_ID"), rs.getDate("REGDATE"), rs.getInt("BOARD_ID"));
+				list.add(communityBoard);
 			}
-
-			rs.close();
-			pst.close();
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pst != null)
-					pst.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			daoContext.close(rs, pst);
 		}
 		return list;
 	}
