@@ -56,6 +56,7 @@ public class BasicAnalysisService implements AnalysisService{
 		//			data[0]- data[1]-  data[2]- data[3]-data[4] + @
 		String[] data = text.split(" ");
 		roe = Double.parseDouble(data[4]) / Double.parseDouble(data[3]) * 100;
+		roe = Math.round(roe * 100) / 100.0;
 		
 		CaptureMemo capture = new CaptureMemo(null, null, 
 				Double.parseDouble(data[3]), 	//PER
