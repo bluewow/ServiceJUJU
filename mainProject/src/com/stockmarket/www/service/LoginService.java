@@ -8,11 +8,11 @@ public interface LoginService {
 	boolean isValidMember(String email, String pwd);
 	
 //	회원등록
-	boolean insertMember(Member member);
+	int signUpMember(Member member);
 	
-//	회원탈퇴
-	boolean deleteMember();
+//	회원탈퇴 for admin
+	int deleteMember();
 	
-//  getIDby Member Table
-	int getIdbyEmail(String email);
+//  get Member by eMail
+	Member getMember(String email);
 }

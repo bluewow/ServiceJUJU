@@ -20,66 +20,98 @@
 
 <!-- CSS Reset -->
 <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
-
 <link href="../../css/board/stock_board.css" type="text/css"
 	rel="stylesheet">
-<script src="../../js/board/community_board.js"></script>
+<script src="../../js/board/stock_board.js"></script>
+
 </head>
+
 <body>
-	<div id="stockScroll">
-		<c:if test="${not empty selectStockName}">
-			<div style="color: cyan; font-weight: bold; font-size: 30px">
-				종목을 선택하면 나타납니다.</div>
-
-		</c:if>
-		<!-- ${not empty selectStockName}"  이거쓸꺼야 -->
-		<c:if test="${empty selectStockName}">
-			<!-- 이거는 볼라고 임시로 냅둘꺼야 -->
-
-			<div style="color: black; font-weight: bold; font-size: 20px">
-				기현 알고리즘</div>
-			<br>
-			<nav id="my-menu">
-				<input type="button" id="my-button" name="my_board_view" value="My">
-				<input type="button" id="favo-button" name="favo_board_view" value="관심">
-				<input type="button" id="reg-button" name="reg_board" value="글쓰기">
-			</nav>
-					
-
+	<section id="stockTop">
+		<nav id="my-menu">
+			<a href="?p=1" id="selected-stock">기현알고리즘</a> <a href="?p=1"
+				id="my-button">My</a> <a href="?p=2" id="favo-button">관심</a> <a
+				href="../../css/board/reg_board" id="reg-button">글쓰기</a>
+		</nav>
+	</section>
+	<section id="stockScroll">
 		<table id="stockTable">
-			<thead class="content">
+			<thead class="subject">
 				<tr>
-					<th></th>
+					<th>번호</th>
 					<th>제목</th>
 					<th>작성일</th>
 					<th>조회</th>
 					<th></th>
 				</tr>
 			</thead>
-	  
-			<tbody>
-				  <c:forEach var="n" items="${CommunityBoard}">
-					<tr>
-							<td>${n.id}</td>
-							<td rowspan="2" class="border_bottom" id="board-title">[${n.stockName}]
-								${n.title} (${n.replyCnt})</td>
-							<td rowspan="1"><fmt:formatDate value="${n.regdate}"
-									pattern="yy/MM/dd" /></td>
-							<td>${n.hit}</td>
-                        
-							<td rowspan="2" class="border_bottom">
-							<label class="checkbox-wrap">
-								<input type="checkbox" name="" value= "" id="favo-check"><i class="check-icon"></i></label></td>             
-					</tr>
-					<tr>
-						<td class="border_bottom"><input type="button"
-							id="del-button" name="del" value="del"></td>
-						<td colspan="2" class="border_bottom">${n.writerId}</td>
-					</tr>
-				</c:forEach>
+
+			<tbody class="content">
+				<tr>
+					<td colspan="5"
+						style="text-align: center; height: 50px; line-height: 50px;">게시된
+						글이 없습니다.</td>
+				</tr>
+				<tr class="detail">
+					<td colspan=5>디테일의 내용이 나올 공간.</br>
+					</td>
+				</tr>
 			</tbody>
-			</table>
-		</c:if>
-	</div>
+		</table>
+
+		<div class="pager">
+			<a href="?p=1">1</a> <a href="?p=2">2</a> <a href="?p=3">3</a>
+		</div>
+
+		<template class="tr-template">
+		<tr>
+			<td></td>
+			<td rowspan="2" class="border-bottom board-title"><a href=""></a></td>
+			<td rowspan="1"></td>
+			<td></td>
+
+			<td rowspan="2" class="border-bottom favo-add"><a href=""></a></td>
+		</tr>
+		<tr>
+			<td class="border-bottom del"><a href=""></a></td>
+			<td colspan="2" class="border-bottom"></td>
+		</tr>
+		</template>
+
+		<template class="detail-template">
+		<tr class="content-row">
+			<td colspan=5>
+			</td>
+			</tr>
+			<tr>
+			<td colspan=5>
+				<table class="replyTable">
+					<colgroup>
+						<col width="90%">
+						<col width="10%">
+					</colgroup>
+					<thead>
+						<tr>
+							<td style="text-align:center; height:50px; line-height:50px;">
+								<textarea id="reply-content" maxlength="200"
+									placeholder="주제와 무관한 댓글이나 악플은 경고조치없이 삭제되며 징계 대상이 될 수 있습니다."></textarea>
+							</td>
+							<td> <input type="button" id="reg-reply-button" name="reg-reply-button" value="등록">
+							</td>
+						</tr>
+					</thead>
+		
+					<tbody>
+						<tr>
+							<td colspan="2" style="text-align:left; height:25px; line-height:25px;">게시된 글이 없습니다.</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</td>
+		</tr>
+
+		</template>
+	</section>
 </body>
 </html>

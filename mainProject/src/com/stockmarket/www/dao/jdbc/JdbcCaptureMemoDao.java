@@ -1,7 +1,5 @@
 package com.stockmarket.www.dao.jdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,146 +12,137 @@ import java.util.Map;
 
 import com.stockmarket.www.dao.CaptureMemoDao;
 import com.stockmarket.www.entity.CaptureMemo;
-import com.stockmarket.www.entity.CommunityBoard;
+import com.stockmarket.www.entity.CaptureMemoView;
 
 public class JdbcCaptureMemoDao implements CaptureMemoDao {
-	
-	
 	@Override
-	public java.util.List<CaptureMemo> getList(int page) {
+	public List<CaptureMemoView> getList(int page) {
+		List<CaptureMemoView> captureMemos = new ArrayList<>();
 		
-		
-		List<CaptureMemo> list = new ArrayList<>();
-		
-		String sql = "SELECT MEMO,TITLE,REGDATE FROM CAPTURE_MEMO";
-		
+		String sql = "SELECT S.NAME, C.TITLE, C.REGDATE "
+				+ "FROM CAPTURE_MEMO C JOIN STOCK S ON C.CODENUM = S.CODENUM";
+
 		try {
-			
-		Statement st = JdbcDaoContext.getStatement();
-			ResultSet rs = st.executeQuery(sql);
-			
-			
-			while(rs.next()){ 
+			JdbcDaoContext daoContext = new JdbcDaoContext();
+			Statement statement = daoContext.getStatement();
+			ResultSet resultSet = statement.executeQuery(sql);
+
+			while (resultSet.next()) {				
+				String name = resultSet.getString("NAME");
+				String title = resultSet.getString("TITLE");
+				Date regdate = resultSet.getDate("regdate");
 				
+				CaptureMemoView captureMemo = new CaptureMemoView(name, title, regdate);
 				
-				String memo = rs.getString("CONTENT");
-				String title = rs.getString("TITLE");
-				Date regdate = rs.getDate("DATE");
-				
-				CaptureMemo captureMemo = new CaptureMemo(title,regdate,memo);
-				
-				
-				
-				list.add(captureMemo);		
+				captureMemos.add(captureMemo);
 			}
-			
-			rs.close();
-			st.close();
-			
-			
-		
+			daoContext.close(resultSet, statement);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return list;
+		return captureMemos;
 	}
 
 	@Override
 	public int insert(CaptureMemo captureMemo) {
 		int result = 0;
-		
-		String sql = "INSERT INTO CAPTURE_MEMO(TITLE)"
-				+"VALUES(?)";
-		
+
+		String sql = "INSERT INTO CAPTURE_MEMO(CONTENT, TITLE, PER, PBR, "
+				+ "ROE, DEBT_RATIO, TOTAL_ASSETS, CODENUM, MEMBER_ID)" 
+				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
 		try {
-			
-			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
-			st.setString(1, captureMemo.getTitle());
-		
-			
-			result = st.executeUpdate();
-			
-			st.close();
-			
+			JdbcDaoContext daoContext = new JdbcDaoContext();
+			PreparedStatement statement = daoContext.getPreparedStatement(sql);
+			statement.setString(1, captureMemo.getContent());
+			statement.setString(2, captureMemo.getTitle());
+			statement.setInt(3, captureMemo.getPER());
+			statement.setInt(4, captureMemo.getPBR());
+			statement.setInt(5, captureMemo.getROE());
+			statement.setInt(6, captureMemo.getDebtRatio());
+			statement.setInt(7, captureMemo.getTotalAssets());
+			statement.setString(8, captureMemo.getCodeNum());
+			statement.setInt(9, captureMemo.getMemberId());
+
+			result = statement.executeUpdate();
+
+			daoContext.close(statement);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return result;
 	}
 
 	@Override
 	public int delete(int id) {
 		int result = 0;
-		String sql = "DELETE NOTICE WHERE ID=?";
-		String url = "jdbc:oracle:thin:@192.168.0.3:1521/xepdb1";
 		
+		String sql = "DELETE CAPTURE_MEMO WHERE ID=?";
+
 		try {
-			
-			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
-			
-			st.setInt(1, id);
-			
-			result = st.executeUpdate();
-			
-			st.close();
-			
+			JdbcDaoContext daoContext = new JdbcDaoContext();
+			PreparedStatement statement = daoContext.getPreparedStatement(sql);
+
+			statement.setInt(1, id);
+
+			result = statement.executeUpdate();
+
+			daoContext.close(statement);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return result;
 	}
 
 	@Override
 	public int update(CaptureMemo captureMemo) {
 		int result = 0;
-		
-		String sql = "UPDATE NOTICE SET TITLE=? WHERE ID=?";
-		
-		
+
+		String sql = "UPDATE CAPTURE_MEMO SET TITLE=?, CONTENT=? WHERE ID=?";
+
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-		
-			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
-			st.setString(1, captureMemo.getTitle());
-			
-			st.setInt(2, captureMemo.getId());
-			
-			result = st.executeUpdate();
-			
-			st.close();
-			
+			JdbcDaoContext daoContext = new JdbcDaoContext();
+			PreparedStatement statement = daoContext.getPreparedStatement(sql);
+			statement.setString(1, captureMemo.getTitle());
+			statement.setString(2, captureMemo.getTitle());
+			statement.setInt(3, captureMemo.getId());
+
+			result = statement.executeUpdate();
+
+			daoContext.close(statement);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return result;
 	}
-
-
 	
-	
-
-
-
+//	public static void main(String[] args) {
+//		JdbcCaptureMemoDao dao = new JdbcCaptureMemoDao();
+//		List<CaptureMemoView> list = dao.getList(1);
+		
+//		for(CaptureMemoView c:list) {
+//			System.out.println(c.toString());
+//		}
+		
+		// insert test
+//		CaptureMemo captureMemo = new CaptureMemo("이거슨 제목...", "이거슨 메모..", 11, 12, 13, 11, 13, "005380", 2);
+//		int result = dao.insert(captureMemo);
+//		System.out.println(result);
+		
+		// update test
+		
+//		CaptureMemo captureMemo = new CaptureMemo("이거슨 제목!!!", "이거슨 메모..", 11, 12, 13, 11, 13, "005380", 2);
+//		captureMemo.setId(1);
+//		System.out.println(captureMemo.toString());
+//		int result = dao.update(captureMemo);
+//		System.out.println(result);		
+//	}
 }
-
-
-

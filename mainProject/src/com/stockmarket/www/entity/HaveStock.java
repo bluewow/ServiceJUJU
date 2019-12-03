@@ -5,18 +5,18 @@ public class HaveStock {
 	private int memberId;
 	private String stockId;
 	private int quantity;
-	private float avg;
+	private int sum;
 	
 	public HaveStock() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public HaveStock(int memberId, String stockId, int quantity, float avg) {
+	public HaveStock(int memberId, String stockId, int quantity, int sum) {
 		super();
 		this.memberId = memberId;
 		this.stockId = stockId;
 		this.quantity = quantity;
-		this.avg = avg;
+		this.sum = sum;
 	}
 
 
@@ -39,17 +39,17 @@ public class HaveStock {
 		this.quantity = quantuty;
 	}
 	
-	public float getAvg() {
-		return avg;
+	public int getSum() {
+		return sum;
 	}
 
-	public void setAvg(float avg) {
-		this.avg = avg;
+	public void setSum(int sum) {
+		this.sum = sum;
 	}
 
 	@Override
 	public String toString() {
-		return "HaveStock [memberId=" + memberId + ", stockId=" + stockId + ", quantity=" + quantity + ", avg=" + avg
+		return "HaveStock [memberId=" + memberId + ", stockId=" + stockId + ", quantity=" + quantity + ", sum=" + sum
 				+ "]";
 	}
 }

@@ -1,17 +1,37 @@
 package com.stockmarket.www.controller.trade;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.stockmarket.www.service.AnalysisService;
+import com.stockmarket.www.service.basic.BasicAnalysisService;
 
 @WebServlet("/card/trade/analysis")
 public class AnalysisController extends HttpServlet{
+	AnalysisService service;
+	
+	public AnalysisController() {
+		service = new BasicAnalysisService();
+	}
+	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String capture = request.getParameter("capture"); 
+		
+		if(capture != null) {  
+			service.captureDataCrawling("095660");
+			
+			PrintWriter out = response.getWriter();
+			out.write("TEST");      
+			return;
+		}
 		
 		//종목정보
 		request.setAttribute("companyName", "네오위즈");

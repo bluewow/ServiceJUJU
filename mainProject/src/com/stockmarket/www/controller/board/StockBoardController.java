@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.stockmarket.www.service.CommunityBoardService;
 import com.stockmarket.www.service.basic.BasicCommunityBoardService;
@@ -52,7 +53,17 @@ public class StockBoardController extends HttpServlet {
 		request.setAttribute("CommunityBoard", communityBoardService.getCommunityBoardList(page)); // 컨트롤러가 할 일은 데이터를 준비하는 일
 		
 		request.getRequestDispatcher("/card/board/stock_board.jsp").forward(request, response);
-		System.out.println("스탁보드컨트롤러두겟");
+		
+		// 세션을 이용하여 현재 사용자의 아이디를 가져온다.
+		HttpSession session = request.getSession();
+		Object tempId = session.getAttribute("id");
+		int id = -1;
+		
+		if(tempId != null)
+			id = (Integer)tempId;
+
+		request.setAttribute("loginId", communityBoardService.getCommunityBoardList(id));
+		
 	}
 
 	@Override

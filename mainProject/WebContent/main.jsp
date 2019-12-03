@@ -60,34 +60,7 @@
 </head>
 
 <body>
-<!-- TODO 
-아이디/비번 잘못입력시 문구
-로그인 실패시 문구
-팝업창 
-modal
-무료회원가입
-이메일/비밀번호찾기
--->
    <!-- =============================================================================================================== -->
-   <div class=pop-up>
-		<div class="pop-up-top">STOCK MARKET<br>로그인</div>
-   		<div class="pop-up-border">
-   			<div class="pop-up-context">
-	   				<div class="text">이메일</div>
-	   					<input class="box" type="text" name="userEmail" placeholder="Enter the Email..." form="user">
-	   				<div class="text">비밀번호</div>
-	   					<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
-   					<form class="login-box" action="login" method="post" id="user">
-	   					<input type="submit" value="로그인">
-   					</form>
-	   				<hr>
-	   				<form class="check-box">   				
-	   					<input class="box" type="submit" value="무료회원가입">
-	   					<input class="box" type="submit" value="이메일/비밀번호 찾기">
-	   				</form>
-   			</div>
-   		</div>
-   </div>
    <header class="navbar">
       <h1 style="display: none;">Stock Market</h1>
       <section class="row">
@@ -98,30 +71,20 @@ modal
             <section class="column column-30">
                <h1 style="display: none;">user section</h1>
                <div class="user-section">
-                  <a href="#"> <img src="http://via.placeholder.com/50x50"
-                     alt="profile photo" class="circle float-left profile-photo"
-                     width="50" height="auto">
-                  </a>
                   <div class="personal">
+                  <a href="#">
+                  	 <img src="http://via.placeholder.com/50x50"
+                    	 alt="profile photo" class="circle float-left profile-photo"
+                     	width="50" height="auto">
+                  </a>
                   	<c:if test="${empty sessionScope.id }">
                   		<input type="button" value="로그인">
                   	</c:if>
                   	<c:if test="${not empty sessionScope.id }">
-	                  	<input type="button" value="USERasfsdsd">
-	                  	<input type="button" value="로그아웃">
+	                  	<input class="small" type="button" value="${sessionScope.nickName }">
+	                  	<input class="small" type="button" value="로그아웃">
                   	</c:if>
                   </div>
-                 <%--  <form class="personal" action="login" method="post">
-                     <c:if test="${empty sessionScope.id }">
-                        <div class="personal1"><input type="button" value="로그인"></div>
-                     </c:if>
-                     <c:if test="${not empty sessionScope.id }">
-                     	<div class="personal2">
-	                        <input type="button" value="USER">
-	                        <input type="button" value="로그아웃">
-                        </div>
-                     </c:if>
-                  </form> --%>
                </div>
             </section>
          </section>
@@ -356,6 +319,94 @@ modal
          </section>
          </div>
    </section>
+<!-- TODO 
+아이디/비번 잘못입력시 문구
+로그인 실패시 문구
+무료회원가입
+이메일/비밀번호찾기
+-->
+   	<!-- ===== 로그인 POPUP ========================================================================================================== -->   
+	<div class="pop-up-wrapper">
+	   <div class="pop-up">
+			<div class="pop-up-top">STOCK MARKET<br>로그인</div>
+	   		<div class="pop-up-border">
+	   			<div class="pop-up-context">
+		   				<div class="text">이메일</div>
+		   				<input class="box" type="text" name="userEmail" placeholder="이메일을 입력하세요" form="login">
+		   				
+		   				<div class="text">비밀번호</div>
+		   				<input class="box" type="password" name="pwd" placeholder="비밀번호를 입력하세요" form="login">
+	   					
+	   					<form class="login-box" action="login" method="post" id="login">
+	   						<input type="hidden" name="form" value="로그인" form="login">
+		   					<input type="button" value="로그인">
+	   					</form>
+		   				
+		   				<hr>
+		   				
+		   				<div class="check-box">   			
+		   					<input class="box" type="button" value="무료회원가입">
+		   					<input class="box" type="button" value="이메일/비밀번호 찾기">
+		   				</div>
+	   			</div>
+	   		</div>
+	   </div>
+   </div>
+ 	<!-- ===== 회원가입 POPUP ========================================================================================================== -->   
+ 	<div class="pop-up-wrapper">
+	   <div class="sign-up-pop-up">
+			<div class="pop-up-top">STOCK MARKET<br>회원가입</div>
+	   		<div class="pop-up-border">
+	   			<div class="pop-up-context">
+		   				<div class="text">이메일</div>
+		   				<input class="box" type="text" name="userEmail" placeholder="이메일을 입력하세요" form="signup">
+		   				
+		   				<div class="text">닉네임</div>
+		   				<input class="box" type="text" name="nickName" placeholder="4 ~ 14자 이내로 입력하세요 " form="signup">
+		   				
+		   				<div class="text">비밀번호</div>
+		   				<input class="box" type="password" name="pwd" placeholder="1 ~ 16자 이내로 입력 하세요" form="signup">
+	   					
+	   					<div class="text">비밀번호 확인</div>
+		   				<input class="box" type="password" name="checkPwd" form="sighup">
+		   				
+	   					<form class="login-box" action="login" method="post" id="signup">
+	   						<input type="hidden" name="form" value="회원가입" form="signup">
+		   					<input class="top-bottom-margin" type="button" value="회원가입">
+	   					</form>
+	   			</div>
+	   		</div>
+	   </div>
+   </div> 
+   <!-- ===== 개인 프로필 POPUP ========================================================================================================== -->
+
+ 	<div class="pop-up-wrapper">
+	   <div class="profile-pop-up">
+			<div class="pop-up-top">STOCK MARKET<br>프로필수정</div>
+	   		<div class="pop-up-border">
+	   			<div class="pop-up-context">
+		   			<!-- 	<div class="text">이메일</div>
+		   				<input class="box" type="text" name="userEmail" placeholder="Enter the Email..." form="user">
+		   				
+		   				<div class="text">닉네임</div>
+		   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
+		   				
+		   				<div class="text">비밀번호</div>
+		   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
+	   					
+	   					<div class="text">비밀번호 확인</div>
+		   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
+		   				
+	   					<form class="login-box" action="login" method="post" id="user">
+		   					<input class="top-bottom-margin" type="button" value="회원가입">
+	   					</form> -->
+	   			</div>
+	   		</div>
+	   </div>
+   </div>
+   
+   <!-- =============================================================================================================== -->
+      
    </main>
    <!-- =============================================================================================================== -->
    <footer>

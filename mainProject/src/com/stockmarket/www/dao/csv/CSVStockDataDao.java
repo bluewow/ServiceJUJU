@@ -123,12 +123,14 @@ public class CSVStockDataDao {
 
 		try {
 			reader = new CSVReader(new FileReader(csvFilePath));
-			String[] line;
+			String[] cols;
 
-			while ((line = reader.readNext()) != null) {
-				if (line[0].equals(search)) {
+			while ((cols = reader.readNext()) != null) {
+				if (cols[0].equals(search)) {
 					
-					company = new Company(line[0], line[2], line[7]);
+					company = new Company(cols[0], cols[2], cols[7]);
+					
+					// 
 					
 //					System.out.println("회사명 : " + line[0] + ", 종목코드 : " + line[2] + ", 웹사이트 : " +
 //					line[7] );

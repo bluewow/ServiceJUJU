@@ -7,45 +7,52 @@ public class CaptureMemo {
 	private String title;
 	private Date regdate;
 	private String content;
-	private int highprice;
-	private int maketprice;
-	private int dealingnum;
-	private int preclosingprice;
-	private String favorite;
+	private int PER;
+	private int PBR;
+	private int ROE;
+	private int debtRatio;		// 부채 비율
+	private int totalAssets;	// 자산 총계
+	private String codeNum;
+	private int memberId;
 
-	public CaptureMemo() {
-		
-
+	// for update
+	public CaptureMemo(String title, String content) {
+		this.title = title;
+		this.content = content;
 	}
-	
-	public CaptureMemo(String title, Date regdate, String content) {
-		
+
+	public CaptureMemo(String title, Date regdate) {
 		this.title = title;
 		this.regdate = regdate;
-		this.content = content;
 	}
 
-	// for inserting
-	public CaptureMemo(String title, String content) {
-
+	// for insert
+	public CaptureMemo(String title, String content, int PER, int PBR, int ROE,
+			int debtRatio, int totalAssets, String codeNum, int memberId) {
 		this.title = title;
 		this.content = content;
-
+		this.PER = PER;
+		this.PBR = PBR;
+		this.ROE = ROE;
+		this.debtRatio = debtRatio;
+		this.totalAssets = totalAssets;
+		this.codeNum = codeNum;
+		this.memberId = memberId;
 	}
 
-   //for selecting
-	public CaptureMemo(int id, String title, Date regdate, String content, int highprice, int maketprice, int dealingnum,
-			int preclosingprice, String favorite) {
-	
+	public CaptureMemo(int id, String title, Date regdate, String content, int PER, int PBR,
+			int ROE, int debtRatio, int totalAssets, String codeNum, int memberId) {
 		this.id = id;
 		this.title = title;
 		this.regdate = regdate;
 		this.content = content;
-		this.highprice = highprice;
-		this.maketprice = maketprice;
-		this.dealingnum = dealingnum;
-		this.preclosingprice = preclosingprice;
-		this.favorite = favorite;
+		this.PER = PER;
+		this.PBR = PBR;
+		this.ROE = ROE;
+		this.debtRatio = debtRatio;
+		this.totalAssets = totalAssets;
+		this.codeNum = codeNum;
+		this.memberId = memberId;
 	}
 
 	public int getId() {
@@ -80,51 +87,68 @@ public class CaptureMemo {
 		this.content = content;
 	}
 
-	public int getHighprice() {
-		return highprice;
+	public int getPER() {
+		return PER;
 	}
 
-	public void setHighprice(int highprice) {
-		this.highprice = highprice;
+	public void setPER(int PER) {
+		this.PER = PER;
 	}
 
-	public int getMaketprice() {
-		return maketprice;
+	public int getPBR() {
+		return PBR;
 	}
 
-	public void setMaketprice(int maketprice) {
-		this.maketprice = maketprice;
+	public void setPBR(int PBR) {
+		this.PBR = PBR;
 	}
 
-	public int getDealingnum() {
-		return dealingnum;
+	public int getROE() {
+		return ROE;
 	}
 
-	public void setDealingnum(int dealingnum) {
-		this.dealingnum = dealingnum;
+	public void setROE(int ROE) {
+		this.ROE = ROE;
 	}
 
-	public int getPreclosingprice() {
-		return preclosingprice;
+	public int getDebtRatio() {
+		return debtRatio;
 	}
 
-	public void setPreclosingprice(int preclosingprice) {
-		this.preclosingprice = preclosingprice;
+	public void setDebtRatio(int debtRatio) {
+		this.debtRatio = debtRatio;
 	}
 
-	public String getFavorite() {
-		return favorite;
+	public int getTotalAssets() {
+		return totalAssets;
 	}
 
-	public void setFavorite(String favorite) {
-		this.favorite = favorite;
+	public void setTotalAssets(int totalAssets) {
+		this.totalAssets = totalAssets;
+	}
+
+	public String getCodeNum() {
+		return codeNum;
+	}
+
+	public void setCodeNum(String codeNum) {
+		this.codeNum = codeNum;
+	}
+
+	public int getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(int memberId) {
+		this.memberId = memberId;
 	}
 
 	@Override
 	public String toString() {
-		return "CaptureMemo [id=" + id + ", title=" + title + ", redate=" + regdate + ", content=" + content + ", highprice="
-				+ highprice + ", maketprice=" + maketprice + ", dealingnum=" + dealingnum + ", preclosingprice="
-				+ preclosingprice + ",favorite=" + favorite + "]";
+		return "CaptureMemo [id=" + id + ", title=" + title + ", redate=" + regdate + ", content=" + content
+				+ ", highprice=" + PER + ", maketprice=" + PBR + ", dealingnum=" + ROE
+				+ ", preclosingprice=" + debtRatio + ",favorite=" + totalAssets + ", codeNum=" + codeNum
+				+ ", memberId=" + memberId + "]";
 	}
 
 }
