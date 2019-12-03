@@ -29,6 +29,8 @@
 	<c:set var="arrow-direction" value="fa-arrow-down"/>
 </c:if> --%>
 
+<script type="text/javascript" src="../../js/trade/analysis.js"></script>
+
 </head>
 <body>
 <div id="analysis-container">

@@ -3,7 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<script src="../../js/trade/trade.js"></script>
 
 <!-- 매도버튼 음영처리 및 disable 처리 -->
 <c:set var="shadow" value=""/>
