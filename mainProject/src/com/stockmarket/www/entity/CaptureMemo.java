@@ -7,14 +7,15 @@ public class CaptureMemo {
 	private String title;
 	private Date regdate;
 	private String content;
-	private int highPrice;
-	private int maketPrice;
-	private int tradingVolume;
-	private int preClosingPrice;
-	private String favorite;
+	private int PER;
+	private int PBR;
+	private int ROE;
+	private int debtRatio;		// 부채 비율
+	private int totalAssets;	// 자산 총계
 	private String codeNum;
 	private int memberId;
 
+	// for update
 	public CaptureMemo(String title, String content) {
 		this.title = title;
 		this.content = content;
@@ -25,30 +26,31 @@ public class CaptureMemo {
 		this.regdate = regdate;
 	}
 
-	public CaptureMemo(String title, String content, int highPrice, int maketPrice, int tradingVolume,
-			int preClosingPrice, String favorite, String codeNum, int memberId) {
+	// for insert
+	public CaptureMemo(String title, String content, int PER, int PBR, int ROE,
+			int debtRatio, int totalAssets, String codeNum, int memberId) {
 		this.title = title;
 		this.content = content;
-		this.highPrice = highPrice;
-		this.maketPrice = maketPrice;
-		this.tradingVolume = tradingVolume;
-		this.preClosingPrice = preClosingPrice;
-		this.favorite = favorite;
+		this.PER = PER;
+		this.PBR = PBR;
+		this.ROE = ROE;
+		this.debtRatio = debtRatio;
+		this.totalAssets = totalAssets;
 		this.codeNum = codeNum;
 		this.memberId = memberId;
 	}
 
-	public CaptureMemo(int id, String title, Date regdate, String content, int highPrice, int maketPrice,
-			int tradingVolume, int preClosingPrice, String favorite, String codeNum, int memberId) {
+	public CaptureMemo(int id, String title, Date regdate, String content, int PER, int PBR,
+			int ROE, int debtRatio, int totalAssets, String codeNum, int memberId) {
 		this.id = id;
 		this.title = title;
 		this.regdate = regdate;
 		this.content = content;
-		this.highPrice = highPrice;
-		this.maketPrice = maketPrice;
-		this.tradingVolume = tradingVolume;
-		this.preClosingPrice = preClosingPrice;
-		this.favorite = favorite;
+		this.PER = PER;
+		this.PBR = PBR;
+		this.ROE = ROE;
+		this.debtRatio = debtRatio;
+		this.totalAssets = totalAssets;
 		this.codeNum = codeNum;
 		this.memberId = memberId;
 	}
@@ -85,44 +87,44 @@ public class CaptureMemo {
 		this.content = content;
 	}
 
-	public int getHighPrice() {
-		return highPrice;
+	public int getPER() {
+		return PER;
 	}
 
-	public void setHighPrice(int highPrice) {
-		this.highPrice = highPrice;
+	public void setPER(int PER) {
+		this.PER = PER;
 	}
 
-	public int getMaketPrice() {
-		return maketPrice;
+	public int getPBR() {
+		return PBR;
 	}
 
-	public void setMaketPrice(int maketPrice) {
-		this.maketPrice = maketPrice;
+	public void setPBR(int PBR) {
+		this.PBR = PBR;
 	}
 
-	public int getTradingVolume() {
-		return tradingVolume;
+	public int getROE() {
+		return ROE;
 	}
 
-	public void setTradingVolume(int tradingVolume) {
-		this.tradingVolume = tradingVolume;
+	public void setROE(int ROE) {
+		this.ROE = ROE;
 	}
 
-	public int getPreClosingPrice() {
-		return preClosingPrice;
+	public int getDebtRatio() {
+		return debtRatio;
 	}
 
-	public void setPreClosingPrice(int preClosingPrice) {
-		this.preClosingPrice = preClosingPrice;
+	public void setDebtRatio(int debtRatio) {
+		this.debtRatio = debtRatio;
 	}
 
-	public String getFavorite() {
-		return favorite;
+	public int getTotalAssets() {
+		return totalAssets;
 	}
 
-	public void setFavorite(String favorite) {
-		this.favorite = favorite;
+	public void setTotalAssets(int totalAssets) {
+		this.totalAssets = totalAssets;
 	}
 
 	public String getCodeNum() {
@@ -144,8 +146,8 @@ public class CaptureMemo {
 	@Override
 	public String toString() {
 		return "CaptureMemo [id=" + id + ", title=" + title + ", redate=" + regdate + ", content=" + content
-				+ ", highprice=" + highPrice + ", maketprice=" + maketPrice + ", dealingnum=" + tradingVolume
-				+ ", preclosingprice=" + preClosingPrice + ",favorite=" + favorite + ", codeNum=" + codeNum
+				+ ", highprice=" + PER + ", maketprice=" + PBR + ", dealingnum=" + ROE
+				+ ", preclosingprice=" + debtRatio + ",favorite=" + totalAssets + ", codeNum=" + codeNum
 				+ ", memberId=" + memberId + "]";
 	}
 

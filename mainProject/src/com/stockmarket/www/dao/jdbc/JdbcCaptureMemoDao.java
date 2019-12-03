@@ -49,19 +49,19 @@ public class JdbcCaptureMemoDao implements CaptureMemoDao {
 	public int insert(CaptureMemo captureMemo) {
 		int result = 0;
 
-		String sql = "INSERT INTO CAPTURE_MEMO(CONTENT, TITLE, HIGH_PRICE, MARKET_PRICE, "
-				+ "TRADING_VOLUME, PRE_CLOSING_PRICE, FAVORITE, CODENUM, MEMBER_ID)" 
+		String sql = "INSERT INTO CAPTURE_MEMO(CONTENT, TITLE, PER, PBR, "
+				+ "ROE, DEBT_RATIO, TOTAL_ASSETS, CODENUM, MEMBER_ID)" 
 				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			PreparedStatement statement = JdbcDaoContext.getPreparedStatement(sql);
 			statement.setString(1, captureMemo.getContent());
 			statement.setString(2, captureMemo.getTitle());
-			statement.setInt(3, captureMemo.getHighPrice());
-			statement.setInt(4, captureMemo.getMaketPrice());
-			statement.setInt(5, captureMemo.getTradingVolume());
-			statement.setInt(6, captureMemo.getPreClosingPrice());
-			statement.setString(7, captureMemo.getFavorite());
+			statement.setInt(3, captureMemo.getPER());
+			statement.setInt(4, captureMemo.getPBR());
+			statement.setInt(5, captureMemo.getROE());
+			statement.setInt(6, captureMemo.getDebtRatio());
+			statement.setInt(7, captureMemo.getTotalAssets());
 			statement.setString(8, captureMemo.getCodeNum());
 			statement.setInt(9, captureMemo.getMemberId());
 
@@ -124,17 +124,22 @@ public class JdbcCaptureMemoDao implements CaptureMemoDao {
 //	public static void main(String[] args) {
 //		JdbcCaptureMemoDao dao = new JdbcCaptureMemoDao();
 //		List<CaptureMemoView> list = dao.getList(1);
-//		
+		
 //		for(CaptureMemoView c:list) {
 //			System.out.println(c.toString());
 //		}
-//		
-//		CaptureMemo captureMemo = new CaptureMemo("aaaaaaaaaa", "aaaaaaaasdsdsd", 11, 12, 13, 11, "sff", "005380", 2);
-//		captureMemo.setId(12);
-//		System.out.println(captureMemo.toString());
+		
+		// insert test
+//		CaptureMemo captureMemo = new CaptureMemo("이거슨 제목...", "이거슨 메모..", 11, 12, 13, 11, 13, "005380", 2);
 //		int result = dao.insert(captureMemo);
-//		int result = dao.update(captureMemo);
-//		
 //		System.out.println(result);
+		
+		// update test
+		
+//		CaptureMemo captureMemo = new CaptureMemo("이거슨 제목!!!", "이거슨 메모..", 11, 12, 13, 11, 13, "005380", 2);
+//		captureMemo.setId(1);
+//		System.out.println(captureMemo.toString());
+//		int result = dao.update(captureMemo);
+//		System.out.println(result);		
 //	}
 }
