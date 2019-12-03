@@ -19,10 +19,10 @@
 	<div id ="bodyScroll">
 	<section id="search-form">
 		<h1 class="d-none">주식회사검색</h1>
-		<form action ="search" method="get">
+		<form action ="list" method="get">
 			<div id ="search-div">
 				<!-- <label for= "search-text"> -->
-					<input id ="search-text" type="text" name="search">
+					<input id ="search-text" type="text" name="companyName">
 					<button class="search-button"></button>
 				<!-- </label> -->
 			</div>
@@ -34,7 +34,7 @@
 			<li id="recommendKeyword_fixed">추천검색어 </li>
 
 			<c:forEach var="r" items="${recommendKeyword}">
-				<a href="search?search=${r}"><span>${r}</span></a>
+				<a href="list?companyName=${r}"><span>${r}</span></a>
 			</c:forEach>
 			
 		</ul>
@@ -53,7 +53,7 @@
 			</thead>
 			
 			<%-- <c:choose> --%>
-			<tbody>
+			<%-- <tbody>
 				<c:forEach var="sector" items="${sectorList}" varStatus="status" >
 					<tr>
 						<td>${status.count}</td>
@@ -62,26 +62,11 @@
 						<td class="attention"><img src="/css/search/interest_no.png" ></td>
 					</tr>
 				</c:forEach>
-			</tbody>
+			</tbody> --%>
 			
 			
-			<%-- <c:set var ="n" value="${search}"/> --%>
-			<%-- <c:if test="${!empty n}"> --%>
-		
-			<%-- <c:when test="$(!empty n)"> --%>
+			
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>${n.companyName}<a href="${n.website}" target="_blank"><img src="/css/search/link.png" alt=""></a></td>
-						<td>${n.stockItemName}</td>
-						<td class="attention"><img src="/css/search/interest_no.png"></td>
-					</tr>
-				</tbody>
-			<%-- </c:when> --%>
-			<%-- </c:if> --%>
-			<%-- </c:choose> --%>
-			
-				<%-- <tbody>
 					<c:forEach var="sector" items="${sectorList}" varStatus="status" >
 						<tr>
 							<td>${status.count}</td>
@@ -90,91 +75,22 @@
 							<td class="attention"><img src="/css/search/interest_no.png" ></td>
 						</tr>
 					</c:forEach>
+				</tbody>
+			
+			
+				<%-- <tbody>
+					<tr>
+						<td>1</td>
+						<td>${n.companyName}<a href="${n.website}" target="_blank"><img src="/css/search/link.png" alt=""></a></td>
+						<td>${n.stockItemName}</td>
+						<td class="attention"><img src="/css/search/interest_no.png"></td>
+					</tr>
 				</tbody> --%>
 			
 			
+				
 			
-			<!-- <tbody>
-				<tr>
-					<td>2</td>
-					<td>테스트</td>
-					<td>미디어</td>
-					<td><img src="/css/search/interest_yes.png" alt=""></td>
-				</tr>
-			</tbody>
 			
-			<tbody>
-				<tr>
-					<td>3</td>
-					<td>테스트</td>
-					<td>은행</td>
-					<td>관심x</td>
-				</tr>
-			</tbody>
-			
-			<tbody>
-				<tr>
-					<td>4</td>
-					<td>테스트</td>
-					<td>미디어</td>
-					<td>관심</td>
-				</tr>
-			</tbody>
-			
-			<tbody>
-				<tr>
-					<td>5</td>
-					<td>테스트</td>
-					<td>미디어</td>
-					<td>관심</td>
-				</tr>
-			</tbody>
-			
-			<tbody>
-				<tr>
-					<td>6</td>
-					<td>테스트</td>
-					<td>미디어</td>
-					<td>관심</td>
-				</tr>
-			</tbody>
-			
-			<tbody>
-				<tr>
-					<td>7</td>
-					<td>테스트</td>
-					<td>미디어</td>
-					<td>관심</td>
-				</tr>
-			</tbody>
-			
-			<tbody>
-				<tr>
-					<td>8</td>
-					<td>테스트</td>
-					<td>미디어</td>
-					<td>관심</td>
-				</tr>
-			</tbody>
-			
-			<tbody>
-				<tr>
-					<td>9</td>
-					<td>테스트</td>
-					<td>미디어</td>
-					<td>관심</td>
-				</tr>
-			</tbody>
-					
-			
-			<tbody>
-				<tr>
-					<td>10</td>
-					<td>테스트</td>
-					<td>미디어</td>
-					<td>관심</td>
-				</tr>
-			</tbody> -->
 			
 		</table>
 	</section>

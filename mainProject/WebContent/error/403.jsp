@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1 style="text-align: center;">로그인이 필요한 서비스 입니다.</h1>
+	<img src="../../images/requestLogin.png" style="max-width:100%; height:auto">
 </body>
 </html>
