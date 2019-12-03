@@ -3,6 +3,7 @@ package com.stockmarket.www.controller.myAsset;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,8 +32,9 @@ public class MyAssetController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int presnetAsset = assetTrendService.getAssetPresent(3);
+		// String presnetAsset = String.valueOf(assetTrendService.getAssetPresent(3));
 		
+		/*
 		List<RecordAsset> list = assetTrendService.getRecordAsset(3);
 				
 		StringBuilder builder = new StringBuilder();
@@ -56,9 +58,36 @@ public class MyAssetController extends HttpServlet{
 	       PrintWriter out = response.getWriter();
 	       out.write(json); 
 	       out.write(presnetAsset);
+	       */
+		
+	       List<Map<String, Object>> list = assetDistrService.getHaveStockList(3);
+	       
+	       StringBuilder builder = new StringBuilder();
+	       builder.append("[");
+	       // {"id":1, "title":"안녕하세요", "writerId":"newlec"}
+	       // {"memberId" :
+	       for(int i=0; i<list.size(); i++) {
+	    	   String item = String.format("{\"stockName\":%s,\"ratio\":\"%f}"
+	    			   , list.get(i).get("stockName")
+	    			   , list.get(i).get("ratio"));
+
+	    	   builder.append(item);
+	    	   
+	    	   if(i < list.size()-1)
+	    		   builder.append(",");
+	       }		
+	       builder.append("]");
+	       
+	       String json = builder.toString();
+	       
+	       String StockName1 = String.valueOf(list.get(0).get("stockName")); 
+	       
+	       PrintWriter out = response.getWriter();
+	       out.write(StockName1); 
+	       // out.write(presnetAsset);
 		
 		
-		request.getRequestDispatcher("myAsset.jsp").forward(request, response);
+		// request.getRequestDispatcher("myAsset.jsp").forward(request, response);
 		
 	}
 
