@@ -57,7 +57,6 @@ public class StockBoardController extends HttpServlet {
 		// 세션을 이용하여 현재 사용자의 아이디를 가져온다.
 		HttpSession session = request.getSession();
 		Object tempId = session.getAttribute("id");
-		System.out.println(tempId);
 		int id = -1;
 		
 		if(tempId != null)
