@@ -1,24 +1,24 @@
 @charset "UTF-8";
 
 #contaner {
-	width: 90%;
-	min-width: 460px;
+	min-width: 530px;
 	max-width: 600px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 15px;
 }
 
-#stockScroll {
-	overflow: scroll;
-	width: 89%;
-	height: 93%;
-	padding: 30px;
+#stockTop {
+	height: 90px;
+	padding: 10px;
+	min-width: 530px;
+	max-width: 100%;
 }
 
 #selected-stock {
-	top: 2%;
-	left: 5%;
+	position: absolute;
+	top: 20px;
+	left: 20px;
 	font-weight: bold;
 	font-size: 1.2em;
 	width: 350px;
@@ -28,12 +28,12 @@
 	border: none;
 	outline: none;
 	cursor: pointer;
-	position: absolute;
 }
 
 #my-button {
-	top: 8%;
-	left: 7%;
+	position: absolute;
+	top: 70px;
+	left: 30px;
 	font-weight: bold;
 	font-size: 1em;
 	width: 36px;
@@ -44,7 +44,6 @@
 	border: none;
 	outline: none;
 	cursor: pointer;
-	position: absolute;
 	text-align: center;
 }
 
@@ -53,8 +52,9 @@
 }
 
 #favo-button {
-	top: 8%;
-	left: 18%;
+	position: absolute;
+	top: 70px;
+	left: 90px;
 	font-weight: bold;
 	font-size: 1em;
 	width: 36px;
@@ -65,7 +65,6 @@
 	border: none;
 	outline: none;
 	cursor: pointer;
-	position: absolute;
 	text-align: center;
 }
 
@@ -74,8 +73,8 @@
 }
 
 #reg-button {
-	top: 5%;
-	left: 70%;
+	top: 40px;
+	right: 40px;
 	font-size: 1.5em;
 	color:#ffffff;
 	width: 80px;
@@ -93,6 +92,17 @@
 #reg-button:hover {
 	opacity: 0.7;
 }
+
+
+#stockScroll {
+	min-width: 460px;
+	max-width: 100%;
+	height: 750px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 10px;
+}
+
 .del a {
 	background: url( "../../images/trashCan.png" ) no-repeat;
 	display: inline-block;
@@ -127,7 +137,6 @@
 
 
 #stockTable {
-	margin-top: 70px;
 	width: 100%;
 	text-align: center;
 	font-size: 11pt;
@@ -143,6 +152,11 @@
 	text-align: left;
 }
 
+.subject {
+	float:left;
+	width:100%;
+}
+
 .subject th {
 	color: #58585E;
 	font-weight: bold;
@@ -154,6 +168,16 @@
 .content {
 	font-weight: bold;
 	font-size: 12pt;
+	overflow-y:auto; 
+	overflow-x:hidden; 
+	float:left; 
+	width:100%; 
+	height:100%;
+
+}
+
+.content tbody tr {
+	display: table;
 }
 
 .content td {

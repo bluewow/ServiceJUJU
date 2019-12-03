@@ -27,13 +27,14 @@
 </head>
 
 <body>
-	<section id="stockScroll">
-		<br>
+	<section id="stockTop">
 		<nav id="my-menu">
 			<a href="?p=1" id="selected-stock">기현알고리즘</a> <a href="?p=1"
 				id="my-button">My</a> <a href="?p=2" id="favo-button">관심</a> <a
 				href="../../css/board/reg_board" id="reg-button">글쓰기</a>
 		</nav>
+	</section>
+	<section id="stockScroll">
 		<table id="stockTable">
 			<thead class="subject">
 				<tr>
