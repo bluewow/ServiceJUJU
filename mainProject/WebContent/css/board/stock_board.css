@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 #contaner {
-	min-width: 530px;
+	 min-width: 450px; 
 	max-width: 600px;
 	margin-left: auto;
 	margin-right: auto;
@@ -11,7 +11,7 @@
 #stockTop {
 	height: 90px;
 	padding: 10px;
-	min-width: 530px;
+	 min-width: 450px; 
 	max-width: 100%;
 }
 
@@ -95,11 +95,11 @@
 
 
 #stockScroll {
-	min-width: 460px;
+	 min-width: 430px;
 	max-width: 100%;
 	height: 750px;
-	padding-left: 30px;
-	padding-right: 30px;
+	padding-left: 5px;
+	padding-right: 5px;
 	padding-top: 10px;
 }
 
@@ -136,14 +136,16 @@
 }
 
 
-#stockTable {
+.stockTable {
 	width: 100%;
 	text-align: center;
-	font-size: 11pt;
+	font-size: 1em;
 	border-collapse: collapse;
 }
 
-#stockTable tr {
+
+
+.stockTable tr {
 	height: 30px;
 }
 
@@ -152,6 +154,18 @@
 	text-align: left;
 }
 
+.w10 {
+	width:10%;
+}
+.w20 {
+	width:20%;
+}
+.w50 {
+	width:50%;
+}
+
+
+
 .subject th {
 	color: #58585E;
 	font-weight: bold;
@@ -159,10 +173,14 @@
 	padding: 5px;
 }
 
+#scroll {
+	max-height:400px;
+	overflow-y: scroll;
+}
 
 .content {
 	font-weight: bold;
-	font-size: 12pt;
+	font-size: 1em;
 }
 
 .content td {
@@ -196,5 +214,6 @@ a {
 }
 #reply-content {
 	width:100%;
-	height: 60px;
+	height: 40px;
 }
+

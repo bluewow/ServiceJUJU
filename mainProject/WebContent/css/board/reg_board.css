@@ -1,28 +1,24 @@
 @charset "UTF-8";
 
-body {
-	width: 100%;
-	height: 100%;
-	position: relative;
-}
-
-#frame {
-	width: 500px;
-	height: 420px;
-	margin-left: auto;
-	margin-right: auto;
+.pop-up-reg {
+	top:10%;
+	left:10%;
+	width: 80%;
+	height: 60%;
 	border-radius: 15px;
 	background-color: #13bfd7;
+	/* visibility:hidden;  */ 
+    position: absolute;
 }
 
-#title-row {
+.pop-up-title-row {
 	position: relative;
 	height: 60px;
 	text-align: center;
 }
 
-.title {
-	width: 400px;
+.reg-title {
+	width: 90%;
 	margin-top: 20px;
 	color: white;
 	display: inline-block;
@@ -33,19 +29,21 @@ body {
 	font-size: 16px;
 }
 
-.title::placeholder {
+.reg-title::placeholder {
 	color: white;
 }
 
-#content-row {
+.pop-up-content-row {
 	text-align: center;
 	position: relative;
-	height: 294px;
+	height: 80%;
 	background: white;
-	margin: 0px 4px;
+	margin: 0px 10px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
 }
 
-.content {
+.reg-content {
 	margin-top: 25px;
 	padding: 10px;
 	width: 90%;
@@ -56,16 +54,16 @@ body {
 	resize: none;
 }
 
-#commit-row {
+.pop-up-commit-row {
 	position: relative;
 	height: 60px;
 	background: white;
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
-	margin: 0px 4px;
+	margin: 0px 10px;
 }
 
-.cancel {
+.reg-cancel {
 	position: absolute;
 	top: 20%;
 	right: 20%;
@@ -80,11 +78,11 @@ body {
 	cursor: pointer;
 }
 
-.cancel:hover {
+.reg-cancel:hover {
 	opacity: 0.7;
 }
 
-.reg {
+.reg-commit {
 	position: absolute;
 	top: 20%;
 	right: 5%;
@@ -99,6 +97,6 @@ body {
 	cursor: pointer;
 }
 
-.reg:hover {
+.reg-commit:hover {
 	opacity: 0.7;
 }

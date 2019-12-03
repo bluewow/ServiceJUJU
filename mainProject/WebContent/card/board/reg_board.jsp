@@ -14,7 +14,7 @@
 
 <link href="../../css/board/reg_board.css" type="text/css"
 	rel="stylesheet">
-<script src="../../js/board/reg_board.js"></script>
+<!-- <script src="../../js/board/reg_board.js"></script> -->
 </head>
 <body>
 	<div id=frame>

@@ -24,28 +24,37 @@
 	rel="stylesheet">
 <script src="../../js/board/stock_board.js"></script>
 
+<!-- Reg Board popup -->
+<link href="../../css/board/reg_board.css" type="text/css"
+	rel="stylesheet">
+<script src="../../js/board/reg_board.js"></script>
+
+
 </head>
 
 <body>
 	<section id="stockTop">
 		<nav id="my-menu">
-			<a href="?p=1" id="selected-stock">기현알고리즘</a> <a href="?p=1"
-				id="my-button">My</a> <a href="?p=2" id="favo-button">관심</a> <a
-				href="../../css/board/reg_board" id="reg-button">글쓰기</a>
+			<a href="" id="selected-stock">기현알고리즘</a>
+			<a href="" id="my-button">My</a>
+			<a href="" id="favo-button">관심</a>
+			<a href="" id="reg-button">글쓰기</a>
 		</nav>
 	</section>
 	<section id="stockScroll">
-		<table id="stockTable">
+		<table class="stockTable">
 			<thead class="subject">
 				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성일</th>
-					<th>조회</th>
-					<th></th>
+					<th class="w10">번호</th>
+					<th class="w50">제목</th>
+					<th class="w20">작성일</th>
+					<th class="w10">조회</th>
+					<th class="w10"></th>
 				</tr>
 			</thead>
-
+		</table>
+		<div id="scroll">
+		<table class="stockTable">
 			<tbody class="content">
 				<tr>
 					<td colspan="5"
@@ -53,14 +62,14 @@
 						글이 없습니다.</td>
 				</tr>
 				<tr class="detail">
-					<td colspan=5>디테일의 내용이 나올 공간.</br>
+					<td colspan=5>디테일의 내용이 나올 공간.
 					</td>
 				</tr>
 			</tbody>
 		</table>
-
+		</div>
 		<div class="pager">
-			<a href="?p=1">1</a> <a href="?p=2">2</a> <a href="?p=3">3</a>
+			<a href="?p=1">1</a> <a href="?p=2">2</a> <a href="?p=3">3</a> <a href="?p=3">4</a> <a href="?p=3">5</a>
 		</div>
 
 		<template class="tr-template">
@@ -113,5 +122,18 @@
 
 		</template>
 	</section>
+	
+	<!-- ===== 글쓰기 POPUP ========================================================================================================== -->   
+ 	<div class="pop-up-reg">
+		<div class="pop-up-title-row">
+			<input type="text" class="reg-title" maxlength="20" placeholder="제목을 입력하세요">
+			
+		</div>
+		<div class="pop-up-content-row">
+			<textarea class="reg-content" maxlength="400" placeholder="내용을 입력하세요"></textarea>
+			<input type="button" class="reg-cancel" name="cancel" value="취소">
+			<input type="button" class="reg-commit" name="reg" value="확인">
+		</div>
+	</div>
 </body>
 </html>
