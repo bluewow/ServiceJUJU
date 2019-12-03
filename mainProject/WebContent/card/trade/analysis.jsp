@@ -40,7 +40,9 @@
 			<div>${companyName }</div>
 			<div>204,000</div>
 		</div>
-		<input id="capture" type="button" value="캡쳐하기">
+		<c:if test="${not empty sessionScope.id }">
+			<input id="capture" type="button" value="캡쳐하기">
+		</c:if>
 	</header>
 
 	<!-- --------------- page-mid -------------- -->
