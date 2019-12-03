@@ -53,7 +53,7 @@
 				<div><fmt:formatNumber value="${myAssets }" pattern="#,###" />원</div>
 				<input class="button button-status" type="button" value="보유 수량">
 				<div>${myQuantity }</div>	
-				<input class="button button-button" type="submit" name="trade" value="매       수">
+				<input class="button button-button animation" type="submit" name="trade" value="매       수">
 
 			</div>
 			<div class="show-button-align">
@@ -63,7 +63,7 @@
 				<div>
 					<input id="text" type="text" name="Purse/Sold" autocomplete="off">
 				</div>
-				<input class="button button-button ${shadow }" type="submit" ${disable } name="trade" value="매       도">
+				<input class="button button-button animation ${shadow }" type="submit" ${disable } name="trade" value="매       도">
 			</div>
 		</form>
 	</section>

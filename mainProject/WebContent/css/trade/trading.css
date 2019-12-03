@@ -17,6 +17,20 @@
 	outline: none;
 }
 
+.animation:active {
+	position: relative;
+	top: 3px;
+	background-color: #13bfd7;
+	color: white;
+}
+
+.animation:hover {
+  background-color: #13bfd7;
+  color: white;
+  transition: 1s;
+}
+
+
 .button-chart {
 	margin: 0% 1%;
 }

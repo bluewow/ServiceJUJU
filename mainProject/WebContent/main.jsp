@@ -78,11 +78,11 @@
                      	width="50" height="auto">
                   </a>
                   	<c:if test="${empty sessionScope.id }">
-                  		<input type="button" value="로그인">
+                  		<input class="animation-2" type="button" value="로그인">
                   	</c:if>
                   	<c:if test="${not empty sessionScope.id }">
-	                  	<input class="small" type="button" value="${sessionScope.nickName }">
-	                  	<input class="small" type="button" value="로그아웃">
+	                  	<input class="small animation-2" type="button" value="${sessionScope.nickName }">
+	                  	<input class="small animation-2" type="button" value="로그아웃">
                   	</c:if>
                   </div>
                </div>
@@ -339,7 +339,7 @@
 	   					
 	   					<form class="login-box" action="login" method="post" id="login">
 	   						<input type="hidden" name="form" value="로그인" form="login">
-		   					<input type="button" value="로그인">
+		   					<input class="animation-1" type="button" value="로그인">
 	   					</form>
 		   				
 		   				<hr>
@@ -372,7 +372,7 @@
 		   				
 	   					<form class="login-box" action="login" method="post" id="signup">
 	   						<input type="hidden" name="form" value="회원가입" form="signup">
-		   					<input class="top-bottom-margin" type="button" value="회원가입">
+		   					<input class="top-bottom-margin animation-1" type="button" value="회원가입">
 	   					</form>
 	   			</div>
 	   		</div>
