@@ -7,9 +7,13 @@ window.addEventListener("load", function(){
 		
 		button.onclick = function(e) {
 			var ajax = new XMLHttpRequest();
-			ajax.open("GET", "../../card/trade/analysis?caputre=on");
+			ajax.open("GET", "../../card/trade/analysis?capture=on");
 			ajax.onload = function() {
-				console.log(request.responseText);
+				console.log(ajax.responseText);
+				//console.log(document.querySelector("#news"));
+				var newsFrame = parent.document.querySelector("#news");
+				var newsWindow = newsFrame.contentWindow || newsFrame;
+				newsWindow.test("1");
 			}
 			ajax.send();
 		}

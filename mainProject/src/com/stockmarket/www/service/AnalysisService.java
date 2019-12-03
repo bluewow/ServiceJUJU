@@ -1,5 +1,7 @@
 package com.stockmarket.www.service;
 
+import com.stockmarket.www.entity.CaptureMemo;
+
 public interface AnalysisService {
 	/* 
 	 * 관심도, 재무상황, 미정 이상 3가지 사항에 대한 분석을 진행한다   
@@ -26,4 +28,7 @@ public interface AnalysisService {
 	 * 
 	 */
 	void refreshPrice();
+
+	//캡처에 전달할 data crawling
+	CaptureMemo captureDataCrawling(String codeNum);
 }
