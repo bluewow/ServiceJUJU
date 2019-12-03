@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.stockmarket.www.entity.CaptureMemo;
 import com.stockmarket.www.service.AnalysisService;
 import com.stockmarket.www.service.basic.BasicAnalysisService;
 
@@ -25,11 +26,16 @@ public class AnalysisController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String capture = request.getParameter("capture"); 
 		
+		//캡쳐 버튼 Press 시
 		if(capture != null) {  
-			service.captureDataCrawling("095660");
+			HttpSession session = request.getSession();
+			int memberId = (int)session.getAttribute("id");
+			
+			CaptureMemo result = service.captureDataCrawling("095660", memberId);
+			System.out.println(result.toString());
 			
 			PrintWriter out = response.getWriter();
-			out.write("TEST");      
+			out.print(result);      
 			return;
 		}
 		

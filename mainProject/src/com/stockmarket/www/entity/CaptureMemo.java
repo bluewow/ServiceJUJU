@@ -7,14 +7,15 @@ public class CaptureMemo {
 	private String title;
 	private Date regdate;
 	private String content;
-	private int PER;
-	private int PBR;
-	private int ROE;
-	private int debtRatio;		// 부채 비율
-	private int totalAssets;	// 자산 총계
+	private double PER;
+	private double PBR;
+	private double ROE;
+	private double debtRatio;			// 부채 비율
+	private int marketCap;			// 시가 총액(억)
+	private float foreignInvestors; //외국인 지뷴율 
 	private String codeNum;
 	private int memberId;
-
+	
 	// for update
 	public CaptureMemo(String title, String content) {
 		this.title = title;
@@ -27,21 +28,21 @@ public class CaptureMemo {
 	}
 
 	// for insert
-	public CaptureMemo(String title, String content, int PER, int PBR, int ROE,
-			int debtRatio, int totalAssets, String codeNum, int memberId) {
+	public CaptureMemo(String title, String content, double PER, double PBR, double ROE,
+			double debtRatio, int marketCap, String codeNum, int memberId) {
 		this.title = title;
 		this.content = content;
 		this.PER = PER;
 		this.PBR = PBR;
 		this.ROE = ROE;
 		this.debtRatio = debtRatio;
-		this.totalAssets = totalAssets;
+		this.marketCap = marketCap;
 		this.codeNum = codeNum;
 		this.memberId = memberId;
 	}
 
-	public CaptureMemo(int id, String title, Date regdate, String content, int PER, int PBR,
-			int ROE, int debtRatio, int totalAssets, String codeNum, int memberId) {
+	public CaptureMemo(int id, String title, Date regdate, String content, double PER, double PBR,
+			double ROE, double debtRatio, int marketCap, String codeNum, int memberId) {
 		this.id = id;
 		this.title = title;
 		this.regdate = regdate;
@@ -50,7 +51,7 @@ public class CaptureMemo {
 		this.PBR = PBR;
 		this.ROE = ROE;
 		this.debtRatio = debtRatio;
-		this.totalAssets = totalAssets;
+		this.marketCap = marketCap;
 		this.codeNum = codeNum;
 		this.memberId = memberId;
 	}
@@ -87,44 +88,53 @@ public class CaptureMemo {
 		this.content = content;
 	}
 
-	public int getPER() {
+	public double getPER() {
 		return PER;
 	}
 
-	public void setPER(int PER) {
+	public void setPER(double PER) {
 		this.PER = PER;
 	}
 
-	public int getPBR() {
+	public double getPBR() {
 		return PBR;
 	}
 
-	public void setPBR(int PBR) {
+	public void setPBR(double PBR) {
 		this.PBR = PBR;
 	}
 
-	public int getROE() {
+	public double getROE() {
 		return ROE;
 	}
 
-	public void setROE(int ROE) {
+	public void setROE(double ROE) {
 		this.ROE = ROE;
 	}
 
-	public int getDebtRatio() {
+	public double getDebtRatio() {
 		return debtRatio;
 	}
 
-	public void setDebtRatio(int debtRatio) {
+	public void setDebtRatio(double debtRatio) {
 		this.debtRatio = debtRatio;
 	}
 
-	public int getTotalAssets() {
-		return totalAssets;
+
+	public int getMarketCap() {
+		return marketCap;
 	}
 
-	public void setTotalAssets(int totalAssets) {
-		this.totalAssets = totalAssets;
+	public void setMarketCap(int marketCap) {
+		this.marketCap = marketCap;
+	}
+
+	public float getForeignInvestors() {
+		return foreignInvestors;
+	}
+
+	public void setForeignInvestors(float foreignInvestors) {
+		this.foreignInvestors = foreignInvestors;
 	}
 
 	public String getCodeNum() {
@@ -145,10 +155,10 @@ public class CaptureMemo {
 
 	@Override
 	public String toString() {
-		return "CaptureMemo [id=" + id + ", title=" + title + ", redate=" + regdate + ", content=" + content
-				+ ", highprice=" + PER + ", maketprice=" + PBR + ", dealingnum=" + ROE
-				+ ", preclosingprice=" + debtRatio + ",favorite=" + totalAssets + ", codeNum=" + codeNum
-				+ ", memberId=" + memberId + "]";
+		return "CaptureMemo [id=" + id + ", title=" + title + ", regdate=" + regdate + ", content=" + content + ", PER="
+				+ PER + ", PBR=" + PBR + ", ROE=" + ROE + ", debtRatio=" + debtRatio + ", marketCap=" + marketCap
+				+ ", foreignInvestors=" + foreignInvestors + ", codeNum=" + codeNum + ", memberId=" + memberId + "]";
 	}
 
+	
 }

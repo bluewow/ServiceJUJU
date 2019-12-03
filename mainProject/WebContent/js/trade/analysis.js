@@ -10,10 +10,10 @@ window.addEventListener("load", function(){
 			ajax.open("GET", "../../card/trade/analysis?capture=on");
 			ajax.onload = function() {
 				console.log(ajax.responseText);
-				//console.log(document.querySelector("#news"));
-				var newsFrame = parent.document.querySelector("#news");
-				var newsWindow = newsFrame.contentWindow || newsFrame;
-				newsWindow.test("1");
+
+//				var newsFrame = parent.document.querySelector("#news");
+//				var newsWindow = newsFrame.contentWindow || newsFrame;
+//				newsWindow.test("1");
 			}
 			ajax.send();
 		}
