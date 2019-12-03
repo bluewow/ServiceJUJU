@@ -14,11 +14,12 @@ public class JDBCRecordAssetDao implements RecordAssetDao {
 	@Override
 	public List<RecordAsset> getList(int id) {
 		List<RecordAsset> recordList = new ArrayList<>();
-
 		String sql = "SELECT * FROM RECORD_ASSET WHERE MEMBER_ID = ?";
+		
+		JdbcDaoContext context = new JdbcDaoContext();
 
 		try {
-			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
+			PreparedStatement st = context.getPreparedStatement(sql);
 			st.setInt(1, id);
 			ResultSet rs = st.executeQuery();
 
@@ -30,8 +31,7 @@ public class JDBCRecordAssetDao implements RecordAssetDao {
 				RecordAsset recordAsset = new RecordAsset(memberId, regdate, value);
 				recordList.add(recordAsset);
 			}
-			rs.close();
-			st.close();
+			context.close(rs, st);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -45,18 +45,19 @@ public class JDBCRecordAssetDao implements RecordAssetDao {
 	@Override
 	public int insert(RecordAsset recordAsset) {
 		int result = 0;
-
 		String sql = "INSERT INTO RECORD_ASSET(MEMBER_ID,REGDATE,VALUE) VALUES(?,?,?)";
+		
+		JdbcDaoContext context = new JdbcDaoContext();
 
 		try {
-			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
+			PreparedStatement st = context.getPreparedStatement(sql);
 			st.setInt(1, recordAsset.getMemberId());
 			st.setString(2, recordAsset.getRegdate());
 			st.setInt(3, recordAsset.getValue());
 
 			result = st.executeUpdate();
 
-			st.close();
+			context.close(st);
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -72,16 +73,17 @@ public class JDBCRecordAssetDao implements RecordAssetDao {
 	@Override
 	public int delete(int memberId) {
 		int result = 0;
-
 		String sql = "DELETE RECORD_ASSET WHERE MEMBER_ID = ? ";
+		
+		JdbcDaoContext context = new JdbcDaoContext();
 
 		try {
-			PreparedStatement st = JdbcDaoContext.getPreparedStatement(sql);
+			PreparedStatement st = context.getPreparedStatement(sql);
 			st.setInt(1, memberId);
 
 			result = st.executeUpdate();
 
-			st.close();
+			context.close(st);
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
