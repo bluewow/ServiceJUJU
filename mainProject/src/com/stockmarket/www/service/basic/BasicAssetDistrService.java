@@ -57,7 +57,6 @@ public class BasicAssetDistrService implements AssetDistrService {
 		for(HaveStockView data:list) {
 			Map<String, Object> distr = new HashMap<>();
 			float ratio = (getProfitByStockId(data.getStockId(), memberId))/(getProfitAll(memberId))*100;
-			System.out.println(ratio);
 			distr.put("ratio", ratio);
 			distr.put("stockName", data.getStockName());
 			distrList.add(distr);
