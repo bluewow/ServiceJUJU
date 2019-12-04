@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+.visiable-none {
+	display: none;
+}
 .card {
 	border: hidden;
 	border-radius: 3%;

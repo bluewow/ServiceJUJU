@@ -9,24 +9,40 @@
 	display: none;
 }
 
+.title{
+	font-family: "에스코어 드림";
+	font-weight: 600;
+	font-size: 1.2em;
+	letter-spacing: 0.07em;
+	color:  #585B5E;
+
+	display: inline-block;
+}
+
+.selected-button{
+	font-family: "에스코어 드림";
+	font-weight: 500;	
+	font-size: 0.9em;
+	color: #FFFFFF;
+
+	margin-left: 15px;
+	background: #13BFD7;
+	padding: 5px 16px;
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+section{
+	padding-top: 5%;
+}
+
 #card {
 	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
-	padding-top: 5%;
 }
-
-	#card > section:first-child {
-
-	}
-	
-	#card > section:last-child {
-		--border: red 1px solid;
-		
-	}
-	
 	.asset-graph-title  {
-		display: inline-block;
+	
 		font-weight: bold;
 		font-size: 14pt;
 	}
@@ -36,10 +52,15 @@
 		top: 5px;
 		right: 0px;
 		display: inline-block;
+
+		font-family: 서울한강체;
 		font-weight: bold;
-		font-size: 11pt;
+		font-size: 0.9em;
+		letter-spacing: 0.05em;
+		color:  #585B5E;
+		
 		background: #efefef;
-		padding: 2px 15px;
+		padding: 0.15em 1.5em;
 		border-radius: 10px;
 	}
 
@@ -53,13 +74,24 @@
 	}
 
 	.my-asset-info .buttons li {
-		font-weight: bold;
-		font-size: 11pt;
+		font-family: "에스코어 드림";
+		font-weight: 500;
+		font-size: 0.9em;
+		color:  #585B5E;
+
 		margin-left: 15px;
 		background: #efefef;
-		padding: 4px 15px;
-		border-radius: 10px;
+		padding: 5px 16px;
+		border-radius: 20px;
 		cursor: pointer;
+	}
+
+	.my-asset-info .buttons li:hover{
+	
+		color: #FFFFFF;
+
+		background: #13BFD7;
+	
 	}
 
 	.my-asset-info .buttons li:first-of-type {
@@ -67,8 +99,12 @@
 	}
 
 	.my-asset-info+p {
-		font-weight: bold;
-		font-size: 16pt;
+		font-family: "에스코어 드림";
+		font-weight: 600;
+		font-size: 1.4em;
+		letter-spacing: 0.09em;
+		color:  #585B5E;
+
 		vertical-align: middle;
 		position: absolute;
 		top: 35px;
@@ -82,21 +118,116 @@
 }
 
 	#assetTrend #graph-assetTrend {
-		background: #8080c0;
+		--background: #8080c0;
 		height: 234px;
 		width: inherit;
 		
 	}
 
 	#assetTrend	#setPeriodgraph-assetTrend {
-		background: #ff8040;
+		--background: #ff8040;
 		height: 50px;
 		width: inherit;
 		
 	}
 
-	.asset-distribution {
-		border: red 1px solid;
-		width: 100%;
-		height: 100px;
+#assetDistribution {		
+	margin-top: 5px;
+	text-align: center;
+	display: flex;
+}
+	
+	#assetDistribution #graph-assetDistr {
+		display: inline-block;
+		--background: #8080c0;
+		height: 234px;
+		width: 50%;
+		align-content: center;
+			
 	}
+
+		#assetDistribution #graph-assetDistr .ment{
+			position: relative;
+			z-index: 3;
+			top: 101px;			
+			font-family: "에스코어 드림";
+			font-weight: 600;
+			font-size: 0.8em;
+			color:  #585B5E;
+		}
+
+		#assetDistribution #graph-assetDistr .square{
+			position: relative;
+			z-index: 2;
+			top: 35px;
+			left: auto;
+			
+			
+			background: #FFFFFF;	
+			width: 90px;
+      		height: 90px;
+			border-radius: 50%;
+			display: inline-block;
+		}
+
+		#assetDistribution #graph-assetDistr .graph{
+			position: relative;	
+			--background: yellowgreen;
+			z-index: 1;
+			top: -103px;
+		}
+
+	#assetDistribution	#list-stock {
+		display: flex;
+		--background: #ff8040;
+		height: 234px	;
+		width: 50%;
+	}
+
+		#assetDistribution #list-stock .test {
+			display: flex;
+			flex-direction: column;
+			margin: auto;
+			text-align: left;
+		}
+
+			#assetDistribution #list-stock .test img{
+				display: inline-block;
+				padding-right: 12px;
+				height: 1.2em;                               
+				width: 35px;
+			}
+
+			#assetDistribution #list-stock .test div{
+				margin: 6px 0px;
+				font-family: 서울한강체;
+				font-weight: bold;
+				font-size: 0.7em;
+				color: #585B5E;	
+			}
+
+
+
+		table{
+			margin:auto;
+			display: table;
+			
+			
+		}
+
+		tbody {
+			text-align: left;
+		}
+
+		tr {
+			display: table-row;
+
+		}
+
+		tbody td {
+			display: inline-block;
+			margin-right: 10px;
+			margin-bottom: 10px;
+			font-size: 12px;
+			align-content: space-around;
+		}
