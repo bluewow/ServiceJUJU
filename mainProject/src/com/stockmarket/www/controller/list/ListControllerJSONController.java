@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import sun.swing.SwingUtilities2.Section;
 
 @WebServlet("/card/search/search-json")
-public class SearchCompanyJSONController extends HttpServlet{
+public class ListControllerJSONController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

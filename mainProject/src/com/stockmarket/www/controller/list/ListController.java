@@ -62,9 +62,8 @@ public class ListController extends HttpServlet {
 			searchCompanyList.add(companyService.searchCompany(companyName));
 		}
 
-		System.out.println(companyService.searchCompany(companyName));
-
-		System.out.println("companyService.searchCompany(companyName)" + companyService.searchCompany(companyName));
+		//System.out.println(companyService.searchCompany(companyName));
+		//System.out.println("companyService.searchCompany(companyName)" + companyService.searchCompany(companyName));
 
 		request.setAttribute("search", searchCompanyList);
 

@@ -11,8 +11,8 @@
 <meta charset="UTF-8">
 
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../../css/search/search.css">
-<script src="../../js/search/search.js"></script>
+<link rel="stylesheet" type="text/css" href="../../css/company/list.css">
+<script src="../../js/company/list.js"></script>
 </head>
 <!-- style="overflow:scroll" -->
 <body>
@@ -69,7 +69,7 @@
 				<c:forEach var="sector" items="${search}" varStatus="status" >
 				<tr>
 					<td>${status.count}</td>
-					<td>${sector.companyName}<a href="${sector.website}" target="_blank"><img src="/css/search/link.png" alt=""></a></td>
+					<td id="companyName">${sector.companyName}<a href="${sector.website}" target="_blank"><img src="/css/search/link.png" alt=""></a></td>
 					<td>${sector.stockItemName}</td>
 					<td class="attention"><img src="/css/search/interest_no.png"></td>
 					<!-- <td class="attention"><img src="/css/search/interest_no.png"></td> -->

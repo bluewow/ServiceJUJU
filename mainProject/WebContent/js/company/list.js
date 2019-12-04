@@ -3,7 +3,8 @@ window.addEventListener("load", function(){
     var cn = document.querySelector("#companyName")
     
     attentionimageControl.onclick = function(){
-        alert("이미지 클릭 구현중입니다...........................");
+        var cnTemp = cn.value;
+        alert(cnTemp);
         
         var request = new XMLHttpRequest();
         request.open("GET", "../../card/search/search-json?cn="+cn, true);
