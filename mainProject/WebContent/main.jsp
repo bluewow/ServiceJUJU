@@ -43,6 +43,7 @@
 <!--  pop-up -->
 <link rel="stylesheet" type="text/css" href="./css/popup.css">
 <script src="./js/popup/popup.js"></script>
+<script src="./js/main.js"></script>
 
 <!--[if lt IE 9]>
    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -96,17 +97,16 @@
    </header>
    <!-- =============================================================================================================== -->
    <main class="row">
-   <h1 style="display: none;">cards</h1>
+   <h1 class="visiable-none">cards</h1>
    <section id="main-content" class="column">
       <!-- 첫번째 로우 -->
 
       <div class="row grid-responsive" id="dragdiv">
          <!-- 검색카드 -->
          <section class="column column-33">
-            <div class="card">
+            <div id="card1" class="card">
                <div class="card-block">
                   <section class="search">
-
                      <ul class="nav nav-tabs" id="myTab" role="tablist style"
                         style="border: none">
                         <li class="nav-item"><a class="nav-link nav-link-s active"
@@ -117,21 +117,18 @@
                         <div class="tab-pane fade show active" id="search"
                            role="tabpanel" aria-labelledby="search-tab">
                            
-                           <iframe height="100%" src="./card/company/list" scrolling="no">
-                              	<!-- 여기에 html 삽입 -->
+                           <iframe src="./card/search/search" scrolling="no">
                            </iframe>
                         </div>
                      </div>
                   </section>
                </div>
-
             </div>
          </section>
 
          <!-- 분석 매매 예측 카드 -->
-
          <section class="column column-33">
-            <div class="card">
+            <div id="card2" class="card">
                <div class="card-block">
                   <section class="analysis/trading">
                      <ul class="nav nav-tabs" id="myTab" role="tablist style"
@@ -151,7 +148,7 @@
                         </div>
                         <div class="tab-pane fade" id="trading" role="tabpanel"
                            aria-labelledby="trading-tab">
-                           <iframe height="100%" src="./card/trade/trade" scrolling="no">
+                           <iframe src="./card/trade/trade" scrolling="no">
                            </iframe>
                         </div>
 
@@ -165,7 +162,7 @@
          <!-- 주식 캡처 카드 -->
 
          <section class="column column-33">
-            <div class="card">
+            <div id="card3" class="card">
                <div class="card-block">
                   <section class="capture">
                      <ul class="nav nav-tabs" id="myTab" role="tablist style"
@@ -177,7 +174,7 @@
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="capture"
                            role="tabpanel" aria-labelledby="capture-tab"></div>
-                            <iframe height="100%" src="/card/capturememo/captureMemo" scrolling="no">
+                            <iframe src="/card/capturememo/captureMemo" scrolling="no">
                            </iframe>
                      </div>
                   </section>
@@ -191,7 +188,7 @@
 
          <!-- 커뮤니티 카드 -->
          <section class="column column-33">
-            <div class="card ">
+            <div id="card4" class="card ">
                <div class="card-block">
                   <section class="news/community/eventcommunity">
                      <ul class="nav nav-tabs" id="myTab" role="tablist style"
@@ -210,17 +207,17 @@
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="news" role="tabpanel"
                            aria-labelledby="news-tab">
-                           <iframe height="100%" src="./card/board/news_board"
+                           <iframe src="./card/board/news_board"
                               scrolling="no"> </iframe>
                         </div>
                         <div class="tab-pane fade" id="community" role="tabpanel"
                            aria-labelledby="community-tab">
-                           <iframe height="100%" src="./card/board/community_board"
+                           <iframe src="./card/board/community_board"
                               scrolling="no"></iframe>
                         </div>
                         <div class="tab-pane fade" id="eventcommunity" role="tabpanel"
                            aria-labelledby="eventcommunity-tab">
-                           <iframe height="100%" src="./card/board/stock_board"
+                           <iframe src="./card/board/stock_board"
                               scrolling="no"></iframe>
                         </div>
                      </div>
@@ -233,7 +230,7 @@
 
          <!-- 보유 목록/관심 목록 카드 -->
          <section class="column column-33">
-            <div class="card">
+            <div id="card5" class="card">
                <div class="card-block">
                   <section class="Purchase list/Interest List">
                      <ul class="nav nav-tabs" id="myTab" role="tablist style"
@@ -248,12 +245,12 @@
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="Purchaselist"
                            role="tabpanel" aria-labelledby="Purchaselist-tab">
-                           <iframe height="100%" src="./card/managestocks/holdinglist.jsp"
+                           <iframe src="./card/managestocks/holdinglist"
                               scrolling="no"> </iframe>
                         </div>
                         <div class="tab-pane fade" id="Interest" role="tabpanel"
                            aria-labelledby="Interest-tab">
-                           <iframe height="100%" src="./card/managestocks/interestlist"
+                           <iframe src="./card/managestocks/interestlist"
                               scrolling="no"> </iframe>
                         </div>
                      </div>
@@ -264,7 +261,7 @@
 
             <!-- 자산추이 카드 -->
             <section class="column column-33">
-               <div class="card">
+               <div id="card6" class="card">
                   <div class="card-block">
                      <section class="asset graph/compare">
                         <ul class="nav nav-tabs" id="myTab" role="tablist style"
@@ -277,7 +274,7 @@
                         <div class="tab-content" id="myTabContent">
                            <div class="tab-pane fade show active" id="assetgraph"
                               role="tabpanel" aria-labelledby="assetgraph-tab">
-                              <iframe height="100%" src="./card/asset/myAsset" scrolling="no">
+                              <iframe src="./card/asset/myAsset" scrolling="no">
                               </iframe></div>
 
                         </div>
@@ -297,7 +294,7 @@
 
          <!-- 랭킹 카드 -->
          <section class="column column-33">
-            <div class="card">
+            <div id="card7" class="card">
                <div class="card-block">
                   <section class="rangking">
                      <ul class="nav nav-tabs" id="myTab" role="tablist style"
@@ -309,7 +306,7 @@
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="rangking"
                            role="tabpanel" aria-labelledby="rangking-tab">
-                           <iframe height="100%" src="./card/rank/ranking" scrolling="no">
+                           <iframe src="./card/rank/ranking" scrolling="no">
                            </iframe>
                         </div>
                      </div>
