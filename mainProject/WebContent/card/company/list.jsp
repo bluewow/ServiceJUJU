@@ -3,7 +3,7 @@
 
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri ="http://java.sun.com/jsp/jstl/functions" %>
-<c:set var ="n" value="${search}"/>
+<%-- <c:set var ="n" value="${search}"/> --%>
 
 <html>
 <head>
@@ -64,29 +64,18 @@
 				</c:forEach>
 			</tbody> --%>
 			
-			
-			
-				<tbody>
-					<c:forEach var="sector" items="${sectorList}" varStatus="status" >
-						<tr>
-							<td>${status.count}</td>
-							<td>${sector.companyName}<a href="${sector.website}" target="_blank"><img src="/css/search/link.png" alt=""></a></td>
-							<td>${sector.stockItemName}</td>
-							<td class="attention"><img src="/css/search/interest_no.png" ></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			
-			
-				<%-- <tbody>
-					<tr>
-						<td>1</td>
-						<td>${n.companyName}<a href="${n.website}" target="_blank"><img src="/css/search/link.png" alt=""></a></td>
-						<td>${n.stockItemName}</td>
-						<td class="attention"><img src="/css/search/interest_no.png"></td>
-					</tr>
-				</tbody> --%>
-			
+			<%-- <c:set var ="n" value="${search}"/> --%>
+			<tbody>
+				<c:forEach var="sector" items="${search}" varStatus="status" >
+				<tr>
+					<td>${status.count}</td>
+					<td>${sector.companyName}<a href="${sector.website}" target="_blank"><img src="/css/search/link.png" alt=""></a></td>
+					<td>${sector.stockItemName}</td>
+					<td class="attention"><img src="/css/search/interest_no.png"></td>
+					<!-- <td class="attention"><img src="/css/search/interest_no.png"></td> -->
+				</tr>
+				</c:forEach>
+			</tbody>
 			
 				
 			

@@ -49,6 +49,7 @@ public class BasicCompanyService implements CompanyService {
 
 	@Override
 	public List<Company> getCompanyListFromNaverByThema(String companyName) {
+		
 		/*
 		 * 네이버 업종별 크롤링을 위한
 		 * 코드==========================================================================
