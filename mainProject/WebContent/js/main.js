@@ -9,9 +9,6 @@ window.addEventListener("load", function(){
     
     mainSection.ondragstart = function(e){
         currentCard = e.target;
-        
-        if (!currentCard.classList.contains("card"))
-        return;
     }
 
     mainSection.ondragover = function(e){
@@ -22,6 +19,12 @@ window.addEventListener("load", function(){
         var targetCard = e.target.parentNode.parentNode.parentNode;
         
         if (!targetCard.classList.contains("card"))
+            return;
+
+        if(targetCard == currentCard)
+            return;
+            
+        if (currentCard.nodeName == "A")
             return;
 
         e.preventDefault();
