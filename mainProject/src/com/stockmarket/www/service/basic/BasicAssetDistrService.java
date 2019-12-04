@@ -34,7 +34,7 @@ public class BasicAssetDistrService implements AssetDistrService {
 		//System.out.println("누적값: "+sum);
 		//System.out.println("현재값: "+presentValue);
 		
-		return sum - (quantity*presentValue);	
+		return (quantity*presentValue) - sum;	
 	}
 	
 	private float getProfitAll(int memberId) {
