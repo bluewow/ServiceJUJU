@@ -82,12 +82,12 @@ public class MyAssetController extends HttpServlet{
 	       
 	       String StockName1 = String.valueOf(list.get(0).get("stockName")); 
 	       
-	       PrintWriter out = response.getWriter();
-	       out.write(StockName1); 
+//	       PrintWriter out = response.getWriter();
+//	       out.write(StockName1); 
 	       // out.write(presnetAsset);
+					
 		
-		
-		// request.getRequestDispatcher("myAsset.jsp").forward(request, response);
+		request.getRequestDispatcher("myAsset.jsp").forward(request, response);
 		
 	}
 

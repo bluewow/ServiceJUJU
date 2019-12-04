@@ -1,10 +1,6 @@
 @charset "UTF-8";
 @import url("reset.css");
 
-body{
-	cursor: url("../images/cusor.png"), pointer;
-}
-
 .wrap {
 	position: relative;
 }
@@ -16,8 +12,11 @@ body{
 .title{
 	font-family: "에스코어 드림";
 	font-weight: 600;
-	font-size: 1em;
+	font-size: 1.2em;
+	letter-spacing: 0.07em;
 	color:  #585B5E;
+
+	display: inline-block;
 }
 
 .selected-button{
@@ -33,24 +32,17 @@ body{
 	cursor: pointer;
 }
 
+section{
+	padding-top: 5%;
+}
+
 #card {
 	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
-	padding-top: 5%;
 }
-
-	#card > section:first-child {
-
-	}
-	
-	#card > section:last-child {
-		--border: red 1px solid;
-		
-	}
-	
 	.asset-graph-title  {
-		display: inline-block;
+	
 		font-weight: bold;
 		font-size: 14pt;
 	}
@@ -61,11 +53,14 @@ body{
 		right: 0px;
 		display: inline-block;
 
-		font-family: "";
+		font-family: 서울한강체;
 		font-weight: bold;
-		font-size: 11pt;
+		font-size: 0.9em;
+		letter-spacing: 0.05em;
+		color:  #585B5E;
+		
 		background: #efefef;
-		padding: 2px 15px;
+		padding: 0.15em 1.5em;
 		border-radius: 10px;
 	}
 
@@ -104,8 +99,12 @@ body{
 	}
 
 	.my-asset-info+p {
-		font-weight: bold;
-		font-size: 16pt;
+		font-family: "에스코어 드림";
+		font-weight: 600;
+		font-size: 1.4em;
+		letter-spacing: 0.09em;
+		color:  #585B5E;
+
 		vertical-align: middle;
 		position: absolute;
 		top: 35px;
@@ -119,14 +118,14 @@ body{
 }
 
 	#assetTrend #graph-assetTrend {
-		background: #8080c0;
+		--background: #8080c0;
 		height: 234px;
 		width: inherit;
 		
 	}
 
 	#assetTrend	#setPeriodgraph-assetTrend {
-		background: #ff8040;
+		--background: #ff8040;
 		height: 50px;
 		width: inherit;
 		
@@ -140,7 +139,7 @@ body{
 	
 	#assetDistribution #graph-assetDistr {
 		display: inline-block;
-		background: #8080c0;
+		--background: #8080c0;
 		height: 234px;
 		width: 50%;
 		align-content: center;
@@ -150,7 +149,7 @@ body{
 		#assetDistribution #graph-assetDistr .ment{
 			position: relative;
 			z-index: 3;
-			top: 90px;			
+			top: 101px;			
 			font-family: "에스코어 드림";
 			font-weight: 600;
 			font-size: 0.8em;
@@ -160,7 +159,7 @@ body{
 		#assetDistribution #graph-assetDistr .square{
 			position: relative;
 			z-index: 2;
-			top: 25px;
+			top: 35px;
 			left: auto;
 			
 			
@@ -173,14 +172,14 @@ body{
 
 		#assetDistribution #graph-assetDistr .graph{
 			position: relative;	
-			background: yellowgreen;
+			--background: yellowgreen;
 			z-index: 1;
-			top: -112px;
+			top: -103px;
 		}
 
 	#assetDistribution	#list-stock {
 		display: flex;
-		background: #ff8040;
+		--background: #ff8040;
 		height: 234px	;
 		width: 50%;
 	}
@@ -194,16 +193,16 @@ body{
 
 			#assetDistribution #list-stock .test img{
 				display: inline-block;
-				padding-right: 10px;
-				height: 12px;                               
-				width: 40px;
+				padding-right: 12px;
+				height: 1.2em;                               
+				width: 35px;
 			}
 
 			#assetDistribution #list-stock .test div{
 				margin: 6px 0px;
 				font-family: 서울한강체;
 				font-weight: bold;
-				font-size: 12px;
+				font-size: 0.7em;
 				color: #585B5E;	
 			}
 
