@@ -13,13 +13,13 @@
 
 .pop-up-title-row {
 	position: relative;
-	height: 60px;
+	height: 20%;
 	text-align: center;
 }
 
 .reg-title {
 	width: 90%;
-	margin-top: 20px;
+	margin-top: 5%;
 	color: white;
 	display: inline-block;
 	text-align: center;
@@ -36,42 +36,35 @@
 .pop-up-content-row {
 	text-align: center;
 	position: relative;
-	height: 80%;
+	height: 77%;
 	background: white;
-	margin: 0px 10px;
+	margin: 0% 3%;
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
 }
 
 .reg-content {
-	margin-top: 25px;
-	padding: 10px;
+	margin-top: 5%;
+	padding: 2%;
 	width: 90%;
-	height: 90%;
+	height: 70%;
 	display: inline-block;
 	border: none;
 	background-color: #efefef;
 	resize: none;
 }
 
-.pop-up-commit-row {
-	position: relative;
-	height: 60px;
-	background: white;
-	border-bottom-left-radius: 15px;
-	border-bottom-right-radius: 15px;
-	margin: 0px 10px;
-}
 
 .reg-cancel {
 	position: absolute;
-	top: 20%;
-	right: 20%;
+	bottom: 5%;
+	right: 25%;
 	font-size: 1em;
-	width:60px;
+	width:20%;
+	max-width:60px;
 	background-color: #efefef;
 	color: black;
-	padding: 6px 10px;
+	padding: 2% 2%;
 	border-radius: 16px;
 	border: none;
 	outline: none;
@@ -84,13 +77,14 @@
 
 .reg-commit {
 	position: absolute;
-	top: 20%;
+	bottom: 5%;
 	right: 5%;
 	font-size: 1em;
-	width:60px;
+	width:20%;
+	max-width:60px;
 	background-color: #efefef;
 	color: black;
-	padding: 6px 10px;
+	padding: 2% 2%;
 	border-radius: 16px;
 	border: none;
 	outline: none;
