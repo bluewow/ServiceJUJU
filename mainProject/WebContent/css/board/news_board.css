@@ -11,9 +11,9 @@
 
 #newsScroll {
 	overflow: scroll;
-	width: 96%;
+	width: 90%;
 	height: 100%;
-	padding: 10px;
+	padding: 5%;
 }
 
 #newsTable {

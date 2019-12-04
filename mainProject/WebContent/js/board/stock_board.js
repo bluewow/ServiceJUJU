@@ -28,7 +28,7 @@ window.addEventListener("load", function() {
 				tds[0].innerText = list[i].id;
 				var aTagDetail = tds[1].firstElementChild;
 				aTagDetail.dataset.id = list[i].id;
-				aTagDetail.innerText = list[i].title;
+				aTagDetail.innerText = title;
 				tds[2].innerText = list[i].regdate;
 				tds[3].innerText = list[i].hit;
 				var aTagFavo = tds[4].firstElementChild;
