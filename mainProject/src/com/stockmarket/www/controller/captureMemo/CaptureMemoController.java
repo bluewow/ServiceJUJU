@@ -29,7 +29,7 @@ public class CaptureMemoController extends HttpServlet {
 		
 		
 		request
-			.getRequestDispatcher("captureMemo.jsp") 
+			.getRequestDispatcher("captureMemo.html") 
 			.forward(request, response);
 		
 	}
