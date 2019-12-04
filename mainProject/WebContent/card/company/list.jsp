@@ -69,9 +69,9 @@
 				<c:forEach var="sector" items="${search}" varStatus="status" >
 				<tr>
 					<td>${status.count}</td>
-					<td id="companyName">${sector.companyName}<a href="${sector.website}" target="_blank"><img src="/css/search/link.png" alt=""></a></td>
+					<td id="companyName">${sector.companyName}<a href="${sector.website}" target="_blank"><img src="/css/company/link.png" alt=""></a></td>
 					<td>${sector.stockItemName}</td>
-					<td class="attention"><img src="/css/search/interest_no.png"></td>
+					<td class="attention"><img src="/css/company/interest_no.png"></td>
 					<!-- <td class="attention"><img src="/css/search/interest_no.png"></td> -->
 				</tr>
 				</c:forEach>

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import sun.swing.SwingUtilities2.Section;
 
-@WebServlet("/card/search/search-json")
+@WebServlet("/card/com/search-json")
 public class ListControllerJSONController extends HttpServlet{
 
 	@Override

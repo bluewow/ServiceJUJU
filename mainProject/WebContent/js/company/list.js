@@ -3,15 +3,13 @@ window.addEventListener("load", function(){
     var cn = document.querySelector("#companyName")
     
     attentionimageControl.onclick = function(){
-        var cnTemp = cn.value;
+        var cnTemp = cn.innerText;
         alert(cnTemp);
         
         var request = new XMLHttpRequest();
-        request.open("GET", "../../card/search/search-json?cn="+cn, true);
+        request.open("GET", "../../card/company/list-json?cn="+cn, true);
         
-        
-        //request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    	console.log(request.readyState);
+        console.log(request.readyState);
     	request.send();
     };
    
