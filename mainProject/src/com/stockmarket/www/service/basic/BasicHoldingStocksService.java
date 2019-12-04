@@ -20,12 +20,7 @@ public class BasicHoldingStocksService implements HoldingStocksService {
 	@Override
 	public List<HaveStockView> getInterestHoldingList(int userId) {
 		List<HaveStockView> list = jdbcHaveStockDao.getList(userId);
-		for(HaveStockView data :list) {
-			System.out.println(data.getGain());
-			
-		}
 
-		
 		return jdbcHaveStockDao.getList(userId);
 	}
 	

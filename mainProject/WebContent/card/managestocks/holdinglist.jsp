@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+
 
 <html>
 <head>
@@ -8,11 +9,15 @@ pageEncoding="UTF-8"%>
 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="../../css/holding.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="../../js/managestocks/holding_list.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
 
 <body>
-<div class="btposition" >
+<div class="btposition" id="manageStocks">
+<button class="updateButton">
+데이터 갱신
+</button>
    <table >
    <thead>
    <tr>
@@ -23,8 +28,12 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
    </tr>
    </thead>
    <tbody>
-    <c:forEach var="n" items="${list}">
-<tr>
+      <tr><td colspan="5">보유한종목이 없습니다</td></tr>
+   </tbody>
+
+  <!-- <tbody>
+     <c:forEach var="n" items="${list}">
+      <tr>
          <td style="text-align:center">${n.stockName}</td>
          <c:choose>
          <c:when test="${n.gain=='상승'}">
@@ -40,23 +49,49 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
          <span>${n.percent}%</span></td>
          </c:otherwise>
          </c:choose>
-          <td>${n.quantity}주</td>	
+          <td>${n.quantity}주</td>   
            <td class="up"><span>4,418</span><br>
            <span>1.15%</span></td>
           </td>
       </tr> 
     </c:forEach>  
-<!--        <tr>
-         <td style="text-align:center;">네오위즈 홀딩스</td>
-         <td class="down">24,150   <span class="fa fa-caret-down"></span><br>
-         <span>4.17%</span></td>
-         <td style="text-align:center;">16주</td>
-         <td class="down"><span>4,418</span><br>
-         <span>1.15%</span></td>
-      </tr>  -->
-      </tbody>
+      </tbody> -->
    </table>
-   
-</div>
+
+   <template class="template">
+   <tr>
+      <td style="text-align: center">
+         <span>stockName</span>
+      </td>
+
+      <td class="up">
+         <span>-</span>
+         <span class="fa fa-caret-up"></span><br>
+         <span>-</span>
+      </td>
+
+      <td class="down">
+         <span>-</span>
+         <span class="fa fa-caret-down"></span><br>
+         -<span>-</span>
+      </td>
+
+      <td>
+         <span>-</span>
+         <span>-</span><br>
+          <span>-</span>
+      </td>
+
+      <td>
+         <span>-</span>주
+      </td>
+      <td class="up">
+         <span>4,418</span><br> 
+         <span>1.15%</span>
+      </td>
+   </tr>
+   </template>
+
+   </div>
 </body>
 </html>
