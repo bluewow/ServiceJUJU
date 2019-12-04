@@ -10,9 +10,9 @@ public class CaptureMemo {
 	private double PER;
 	private double PBR;
 	private double ROE;
-	private double debtRatio;			// 부채 비율
-	private int marketCap;			// 시가 총액(억)
-	private float foreignInvestors; //외국인 지뷴율 
+	private double debtRatio;			// 부채 비율 (%)
+	private int marketCap;				// 시가 총액(억)
+	private double foreignInvestors; 	//외국인 지뷴율 (%)
 	private String codeNum;
 	private int memberId;
 	
@@ -129,7 +129,7 @@ public class CaptureMemo {
 		this.marketCap = marketCap;
 	}
 
-	public float getForeignInvestors() {
+	public double getForeignInvestors() {
 		return foreignInvestors;
 	}
 
