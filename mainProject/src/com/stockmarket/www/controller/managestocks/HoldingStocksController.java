@@ -48,6 +48,9 @@ public class HoldingStocksController extends HttpServlet{
 		
 		List<HaveStockView> list = HoldingStocksInterface.getInterestHoldingList(userId);
 
+//		for(HaveStockView data : list) {
+//			System.out.println(data.getIncome());
+//		}
         Gson gson = new Gson();
 		String json = gson.toJson(list);
 

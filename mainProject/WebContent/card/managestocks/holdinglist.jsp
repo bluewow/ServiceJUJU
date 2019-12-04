@@ -5,6 +5,7 @@ pageEncoding="UTF-8"%>
 <html>
 <head>
 <meta charset="UTF-8">
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="../../css/holding.css">
@@ -65,29 +66,43 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
       </td>
 
       <td class="up">
-         <span>-</span>
+      <span></span>
          <span class="fa fa-caret-up"></span><br>
-         <span>-</span>
+         <span></span>
       </td>
 
       <td class="down">
-         <span>-</span>
+         <span></span>
          <span class="fa fa-caret-down"></span><br>
-         -<span>-</span>
+         -<span></span>
+      </td>
+
+      <td>
+         <span></span>
+         <span></span><br>
+          <span></span>
       </td>
 
       <td>
          <span>-</span>
-         <span>-</span><br>
-          <span>-</span>
+         <span>주</span>
       </td>
-
-      <td>
-         <span>-</span>주
-      </td>
+      
       <td class="up">
-         <span>4,418</span><br> 
-         <span>1.15%</span>
+         <span></span><br> 
+         <span></span>
+         %
+      </td>
+      <td class="down">
+         -<span></span><br> 
+         <span></span>
+         <span></span>
+         %
+      </td>
+       <td>
+         <span></span><br> 
+         <span></span>
+         %
       </td>
    </tr>
    </template>

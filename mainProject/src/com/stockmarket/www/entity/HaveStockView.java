@@ -4,7 +4,7 @@ public class HaveStockView extends HaveStock {
 	
 	private String stockName;
 	private String price;
-	private int intPrice;
+	private int income ;
 	private String gain;
 	private String percent;
 	
@@ -13,22 +13,24 @@ public class HaveStockView extends HaveStock {
 	}
 	
 	public HaveStockView(int memberId, String stockId, int quantity, int sum, String stockName, String price,
-			String gain, String percent, int intPrice) {
+			String gain, String percent) {
 		super(memberId, stockId, quantity, sum);
 		this.stockName = stockName;
 		this.price = price;
 		this.gain = gain;
 		this.percent = percent;
-		this.intPrice = intPrice;
 	}
 
-
-	public int getIntprice() {
-		return intPrice;
+	public HaveStockView(int income) {
+		this.income = income;
 	}
 
-	public void setIntprice(int intprice) {
-		this.intPrice = intprice;
+	public int getIncome() {
+		return income;
+	}
+
+	public void setIncome(int income) {
+		this.income = income;
 	}
 
 	public String getStockName() {
@@ -58,7 +60,7 @@ public class HaveStockView extends HaveStock {
 
 	@Override
 	public String toString() {
-		return "HaveStockView [stockName=" + stockName + ", price=" + price + ", intPrice=" + intPrice + ", gain="
+		return "HaveStockView [stockName=" + stockName + ", price=" + price + ", intPrice=" + income + ", gain="
 				+ gain + ", percent=" + percent + super.toString() + "]";
 	}
 

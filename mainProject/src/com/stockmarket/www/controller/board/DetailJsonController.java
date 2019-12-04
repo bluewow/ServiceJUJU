@@ -58,6 +58,7 @@ public class DetailJsonController extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.write(Json);
 		
+		
 
 //			
 	}
@@ -67,4 +68,5 @@ public class DetailJsonController extends HttpServlet {
 			throws ServletException, IOException {
 			super.doPost(request, response);
 	}
+
 }
