@@ -8,8 +8,11 @@ window.addEventListener("load", function(){
 	//load google chart
 	google.charts.load('current', {packages: ['corechart', 'line']});
 	
-	//일봉,주봉,월봉 클릭 및 그래프 변경(ajax)
+	// 일봉,주봉,월봉 클릭 및 그래프 변경(ajax)
 	ajaxFunc();
+	
+	// 매수/매도 이벤트 처리
+	tradeFunc();
 	
 	 //그림그리기 위한 data
     function drawBasic(list) {
@@ -82,4 +85,32 @@ window.addEventListener("load", function(){
         }
         
 	}//finish ajax func
+	
+	//  매수/매도 이벤트 처리
+	//	tradeFunc 
+	function tradeFunc() {
+		var button = document.querySelector("#page-bottom-box");
+		var event = button.querySelector("input.event");
+		var data = button.querySelectorAll(".data");
+		
+		button.onclick = function(e) {
+			if(e.target.className != event.className)
+		      	return;
+		    
+			var money = 100000;
+			//입력 type="text" 는 제외하기 위하여 length - 1 을 추가
+			for(var i = 0; i < data.length - 1; i++) { 
+//				console.log(data[i].innerHTML);
+//				data[i].innerHTML = money.toLocaleString();
+			}
+			
+			var ajax = new XMLHttpRequest();
+	        ajax.open("GET", "../../card/trade/trade?replaceEvent=" + "on");
+	        ajax.onload = function() {
+	        	console.log(ajax.responseText);
+	        }
+	        ajax.send();
+		
+		}
+	}
 });

@@ -50,20 +50,21 @@
 		<form id="page-bottom-box" action="trade" method="get">
 			<div class="show-button-align">
 				<input class="button button-status" type="button" value="보유 자산">
-				<div><fmt:formatNumber value="${myAssets }" pattern="#,###" />원</div>
+				<div class="data"><fmt:formatNumber value="${myAssets }" pattern="#,###" />원</div>
 				<input class="button button-status" type="button" value="보유 수량">
-				<div>${myQuantity }</div>	
-				<input class="button button-button animation" type="submit" name="trade" value="매       수">
+				<div class="data">${myQuantity }주</div>	
+				<input class="event button button-button animation" type="button" name="trade" value="매       수">
 
 			</div>
 			<div class="show-button-align">
 				<input class="button button-status" type="button" value="평균 매수">
-				<div><fmt:formatNumber value="${aveAssets }" pattern="#,###" />원</div>
+				<div class="data"><fmt:formatNumber value="${aveAssets }" pattern="#,###" />원</div>
 				<input class="button button-status" type="button" value="구매/매도">
 				<div>
-					<input id="text" type="text" name="Purse/Sold" autocomplete="off">
+					<input class="data" id="text" type="text" name="Purse/Sold" autocomplete="off">
 				</div>
-				<input class="button button-button animation ${shadow }" type="submit" ${disable } name="trade" value="매       도">
+				<input class="event button button-button animation" type="button" ${disable } name="trade" value="매       도">
+				<%-- <input class="event button button-button animation ${shadow }" type="submit" ${disable } name="trade" value="매       도"> --%>
 			</div>
 		</form>
 	</section>
