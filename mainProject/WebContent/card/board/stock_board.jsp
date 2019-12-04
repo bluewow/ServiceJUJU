@@ -125,15 +125,17 @@
 	
 	<!-- ===== 글쓰기 POPUP ========================================================================================================== -->   
  	<div class="pop-up-reg">
-		<div class="pop-up-title-row">
-			<input type="text" class="reg-title" maxlength="20" placeholder="제목을 입력하세요">
-			
-		</div>
-		<div class="pop-up-content-row">
-			<textarea class="reg-content" maxlength="400" placeholder="내용을 입력하세요"></textarea>
-			<input type="button" class="reg-cancel" name="cancel" value="취소">
-			<input type="button" class="reg-commit" name="reg" value="확인">
-		</div>
+ 		<form class="regboard-box" method="post" id="regboard">
+			<div class="pop-up-title-row">
+				<input type="text" class="reg-title" name="title" maxlength="40" placeholder="제목을 입력하세요">
+				
+			</div>
+			<div class="pop-up-content-row">
+				<textarea class="reg-content" maxlength="800" placeholder="내용을 입력하세요"></textarea>
+				<input type="button" class="reg-submit" name="submit" value="확인">
+				<input type="button" class="reg-cancel" name="cancel" value="취소">
+			</div>
+		</form>
 	</div>
 </body>
 </html>
