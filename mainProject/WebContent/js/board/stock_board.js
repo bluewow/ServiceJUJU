@@ -7,8 +7,7 @@ window.addEventListener("load", function() {
 	var load = function(page) {
 
 		var request = new XMLHttpRequest();
-		request.open("GET", "../../card/board/stock_board_list?p="
-				+ page);
+		request.open("GET", "../../card/board/stock_board_list?p=" + page);
 
 		request.onload = function() {
 			var list = JSON.parse(request.responseText);
@@ -117,6 +116,19 @@ window.addEventListener("load", function() {
 		var reContent = e.target.parentNode.parentNode.querySelector('.reply-content').value;
 		var reContentEncode = encodeURI(reContent);
 		
+		String.prototype.trim = function() {
+		    return this.replace(/^\s+|\s+$/g, "");
+		}
+		
+		var str = reContent;
+	      str = str.trim();
+		
+		// 댓글내용이 없으면 알림을 하고 되돌아간다.
+		if(str == "") {
+			alert("내용을 작성하세요");
+			return;
+		}
+		
 		var data = [
 			["boardId", boardId],
 			["reContent", reContentEncode],
@@ -125,7 +137,6 @@ window.addEventListener("load", function() {
 		
 		for (var i = 0; i < data.length; i++) {
 			sendData[i] = data[i].join("=");
-			console.log(sendData.join("&"));
 		}
 		sendData = sendData.join("&");
 		
@@ -140,25 +151,25 @@ window.addEventListener("load", function() {
 		
 		alert("등록되었습니다.");
 		
-		// 4. 결과를 확인하고 결과를 표시한다.
+
+		// 텍스트박스 지우기
 		e.target.parentNode.parentNode.querySelector('.reply-content').value = null;
+		
+		// 4. 결과를 확인하고 결과를 표시한다.
 		var currentTr = e.target.parentNode.parentNode;
 		var nextTr = currentTr.parentNode.nextElementSibling.firstElementChild;
 
 		var template = section.querySelector(".detail-template");
 		var cloneTr = document.importNode(template.content, true);
 		
-		var replyContent = cloneTr
-				.querySelector(".replyTable tbody tr td");
+		var replyContent = cloneTr.querySelector(".replyTable tbody tr td");
 		var div = document.createElement("div");
 		var content = '<span class="re-content">' +e.target.dataset.writerId + 
 			" : </span><span>" + reContent+"</span>";
-		div.innerHTML= content;
-
-    	console.log(div)
-		console.log(nextTr.firstElementChild);
-    	nextTr.firstElementChild.prepend(div);
-    	
+		
+			div.innerHTML= content;
+			console.log(div);
+			nextTr.firstElementChild.prepend(div);
 	};
 	
 	//========= 내용 클릭 핸들러 ==================	
