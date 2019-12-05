@@ -120,10 +120,10 @@ public class TradeController extends HttpServlet{
 		
 		//해당 종목의 보유자산
 		data[0] = sum;
-		//평균매수
-		data[1] = sum / qty;
 		//보유수량
-		data[2] = qty;
+		data[1] = qty;
+		//평균매수
+		data[2] = sum / qty;
 		
 		Gson gson = new Gson();
         String json = gson.toJson(data);

@@ -97,24 +97,21 @@ window.addEventListener("load", function(){
 			if(e.target.className != event.className)
 		      	return;
 		    
-			var money = 100000;
-			//입력 type="text" 는 제외하기 위하여 length - 1 을 추가
-			for(var i = 0; i < data.length - 1; i++) { 
-//				console.log(data[i].innerHTML);
-//				data[i].innerHTML = money.toLocaleString();
-			}
-			
 			if(e.target.value == "매       수")
 				var trade = "buy";
 			else if(e.target.value =="매       도")
 				var trade = "sell";
 				
-			
 			var ajax = new XMLHttpRequest();
 	        ajax.open("GET", "../../card/trade/trade?replaceEvent=on&button=" + trade + "&Purse/Sold=" + qty.value);
 	        ajax.onload = function() {
-	        	console.log(ajax.responseText);
+	        	var result = JSON.parse(ajax.responseText);
+				//입력 type="text" 는 제외하기 위하여 length - 1 을 추가
+				for(var i = 0; i < data.length - 1; i++) 
+					data[i].innerHTML = result[i].toLocaleString();
 	        }
+	        data[3].value = "";
+	        
 	        ajax.send();
 		
 		}
