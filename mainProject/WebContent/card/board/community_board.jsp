@@ -25,50 +25,89 @@
 </head>
 
 <body>
-	<section id="communityScroll">
-		<br>
+	<section id="communityTop">
 		<nav id="my-menu">
-			<input type="button" id="my-button" name="my_board_view" value="My">
-			<input type="button" id="favo-button" name="favo_board_view"
-				value="관심">
+			<a href="" id="my-button">My</a>
+			<a href="" id="favo-button">관심</a>
 		</nav>
-		<table id="communityTable">
+	</section>
+	<section id="communityScroll">
+		<table class="communityTable">
 			<thead class="subject">
 				<tr>
-					<th></th>
-					<th>제목</th>
-					<th>작성일</th>
-					<th>조회</th>
-					<th></th>
+					<th class="w10">번호</th>
+					<th class="w50">제목</th>
+					<th class="w20">작성일</th>
+					<th class="w10">조회</th>
+					<th class="w10"></th>
 				</tr>
 			</thead>
-			
+		</table>
+		<div id="scroll">
+		<table class="communityTable">
 			<tbody class="content">
 				<tr>
-                   <td colspan="5" style="text-align:center; height:50px; line-height:50px;">게시된 글이 없습니다.</td>
-               </tr>
+					<td colspan="5" style="text-align: center; height: 50px; line-height: 50px;">게시된 글이 없습니다.</td>
+				</tr>
+				<tr class="detail">
+					<td colspan=5>디테일의 내용이 나올 공간.
+					</td>
+				</tr>
 			</tbody>
 		</table>
-		
-		<div class="pager">
-			<a href="?p=1">1</a> <a href="?p=2">2</a> <a href="?p=3">3</a>
 		</div>
-		
+		<div class="pager">
+			<a href="?p=1">1</a> <a href="?p=2">2</a> <a href="?p=3">3</a> <a href="?p=3">4</a> <a href="?p=3">5</a>
+		</div>
+
 		<template class="tr-template">
-			<tr>
+		<tr>
 			<td></td>
-			<td rowspan="2" class="border_bottom board-title"><a href="detail.html"></a></td>
+			<td rowspan="2" class="border-bottom board-title"><a href=""></a></td>
 			<td rowspan="1"></td>
 			<td></td>
 
-			<td rowspan="2" class="border_bottom favo-add"><a href="detail.html"></td>
+			<td rowspan="2" class="border-bottom favo-add"><a href=""></a></td>
 		</tr>
 		<tr>
-			<td class="border_bottom del"><a href="detail.html"></td>
-			<td colspan="2" class="border_bottom"></td>
+			<td class="border-bottom del"><a href=""></a></td>
+			<td colspan="2" class="border-bottom"></td>
 		</tr>
 		</template>
-		
+
+		<template class="detail-template">
+		<tr class="content-row">
+			<td colspan=5>
+			</td>
+			</tr>
+			<tr>
+			<td colspan=5>
+				<table class="replyTable">
+					<colgroup>
+						<col width="85%">
+						<col width="15%">
+					</colgroup>
+					<thead>
+						<tr>
+							<td style="text-align:center; height:50px; line-height:50px;">
+							<input type="text" class="reply-content" name="title" maxlength="200" placeholder="주제와 무관한 댓글, 악플은 징계 대상이 됩니다.">
+							</td>
+							<td class="reply-submit-button"> <a href="" class="reg-reply-button">등록</a>
+							</td>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr>
+							<td colspan="2" style="text-align:left; height:25px; line-height:25px;">게시된 글이 없습니다.</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</td>
+		</tr>
+
+		</template>
 	</section>
 </body>
 </html>

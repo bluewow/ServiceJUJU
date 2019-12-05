@@ -12,8 +12,11 @@ import com.stockmarket.www.entity.CommunityBoard;
 public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 	@Override
-	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockName) {
-
+	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockCode) {
+		System.out.println(page);
+		System.out.println(field);
+		System.out.println(query);
+		System.out.println(stockCode);
 		List<CommunityBoard> list = new ArrayList<>();
 
 		String sql = "SELECT * FROM (SELECT ROWNUM NUM, B.* FROM(SELECT * FROM (SELECT * FROM BOARD_VIEW WHERE STOCKNAME LIKE ?) WHERE "
@@ -26,7 +29,7 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 			pst = daoContext.getPreparedStatement(sql);
 
-			pst.setString(1, "%" + stockName + "%");
+			pst.setString(1, "%" + stockCode + "%");
 			pst.setString(2, "%" + query + "%");
 			pst.setInt(3, 1 + 10 * (page - 1));
 			pst.setInt(4, 10 * page);

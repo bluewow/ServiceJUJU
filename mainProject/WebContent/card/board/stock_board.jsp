@@ -35,7 +35,7 @@
 <body>
 	<section id="stockTop">
 		<nav id="my-menu">
-			<a href="" id="selected-stock">선택된주식</a>
+			<a href="" id="selected-stock">네오위즈</a>
 			<a href="" id="my-button">My</a>
 			<a href="" id="favo-button">관심</a>
 			<a href="" id="reg-button">글쓰기</a>
@@ -94,13 +94,13 @@
 			<td colspan=5>
 				<table class="replyTable">
 					<colgroup>
-						<col width="90%">
-						<col width="10%">
+						<col width="85%">
+						<col width="15%">
 					</colgroup>
 					<thead>
 						<tr>
 							<td style="text-align:center; height:50px; line-height:50px;">
-							<input type="text" class="reply-content" name="title" maxlength="200" placeholder="주제와 무관한 댓글, 악플은 즉시 삭제되며, 징계 대상이 됩니다.">
+							<input type="text" class="reply-content" name="title" maxlength="200" placeholder="주제와 무관한 댓글, 악플은 징계 대상이 됩니다.">
 							</td>
 							<td class="reply-submit-button"> <a href="" class="reg-reply-button">등록</a>
 							</td>

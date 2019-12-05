@@ -23,14 +23,19 @@ public class BasicCommunityBoardService implements CommunityBoardService {
 	}
 
 	@Override
+	public List<CommunityBoard> getCommunityBoardList(int page, String stockCode) {
+		return getCommunityBoardList(page, "title", "", stockCode);
+	}
+
+	@Override
 	public List<CommunityBoard> getCommunityBoardList(int page) {
 		return getCommunityBoardList(page, "title", "", "");
 	}
 
 	@Override
-	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockName) {
+	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockCode) {
 		// TODO Auto-generated method stub
-		return communityBoardDao.getCommunityBoardList(page, field, query, stockName);
+		return communityBoardDao.getCommunityBoardList(page, field, query, stockCode);
 	}
 
 	@Override

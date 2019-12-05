@@ -37,7 +37,7 @@ public class StockBoardJsonController extends HttpServlet {
 		int page = 1;
 		String field = "TITLE";
 		String query= "";
-		String stockName= "";
+		String stockCode= "네오위즈";
 		
 		String page_ = request.getParameter("p");
 		if(page_ != null && !page_.equals(""))
@@ -51,10 +51,10 @@ public class StockBoardJsonController extends HttpServlet {
 		if(query_ !=null && !query_.equals(""))
 			query = query_;
 		
-		String stockName_ = request.getParameter("s");
-		if(stockName_ !=null && !stockName_.equals(""))
-			stockName = stockName_;
-		List<CommunityBoard> list = communityBoardService.getCommunityBoardList(page,field,query,stockName);
+		String stockCode_ = request.getParameter("s");
+		if(stockCode_ !=null && !stockCode_.equals(""))
+			stockCode = stockCode_;
+		List<CommunityBoard> list = communityBoardService.getCommunityBoardList(page,field,query,stockCode);
 	      Gson gson = new Gson();
 	      String json = gson.toJson(list);
 	      

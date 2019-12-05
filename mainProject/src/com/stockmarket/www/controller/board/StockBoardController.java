@@ -50,7 +50,9 @@ public class StockBoardController extends HttpServlet {
 		if(stockCode_ !=null && !stockCode_.equals(""))
 			stockCode = stockCode_;
 		
-		request.setAttribute("CommunityBoard", communityBoardService.getCommunityBoardList(page)); // 컨트롤러가 할 일은 데이터를 준비하는 일
+		stockCode = "095660"; //네오위즈 더미 하드코딩
+		
+		request.setAttribute("CommunityBoard", communityBoardService.getCommunityBoardList(page, stockCode)); // 컨트롤러가 할 일은 데이터를 준비하는 일
 		
 		request.getRequestDispatcher("/card/board/stock_board.jsp").forward(request, response);
 		
