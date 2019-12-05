@@ -30,40 +30,20 @@ body{
     width:105%;
 }
 
-/* #search-form{
-    text-align:center;
-    margin-top: 4%;
-    margin-right: 2%;
-    padding-left: 30px;
-} */
 
 #search-text{
     height: 40px;
 	width: calc(100% - 70px);
 	display: inline-block; 
-	 
 }
 
-
-/* #search-text{
-    height: 40px;
-	width: 87%; 
-	 
-} */
 
 #recommendKeyword ul{
 	margin-left: 10%;
 	margin-right: 10%;
 }
 
-/* #recommendKeyword{
 
-	display: inline-block;
-	text-align: center;
-    width: 40%;
-    font-size: 80%;
-    font-weight: bold;
-} */
 
 #recommendKeyword_fixed{
 	display: inline-block;
@@ -87,8 +67,7 @@ body{
 table{
     text-align: center;
     border-collapse: collapse;
-   /*  width: 82%; */
-    width: 90%;
+	width: 90%;
     margin-right: 10%;
     margin-left: 4%;
     font-size: 80%;
@@ -125,11 +104,13 @@ thead{
      
 }
 
-
+tbody{
+    border-bottom: 1px solid #ccc;
+}
 
 td{
     padding: 10px; 
-   /*  border-bottom: 1px solid #ccc;  */
+    /* border-bottom: 1px solid #ccc;  */
     /* width:27px; */
     /* display: inline-block; */
 }
@@ -155,6 +136,27 @@ span{
     text-overflow: ellipsis;
 }
 
-tbody{
-    border-bottom: 1px solid #ccc;
+
+
+.wrap a:hover + .help{display:block}
+
+.wrap .help{
+    display: none;
+    position: fixed;
+    top:35%;
+    right:26%;
+    padding:5px;
+    background:#eee
 }
+
+.wrap a:hover + .help{
+    
+    display: inline-block;
+}
+
+.wrap{
+	padding-top :14px;
+}
+
+
+
