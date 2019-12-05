@@ -13,6 +13,15 @@ window.addEventListener("load", function(){
 	// 매수/매도 이벤트 처리
 	tradeFunc();
 	
+	//TEMP 함수사용법을 익혀 적절히 배치 필요
+    var ajax = new XMLHttpRequest();
+    ajax.open("GET", "../../card/trade/trade?date=일봉");
+    ajax.onload = function() {
+    	console.log(JSON.parse(ajax.responseText));
+    	google.charts.setOnLoadCallback(function(){drawBasic(JSON.parse(ajax.responseText))});
+    }
+    ajax.send();
+    
 	 //그림그리기 위한 data
     function drawBasic(list) {
 	
@@ -114,12 +123,5 @@ window.addEventListener("load", function(){
 		}
 	}
 	
-	//TEMP 함수사용법을 익혀 적절히 배치 필요
-    var ajax = new XMLHttpRequest();
-    ajax.open("GET", "../../card/trade/trade?date=일봉");
-    ajax.onload = function() {
-    	console.log(JSON.parse(ajax.responseText));
-    	google.charts.setOnLoadCallback(drawBasic(JSON.parse(ajax.responseText)));
-    }
-    ajax.send();
+
 });
