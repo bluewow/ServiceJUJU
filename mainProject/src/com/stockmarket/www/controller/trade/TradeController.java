@@ -57,7 +57,7 @@ public class TradeController extends HttpServlet{
 		//Get 종목정보, 해당 종목의 보유 자산, 평균 매수가, 보유수량
 		request.setAttribute("companyName", "네오위즈");
 		request.setAttribute("myAssets", sum);
-		request.setAttribute("aveAssets", sum / qty);
+		request.setAttribute("aveAssets", qty == 0 ? 0 : (sum / qty));
 		request.setAttribute("myQuantity", qty);
 		
 		request.getRequestDispatcher("trading.jsp").forward(request, response);
@@ -123,7 +123,7 @@ public class TradeController extends HttpServlet{
 		//보유수량
 		data[1] = qty;
 		//평균매수
-		data[2] = sum / qty;
+		data[2] = qty == 0 ? 0 : sum / qty;
 		
 		Gson gson = new Gson();
         String json = gson.toJson(data);
