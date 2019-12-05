@@ -17,7 +17,6 @@ window.addEventListener("load", function(){
     var ajax = new XMLHttpRequest();
     ajax.open("GET", "../../card/trade/trade?date=일봉");
     ajax.onload = function() {
-    	console.log(JSON.parse(ajax.responseText));
     	google.charts.setOnLoadCallback(function(){drawBasic(JSON.parse(ajax.responseText))});
     }
     ajax.send();
