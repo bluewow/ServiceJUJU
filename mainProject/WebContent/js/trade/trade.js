@@ -62,7 +62,6 @@ window.addEventListener("load", function(){
 	        else if(e.target.value == "월봉")  
 	        	selectedButton(2, "month_");
 	        
-	        var list =[];
 	        var ajax = new XMLHttpRequest();
 	        ajax.open("GET", "../../card/trade/trade?date=" + e.target.value);
 	        ajax.onload = function() {
@@ -114,4 +113,13 @@ window.addEventListener("load", function(){
 		    ajax.send();
 		}
 	}
+	
+	//TEMP 함수사용법을 익혀 적절히 배치 필요
+    var ajax = new XMLHttpRequest();
+    ajax.open("GET", "../../card/trade/trade?date=일봉");
+    ajax.onload = function() {
+    	console.log(JSON.parse(ajax.responseText));
+    	google.charts.setOnLoadCallback(drawBasic(JSON.parse(ajax.responseText)));
+    }
+    ajax.send();
 });
