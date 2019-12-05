@@ -1,29 +1,5 @@
 @charset "UTF-8";
-@font-face {
-	font-family: "에스코어 드림";
-	src: url(../fonts/SCDREAM5.OTF) format('opentype');
-	font-weight: 500;
-}
-@font-face {
-	font-family: "에스코어 드림";
-	src: url(../fonts/SCDREAM6.OTF) format('opentype');
-	font-weight: 600;
-}
-@font-face {
-	font-family: "에스코어 드림";
-	src: url(../fonts/SCDREAM7.OTF) format('opentype');
-	font-weight: 700;
-}
-@font-face {
-	font-family: "에스코어 드림";
-	src: url(../fonts/SCDREAM9.OTF) format('opentype');
-	font-weight: 900;
-}
-
-/* 커서 포인터 수정 */
-body{
-	cursor: url("../images/cusor.png"), pointer;
-}
+@import url("customStyle.css");
 
 /* 요소(element) 여백 초기화  */
 html, body,
