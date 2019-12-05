@@ -31,8 +31,7 @@ public class AnalysisController extends HttpServlet{
 			HttpSession session = request.getSession();
 			int memberId = (int)session.getAttribute("id");
 			
-			CaptureMemo result = service.captureDataCrawling("095660", memberId);
-			System.out.println(result.toString());
+			String result = service.captureDataCrawling("095660", memberId);
 			
 			PrintWriter out = response.getWriter();
 			out.print(result);      

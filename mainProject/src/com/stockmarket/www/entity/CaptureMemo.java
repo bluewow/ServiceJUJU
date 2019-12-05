@@ -16,6 +16,9 @@ public class CaptureMemo {
 	private String codeNum;
 	private int memberId;
 	
+	public CaptureMemo() {
+	}
+	
 	// for update
 	public CaptureMemo(String title, String content) {
 		this.title = title;
