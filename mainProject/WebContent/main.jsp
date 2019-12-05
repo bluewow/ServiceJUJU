@@ -96,6 +96,7 @@
       <!-- 첫번째 로우 -->
 
       <div class="row grid-responsive" id="dragdiv">
+       <template class="cards-template">
          <!-- 검색카드 -->
          <section class="column column-33">
             <div id="card1" class="card">
@@ -308,6 +309,7 @@
                </div>
             </div>
          </section>
+         </template>
          </div>
    </section>
 <!-- TODO 
