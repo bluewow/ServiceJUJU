@@ -49,16 +49,16 @@
 		<section class="page-bottom">
 		<form id="page-bottom-box" action="trade" method="get">
 			<div class="show-button-align">
-				<input class="button button-status" type="button" value="보유 자산">
-				<div class="data"><fmt:formatNumber value="${myAssets }" pattern="#,###" />원</div>
+				<input class="button button-status" type="button" value="평균 매수">
+				<div class="data"><fmt:formatNumber value="${aveAssets}" pattern="#,###" />원</div>
 				<input class="button button-status" type="button" value="보유 수량">
 				<div class="data"><fmt:formatNumber value="${myQuantity }" pattern="#,###" />주</div>	
 				<input class="event button button-button animation" type="button" name="trade" value="매       수">
 
 			</div>
 			<div class="show-button-align">
-				<input class="button button-status" type="button" value="평균 매수">
-				<div class="data"><fmt:formatNumber value="${aveAssets }" pattern="#,###" />원</div>
+				<input class="button button-status" type="button" value="가상 머니">
+				<div class="data"><fmt:formatNumber value="${myAssets }" pattern="#,###" />원</div>
 				<input class="button button-status" type="button" value="구매/매도">
 				<div>
 					<input class="data" id="text" type="text" name="Purse/Sold" autocomplete="off">

@@ -65,6 +65,8 @@ public class BasicTradeService implements TradeService{
 			System.out.println("마이너스 수량");
 			return false;
 		} else {
+			Member member = memberDao.getMember(id);
+			memberDao.updateMember(id, member.getvMoney() + (-qty * curPrice));
 			haveStock.setQuantity(haveStock.getQuantity() + qty);
 			haveStock.setSum(haveStock.getSum() + qty * curPrice);
 			stockDao.update(haveStock);
