@@ -59,4 +59,26 @@ public class MainJSONController extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.print(json);
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Object tempId = session.getAttribute("id");
+		
+		int id = -1;
+		
+		if(tempId != null)
+			id = (Integer)tempId;
+		
+		String cardPos = request.getParameter("cardPos");
+		cardPos = cardPos.replaceAll("[\\[|\\]|\"]", "");
+		
+		int result = service.updateCardPos(id, cardPos);
+		
+		response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+        out.print(result);
+	}
 }

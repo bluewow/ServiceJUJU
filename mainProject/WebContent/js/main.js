@@ -8,6 +8,7 @@ window.addEventListener("load", function() {
 		request.open("GET", "../main-json", true);
 
 		request.onload = function() {
+            stage.innerHTML = "";
 			var list = JSON.parse(request.responseText);
 			list = list.split(",");
 
@@ -16,7 +17,7 @@ window.addEventListener("load", function() {
 			var cards = cloneCards.querySelectorAll(".card");
 			var cardsPos = cloneCards.querySelectorAll(".column");
 			var cardsCopy = [];
-
+            
 			for (var i = 0; i < cards.length; i++) {
 				cardsCopy[i] = cards[i].cloneNode(true);
 				cardsPos[i] = cards[i].parentNode;
@@ -48,7 +49,7 @@ window.addEventListener("load", function() {
 	}
 
 	stage.ondragstart = function(e) {
-		currentCard = e.target;
+        currentCard = e.target;
 	}
 
 	stage.ondragover = function(e) {
@@ -57,7 +58,7 @@ window.addEventListener("load", function() {
 
 	stage.ondrop = function(e) {
 		var targetCard = e.target.parentNode.parentNode.parentNode;
-
+		
 		if (!targetCard.classList.contains("card"))
 			return;
 
@@ -69,12 +70,56 @@ window.addEventListener("load", function() {
 
 		e.preventDefault();
 
-		var tempCard = targetCard.cloneNode(true);
-		var currentCardPos = currentCard.parentNode;
-		var targetCardPos = targetCard.parentNode;
-
-		targetCard.remove();
-		targetCardPos.append(currentCard);
-		currentCardPos.append(tempCard);
+		targetCard = targetCard.id.substring(4);
+		currentCard = currentCard.id.substring(4);
+		var cardPos = stage.querySelectorAll(".column");
+		var list = [];
+		for(var i = 0; i < cardPos.length; i++) {
+			if (cardPos[i].firstElementChild == null) {
+				list[i] = "0";
+				continue;
+			}
+				
+			list[i] = cardPos[i].firstElementChild.id.substring(4);
+		}
+		
+		function switching(){
+			var a;
+			var b;
+			for(var i = 0; i < list.length; i++) {
+				if(list[i] == currentCard)
+					a = i;
+				if(list[i] == targetCard)
+					b = i;
+			}
+			
+			var temp = list[a];
+			list[a] = list[b];
+			list[b] = temp;
+		}
+		
+        switching();
+        
+//		var tempCard = targetCard.cloneNode(true);
+//		var currentCardPos = currentCard.parentNode;
+//		var targetCardPos = targetCard.parentNode;
+//
+//		targetCard.remove();
+//		targetCardPos.append(currentCard);
+//        currentCardPos.append(tempCard);
+        var data = "cardPos=" + JSON.stringify(list);
+        console.log(data);
+        var request = new XMLHttpRequest();
+        request.open("POST", "../main-json", true);
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        request.onload = function(){
+            if(request.responseText == 1){
+                load();
+            }
+            else
+                alert("로그인 후 이용할 수 있는 기능입니다.");
+        }
+        
+        request.send(data);
 	}
 });
