@@ -22,7 +22,6 @@
 
 <!-- CSS Reset -->
 <link rel="stylesheet" type="text/css" href="./css/normalize.css">
-<link rel="stylesheet" type="text/css" href="./css/reset.css">
 
 <!-- Milligram CSS minified -->
 <link rel="stylesheet" type="text/css" href="./css/milligram.min.css">
