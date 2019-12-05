@@ -42,12 +42,12 @@ public class ReplyController extends HttpServlet {
 		if(tempId != null)
 			writerId = (Integer)tempId;
 		MemberDao memberDao = new JdbcMemberDao();
-		String wrtierNickname = memberDao.getMember(writerId).getNickName();
+		String writerNickname = memberDao.getMember(writerId).getNickName();
 		
 		String reContent = request.getParameter("reContent");
 		String boardId_ = request.getParameter("boardId");
 		int boardId = Integer.parseInt(boardId_);
-		CommunityBoard insertReply = new CommunityBoard(reContent, wrtierNickname, boardId);
+		CommunityBoard insertReply = new CommunityBoard(reContent, writerNickname, boardId);
 
 		int result = communityBoardService.insertReply(insertReply);
 		

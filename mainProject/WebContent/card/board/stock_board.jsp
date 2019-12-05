@@ -100,7 +100,7 @@
 					<thead>
 						<tr>
 							<td style="text-align:center; height:50px; line-height:50px;">
-							<input type="text" class="reply-content" name="title" maxlength="200" placeholder="주제와 무관한 댓글이나 악플은 경고조치없이 삭제되며 징계 대상이 될 수 있습니다.">
+							<input type="text" class="reply-content" name="title" maxlength="200" placeholder="주제와 무관한 댓글, 악플은 즉시 삭제되며, 징계 대상이 됩니다.">
 							</td>
 							<td class="reply-submit-button"> <a href="" class="reg-reply-button">등록</a>
 							</td>

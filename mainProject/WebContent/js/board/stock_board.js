@@ -61,25 +61,28 @@ window.addEventListener("load", function() {
 		
 		//이미 내용이 있으면 닫아주세요.
 		if (nextTr.classList.contains("content-row")) {
-
 			  var row = nextTr.nextElementSibling;
 			  row.parentNode.removeChild(row);
 			  nextTr.parentNode.removeChild(nextTr);
 			  return;
 		}
-
+		//내용을 로딩중이면 표시해주세요.
 		if (e.target.parentNode.lastChild.nodeName == "IMG") {
 			alert("로딩중입니다~");
 			return;
 		}
+		
 		var id = e.target.dataset.id;
-
+		//로딩을 표시
 		var ajaxIcon = document.createElement("img");
 		ajaxIcon.src = "../../images/delay-icon.gif";
 		e.target.parentNode.append(ajaxIcon);
 
+		//데이터를 요청
 		var request = new XMLHttpRequest();
 		request.open("GET", "../../card/board/detail?id=" + id, true);
+		
+		//요청값을 받아오면 실행
 		request.onload = function() {
 			var detail = JSON.parse(request.responseText);
 			var template = section.querySelector(".detail-template");
@@ -91,10 +94,11 @@ window.addEventListener("load", function() {
 			var contentSum = "";
 			var aTagDetail = cloneTr.querySelector(".reg-reply-button");
 			aTagDetail.dataset.id = id;
+			aTagDetail.dataset.writerId = detail.writerId;
 			for (var i = 0; i < detail.replys.length; i++) {
 				contentSum += '<div><span class="re-content">' +detail.replys[i].writerId + 
 				" : </span><span>" + detail.replys[i].reContent+"</span></div>";
-			}
+			} 
 			replyContent.innerHTML = contentSum;
 			tbody.insertBefore(cloneTr, nextTr);
 
@@ -111,11 +115,11 @@ window.addEventListener("load", function() {
 		
 		var boardId = e.target.dataset.id;
 		var reContent = e.target.parentNode.parentNode.querySelector('.reply-content').value;
-		reContent = encodeURI(reContent);
+		var reContentEncode = encodeURI(reContent);
 		
 		var data = [
 			["boardId", boardId],
-			["reContent", reContent],
+			["reContent", reContentEncode],
 			]
 		var sendData = [];
 		
@@ -137,10 +141,24 @@ window.addEventListener("load", function() {
 		alert("등록되었습니다.");
 		
 		// 4. 결과를 확인하고 결과를 표시한다.
+		e.target.parentNode.parentNode.querySelector('.reply-content').value = null;
+		var currentTr = e.target.parentNode.parentNode;
+		var nextTr = currentTr.parentNode.nextElementSibling.firstElementChild;
 
+		var template = section.querySelector(".detail-template");
+		var cloneTr = document.importNode(template.content, true);
 		
-        
+		var replyContent = cloneTr
+				.querySelector(".replyTable tbody tr td");
+		var div = document.createElement("div");
+		var content = '<span class="re-content">' +e.target.dataset.writerId + 
+			" : </span><span>" + reContent+"</span>";
+		div.innerHTML= content;
 
+    	console.log(div)
+		console.log(nextTr.firstElementChild);
+    	nextTr.firstElementChild.prepend(div);
+    	
 	};
 	
 	//========= 내용 클릭 핸들러 ==================	
