@@ -35,6 +35,17 @@ public class BasicTradeService implements TradeService{
 	}
 
 	@Override
+	public int getStockAssets(int id, String stockId) {
+		JdbcHaveStockDao stockDao = new JdbcHaveStockDao();
+		
+		HaveStock haveStock = stockDao.get(id, stockId);
+		if(haveStock == null)
+			return 0;
+		
+		return haveStock.getSum();
+	}
+	
+	@Override
 	public int getQty(int id, String stockId) {
 		JdbcHaveStockDao stockDao = new JdbcHaveStockDao();
 		
@@ -46,7 +57,7 @@ public class BasicTradeService implements TradeService{
 	}
 	
 	@Override
-	public boolean setQty(int id, String stockId, int qty) {
+	public boolean setQty(int id, String stockId, int qty, int curPrice) {
 		JdbcHaveStockDao stockDao = new JdbcHaveStockDao();
 		
 		HaveStock haveStock = stockDao.get(id, stockId);
@@ -55,6 +66,7 @@ public class BasicTradeService implements TradeService{
 			return false;
 		} else {
 			haveStock.setQuantity(haveStock.getQuantity() + qty);
+			haveStock.setSum(haveStock.getSum() + qty * curPrice);
 			stockDao.update(haveStock);
 			return true;
 		}

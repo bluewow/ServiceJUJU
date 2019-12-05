@@ -12,5 +12,6 @@ public interface MemberDao {
 	Member getMemberByEmail(String query);	
 	int getMemberRank(int id);
 	int updateMember(int id, int vmoney);
+	int updateMember(int id, String cardPos);
 	int insertMember(Member member);
 }

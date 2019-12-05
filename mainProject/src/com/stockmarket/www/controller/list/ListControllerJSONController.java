@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import sun.swing.SwingUtilities2.Section;
 
-@WebServlet("/card/com/search-json")
+@WebServlet("/card/comcompany/list-json")
 public class ListControllerJSONController extends HttpServlet{
 
 	@Override
@@ -31,8 +31,9 @@ public class ListControllerJSONController extends HttpServlet{
 		
 		String companyName = request.getParameter("cn");
 		
-		System.out.println(id);
-		System.out.println(companyName);
+		/*
+		 * System.out.println(id); System.out.println(companyName);
+		 */
 		
 				
 	}

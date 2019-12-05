@@ -52,7 +52,7 @@
 				<input class="button button-status" type="button" value="보유 자산">
 				<div class="data"><fmt:formatNumber value="${myAssets }" pattern="#,###" />원</div>
 				<input class="button button-status" type="button" value="보유 수량">
-				<div class="data">${myQuantity }주</div>	
+				<div class="data"><fmt:formatNumber value="${myQuantity }" pattern="#,###" />주</div>	
 				<input class="event button button-button animation" type="button" name="trade" value="매       수">
 
 			</div>

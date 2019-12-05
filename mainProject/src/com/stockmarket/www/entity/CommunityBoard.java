@@ -6,17 +6,8 @@ public class CommunityBoard {
 	private int id;
 	private String title;
 	private String writerId;
-	private int writerIdNum;
 	private Date regdate;
 	private int hit;
-	public int getWriterIdNum() {
-		return writerIdNum;
-	}
-
-	public void setWriterIdNum(int writerIdNum) {
-		this.writerIdNum = writerIdNum;
-	}
-
 	private String content;
 	private String stockName;
 	private int replyCnt;
@@ -62,9 +53,11 @@ public class CommunityBoard {
 		this.id = boardId;
 	}
 
-	public CommunityBoard(String reContent, int writerIdNum, int boardId) {
+//댓글입력
+	public CommunityBoard(String reContent, String writerId, int boardId) {
+		super();
 		this.reContent = reContent;
-		this.writerIdNum = writerIdNum;
+		this.writerId = writerId;
 		this.id = boardId;
 	}
 
@@ -150,10 +143,9 @@ public class CommunityBoard {
 
 	@Override
 	public String toString() {
-		return "CommunityBoard [id=" + id + ", title=" + title + ", writerId=" + writerId + ", writerIdNum="
-				+ writerIdNum + ", regdate=" + regdate + ", hit=" + hit + ", content=" + content + ", stockName="
-				+ stockName + ", replyCnt=" + replyCnt + ", replyId=" + replyId + ", reContent=" + reContent + "]";
+		return "CommunityBoard [id=" + id + ", title=" + title + ", writerId=" + writerId + ", regdate=" + regdate
+				+ ", hit=" + hit + ", content=" + content + ", stockName=" + stockName + ", replyCnt=" + replyCnt
+				+ ", replyId=" + replyId + ", reContent=" + reContent + "]";
 	}
 
-	
 }

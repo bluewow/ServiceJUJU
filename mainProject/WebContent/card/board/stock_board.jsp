@@ -106,7 +106,7 @@
 							</td>
 						</tr>
 					</thead>
-		
+					
 					<tbody>
 						<tr>
 							<td colspan="2" style="text-align:left; height:25px; line-height:25px;">게시된 글이 없습니다.</td>

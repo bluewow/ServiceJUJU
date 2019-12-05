@@ -132,37 +132,31 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 	}
 
 	@Override
-	public int insertReply(String title, String writerNickName, int boardId) {
+	public int insertReply(CommunityBoard insertReply) {
 		int result = 0;
 		String sql = "INSERT INTO REPLY (ID, RE_CONTENT, WRITER_ID, REGDATE, BOARD_ID) "
 				+ "VALUES ((SELECT NVL(MAX(ID),0)+1 FROM REPLY), ?, ?, SYSTIMESTAMP, ?)";
 		PreparedStatement pst = null;
-		ResultSet rs = null;
 		JdbcDaoContext daoContext = new JdbcDaoContext();
 
 		try {
 
 			pst = daoContext.getPreparedStatement(sql);
 
-			pst.setString(1, title);
-			pst.setString(2, writerNickName);
-			pst.setInt(3, boardId);
+			pst.setString(1, insertReply.getReContent());
+			pst.setString(2, insertReply.getWriterId());
+			pst.setInt(3, insertReply.getId());
 
 			result = pst.executeUpdate();
-			rs = pst.executeQuery();
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		} finally {
-			daoContext.close(rs, pst);
+			daoContext.close(pst);
 		}
 		return result;
 	}
 
-	@Override
-	public int insertReply(CommunityBoard insertReply) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 }

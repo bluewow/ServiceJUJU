@@ -38,9 +38,6 @@ public class DetailJsonController extends HttpServlet {
 		
 		
 		int boardId = Integer.parseInt(request.getParameter("id"));
-//		HttpSession session = request.getSession();
-//		Object tempId = session.getAttribute("id");
-		System.out.println(boardId);
 		CommunityBoard communityBoard = communityBoardService.getBoard(boardId);
 		
 		List<CommunityBoard> replyList = communityBoardService.getCommunityBoardReplyList(boardId);
@@ -52,7 +49,6 @@ public class DetailJsonController extends HttpServlet {
 
 		Gson gson = new Gson();
 		String Json = gson.toJson(hm);
-		System.out.println(Json);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
