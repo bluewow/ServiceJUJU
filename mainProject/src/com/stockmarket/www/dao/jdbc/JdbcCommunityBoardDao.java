@@ -137,7 +137,6 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		String sql = "INSERT INTO REPLY (ID, RE_CONTENT, WRITER_ID, REGDATE, BOARD_ID) "
 				+ "VALUES ((SELECT NVL(MAX(ID),0)+1 FROM REPLY), ?, ?, SYSTIMESTAMP, ?)";
 		PreparedStatement pst = null;
-		ResultSet rs = null;
 		JdbcDaoContext daoContext = new JdbcDaoContext();
 
 		try {
@@ -153,7 +152,7 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		} finally {
-			daoContext.close(rs, pst);
+			daoContext.close(pst);
 		}
 		return result;
 	}

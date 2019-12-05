@@ -35,7 +35,6 @@ public class ReplyController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("받았어?");
 		HttpSession session = request.getSession();
 		Object tempId = session.getAttribute("id");
 		int writerId = -1;
@@ -48,7 +47,6 @@ public class ReplyController extends HttpServlet {
 		String reContent = request.getParameter("reContent");
 		String boardId_ = request.getParameter("boardId");
 		int boardId = Integer.parseInt(boardId_);
-		System.out.println(reContent+boardId+wrtierNickname);
 		CommunityBoard insertReply = new CommunityBoard(reContent, wrtierNickname, boardId);
 
 		int result = communityBoardService.insertReply(insertReply);

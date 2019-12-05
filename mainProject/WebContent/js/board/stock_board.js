@@ -58,9 +58,14 @@ window.addEventListener("load", function() {
 		var currentTr = e.target.parentNode.parentNode;
 		var nextTr = currentTr.nextElementSibling.nextElementSibling;
 
+		
+		//이미 내용이 있으면 닫아주세요.
 		if (nextTr.classList.contains("content-row")) {
-			alert("이미 있잖아~");
-			return;
+
+			  var row = nextTr.nextElementSibling;
+			  row.parentNode.removeChild(row);
+			  nextTr.parentNode.removeChild(nextTr);
+			  return;
 		}
 
 		if (e.target.parentNode.lastChild.nodeName == "IMG") {
@@ -87,8 +92,9 @@ window.addEventListener("load", function() {
 			var aTagDetail = cloneTr.querySelector(".reg-reply-button");
 			aTagDetail.dataset.id = id;
 			for (var i = 0; i < detail.replys.length; i++) {
-				contentSum += detail.replys[i].writerId + " : "
-						+ detail.replys[i].reContent + "</br>";
+				contentSum += "<div><span>" +detail.replys[i].writerId + 
+				" : </span><span>" + detail.replys[i].reContent+"</span></div>";
+				
 			}
 			replyContent.innerHTML = contentSum;
 			tbody.insertBefore(cloneTr, nextTr);
@@ -102,32 +108,40 @@ window.addEventListener("load", function() {
 	//========= 댓글쓰기 ==================
 	var regButtonClickHandler = function(e){
 		
+		// 1. 입력한 값을 얻어온다.
+		
 		var boardId = e.target.dataset.id;
-        var reContent = e.target.parentNode.parentNode.querySelector('.reply-content').value;
-        reContent = encodeURI(reContent);
-        
+		var reContent = e.target.parentNode.parentNode.querySelector('.reply-content').value;
+		reContent = encodeURI(reContent);
+		
 		var data = [
-            ["boardId", boardId],
-            ["reContent", reContent],
-        ]
-        var sendData = [];
+			["boardId", boardId],
+			["reContent", reContent],
+			]
+		var sendData = [];
+		
+		for (var i = 0; i < data.length; i++) {
+			sendData[i] = data[i].join("=");
+			console.log(sendData.join("&"));
+		}
+		sendData = sendData.join("&");
+		
+		// 2. 값을 서버에 보낸다.
+		
+		var request = new XMLHttpRequest(); 
+		request.open("POST", "../../card/board/Reply", true); 
+		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		request.send(sendData);
+		
+		// 3. 요청이 완료되었는지 결과를 확인한다.
+		
+		alert("등록되었습니다.");
+		
+		// 4. 결과를 확인하고 결과를 표시한다.
 
-        for (var i = 0; i < data.length; i++) {
-            sendData[i] = data[i].join("=");
-            console.log(sendData.join("&"));
-        }
-        sendData = sendData.join("&");
-
-
-        var request = new XMLHttpRequest(); 
-        request.open("POST", "../../card/board/Reply", true); 
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        request.send(sendData);
         
         
-        alert("등록되었습니다.");
 
-        load(1);
 	};
 	
 	//========= 내용 클릭 핸들러 ==================	
