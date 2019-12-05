@@ -8,7 +8,7 @@ button{
     
 }
 
-.btposition{
+.manageStocks{
 	padding:20px;
 	text-align:right;
 }
@@ -35,6 +35,8 @@ span{
 	font-size:small;
 	
 }
+
+
 .down{
 	color:blue;
 	text-align:center;
@@ -43,4 +45,10 @@ span{
 .up{
 	color:red;
 	text-align:center;
+}
+
+#scroll {
+    max-height: 550px;
+    min-height: 500px;
+    overflow-y: scroll;
 }

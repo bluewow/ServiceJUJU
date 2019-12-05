@@ -15,7 +15,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 </head>
 
 <body>
-<div class="btposition" id="manageStocks">
+<div class="manageStocks" id="scroll" >
 <button class="updateButton">
 데이터 갱신
 </button>
@@ -28,7 +28,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
       <th>수익금</th>
    </tr>
    </thead>
-   <tbody>
+   <tbody >
       <tr><td colspan="5">보유한종목이 없습니다</td></tr>
    </tbody>
 
@@ -59,7 +59,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
       </tbody> -->
    </table>
 
-   <template class="template">
+   <template class="template" >
    <tr>
       <td style="text-align: center">
          <span>stockName</span>
@@ -89,18 +89,24 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
       </td>
       
       <td class="up">
-         <span></span><br> 
+         <span></span>
+        <span>원</span> 
+         <br> 
          <span></span>
          %
       </td>
       <td class="down">
-         -<span></span><br> 
+         <span></span>
+         <span>원</span>  
+         <br> 
          <span></span>
          <span></span>
          %
       </td>
        <td>
-         <span></span><br> 
+         <span></span>
+         <span>원</span>
+         <br> 
          <span></span>
          %
       </td>

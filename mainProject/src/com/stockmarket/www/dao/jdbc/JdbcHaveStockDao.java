@@ -40,6 +40,8 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		list.add(new CurStock("005930", "12,000", "상승", "3,000", "+", "1.6"));
 		list.add(new CurStock("005380", "11,000", "상승", "3,000", "+", "8.9"));
 		list.add(new CurStock("095660", "10,500", "상승", "3,000", "+", "10.2"));
+		list.add(new CurStock("000880", "13,500", "하강", "3,000", "-", "14.2"));
+		list.add(new CurStock("215600", "17,000", "하강", "3,000", "-", "10"));
 
 		try {
 			PreparedStatement st = context.getPreparedStatement(sql);
@@ -126,8 +128,10 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		list.add(new CurStock("005930", "12,000", "상승", "3,000", "+", "1.6"));
 		list.add(new CurStock("005380", "11,000", "상승", "3,000", "+", "8.9"));
 		list.add(new CurStock("095660", "10,500", "상승", "3,000", "+", "10.2"));
+		list.add(new CurStock("000880", "13,500", "하강", "3,000", "-", "14.2"));
+		list.add(new CurStock("215600", "17,000", "하강", "3,000", "-", "10"));
 
-		try {
+		try {	
 
 			PreparedStatement st = context.getPreparedStatement(sql);
 			st.setInt(1, memberId);

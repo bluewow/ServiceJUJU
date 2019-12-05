@@ -5,7 +5,7 @@ window.addEventListener("load",function(){
 		  return num.toString().replace(regexp, ',');
 	}
 
-    var section = this.document.querySelector("#manageStocks")
+    var section = this.document.querySelector(".manageStocks")
     var updateButton = section.querySelector(".updateButton");
     var tbody = section.querySelector("table tbody");
  
