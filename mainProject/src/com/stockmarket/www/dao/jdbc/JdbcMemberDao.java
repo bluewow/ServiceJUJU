@@ -15,6 +15,7 @@ public class JdbcMemberDao implements MemberDao {
 	@Override
 	public List<Member> getMemberList() {
 		String sql = "SELECT * FROM MEMBER";
+		
 		List<Member> members = new ArrayList<>();
 
 		try {
@@ -29,8 +30,9 @@ public class JdbcMemberDao implements MemberDao {
 				String password = resultSet.getString("PASSWORD");
 				int vmoney = resultSet.getInt("VMONEY");
 				Date regdate = resultSet.getDate("REGDATE");
+				String cardPos = resultSet.getString("CARD_POS");				
 
-				Member member = new Member(id, email, nickName, password, vmoney);
+				Member member = new Member(id, email, nickName, password, vmoney, cardPos);
 				members.add(member);
 			}
 			
@@ -47,8 +49,10 @@ public class JdbcMemberDao implements MemberDao {
 	public List<Member> getRankerList() {
 		Statement statement = null;
 		ResultSet resultSet = null;
+		
 		// 가상머니 상위 50위까지 뽑아오는 쿼리
 		String sql = "SELECT * FROM MEMBER ORDER BY VMONEY " + "DESC OFFSET 0 ROWS FETCH NEXT 50 ROWS ONLY";
+		
 		List<Member> members = new ArrayList<>();
 
 		try {
@@ -63,8 +67,9 @@ public class JdbcMemberDao implements MemberDao {
 				String password = resultSet.getString("PASSWORD");
 				int vmoney = resultSet.getInt("VMONEY");
 				Date regdate = resultSet.getDate("REGDATE");
+				String cardPos = resultSet.getString("CARD_POS");	
 
-				Member member = new Member(id, email, nickName, password, vmoney);
+				Member member = new Member(id, email, nickName, password, vmoney, cardPos);
 				members.add(member);
 			}
 			
@@ -80,6 +85,7 @@ public class JdbcMemberDao implements MemberDao {
 	@Override
 	public Member getMember(int id) {
 		String sql = "SELECT * FROM MEMBER WHERE ID=" + id;
+		
 		Member member = null;
 
 		try {
@@ -92,8 +98,9 @@ public class JdbcMemberDao implements MemberDao {
 				String nickName = resultSet.getString("NICKNAME");
 				String password = resultSet.getString("PASSWORD");
 				int vmoney = resultSet.getInt("VMONEY");
+				String cardPos = resultSet.getString("CARD_POS");	
 
-				member = new Member(id, email, nickName, password, vmoney);
+				member = new Member(id, email, nickName, password, vmoney, cardPos);
 			}
 			
 			daoContext.close(resultSet, statement);
@@ -108,6 +115,7 @@ public class JdbcMemberDao implements MemberDao {
 	@Override
 	public Member getMemberByEmail(String query) {
 		String sql = "SELECT * FROM MEMBER WHERE EMAIL=?";
+		
 		Member member = null;
 
 		try {
@@ -124,8 +132,9 @@ public class JdbcMemberDao implements MemberDao {
 				String nickName = resultSet.getString("NICKNAME");
 				String password = resultSet.getString("PASSWORD");
 				int vmoney = resultSet.getInt("VMONEY");
+				String cardPos = resultSet.getString("CARD_POS");	
 
-				member = new Member(id, email, nickName, password, vmoney);
+				member = new Member(id, email, nickName, password, vmoney, cardPos);
 			}
 			daoContext.close(resultSet, statement);
 		} catch (ClassNotFoundException e) {
@@ -138,11 +147,11 @@ public class JdbcMemberDao implements MemberDao {
 
 	@Override
 	public int getMemberRank(int id) {
-		int rank = 0;
-		
 		String sql = "SELECT * FROM (\r\n"
 				+ "    SELECT DENSE_RANK() OVER (ORDER BY VMONEY DESC) AS \"RANK\", MEMBER.* FROM MEMBER\r\n"
 				+ "    ) \r\n" + "WHERE id = " + id;
+		
+		int rank = 0;
 
 		try {
 			JdbcDaoContext daoContext = new JdbcDaoContext();
@@ -163,15 +172,39 @@ public class JdbcMemberDao implements MemberDao {
 
 	@Override
 	public int updateMember(int id, int vmoney) {
-		int result = 0;
-
 		String sql = "UPDATE MEMBER SET VMONEY = ? WHERE ID = ?";
+
+		int result = 0;
 		
 		try {
 			JdbcDaoContext daoContext = new JdbcDaoContext();
 			PreparedStatement statement = daoContext.getPreparedStatement(sql);
 
 			statement.setInt(1, vmoney);
+			statement.setInt(2, id);
+
+			result = statement.executeUpdate();
+
+			daoContext.close(statement);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@Override
+	public int updateMember(int id, String cardPos) {
+		String sql = "UPDATE MEMBER SET CARD_POS = ? WHERE ID = ?";
+
+		int result = 0;
+		
+		try {
+			JdbcDaoContext daoContext = new JdbcDaoContext();
+			PreparedStatement statement = daoContext.getPreparedStatement(sql);
+
+			statement.setString(1, cardPos);
 			statement.setInt(2, id);
 
 			result = statement.executeUpdate();
@@ -211,7 +244,6 @@ public class JdbcMemberDao implements MemberDao {
 		}
 		return result;
 	}
-	
 /*
  * =======================================================================
  * ============================= for Test ================================
