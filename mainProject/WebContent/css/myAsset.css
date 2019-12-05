@@ -34,12 +34,9 @@
 	cursor: pointer;
 }
 
-
-
 section{
 	padding-top: 5%;
 }
-
 
 #card {
 	height: 100vh;
@@ -49,7 +46,6 @@ section{
 }
 	#card-top{
 		height: 50%;
-		display:  flexbox;
 	}
 
 	#card-bottom{

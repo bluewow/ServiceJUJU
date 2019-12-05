@@ -60,6 +60,7 @@ public class MyAssetController extends HttpServlet{
 	       out.write(presnetAsset);
 	       */
 		
+		/*
 	       List<Map<String, Object>> list = assetDistrService.getHaveStockList(3);
 	       
 	       StringBuilder builder = new StringBuilder();
@@ -81,7 +82,8 @@ public class MyAssetController extends HttpServlet{
 	       String json = builder.toString();
 	       
 	       String StockName1 = String.valueOf(list.get(0).get("stockName")); 
-	       
+	       */
+		
 //	       PrintWriter out = response.getWriter();
 //	       out.write(StockName1); 
 	       // out.write(presnetAsset);

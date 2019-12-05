@@ -7,7 +7,7 @@
 <head>
 
 <meta charset="utf-8">
-<!-- CSS Reset -->
+<!-- CSS Reset --> 
 
 <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
 <!-- progress bar -->
