@@ -106,14 +106,12 @@ window.addEventListener("load", function(){
 	        ajax.open("GET", "../../card/trade/trade?replaceEvent=on&button=" + trade + "&Purse/Sold=" + qty.value);
 	        ajax.onload = function() {
 	        	var result = JSON.parse(ajax.responseText);
-				//입력 type="text" 는 제외하기 위하여 length - 1 을 추가
-				for(var i = 0; i < data.length - 1; i++) 
-					data[i].innerHTML = result[i].toLocaleString();
-	        }
-	        data[3].value = "";
-	        
-	        ajax.send();
-		
+		        data[0].innerHTML = result[0].toLocaleString() + "원";
+		        data[1].innerHTML = result[1].toLocaleString() + "주";
+		        data[2].innerHTML = result[2].toLocaleString() + "원";
+		        data[3].value = "";
+	        }    
+		    ajax.send();
 		}
 	}
 });
