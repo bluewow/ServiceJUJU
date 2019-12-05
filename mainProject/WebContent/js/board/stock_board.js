@@ -92,9 +92,8 @@ window.addEventListener("load", function() {
 			var aTagDetail = cloneTr.querySelector(".reg-reply-button");
 			aTagDetail.dataset.id = id;
 			for (var i = 0; i < detail.replys.length; i++) {
-				contentSum += "<div><span>" +detail.replys[i].writerId + 
+				contentSum += '<div><span class="re-content">' +detail.replys[i].writerId + 
 				" : </span><span>" + detail.replys[i].reContent+"</span></div>";
-				
 			}
 			replyContent.innerHTML = contentSum;
 			tbody.insertBefore(cloneTr, nextTr);
@@ -139,7 +138,7 @@ window.addEventListener("load", function() {
 		
 		// 4. 결과를 확인하고 결과를 표시한다.
 
-        
+		
         
 
 	};
