@@ -15,8 +15,7 @@
 <!-- Bootstrap Styles -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
+>
 
 <!-- Template Styles -->
 <link rel="stylesheet" type="text/css" href="./css/font-awesome.min.css">
@@ -33,12 +32,6 @@
 
 <link rel="stylesheet" type="text/css" href="./css/tablet.css">
 
-
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="./css/tablet.css">
 
 <!--  pop-up -->
@@ -246,7 +239,7 @@
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="Purchaselist"
                            role="tabpanel" aria-labelledby="Purchaselist-tab">
-                           <iframe src="./card/managestocks/holdinglist"
+                           <iframe src="./card/managestocks/holdinglist.jsp"
                               scrolling="no"> </iframe>
                         </div>
                         <div class="tab-pane fade" id="Interest" role="tabpanel"

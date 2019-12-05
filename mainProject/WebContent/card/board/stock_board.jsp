@@ -35,7 +35,7 @@
 <body>
 	<section id="stockTop">
 		<nav id="my-menu">
-			<a href="" id="selected-stock">기현알고리즘</a>
+			<a href="" id="selected-stock">선택된주식</a>
 			<a href="" id="my-button">My</a>
 			<a href="" id="favo-button">관심</a>
 			<a href="" id="reg-button">글쓰기</a>
@@ -57,9 +57,7 @@
 		<table class="stockTable">
 			<tbody class="content">
 				<tr>
-					<td colspan="5"
-						style="text-align: center; height: 50px; line-height: 50px;">게시된
-						글이 없습니다.</td>
+					<td colspan="5" style="text-align: center; height: 50px; line-height: 50px;">게시된 글이 없습니다.</td>
 				</tr>
 				<tr class="detail">
 					<td colspan=5>디테일의 내용이 나올 공간.
@@ -102,10 +100,9 @@
 					<thead>
 						<tr>
 							<td style="text-align:center; height:50px; line-height:50px;">
-								<textarea id="reply-content" maxlength="200"
-									placeholder="주제와 무관한 댓글이나 악플은 경고조치없이 삭제되며 징계 대상이 될 수 있습니다."></textarea>
+							<input type="text" class="reply-content" name="title" maxlength="200" placeholder="주제와 무관한 댓글이나 악플은 경고조치없이 삭제되며 징계 대상이 될 수 있습니다.">
 							</td>
-							<td> <input type="button" id="reg-reply-button" name="reg-reply-button" value="등록">
+							<td class="reply-submit-button"> <a href="" class="reg-reply-button">등록</a>
 							</td>
 						</tr>
 					</thead>

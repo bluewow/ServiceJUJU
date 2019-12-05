@@ -45,10 +45,19 @@ public class CommunityBoard {
 	}
 
 	public CommunityBoard(int replyId, String reContent, String writerId, Date regdate, int boardId) {
+		super();
 		this.replyId = replyId;
 		this.reContent = reContent;
 		this.writerId = writerId;
 		this.regdate = regdate;
+		this.id = boardId;
+	}
+
+//댓글입력
+	public CommunityBoard(String reContent, String writerId, int boardId) {
+		super();
+		this.reContent = reContent;
+		this.writerId = writerId;
 		this.id = boardId;
 	}
 

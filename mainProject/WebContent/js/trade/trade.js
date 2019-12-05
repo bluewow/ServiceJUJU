@@ -10,10 +10,18 @@ window.addEventListener("load", function(){
 	
 	// 일봉,주봉,월봉 클릭 및 그래프 변경(ajax)
 	ajaxFunc();
-	
 	// 매수/매도 이벤트 처리
 	tradeFunc();
 	
+	//TEMP 함수사용법을 익혀 적절히 배치 필요
+    var ajax = new XMLHttpRequest();
+    ajax.open("GET", "../../card/trade/trade?date=일봉");
+    ajax.onload = function() {
+    	console.log(JSON.parse(ajax.responseText));
+    	google.charts.setOnLoadCallback(function(){drawBasic(JSON.parse(ajax.responseText))});
+    }
+    ajax.send();
+    
 	 //그림그리기 위한 data
     function drawBasic(list) {
 	
@@ -63,7 +71,6 @@ window.addEventListener("load", function(){
 	        else if(e.target.value == "월봉")  
 	        	selectedButton(2, "month_");
 	        
-	        var list =[];
 	        var ajax = new XMLHttpRequest();
 	        ajax.open("GET", "../../card/trade/trade?date=" + e.target.value);
 	        ajax.onload = function() {
@@ -92,25 +99,29 @@ window.addEventListener("load", function(){
 		var button = document.querySelector("#page-bottom-box");
 		var event = button.querySelector("input.event");
 		var data = button.querySelectorAll(".data");
+		var qty = button.querySelector("#text");
 		
 		button.onclick = function(e) {
 			if(e.target.className != event.className)
 		      	return;
 		    
-			var money = 100000;
-			//입력 type="text" 는 제외하기 위하여 length - 1 을 추가
-			for(var i = 0; i < data.length - 1; i++) { 
-//				console.log(data[i].innerHTML);
-//				data[i].innerHTML = money.toLocaleString();
-			}
-			
+			if(e.target.value == "매       수")
+				var trade = "buy";
+			else if(e.target.value =="매       도")
+				var trade = "sell";
+				
 			var ajax = new XMLHttpRequest();
-	        ajax.open("GET", "../../card/trade/trade?replaceEvent=" + "on");
+	        ajax.open("GET", "../../card/trade/trade?replaceEvent=on&button=" + trade + "&Purse/Sold=" + qty.value);
 	        ajax.onload = function() {
-	        	console.log(ajax.responseText);
-	        }
-	        ajax.send();
-		
+	        	var result = JSON.parse(ajax.responseText);
+		        data[0].innerHTML = result[0].toLocaleString() + "원";
+		        data[1].innerHTML = result[1].toLocaleString() + "주";
+		        data[2].innerHTML = result[2].toLocaleString() + "원";
+		        data[3].value = "";
+	        }    
+		    ajax.send();
 		}
 	}
+	
+
 });

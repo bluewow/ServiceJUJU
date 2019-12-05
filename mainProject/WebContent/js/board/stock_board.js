@@ -13,7 +13,7 @@ window.addEventListener("load", function() {
 		request.onload = function() {
 			var list = JSON.parse(request.responseText);
 			var trTemplate = section.querySelector(".tr-template");
-			console.log
+			
 
 			tbody.innerHTML = "";
 
@@ -44,6 +44,7 @@ window.addEventListener("load", function() {
 	}
 
 	load(1)
+	
 	pager.onclick = function(e) {
 		if (e.target.nodeName != "A")
 			return;
@@ -52,11 +53,8 @@ window.addEventListener("load", function() {
 		load(e.target.innerText);
 	};
 
-	tbody.onclick = function(e) {
-		if (!e.target.parentNode.classList.contains("board-title"))
-			return;
-		e.preventDefault();
-
+	
+	var titleClickHandler = function(e) {
 		var currentTr = e.target.parentNode.parentNode;
 		var nextTr = currentTr.nextElementSibling.nextElementSibling;
 
@@ -86,29 +84,64 @@ window.addEventListener("load", function() {
 			var replyContent = cloneTr
 					.querySelector(".replyTable tbody tr td");
 			var contentSum = "";
-
+			var aTagDetail = cloneTr.querySelector(".reg-reply-button");
+			aTagDetail.dataset.id = id;
 			for (var i = 0; i < detail.replys.length; i++) {
 				contentSum += detail.replys[i].writerId + " : "
 						+ detail.replys[i].reContent + "</br>";
 			}
 			replyContent.innerHTML = contentSum;
-			console.log(td);
-			console.log(replyContent);
-
 			tbody.insertBefore(cloneTr, nextTr);
 
-			console.log(nextTr);
 			ajaxIcon.remove();
 			ajaxIcon = undefined;
 		};
 		request.send();
 	};
+	
+	//========= 댓글쓰기 ==================
+	var regButtonClickHandler = function(e){
+		
+		var boardId = e.target.dataset.id;
+        var reContent = e.target.parentNode.parentNode.querySelector('.reply-content').value;
+        reContent = encodeURI(reContent);
+        
+		var data = [
+            ["boardId", boardId],
+            ["reContent", reContent],
+        ]
+        var sendData = [];
 
-	function del_row() {
-		var stock_tbody_tr = stock_tbody.getElementsByTagName('tr');
-		if (stock_tbody_tr.length > 1) {
-			stock_tbody.deleteRow(stock_tbody_tr.length - 1);
-			stock_y--;
-		}
-	}
+        for (var i = 0; i < data.length; i++) {
+            sendData[i] = data[i].join("=");
+            console.log(sendData.join("&"));
+        }
+        sendData = sendData.join("&");
+
+
+        var request = new XMLHttpRequest(); 
+        request.open("POST", "../../card/board/Reply", true); 
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        request.send(sendData);
+        
+        
+        alert("등록되었습니다.");
+
+        load(1);
+	};
+	
+	//========= 내용 클릭 핸들러 ==================	
+	tbody.onclick = function(e) {
+		e.preventDefault();
+				
+		if(e.target.parentNode.classList.contains("board-title"))
+			titleClickHandler(e);		
+		else if(e.target.parentNode.classList.contains("reply-submit-button"))
+			regButtonClickHandler(e);	
+		
+
+	};
+
 })
+
+

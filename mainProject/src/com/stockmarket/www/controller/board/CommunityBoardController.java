@@ -61,4 +61,5 @@ public class CommunityBoardController extends HttpServlet {
 
 		super.doPost(request, response);
 	}
+
 }
