@@ -15,7 +15,7 @@ window.addEventListener("load",function(){
     request.open("GET","../../card/managestocks/holdinglist",true);
 
 
-//
+
     //서블릿의 실행이 완료되었을때 실행 
     request.onload = function(){
         var template = section.querySelector(".template");
@@ -68,7 +68,6 @@ window.addEventListener("load",function(){
 //        for(var i =0 ; i<tds.length ;i++){
 //            console.log(tds[i]);
 //        }
-//    
         
         tds[4].firstElementChild.innerText = list[i].quantity;
         //   var cloneTr = document.importNode(trTemplate.Content, true);
