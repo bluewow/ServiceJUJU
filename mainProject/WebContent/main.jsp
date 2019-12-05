@@ -281,9 +281,9 @@
          <!-- 세번째 로우 -->
 
          <!-- 빈 공간 -->
-         <div class="column column-33"></div>
+         <section class="column column-33"></section>
 
-         <div class="column column-33"></div>
+         <section class="column column-33"></section>
 
 
          <!-- 랭킹 카드 -->
