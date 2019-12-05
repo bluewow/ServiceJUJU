@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.stockmarket.www.dao.MemberDao;
+import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
 import com.stockmarket.www.entity.CommunityBoard;
 import com.stockmarket.www.service.CommunityBoardService;
 import com.stockmarket.www.service.basic.BasicCommunityBoardService;
@@ -33,20 +35,22 @@ public class ReplyController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("받았어?");
 		HttpSession session = request.getSession();
 		Object tempId = session.getAttribute("id");
 		int writerId = -1;
 		
 		if(tempId != null)
 			writerId = (Integer)tempId;
+		MemberDao memberDao = new JdbcMemberDao();
+		String wrtierNickname = memberDao.getMember(writerId).getNickName();
 		
 		String reContent = request.getParameter("reContent");
 		String boardId_ = request.getParameter("boardId");
 		int boardId = Integer.parseInt(boardId_);
-		
-		CommunityBoard insertReply = new CommunityBoard(reContent, writerId, boardId);
-		
-		System.out.println(insertReply.toString());
+		System.out.println(reContent+boardId+wrtierNickname);
+		CommunityBoard insertReply = new CommunityBoard(reContent, wrtierNickname, boardId);
+
 		int result = communityBoardService.insertReply(insertReply);
 		
 		response.setCharacterEncoding("UTF-8"); // UTP-8로 보내는 코드

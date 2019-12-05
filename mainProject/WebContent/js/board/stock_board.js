@@ -92,7 +92,6 @@ window.addEventListener("load", function() {
 			}
 			replyContent.innerHTML = contentSum;
 			tbody.insertBefore(cloneTr, nextTr);
-			console.log(tbody);
 
 			ajaxIcon.remove();
 			ajaxIcon = undefined;
@@ -102,12 +101,10 @@ window.addEventListener("load", function() {
 	
 	//========= 댓글쓰기 ==================
 	var regButtonClickHandler = function(e){
-		alert("등록 하하하");
 		
 		var boardId = e.target.dataset.id;
         var reContent = e.target.parentNode.parentNode.querySelector('.reply-content').value;
         reContent = encodeURI(reContent);
-        console.log(reContent);
         
 		var data = [
             ["boardId", boardId],
@@ -120,16 +117,16 @@ window.addEventListener("load", function() {
             console.log(sendData.join("&"));
         }
         sendData = sendData.join("&");
-        console.log(data);
 
 
         var request = new XMLHttpRequest(); 
         request.open("POST", "../../card/board/Reply", true); 
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        console.log(sendData);
         request.send(sendData);
-        console.log(request.responseText);
         
+        
+        alert("등록되었습니다.");
+
         load(1);
 	};
 	

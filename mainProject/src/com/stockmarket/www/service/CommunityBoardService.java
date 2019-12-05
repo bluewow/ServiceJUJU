@@ -38,7 +38,6 @@ public interface CommunityBoardService {
 	/*
 	 * 댓글 추가 삭제
 	 * */
-	int insertReply(String title, int writerId, int boardId);
 	int insertReply(CommunityBoard insertReply);
 
 
