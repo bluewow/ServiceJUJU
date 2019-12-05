@@ -52,12 +52,11 @@ public class DetailJsonController extends HttpServlet {
 
 		Gson gson = new Gson();
 		String Json = gson.toJson(hm);
-
+		System.out.println(Json);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.write(Json);
-		
 		
 
 //			
@@ -68,5 +67,4 @@ public class DetailJsonController extends HttpServlet {
 			throws ServletException, IOException {
 			super.doPost(request, response);
 	}
-
 }
