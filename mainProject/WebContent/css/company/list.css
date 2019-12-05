@@ -129,12 +129,32 @@ thead{
 
 td{
     padding: 10px; 
-    border-bottom: 1px solid #ccc; 
-    width:27px;
+   /*  border-bottom: 1px solid #ccc;  */
+    /* width:27px; */
+    /* display: inline-block; */
 }
 
 span{
 	font-size: 80%;
     color: red;
     margin-left: 2%;
+}
+
+#companyName:hover {
+	/* box-shadow:200px 0 0 0 rgba(0,0,0,0.5) inset; */
+	cursor: pointer;
+
+}
+
+#stockItemName {
+	/* border : 4px dashed red; */
+	display: inline-block;
+    width: 80px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+tbody{
+    border-bottom: 1px solid #ccc;
 }

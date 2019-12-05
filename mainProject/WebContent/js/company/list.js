@@ -1,8 +1,15 @@
 window.addEventListener("load", function(){
     var attentionimageControl = document.querySelector(".attention");
     var cn = document.querySelector("#companyName")
+    var CompanyNameClickedByUser = document.querySelector("#companyName")
     
-    attentionimageControl.onclick = function(){
+    CompanyNameClickedByUser.onclick = function(e){
+        e.preventDefault();
+        alert("preventDefault 됬나?")
+        console.log(e.currentTarget.tagName);
+    };
+
+    /*attentionimageControl.onclick = function(){
         var cnTemp = cn.innerText;
         alert(cnTemp);
         
@@ -11,6 +18,6 @@ window.addEventListener("load", function(){
         
         console.log(request.readyState);
     	request.send();
-    };
+    };*/
    
 });

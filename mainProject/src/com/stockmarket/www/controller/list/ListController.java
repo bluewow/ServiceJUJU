@@ -21,6 +21,8 @@ import com.stockmarket.www.entity.Company;
 import com.stockmarket.www.service.CompanyService;
 import com.stockmarket.www.service.basic.BasicCompanyService;
 
+import oracle.jdbc.proxy.annotation.Post;
+
 @WebServlet("/card/company/list")
 public class ListController extends HttpServlet {
 
@@ -51,7 +53,7 @@ public class ListController extends HttpServlet {
 		// String search = "제지";
 
 		String companyName_ = request.getParameter("companyName");
-
+		
 		if (companyName_ != null && !companyName_.equals("")) {
 			companyName = companyName_;
 		}
@@ -62,14 +64,8 @@ public class ListController extends HttpServlet {
 			searchCompanyList.add(companyService.searchCompany(companyName));
 		}
 
-		//System.out.println(companyService.searchCompany(companyName));
-		//System.out.println("companyService.searchCompany(companyName)" + companyService.searchCompany(companyName));
-
+		
 		request.setAttribute("search", searchCompanyList);
-
-		// search = "패션";
-		// request.setAttribute("search", seachCompanyService.searchCompany(search,
-		// csvFilePath));
 
 //==== (아래는) 크롤링을 위한 코드====================================
 //https://finance.naver.com/sise/lastsearch2.nhn(네이버 증권)에서 검색 상위종목 4개 추출		
