@@ -9,4 +9,6 @@ public interface CommunityBoardDao {
 	int getReplyCnt(String field, String query, String stockName);
 	CommunityBoard getCommunityBoardDetail(int id);
 	List<CommunityBoard> getReplyList(int boardId);
+	int insertReply(String title, String writerNickname, int boardId);
+	int insertReply(CommunityBoard insertReply);
 }

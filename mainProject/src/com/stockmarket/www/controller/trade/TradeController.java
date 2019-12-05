@@ -34,12 +34,20 @@ public class TradeController extends HttpServlet{
 		HttpSession session = request.getSession();
 		int memberId = (int)session.getAttribute("id");
 		
-		String date = request.getParameter("date"); 
 		//일봉, 주봉, 월봉 - ajax 요청
+		String date = request.getParameter("date"); 
 		if(date != null) {
 			dateButtonStatus(date, request, response);
 			return;
 		}
+
+		//가격정보 reflesh - ajax 요청
+		String price = request.getParameter("replaceEvent");
+		if(price != null) {
+			refleshPrice(request, response, memberId, "095660");
+			return;
+		}
+
 		
 		//종목정보 from 검색페이지
 //		request.setAttribute("companyName", request.getAttribute("companyName"));
@@ -53,11 +61,7 @@ public class TradeController extends HttpServlet{
 		
 		//평균 매수
 		request.setAttribute("aveAssets", "10000");
-		
-		//매수-매도
-		tradeProcess(memberId, request);
-
-		//TODO fix stockId
+				
 		//보유수량
 		request.setAttribute("myQuantity", service.getQty(memberId, "095660"));
 		
@@ -111,7 +115,29 @@ public class TradeController extends HttpServlet{
         String json = gson.toJson(data);
         
 		PrintWriter out = response.getWriter();
-		out.print(json);      
+		out.write(json);      
+	}
+
+	private void refleshPrice(HttpServletRequest request, HttpServletResponse response, int memberId, String codeNum) throws IOException {
+		int[] data = new int[3]; 
+		
+		//매수-매도
+		tradeProcess(memberId, request);
+		
+		//보유자산
+		data[0] = service.getAssets(memberId);
+		
+		//평균매수
+		data[1] = 10000;
+		
+		//보유수량
+		data[2] = service.getQty(memberId, codeNum);
+		
+		Gson gson = new Gson();
+        String json = gson.toJson(data);
+        
+		PrintWriter out = response.getWriter();
+		out.write(json);  
 	}
 	
 	//TEST

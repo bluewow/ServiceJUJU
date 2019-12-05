@@ -80,7 +80,8 @@
 }
 
 .pop-up-context hr {
-	border: 1px solid #dee2e6;
+	display: block;
+	border: 0.5px solid #dee2e6;
 	margin: 8% 0% 0% 0%;
 }
 
