@@ -43,47 +43,41 @@ public class TradeController extends HttpServlet{
 
 		//가격정보 reflesh - ajax 요청
 		String price = request.getParameter("replaceEvent");
-		if(price != null) {
+		if(price != null) { //price is only "on"
+			//매수-매도 실행
+			tradeProcess(memberId, request);
 			refleshPrice(request, response, memberId, "095660");
 			return;
 		}
 
-		
-		//종목정보 from 검색페이지
-//		request.setAttribute("companyName", request.getAttribute("companyName"));
-		request.setAttribute("companyName", "네오위즈");
-		
 		//종목가격 
 		//종목 등락률
-
-		//보유 자산
-		request.setAttribute("myAssets", service.getAssets(memberId));
-		
-		//평균 매수
-		request.setAttribute("aveAssets", "10000");
-				
-		//보유수량
-		request.setAttribute("myQuantity", service.getQty(memberId, "095660"));
+		int sum = service.getStockAssets(memberId, "095660");
+		int qty = service.getQty(memberId, "095660");
+		//Get 종목정보, 해당 종목의 보유 자산, 평균 매수가, 보유수량
+		request.setAttribute("companyName", "네오위즈");
+		request.setAttribute("myAssets", sum);
+		request.setAttribute("aveAssets", sum / qty);
+		request.setAttribute("myQuantity", qty);
 		
 		request.getRequestDispatcher("trading.jsp").forward(request, response);
 	}
 
 	private boolean tradeProcess(int memberId, HttpServletRequest request) {
-		String trade = request.getParameter("trade");
-		
+		String trade = request.getParameter("button");
+
 		if(trade != null) {
 			String qty = null;
 			switch(trade) {
-			//구매수량, 매도수량
-			case "매       수":
+			case "buy": //구매
 				qty = request.getParameter("Purse/Sold");
 				if(qty != null && qty != "") 
-					service.setQty(memberId, "095660", Integer.parseInt(qty));
+					service.setQty(memberId, "095660", Integer.parseInt(qty), 20000);
 				break;
-			case "매       도":
+			case "sell": //매도
 				qty = request.getParameter("Purse/Sold");
 				if(qty != null && qty != "")
-					service.setQty(memberId, "095660", -Integer.parseInt(qty));
+					service.setQty(memberId, "095660", -Integer.parseInt(qty), 20000);
 				break;
 			default:
 				break;
@@ -121,17 +115,15 @@ public class TradeController extends HttpServlet{
 	private void refleshPrice(HttpServletRequest request, HttpServletResponse response, int memberId, String codeNum) throws IOException {
 		int[] data = new int[3]; 
 		
-		//매수-매도
-		tradeProcess(memberId, request);
+		int sum = service.getStockAssets(memberId, codeNum);
+		int qty = service.getQty(memberId, codeNum);
 		
-		//보유자산
-		data[0] = service.getAssets(memberId);
-		
+		//해당 종목의 보유자산
+		data[0] = sum;
 		//평균매수
-		data[1] = 10000;
-		
+		data[1] = sum / qty;
 		//보유수량
-		data[2] = service.getQty(memberId, codeNum);
+		data[2] = qty;
 		
 		Gson gson = new Gson();
         String json = gson.toJson(data);

@@ -10,7 +10,6 @@ window.addEventListener("load", function(){
 	
 	// 일봉,주봉,월봉 클릭 및 그래프 변경(ajax)
 	ajaxFunc();
-	
 	// 매수/매도 이벤트 처리
 	tradeFunc();
 	
@@ -92,6 +91,7 @@ window.addEventListener("load", function(){
 		var button = document.querySelector("#page-bottom-box");
 		var event = button.querySelector("input.event");
 		var data = button.querySelectorAll(".data");
+		var qty = button.querySelector("#text");
 		
 		button.onclick = function(e) {
 			if(e.target.className != event.className)
@@ -104,8 +104,14 @@ window.addEventListener("load", function(){
 //				data[i].innerHTML = money.toLocaleString();
 			}
 			
+			if(e.target.value == "매       수")
+				var trade = "buy";
+			else if(e.target.value =="매       도")
+				var trade = "sell";
+				
+			
 			var ajax = new XMLHttpRequest();
-	        ajax.open("GET", "../../card/trade/trade?replaceEvent=" + "on");
+	        ajax.open("GET", "../../card/trade/trade?replaceEvent=on&button=" + trade + "&Purse/Sold=" + qty.value);
 	        ajax.onload = function() {
 	        	console.log(ajax.responseText);
 	        }
