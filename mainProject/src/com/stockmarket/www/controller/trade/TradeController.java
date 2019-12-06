@@ -74,7 +74,9 @@ public class TradeController extends HttpServlet{
 		String trade = request.getParameter("button");
 		String qty = request.getParameter("Purse/Sold");
 		 
-		//result - 0:ok, 1:vmoney부족, 2: 거래정지목록, 3:장내시간이 아님, 4:수량이 0이하인 경우,
+		//result - 0:ok, 1:vmoney부족, 2: 거래정지목록, 
+		//		   3:장내시간이 아님, 4:수량이 0이하인 경우 거래x, 5:수량이  0 인경우
+		//		   6:보유종목이 아닌경우 거래x
 		if(trade != null && qty != null && qty != "") {
 			switch(trade) {
 			case "buy": //구매
@@ -82,12 +84,16 @@ public class TradeController extends HttpServlet{
 				if(result != 0) return result;
 				if(service.checkHaveStock(memberId, "095660") == false)
 					service.addHaveStock(memberId, "095660", Integer.parseInt(qty), 20000);
-				service.tradeBuy(memberId, "095660", Integer.parseInt(qty), 20000);
+				
+				service.tradeBuySell(memberId, "095660", Integer.parseInt(qty), 20000);
 				break;
 			case "sell": //매도
-				service.setQty(memberId, "095660", -Integer.parseInt(qty), 20000);
-//				if(haveStock.getQuantity() + qty < 0) {
-//					System.out.println("마이너스 수량");
+				if(service.checkHaveStock(memberId, "095660") == false)
+					return 6;
+				if(service.checkZeroHaveStock(memberId, "095660", Integer.parseInt(qty))) 
+					return 4;
+				
+				service.tradeBuySell(memberId, "095660", -Integer.parseInt(qty), 20000);
 				break;
 			default:
 				break;

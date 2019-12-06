@@ -95,13 +95,24 @@ public class BasicTradeService implements TradeService{
 	}
 	
 	@Override
+	public boolean checkZeroHaveStock(int id, String codeNum, int qty) {
+		HaveStock haveStock = stockDao.get(id, codeNum);
+		//마이나스 수량 체크
+		if(haveStock.getQuantity() + qty < 0) 
+			return true;
+		
+		return false;
+	}
+	
+	
+	@Override
 	public void addHaveStock(int id, String codeNum, int qty, int curStockPrice) {
 		HaveStock haveStock = new HaveStock(id, codeNum, qty, curStockPrice * qty);
 		stockDao.insert(haveStock);
 	};
 	
 	@Override
-	public void tradeBuy(int id, String codeNum, int qty, int curStockPrice) {
+	public void tradeBuySell(int id, String codeNum, int qty, int curStockPrice) {
 		Member member = memberDao.getMember(id);
 		HaveStock haveStock = stockDao.get(id, codeNum);
 		
@@ -118,9 +129,10 @@ public class BasicTradeService implements TradeService{
 	public static void main(String[] args) {
 		BasicTradeService service = new BasicTradeService();
 		
+/*				
 		//check trade buy
 		service.tradeBuy(2, "215600", 4, 20000);
-/*				
+
 		//가상머니 체크 Test
 		for(int i = 0; i < 10; i++)
 			System.out.println(service.checkVmoney(14, i, 300000));
