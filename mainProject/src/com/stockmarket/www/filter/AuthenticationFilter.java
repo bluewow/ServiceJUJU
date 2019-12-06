@@ -17,7 +17,7 @@ public class AuthenticationFilter implements Filter{
 
 	private static final String[] noAuthUrls = {
 			//TODO
-			"/card/search/search",
+			"/card/company/list",
 			"/card/trade/analysis", 
 			"/card/board/news_board",
 			};
