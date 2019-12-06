@@ -129,8 +129,8 @@
 			</div>
 			<div class="pop-up-content-row">
 				<textarea class="reg-content" maxlength="800" placeholder="내용을 입력하세요"></textarea>
-				<input type="button" class="reg-submit" id="submit" value="확인">
-				<input type="button" class="reg-cancel" id="cancel" value="취소">
+				<input type="button" class="reg-submit" name="submit" value="확인">
+				<input type="button" class="reg-cancel" name="cancel" value="취소">
 			</div>
 		</form>
 	</div>

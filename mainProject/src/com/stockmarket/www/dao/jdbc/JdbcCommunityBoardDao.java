@@ -159,24 +159,22 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 	@Override
 	public int insertCommunityBoard(CommunityBoard communityBoard) {
-		
 		int result = 0;
-		String sql = "INSERT INTO BOARD (ID, TITLE, WRITER_ID, REGDATE, HIT, CONTENT, STOCKCODE) "
-				+ "VALUES ((SELECT NVL(MAX(ID),0)+1 FROM BOARD), ?, ?, SYSTIMESTAMP, 0, ?, '095660')";
-
+		String sql = "INSERT INTO BOARD (ID, TITLE, WRITER_ID, CONTENT, STOCKCODE) "
+				+ "VALUES ((SELECT NVL(MAX(ID),0)+1 FROM BOARD), ?, ?, ?, '095660')";
+		
 		PreparedStatement pst = null;
 		JdbcDaoContext daoContext = new JdbcDaoContext();
 
 		try {
-
 			pst = daoContext.getPreparedStatement(sql);
 
 			pst.setString(1, communityBoard.getTitle());
 			pst.setString(2, communityBoard.getWriterId());
 			pst.setString(3, communityBoard.getContent());
 
-			result = pst.executeUpdate();
 
+			result = pst.executeUpdate();
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -186,5 +184,10 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 	}
 
 
-
+public static void main(String[] args) {
+	JdbcCommunityBoardDao com = new JdbcCommunityBoardDao();
+	CommunityBoard communityBoard = new CommunityBoard("a" ,"b", "c");
+	
+	com.insertCommunityBoard(communityBoard);
+}
 }
