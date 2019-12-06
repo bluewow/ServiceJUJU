@@ -82,10 +82,12 @@ public class TradeController extends HttpServlet{
 				if(result != 0) return result;
 				if(service.checkHaveStock(memberId, "095660") == false)
 					service.addHaveStock(memberId, "095660", Integer.parseInt(qty), 20000);
-				service.setQty(memberId, "095660", Integer.parseInt(qty), 20000);
+				service.tradeBuy(memberId, "095660", Integer.parseInt(qty), 20000);
 				break;
 			case "sell": //매도
 				service.setQty(memberId, "095660", -Integer.parseInt(qty), 20000);
+//				if(haveStock.getQuantity() + qty < 0) {
+//					System.out.println("마이너스 수량");
 				break;
 			default:
 				break;

@@ -34,4 +34,7 @@ public interface TradeService {
 	
 	/* HaveStock DB 에 데이터 추가*/
 	void addHaveStock(int id, String codeNum, int qty, int curStockPrice);
+	
+	/* 매수 실행 */
+	void tradeBuy(int id, String codeNum, int qty, int curStockPrice);
 }

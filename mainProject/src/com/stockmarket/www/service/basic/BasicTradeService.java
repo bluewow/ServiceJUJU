@@ -60,18 +60,12 @@ public class BasicTradeService implements TradeService{
 		JdbcHaveStockDao stockDao = new JdbcHaveStockDao();
 		
 		HaveStock haveStock = stockDao.get(id, stockId);
-		//TODO
-//		if(haveStock == null)
 			
-		if(haveStock.getQuantity() + qty < 0) {
-			System.out.println("마이너스 수량");
-		} else {
-			Member member = memberDao.getMember(id);
-			memberDao.updateMember(id, member.getvMoney() + (-qty * curPrice));
-			haveStock.setQuantity(haveStock.getQuantity() + qty);
-			haveStock.setSum(haveStock.getSum() + qty * curPrice);
-			stockDao.update(haveStock);
-		}
+		Member member = memberDao.getMember(id);
+		memberDao.updateMember(id, member.getvMoney() + (-qty * curPrice));
+		haveStock.setQuantity(haveStock.getQuantity() + qty);
+		haveStock.setSum(haveStock.getSum() + qty * curPrice);
+		stockDao.update(haveStock);
 	}
 	
 
@@ -105,13 +99,28 @@ public class BasicTradeService implements TradeService{
 		HaveStock haveStock = new HaveStock(id, codeNum, qty, curStockPrice * qty);
 		stockDao.insert(haveStock);
 	};
+	
+	@Override
+	public void tradeBuy(int id, String codeNum, int qty, int curStockPrice) {
+		Member member = memberDao.getMember(id);
+		HaveStock haveStock = stockDao.get(id, codeNum);
 		
+		//회원의 가상머니 수정
+		memberDao.updateMember(id, member.getvMoney() + (-qty * curStockPrice));
+		//보유종목에 대한 수량과 sum 수정
+		haveStock.setQuantity(haveStock.getQuantity() + qty);
+		haveStock.setSum(haveStock.getSum() + qty * curStockPrice);
+		stockDao.update(haveStock);
+	}
 /////////////////////////////////////////////////////////
 ////////////////////////// TEST /////////////////////////
 /////////////////////////////////////////////////////////
 	public static void main(String[] args) {
 		BasicTradeService service = new BasicTradeService();
 		
+		//check trade buy
+		service.tradeBuy(2, "215600", 4, 20000);
+/*				
 		//가상머니 체크 Test
 		for(int i = 0; i < 10; i++)
 			System.out.println(service.checkVmoney(14, i, 300000));
@@ -123,5 +132,7 @@ public class BasicTradeService implements TradeService{
 		
 		//check add HaveStock
 		service.addHaveStock(2, "215600", 3, 10000);
+*/		
+		
 	}
 }
