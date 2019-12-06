@@ -1,13 +1,7 @@
-/*	
-	drawBasic(); - 그림그리기 위한 data 함수
-	graphFunc(); - 그리기 함수
-	ajaxFunc(); - 일봉,주봉,월봉 클릭 및 그래프 변경(ajax)
-*/
-
 window.addEventListener("load", function(){
 	//load google chart
 	google.charts.load('current', {packages: ['corechart', 'line']});
-	
+
 	// 일봉,주봉,월봉 클릭 및 그래프 변경(ajax)
 	ajaxFunc();
 	// 매수/매도 이벤트 처리
@@ -104,10 +98,26 @@ window.addEventListener("load", function(){
 			if(e.target.className != event.className)
 		      	return;
 		    
-			if(e.target.value == "매       수")
+			if(!data[3].value) {
+				alert("수량을 입력해 주세요");
+				return;
+			}
+			
+			if(e.target.value == "매       수") {
 				var trade = "buy";
-			else if(e.target.value =="매       도")
+				if(confirm(data[3].value + "주 매수를 진행하시겠습니까?") == false) {
+					data[3].value = "";
+					return;
+				}
+				
+			}
+			else if(e.target.value =="매       도") {
 				var trade = "sell";
+				if(confirm(data[3].value + "주 매도를 진행하시겠습니까?") == false) {
+					data[3].value = "";
+					return;
+				}
+			}
 				
 			var ajax = new XMLHttpRequest();
 	        ajax.open("GET", "../../card/trade/trade?replaceEvent=on&button=" + trade + "&Purse/Sold=" + qty.value);
@@ -117,6 +127,10 @@ window.addEventListener("load", function(){
 		        data[1].innerHTML = result[1].toLocaleString() + "주";
 		        data[2].innerHTML = result[2].toLocaleString() + "원";
 		        data[3].value = "";
+			//result - 0:ok, 1:vmoney부족, 2: 거래정지목록, 
+			//		   3:장내시간이 아님, 4:수량이 0이하인 경우 거래x, 5:수량이  0 인경우
+			//		   6:보유종목이 아닌경우 거래x
+		        
 	        }    
 		    ajax.send();
 		}
