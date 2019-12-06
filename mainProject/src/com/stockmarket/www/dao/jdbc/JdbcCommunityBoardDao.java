@@ -13,10 +13,7 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 	@Override
 	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockCode) {
-		System.out.println(page);
-		System.out.println(field);
-		System.out.println(query);
-		System.out.println(stockCode);
+
 		List<CommunityBoard> list = new ArrayList<>();
 
 		String sql = "SELECT * FROM (SELECT ROWNUM NUM, B.* FROM(SELECT * FROM (SELECT * FROM BOARD_VIEW WHERE STOCKNAME LIKE ?) WHERE "
@@ -149,6 +146,34 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 			pst.setString(1, insertReply.getReContent());
 			pst.setString(2, insertReply.getWriterId());
 			pst.setInt(3, insertReply.getId());
+
+			result = pst.executeUpdate();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			daoContext.close(pst);
+		}
+		return result;
+	}
+
+	@Override
+	public int insertCommunityBoard(CommunityBoard communityBoard) {
+		
+		int result = 0;
+		String sql = "INSERT INTO BOARD (ID, TITLE, WRITER_ID, REGDATE, HIT, CONTENT, STOCKCODE) "
+				+ "VALUES ((SELECT NVL(MAX(ID),0)+1 FROM BOARD), ?, ?, SYSTIMESTAMP, 0, ?, '095660')";
+
+		PreparedStatement pst = null;
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+
+		try {
+
+			pst = daoContext.getPreparedStatement(sql);
+
+			pst.setString(1, communityBoard.getTitle());
+			pst.setString(2, communityBoard.getWriterId());
+			pst.setString(3, communityBoard.getContent());
 
 			result = pst.executeUpdate();
 

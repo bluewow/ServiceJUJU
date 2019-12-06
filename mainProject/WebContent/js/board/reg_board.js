@@ -28,4 +28,6 @@ window.addEventListener("load", function() {
 			alert("글등록을 거부한다!!")
 			regBoardForm.style.visibility = "hidden";
 	};
+	
+	
 })
