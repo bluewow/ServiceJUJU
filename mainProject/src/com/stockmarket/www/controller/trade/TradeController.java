@@ -45,9 +45,10 @@ public class TradeController extends HttpServlet{
 		//가격정보 reflesh - ajax 요청
 		String price = request.getParameter("replaceEvent");
 		if(price != null) { //price is only "on"
+			int result = 0;
 			//매수-매도 실행
-			tradeProcess(memberId, request);
-			updateResultPrice(request, response, memberId, "095660");
+			result = tradeProcess(memberId, request);
+			updateResultPrice(request, response, memberId, "095660", result);
 			return;
 		}
 
@@ -68,13 +69,19 @@ public class TradeController extends HttpServlet{
 /////////////////// 매수 - 매도 관련 함수 /////////////////////
 /////////////////////////////////////////////////////////
 	
-	private void tradeProcess(int memberId, HttpServletRequest request) {
+	private int tradeProcess(int memberId, HttpServletRequest request) {
+		int result = 0;
 		String trade = request.getParameter("button");
 		String qty = request.getParameter("Purse/Sold");
-
+		 
+		//result - 0:ok, 1:vmoney부족, 2: 거래정지목록, 3:장내시간이 아님, 4:수량이 0이하인 경우,
 		if(trade != null && qty != null && qty != "") {
 			switch(trade) {
 			case "buy": //구매
+				result = service.checkVmoney(memberId, Integer.parseInt(qty), 20000);
+				if(result != 0) return result;
+				if(service.checkHaveStock(memberId, "095660") == false)
+					service.addHaveStock(memberId, "095660", Integer.parseInt(qty), 20000);
 				service.setQty(memberId, "095660", Integer.parseInt(qty), 20000);
 				break;
 			case "sell": //매도
@@ -84,12 +91,13 @@ public class TradeController extends HttpServlet{
 				break;
 			}
 		}
+		return 0;
 	}
 
 	
 
-	private void updateResultPrice(HttpServletRequest request, HttpServletResponse response, int memberId, String codeNum) throws IOException {
-		int[] data = new int[3]; 
+	private void updateResultPrice(HttpServletRequest request, HttpServletResponse response, int memberId, String codeNum, int result) throws IOException {
+		int[] data = new int[4]; 
 		
 		int sum = service.getStockAssets(memberId, codeNum);
 		int qty = service.getQty(memberId, codeNum);
@@ -99,7 +107,9 @@ public class TradeController extends HttpServlet{
 		//보유수량
 		data[1] = qty;
 		//가상머니
-		data[2] = service.getAssets(memberId); 
+		data[2] = service.getAssets(memberId);
+		//결과 
+		data[3] = result;
 		
 		Gson gson = new Gson();
         String json = gson.toJson(data);
