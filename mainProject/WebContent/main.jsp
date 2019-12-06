@@ -53,7 +53,7 @@
 
 </head>
 
-<body>
+<body class="scrollbar custom-scrollbar-style">
    <!-- =============================================================================================================== -->
    <header class="navbar">
       <h1 style="display: none;">Stock Market</h1>
@@ -112,7 +112,7 @@
                         <div class="tab-pane fade show active" id="search"
                            role="tabpanel" aria-labelledby="search-tab">
                            
-                           <iframe src="./card/company/list" scrolling="no">
+                           <iframe src="./card/company/list">
                            </iframe>
                         </div>
                      </div>
@@ -138,12 +138,11 @@
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="analysis"
                            role="tabpanel" aria-labelledby="analysis-tab">
-                           <iframe height="100%" src="./card/trade/analysis"
-                              scrolling="no"> </iframe>
+                           <iframe height="100%" src="./card/trade/analysis"> </iframe>
                         </div>
                         <div class="tab-pane fade" id="trading" role="tabpanel"
                            aria-labelledby="trading-tab">
-                           <iframe src="./card/trade/trade" scrolling="no">
+                           <iframe src="./card/trade/trade">
                            </iframe>
                         </div>
 
@@ -169,7 +168,7 @@
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="capture"
                            role="tabpanel" aria-labelledby="capture-tab"></div>
-                            <iframe src="/card/capturememo/captureMemo" scrolling="no">
+                            <iframe src="/card/capturememo/captureMemo">
                            </iframe>
                      </div>
                   </section>
@@ -202,18 +201,15 @@
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="news" role="tabpanel"
                            aria-labelledby="news-tab">
-                           <iframe src="./card/board/news_board"
-                              scrolling="no"> </iframe>
+                           <iframe src="./card/board/news_board"> </iframe>
                         </div>
                         <div class="tab-pane fade" id="community" role="tabpanel"
                            aria-labelledby="community-tab">
-                           <iframe src="./card/board/community_board"
-                              scrolling="no"></iframe>
+                           <iframe src="./card/board/community_board" scrolling="no"></iframe>
                         </div>
                         <div class="tab-pane fade" id="eventcommunity" role="tabpanel"
                            aria-labelledby="eventcommunity-tab">
-                           <iframe src="./card/board/stock_board"
-                              scrolling="no"></iframe>
+                           <iframe src="./card/board/stock_board" scrolling="no"></iframe>
                         </div>
                      </div>
                   </section>
@@ -240,13 +236,11 @@
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="Purchaselist"
                            role="tabpanel" aria-labelledby="Purchaselist-tab">
-                           <iframe src="./card/managestocks/holdinglist.jsp"
-                              scrolling="no"> </iframe>
+                           <iframe src="./card/managestocks/holdinglist.jsp"> </iframe>
                         </div>
                         <div class="tab-pane fade" id="Interest" role="tabpanel"
                            aria-labelledby="Interest-tab">
-                           <iframe src="./card/managestocks/interestlist"
-                              scrolling="no"> </iframe>
+                           <iframe src="./card/managestocks/interestlist"> </iframe>
                         </div>
                      </div>
                   </section>
@@ -269,7 +263,7 @@
                         <div class="tab-content" id="myTabContent">
                            <div class="tab-pane fade show active" id="assetgraph"
                               role="tabpanel" aria-labelledby="assetgraph-tab">
-                              <iframe src="./card/asset/myAsset" scrolling="no">
+                              <iframe src="./card/asset/myAsset">
                               </iframe></div>
 
                         </div>
@@ -300,7 +294,7 @@
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="rangking"
                            role="tabpanel" aria-labelledby="rangking-tab">
-                           <iframe src="./card/rank/ranking" scrolling="no">
+                           <iframe src="./card/rank/ranking">
                            </iframe>
                         </div>
                      </div>

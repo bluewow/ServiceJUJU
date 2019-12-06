@@ -53,7 +53,7 @@
 				</tr>
 			</thead>
 		</table>
-		<div id="scroll">
+		<div id="scroll" class="scrollbar custom-scrollbar-style">
 		<table class="stockTable">
 			<tbody class="content">
 				<tr>

@@ -25,7 +25,7 @@
 	 
 	 
 </head>
-<body>
+<body class="scrollbar custom-scrollbar-style">
 <div id="trading-container">
 	<!-- --------------- page-top -------------- -->
 	<header class="page-top">

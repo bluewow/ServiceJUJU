@@ -22,10 +22,9 @@
 
 </head>
 <!-- ======================================================================= -->
-<body>
-	<main>
-		<div id="newsScroll">
-
+<body class="scrollbar custom-scrollbar-style">
+	<main id="contaner">
+		<div>
 			<c:forEach var="news" items="${news_lists}" varStatus="status">
 				<table id="newsTable">
 					<thead class="content">

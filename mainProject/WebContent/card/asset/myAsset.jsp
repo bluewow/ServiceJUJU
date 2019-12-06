@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="../../css/myAsset.css">
 </head>
 
-<body>
+<body class="scrollbar custom-scrollbar-style">
 	<main id="card">
 		<section id="card-top">
 			<div id="titleAssetTrend" class="wrap">

@@ -8,14 +8,15 @@ pageEncoding="UTF-8"%>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="../../css/normalize.css">
 <link rel="stylesheet" type="text/css" href="../../css/holding.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="../../js/managestocks/holding_list.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
 
-<body>
-<div class="manageStocks" id="scroll" >
+<body class="scrollbar custom-scrollbar-style">
+<div class="manageStocks">
 <button class="updateButton">
 데이터 갱신
 </button>

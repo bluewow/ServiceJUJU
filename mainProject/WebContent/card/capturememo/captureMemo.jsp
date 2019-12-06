@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="../../css/captureMemo.css">
 </head>
 <!-- style="overflow:scroll" -->
-<body>
+<body class="scrollbar custom-scrollbar-style">
 	<section id="captureScroll">
 		<table id="captureTable" >
 			<thead class="thead">
