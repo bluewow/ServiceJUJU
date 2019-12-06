@@ -4,7 +4,7 @@ window.addEventListener("load", function() {
 	var tbody = section.querySelector("table tbody");
 	var pager = section.querySelector(".pager");
 
-	var load = function(page) {
+	load = function(page) {
 
 		var request = new XMLHttpRequest();
 		request.open("GET", "../../card/board/stock_board_list?p=" + page);
