@@ -47,7 +47,7 @@ public class TradeController extends HttpServlet{
 		if(price != null) { //price is only "on"
 			//매수-매도 실행
 			tradeProcess(memberId, request);
-			refleshPrice(request, response, memberId, "095660");
+			updateResultPrice(request, response, memberId, "095660");
 			return;
 		}
 
@@ -64,29 +64,54 @@ public class TradeController extends HttpServlet{
 		request.getRequestDispatcher("trading.jsp").forward(request, response);
 	}
 
-	private boolean tradeProcess(int memberId, HttpServletRequest request) {
+/////////////////////////////////////////////////////////
+/////////////////// 매수 - 매도 관련 함수 /////////////////////
+/////////////////////////////////////////////////////////
+	
+	private void tradeProcess(int memberId, HttpServletRequest request) {
 		String trade = request.getParameter("button");
+		String qty = request.getParameter("Purse/Sold");
 
-		if(trade != null) {
-			String qty = null;
+		if(trade != null && qty != null && qty != "") {
 			switch(trade) {
 			case "buy": //구매
-				qty = request.getParameter("Purse/Sold");
-				if(qty != null && qty != "") 
-					service.setQty(memberId, "095660", Integer.parseInt(qty), 20000);
+				service.setQty(memberId, "095660", Integer.parseInt(qty), 20000);
 				break;
 			case "sell": //매도
-				qty = request.getParameter("Purse/Sold");
-				if(qty != null && qty != "")
-					service.setQty(memberId, "095660", -Integer.parseInt(qty), 20000);
+				service.setQty(memberId, "095660", -Integer.parseInt(qty), 20000);
 				break;
 			default:
 				break;
 			}
 		}
-		return true;
 	}
 
+	
+
+	private void updateResultPrice(HttpServletRequest request, HttpServletResponse response, int memberId, String codeNum) throws IOException {
+		int[] data = new int[3]; 
+		
+		int sum = service.getStockAssets(memberId, codeNum);
+		int qty = service.getQty(memberId, codeNum);
+		
+		//평균단가
+		data[0] = qty == 0 ? 0 : sum / qty;
+		//보유수량
+		data[1] = qty;
+		//가상머니
+		data[2] = service.getAssets(memberId); 
+		
+		Gson gson = new Gson();
+        String json = gson.toJson(data);
+        
+		PrintWriter out = response.getWriter();
+		out.write(json);  
+	}
+
+/////////////////////////////////////////////////////////
+/////////////////// 일봉/주봉/월봉 관련 함수 /////////////////////
+/////////////////////////////////////////////////////////
+	
 	private void dateButtonStatus(String date, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		int[][] data = {};
@@ -113,26 +138,6 @@ public class TradeController extends HttpServlet{
 		out.write(json);      
 	}
 
-	private void refleshPrice(HttpServletRequest request, HttpServletResponse response, int memberId, String codeNum) throws IOException {
-		int[] data = new int[3]; 
-		
-		int sum = service.getStockAssets(memberId, codeNum);
-		int qty = service.getQty(memberId, codeNum);
-		
-		//평균매수
-		data[0] = qty == 0 ? 0 : sum / qty;
-		//보유수량
-		data[1] = qty;
-		//보유자산
-		data[2] = service.getAssets(memberId); 
-		
-		Gson gson = new Gson();
-        String json = gson.toJson(data);
-        
-		PrintWriter out = response.getWriter();
-		out.write(json);  
-	}
-	
 	//TEST
 	public static void main(String[] args) {
 	        int[] numbers = {1, 1, 2, 3, 5, 8, 13};
