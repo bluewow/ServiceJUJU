@@ -75,7 +75,7 @@ public class TradeController extends HttpServlet{
 		String qty = request.getParameter("Purse/Sold");
 		 
 		//result - 0:ok, 1:vmoney부족, 2: 거래정지목록, 
-		//		   3:장내시간이 아님, 4:수량이 0이하인 경우 거래x, 5:수량이  0 인경우
+		//		   3:장내시간이 아님, 4:수량이 0이하가 되는 경우 거래x, 
 		//		   6:보유종목이 아닌경우 거래x
 		if(trade != null && qty != null && qty != "") {
 			switch(trade) {

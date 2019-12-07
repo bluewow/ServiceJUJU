@@ -6,8 +6,10 @@ window.addEventListener("load", function(){
 	ajaxFunc();
 	// 매수/매도 이벤트 처리
 	tradeFunc();
+	// 보유수량에 따른 매도버튼 활성/비활성화
+	checkSellButton();
 	
-	//TEMP 함수사용법을 익혀 적절히 배치 필요
+	//TODO 함수사용법을 익혀 적절히 배치 필요
     var ajax = new XMLHttpRequest();
     ajax.open("GET", "../../card/trade/trade?date=일봉");
     ajax.onload = function() {
@@ -117,6 +119,7 @@ window.addEventListener("load", function(){
 					data[3].value = "";
 					return;
 				}
+				//TODO 매도후 보유수량이 0인경우 처리
 			}
 				
 			var ajax = new XMLHttpRequest();
@@ -128,13 +131,16 @@ window.addEventListener("load", function(){
 		        data[2].innerHTML = result[2].toLocaleString() + "원";
 		        data[3].value = "";
 			//result - 0:ok, 1:vmoney부족, 2: 거래정지목록, 
-			//		   3:장내시간이 아님, 4:수량이 0이하인 경우 거래x, 5:수량이  0 인경우
+			//		   3:장내시간이 아님, 4:수량이 0이하인 경우 거래x,
 			//		   6:보유종목이 아닌경우 거래x
-		        
+		        console.log("result :" + result[3]);
 	        }    
 		    ajax.send();
 		}
 	}
 	
+	function checkSellButton() {
+		var event = document.querySelector("input.event");
+	}
 
 });
