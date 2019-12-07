@@ -95,10 +95,20 @@ public class BasicTradeService implements TradeService{
 	}
 	
 	@Override
-	public boolean checkZeroHaveStock(int id, String codeNum, int qty) {
+	public boolean checkMinusHaveStock(int id, String codeNum, int qty) {
 		HaveStock haveStock = stockDao.get(id, codeNum);
 		//마이나스 수량 체크
-		if(haveStock.getQuantity() + qty < 0) 
+		if(haveStock.getQuantity() - qty < 0) 
+			return true;
+		
+		return false;
+	}
+	
+	@Override
+	public boolean checkZeroHaveStock(int id, String codeNum) {
+		HaveStock haveStock = stockDao.get(id, codeNum);
+		//Zero 수량 체크
+		if(haveStock.getQuantity() == 0) 
 			return true;
 		
 		return false;
@@ -106,10 +116,15 @@ public class BasicTradeService implements TradeService{
 	
 	
 	@Override
-	public void addHaveStock(int id, String codeNum, int qty, int curStockPrice) {
-		HaveStock haveStock = new HaveStock(id, codeNum, qty, curStockPrice * qty);
+	public void addHaveStock(int id, String codeNum) {
+		HaveStock haveStock = new HaveStock(id, codeNum, 0, 0);
 		stockDao.insert(haveStock);
 	};
+	
+	@Override
+	public void delHaveStock(int memberId, String codeNum) {
+		stockDao.delete(memberId, codeNum);
+	}
 	
 	@Override
 	public void tradeBuySell(int id, String codeNum, int qty, int curStockPrice) {
@@ -147,4 +162,6 @@ public class BasicTradeService implements TradeService{
 */		
 		
 	}
+
+
 }

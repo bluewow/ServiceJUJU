@@ -70,30 +70,35 @@ public class TradeController extends HttpServlet{
 /////////////////////////////////////////////////////////
 	
 	private int tradeProcess(int memberId, HttpServletRequest request) {
-		int result = 0;
 		String trade = request.getParameter("button");
 		String qty = request.getParameter("Purse/Sold");
 		 
 		//result - 0:ok, 1:vmoney부족, 2: 거래정지목록, 
 		//		   3:장내시간이 아님, 4:수량이 0이하가 되는 경우 거래x, 
-		//		   6:보유종목이 아닌경우 거래x
+		//		   5:수량이 0이 되는 경우 6:보유종목이 아닌경우 거래x
 		if(trade != null && qty != null && qty != "") {
 			switch(trade) {
 			case "buy": //구매
-				result = service.checkVmoney(memberId, Integer.parseInt(qty), 20000);
-				if(result != 0) return result;
+				if(service.checkVmoney(memberId, Integer.parseInt(qty), 20000) != 0)
+					return 1;
 				if(service.checkHaveStock(memberId, "095660") == false)
-					service.addHaveStock(memberId, "095660", Integer.parseInt(qty), 20000);
+					service.addHaveStock(memberId, "095660");
 				
 				service.tradeBuySell(memberId, "095660", Integer.parseInt(qty), 20000);
 				break;
 			case "sell": //매도
 				if(service.checkHaveStock(memberId, "095660") == false)
 					return 6;
-				if(service.checkZeroHaveStock(memberId, "095660", Integer.parseInt(qty))) 
+				if(service.checkMinusHaveStock(memberId, "095660", Integer.parseInt(qty))) 
 					return 4;
 				
 				service.tradeBuySell(memberId, "095660", -Integer.parseInt(qty), 20000);
+				
+				//매도후 수량이 0인 경우 db 삭제
+				if(service.checkZeroHaveStock(memberId, "095660")) { 
+					service.delHaveStock(memberId, "095660");
+					return 5;
+				}
 				break;
 			default:
 				break;

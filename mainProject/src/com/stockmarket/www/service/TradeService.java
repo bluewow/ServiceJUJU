@@ -32,12 +32,18 @@ public interface TradeService {
 	/* 주식의 소유여부를 체크하여 없으면 addHaveStock 을 실행한다 */
 	boolean checkHaveStock(int id, String codeNum);
 	
-	/* 주식 - 보유수량을 체크한다 */
-	boolean checkZeroHaveStock(int id, String codeNum, int qty);
+	/* 주식 - Zero 수량을 체크한다 */
+	boolean checkZeroHaveStock(int id, String codeNum);
+	/* 주식 - 마이나스 수량을 체크한다 */
+	boolean checkMinusHaveStock(int id, String codeNum, int qty);
 	
 	/* HaveStock DB 에 데이터 추가*/
-	void addHaveStock(int id, String codeNum, int qty, int curStockPrice);
+	void addHaveStock(int id, String codeNum);
+	/* HaveStock DB 에 데이터 삭지*/
+	void delHaveStock(int memberId, String codeNum);
 	
 	/* 매수 실행 */
 	void tradeBuySell(int id, String codeNum, int qty, int curStockPrice);
+
+	
 }

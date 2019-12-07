@@ -3,14 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
-<!-- 매도버튼 음영처리 및 disable 처리 -->
-<c:set var="shadow" value=""/>
-<c:if test= "${myQuantity <= 0 }">
-	<c:set var="shadow" value="shadow"/>
-	<c:set var="disable" value="disabled"/>
-</c:if>
-		
 <html>
 <head>
 
@@ -63,7 +55,7 @@
 				<div>
 					<input class="data" id="text" type="text" name="Purse/Sold" autocomplete="off">
 				</div>
-				<input class="event button button-button animation" type="button" ${disable } name="trade" value="매       도">
+				<input id="sell" class="event button button-button animation" type="button" name="trade" value="매       도">
 				<%-- <input class="event button button-button animation ${shadow }" type="submit" ${disable } name="trade" value="매       도"> --%>
 			</div>
 		</form>

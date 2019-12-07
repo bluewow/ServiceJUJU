@@ -6,8 +6,6 @@ window.addEventListener("load", function(){
 	ajaxFunc();
 	// 매수/매도 이벤트 처리
 	tradeFunc();
-	// 보유수량에 따른 매도버튼 활성/비활성화
-	checkSellButton();
 	
 	//TODO 함수사용법을 익혀 적절히 배치 필요
     var ajax = new XMLHttpRequest();
@@ -95,9 +93,12 @@ window.addEventListener("load", function(){
 		var event = button.querySelector("input.event");
 		var data = button.querySelectorAll(".data");
 		var qty = button.querySelector("#text");
+		var sellButton = button.querySelector("#sell");
 		
+		checkSellButton();
+    	
 		button.onclick = function(e) {
-			if(e.target.className != event.className)
+			if(e.target.name != event.name)
 		      	return;
 		    
 			if(!data[3].value) {
@@ -119,7 +120,6 @@ window.addEventListener("load", function(){
 					data[3].value = "";
 					return;
 				}
-				//TODO 매도후 보유수량이 0인경우 처리
 			}
 				
 			var ajax = new XMLHttpRequest();
@@ -131,16 +131,39 @@ window.addEventListener("load", function(){
 		        data[2].innerHTML = result[2].toLocaleString() + "원";
 		        data[3].value = "";
 			//result - 0:ok, 1:vmoney부족, 2: 거래정지목록, 
-			//		   3:장내시간이 아님, 4:수량이 0이하인 경우 거래x,
-			//		   6:보유종목이 아닌경우 거래x
-		        console.log("result :" + result[3]);
+			//		   3:장내시간이 아님, 4:수량이 0이하인 경우 거래x, 
+			//		    5:수량이 0이 되는 경우 6:보유종목이 아닌경우 거래x
+		        switch(result[3]) {
+		        case 0:
+		        	alert("체결되었습니다");
+		        	break;
+		        case 1:
+		        	alert("가상머니가 부족합니다");
+		        	break;
+		        case 4:
+		        	alert("보유수량을 초과하였습니다");
+		        	break;
+		        case 5:
+		        	break;
+		        case 6:
+		        	alert("현재 보유종목이 아닙니다.");
+		        	break;
+		        }
+		        checkSellButton();
 	        }    
 		    ajax.send();
 		}
-	}
-	
-	function checkSellButton() {
-		var event = document.querySelector("input.event");
+		
+		function checkSellButton() {
+			//매도버튼 disable 체크
+			if(data[1].innerHTML == "0주") {
+				sellButton.className = "event button button-button shadow"
+				sellButton.disabled = true;
+			} else {
+				sellButton.className = "event button button-button animation"
+				sellButton.disabled = false;
+			}
+		}
 	}
 
 });
