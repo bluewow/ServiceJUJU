@@ -1,11 +1,24 @@
 package com.stockmarket.www.service.basic;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
+import org.apache.commons.lang3.StringUtils;
+import org.jsoup.Connection;
+import org.jsoup.Connection.Response;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -23,6 +36,7 @@ import com.stockmarket.www.entity.CurStock;
 import com.stockmarket.www.entity.HaveStockView;
 import com.stockmarket.www.entity.Member;
 import com.stockmarket.www.entity.RecordAsset;
+import com.stockmarket.www.service.CompanyService;
 import com.stockmarket.www.service.SystemService;
 
 public class BasicSystemService implements SystemService {
@@ -238,12 +252,162 @@ public class BasicSystemService implements SystemService {
 				System.out.println("케이스 5");
 				sys.insertRecordAsset();
 				break;
-			case 6: 
+			case 6:  // search test
+//				searchTest("지우개");
+//				searchTest("새벽배송");
+//				searchTest("카카오톡");
+//				searchTest("카카오");
+//				searchTest("반도체");
+//				searchTest("김정은");
+//				searchTest("브라운더스트");
+				searchTest("철도");
+			case 7:
 				return;
-				
 			}
 			System.out.println("종료");
 		}
-	}
+	}//finished main
+	
+	private static void searchTest(String search) throws IOException {
+		Response response = null;
+		Document doc = null;
+		
+		//전기장비, 전기제품, 건강
+		String[] list = {
+				"에너지", "게임", "운송", "전기", "통신", "출판", "핸드셋", "문구", "건강", "미디어",
+				"반도체", "투자", "소프트", "판매", "생물", "항공사", "광고", "기계", "유통", 
+				"생명", "기업", "디스플레이", "사무", "전자", "종이", "목재", "소매",
+				"화장품", "교육", "백화점", "건축", "해운사", "호텔", "레저", "레스토랑",
+				"상업", "섬유", "의류", "포장재", "조선", "제약", "컴퓨터", "유틸리티",
+				"식품", "가구", "전력", "자동차", "화학", "철강", "도로", "철도", "무선", "통신",
+				"가스", "자재", "가정", "무역", "기타", "은행", "생명", "IT", "it", "음료",
+				"석유", "우주", "국방", "방송", "보험", "부동산", "비철금속", "철금속", "카드",
+				"금융", "담배", "증권", "방위"
+		};
 
+//		case 1 search + 업종명 검색결과 업종명이름으로 검색된 횟수
+//		실패 		
+//		새벽배송 검색 결과
+//		새벽배송 게임 : 45
+//		새벽배송 전기 : 45
+//		새벽배송 건강 : 43
+//		새벽배송 소프트 : 40
+//		새벽배송 광고 : 50
+//		새벽배송 백화점 : 44
+//		새벽배송 호텔 : 61
+//		새벽배송 식품 : 53
+//		새벽배송 카드 : 46
+//		for(int i = 0; i < list.length; i++) {
+//			String str = search + " " + list[i];
+//			String url = "https://search.naver.com/search.naver?query=" + str; 
+//			try {
+//				response = Jsoup.connect(url)
+//			            .method(Connection.Method.GET)
+//	                    .execute();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//	
+//			doc = response.parse();
+//			System.out.println(str + " : " + StringUtils.countMatches(doc.select("body").text(), list[i]));
+//		}
+		
+//		case 2 search + 업체 검색결과를 defined 된 단어와 매칭
+//		_sp_each_source 제외? ex) 중소기업신문, 머니투데이 
+//		Map<String, Integer>result = new HashMap<String, Integer>();
+//		String str = search + " " + "업체";
+//		String url = "https://search.naver.com/search.naver?query=" + str; 
+//		try {
+//			response = Jsoup.connect(url)
+//					.method(Connection.Method.GET)
+//					.execute();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		doc = response.parse();
+//		for(int i = 0; i < list.length; i++) {
+////			System.out.println(str + " " + list[i] + " : " + StringUtils.countMatches(doc.select("body").text(), list[i]));
+//			result.put(search + list[i] , StringUtils.countMatches(doc.select("body").text(), list[i]));
+//		}
+//
+//		str = search + " " + "업종";
+//		url = "https://search.naver.com/search.naver?query=" + str; 
+//		try {
+//			response = Jsoup.connect(url)
+//					.method(Connection.Method.GET)
+//					.execute();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		doc = response.parse();
+//		for(int i = 0; i < list.length; i++) {
+////			System.out.println(str + " " + list[i] + " : " + StringUtils.countMatches(doc.select("body").text(), list[i]));
+//			Object temp = (Object)(search+list[i]);
+//			result.put(search + list[i], result.get(temp) + StringUtils.countMatches(doc.select("body").text(), list[i]));
+//		}
+//		
+//		for (String key : result.keySet()) {
+//		    System.out.println(key + " : " + result.get(key));
+//
+//		}
+		
+		
+//		case3 검색어 + "주식" 검색 결과와 주식명 대비
+//		case3 검색어 + "종목" 검색 결과와 주식명 대비
+//		"테마주"
+//		검색결과 count 에 따른 정확도
+//		1위의 종목의 업종리스트를 더한다
+		Map<String, Integer>result = new HashMap<String, Integer>();
+		String[] arr = {"주식", "종목", "테마주"};
+//		String[] stockList = null;
+		CSVStockDataDao data = new CSVStockDataDao();
+		String Path1 = "C:\\work\\Repository\\stockMarket\\mainProject\\WebContent\\fileUpload\\KOSPI.csv";
+		String Path2 = "C:\\work\\Repository\\stockMarket\\mainProject\\WebContent\\fileUpload\\KOSDAQ.csv";
+		List<String> stockList = new ArrayList<>();
+		stockList = data.getColumnData(0, Path1);
+		stockList.addAll(data.getColumnData(0, Path2));
+//		for(String str : stockList) 
+//			System.out.println(str);
+		
+		for(int i = 0; i < arr.length; i++) {
+			String str = search + " " + arr[i];
+			String url = "https://search.naver.com/search.naver?query=" + str; 
+			try {
+				response = Jsoup.connect(url)
+						.method(Connection.Method.GET)
+						.execute();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			doc = response.parse();
+			System.out.println(doc.select("#main_pack").text());
+			if(i == 0) {
+				for(int j = 0; j < stockList.size() ; j++) {
+					result.put(stockList.get(j) , StringUtils.countMatches(doc.select("#main_pack").text(), stockList.get(j)));
+				}
+//				for (String key : result.keySet()) {
+//					if(result.get(key) != 0)
+//						System.out.println(key + " : " + result.get(key));
+//
+//				}
+			} else {
+				for(int j = 0; j < stockList.size() ; j++) {
+					Object temp = (Object)(stockList.get(j));
+					result.put(stockList.get(j), result.get(temp) + StringUtils.countMatches(doc.select("#main_pack").text(), stockList.get(j)));
+				}
+//				for (String key : result.keySet()) {
+//					if(result.get(key) != 0)
+//						System.out.println(key + " : " + result.get(key));
+//
+//				}
+			}
+			
+		}
+		for (String key : result.keySet()) {
+			if(result.get(key) != 0)
+				System.out.println(key + " : " + result.get(key));
+
+		}
+		
+	}
 }
