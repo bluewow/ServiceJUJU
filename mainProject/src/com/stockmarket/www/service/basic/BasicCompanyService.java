@@ -1,22 +1,16 @@
 package com.stockmarket.www.service.basic;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvValidationException;
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
 import com.stockmarket.www.entity.Company;
 import com.stockmarket.www.service.CompanyService;
@@ -175,6 +169,30 @@ public class BasicCompanyService implements CompanyService {
 		 */
 		return null;
 
+	}
+
+	/* 네이버 업종 크롤링 */
+	@Override
+	public void stockIndustryCrawling() {
+		String url = "https://finance.naver.com/sise/sise_group.nhn?type=upjong";
+		Document doc = null;
+		
+		try {
+			doc = Jsoup.connect(url).get();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// tr tag에 업종 링크를 선택
+		
+		Elements Industrytable = doc.select("#contentarea_left");
+		
+		Iterator<Element> IndustryAtag = Industrytable.select("tr a").iterator();
+		
+		while (IndustryAtag.hasNext()) {
+			System.out.println(IndustryAtag.next());
+		}
+		
 	}
 
 }

@@ -16,7 +16,8 @@ public interface CompanyService {
 	void setFilePath(String csvFilePath);
 
 	List<Company> getCompanyListFromNaverByThema(String companyName);
-
+	
+	void stockIndustryCrawling();
 	
 	
 }
