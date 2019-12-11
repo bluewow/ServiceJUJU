@@ -196,15 +196,59 @@ public class BasicCompanyService implements CompanyService {
 			upjongAtag.add(IndustryAtag.next().attr("href"));
 		}
 		//System.out.println(upjongAtag); ==== 여기까지 출력 됨....
-//		
-//	
-//		while (IndustryName.hasNext()) {
-//			upjonName.add(IndustryName.next().text());
-//			cnt++;
-//			System.out.println(upjonName);
-//			System.out.println(cnt);
-//		}
+
+		// 1. 업종명과 링크를 얻는다.
+		// 2. 업종명에 해당하는 링크를 타고 들어가서 상세 종목명을 얻는다.
+		// 일단 여기까지..
 		
+		ArrayList <String> detailIndustryList = new ArrayList<>();
+		for (int i = 0; i < upjonName.size(); i++) {
+			String upjongDetailUrl = "https://finance.naver.com" + upjongAtag.get(i);
+			Document upjongDetail = null;
+			
+			detailIndustryList.add(upjonName.get(i));
+
+			
+			try {
+				upjongDetail = Jsoup.connect(upjongDetailUrl).get();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			Elements detailIndustrytable = upjongDetail.select("tbody a");
+			Iterator<Element> detailIndustryName = detailIndustrytable.select("a").iterator();
+			
+			
+			
+			while (detailIndustryName.hasNext()) {
+				detailIndustryList.add(detailIndustryName.next().text());
+			}
+			
+		}
+		
+		System.out.println(detailIndustryList);
+//		ArrayList <String> detailIndustryList = new ArrayList<>();
+//		String upjongDetailUrl = "https://finance.naver.com" + upjongAtag.get(0);
+//		Document upjongDetail = null;
+//		
+//		detailIndustryList.add(upjonName.get(0));
+//
+//		
+//		try {
+//			upjongDetail = Jsoup.connect(upjongDetailUrl).get();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		Elements detailIndustrytable = upjongDetail.select("tbody a");
+//		Iterator<Element> detailIndustryName = detailIndustrytable.select("a").iterator();
+//		
+//		
+//		
+//		while (detailIndustryName.hasNext()) {
+//			detailIndustryList.add(detailIndustryName.next().text());
+//			System.out.println(detailIndustryList);
+//		}
 		
 		
 		
