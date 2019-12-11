@@ -9,8 +9,10 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -32,6 +34,7 @@ import com.stockmarket.www.dao.csv.CSVStockDataDao;
 import com.stockmarket.www.dao.jdbc.JDBCRecordAssetDao;
 import com.stockmarket.www.dao.jdbc.JdbcHaveStockDao;
 import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
+import com.stockmarket.www.entity.Company;
 import com.stockmarket.www.entity.CurStock;
 import com.stockmarket.www.entity.HaveStockView;
 import com.stockmarket.www.entity.Member;
@@ -259,8 +262,18 @@ public class BasicSystemService implements SystemService {
 //				searchTest("카카오");
 //				searchTest("반도체");
 //				searchTest("김정은");
+//				searchTest("미사일");
 //				searchTest("브라운더스트");
-				searchTest("철도");
+//				searchTest("철도");
+				searchTest("기저귀");
+//				searchTest("4차산업");
+//				searchTest("손흥민");
+//				searchTest("트럼프");
+//				searchTest("비트코인");
+//				searchTest("네오위즈");
+//				searchTest("암호화폐");
+//				searchTest("로봇");
+//				searchTest("SLAM");
 			case 7:
 				return;
 			}
@@ -312,7 +325,7 @@ public class BasicSystemService implements SystemService {
 //			System.out.println(str + " : " + StringUtils.countMatches(doc.select("body").text(), list[i]));
 //		}
 		
-//		case 2 search + 업체 검색결과를 defined 된 단어와 매칭
+//		case 2 search + "업체" or "업종" 검색결과를 defined 된 단어와 매칭
 //		_sp_each_source 제외? ex) 중소기업신문, 머니투데이 
 //		Map<String, Integer>result = new HashMap<String, Integer>();
 //		String str = search + " " + "업체";
@@ -355,10 +368,12 @@ public class BasicSystemService implements SystemService {
 //		case3 검색어 + "주식" 검색 결과와 주식명 대비
 //		case3 검색어 + "종목" 검색 결과와 주식명 대비
 //		"테마주"
-//		검색결과 count 에 따른 정확도
-//		1위의 종목의 업종리스트를 더한다
+//		검색결과 count 에 따른 정확도 --1차필터
+//		증권사, 신문사 이름 --1.5차필터
+//		1,2 or 3위 종목의 업종리스트 찾아 검색된 종목이 포함되어있다면 추가 한다 -- 2차필터  
+//		
 		Map<String, Integer>result = new HashMap<String, Integer>();
-		String[] arr = {"주식", "종목", "테마주"};
+		String[] arr = {"주식", "종목", "테마" };
 //		String[] stockList = null;
 		CSVStockDataDao data = new CSVStockDataDao();
 		String Path1 = "C:\\work\\Repository\\stockMarket\\mainProject\\WebContent\\fileUpload\\KOSPI.csv";
@@ -369,6 +384,7 @@ public class BasicSystemService implements SystemService {
 //		for(String str : stockList) 
 //			System.out.println(str);
 		
+		////////////////1차필터
 		for(int i = 0; i < arr.length; i++) {
 			String str = search + " " + arr[i];
 			String url = "https://search.naver.com/search.naver?query=" + str; 
@@ -383,31 +399,103 @@ public class BasicSystemService implements SystemService {
 			System.out.println(doc.select("#main_pack").text());
 			if(i == 0) {
 				for(int j = 0; j < stockList.size() ; j++) {
-					result.put(stockList.get(j) , StringUtils.countMatches(doc.select("#main_pack").text(), stockList.get(j)));
+					result.put(stockList.get(j), StringUtils.countMatches(doc.select("#main_pack").text(), stockList.get(j)));
+					Object temp = (Object)(stockList.get(j));
+					result.put(stockList.get(j), result.get(temp)  //오디오클립 요소 제거
+							- StringUtils.countMatches(doc.select(".section.sp_music_audio._sp_nmusic_audio._prs_aud_cll").text(), stockList.get(j)));
 				}
-//				for (String key : result.keySet()) {
-//					if(result.get(key) != 0)
-//						System.out.println(key + " : " + result.get(key));
-//
-//				}
 			} else {
 				for(int j = 0; j < stockList.size() ; j++) {
 					Object temp = (Object)(stockList.get(j));
 					result.put(stockList.get(j), result.get(temp) + StringUtils.countMatches(doc.select("#main_pack").text(), stockList.get(j)));
+					result.put(stockList.get(j), result.get(temp) //오디오클립 요소 제거 
+							- StringUtils.countMatches(doc.select(".section.sp_music_audio._sp_nmusic_audio._prs_aud_cll").text(), stockList.get(j)));
 				}
-//				for (String key : result.keySet()) {
-//					if(result.get(key) != 0)
-//						System.out.println(key + " : " + result.get(key));
-//
-//				}
 			}
-			
 		}
-		for (String key : result.keySet()) {
-			if(result.get(key) != 0)
-				System.out.println(key + " : " + result.get(key));
+//		for (String key : result.keySet()) {
+//			if(result.get(key) != 0)
+//				System.out.println(key + " : " + result.get(key));
+//
+//		}
+		////////////////// 2차필터
+		//LinkedHashMap preserve the ordering of elements in which they are inserted
+		LinkedHashMap<String, Integer> reverseSortedMap = new LinkedHashMap<>();
+		//Use Comparator.reverseOrder() for reverse ordering
+		result.entrySet()
+	    .stream()
+	    .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())) 
+	    .forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
+	 
+		System.out.println("Reverse Sorted Map   : " + reverseSortedMap);
+		List<Company> company = new ArrayList<>();
+		List<String> storageCompany = new ArrayList<String>();
+		List<String> storageCodeNum = new ArrayList<String>();
+		CSVStockDataDao kospi = new CSVStockDataDao(Path1);
+		CSVStockDataDao kosdaq = new CSVStockDataDao(Path2);
+		for(String key : reverseSortedMap.keySet()) {
+			if(result.get(key) != 0) 
+				storageCompany.add(key);
+//				System.out.println(key + " : " + result.get(key));
+		}
 
+//		//종목명으로 codeNum 얻어오기 : 카운팅된 숫자가 같을경우 종목명 선별??
+//		if(kospi.searchCompany(key) != null)
+//			System.out.println(kospi.searchCompany(key).getcompanyName() + " : " + kospi.searchCompany(key).getCodeNum());
+//		if(kosdaq.searchCompany(key) != null)
+//			System.out.println(kosdaq.searchCompany(key).getcompanyName() + " : " + kosdaq.searchCompany(key).getCodeNum());
+//		
+//		
+//		for(Company c : company) {
+//			System.out.println(c.getcompanyName() + " : " + c.getStockItemName());
+//		}
+		
+		for(String k : storageCompany) {
+			if(kospi.searchCompany(k) != null)
+				storageCodeNum.add(kospi.searchCompany(k).getCodeNum());
+			if(kosdaq.searchCompany(k) != null)
+				storageCodeNum.add(kosdaq.searchCompany(k).getCodeNum());
+				
+//			if(kospi.searchCompany(key) != null)
+//				System.out.println(kospi.searchCompany(key).getcompanyName() + " : " + kospi.searchCompany(key).getCodeNum());
+//			if(kosdaq.searchCompany(key) != null)
+//				System.out.println(kosdaq.searchCompany(key).getcompanyName() + " : " + kosdaq.searchCompany(key).getCodeNum());
+		}
+	
+		String defaultURL = "https://finance.naver.com";
+		for(String k : storageCodeNum) {
+			System.out.println("print : " + k + " ");
+		
+			String url = "https://finance.naver.com/item/main.nhn?code=" + k;
+			System.out.println("print : " + url);
+			try {
+				response = Jsoup.connect(url)
+						.method(Connection.Method.GET)
+						.execute();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			doc = response.parse();
+//			System.out.println(doc.select(".section.trade_compare > a").attr("href"));
+			url = defaultURL + doc.select(".section.trade_compare > a").attr("href");
+			try {
+				response = Jsoup.connect(url)
+						.method(Connection.Method.GET)
+						.execute();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			doc = response.parse();
+//			System.out.println(doc);
+			System.out.println(doc.select("tr td a").text());
+			break;
 		}
 		
+		
+		
+		//업종명내에  주식종목리스트가 존재한다면  ok 
+		
+		//주식종목 리스트와 counting 된 종목과 비교한 결과가 최종값
+			
 	}
 }

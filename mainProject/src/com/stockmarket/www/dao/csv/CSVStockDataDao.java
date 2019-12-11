@@ -64,7 +64,7 @@ public class CSVStockDataDao {
 			String[] cols;
 
 			while ((cols = reader.readNext()) != null) {
-				Company company = new Company(cols[0], cols[2], cols[7]);
+				Company company = new Company(cols[0], cols[1], cols[2], cols[7]);
 				list.add(company);
 			}			
 			
