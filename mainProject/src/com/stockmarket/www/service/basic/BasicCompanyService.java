@@ -180,7 +180,7 @@ public class BasicCompanyService implements CompanyService {
 
 		}
 
-		System.out.println(detailIndustryList);
+		//System.out.println(detailIndustryList);
 
 	}
 
