@@ -109,29 +109,30 @@ public class BasicCompanyService implements CompanyService {
 			Elements detailIndustryTable = upjongDetail.select("tbody a");
 			Iterator<Element> detailIndustryName = detailIndustryTable.select("a").iterator();
 			
+			 
 			List<String[]> data = new ArrayList<String[]>();
 			
-			while (detailIndustryName.hasNext()){
-				 //System.out.println(detailIndustryName.next().text());
-				 //data.add(new String[] {detailIndustryName.next().text()});
-				 //System.out.println(data);
+			
+			while (detailIndustryName.hasNext()) {
+				detailIndustryList.add(detailIndustryName.next().text());
+				//System.out.println("detailIndustryList" + detailIndustryList);
+				//업종명 안에 있는 구체적인 주식회사 이름을 detailIndustryList에 추가
 			}
-//			while (detailIndustryName.hasNext()) {
-//				detailIndustryList.add(detailIndustryName.next().text());
-//				 업종명 안에 있는 구체적인 주식회사 이름을 detailIndustryList에 추가
-//			}
-			String upjong = "upjong";
-			try {
-				csvStockDataDao.makeCSV(upjong, data);
-				//System.out.println(data);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			//System.out.println(detailIndustryList.toString());
+			data.add(new String[] {detailIndustryList.toString()});
+			
+			
 		//}
-		//System.out.println(detailIndustryList);
+		String upjong="upjong";
+		
+		try {
+			csvStockDataDao.makeCSV(upjong, data);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+//https://wildpup.cafe24.com/archives/82
+		}
 	}
-
 	
 	@Override
 	public List<Company> getCompanyListFromNaverByThema(String companyName) {
