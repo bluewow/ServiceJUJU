@@ -2,14 +2,14 @@
 
 /* ===레이아웃============================================== */
 body {
-    margin: 0;
-    padding: 0;
+    --margin: 0;
+    --padding: 0;
     height: 100%;
 }
 
 #contaner {
     width: 90%;
-    min-width: 460px;
+    --min-width: 460px;
     max-width: 600px;
     min-height: 100%;
     margin-left: auto;

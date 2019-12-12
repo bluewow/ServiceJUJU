@@ -7,7 +7,8 @@ import com.stockmarket.www.entity.CommunityBoard;
 public interface CommunityBoardDao {
 	List<CommunityBoard> getCommunityBoardList(int page, String Field, String Query, String Code);
 	List<CommunityBoard> getReplyList(int boardId);
-	int getReplyCnt(String field, String query, String stockName);
 	CommunityBoard getCommunityBoardDetail(int id);
+	int insertCommunityBoard(CommunityBoard communityBoard);
+	int getReplyCnt(String field, String query, String stockName);
 	int insertReply(CommunityBoard insertReply);
 }

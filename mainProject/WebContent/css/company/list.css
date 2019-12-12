@@ -158,5 +158,16 @@ span{
 	padding-top :14px;
 }
 
+.wrap a:link {
+    text-decoration: none;
+}
+
+.wrap a:visited{
+    text-decoration: none;
+}
+
+.wrap a:hover{
+    text-decoration: none;
+}
 
 

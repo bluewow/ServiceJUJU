@@ -15,8 +15,7 @@
 		rel="stylesheet">
 	
 	<!-- Template Styles -->
-	<link rel="stylesheet" type="text/css"
-		href="../../css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../../css/font-awesome.min.css">
 	
 	<!-- CSS Reset -->
 	<link rel="stylesheet" type="text/css" href="../../css/normalize.css">
@@ -43,7 +42,7 @@
 				</tr>
 			</thead>
 		</table>
-		<div id="scroll">
+		<div id="scroll" class="scrollbar custom-scrollbar-style">
 		<table class="communityTable">
 			<tbody class="content">
 				<tr>

@@ -20,7 +20,7 @@ public class StockBoardJsonController extends HttpServlet {
 	
 	private CommunityBoardService communityBoardService;
 	
-	
+
 	public StockBoardJsonController() {
 		communityBoardService = new BasicCommunityBoardService();
 	}
@@ -69,7 +69,6 @@ public class StockBoardJsonController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-	
+		
 	}
 }

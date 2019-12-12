@@ -58,8 +58,7 @@ public class BasicCommunityBoardService implements CommunityBoardService {
 
 	@Override
 	public int insertCommunityBoard(CommunityBoard communityBoard) {
-		// TODO Auto-generated method stub
-		return 0;
+		return communityBoardDao.insertCommunityBoard(communityBoard);
 	}
 
 	@Override

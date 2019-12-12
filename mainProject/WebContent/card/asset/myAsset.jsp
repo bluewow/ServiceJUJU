@@ -16,7 +16,7 @@
 	<script src="../../js/asset/myAsset.js"></script>
 </head>
 
-<body>
+<body class="scrollbar custom-scrollbar-style">
 	<main id="card">
 		<section id="card-top">
 			<div id="titleAssetTrend" class="wrap">

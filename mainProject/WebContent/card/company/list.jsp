@@ -11,12 +11,13 @@
 <meta charset="UTF-8">
 
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../../css/normalize.css">
 <link rel="stylesheet" type="text/css" href="../../css/company/list.css">
 <script src="../../js/company/list.js"></script>
 </head>
 <!-- style="overflow:scroll" -->
-<body>
-	<div id ="bodyScroll">
+<body class="scrollbar custom-scrollbar-style">
+	<div>
 	<section id="search-form">
 		<h1 class="d-none">주식회사검색</h1>
 		<form action ="list" method="get">

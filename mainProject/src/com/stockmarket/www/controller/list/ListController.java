@@ -94,6 +94,8 @@ public class ListController extends HttpServlet {
 		// request.setAttribute("sectorList",companyService.getCompanyListFromNaverByThema(companyName));
 		// System.out.println(companyService.getCompanyListFromNaverByThema(companyName));
 
+		companyService.stockIndustryCrawling();
+		
 		request.getRequestDispatcher("list.jsp").forward(request, response);
 
 	}

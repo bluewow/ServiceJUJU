@@ -4,6 +4,68 @@ window.addEventListener("load", function() {
 	var regBoard = section.querySelector("#reg-button");
 	var regBoardForm = document.querySelector(".pop-up-reg");
 	var regSubmit = regBoardForm.querySelector(".pop-up-content-row");
+	
+	
+var regButtonClickHandler = function(e){
+		
+		// 1. 입력한 값을 얻어온다.
+		
+		var title = regBoardForm.querySelector(".reg-title").value;
+		var content = regBoardForm.querySelector(".reg-content").value;
+		
+		String.prototype.trim = function() {
+			return this.replace(/^\s+|\s+$/g, "");
+		}
+		
+		var str1 = title;
+		str1 = str1.trim();
+		var str2 = content;
+		str2 = str2.trim();
+		
+		
+		// 댓글내용이 없으면 알림을 하고 되돌아간다.
+		if(str1 == "") {
+			alert("제목을 작성하세요");
+			return;
+		}else if(str2 == "") {
+			alert("내용을 작성하세요");
+			return;
+		}else{
+		
+
+		
+		title = encodeURI(title);
+		content = encodeURI(content);
+		
+		var data = [
+			["title", title],
+			["content", content],
+			]
+		var sendData = [];
+		
+		for (var i = 0; i < data.length; i++) {
+			sendData[i] = data[i].join("=");
+		}
+		sendData = sendData.join("&");
+		
+		// 2. 값을 서버에 보낸다.
+		
+		var request = new XMLHttpRequest(); 
+		request.open("POST", "../../card/board/stock_reg_board", true); 
+		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		request.send(sendData);
+		
+		// 3. 요청이 완료되었는지 결과를 확인한다.
+		
+		alert("등록되었습니다.");
+		
+		load(1);
+		}
+	};
+	
+	
+	
+	
 //========= 글쓰기 버튼 클릭==================
 	regBoard.onclick = function(e) {
 		if (e.target.nodeName != "A")
@@ -21,11 +83,17 @@ window.addEventListener("load", function() {
 
 		e.preventDefault();
 
-		if (e.target.name == "cancel")
+		if(e.target.name == "cancel"){
+			alert("글등록이 취소되었다!!")
 			regBoardForm.style.visibility = "hidden";
 		//========= 글쓰기 등록 버튼 클릭==================
-		else if (e.target.name == "submit")
-			alert("글등록을 거부한다!!")
-			regBoardForm.style.visibility = "hidden";
+		}else if (e.target.name == "submit"){
+			
+			regButtonClickHandler(e);
+		
+		
+			regBoardForm.style.visibility = "hidden";}
 	};
+	
+	
 })

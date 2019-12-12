@@ -61,6 +61,13 @@ public class CommunityBoard {
 		this.id = boardId;
 	}
 
+	public CommunityBoard(String title, String content, String writerId) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.writerId = writerId;
+	}
+
 	public int getId() {
 		return id;
 	}

@@ -160,7 +160,8 @@ public class Program {
 	private static void init() {
 		clientId = "qcb_heUiOwEgQEvETpk8";// 애플리케이션 클라이언트 아이디값";
 		clientSecret = "HopZWjJ6Qf";// 애플리케이션 클라이언트 시크릿값";
-
+//		qnM5ckLBoL4MohCeIdp7 //검색 API 아이디
+//		tfU_2RcZey			 //검색 API 비번
 		apiURL = "https://openapi.naver.com/v1/datalab/search";
 
 	}
