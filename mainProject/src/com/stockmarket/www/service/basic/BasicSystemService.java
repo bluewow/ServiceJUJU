@@ -16,8 +16,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.TreeMap;
 
+import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Connection.Response;
@@ -263,6 +265,7 @@ public class BasicSystemService implements SystemService {
 //				searchTest("반도체");
 //				searchTest("김정은");
 				searchTest("미사일");
+//				searchTest("키움증권");
 //				searchTest("브라운더스트");
 //				searchTest("철도");
 //				searchTest("기저귀");
@@ -282,59 +285,89 @@ public class BasicSystemService implements SystemService {
 		}
 	}//finished main
 	
-//		case3 검색어 + "주식" 검색 결과와 주식명 대비
-//		case3 검색어 + "종목" 검색 결과와 주식명 대비
-//		"테마주"
-//		검색결과 count 에 따른 정확도 --1차필터
-//		1,2 or 3위 종목의 업종리스트 찾아 검색된 종목이 포함되어있다면 추가 한다 -- 2차필터  
-//		증권사, 신문사 이름, 고유명사 --3차필터
+
+	//	증권사, 신문사 이름, 고유명사 및 제거대상에 대한 리스트 확보 필요--1.5 차필터
 	//  조국 같은 테마주는 업종에서 필터링 되지 않는다.
 	private static void searchTest(String search) throws IOException {
-		Response response = null;
-		Document doc = null;
-		Map<String, Integer>result = new HashMap<String, Integer>();
-		String[] arr = {"주식", "종목", "테마" };
+		
+		//1차 : 검색어 + "주식" && "종목" && "테마"의 네이버검색 결과를 종목명과 매칭한다
+		//     자연어처리
+		filterFirst(search);
+		//2차 : 1차 결과의 리스트  1,2,3위의 네이버업종 종목리스트와 일치하는 항목만 최종결과값에 포함한다 
+//		filterSecond();
+			
+	}
+
+	private static Document naverCrawling(String str) throws IOException {
+		Document doc = null;	//크롤링 결과를 담는 Document
+		Response response = null; //jsoup connect 결과 반환 
+		
+		String url = "https://search.naver.com/search.naver?query=" + str; 
+		try {
+			response = Jsoup.connect(url)
+					.method(Connection.Method.GET)
+					.execute();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		doc = response.parse();
+		return doc;
+	}
+	
+	private static void filterFirst(String search) throws IOException {
+		Map<String, Integer>crawlingResult = new HashMap<>(); //종목명, count 수
+		String[] keyWord = {"주식", "종목", "테마" };
+		String[] removeTarget = 
+			{"큐레이션", "브레이크", "디딤돌", "트레이딩", "SBS뉴스", "트레이더", "트레이",
+			 "레이더", "레이튼", "플레이어", "레이시온", "오디오", "스튜디오", "키움증권 클립", "키움증권 2", "키움증권 재생중",
+			 "한국경제TV 재생", "아시아경제 https" , "아시아경제 최신", "아시아경제 2", "NH투자증권 공식"}; //크롤링 결과중 제거 대상 필터 지속적인 업데이트 필요
+
+		//TEMP CSV 파일 삭제예정 ---------------------------------------
+		List<String> stockList = new ArrayList<>();
 		CSVStockDataDao data = new CSVStockDataDao();
 		String Path1 = "C:\\work\\Repository\\stockMarket\\mainProject\\WebContent\\fileUpload\\KOSPI.csv";
 		String Path2 = "C:\\work\\Repository\\stockMarket\\mainProject\\WebContent\\fileUpload\\KOSDAQ.csv";
-		List<String> stockList = new ArrayList<>();
 		stockList = data.getColumnData(0, Path1);
 		stockList.addAll(data.getColumnData(0, Path2));
+		//---------------------------------------------------------
 		
 		////////////////1차필터
-		for(int i = 0; i < arr.length; i++) {
-			String str = search + " " + arr[i];
-			String url = "https://search.naver.com/search.naver?query=" + str; 
-			try {
-				response = Jsoup.connect(url)
-						.method(Connection.Method.GET)
-						.execute();
-			} catch (IOException e) {
-				e.printStackTrace();
+		for(int i = 0; i < keyWord.length; i++) {
+			String str = search + " " + keyWord[i];
+			String text = null;
+
+			Document doc = naverCrawling(str);
+			text = doc.select("#main_pack").text(); //본문 text
+			for(String s : removeTarget) {			//지정된 문자는 제거한다
+				text = text.replaceAll(s, "");
 			}
-			doc = response.parse();
-			System.out.println(doc.select("#main_pack").text());
-			if(i == 0) {
-				for(int j = 0; j < stockList.size() ; j++) {
-					result.put(stockList.get(j), StringUtils.countMatches(doc.select("#main_pack").text(), stockList.get(j)));
-					Object temp = (Object)(stockList.get(j));
-					result.put(stockList.get(j), result.get(temp)  //오디오클립 요소 제거
-							- StringUtils.countMatches(doc.select(".section.sp_music_audio._sp_nmusic_audio._prs_aud_cll").text(), stockList.get(j)));
-				}
-			} else {
-				for(int j = 0; j < stockList.size() ; j++) {
-					Object temp = (Object)(stockList.get(j));
-					result.put(stockList.get(j), result.get(temp) + StringUtils.countMatches(doc.select("#main_pack").text(), stockList.get(j)));
-					result.put(stockList.get(j), result.get(temp) //오디오클립 요소 제거 
-							- StringUtils.countMatches(doc.select(".section.sp_music_audio._sp_nmusic_audio._prs_aud_cll").text(), stockList.get(j)));
-				}
+			
+//			for print			
+//			System.out.println(text);
+			
+			// <종목명, count> 저장
+			for(int j = 0; j < stockList.size() ; j++) {
+				String stockName = stockList.get(j);
+				crawlingResult.put(
+						stockName, 
+						crawlingResult.get((Object)stockName)==null? 
+							StringUtils.countMatches(text, stockName):
+							StringUtils.countMatches(text, stockName) + crawlingResult.get((Object)stockName)); 
 			}
 		}
-//		for (String key : result.keySet()) {
-//			if(result.get(key) != 0)
-//				System.out.println(key + " : " + result.get(key));
-//
-//		}
+		
+//		for print
+//		Set<Map.Entry<String, Integer>> entries = crawlingResult.entrySet();
+//		for (Map.Entry<String, Integer> entry : entries) {
+//				if(entry.getValue() != 0) {
+//				  System.out.print(entry.getKey() + " : ");
+//				  System.out.println(entry.getValue());
+//				}
+//			}
+		
+	}
+	/*
+	private static void filterSecond() {
 		////////////////// 2차필터
 		//LinkedHashMap preserve the ordering of elements in which they are inserted
 		LinkedHashMap<String, Integer> reverseSortedMap = new LinkedHashMap<>();
@@ -441,11 +474,7 @@ public class BasicSystemService implements SystemService {
 		for(String v : finalCompany)
 			System.out.println(v);
 		
-		
-		
-		//업종명내에  주식종목리스트가 존재한다면  ok 
-		
-		//주식종목 리스트와 counting 된 종목과 비교한 결과가 최종값
-			
+				
 	}
+	*/
 }
