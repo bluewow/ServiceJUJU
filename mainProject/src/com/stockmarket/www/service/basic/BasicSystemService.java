@@ -263,7 +263,7 @@ public class BasicSystemService implements SystemService {
 				break;
 			case 6:  // search test
 //				searchTest("지우개");
-				searchTest("새벽배송");
+//				searchTest("새벽배송");
 //				searchTest("카카오톡");
 //				searchTest("카카오");
 //				searchTest("반도체");
@@ -273,7 +273,7 @@ public class BasicSystemService implements SystemService {
 //				searchTest("브라운더스트");
 //				searchTest("철도");
 //				searchTest("기저귀");
-//				searchTest("4차산업");
+				searchTest("4차산업");
 //				searchTest("손흥민");
 //				searchTest("트럼프");
 //				searchTest("비트코인");
@@ -297,10 +297,12 @@ public class BasicSystemService implements SystemService {
 		//1차 : 검색어 + "주식" && "종목" && "테마"의 네이버검색 결과를 종목명과 매칭한다
 		//     자연어처리
 		filterFirst(search);
+		
 		//내림차순 정렬
 		filterOrder();
+		
 		//2차 : 1차 결과의 리스트  1,2,3위의 네이버업종 종목리스트와 일치하는 항목만 최종결과값에 포함한다 
-//		filterSecond();
+		filterSecond();
 			
 	}
 
@@ -351,7 +353,7 @@ public class BasicSystemService implements SystemService {
 				text = text.replaceAll(s, "");
 			}
 			
-//			System.out.println(text);
+//			System.out.println(text);	//for debugging
 			// <종목명, count> 저장
 			for(int j = 0; j < stockList.size() ; j++) {
 				String stockName = stockList.get(j);
@@ -374,67 +376,61 @@ public class BasicSystemService implements SystemService {
         for (Entry<String, Integer> entry : list) 
         	crawlDataOrder.put(entry.getKey(), entry.getValue());
         
-        System.out.println(crawlDataOrder);		
+//        System.out.println(crawlDataOrder);		//for debugging
 	}
+	
 	// 2차필터
 	private static void filterSecond() throws IOException {
+		List<String> storageCodeNum = new ArrayList<String>();
+		List<String> finalCompany = new ArrayList<String>();
+		
 		//TEMP CSV 파일 삭제예정 ---------------------------------------
 		String Path1 = "C:\\work\\Repository\\stockMarket\\mainProject\\WebContent\\fileUpload\\KOSPI.csv";
 		String Path2 = "C:\\work\\Repository\\stockMarket\\mainProject\\WebContent\\fileUpload\\KOSDAQ.csv";
 		CSVStockDataDao kospi = new CSVStockDataDao(Path1);
 		CSVStockDataDao kosdaq = new CSVStockDataDao(Path2);
-		//--------------------------------------
 		
-		List<String> storageCodeNum = new ArrayList<String>();
-		List<String> finalCompany = new ArrayList<String>();
-
 		for(String k : crawlDataOrder.keySet()) {
 			if(kospi.searchCompany(k) != null)
 				storageCodeNum.add(kospi.searchCompany(k).getCodeNum());
 			if(kosdaq.searchCompany(k) != null)
 				storageCodeNum.add(kosdaq.searchCompany(k).getCodeNum());
-				
-//			if(kospi.searchCompany(key) != null)
-//				System.out.println(kospi.searchCompany(key).getcompanyName() + " : " + kospi.searchCompany(key).getCodeNum());
-//			if(kosdaq.searchCompany(key) != null)
-//				System.out.println(kosdaq.searchCompany(key).getcompanyName() + " : " + kosdaq.searchCompany(key).getCodeNum());
 		}
 	
 		//TEMP 크롤링 파일 삭제예정 ---------------------------------------
 		String defaultURL = "https://finance.naver.com";
 		int index = 0;
+		List<Integer> limit = new ArrayList<>(crawlDataOrder.values());
+		
 		for(String k : storageCodeNum) {
 			index++;
-			System.out.println("print : " + k + " ");
-		
 			String url = "https://finance.naver.com/item/main.nhn?code=" + k;
 			Document doc = naverCrawling(url);
 			
 			url = defaultURL + doc.select(".section.trade_compare > a").attr("href");
 			doc = naverCrawling(url);
 			
-			tempCompany = doc.select("tr td a").text();
-			String[] temp = tempCompany.split("  ");			
+			// 업종관련 회사리스트			
+			String companyList = doc.select("tr td a").text();
+			String[] list = companyList.split("  ");			
 			
-			for(String e : storageCompany) {
-				for(String m : temp) {
-//					System.out.println(m + " , " + e);
+			for(String e : crawlDataOrder.keySet()) {
+				for(String m : list) {
 					m = m.trim();
-					if(m.equals(e))
+					if(m.equals(e))	//crawling data 와 업종리스트가 매칭될 경우 최종 회사 리스트에 추가된다
 						finalCompany.add(e);
 				}
 			}
-			if(index >= 2) {
-				if(tempCount.get(index) == tempCount.get(index+1)) {
+			
+			if(index >= 3) {	//count 수 기준으로 1, 2, 3 등까지 적용한다
+				if(limit.get(index) == limit.get(index+1)) 
 					continue;
-				}
+
 				break;
 			}
 		}
-		System.out.println("=========");
-		for(String v : finalCompany)
+		for(String v : finalCompany)	// for debugging
 			System.out.println(v);
-		
 				
 	}
 }
