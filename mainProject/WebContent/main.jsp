@@ -168,7 +168,7 @@
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="capture"
                            role="tabpanel" aria-labelledby="capture-tab"></div>
-                            <iframe src="/card/capturememo/captureMemo">
+                            <iframe id="captureWindow" src="/card/capturememo/captureMemo">
                            </iframe>
                      </div>
                   </section>
