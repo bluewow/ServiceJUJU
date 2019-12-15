@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 import org.jsoup.Jsoup;
@@ -92,12 +93,13 @@ public class BasicCompanyService implements CompanyService {
 		// 2. 업종명에 해당하는 링크를 타고 들어가서 상세 종목명을 얻는다.
 
 		ArrayList<String> detailIndustryList = new ArrayList<>();
+		List<String[]> data = new ArrayList<String[]>();
 
-		//for (int i = 0; i < upjonName.size(); i++) {
-			String upjongDetailUrl = "https://finance.naver.com" + upjongAtag.get(0);
+		for (int i = 0; i < upjonName.size(); i++) {
+			String upjongDetailUrl = "https://finance.naver.com" + upjongAtag.get(i);
 			Document upjongDetail = null;
 
-			detailIndustryList.add(upjonName.get(0));
+			detailIndustryList.add(upjonName.get(i));
 			// 업종명을 detailIndustryList에 추가
 
 			try {
@@ -109,28 +111,31 @@ public class BasicCompanyService implements CompanyService {
 			Elements detailIndustryTable = upjongDetail.select("tbody a");
 			Iterator<Element> detailIndustryName = detailIndustryTable.select("a").iterator();
 			
-			 
-			List<String[]> data = new ArrayList<String[]>();
-			
-			
-			while (detailIndustryName.hasNext()) {
+			 while (detailIndustryName.hasNext()) {
 				detailIndustryList.add(detailIndustryName.next().text());
-				//System.out.println("detailIndustryList" + detailIndustryList);
-				//업종명 안에 있는 구체적인 주식회사 이름을 detailIndustryList에 추가
 			}
-			//System.out.println(detailIndustryList.toString());
-			data.add(new String[] {detailIndustryList.toString()});
+			 detailIndustryList.add("\n");
+			
+			for (int j = 0; j < detailIndustryList.size(); j++) {
+				detailIndustryList.remove("");
+			}
+			// 공백을 제거 코드
 			
 			
-		//}
-		String upjong="upjong";
+			//System.out.println(detailIndustryList);
+			
+			
+		}
+		data.add(new String[] {detailIndustryList.toString()});
+		//System.out.println(detailIndustryList);
+		String upjong="UPJONG";
 		
 		try {
 			csvStockDataDao.makeCSV(upjong, data);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-//https://wildpup.cafe24.com/archives/82
+			//https://wildpup.cafe24.com/archives/82
 		}
 	}
 	
