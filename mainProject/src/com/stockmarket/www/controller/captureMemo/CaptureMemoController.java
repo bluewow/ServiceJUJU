@@ -22,10 +22,7 @@ public class CaptureMemoController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
-		// 1. get received JSON data from request
-		BufferedReader br =  request.getReader();	
-		Gson gson = new Gson();
-		System.out.println(gson.fromJson(br.readLine(), CaptureMemo.class));
+	
 
 	}
 }

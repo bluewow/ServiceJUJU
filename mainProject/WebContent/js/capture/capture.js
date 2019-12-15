@@ -1,7 +1,5 @@
-function captureEvent(e) {
-	console.log(e); //json format
-}
-
-window.addEventListener("load", function(){ 
-
+window.addEventListener("message", function(e) {
+	if(e.data.capture)
+		console.log(e.data.capture); //json format
+		
 });

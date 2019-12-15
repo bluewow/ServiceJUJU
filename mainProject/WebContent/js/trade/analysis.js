@@ -11,7 +11,9 @@ window.addEventListener("load", function(){
 			ajax.onload = function() {
 				//data send to capture Card
 				var frame = parent.document.querySelector("#captureWindow");
-				frame.contentWindow.captureEvent(ajax.responseText);
+				frame.contentWindow.postMessage(
+						{capture: ajax.responseText }, 
+						"http://localhost:8080/card/capturememo/captureMemo.jsp");
 			}
 			ajax.send();
 		}
