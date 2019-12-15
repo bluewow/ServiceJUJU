@@ -12,6 +12,8 @@
 		<title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
 <link rel="stylesheet" type="text/css" href="../../css/captureMemo.css">
+<script type="text/javascript" src="../../js/capture/capture.js"></script>
+
 </head>
 <!-- style="overflow:scroll" -->
 <body class="scrollbar custom-scrollbar-style">
