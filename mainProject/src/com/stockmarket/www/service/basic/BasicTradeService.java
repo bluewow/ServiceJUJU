@@ -29,7 +29,7 @@ public class BasicTradeService implements TradeService{
 	}
 
 	@Override
-	public int getAssets(int id) {
+	public long getAssets(int id) {
 		Member member = memberDao.getMember(id);
 		if(member == null)
 			return 0;
