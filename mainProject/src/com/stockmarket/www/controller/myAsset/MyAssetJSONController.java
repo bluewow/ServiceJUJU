@@ -41,9 +41,9 @@ public class MyAssetJSONController extends HttpServlet{
 		// 전날까지 또는 당일 오후 5시 이후의 자산 기록이 포함된 리스트
 		List<RecordAsset> trendList = assetTrendService.getRecordAsset(userId);
 		// 현재의 보유 자산
-		int assetPesent = assetTrendService.getAssetPresent(userId);
+		float assetPesent = assetTrendService.getAssetPresent(userId);
 		// 자산 비율 리스트
-		List<Map<String, Object>> distrList = assetDistrService.getHaveStockList(userId);
+		Map<String, Float> distrList = assetDistrService.getHaveStockList(userId);
 	
 		// String assetPesent = String.valueOf(assetTrendService.getAssetPresent(userId));
 		

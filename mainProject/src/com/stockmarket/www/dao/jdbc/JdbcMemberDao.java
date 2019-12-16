@@ -171,7 +171,7 @@ public class JdbcMemberDao implements MemberDao {
 	}
 
 	@Override
-	public int updateMember(int id, int vmoney) {
+	public int updateMember(int id, long vmoney) {
 		String sql = "UPDATE MEMBER SET VMONEY = ? WHERE ID = ?";
 
 		int result = 0;
@@ -180,7 +180,7 @@ public class JdbcMemberDao implements MemberDao {
 			JdbcDaoContext daoContext = new JdbcDaoContext();
 			PreparedStatement statement = daoContext.getPreparedStatement(sql);
 
-			statement.setInt(1, vmoney);
+			statement.setLong(1, vmoney);
 			statement.setInt(2, id);
 
 			result = statement.executeUpdate();

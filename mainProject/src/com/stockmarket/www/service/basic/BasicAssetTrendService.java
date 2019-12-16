@@ -34,9 +34,9 @@ public class BasicAssetTrendService implements AssetTrendService {
 	}
 
 	@Override
-	public int getAssetPresent(int memberId) {
+	public long getAssetPresent(int memberId) {
 		// 현재 보유 자산
-		int sum = 0;
+		long sum = 0;
 		sum = memberDao.getMember(memberId).getvMoney();
 		
 		List<HaveStockView> list = new ArrayList<>();

@@ -9,7 +9,7 @@ public interface TradeService {
 	boolean updateSoldQty(int qty);
 	
 	/* 자산정보를 가져온다	 */
-	int getAssets(int id);
+	long getAssets(int id);
 	
 	/* 해당종목의 자산을 가져온다 */
 	int getStockAssets(int id, String stockId);
