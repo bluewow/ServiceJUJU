@@ -143,10 +143,6 @@ public class BasicCompanyService implements CompanyService {
 		return null;
 	}
 
-	@Override
-	public void stockIndustryCrawling() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }

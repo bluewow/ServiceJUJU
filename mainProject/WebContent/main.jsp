@@ -112,7 +112,7 @@
                         <div class="tab-pane fade show active" id="search"
                            role="tabpanel" aria-labelledby="search-tab">
                            
-                           <iframe src="./card/company/list">
+                           <iframe id="companyListWindow" src="./card/company/list">
                            </iframe>
                         </div>
                      </div>
