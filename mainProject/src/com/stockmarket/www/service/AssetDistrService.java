@@ -9,6 +9,6 @@ public interface AssetDistrService {
 	
 	// 자산 분포도 그래프
 	// getAssetList
-	List<Map<String, Object>> getHaveStockList(int memberId);	
+	Map<String, Float> getHaveStockList(int memberId);	
 
 }
