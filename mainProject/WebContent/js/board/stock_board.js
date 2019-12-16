@@ -95,8 +95,11 @@ window.addEventListener("load", function() {
 			aTagDetail.dataset.id = id;
 			aTagDetail.dataset.writerId = detail.writerId;
 			for (var i = 0; i < detail.replys.length; i++) {
-				contentSum += '<div><span class="re-content">' +detail.replys[i].writerId + 
-				" : </span><span>" + detail.replys[i].reContent+"</span></div>";
+				contentSum += '<div><span class="re-content">' 
+					+ detail.replys[i].writerId + " : </span><span>"
+					+ detail.replys[i].reContent+'</span><span class="modi-box"><a href=../../card/board/re-modi?id='
+					+ detail.replys[i].id +' class="re-modi">수정</a>  <a href=../../card/board/re-del?id='
+					+ detail.replys[i].id +' class="re-del">삭제</a>'+"</span></div>";
 			} 
 			replyContent.innerHTML = contentSum;
 			tbody.insertBefore(cloneTr, nextTr);
@@ -165,7 +168,9 @@ window.addEventListener("load", function() {
 		var replyContent = cloneTr.querySelector(".replyTable tbody tr td");
 		var div = document.createElement("div");
 		var content = '<span class="re-content">' +e.target.dataset.writerId + 
-			" : </span><span>" + reContent+"</span>";
+			" : </span><span>" + reContent+'</span><span class="modi-box"><a href=../../card/board/re-modi?id='
+			+ detail.replys[i].id +' class="re-modi">수정</a>  <a href=../../card/board/re-del?id='
+			+ detail.replys[i].id +' class="re-del">삭제</a>'+"</span>";
 		
 			div.innerHTML= content;
 			console.log(div);
