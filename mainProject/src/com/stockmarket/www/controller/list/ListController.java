@@ -1,6 +1,7 @@
 package com.stockmarket.www.controller.list;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -42,6 +44,17 @@ public class ListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		String CompanyNameClickedByUser = request.getParameter("CompanyNameClickedByUser");
+		
+		if (CompanyNameClickedByUser != null) {
+//			HttpSession session = request.getSession();
+			PrintWriter out = response.getWriter();
+			out.print(CompanyNameClickedByUser);      
+			return;
+		}
+		
+		
 //	====CSV 파일을 읽고, 검색된 회사 정보를 찾아 jsp에 전달하는 코드
 		ServletContext application = getServletContext();
 		String csvUrlPath = "/fileUpload/KOSPI.csv";
@@ -94,6 +107,8 @@ public class ListController extends HttpServlet {
 		// request.setAttribute("sectorList",companyService.getCompanyListFromNaverByThema(companyName));
 		// System.out.println(companyService.getCompanyListFromNaverByThema(companyName));
 
+		
+		
 		companyService.stockIndustryCrawling();
 		
 		request.getRequestDispatcher("list.jsp").forward(request, response);
