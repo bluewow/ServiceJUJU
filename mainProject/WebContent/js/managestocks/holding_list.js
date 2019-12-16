@@ -1,37 +1,53 @@
 window.addEventListener("load",function(){
-	
+   
+   var section = this.document.querySelector(".manageStocks");
+   var updateButton = section.querySelector(".updateButton");
+   var preArea = section.querySelector(".prearea");
+   var tbody = section.querySelector("table tbody");
+
 	function addComma(num) {
 		  var regexp = /\B(?=(\d{3})+(?!\d))/g;
 		  return num.toString().replace(regexp, ',');
-	}
+   }
 
-    var section = this.document.querySelector(".manageStocks")
-    var updateButton = section.querySelector(".updateButton");
-    var tbody = section.querySelector("table tbody");
- 
     updateButton.onclick = function(){
 
     var request = new XMLHttpRequest();
     request.open("GET","../../card/managestocks/holdinglist",true);
+    
 
-
+    
 
     //서블릿의 실행이 완료되었을때 실행 
     request.onload = function(){
-        var template = section.querySelector(".template");
+
+//        var cardFooter = section.querySelector(".card-footer");
+//        console.log(cardFooter.firstChild);
+        
         var list = JSON.parse(request.responseText);
         
+        var allIncomePercent =0
+        var allIncome = 0;
+        var allSum = 0;
         tbody.innerHTML = "";
         
 
 
         for(var i=0; i<list.length; i++){
-         var incomePercent = Math.ceil((list[i].income/list[i].sum)*100);
-         list[i].income = addComma(list[i].income);
-         list[i].sum = addComma(list[i].sum);
-        
+            
+         var template = section.querySelector(".template");
          var cloneTr = document.importNode(template.content, true);
          var tds = cloneTr.querySelectorAll("td");
+            
+        	
+         var incomePercent = Math.ceil((list[i].income/list[i].sum)*100);
+         allIncome += list[i].income;
+         allSum += list[i].sum;
+         allIncomePercent = Math.ceil((allIncome/allSum)*100);
+         list[i].income = addComma(list[i].income);
+         list[i].sum = addComma(list[i].sum);
+
+
 
          tds[0].firstElementChild.innerText = list[i].stockName;
 
@@ -61,14 +77,23 @@ window.addEventListener("load",function(){
               tds[j].style.display = "none";
             }
          }
+        console.log(allIncomePercent+",allSum:"+allSum+",allIncome:"+allIncome); 
         
+         if(allIncomePercent>0)
+         {
+        	  preArea.firstElementChild.nextSibling.innerText = allIncomePercent;
+         }
+
+         // if(IncomePercent>0)
+         // {
+         //   divs[0].firstElementChild
+         // }      
 //        console.log("tds"+i+"번째:"+tds[i].lastElementChild.innerText);
 //        
 
 //        for(var i =0 ; i<tds.length ;i++){
 //            console.log(tds[i]);
-//        }
-        
+//        }     
         tds[4].firstElementChild.innerText = list[i].quantity;
         //   var cloneTr = document.importNode(trTemplate.Content, true);
         //   var tds = cloneTr.querySelectorAll("td");
