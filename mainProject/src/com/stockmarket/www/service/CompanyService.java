@@ -1,5 +1,6 @@
 package com.stockmarket.www.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.stockmarket.www.entity.Company;
@@ -16,7 +17,10 @@ public interface CompanyService {
 	void setFilePath(String csvFilePath);
 
 	List<Company> getCompanyListFromNaverByThema(String companyName);
-
+	
+	void stockIndustryCrawling();
+	
+	
 	
 	
 }

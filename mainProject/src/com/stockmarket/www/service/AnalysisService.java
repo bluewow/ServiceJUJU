@@ -30,5 +30,5 @@ public interface AnalysisService {
 	void refreshPrice();
 
 	//캡처에 전달할 data crawling
-	CaptureMemo captureDataCrawling(String codeNum, int memberId);
+	String captureDataCrawling(String codeNum, int memberId);
 }

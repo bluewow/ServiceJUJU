@@ -232,7 +232,7 @@ public class JdbcMemberDao implements MemberDao {
 			statement.setString(1, member.getEmail());
 			statement.setString(2, member.getNickName());
 			statement.setString(3, member.getPassword());
-			statement.setInt(4, member.getvMoney());
+			statement.setLong(4, member.getvMoney());
 
 			result = statement.executeUpdate();
 			statement.close();

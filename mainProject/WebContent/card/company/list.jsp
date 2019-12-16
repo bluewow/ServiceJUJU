@@ -11,12 +11,13 @@
 <meta charset="UTF-8">
 
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../../css/normalize.css">
 <link rel="stylesheet" type="text/css" href="../../css/company/list.css">
 <script src="../../js/company/list.js"></script>
 </head>
 <!-- style="overflow:scroll" -->
-<body>
-	<div id ="bodyScroll">
+<body class="scrollbar custom-scrollbar-style">
+	<div>
 	<section id="search-form">
 		<h1 class="d-none">주식회사검색</h1>
 		<form action ="list" method="get">
@@ -65,22 +66,20 @@
 			</tbody> --%>
 			
 			<%-- <c:set var ="n" value="${search}"/> --%>
-			<tbody >
+			<tbody>
 				<c:forEach var="sector" items="${search}" varStatus="status" >
 				<tr>
 					<td >${status.count}</td>
 					<td name="CompanyNameClickedByUser"><a href="list?companyName=${sector.companyName}" id="companyName">${sector.companyName}</a> <a href="${sector.website}" target="_blank"><img src="/css/company/link.png" alt=""></a></td>
-					<td id ="stockItemName" >${sector.stockItemName}</td>
+					<td id ="stockItemName" class="wrap">
+						<a href="#">${sector.stockItemName}</a>
+						<div class="help">${sector.stockItemName}</div>
+					</td>
 					<td class="attention"><img src="/css/company/interest_no.png"></td>
 					<!-- <td class="attention"><img src="/css/search/interest_no.png"></td> -->
 				</tr>
 				</c:forEach>
 			</tbody>
-			<!-- 자바스크립트 온 클릭하면 프리벤트....
-				 리스트 값을 상태저장을 하고 뿌려주던가 둘중하나 택...	 -->
-				<!-- a태그 쓰거나 자바스크립트 -->
-			
-			
 			
 		</table>
 	</section>

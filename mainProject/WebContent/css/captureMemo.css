@@ -25,11 +25,18 @@
 #del-button a:hover{
     opacity: 1;
 }
+#del-button span{
+    display: inline-block;
+   padding: 10px;
+    
+}
 #captureTable{
     width: 100%;
     text-align: center;
     font-size: 1em;
     border-collapse: collapse;
+    padding-left: 200px;
+	padding-right: 200px;
 
 }
 #captureTable tr{

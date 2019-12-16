@@ -12,7 +12,7 @@ import com.stockmarket.www.entity.CommunityBoard;
 public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 	@Override
-	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockName) {
+	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockCode) {
 
 		List<CommunityBoard> list = new ArrayList<>();
 
@@ -26,7 +26,7 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 			pst = daoContext.getPreparedStatement(sql);
 
-			pst.setString(1, "%" + stockName + "%");
+			pst.setString(1, "%" + stockCode + "%");
 			pst.setString(2, "%" + query + "%");
 			pst.setInt(3, 1 + 10 * (page - 1));
 			pst.setInt(4, 10 * page);
@@ -157,6 +157,37 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		return result;
 	}
 
+	@Override
+	public int insertCommunityBoard(CommunityBoard communityBoard) {
+		int result = 0;
+		String sql = "INSERT INTO BOARD (ID, TITLE, WRITER_ID, CONTENT, STOCKCODE) "
+				+ "VALUES ((SELECT NVL(MAX(ID),0)+1 FROM BOARD), ?, ?, ?, '095660')";
+		
+		PreparedStatement pst = null;
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+
+		try {
+			pst = daoContext.getPreparedStatement(sql);
+
+			pst.setString(1, communityBoard.getTitle());
+			pst.setString(2, communityBoard.getWriterId());
+			pst.setString(3, communityBoard.getContent());
 
 
+			result = pst.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			daoContext.close(pst);
+		}
+		return result;
+	}
+
+
+public static void main(String[] args) {
+	JdbcCommunityBoardDao com = new JdbcCommunityBoardDao();
+	CommunityBoard communityBoard = new CommunityBoard("a" ,"b", "c");
+	
+	com.insertCommunityBoard(communityBoard);
+}
 }

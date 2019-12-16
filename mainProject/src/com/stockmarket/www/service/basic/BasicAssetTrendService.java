@@ -44,7 +44,9 @@ public class BasicAssetTrendService implements AssetTrendService {
 		for (HaveStockView data : list) {
 			// (보유종목당 현재가 및 보유수량 확인용)
 			// System.out.println(data.getPrice()+","+data.getQuantity()); 
-			sum += Integer.parseInt(data.getPrice().replaceAll(",",""))*data.getQuantity();
+			int presentValue = Integer.parseInt(data.getPrice().replaceAll(",",""));
+			int quantity = data.getQuantity();
+			sum += presentValue*quantity;
 		}
 		// 가상머니+(현재가*보유수량)+(현재가*보유수량).....
 		// List<HaveStock> quantHaveStocks = haveStockDao.getQuantity(memberId);

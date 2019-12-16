@@ -3,11 +3,11 @@ window.addEventListener("load", function(){
     var cn = document.querySelector("#companyName")
     var CompanyNameClickedByUser = document.querySelector("#companyName")
     
-    CompanyNameClickedByUser.onclick = function(e){
+   /* CompanyNameClickedByUser.onclick = function(e){
         e.preventDefault();
         alert("preventDefault 됬나?")
         console.log(e.currentTarget.tagName);
-    };
+    };*/
 
     /*attentionimageControl.onclick = function(){
         var cnTemp = cn.innerText;

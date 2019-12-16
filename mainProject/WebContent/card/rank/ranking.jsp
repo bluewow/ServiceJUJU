@@ -22,7 +22,7 @@
 <link href="../../css/rank.css" type="text/css" rel="stylesheet">
 </head>
 <!-- ======================================================================= -->
-<body>
+<body class="scrollbar custom-scrollbar-style">
 	<main id="contaner">
 		<div class="rank-table">
 			<table>

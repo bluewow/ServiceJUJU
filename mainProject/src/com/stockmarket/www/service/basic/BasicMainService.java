@@ -17,4 +17,8 @@ public class BasicMainService implements MainService {
 		return memberDao.getMember(id);
 	}
 
+	@Override
+	public int updateCardPos(int id, String cardPos) {
+		return memberDao.updateMember(id, cardPos);
+	}	
 }

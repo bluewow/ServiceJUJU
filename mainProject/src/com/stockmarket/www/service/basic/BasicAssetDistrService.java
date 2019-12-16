@@ -24,26 +24,18 @@ public class BasicAssetDistrService implements AssetDistrService {
 		assetTrendService = new BasicAssetTrendService();
 	}
 	
-	private float getProfitByStockId(String stockId, int memberId) {
+	private float getSumByStockId(String stockId, int memberId) {
 		
-		int quantity = haveStockDao.getView(memberId, stockId).getQuantity();
-		int sum = haveStockDao.getView(memberId, stockId).getSum();
-		int presentValue = Integer.parseInt(haveStockDao.getView(memberId, stockId).getPrice().replaceAll(",", ""));
-		
-		//System.out.println("수량: "+quantity);
-		//System.out.println("누적값: "+sum);
-		//System.out.println("현재값: "+presentValue);
-		
-		return (quantity*presentValue) - sum;	
+		return haveStockDao.getView(memberId, stockId).getSum();	
 	}
 	
-	private float getProfitAll(int memberId) {
+	private float getSumAll(int memberId) {
 		int value = 0;
 		
 		List<HaveStockView> list = new ArrayList<>();
 		list.addAll(haveStockDao.getList(memberId));
 		for (HaveStockView data : list) {
-			value += getProfitByStockId(data.getStockId(), memberId);
+			value += getSumByStockId(data.getStockId(), memberId);
 		}	
 		return value;	
 	}
@@ -56,7 +48,9 @@ public class BasicAssetDistrService implements AssetDistrService {
 		list.addAll(haveStockDao.getList(memberId));
 		for(HaveStockView data:list) {
 			Map<String, Object> distr = new HashMap<>();
-			float ratio = (getProfitByStockId(data.getStockId(), memberId))/(getProfitAll(memberId))*100;
+			float profit = getSumByStockId(data.getStockId(), memberId);
+			float profits = getSumAll(memberId);
+			float ratio = (profit/profits)*100;
 			distr.put("ratio", ratio);
 			distr.put("stockName", data.getStockName());
 			distrList.add(distr);
@@ -79,10 +73,10 @@ public class BasicAssetDistrService implements AssetDistrService {
 
 		switch(testIndex) {
 		case 1:	// getAssetPresent용 테스트
-			System.out.println(assetDistr.getProfitByStockId("035420", 3));
+			System.out.println(assetDistr.getSumByStockId("035420", 3));
 			break;
 		case 2:	// getRecordAsset용 테스트
-			System.out.println(assetDistr.getProfitAll(3));
+			System.out.println(assetDistr.getSumAll(3));
 			break;
 		case 3:	// getRecordAsset용 테스트
 			System.out.println(assetDistr.getHaveStockList(3));

@@ -10,7 +10,8 @@ public interface CommunityBoardService {
 	 * */
 	List<CommunityBoard> getCommunityBoardList();
 	List<CommunityBoard> getCommunityBoardList(int page);
-	List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockName);
+	List<CommunityBoard> getCommunityBoardList(int page, String stockCode);
+	List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockCode);
 
 	/*
 	 * 댓글목록

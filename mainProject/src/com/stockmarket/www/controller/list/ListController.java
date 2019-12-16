@@ -74,13 +74,13 @@ public class ListController extends HttpServlet {
 
 		Document doc = null;
 
-		String[] recommendKeyword = new String[4];
+		String[] recommendKeyword = new String[3];
 		doc = Jsoup.connect(urlKeywordTop4).get();
 
 		Elements element = doc.select("tbody");
 		Iterator<Element> ie1 = element.select("a.tltle").iterator();
 
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 3; i++) {
 			recommendKeyword[i] = ie1.next().text();
 		}
 
@@ -94,6 +94,8 @@ public class ListController extends HttpServlet {
 		// request.setAttribute("sectorList",companyService.getCompanyListFromNaverByThema(companyName));
 		// System.out.println(companyService.getCompanyListFromNaverByThema(companyName));
 
+		companyService.stockIndustryCrawling();
+		
 		request.getRequestDispatcher("list.jsp").forward(request, response);
 
 	}

@@ -9,11 +9,11 @@ window.addEventListener("load", function(){
 			var ajax = new XMLHttpRequest();
 			ajax.open("GET", "../../card/trade/analysis?capture=on");
 			ajax.onload = function() {
-				console.log(ajax.responseText);
-
-//				var newsFrame = parent.document.querySelector("#news");
-//				var newsWindow = newsFrame.contentWindow || newsFrame;
-//				newsWindow.test("1");
+				//data send to capture Card
+				var frame = parent.document.querySelector("#captureWindow");
+				frame.contentWindow.postMessage(
+						{capture: ajax.responseText }, 
+						"http://localhost:8080/card/capturememo/captureMemo.jsp");
 			}
 			ajax.send();
 		}

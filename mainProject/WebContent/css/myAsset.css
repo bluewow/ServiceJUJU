@@ -21,7 +21,7 @@
 	display: inline-block;
 }
 
-.selected-button{
+#titleAssetTrend .my-asset-info .buttons .selected-button{
 	font-family: "에스코어 드림";
 	font-weight: 500;	
 	font-size: 0.7em;
@@ -180,21 +180,21 @@ section{
 			width: 50%;
 		}
 	
-			#assetDistribution #list-stock .test {
+			#assetDistribution #list-stock .list {
 				display: flex;
 				flex-direction: column;
 				margin: auto;
 				text-align: left;
 			}
 
-			#assetDistribution #list-stock .test img{
+			#assetDistribution #list-stock .list img{
 				display: inline-block;
 				padding-right: 12px;
 				height: 1.2em;                               
 				width: 35px;
 			}
 
-			#assetDistribution #list-stock .test div{
+			#assetDistribution #list-stock .list td{
 				padding: 6px 0px;
 				font-family: 서울한강체;
 				font-weight: bold;

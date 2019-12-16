@@ -1,19 +1,13 @@
-/*	
-	drawBasic(); - 그림그리기 위한 data 함수
-	graphFunc(); - 그리기 함수
-	ajaxFunc(); - 일봉,주봉,월봉 클릭 및 그래프 변경(ajax)
-*/
-
 window.addEventListener("load", function(){
 	//load google chart
 	google.charts.load('current', {packages: ['corechart', 'line']});
-	
+
 	// 일봉,주봉,월봉 클릭 및 그래프 변경(ajax)
 	ajaxFunc();
 	// 매수/매도 이벤트 처리
 	tradeFunc();
 	
-	//TEMP 함수사용법을 익혀 적절히 배치 필요
+	//TODO 함수사용법을 익혀 적절히 배치 필요
     var ajax = new XMLHttpRequest();
     ajax.open("GET", "../../card/trade/trade?date=일봉");
     ajax.onload = function() {
@@ -99,15 +93,34 @@ window.addEventListener("load", function(){
 		var event = button.querySelector("input.event");
 		var data = button.querySelectorAll(".data");
 		var qty = button.querySelector("#text");
+		var sellButton = button.querySelector("#sell");
 		
+		checkSellButton();
+    	
 		button.onclick = function(e) {
-			if(e.target.className != event.className)
+			if(e.target.name != event.name)
 		      	return;
 		    
-			if(e.target.value == "매       수")
+			if(!data[3].value) {
+				alert("수량을 입력해 주세요");
+				return;
+			}
+			
+			if(e.target.value == "매       수") {
 				var trade = "buy";
-			else if(e.target.value =="매       도")
+				if(confirm(data[3].value + "주 매수를 진행하시겠습니까?") == false) {
+					data[3].value = "";
+					return;
+				}
+				
+			}
+			else if(e.target.value =="매       도") {
 				var trade = "sell";
+				if(confirm(data[3].value + "주 매도를 진행하시겠습니까?") == false) {
+					data[3].value = "";
+					return;
+				}
+			}
 				
 			var ajax = new XMLHttpRequest();
 	        ajax.open("GET", "../../card/trade/trade?replaceEvent=on&button=" + trade + "&Purse/Sold=" + qty.value);
@@ -117,10 +130,40 @@ window.addEventListener("load", function(){
 		        data[1].innerHTML = result[1].toLocaleString() + "주";
 		        data[2].innerHTML = result[2].toLocaleString() + "원";
 		        data[3].value = "";
+			//result - 0:ok, 1:vmoney부족, 2: 거래정지목록, 
+			//		   3:장내시간이 아님, 4:수량이 0이하인 경우 거래x, 
+			//		    5:수량이 0이 되는 경우 6:보유종목이 아닌경우 거래x
+		        switch(result[3]) {
+		        case 0:
+		        	alert("체결되었습니다");
+		        	break;
+		        case 1:
+		        	alert("가상머니가 부족합니다");
+		        	break;
+		        case 4:
+		        	alert("보유수량을 초과하였습니다");
+		        	break;
+		        case 5:
+		        	break;
+		        case 6:
+		        	alert("현재 보유종목이 아닙니다.");
+		        	break;
+		        }
+		        checkSellButton();
 	        }    
 		    ajax.send();
 		}
+		
+		function checkSellButton() {
+			//매도버튼 disable 체크
+			if(data[1].innerHTML == "0주") {
+				sellButton.className = "event button button-button shadow"
+				sellButton.disabled = true;
+			} else {
+				sellButton.className = "event button button-button animation"
+				sellButton.disabled = false;
+			}
+		}
 	}
-	
 
 });

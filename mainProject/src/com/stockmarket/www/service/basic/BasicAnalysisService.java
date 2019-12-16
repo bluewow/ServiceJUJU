@@ -6,6 +6,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import com.google.gson.Gson;
 import com.stockmarket.www.controller.system.AppContext;
 import com.stockmarket.www.dao.MemberDao;
 import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
@@ -31,7 +32,7 @@ public class BasicAnalysisService implements AnalysisService{
 	}
 
 	@Override
-	public CaptureMemo captureDataCrawling(String codeNum, int memberId) {
+	public String captureDataCrawling(String codeNum, int memberId) {
 		Document doc = null;
 		String url = "https://finance.naver.com/item/main.nhn?code=" + codeNum;
 		
@@ -58,6 +59,7 @@ public class BasicAnalysisService implements AnalysisService{
 		roe = Double.parseDouble(data[4]) / Double.parseDouble(data[3]) * 100;
 		roe = Math.round(roe * 100) / 100.0;
 		
+		Gson gson = new Gson();
 		CaptureMemo capture = new CaptureMemo(null, null, 
 				Double.parseDouble(data[3]), 	//PER
 				Double.parseDouble(data[4]), 	//PBR
@@ -65,8 +67,10 @@ public class BasicAnalysisService implements AnalysisService{
 				Double.parseDouble(data[0]), 	//debtRatio
 				Integer.parseInt(data[1]),	 	//marketCap
 				codeNum,					 	//codeNum
-				memberId);    							//invalid memberId
-		return capture;
+				memberId);    					//invalid memberId
+		
+		String json = gson.toJson(capture);
+		return json;
 	}
 
 }

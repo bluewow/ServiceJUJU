@@ -226,3 +226,21 @@ a {
 .re-content {
 	font-weight: bold;
 }
+
+.reg-reply-button {
+	font-weight: bold;
+	font-size: 1em;
+	width: 36px;
+	background-color: #13bfd7;
+	color: #ffffff;
+	padding: 3px 5px;
+	border-radius: 16px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+
+
+.reg-reply-button {
+	opacity: 0.7;
+}

@@ -5,7 +5,7 @@ public class Member {
 	private String email;
 	private String nickName;
 	private String password;
-	private int vMoney;
+	private long vMoney;
 	private String cardPos;
 	
 	public Member() {
@@ -57,10 +57,10 @@ public class Member {
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	public int getvMoney() {
+	public long getvMoney() {
 		return vMoney;
 	}
-	public void setvMoney(int vMoney) {
+	public void setvMoney(long vMoney) {
 		this.vMoney = vMoney;
 	}
 

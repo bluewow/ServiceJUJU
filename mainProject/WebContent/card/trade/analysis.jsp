@@ -32,7 +32,7 @@
 <script type="text/javascript" src="../../js/trade/analysis.js"></script>
 
 </head>
-<body>
+<body class="scrollbar custom-scrollbar-style">
 <div id="analysis-container">
 	<!-- --------------- page-top -------------- -->
 	<header class="page-top">

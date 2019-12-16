@@ -20,13 +20,13 @@ import com.stockmarket.www.service.AssetTrendService;
 import com.stockmarket.www.service.basic.BasicAssetDistrService;
 import com.stockmarket.www.service.basic.BasicAssetTrendService;
 
-@WebServlet("/card/asset/myAsset")
-public class MyAssetController extends HttpServlet{
+@WebServlet("/card/asset/myAsset-json")
+public class MyAssetJSONController extends HttpServlet{
 	
 	private AssetTrendService assetTrendService;
 	private AssetDistrService assetDistrService;
 	
-	public MyAssetController() {
+	public MyAssetJSONController() {
 		assetTrendService = new BasicAssetTrendService();
 		assetDistrService = new BasicAssetDistrService();
 	}
@@ -38,15 +38,29 @@ public class MyAssetController extends HttpServlet{
 		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("id");
 		
+		// 전날까지 또는 당일 오후 5시 이후의 자산 기록이 포함된 리스트
+		List<RecordAsset> trendList = assetTrendService.getRecordAsset(userId);
 		// 현재의 보유 자산
 		int assetPesent = assetTrendService.getAssetPresent(userId);
+		// 자산 비율 리스트
+		List<Map<String, Object>> distrList = assetDistrService.getHaveStockList(userId);
+	
+		// String assetPesent = String.valueOf(assetTrendService.getAssetPresent(userId));
+		
+        Gson gson = new Gson();
+		String distrJson = gson.toJson(distrList);
+		String trendJson = gson.toJson(trendList);
+		String trendPrsentJson = gson.toJson(assetPesent);
+		String list = "[{\"distJson\":"+distrJson+"}, {\"trendJson\":"+trendJson+"}, {\"trendPrsentJson\":"+trendPrsentJson+"}]";
 
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         
-        request.setAttribute("assetPesent", assetPesent);
+        PrintWriter out = response.getWriter();
+        out.write(list);
+        // out.write(trendJson);
 					
-		request.getRequestDispatcher("myAsset.jsp").forward(request, response);
+		//request.getRequestDispatcher("myAsset.jsp").forward(request, response);
 		
 	}
 
