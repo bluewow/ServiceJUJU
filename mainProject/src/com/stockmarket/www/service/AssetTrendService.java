@@ -7,7 +7,7 @@ import com.stockmarket.www.entity.RecordAsset;
 public interface AssetTrendService {
 	
 	// 현 보유 자산
-	int getAssetPresent(int memberId);
+	long getAssetPresent(int memberId);
 	
 	// 자산추이 그래프
 	List<RecordAsset> getRecordAsset(int memberId);
