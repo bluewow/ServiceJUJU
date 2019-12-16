@@ -57,8 +57,8 @@ public class BasicCompanyService implements CompanyService {
 	}
 
 //	/* 네이버 업종 크롤링 */
-//	@Override
-//	public void stockIndustryCrawling() {
+	@Override
+	public void stockIndustryCrawling() {
 //		String upjongUrl = "https://finance.naver.com/sise/sise_group.nhn?type=upjong";
 //		Document doc = null;
 //
@@ -93,9 +93,9 @@ public class BasicCompanyService implements CompanyService {
 //		// 2. 업종명에 해당하는 링크를 타고 들어가서 상세 종목명을 얻는다.
 //
 //		ArrayList<String> detailIndustryList = new ArrayList<>();
-//		List<String[]> data = new ArrayList<String[]>();
+//		List<String> data = new ArrayList<>();
 //
-//		for (int i = 0; i < upjonName.size(); i++) {
+//		for (int i = 0; i < 5; i++) {
 //			String upjongDetailUrl = "https://finance.naver.com" + upjongAtag.get(i);
 //			Document upjongDetail = null;
 //
@@ -116,20 +116,18 @@ public class BasicCompanyService implements CompanyService {
 //			}
 //			 detailIndustryList.add("\n");
 //			
-//			for (int j = 0; j < detailIndustryList.size(); j++) {
-//				detailIndustryList.remove("");
-//			}
+////			for (int j = 0; j < detailIndustryList.size(); j++) {
+////				detailIndustryList.remove("");
+////			}
 //			// 공백을 제거 코드
-//			
-//			
-//			//System.out.println(detailIndustryList);
-//			
-//			
 //		}
-//		data.add(new String[] {detailIndustryList.toString()});
+//		System.out.println(detailIndustryList);
+//		
+//		//data.addAll(detailIndustryList);
 //		//System.out.println(detailIndustryList);
 //		String upjong="UPJONG";
 //		
+//		System.out.println(data);
 //		try {
 //			csvStockDataDao.makeCSV(upjong, data);
 //		} catch (IOException e) {
@@ -137,7 +135,7 @@ public class BasicCompanyService implements CompanyService {
 //			e.printStackTrace();
 //			//https://wildpup.cafe24.com/archives/82
 //		}
-//	}
+	}
 	
 	@Override
 	public List<Company> getCompanyListFromNaverByThema(String companyName) {
