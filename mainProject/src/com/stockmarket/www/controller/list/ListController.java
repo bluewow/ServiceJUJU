@@ -46,11 +46,14 @@ public class ListController extends HttpServlet {
 			throws ServletException, IOException {
 		
 		String CompanyNameClickedByUser = request.getParameter("CompanyNameClickedByUser");
-		
+		//System.out.println("doGet");
+		//System.out.println(request.getParameter("companyName"));
 		if (CompanyNameClickedByUser != null) {
 //			HttpSession session = request.getSession();
+			String companyName = request.getParameter("companyName");
+			System.out.println(companyName);
 			PrintWriter out = response.getWriter();
-			out.print(CompanyNameClickedByUser);      
+			out.print(companyName);      
 			return;
 		}
 		
