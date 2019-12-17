@@ -11,6 +11,35 @@
 	padding-top: 40px;
 
 }
+.reg-submit{
+    font-size: 1em;
+	width:60px;
+	background-color: #35cebe;
+	color: #f4f5f6;
+	padding: 6px 10px;
+	border-radius: 16px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+
+}
+.reg-submit:hover {
+    opacity: 0.7;
+}
+.reg-cancel{
+    font-size: 1em;
+	width:60px;
+	background-color: #35cebe;
+	color: f4f5f6;
+	padding: 6px 10px;
+	border-radius: 16px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+.reg-cancel:hover {
+    opacity: 0.7;
+}
 #del-button a{
     background: url("../images/trashCan.png")no-repeat;
     display: inline-block;
