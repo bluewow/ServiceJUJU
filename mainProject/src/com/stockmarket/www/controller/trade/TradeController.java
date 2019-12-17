@@ -120,7 +120,7 @@ public class TradeController extends HttpServlet{
 		//보유수량
 		data[1] = qty;
 		//가상머니
-		data[2] = service.getAssets(memberId);
+		data[2] = (int) service.getAssets(memberId);
 		//결과 
 		data[3] = result;
 		
