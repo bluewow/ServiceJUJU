@@ -1,14 +1,12 @@
 package com.stockmarket.www.service.basic;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.xml.ws.ServiceMode;
-
 import java.util.Scanner;
 
 import com.stockmarket.www.dao.HaveStockDao;
@@ -25,8 +23,8 @@ public class BasicAssetDistrService implements AssetDistrService {
 	private HaveStockDao haveStockDao;
 	private AssetTrendService assetTrendService;
 
-	private static Map<String, Float> nonAraayList = new HashMap<>(); // 종목명 / 분포율 정렬 전
-	private static Map<String, Float> ArrayList = new LinkedHashMap<>(); // 종목명 / 분포율 내림차순 정렬
+	private static Map<String, Object> nonAraayList = new HashMap<>(); // 종목명 / 분포율 정렬 전
+	private static Map<String, Object> ArrayList = new LinkedHashMap<>(); // 종목명 / 분포율 내림차순 정렬
 
 	public BasicAssetDistrService() {
 		haveStockDao = new JdbcHaveStockDao();
@@ -63,8 +61,37 @@ public class BasicAssetDistrService implements AssetDistrService {
 
 	// 멤버의 자산을 정렬 후 맵 리스트로 반환
 	@Override
-	public Map<String, Float> getHaveStockList(int memberId) {
+	public List<HaveStockView> getHaveStockList(int memberId) {
 
+		List<HaveStockView> arrayList = new ArrayList<>();
+		
+		List<HaveStockView> list = new ArrayList<>();
+		list.addAll(haveStockDao.getList(memberId));
+		for (HaveStockView data : list) {
+			HaveStockView haveStockView = new HaveStockView();
+			float profit = getSumByStockId(data.getStockId(), memberId);
+			float profits = getSumAll(memberId);
+			float ratio = (profit / profits) * 100;
+			
+			haveStockView.setStockName(data.getStockName());
+			haveStockView.setRatio(ratio);
+
+			arrayList.add(haveStockView);
+		}
+		Collections.sort(arrayList, new Comparator<HaveStockView>() {
+			@Override
+			public int compare(HaveStockView v1, HaveStockView v2) {
+				return Float.valueOf(v2.getRatio()).compareTo(Float.valueOf(v1.getRatio()));
+			}	
+		});
+		// sortByValue();
+		return arrayList;
+	}
+	
+	/*
+	@Override
+	public Map<String, Float> getHaveStockList(int memberId) {
+		
 		List<HaveStockView> list = new ArrayList<>();
 		list.addAll(haveStockDao.getList(memberId));
 		for (HaveStockView data : list) {
@@ -80,15 +107,16 @@ public class BasicAssetDistrService implements AssetDistrService {
 		sortByValue();
 		return ArrayList;
 	}
+	*/
 
-	private static void sortByValue() {
-		List<Entry<String, Float>> list = new ArrayList<>(nonAraayList.entrySet());
-		list.sort(Entry.<String, Float>comparingByValue().reversed());
-
-		for (Entry<String, Float> entry : list) {
-			ArrayList.put(entry.getKey(), entry.getValue());
-		}
-	}
+//	private static void sortByValue() {
+//		List<Entry<String, Float>> list = new ArrayList<>(nonAraayList.entrySet());
+//		list.sort(Entry.<String, Float>comparingByValue().reversed());
+//
+//		for (Entry<String, Float> entry : list) {
+//			ArrayList.put(entry.getKey(), entry.getValue());
+//		}
+//	}
 
 	/*
 	 * =======================================================================

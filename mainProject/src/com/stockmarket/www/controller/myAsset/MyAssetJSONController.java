@@ -41,9 +41,9 @@ public class MyAssetJSONController extends HttpServlet{
 		// 전날까지 또는 당일 오후 5시 이후의 자산 기록이 포함된 리스트
 		List<RecordAsset> trendList = assetTrendService.getRecordAsset(userId);
 		// 현재의 보유 자산
-		float assetPesent = assetTrendService.getAssetPresent(userId);
+		long assetPesent = assetTrendService.getAssetPresent(userId);
 		// 자산 비율 리스트
-		Map<String, Float> distrList = assetDistrService.getHaveStockList(userId);
+		List<HaveStockView> distrList = assetDistrService.getHaveStockList(userId);
 	
 		// String assetPesent = String.valueOf(assetTrendService.getAssetPresent(userId));
 		
@@ -56,11 +56,12 @@ public class MyAssetJSONController extends HttpServlet{
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         
-        PrintWriter out = response.getWriter();
-        out.write(list);
+         PrintWriter out = response.getWriter();
+         out.write(list);
         // out.write(trendJson);
-					
-		//request.getRequestDispatcher("myAsset.jsp").forward(request, response);
+			
+       // request.setAttribute("assetPesent", assetPesent);
+		// request.getRequestDispatcher("myAsset.jsp").forward(request, response);
 		
 	}
 

@@ -39,7 +39,7 @@ public class MyAssetController extends HttpServlet{
 		int userId = (int)session.getAttribute("id");
 		
 		// 현재의 보유 자산
-		float assetPesent = assetTrendService.getAssetPresent(userId);
+		long assetPesent = assetTrendService.getAssetPresent(userId);
 
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");

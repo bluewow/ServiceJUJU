@@ -9,6 +9,7 @@ window.addEventListener("load",function(){
         request.open("GET","../../card/asset/myAsset-json",true);
 
         request.onload = function(){
+        	alert(	request.responseText);
 
             var distrListTemplate = section.querySelector(".template-list-stock");
             var list = JSON.parse(request.responseText);
