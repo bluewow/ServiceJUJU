@@ -9,17 +9,17 @@ window.addEventListener("load",function(){
         request.open("GET","../../card/asset/myAsset-json",true);
 
         request.onload = function(){
-        	alert(	request.responseText);
+        	//alert(	request.responseText);
 
             var distrListTemplate = section.querySelector(".template-list-stock");
             var list = JSON.parse(request.responseText);
-            alert(list[0].distJson[0].stockName);
+            //alert(list[0].distJson[0].stockName);
 
             tbody.innerHTML = "";
 
             for(var i=0; i<list[0].distJson.length; i++){
                 var distrImage = '<img src="../../images/distr_list_0'+((i%4)+1)+'.png">';
-                alert(distrImage);
+                //alert(distrImage);
 
                 var cloneTr = document.importNode(distrListTemplate.content, true);
                 var tds = cloneTr.querySelectorAll("td");
