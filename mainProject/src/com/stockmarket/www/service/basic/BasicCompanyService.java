@@ -100,18 +100,16 @@ public class BasicCompanyService implements CompanyService {
 		// 2. 업종명에 해당하는 링크를 타고 들어가서 상세 종목명을 얻는다.
 
 		ArrayList<String> detailIndustryList = new ArrayList<>();
-		List<String> data = new ArrayList<>();
 		
-		HashMap<String, List<String>> mapDetailIndustryList = new HashMap<String, List<String>>();
+		
+//		HashMap<String, List<String>> mapDetailIndustryList = new HashMap<String, List<String>>();
+		HashMap<String, String> mapDetailIndustryList = new HashMap<String, String>();
 		
 		
 		int i;
-		for (i = 0; i < 3; i++) {
+		for (i = 0; i < upjongAtag.size(); i++) {
 			String upjongDetailUrl = "https://finance.naver.com" + upjongAtag.get(i);
 			Document upjongDetail = null;
-
-			//detailIndustryList.add(upjonName.get(i));
-			// 업종명을 detailIndustryList에 추가
 
 			try {
 				upjongDetail = Jsoup.connect(upjongDetailUrl).get();
@@ -125,7 +123,7 @@ public class BasicCompanyService implements CompanyService {
 			 while (detailIndustryName.hasNext()) {
 				detailIndustryList.add(detailIndustryName.next().text());
 			}
-			 detailIndustryList.add("\n");
+			 
 			
 			for (int j = 0; j < detailIndustryList.size(); j++) {
 				detailIndustryList.remove("");
@@ -133,22 +131,17 @@ public class BasicCompanyService implements CompanyService {
 			// 공백을 제거 코드
 			
 			for (int j = 0; j < detailIndustryList.size(); j++) {
-				mapDetailIndustryList.put(upjonName.get(i), detailIndustryList);
+				mapDetailIndustryList.put(upjonName.get(i), detailIndustryList.toString());
 			}
 			
+			detailIndustryList.removeAll(detailIndustryList); // mapDetailIndustryList에 회사명을 넣은 후에 중복을 방지하기 위해서 모두 삭제
+			//cnt++; // 업종 갯수 확인 79개
 			
 			
-			
-//			for(List<String> key : mapDetailIndustryList.values()) {
-//				for(String t : key) {
-//					System.out.println(mapDetailIndustryList.get(key) + " " + t);
-//					
-//				}
-//			}
 		}
 		
 		for (String key : mapDetailIndustryList.keySet()) {
-			List<String> value = mapDetailIndustryList.get(key);
+			String value = mapDetailIndustryList.get(key);
 			System.out.println("key : " + key + " value : " + value);
 			
 		} 
