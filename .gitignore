@@ -22,3 +22,6 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /bin/
+mainProject/src/com/stockmarket/www/controller/system/SystemLib.java
+mainProject/src/com/stockmarket/www/dao/csv/CSVDailyDataDao.java
+mainProject/src/com/stockmarket/www/entity/StockDetail.java
