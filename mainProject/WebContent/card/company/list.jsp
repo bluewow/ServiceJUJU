@@ -70,7 +70,8 @@
 				<c:forEach var="sector" items="${search}" varStatus="status" >
 				<tr>
 					<td >${status.count}</td>
-					<td name="CompanyNameClickedByUser">
+					<!-- <td name="CompanyNameClickedByUser"> -->
+					<td >
 						<a href="list?companyName=${sector.companyName}" id="companyName">${sector.companyName}</a>
 						<a href="${sector.website}" target="_blank"><img src="/css/company/link.png" alt=""></a>
 					</td>

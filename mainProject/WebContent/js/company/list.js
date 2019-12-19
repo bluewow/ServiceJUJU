@@ -6,10 +6,10 @@ window.addEventListener("load", function(){
     CompanyNameClickedByUser.onclick = function(e){
        alert("클릭 확인")
        var ajax = new XMLHttpRequest();
-       ajax.open("GET", "../../card/company/list?CompanyNameClickedByUser=on");
+       ajax.open("POST", "../../card/company/list");
        ajax.onload = function() {
-    	   //data send to capture Card
-			var frame = parent.document.querySelector("#companyListWindow");
+    	   var data ='';
+		   var frame = parent.document.querySelector("#companyListWindow");
 			frame.contentWindow.postMessage(
 					{capture: ajax.responseText }, 
 					"http://localhost:8080/card/capturememo/captureMemo.jsp");

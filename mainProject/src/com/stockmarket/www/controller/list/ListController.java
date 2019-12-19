@@ -50,13 +50,32 @@ public class ListController extends HttpServlet {
 		//System.out.println(request.getParameter("companyName"));
 		if (CompanyNameClickedByUser != null) {
 //			HttpSession session = request.getSession();
-			String companyName = request.getParameter("companyName");
-			System.out.println(companyName);
-			PrintWriter out = response.getWriter();
-			out.print(companyName);      
-			return;
+//			String companyName = request.getParameter("companyName");
+//			System.out.println(companyName);
+//			PrintWriter out = response.getWriter();
+//			out.print(companyName);      
+//			return;
 		}
 		
+		
+//==== (아래는) 크롤링을 위한 코드====================================
+//https://finance.naver.com/sise/lastsearch2.nhn(네이버 증권)에서 검색 상위종목 4개 추출		
+		
+		String urlKeywordTop4 = "https://finance.naver.com/sise/lastsearch2.nhn";
+		
+		Document doc = null;
+		
+		String[] recommendKeyword = new String[3];
+		doc = Jsoup.connect(urlKeywordTop4).get();
+		
+		Elements element = doc.select("tbody");
+		Iterator<Element> ie1 = element.select("a.tltle").iterator();
+		
+		for (int i = 0; i < 3; i++) {
+			recommendKeyword[i] = ie1.next().text();
+		}
+		
+		request.setAttribute("recommendKeyword", recommendKeyword);
 		
 //	====CSV 파일을 읽고, 검색된 회사 정보를 찾아 jsp에 전달하는 코드
 		ServletContext application = getServletContext();
@@ -69,38 +88,24 @@ public class ListController extends HttpServlet {
 		// String search = "제지";
 
 		String companyName_ = request.getParameter("companyName");
+		companyService.stockIndustryCrawling();
 		
 		if (companyName_ != null && !companyName_.equals("")) {
 			companyName = companyName_;
+		} else {
+			request.getRequestDispatcher("list.jsp").forward(request, response);
+		    return;
 		}
 		
 		searchCompanyList = new ArrayList<Company>();
 		
-		if (companyService.searchCompany(companyName) != null) {
-			searchCompanyList.add(companyService.searchCompany(companyName));
-		}
+//		if (companyService.searchCompany(companyName) != null) {
+//			searchCompanyList.add(companyService.searchCompany(companyName));
+//		}
 
 		
 		request.setAttribute("search", searchCompanyList);
 
-//==== (아래는) 크롤링을 위한 코드====================================
-//https://finance.naver.com/sise/lastsearch2.nhn(네이버 증권)에서 검색 상위종목 4개 추출		
-
-		String urlKeywordTop4 = "https://finance.naver.com/sise/lastsearch2.nhn";
-
-		Document doc = null;
-
-		String[] recommendKeyword = new String[3];
-		doc = Jsoup.connect(urlKeywordTop4).get();
-
-		Elements element = doc.select("tbody");
-		Iterator<Element> ie1 = element.select("a.tltle").iterator();
-
-		for (int i = 0; i < 3; i++) {
-			recommendKeyword[i] = ie1.next().text();
-		}
-
-		request.setAttribute("recommendKeyword", recommendKeyword);
 
 		/*
 		 * 네이버 테마별 크롤링을 위한
@@ -110,9 +115,13 @@ public class ListController extends HttpServlet {
 		// request.setAttribute("sectorList",companyService.getCompanyListFromNaverByThema(companyName));
 		// System.out.println(companyService.getCompanyListFromNaverByThema(companyName));
 
+		List<String> test =	companyService.search(companyName);
+		//회사 이름 = > list String
 		
+		for (String string : test) {
+			System.out.println(string);
+		}
 		
-		companyService.stockIndustryCrawling();
 		
 		request.getRequestDispatcher("list.jsp").forward(request, response);
 
