@@ -185,6 +185,7 @@ public class BasicCompanyService implements CompanyService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		return result;	
 	}
 
@@ -207,7 +208,7 @@ public class BasicCompanyService implements CompanyService {
 			{"큐레이션", "브레이크", "디딤돌", "트레이딩", "SBS뉴스", "트레이더", "트레이",
 			 "레이더", "레이튼", "플레이어", "레이시온", "오디오", "스튜디오", "키움증권 클립", 
 			 "키움증권 2", "키움증권 재생중", "한국경제TV 재생", "아시아경제 https" , "아시아경제 최신",
-			 "아시아경제 2", "NH투자증권 공식", "※키움증권"}; //크롤링 결과의 제거 대상. 지속적인 업데이트 필요
+			 "아시아경제 2", "NH투자증권 공식", "※키움증권", "레이어", "KNN뉴스", "SBSCNBC뉴스"}; //크롤링 결과의 제거 대상. 지속적인 업데이트 필요
 
 		//TEMP CSV 파일 삭제예정 ---------------------------------------
 		CSVStockDataDao data = new CSVStockDataDao();
@@ -257,7 +258,8 @@ public class BasicCompanyService implements CompanyService {
 	// 2차필터
 	private List<String> filterSecond() throws IOException {
 		List<String> storageCodeNum = new ArrayList<String>();
-		List<String> finalCompany = new ArrayList<String>();
+		List<String> beforeCompany = new ArrayList<String>();	//중복제거전 회사목록
+		List<String> afterCompany = new ArrayList<String>(); //중복제거된 회사목록
 		
 		//TEMP CSV 파일 삭제예정 ---------------------------------------
 		String Path1 = "C:\\Users\\acorn\\Documents\\프로젝트\\ServiceJUJU\\mainProject\\WebContent\\fileUpload\\KOSPI.csv";
@@ -292,21 +294,28 @@ public class BasicCompanyService implements CompanyService {
 			for(String e : crawlDataOrder.keySet()) {
 				for(String m : list) {
 					m = m.trim();
-					if(m.equals(e))	//crawling data 와 업종리스트가 매칭될 경우 최종 회사 리스트에 추가된다
-						finalCompany.add(e);
+					if(m.equals(e)) 	//crawling data 와 업종리스트가 매칭될 경우 최종 회사 리스트에 추가된다
+						beforeCompany.add(e);
 				}
 			}
 			
 			if(index >= 3) {	//count 수 기준으로 1, 2, 3 등까지 적용한다
-				if(limit.get(index) == limit.get(index+1)) 
+				if(limit.get(index - 1) == limit.get(index)) 
 					continue;
 
 				break;
 			}
 		}
-//		for(String v : finalCompany)	// for debugging
+		
+		for(String comp : beforeCompany) {
+			if(!afterCompany.contains(comp))
+				afterCompany.add(comp);
+		}
+			
+//		for(String v : afterCompany)	// for debugging
 //			System.out.println(v);
-		return finalCompany;
+	
+		return afterCompany;
 	}
 	
 
