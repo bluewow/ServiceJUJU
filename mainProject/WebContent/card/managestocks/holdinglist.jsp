@@ -69,19 +69,19 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
       <td class="up">
       <span></span>
          <span class="fa fa-caret-up"></span><br>
-         <span></span>
+         <span></span>%
       </td>
 
       <td class="down">
          <span></span>
          <span class="fa fa-caret-down"></span><br>
-         -<span></span>
+         -<span></span>%
       </td>
 
       <td>
          <span></span>
          <span></span><br>
-          <span></span>
+          <span></span>%
       </td>
 
       <td>
