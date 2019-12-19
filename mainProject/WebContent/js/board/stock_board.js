@@ -1,3 +1,8 @@
+window.addEventListener("message", function(e) {
+	if(e.data) //codeNum
+		console.log("stockBoard : " + e.data); 
+});
+
 window.addEventListener("load", function() {
 
 	var section = document.querySelector("#stockScroll");

@@ -1,3 +1,8 @@
+window.addEventListener("message", function(e) {
+	if(e.data) //codeNum
+		console.log("trade : " + e.data); 
+});
+
 window.addEventListener("load", function(){
 	//load google chart
 	google.charts.load('current', {packages: ['corechart', 'line']});

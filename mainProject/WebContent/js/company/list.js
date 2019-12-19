@@ -1,20 +1,26 @@
 window.addEventListener("load", function(){
-    var attentionimageControl = document.querySelector(".attention");
-    var cn = document.querySelector("#companyName");
-    var CompanyNameClickedByUser = document.querySelector("#companyName");
-    
-    CompanyNameClickedByUser.onclick = function(e){
-       alert("클릭 확인")
-       var ajax = new XMLHttpRequest();
-       ajax.open("POST", "../../card/company/list");
-       ajax.onload = function() {
-    	   var data ='';
-		   var frame = parent.document.querySelector("#companyListWindow");
-			frame.contentWindow.postMessage(
-					{capture: ajax.responseText }, 
-					"http://localhost:8080/card/capturememo/captureMemo.jsp");
-		}
-       
-       ajax.send();
-    };
+	//codeNum 전달이벤트
+	sendEvent();
+	
+	function sendEvent() {
+	    var companyName = document.querySelector("#companyName");
+	    
+	    if(companyName == null) 
+	    	return;
+	    
+	    companyName.onclick = function(e){
+	       var codenum = companyName.dataset.codenum;
+	       
+	       var stockBoardWindow = parent.document.querySelector("#stock-board-window");
+	       var analysisWindow = parent.document.querySelector("#analysis-window");
+	       var tradeWindow = parent.document.querySelector("#trade-window");
+	       
+	       stockBoardWindow.contentWindow.postMessage(
+	    		   codenum, "http://localhost:8080/card/board/stock_board.jsp");
+	       analysisWindow.contentWindow.postMessage(
+	    		   codenum, "http://localhost:8080/card/trade/analysis.jsp");
+	       tradeWindow.contentWindow.postMessage(
+	    		   codenum, "http://localhost:8080/card/trade/trading.jsp");
+	    }
+    }
 });
