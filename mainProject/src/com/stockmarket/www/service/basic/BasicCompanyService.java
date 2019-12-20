@@ -136,6 +136,10 @@ public class BasicCompanyService implements CompanyService {
 				mapDetailIndustryList.put(upjonName.get(i), detailIndustryList);
 			}
 			
+			for (int j = 0; j < detailIndustryList.size(); j++) {
+				//remove 해보기
+			}
+			
 			
 			
 			
