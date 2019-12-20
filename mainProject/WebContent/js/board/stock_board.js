@@ -103,8 +103,8 @@ window.addEventListener("load", function() {
 				contentSum += '<div><span class="re-content">' 
 					+ detail.replys[i].writerId + " : </span><span>"
 					+ detail.replys[i].reContent+'</span><span class="modi-box"><a href=../../card/board/re-modi?id='
-					+ detail.replys[i].id +' class="re-modi">수정</a>  <a href=../../card/board/re-del?id='
-					+ detail.replys[i].id +' class="re-del">삭제</a>'+"</span></div>";
+					+ detail.replys[i].replyId +' class="re-modi" data-id="' +detail.replys[i].replyId + '">수정</a>  <a href=../../card/board/re-del?id='
+					+ detail.replys[i].replyId +' class="re-del" data-id="' +detail.replys[i].replyId + '">삭제</a>'+"</span></div>";
 			} 
 			replyContent.innerHTML = contentSum;
 			tbody.insertBefore(cloneTr, nextTr);
@@ -156,13 +156,14 @@ window.addEventListener("load", function() {
 		request.send(sendData);
 		
 		// 3. 요청이 완료되었는지 결과를 확인한다.
-		
+		request.onload = function() {
+			var lastReplyNum = request.responseText;
 		alert("등록되었습니다.");
 		
 
 		// 텍스트박스 지우기
 		e.target.parentNode.parentNode.querySelector('.reply-content').value = null;
-		
+		console.log(lastReplyNum);
 		// 4. 결과를 확인하고 결과를 표시한다.
 		var currentTr = e.target.parentNode.parentNode;
 		var nextTr = currentTr.parentNode.nextElementSibling.firstElementChild;
@@ -174,22 +175,61 @@ window.addEventListener("load", function() {
 		var div = document.createElement("div");
 		var content = '<span class="re-content">' +e.target.dataset.writerId + 
 			" : </span><span>" + reContent+'</span><span class="modi-box"><a href=../../card/board/re-modi?id='
-			+ detail.replys[i].id +' class="re-modi">수정</a>  <a href=../../card/board/re-del?id='
-			+ detail.replys[i].id +' class="re-del">삭제</a>'+"</span>";
+			+ lastReplyNum +' class="re-modi" data-id="' + lastReplyNum + '">수정</a>  <a href=../../card/board/re-del?id='
+			+ lastReplyNum +' class="re-del" data-id="' + lastReplyNum + '">삭제</a>'+"</span>";
 		
 			div.innerHTML= content;
 			console.log(div);
 			nextTr.firstElementChild.prepend(div);
+		}
 	};
+	
+	//========= 댓글수정 ==================
+	var replyModiClickHandler = function(e){
+		alert("수정버튼!!!")
+	}
+	
+	//========= 댓글삭제 ==================
+	var replyDelClickHandler = function(e){
+		var replyId = e.target.dataset.id;
+		var data = [
+			["replyId", replyId],
+			["status", "del"],
+			]
+		var sendData = [];
+		
+		for (var i = 0; i < data.length; i++) {
+			sendData[i] = data[i].join("=");
+		}
+		sendData = sendData.join("&");
+		
+		var request = new XMLHttpRequest(); 
+		request.open("POST", "../../card/board/Reply", true); 
+		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		request.send(sendData);
+		
+		
+		// 3. 요청이 완료되었는지 결과를 확인한다.
+		request.onload = function() {
+		alert("삭제되었습니다.");
+	}
+	}
 	
 	//========= 내용 클릭 핸들러 ==================	
 	tbody.onclick = function(e) {
 		e.preventDefault();
 				
 		if(e.target.parentNode.classList.contains("board-title"))
-			titleClickHandler(e);		
+			titleClickHandler(e);
+		
 		else if(e.target.parentNode.classList.contains("reply-submit-button"))
 			regButtonClickHandler(e);	
+		
+		else if(e.target.classList.contains("re-modi"))
+			replyModiClickHandler(e);	
+		
+		else if(e.target.classList.contains("re-del"))
+			replyDelClickHandler(e);	
 		
 
 	};
