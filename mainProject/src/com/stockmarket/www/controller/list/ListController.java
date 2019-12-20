@@ -88,7 +88,8 @@ public class ListController extends HttpServlet {
 		// String search = "제지";
 
 		String companyName_ = request.getParameter("companyName");
-		companyService.stockIndustryCrawling();
+		
+		//companyService.stockIndustryCrawling();
 		
 		if (companyName_ != null && !companyName_.equals("")) {
 			companyName = companyName_;
