@@ -102,52 +102,43 @@ public class BasicCompanyService implements CompanyService {
 		ArrayList<String> detailIndustryList = new ArrayList<>();
 		
 		
-//		HashMap<String, List<String>> mapDetailIndustryList = new HashMap<String, List<String>>();
-		HashMap<String, String> mapDetailIndustryList = new HashMap<String, String>();
+		Map<String, List<String>> map = new HashMap<String, List<String>>();
 		
 		
 		int i;
-		for (i = 0; i < upjongAtag.size(); i++) {
-			String upjongDetailUrl = "https://finance.naver.com" + upjongAtag.get(i);
-			Document upjongDetail = null;
+		//upjongAtag.size()
+		for (i = 0; i < 2; i++) {
+			List<String> list = new ArrayList<String>();
+			String url = "https://finance.naver.com" + upjongAtag.get(i);
+			 
 
 			try {
-				upjongDetail = Jsoup.connect(upjongDetailUrl).get();
+				doc = Jsoup.connect(url).get();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
-			Elements detailIndustryTable = upjongDetail.select("tbody a");
-			Iterator<Element> detailIndustryName = detailIndustryTable.select("a").iterator();
-			
-			 while (detailIndustryName.hasNext()) {
-				detailIndustryList.add(detailIndustryName.next().text());
+			Elements companyList = doc.select("tbody a");
+			String detailCompanyList = companyList.select("a").text();
+			String[] companyArray = detailCompanyList.split("  ");
+//			for(String k : companyArray)
+//				System.out.println(k);
+			for (String string : companyArray) {
+				list.add(string);
 			}
-			 
-			
-			for (int j = 0; j < detailIndustryList.size(); j++) {
-				detailIndustryList.remove("");
-			}
-			// 공백을 제거 코드
-			
-			for (int j = 0; j < detailIndustryList.size(); j++) {
-				mapDetailIndustryList.put(upjonName.get(i), detailIndustryList.toString());
-			}
-			
-			detailIndustryList.removeAll(detailIndustryList); // mapDetailIndustryList에 회사명을 넣은 후에 중복을 방지하기 위해서 모두 삭제
-			//cnt++; // 업종 갯수 확인 79개
-
+			map.put(upjongAtag.get(i), list);
 			
 			
 		}
+		System.out.println(map);
 		
-		for (String key : mapDetailIndustryList.keySet()) {
-			String value = mapDetailIndustryList.get(key);
-			System.out.println("key : " + key + " value : " + value);
-			
-		} 
+//		for (String key : map.keySet()) {
+//			List<String> value = map.get(key);
+//			System.out.println("key : " + key + "     value :   " + value);
+//			
+//		} 
 		System.out.println("================================================================");
-		
+		System.out.println("종목 개수  : " + cnt);
 		
 	
 	}

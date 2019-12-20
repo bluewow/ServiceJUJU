@@ -89,7 +89,7 @@ public class ListController extends HttpServlet {
 
 		String companyName_ = request.getParameter("companyName");
 		
-		//companyService.stockIndustryCrawling();
+		companyService.stockIndustryCrawling(); //종목 크롤링
 		
 		if (companyName_ != null && !companyName_.equals("")) {
 			companyName = companyName_;
@@ -100,9 +100,9 @@ public class ListController extends HttpServlet {
 		
 		searchCompanyList = new ArrayList<Company>();
 		
-//		if (companyService.searchCompany(companyName) != null) {
-//			searchCompanyList.add(companyService.searchCompany(companyName));
-//		}
+		if (companyService.searchCompany(companyName) != null) {
+			searchCompanyList.add(companyService.searchCompany(companyName));
+		}
 
 		
 		request.setAttribute("search", searchCompanyList);
