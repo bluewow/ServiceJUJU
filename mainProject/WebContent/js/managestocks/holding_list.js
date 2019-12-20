@@ -38,7 +38,7 @@ window.addEventListener("load",function(){
          var tds = cloneTr.querySelectorAll("td");
             
         	
-         var incomePercent = Math.ceil((list[i].income/list[i].sum)*100);
+         var incomePercent = ((list[i].income/list[i].sum)*100).toFixed(2);
          allIncome += list[i].income;
          allSum += list[i].sum;
          allIncomePercent += incomePercent;
@@ -67,7 +67,7 @@ window.addEventListener("load",function(){
         else {
            tds[3].firstElementChild.innerText = list[i].price;
            tds[3].lastElementChild.innerText = list[i].percent;
-           tds[7].firstElementChild.innerText = 0;
+           tds[7].firstElementChild.innerText = list[i].income;
            tds[7].lastElementChild.innerText = incomePercent;
         }
         
@@ -93,11 +93,14 @@ window.addEventListener("load",function(){
         //   tds[0].innertext = list[i].stockName;
         tbody.append(cloneTr);
         
+        console.log(allIncomePercent+",allSum:"+allSum+",allIncome:"+allIncome); 
         }
         
-       allIncomePercent = allIncomePercent/list.length
-       console.log(allIncomePercent+",allSum:"+allSum+",allIncome:"+allIncome); 
-       var Valuation = allSum - allIncome; 
+       allIncomePercent = (allIncome/allSum)*100;
+       allIncomePercent =  allIncomePercent.toFixed(2);
+
+       var Valuation = allSum + allIncome; 
+       
 
        if(allIncomePercent>0){
         preArea.firstElementChild.nextElementSibling.style.color ="red";
@@ -118,8 +121,8 @@ window.addEventListener("load",function(){
        }
        else{
         preArea.firstElementChild.nextElementSibling.innerText = "0%";
-        preArea.lastElementChild.innerText = 0 + won;
-        backArea.lastElementChild.innerText = 0 + won;
+        preArea.lastElementChild.innerText = addComma(allIncome) + won;
+        backArea.lastElementChild.innerText = addComma(Valuation) + won;
        }
        
        backArea.firstElementChild.nextElementSibling.innerText = addComma(allSum) + won;

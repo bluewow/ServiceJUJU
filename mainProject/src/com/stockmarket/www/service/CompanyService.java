@@ -20,7 +20,16 @@ public interface CompanyService {
 	
 	void stockIndustryCrawling();
 	
-	
+	/*
+	 * search 알고리즘을 사용하여 검색어와 관련된 회사목록을 추출한다
+	 * input
+	 * 	search : 검색어
+	 * 
+	 * 문제점
+	 * - 1차 필터에서 CJ대한통운 과 같은 단어는 CJ, CJ대한통운으로 결과같이 나온다 
+	 * - 조국과 같은 "테마주"는 업종에서 필터링 되지 않는다.
+	 */
+	public List<String> search(String search);
 	
 	
 }
