@@ -40,6 +40,9 @@ public interface CommunityBoardService {
 	 * 댓글 추가 삭제
 	 * */
 	int insertReply(CommunityBoard insertReply);
+	int updateReply(CommunityBoard updateReply);
+	int lastReplyNum(int boardId);
+	int deleteReply(int replyId);
 
 
 }
