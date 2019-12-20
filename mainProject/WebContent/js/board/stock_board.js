@@ -163,7 +163,6 @@ window.addEventListener("load", function() {
 
 		// 텍스트박스 지우기
 		e.target.parentNode.parentNode.querySelector('.reply-content').value = null;
-		console.log(lastReplyNum);
 		// 4. 결과를 확인하고 결과를 표시한다.
 		var currentTr = e.target.parentNode.parentNode;
 		var nextTr = currentTr.parentNode.nextElementSibling.firstElementChild;
@@ -179,19 +178,20 @@ window.addEventListener("load", function() {
 			+ lastReplyNum +' class="re-del" data-id="' + lastReplyNum + '">삭제</a>'+"</span>";
 		
 			div.innerHTML= content;
-			console.log(div);
 			nextTr.firstElementChild.prepend(div);
 		}
 	};
 	
 	//========= 댓글수정 ==================
 	var replyModiClickHandler = function(e){
-		alert("수정버튼!!!")
+		var replyId = e.target.dataset.id;
+		
 	}
 	
 	//========= 댓글삭제 ==================
 	var replyDelClickHandler = function(e){
 		var replyId = e.target.dataset.id;
+		var targetDiv = e.target.parentNode.parentNode;
 		var data = [
 			["replyId", replyId],
 			["status", "del"],
@@ -212,6 +212,7 @@ window.addEventListener("load", function() {
 		// 3. 요청이 완료되었는지 결과를 확인한다.
 		request.onload = function() {
 		alert("삭제되었습니다.");
+		targetDiv.parentNode.removeChild(targetDiv);
 	}
 	}
 	

@@ -103,5 +103,23 @@ public class BasicCommunityBoardService implements CommunityBoardService {
 		return communityBoardDao.insertReply(insertReply);
 	}
 
+	@Override
+	public int lastReplyNum(int boardId) {
+		// TODO Auto-generated method stub
+		return communityBoardDao.lastReplyNum(boardId);
+	}
+
+	@Override
+	public int updateReply(CommunityBoard updateReply) {
+		// TODO Auto-generated method stub
+		return communityBoardDao.updateReply(updateReply);
+	}
+
+	@Override
+	public int deleteReply(int replyId) {
+		// TODO Auto-generated method stub
+		return communityBoardDao.deleteReply(replyId);
+	}
+
 
 }

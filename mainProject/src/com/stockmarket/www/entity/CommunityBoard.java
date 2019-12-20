@@ -68,6 +68,14 @@ public class CommunityBoard {
 		this.writerId = writerId;
 	}
 
+	public CommunityBoard(int boardId) {
+		this.id = boardId;
+	}
+
+	public CommunityBoard(int replyId, String string) {
+		this.replyId = replyId;
+	}
+
 	public int getId() {
 		return id;
 	}
