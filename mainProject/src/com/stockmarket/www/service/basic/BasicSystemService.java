@@ -1,51 +1,35 @@
 package com.stockmarket.www.service.basic;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeMap;
 
-import javax.swing.SortOrder;
-
-import org.apache.commons.lang3.RegExUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.jsoup.Connection;
-import org.jsoup.Connection.Response;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.stockmarket.www.controller.system.AppContext;
+import com.stockmarket.www.controller.system.SystemLib;
 import com.stockmarket.www.dao.HaveStockDao;
 import com.stockmarket.www.dao.MemberDao;
 import com.stockmarket.www.dao.RecordAssetDao;
+import com.stockmarket.www.dao.StockDetailDao;
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
 import com.stockmarket.www.dao.jdbc.JDBCRecordAssetDao;
 import com.stockmarket.www.dao.jdbc.JdbcHaveStockDao;
 import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
-import com.stockmarket.www.entity.Company;
+import com.stockmarket.www.dao.jdbc.JdbcStockDetailDao;
 import com.stockmarket.www.entity.CurStock;
 import com.stockmarket.www.entity.HaveStockView;
 import com.stockmarket.www.entity.Member;
 import com.stockmarket.www.entity.RecordAsset;
-import com.stockmarket.www.service.CompanyService;
+import com.stockmarket.www.entity.StockDetail;
 import com.stockmarket.www.service.SystemService;
 
 public class BasicSystemService implements SystemService {
@@ -60,7 +44,11 @@ public class BasicSystemService implements SystemService {
 	MemberDao memberDao;
 	HaveStockDao haveStockDao;
 	RecordAssetDao recordAssetDao;
-
+	StockDetailDao stockDetailDao;
+	
+	public BasicSystemService() {
+		stockDetailDao = new JdbcStockDetailDao();
+	}
 	/*-------------------------- refreshStockPrice ----------------------------*/
 	public void refreshStockPrice(String pathOfKospi, String pathOfKosdaq) {
 		CSVStockDataDao data = new CSVStockDataDao();
@@ -199,6 +187,33 @@ public class BasicSystemService implements SystemService {
 		return result;
 	}
 
+	public void setStockDataAll(String codeNum) {
+		List<StockDetail> list = new ArrayList<StockDetail>();
+		Gson gson = new Gson();
+		
+		//일별시세 게시판
+		String url = "https://m.stock.naver.com/api/item/getTrendList.nhn?code=" + codeNum + "&size=1000";
+		Document doc = SystemLib.naverCrawling(url);
+		
+		JsonParser jsonParser = new JsonParser();
+		JsonElement jsonElement = jsonParser.parse(doc.text());
+		String values = jsonElement.getAsJsonObject().get("result").toString();
+
+		//크롤링 데이터를 객체에 저장
+		StockDetail[] stockDetail= gson.fromJson(values, StockDetail[].class);
+		for(StockDetail obj : stockDetail) {
+			System.out.println(obj);
+		}
+		stockDetailDao.insert(stockDetail);
+		stockDetailDao.deleteAll();
+		System.out.println("END");
+		
+	}
+	
+	public List<StockDetail> getStockDetail(String codeNum) {
+		return stockDetailDao.get(codeNum);
+	}
+	
 	/*
 	 * =======================================================================
 	 * ============================= for Test ================================
@@ -283,6 +298,16 @@ public class BasicSystemService implements SystemService {
 //				searchTest("SLAM");
 //				searchTest("조국");
 			case 7:
+				sys.setStockDataAll("095660");
+//				service.getAllDailyPrice("004170");
+				return;
+			case 8: //stockdetailDao 의 저장된 데이터를 가져온다
+				StockDetailDao s;
+				s = new JdbcStockDetailDao();
+				List<StockDetail> stock = s.get("095660");
+				for(StockDetail obj : stock)
+					System.out.println(obj.toString());
+				
 				return;
 			}
 			System.out.println("종료");
