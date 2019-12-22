@@ -25,7 +25,7 @@ window.addEventListener("load", function(){
 	
     //-------------------- Set Data --------------------------
       var data = new google.visualization.DataTable();
-      data.addColumn('number', 'day');
+      data.addColumn('string', 'day');
       data.addColumn('number', '원');
 
       data.addRows(list);
@@ -34,11 +34,12 @@ window.addEventListener("load", function(){
       var options = {
     	      legend: {
     	          position: 'none'
-    	        }, //non-display column name
+    	      }, //non-display column name
     	      series:{
     	      	0: {color: '#13bfd7'},
     	      } //graph color
-      };
+      }; 
+    
 
       //-------------------- Draw LineChart --------------------------
 	  function resize() {

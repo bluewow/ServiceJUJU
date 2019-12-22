@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.google.gson.Gson;
@@ -137,17 +138,16 @@ public class TradeController extends HttpServlet{
 /////////////////////////////////////////////////////////
 	
 	private void dateButtonStatus(String date, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		JSONArray json = new JSONArray();
 		
-		int[][] data = null;
-		// Converting multidimensional array into JSON
 		switch(date) {
 		case "일봉":	
 			List<StockDetail> list = service.getDailyPrice("095660");
-			System.out.println(list.size());
-			data = new int[list.size()][2];
 			for(int i = 0; i < list.size(); i++) {
-				data[i][0] = Integer.parseInt(list.get(i).getBizdate());
-				data[i][1] = list.get(i).getClose_val();
+				JSONArray array = new JSONArray();
+				array.add(list.get(list.size()-i-1).getBizdate());
+				array.add(list.get(list.size()-i-1).getClose_val());
+				json.add(array);
 			}
 			break;
 //		case "주봉":
@@ -159,12 +159,8 @@ public class TradeController extends HttpServlet{
 //			data = data3;
 //			break;
 		}
-		
-		Gson gson = new Gson();
-        String json = gson.toJson(data);
-        
-		PrintWriter out = response.getWriter();
-		out.write(json);      
+        PrintWriter out = response.getWriter();
+		out.print(json);      
 	}
 
 	//TEST
