@@ -106,8 +106,8 @@ public class BasicCompanyService implements CompanyService {
 		
 		
 		int i;
-		//upjongAtag.size()
-		for (i = 0; i < 2; i++) {
+		
+		for (i = 0; i < upjongAtag.size(); i++) {
 			List<String> list = new ArrayList<String>();
 			String url = "https://finance.naver.com" + upjongAtag.get(i);
 			 
@@ -121,22 +121,33 @@ public class BasicCompanyService implements CompanyService {
 			Elements companyList = doc.select("tbody a");
 			String detailCompanyList = companyList.select("a").text();
 			String[] companyArray = detailCompanyList.split("  ");
-//			for(String k : companyArray)
-//				System.out.println(k);
+
 			for (String string : companyArray) {
 				list.add(string);
 			}
-			map.put(upjongAtag.get(i), list);
+			map.put(upjonName.get(i), list);
 			
+			/*---------------------------------------------------------------*/
+			
+			List<String> getData = new ArrayList<String>();
+            for(String k : map.keySet()) {
+               getData = map.get(k);
+               for(String j : getData) {
+                  System.out.println(k + " : " + j);
+               }
+            }
+			cnt++;
 			
 		}
-		System.out.println(map);
+		//System.out.println(map);
 		
 //		for (String key : map.keySet()) {
 //			List<String> value = map.get(key);
 //			System.out.println("key : " + key + "     value :   " + value);
 //			
 //		} 
+		
+		
 		System.out.println("================================================================");
 		System.out.println("종목 개수  : " + cnt);
 		
