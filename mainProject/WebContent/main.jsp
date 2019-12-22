@@ -31,8 +31,6 @@
 
 <link rel="stylesheet" type="text/css" href="./css/tablet.css">
 
-<link rel="stylesheet" type="text/css" href="./css/tablet.css">
-
 <!--  pop-up -->
 <link rel="stylesheet" type="text/css" href="./css/popup.css">
 <script src="./js/popup/popup.js"></script>
