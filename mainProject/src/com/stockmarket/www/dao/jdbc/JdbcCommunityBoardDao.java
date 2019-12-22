@@ -203,25 +203,22 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		} finally {
 			daoContext.close(pst);
 		}
-		System.out.println(returnReplyNum);
 		return returnReplyNum;
 	}
 
 	@Override
 	public int updateReply(CommunityBoard updateReply) {
 		int result = 0;
-		String sql = "INSERT INTO BOARD (ID, TITLE, WRITER_ID, CONTENT, STOCKCODE) "
-				+ "VALUES ((SELECT NVL(MAX(ID),0)+1 FROM BOARD), ?, ?, ?, '095660')";
-
+		String sql = "UPDATE REPLY SET RE_CONTENT=?, REGDATE=SYSTIMESTAMP WHERE ID=?";
+		
 		PreparedStatement pst = null;
 		JdbcDaoContext daoContext = new JdbcDaoContext();
 
 		try {
 			pst = daoContext.getPreparedStatement(sql);
 
-			pst.setString(1, communityBoard.
-			pst.setString(2, communityBoard.getWriterId());
-			pst.setString(3, communityBoard.getContent());
+			pst.setString(1, updateReply.getReContent());
+			pst.setInt(2, updateReply.getReplyId());
 
 			result = pst.executeUpdate();
 
@@ -253,14 +250,7 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		return result;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
+
 	public static void main(String[] args) {
 		JdbcCommunityBoardDao com = new JdbcCommunityBoardDao();
 		CommunityBoard lastReplyNum = new CommunityBoard();

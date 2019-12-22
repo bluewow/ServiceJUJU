@@ -14,7 +14,7 @@ public class CommunityBoard {
 	private int replyId;
 	private String reContent;
 
-	// select
+// select
 
 	public CommunityBoard() {
 	}
@@ -53,14 +53,6 @@ public class CommunityBoard {
 		this.id = boardId;
 	}
 
-//댓글입력
-	public CommunityBoard(String reContent, String writerId, int boardId) {
-		super();
-		this.reContent = reContent;
-		this.writerId = writerId;
-		this.id = boardId;
-	}
-
 	public CommunityBoard(String title, String content, String writerId) {
 		super();
 		this.title = title;
@@ -72,8 +64,23 @@ public class CommunityBoard {
 		this.id = boardId;
 	}
 
+// reply insert
+	public CommunityBoard(String reContent, String writerId, int boardId) {
+		super();
+		this.reContent = reContent;
+		this.writerId = writerId;
+		this.id = boardId;
+	}
+
+//reply delete
 	public CommunityBoard(int replyId, String string) {
 		this.replyId = replyId;
+	}
+
+//reply update
+	public CommunityBoard(int replyId, String reContent, String string) {
+		this.replyId = replyId;
+		this.reContent = reContent;
 	}
 
 	public int getId() {

@@ -32,31 +32,12 @@ public class ListController extends HttpServlet {
 	private List<Company> searchCompanyList;
 
 	public ListController() {
-		/*
-		 * ServletContext application = getServletContext(); String csvUrlPath =
-		 * "/fileUpload/KOSPI.csv"; String csvFilePath =
-		 * application.getRealPath(csvUrlPath);
-		 * 
-		 * companyService = new BasicCompanyService(csvFilePath);
-		 */
+		
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		String CompanyNameClickedByUser = request.getParameter("CompanyNameClickedByUser");
-		//System.out.println("doGet");
-		//System.out.println(request.getParameter("companyName"));
-		if (CompanyNameClickedByUser != null) {
-//			HttpSession session = request.getSession();
-//			String companyName = request.getParameter("companyName");
-//			System.out.println(companyName);
-//			PrintWriter out = response.getWriter();
-//			out.print(companyName);      
-//			return;
-		}
-		
 		
 //==== (아래는) 크롤링을 위한 코드====================================
 //https://finance.naver.com/sise/lastsearch2.nhn(네이버 증권)에서 검색 상위종목 4개 추출		
@@ -85,11 +66,11 @@ public class ListController extends HttpServlet {
 		companyService = new BasicCompanyService(csvFilePath);
 
 		String companyName = "";
-		// String search = "제지";
+	
 
 		String companyName_ = request.getParameter("companyName");
 		
-		companyService.stockIndustryCrawling(); //종목 크롤링
+		//companyService.stockIndustryCrawling(); //종목 크롤링
 		
 		if (companyName_ != null && !companyName_.equals("")) {
 			companyName = companyName_;
