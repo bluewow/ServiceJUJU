@@ -35,6 +35,9 @@ public interface CommunityBoardService {
 	 * */
 	int insertFavoriteCommunityBoard(CommunityBoard communityBoard);
 	int deleteFavoriteCommunityBoard(CommunityBoard communityBoard);
+	/*
+	 * 게시글 댓글 개수 확인
+	 * */
 	int getCommunityBoardreplyCnt(String field, String query, String stockName);
 	/*
 	 * 댓글 추가 삭제

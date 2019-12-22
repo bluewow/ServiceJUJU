@@ -33,57 +33,64 @@ public class ReplyController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
 
+		// 보내준 값으로 삽입, 수정,삭제여부 확인
 		HttpSession session = request.getSession();
 		String reContent = request.getParameter("reContent");
 		String boardId_ = request.getParameter("boardId");
 		String replyIds = request.getParameter("replyId");
 		String status = request.getParameter("status");
-		
-	
-		if(status==null) {
+
+		// 상태값이 없으면 삽입
+		if (status == null) {
 			Object tempId = session.getAttribute("id");
 			int writerId = -1;
-			
-			if(tempId != null)
-				writerId = (Integer)tempId;
+
+			if (tempId != null)
+				writerId = (Integer) tempId;
 			MemberDao memberDao = new JdbcMemberDao();
 			String writerNickname = memberDao.getMember(writerId).getNickName();
-			
+
 			int boardId = Integer.parseInt(boardId_);
 			CommunityBoard insertReply = new CommunityBoard(reContent, writerNickname, boardId);
-	
+
 			int result = communityBoardService.insertReply(insertReply);
-			
 			int lastReplyNum = communityBoardService.lastReplyNum(boardId);
-			
-			
-	
+
 			response.setCharacterEncoding("UTF-8"); // UTP-8로 보내는 코드
 			response.setContentType("text/html;charset=UTF-8"); // UTP-8로 보내는 코드
 			PrintWriter out = response.getWriter();
-			System.out.println("result :"+result);
-			System.out.println("lastReplyNum :"+lastReplyNum);
 			out.print(lastReplyNum);
-			
-		} else if(status.equals("del")){
+			out.print(result);
+
+			// 상태값에 del이면 삭제
+		} else if (status.equals("del")) {
 			int replyId = -1;
-			replyId = Integer.parseInt(replyIds);	
-			
-			CommunityBoard deleteReply = new CommunityBoard(replyId, "del");
+			replyId = Integer.parseInt(replyIds);
+
+			// CommunityBoard deleteReply = new CommunityBoard(replyId, "del");
 			int result = communityBoardService.deleteReply(replyId);
-			
+
 			response.setCharacterEncoding("UTF-8"); // UTP-8로 보내는 코드
 			response.setContentType("text/html;charset=UTF-8"); // UTP-8로 보내는 코드
 			PrintWriter out = response.getWriter();
-			
+
 			out.print(result);
-			
-			
-		} else if(status.equals("modi")) {
-			
-			System.out.println("모다이~~~");
-		} 
+
+			// 상태값에 modi면 수정
+		} else if (status.equals("modi")) {
+			int replyId = -1;
+			replyId = Integer.parseInt(replyIds);
+
+			CommunityBoard updateReply = new CommunityBoard(replyId, reContent, "del");
+			int result = communityBoardService.updateReply(updateReply);
+
+			response.setCharacterEncoding("UTF-8"); // UTP-8로 보내는 코드
+			response.setContentType("text/html;charset=UTF-8"); // UTP-8로 보내는 코드
+			PrintWriter out = response.getWriter();
+
+			out.print(result);
+
+		}
 	}
 }

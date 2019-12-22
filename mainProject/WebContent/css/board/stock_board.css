@@ -223,7 +223,16 @@ a {
   font-weight: 400;
 }
 
-.re-content {
+.reply-modi-content {
+	width:70%;
+	height: 20px;
+}
+
+.reply-modi-content:placeholder {
+  font-size: 0.8em;
+  font-weight: 400;
+}
+.re-writer {
 	font-weight: bold;
 }
 
@@ -250,3 +259,8 @@ a {
 	font-weight: 400;
 	float: right;
 }
+
+.hidden {
+	display: none;
+}
+
