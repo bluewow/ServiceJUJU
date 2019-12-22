@@ -73,7 +73,7 @@ window.addEventListener("load", function(){
 	        var ajax = new XMLHttpRequest();
 	        ajax.open("GET", "../../card/trade/trade?date=" + e.target.value);
 	        ajax.onload = function() {
-	        	console.log(JSON.parse(ajax.responseText));
+//	        	console.log(JSON.parse(ajax.responseText));
 	        	google.charts.setOnLoadCallback(drawBasic(JSON.parse(ajax.responseText)));
 	        }
 	        ajax.send();
