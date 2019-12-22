@@ -16,6 +16,7 @@ import org.json.simple.JSONObject;
 
 import com.google.gson.Gson;
 import com.stockmarket.www.dao.MemberDao;
+import com.stockmarket.www.entity.StockDetail;
 import com.stockmarket.www.service.TradeService;
 import com.stockmarket.www.service.basic.BasicTradeService;
 
@@ -25,7 +26,7 @@ import com.stockmarket.www.service.basic.BasicTradeService;
 @WebServlet("/card/trade/trade")
 public class TradeController extends HttpServlet{
 	TradeService service;
-	
+
 	public TradeController() {
 		service = new BasicTradeService();
 	}
@@ -137,21 +138,26 @@ public class TradeController extends HttpServlet{
 	
 	private void dateButtonStatus(String date, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
-		int[][] data = {};
+		int[][] data = null;
 		// Converting multidimensional array into JSON
 		switch(date) {
 		case "일봉":	
-			int[][] data1 = {{1, 2}, {3, 4}, {4, 5}};
-			data = data1;
+			List<StockDetail> list = service.getDailyPrice("095660");
+			System.out.println(list.size());
+			data = new int[list.size()][2];
+			for(int i = 0; i < list.size(); i++) {
+				data[i][0] = Integer.parseInt(list.get(i).getBizdate());
+				data[i][1] = list.get(i).getClose_val();
+			}
 			break;
-		case "주봉":
-			int[][] data2 = {{5, 4}, {4, 3}, {2, 1}};
-			data = data2;
-			break;
-		case "월봉":	
-			int[][] data3 = {{10, 20}, {40, 50}, {20, 30}};
-			data = data3;
-			break;
+//		case "주봉":
+//			int[][] data2 = {{5, 4}, {4, 3}, {2, 1}};
+//			data = data2;
+//			break;
+//		case "월봉":	
+//			int[][] data3 = {{10, 20}, {40, 50}, {20, 30}};
+//			data = data3;
+//			break;
 		}
 		
 		Gson gson = new Gson();

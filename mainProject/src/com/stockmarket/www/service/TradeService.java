@@ -1,13 +1,11 @@
 package com.stockmarket.www.service;
 
+import java.util.List;
+
+import com.stockmarket.www.entity.StockDetail;
+
 //Quantity -> Qty
 public interface TradeService {
-	/* 구매수량을 입력받아 처리한다 */
-	boolean updatePurchaseQty(int qty);
-	
-	/* 매도수량을 입력받아 처리한다  */
-	boolean updateSoldQty(int qty);
-	
 	/* 자산정보를 가져온다	 */
 	long getAssets(int id);
 	
@@ -20,9 +18,6 @@ public interface TradeService {
 	/* 종목수량  및 sum 값을 변경한다 */
 	void setQty(int id, String stockId, int qty, int curPrice);
 	
-	/*일봉/주봉/월봉 데이터를 가져온다  */
-	void getStock(int date);
-	
 	/* 매수시 가상머니 체크 
 	 * return 
 	 * 	0:정상 
@@ -34,16 +29,19 @@ public interface TradeService {
 	
 	/* 주식 - Zero 수량을 체크한다 */
 	boolean checkZeroHaveStock(int id, String codeNum);
-	/* 주식 - 마이나스 수량을 체크한다 */
+	/* 주식 - Minus 수량을 체크한다 */
 	boolean checkMinusHaveStock(int id, String codeNum, int qty);
 	
 	/* HaveStock DB 에 데이터 추가*/
 	void addHaveStock(int id, String codeNum);
-	/* HaveStock DB 에 데이터 삭지*/
+	/* HaveStock DB 에 데이터 삭제*/
 	void delHaveStock(int memberId, String codeNum);
 	
-	/* 매수 실행 */
+	/* 매수/매도 실행 */
 	void tradeBuySell(int id, String codeNum, int qty, int curStockPrice);
+	
+	/* 일봉 데이터를 가져온다 */
+	List<StockDetail> getDailyPrice(String codeNum);
 
 	
 }
