@@ -26,13 +26,14 @@ window.addEventListener("load", function () {
 					true);
 
 				var tds = cloneTr.querySelectorAll("td");
-				var title = "[" + list[i].stockName + "] "
-					+ list[i].title + "(" + list[i].replyCnt + ")";
 
 				tds[0].innerText = list[i].id;
 				var aTagDetail = tds[1].firstElementChild;
+				aTagDetail.innerHTML =
+					'<span class="stock-name">' + "[" + list[i].stockName + "]" + '</span>' +
+					'<span class="title"> ' + list[i].title + ' </span>' +
+					'<span class="reply-cnt">(' + list[i].replyCnt + ')</span>';
 				aTagDetail.dataset.id = list[i].id;
-				aTagDetail.innerText = title;
 				tds[2].innerText = list[i].regdate;
 				tds[3].innerText = list[i].hit;
 				var aTagFavo = tds[4].firstElementChild;
@@ -59,7 +60,7 @@ window.addEventListener("load", function () {
 
 
 	var titleClickHandler = function (e) {
-		var currentTr = e.target.parentNode.parentNode;
+		var currentTr = e.target.parentNode.parentNode.parentNode;
 		var nextTr = currentTr.nextElementSibling.nextElementSibling;
 
 
@@ -71,16 +72,16 @@ window.addEventListener("load", function () {
 			return;
 		}
 		//내용을 로딩중이면 표시해주세요.
-		if (e.target.parentNode.lastChild.nodeName == "IMG") {
+		if (e.target.parentNode.parentNode.lastChild.nodeName == "IMG") {
 			alert("로딩중입니다~");
 			return;
 		}
 
-		var id = e.target.dataset.id;
+		var id = e.target.parentNode.dataset.id;
 		//로딩을 표시
 		var ajaxIcon = document.createElement("img");
 		ajaxIcon.src = "../../images/delay-icon.gif";
-		e.target.parentNode.append(ajaxIcon);
+		e.target.parentNode.parentNode.append(ajaxIcon);
 
 		//데이터를 요청
 		var request = new XMLHttpRequest();
@@ -92,7 +93,7 @@ window.addEventListener("load", function () {
 			var template = section.querySelector(".detail-template");
 			var cloneTr = document.importNode(template.content, true);
 			var td = cloneTr.querySelector(".content-row td");
-			td.innerHTML = detail.board.content;
+			td.innerHTML = '<span>' + detail.board.content + '</span><br><a href="" class="content-modi" data-id="' + detail.board.id + '">수정</a>';
 			var replyContent = cloneTr
 				.querySelector(".replyTable tbody tr td");
 			var contentSum = "";
@@ -175,8 +176,8 @@ window.addEventListener("load", function () {
 
 			var replyContent = cloneTr.querySelector(".replyTable tbody tr td");
 			var div = document.createElement("div");
-			var content = '<div><span class="re-content">'
-				+ e.target.dataset.writerId + " : </span><span>"
+			var content = '<div><span class="re-writer">'
+				+ e.target.dataset.writerId + ' : </span><span class="re-content">'
 				+ reContent + '</span><span class="modi-box"><a href="" class="re-modi" data-id="'
 				+ lastReplyNum + '">수정</a>  <a href="" class="re-del" data-id="'
 				+ lastReplyNum + '">삭제</a><a href="" class="re-commit hidden" data-id="'
@@ -345,7 +346,7 @@ window.addEventListener("load", function () {
 	tbody.onclick = function (e) {
 		e.preventDefault();
 
-		if (e.target.parentNode.classList.contains("board-title"))
+		if (e.target.parentNode.parentNode.classList.contains("board-title"))
 			titleClickHandler(e);
 
 		else if (e.target.parentNode.classList.contains("reply-submit-button"))
