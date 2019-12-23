@@ -37,32 +37,10 @@ public class BasicAssetDistrService implements AssetDistrService {
 	 * 종목의 자산을 더한 값 내림차순으로 정렬
 	 */
 
-	// 멤버의 하나의 보유 종목의 자산
-	private float getSumByStockId(String stockId, int memberId) {
-
-		float presentPrice = Float.parseFloat(haveStockDao.getView(memberId, stockId).getPrice().replaceAll(",", ""));
-		int quantuty = haveStockDao.getView(memberId, stockId).getQuantity();
-
-		// System.out.println(presentPrice);
-		// System.out.println(quantuty);
-
-		return presentPrice * quantuty;
-	}
-
-	// 멤버의 모든 종목의 자산을 더한 값 = 현 보유 자산 - 주식 가상 머니
-	private float getSumAll(int memberId) {
-
-		long assetPresnt = assetTrendService.getAssetPresent(memberId);
-		long vMoney = memberDao.getMember(memberId).getvMoney();
-		// System.out.println(vMoney);
-
-		return assetPresnt - vMoney;
-	}
-
 	// 멤버의 자산을 정렬 후 맵 리스트로 반환
 	@Override
 	public List<HaveStockView> getHaveStockList(int memberId) {
-
+		
 		List<HaveStockView> arrayList = new ArrayList<>();
 		
 		List<HaveStockView> list = new ArrayList<>();
@@ -75,48 +53,55 @@ public class BasicAssetDistrService implements AssetDistrService {
 			
 			haveStockView.setStockName(data.getStockName());
 			haveStockView.setRatio(ratio);
-
+		
 			arrayList.add(haveStockView);
 		}
 		Collections.sort(arrayList, new Comparator<HaveStockView>() {
 			@Override
 			public int compare(HaveStockView v1, HaveStockView v2) {
 				return Float.valueOf(v2.getRatio()).compareTo(Float.valueOf(v1.getRatio()));
-			}	
+			}
 		});
-		// sortByValue();
+		cutListForFour(arrayList);
+		
 		return arrayList;
 	}
 	
-	/*
-	@Override
-	public Map<String, Float> getHaveStockList(int memberId) {
-		
-		List<HaveStockView> list = new ArrayList<>();
-		list.addAll(haveStockDao.getList(memberId));
-		for (HaveStockView data : list) {
-			
-			float profit = getSumByStockId(data.getStockId(), memberId);
-			float profits = getSumAll(memberId);
-			
-			float ratio = (profit / profits) * 100;
-			String stockName = "\"" + data.getStockName() + "\"";
-			
-			nonAraayList.put(stockName, ratio);
-		}
-		sortByValue();
-		return ArrayList;
-	}
-	*/
+	// 멤버의 하나의 보유 종목의 자산
+	private float getSumByStockId(String stockId, int memberId) {
 
-//	private static void sortByValue() {
-//		List<Entry<String, Float>> list = new ArrayList<>(nonAraayList.entrySet());
-//		list.sort(Entry.<String, Float>comparingByValue().reversed());
-//
-//		for (Entry<String, Float> entry : list) {
-//			ArrayList.put(entry.getKey(), entry.getValue());
-//		}
-//	}
+		float presentPrice = Float.parseFloat(haveStockDao.getView(memberId, stockId).getPrice().replaceAll(",", ""));
+		int quantuty = haveStockDao.getView(memberId, stockId).getQuantity();
+
+		return presentPrice * quantuty;
+	}
+
+	// 멤버의 모든 종목의 자산을 더한 값 = 현 보유 자산 - 주식 가상 머니
+	private float getSumAll(int memberId) {
+
+		long assetPresnt = assetTrendService.getAssetPresent(memberId);
+		long vMoney = memberDao.getMember(memberId).getvMoney();
+
+		return assetPresnt - vMoney;
+	}
+
+	// 보유 주식이 5개 이상인 경우 4개 이후부터 기타로 묶고 4개 이후 리스트 삭제
+	private void cutListForFour(List<HaveStockView> arrayList) {
+		
+		if(arrayList.size()>=5) {
+			float ratio = 0;
+			for (int i = 0; i < arrayList.size()-3; i++)
+				ratio += arrayList.get(3+i).getRatio();
+			while (arrayList.size()>4) {
+				int i = 0;
+				arrayList.remove(4+i);
+				i++;
+			}
+			
+			arrayList.get(3).setStockName("기타");
+			arrayList.get(3).setRatio(ratio);	
+		}
+	}
 
 	/*
 	 * =======================================================================
@@ -139,9 +124,6 @@ public class BasicAssetDistrService implements AssetDistrService {
 			System.out.println(assetDistr.getSumAll(3));
 			break;
 		case 3: // getRecordAsset용 테스트
-			System.out.println(assetDistr.getHaveStockList(3));
-			break;
-		case 4:
 			System.out.println(assetDistr.getHaveStockList(3));
 			break;
 		}
