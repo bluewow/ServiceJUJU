@@ -30,7 +30,9 @@ import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+import com.stockmarket.www.dao.UpjongDao;
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
+import com.stockmarket.www.dao.jdbc.JdbcUpjongDao;
 import com.stockmarket.www.entity.Company;
 import com.stockmarket.www.service.CompanyService;
 
@@ -40,13 +42,14 @@ public class BasicCompanyService implements CompanyService {
 	private String csvFilePath;
 	private Map<String, Integer>crawlData = new HashMap<>(); //종목명, count 수
 	private Map<String, Integer>crawlDataOrder = new LinkedHashMap<>(); //종목명, count 수 내림차순
-
+	
 	// ====================================
 	/* private CompanyService companyService; */
 
 	public BasicCompanyService(String csvFilePath) {
 
 		csvStockDataDao = new CSVStockDataDao(csvFilePath);
+		
 		/* companyService = new BasicCompanyService(csvFilePath); */
 	}
 
@@ -63,97 +66,7 @@ public class BasicCompanyService implements CompanyService {
 
 	}
 
-//	/* 네이버 업종 크롤링 */
-	@Override
-	public void stockIndustryCrawling() {
-		String upjongUrl = "https://finance.naver.com/sise/sise_group.nhn?type=upjong";
-		Document doc = null;
-
-		try {
-			doc = Jsoup.connect(upjongUrl).get();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		// tr tag에 업종 링크를 선택
-
-		Elements Industrytable = doc.select("#contentarea_left");
-
-		Iterator<Element> IndustryAtag = Industrytable.select("tr a").iterator();
-		Iterator<Element> IndustryName = Industrytable.select("tr a").iterator();
-		// IndustryAtag.next().attr("href") => a 링크만 뽑아냄
-		// IndustryAtag.next() => 업종 명만 뽑아냄
-		ArrayList<String> upjongAtag = new ArrayList<>();
-		ArrayList<String> upjonName = new ArrayList<>();
-		int cnt = 0;
-
-		while (IndustryName.hasNext()) {
-			upjonName.add(IndustryName.next().text());
-		}
-
-		while (IndustryAtag.hasNext()) {
-			upjongAtag.add(IndustryAtag.next().attr("href"));
-		}
-		// System.out.println(upjongAtag); ==== 여기까지 출력 됨....
-
-		// 1. 업종명과 링크를 얻는다.
-		// 2. 업종명에 해당하는 링크를 타고 들어가서 상세 종목명을 얻는다.
-
-		ArrayList<String> detailIndustryList = new ArrayList<>();
-		
-		
-		Map<String, List<String>> map = new HashMap<String, List<String>>();
-		
-		
-		int i;
-		
-		for (i = 0; i < upjongAtag.size(); i++) {
-			List<String> list = new ArrayList<String>();
-			String url = "https://finance.naver.com" + upjongAtag.get(i);
-			 
-
-			try {
-				doc = Jsoup.connect(url).get();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			Elements companyList = doc.select("tbody a");
-			String detailCompanyList = companyList.select("a").text();
-			String[] companyArray = detailCompanyList.split("  ");
-
-			for (String string : companyArray) {
-				list.add(string);
-			}
-			map.put(upjonName.get(i), list);
-			
-			/*---------------------------------------------------------------*/
-			
-			List<String> getData = new ArrayList<String>();
-            for(String k : map.keySet()) {
-               getData = map.get(k);
-               for(String j : getData) {
-                  System.out.println(k + " : " + j);
-               }
-            }
-			cnt++;
-			
-		}
-		//System.out.println(map);
-		
-//		for (String key : map.keySet()) {
-//			List<String> value = map.get(key);
-//			System.out.println("key : " + key + "     value :   " + value);
-//			
-//		} 
-		
-		
-		System.out.println("================================================================");
-		System.out.println("종목 개수  : " + cnt);
-		
-	
-	}
-	
+ 	
 	@Override
 	public List<Company> getCompanyListFromNaverByThema(String companyName) {
 		// TODO Auto-generated method stub
@@ -313,6 +226,8 @@ public class BasicCompanyService implements CompanyService {
 	
 		return afterCompany;
 	}
+
+	
 	
 
 }

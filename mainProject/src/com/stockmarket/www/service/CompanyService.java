@@ -18,8 +18,6 @@ public interface CompanyService {
 
 	List<Company> getCompanyListFromNaverByThema(String companyName);
 	
-	void stockIndustryCrawling();
-	
 	/*
 	 * search 알고리즘을 사용하여 검색어와 관련된 회사목록을 추출한다
 	 * input

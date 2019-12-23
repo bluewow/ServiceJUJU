@@ -22,5 +22,16 @@ window.addEventListener("load", function(){
 	       tradeWindow.contentWindow.postMessage(
 	    		   codenum, "http://localhost:8080/card/trade/trading.jsp");
 	    }
-    }
+	}
+	
+	var recommendKeyword = document.querySelector("#ajaxTest");
+	recommendKeyword.onclick = function(e){
+		alert("연결 확인");
+		var ajax = new XMLHttpRequest();
+		ajax.open("GET", "../../card/trade/list?companyName=${r}");
+	}
+
+	
+
+
 });

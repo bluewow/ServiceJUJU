@@ -70,7 +70,7 @@ public class ListController extends HttpServlet {
 
 		String companyName_ = request.getParameter("companyName");
 		
-		//companyService.stockIndustryCrawling(); //종목 크롤링
+		
 		
 		if (companyName_ != null && !companyName_.equals("")) {
 			companyName = companyName_;

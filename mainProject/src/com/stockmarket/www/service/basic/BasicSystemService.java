@@ -3,7 +3,10 @@ package com.stockmarket.www.service.basic;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import org.jsoup.Jsoup;
@@ -20,19 +23,23 @@ import com.stockmarket.www.dao.HaveStockDao;
 import com.stockmarket.www.dao.MemberDao;
 import com.stockmarket.www.dao.RecordAssetDao;
 import com.stockmarket.www.dao.StockDetailDao;
+import com.stockmarket.www.dao.UpjongDao;
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
 import com.stockmarket.www.dao.jdbc.JDBCRecordAssetDao;
 import com.stockmarket.www.dao.jdbc.JdbcHaveStockDao;
 import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
 import com.stockmarket.www.dao.jdbc.JdbcStockDetailDao;
+import com.stockmarket.www.dao.jdbc.JdbcUpjongDao;
 import com.stockmarket.www.entity.CurStock;
 import com.stockmarket.www.entity.HaveStockView;
 import com.stockmarket.www.entity.Member;
 import com.stockmarket.www.entity.RecordAsset;
 import com.stockmarket.www.entity.StockDetail;
+import com.stockmarket.www.entity.Upjong;
 import com.stockmarket.www.service.SystemService;
 
 public class BasicSystemService implements SystemService {
+	private UpjongDao upjongDao;
 	private static final int STOCK_CODE_NUM = 1;
 	// for update Market
 	// <th> 회사명|종목코드|업종|주요제품|상장일|결산월|대표자명|홈페이지|지역 </th>
@@ -48,6 +55,7 @@ public class BasicSystemService implements SystemService {
 	
 	public BasicSystemService() {
 		stockDetailDao = new JdbcStockDetailDao();
+		upjongDao = new JdbcUpjongDao();
 	}
 	/*-------------------------- refreshStockPrice ----------------------------*/
 	public void refreshStockPrice(String pathOfKospi, String pathOfKosdaq) {
@@ -214,6 +222,79 @@ public class BasicSystemService implements SystemService {
 		return stockDetailDao.get(codeNum);
 	}
 	
+	public void upjongCrawling() {
+		
+		String upjongUrl = "https://finance.naver.com/sise/sise_group.nhn?type=upjong";
+		Document doc = null;
+
+		try {
+			doc = Jsoup.connect(upjongUrl).get();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// tr tag에 업종 링크를 선택
+
+		Elements Industrytable = doc.select("#contentarea_left");
+
+		Iterator<Element> IndustryAtag = Industrytable.select("tr a").iterator();
+		Iterator<Element> IndustryName = Industrytable.select("tr a").iterator();
+		// IndustryAtag.next().attr("href") => a 링크만 뽑아냄
+		// IndustryAtag.next() => 업종 명만 뽑아냄
+		ArrayList<String> upjongAtag = new ArrayList<>();
+		ArrayList<String> upjonName = new ArrayList<>();
+		int cnt = 0;
+
+		// 1. 업종명과 해당링크를 얻는다.
+		while (IndustryAtag.hasNext()) 
+			upjongAtag.add(IndustryAtag.next().attr("href"));
+		
+		// 2. 업종명에 해당하는 링크를 타고 들어가서 상세 종목명을 얻는다.
+		while (IndustryName.hasNext()) 
+			upjonName.add(IndustryName.next().text());
+		
+		
+		// 2차 작업 - 업종과 주식종목을 매칭
+		Map<String, List<String>> map = new HashMap<String, List<String>>();
+		List<Upjong> upjongList = new ArrayList<>();
+
+		int totalCnt = 0;
+		for (int i = 0; i < upjongAtag.size(); i++) {
+			List<String> list = new ArrayList<String>();
+			String url = "https://finance.naver.com" + upjongAtag.get(i);
+			 
+
+			try {
+				doc = Jsoup.connect(url).get();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			Elements companyList = doc.select("tbody a");
+			String detailCompanyList = companyList.select("a").text();
+			String[] companyArray = detailCompanyList.split("  ");
+
+			for (String string : companyArray) {
+				list.add(string);
+			}
+			map.put(upjonName.get(i), list);
+		} //-업종명 넣는작업
+		
+		List<String> getData = new ArrayList<String>();
+		for(String k : map.keySet()) { //업종
+			getData = map.get(k);
+			for(String j : getData) { //한 업종내의 종목들 
+				Upjong upjong = new Upjong(k, j);
+				upjongList.add(upjong);
+				totalCnt++;
+//            	   System.out.println(k + " : " + j);
+			}
+			System.out.println(k);
+		}
+		upjongDao.insert(upjongList);
+		System.out.println("end"+ totalCnt);
+	}
+	
 	/*
 	 * =======================================================================
 	 * ============================= for Test ================================
@@ -309,7 +390,14 @@ public class BasicSystemService implements SystemService {
 					System.out.println(obj.toString());
 				
 				return;
+			case 9:
+				sys.upjongCrawling();
+				return;
+			case 10:
+				JdbcUpjongDao upjongDao = new JdbcUpjongDao();
+				upjongDao.delete();
 			}
+			
 			System.out.println("종료");
 		}
 	}//finished main
