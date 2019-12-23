@@ -11,14 +11,13 @@ window.addEventListener("load",function(){
 		  return num.toString().replace(regexp, ',');
    }
 
-    updateButton.onclick = function(){
+   function holdingLoad(){
+
+      console.log("실행");
 
     var request = new XMLHttpRequest();
     request.open("GET","../../card/managestocks/holdinglist",true);
     
-
-    
-
     //서블릿의 실행이 완료되었을때 실행 
     request.onload = function(){
 //        var cardFooter = section.querySelector(".card-footer");
@@ -129,6 +128,10 @@ window.addEventListener("load",function(){
        
     };
     request.send();
-   }
+   };
+   holdingLoad();
 
+   setInterval("holdingLoad()", 5000);
+  
 });
+
