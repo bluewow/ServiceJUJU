@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.stockmarket.www.entity.CommunityBoard;
@@ -69,6 +70,14 @@ public class StockBoardJsonController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		// 보내준 값으로 삽입, 수정,삭제여부 확인
+				HttpSession session = request.getSession();
+				String boardId_ = request.getParameter("boardId");
+				String Content = request.getParameter("reContent");
+				String status = request.getParameter("status");
+				
+				 if (status.equals("del")) {
+					 
+				 }
 	}
 }

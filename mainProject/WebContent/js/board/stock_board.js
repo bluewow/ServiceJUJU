@@ -341,7 +341,32 @@ window.addEventListener("load", function () {
 			targetDiv.parentNode.removeChild(targetDiv);
 		}
 	}
+	//========= 게시글 삭제 ==================
+	var delContentClickHandler = function(e) {
+		var boardId = e.target.dataset.id;
+		var data = [ [ "boardId", boardId ],
+				[ "status", "del" ], ]
+		var sendData = [];
 
+		for (var i = 0; i < data.length; i++) {
+			sendData[i] = data[i].join("=");
+		}
+		sendData = sendData.join("&");
+
+		var request = new XMLHttpRequest();
+		request.open("POST", "../../card/board/Reply", true);
+		request.setRequestHeader('Content-Type',
+				'application/x-www-form-urlencoded');
+		request.send(sendData);
+
+		// 3. 요청이 완료되었는지 결과를 확인한다.
+		request.onload = function() {
+			alert("삭제되었습니다.");
+			targetDiv.parentNode.removeChild(targetDiv);
+		}
+	}
+	
+	
 	//========= 내용 클릭 핸들러 ==================	
 	tbody.onclick = function (e) {
 		e.preventDefault();
@@ -363,6 +388,9 @@ window.addEventListener("load", function () {
 
 		else if (e.target.classList.contains("re-cancel"))
 			replyCancelClickHandler(e);
+
+		else if (e.target.classList.contains("del-content"))
+			delContentClickHandler(e);
 
 
 	};
