@@ -233,7 +233,7 @@
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="Purchaselist"
                            role="tabpanel" aria-labelledby="Purchaselist-tab">
-                           <iframe src="./card/managestocks/holdinglist.jsp"> </iframe>
+                           <iframe id="holding-window" src="./card/managestocks/holdinglist.jsp"> </iframe>
                         </div>
                         <div class="tab-pane fade" id="Interest" role="tabpanel"
                            aria-labelledby="Interest-tab">
