@@ -1,3 +1,11 @@
+window.addEventListener("message", function(e) {
+	if(e.data) //codeNum 
+		console.log("holding : " + e.data);
+	
+});
+
+
+
 window.addEventListener("load",function(){
    
    var section = this.document.querySelector(".manageStocks");

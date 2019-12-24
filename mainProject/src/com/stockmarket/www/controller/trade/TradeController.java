@@ -3,6 +3,7 @@ package com.stockmarket.www.controller.trade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -112,31 +113,26 @@ public class TradeController extends HttpServlet{
 	
 
 	private void updateResultPrice(HttpServletRequest request, HttpServletResponse response, int memberId, String codeNum, int result) throws IOException {
-		int[] data = new int[4]; 
-		
+		HashMap<Object, Object>map = new HashMap<>();
 		int sum = service.getStockAssets(memberId, codeNum);
 		int qty = service.getQty(memberId, codeNum);
 		
-		//평균단가
-		data[0] = qty == 0 ? 0 : sum / qty;
-		//보유수량
-		data[1] = qty;
-		//가상머니
-		data[2] = (int) service.getAssets(memberId);
-		//결과 
-		data[3] = result;
+		map.put("avgPrice", qty == 0 ? 0 : sum / qty);
+		map.put("quantity", qty);
+		map.put("vMoney", (int) service.getAssets(memberId));
+		map.put("result", result);
+		map.put("codeNum", codeNum);
+		JSONObject data = new JSONObject(map);
 		
-		Gson gson = new Gson();
-        String json = gson.toJson(data);
-        
 		PrintWriter out = response.getWriter();
-		out.write(json);  
+		out.print(data);  
 	}
 
 /////////////////////////////////////////////////////////
 /////////////////// 일봉/주봉/월봉 관련 함수 /////////////////////
 /////////////////////////////////////////////////////////
 	
+	@SuppressWarnings("unchecked")
 	private void dateButtonStatus(String date, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		JSONArray json = new JSONArray();
 		
