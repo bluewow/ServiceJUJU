@@ -22,14 +22,12 @@ public interface CommunityBoardService {
 	 * 게시판 내용
 	 * */
 	CommunityBoard getBoard(int id);
-	CommunityBoard getPrevBoardByCurrentId(int id);
-	CommunityBoard getNextBoardByCurrentId(int id);
 	/*
 	 * 게시판 삽입 편집
 	 * */
 	int insertCommunityBoard(CommunityBoard communityBoard);
-	int updateCommunityBoard(CommunityBoard communityBoard);
-	int deleteCommunityBoard(CommunityBoard communityBoard);
+	int updateCommunityBoard(CommunityBoard updateCommunityBoard);
+	int deleteCommunityBoard(int boardId);
 	/*
 	 * 게시판 즐겨찾기 추가 삭제
 	 * */
@@ -46,6 +44,7 @@ public interface CommunityBoardService {
 	int updateReply(CommunityBoard updateReply);
 	int lastReplyNum(int boardId);
 	int deleteReply(int replyId);
+	int deleteReplys(int boardId);
 
 
 }
