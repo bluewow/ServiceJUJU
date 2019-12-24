@@ -1,7 +1,7 @@
 package com.stockmarket.www.entity;
-//코스피 엔티티 
-//멤버 변수는 코스닥과 코스피가 동일
-public class Kospi {
+//koreaStocks = 코스피+ 코스닥
+
+public class koreaStocks {
 	
 	// 회사명
 	private String companyName;
@@ -24,7 +24,7 @@ public class Kospi {
 	
 	
 	
-	public Kospi(String companyName, String stockCode, String sectors, String mainProduct, String stockedDay,
+	public koreaStocks(String companyName, String stockCode, String sectors, String mainProduct, String stockedDay,
 			String settlementMonth, String representativeName, String website, String location) {
 		
 		this.companyName = companyName;
@@ -94,7 +94,7 @@ public class Kospi {
 	
 	@Override
 	public String toString() {
-		return "Kospi [companyName=" + companyName + ", stockCode=" + stockCode + ", sectors=" + sectors
+		return "koreaStocks [companyName=" + companyName + ", stockCode=" + stockCode + ", sectors=" + sectors
 				+ ", mainProduct=" + mainProduct + ", stockedDay=" + stockedDay + ", settlementMonth="
 				+ settlementMonth + ", representativeName=" + representativeName + ", website=" + website
 				+ ", location=" + location + "]";
