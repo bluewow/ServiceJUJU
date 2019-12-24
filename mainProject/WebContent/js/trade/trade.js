@@ -1,3 +1,8 @@
+window.addEventListener("message", function(e) {
+	if(e.data) //codeNum
+		console.log("trade : " + e.data); 
+});
+
 window.addEventListener("load", function(){
 	//load google chart
 	google.charts.load('current', {packages: ['corechart', 'line']});
@@ -20,7 +25,7 @@ window.addEventListener("load", function(){
 	
     //-------------------- Set Data --------------------------
       var data = new google.visualization.DataTable();
-      data.addColumn('number', 'day');
+      data.addColumn('string', 'day');
       data.addColumn('number', '원');
 
       data.addRows(list);
@@ -29,11 +34,12 @@ window.addEventListener("load", function(){
       var options = {
     	      legend: {
     	          position: 'none'
-    	        }, //non-display column name
+    	      }, //non-display column name
     	      series:{
     	      	0: {color: '#13bfd7'},
     	      } //graph color
-      };
+      }; 
+    
 
       //-------------------- Draw LineChart --------------------------
 	  function resize() {
@@ -67,7 +73,7 @@ window.addEventListener("load", function(){
 	        var ajax = new XMLHttpRequest();
 	        ajax.open("GET", "../../card/trade/trade?date=" + e.target.value);
 	        ajax.onload = function() {
-	        	console.log(JSON.parse(ajax.responseText));
+//	        	console.log(JSON.parse(ajax.responseText));
 	        	google.charts.setOnLoadCallback(drawBasic(JSON.parse(ajax.responseText)));
 	        }
 	        ajax.send();

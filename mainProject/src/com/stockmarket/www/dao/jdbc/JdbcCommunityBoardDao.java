@@ -162,7 +162,7 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		int result = 0;
 		String sql = "INSERT INTO BOARD (ID, TITLE, WRITER_ID, CONTENT, STOCKCODE) "
 				+ "VALUES ((SELECT NVL(MAX(ID),0)+1 FROM BOARD), ?, ?, ?, '095660')";
-		
+
 		PreparedStatement pst = null;
 		JdbcDaoContext daoContext = new JdbcDaoContext();
 
@@ -173,8 +173,75 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 			pst.setString(2, communityBoard.getWriterId());
 			pst.setString(3, communityBoard.getContent());
 
+			result = pst.executeUpdate();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			daoContext.close(pst);
+		}
+		return result;
+	}
+
+	@Override
+	public int lastReplyNum(int boardId) {
+		int returnReplyNum = 0;
+		String sql = "select id from (select rownum num, r.* from (select * from reply order by id desc) r) where num like '1'";
+
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+
+		try {
+			pst = daoContext.getPreparedStatement(sql);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				returnReplyNum = rs.getInt("ID");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			daoContext.close(pst);
+		}
+		return returnReplyNum;
+	}
+
+	@Override
+	public int updateReply(CommunityBoard updateReply) {
+		int result = 0;
+		String sql = "UPDATE REPLY SET RE_CONTENT=?, REGDATE=SYSTIMESTAMP WHERE ID=?";
+		
+		PreparedStatement pst = null;
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+
+		try {
+			pst = daoContext.getPreparedStatement(sql);
+
+			pst.setString(1, updateReply.getReContent());
+			pst.setInt(2, updateReply.getReplyId());
 
 			result = pst.executeUpdate();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			daoContext.close(pst);
+		}
+		return result;
+	}
+
+	@Override
+	public int deleteReply(int replyId) {
+		int result = 0;
+		String sql = "DELETE FROM REPLY WHERE ID = "+ replyId;
+
+		PreparedStatement pst = null;
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+
+		try {
+			pst = daoContext.getPreparedStatement(sql);
+			result = pst.executeUpdate();
+
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -184,10 +251,11 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 	}
 
 
-public static void main(String[] args) {
-	JdbcCommunityBoardDao com = new JdbcCommunityBoardDao();
-	CommunityBoard communityBoard = new CommunityBoard("a" ,"b", "c");
-	
-	com.insertCommunityBoard(communityBoard);
-}
+	public static void main(String[] args) {
+		JdbcCommunityBoardDao com = new JdbcCommunityBoardDao();
+		CommunityBoard lastReplyNum = new CommunityBoard();
+
+		com.lastReplyNum(1);
+	}
+
 }

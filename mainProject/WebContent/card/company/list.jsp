@@ -35,7 +35,8 @@
 			<li id="recommendKeyword_fixed">추천검색어 </li>
 
 			<c:forEach var="r" items="${recommendKeyword}">
-				<a href="list?companyName=${r}"><span>${r}</span></a>
+				<%-- <a href="list?companyName=${r}"><span>${r}</span></a> --%>
+				<span id = ajaxTest>${r}</span>
 			</c:forEach>
 			
 		</ul>
@@ -70,8 +71,9 @@
 				<c:forEach var="sector" items="${search}" varStatus="status" >
 				<tr>
 					<td >${status.count}</td>
-					<td name="CompanyNameClickedByUser">
-						<a href="list?companyName=${sector.companyName}" id="companyName">${sector.companyName}</a>
+						<!-- <td name="CompanyNameClickedByUser">-->
+					<td >
+						<a href="list?companyName=${sector.companyName}" data-codenum="${sector.codeNum }" id="companyName">${sector.companyName}</a>
 						<a href="${sector.website}" target="_blank"><img src="/css/company/link.png" alt=""></a>
 					</td>
 					<%-- <td name="CompanyNameClickedByUser"><a href="list?companyName=${sector.companyName}" id="companyName">${sector.companyName}</a> <a href="${sector.website}" target="_blank"><img src="/css/company/link.png" alt=""></a></td> --%>

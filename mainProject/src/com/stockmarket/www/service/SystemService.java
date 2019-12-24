@@ -1,6 +1,9 @@
 package com.stockmarket.www.service;
 
+import java.util.List;
+
 import com.stockmarket.www.entity.RecordAsset;
+import com.stockmarket.www.entity.StockDetail;
 
 public interface SystemService {
 	/*
@@ -26,4 +29,20 @@ public interface SystemService {
 	
 	// 하루에 한번 모든 회원의 당일 자산값을 등록한다.
 	int insertRecordAsset();
+	
+	/*
+	 *  해당종목(codeNum)의 모든 정보를  저장한다
+	*/
+	void setStockDataAll(String codeNum);
+	
+	/*
+	 *  해당종목(codeNum) 의 모든 정보를 불러온다
+	*/
+	List<StockDetail> getStockDetail(String codeNum);
+	
+	//TODO
+	//상장종목 폐지목록
+	//하루에한번 stock 정보 추가
+	//추가된 종목 추가
 }
+

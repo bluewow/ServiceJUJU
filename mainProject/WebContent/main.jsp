@@ -31,8 +31,6 @@
 
 <link rel="stylesheet" type="text/css" href="./css/tablet.css">
 
-<link rel="stylesheet" type="text/css" href="./css/tablet.css">
-
 <!--  pop-up -->
 <link rel="stylesheet" type="text/css" href="./css/popup.css">
 <script src="./js/popup/popup.js"></script>
@@ -138,12 +136,11 @@
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="analysis"
                            role="tabpanel" aria-labelledby="analysis-tab">
-                           <iframe height="100%" src="./card/trade/analysis"> </iframe>
+                           <iframe height="100%" id="analysis-window" src="./card/trade/analysis"> </iframe>
                         </div>
                         <div class="tab-pane fade" id="trading" role="tabpanel"
                            aria-labelledby="trading-tab">
-                           <iframe src="./card/trade/trade">
-                           </iframe>
+                           <iframe id="trade-window" src="./card/trade/trade"> </iframe>
                         </div>
 
                      </div>
@@ -168,7 +165,7 @@
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="capture"
                            role="tabpanel" aria-labelledby="capture-tab"></div>
-                            <iframe id="captureWindow" src="/card/capturememo/captureMemo">
+                            <iframe id="capture-window" src="/card/capturememo/captureMemo">
                            </iframe>
                      </div>
                   </section>
@@ -209,7 +206,7 @@
                         </div>
                         <div class="tab-pane fade" id="eventcommunity" role="tabpanel"
                            aria-labelledby="eventcommunity-tab">
-                           <iframe src="./card/board/stock_board" scrolling="no"></iframe>
+                           <iframe id="stock-board-window" src="./card/board/stock_board" scrolling="no"></iframe>
                         </div>
                      </div>
                   </section>

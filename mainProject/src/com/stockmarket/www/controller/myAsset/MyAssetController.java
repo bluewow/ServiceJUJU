@@ -31,7 +31,6 @@ public class MyAssetController extends HttpServlet{
 		assetDistrService = new BasicAssetDistrService();
 	}
 	
-	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -39,12 +38,12 @@ public class MyAssetController extends HttpServlet{
 		int userId = (int)session.getAttribute("id");
 		
 		// 현재의 보유 자산
-		long assetPesent = assetTrendService.getAssetPresent(userId);
+		long assetPresent = assetTrendService.getAssetPresent(userId);
 
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         
-        request.setAttribute("assetPesent", assetPesent);
+        request.setAttribute("assetPresent", assetPresent);
 					
 		request.getRequestDispatcher("myAsset.jsp").forward(request, response);
 		

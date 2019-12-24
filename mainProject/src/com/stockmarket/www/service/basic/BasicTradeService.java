@@ -1,31 +1,27 @@
 package com.stockmarket.www.service.basic;
 
+import java.util.List;
+
 import com.stockmarket.www.dao.HaveStockDao;
+import com.stockmarket.www.dao.MemberDao;
+import com.stockmarket.www.dao.StockDetailDao;
 import com.stockmarket.www.dao.jdbc.JdbcHaveStockDao;
 import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
+import com.stockmarket.www.dao.jdbc.JdbcStockDetailDao;
 import com.stockmarket.www.entity.HaveStock;
 import com.stockmarket.www.entity.Member;
+import com.stockmarket.www.entity.StockDetail;
 import com.stockmarket.www.service.TradeService;
 
 public class BasicTradeService implements TradeService{
-	JdbcMemberDao memberDao;
-	JdbcHaveStockDao stockDao;
+	MemberDao memberDao;
+	HaveStockDao stockDao;
+	StockDetailDao stockDetailDao;
 	
 	public BasicTradeService() {
 		memberDao = new JdbcMemberDao();
 		stockDao = new JdbcHaveStockDao();
-	}
-	
-	@Override
-	public boolean updatePurchaseQty(int qty) {
-		//성공/실패 DB(수량)		
-		return false;
-	}
-
-	@Override
-	public boolean updateSoldQty(int qty) {
-		//성공/실패 DB(수량)
-		return false;
+		stockDetailDao = new JdbcStockDetailDao();
 	}
 
 	@Override
@@ -68,11 +64,6 @@ public class BasicTradeService implements TradeService{
 		stockDao.update(haveStock);
 	}
 	
-
-	@Override
-	public void getStock(int date) {
-		
-	}
 
 	@Override
 	public int checkVmoney(int id, int qty, int curStockPrice) {
@@ -138,13 +129,20 @@ public class BasicTradeService implements TradeService{
 		haveStock.setSum(haveStock.getSum() + qty * curStockPrice);
 		stockDao.update(haveStock);
 	}
+	
+	@Override
+	public List<StockDetail> getDailyPrice(String codeNum) {
+		return stockDetailDao.get(codeNum);
+	}
+	
 /////////////////////////////////////////////////////////
 ////////////////////////// TEST /////////////////////////
 /////////////////////////////////////////////////////////
 	public static void main(String[] args) {
+/*		
 		BasicTradeService service = new BasicTradeService();
 		
-/*				
+		
 		//check trade buy
 		service.tradeBuy(2, "215600", 4, 20000);
 
@@ -162,6 +160,4 @@ public class BasicTradeService implements TradeService{
 */		
 		
 	}
-
-
 }
