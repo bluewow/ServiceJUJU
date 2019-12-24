@@ -131,7 +131,5 @@ window.addEventListener("load",function(){
    };
    holdingLoad();
 
-   setInterval("holdingLoad()", 5000);
-  
 });
 
