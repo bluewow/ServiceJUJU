@@ -3,9 +3,7 @@ package com.stockmarket.www.service.basic;
 import java.util.List;
 
 import com.stockmarket.www.dao.CommunityBoardDao;
-import com.stockmarket.www.dao.MemberDao;
 import com.stockmarket.www.dao.jdbc.JdbcCommunityBoardDao;
-import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
 import com.stockmarket.www.entity.CommunityBoard;
 import com.stockmarket.www.service.CommunityBoardService;
 
