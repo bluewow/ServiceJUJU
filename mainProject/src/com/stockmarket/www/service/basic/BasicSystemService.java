@@ -251,7 +251,7 @@ public class BasicSystemService implements SystemService {
 		
 		// 2. 업종명에 해당하는 링크를 타고 들어가서 상세 종목명을 얻는다.
 		while (IndustryName.hasNext()) 
-			upjonName.add(IndustryName.next().text());
+			upjonName.add(IndustryName.next().text().trim());
 		
 		
 		// 2차 작업 - 업종과 주식종목을 매칭
@@ -271,7 +271,7 @@ public class BasicSystemService implements SystemService {
 			}
 
 			Elements companyList = doc.select("tbody a");
-			String detailCompanyList = companyList.select("a").text();
+			String detailCompanyList = companyList.select("a").text().trim();
 			String[] companyArray = detailCompanyList.split("  ");
 
 			for (String string : companyArray) {
@@ -283,13 +283,13 @@ public class BasicSystemService implements SystemService {
 		List<String> getData = new ArrayList<String>();
 		for(String k : map.keySet()) { //업종
 			getData = map.get(k);
-			for(String j : getData) { //한 업종내의 종목들 
+			for(String j : getData) { //한 업종내의 종목들
 				Upjong upjong = new Upjong(k, j);
 				upjongList.add(upjong);
 				totalCnt++;
-//            	   System.out.println(k + " : " + j);
+//            	   System.out.println(k + " : " + j); //for debugging
 			}
-			System.out.println(k);
+//			System.out.println(k); //for debugging
 		}
 		upjongDao.insert(upjongList);
 		System.out.println("end"+ totalCnt);
