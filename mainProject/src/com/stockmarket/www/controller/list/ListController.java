@@ -63,11 +63,7 @@ public class ListController extends HttpServlet {
 		
 
 		String companyName = "";
-	
-
 		String companyName_ = request.getParameter("companyName");
-		
-		
 		
 		if (companyName_ != null && !companyName_.equals("")) {
 			companyName = companyName_;
@@ -78,42 +74,31 @@ public class ListController extends HttpServlet {
 		
 		searchCompanyList = new ArrayList<koreaStocks>();
 		
-		//System.out.println("컨트롤러 : "+companyName);
-		//==========================================
 		
-		List<String> test =	companyService.search(companyName);
+		List<String> list =	companyService.searchCompanyNames(companyName);
+		// 기현이 형의 검색 알고리즘을 통해 회사 이름을 List에 String 형식으로 담는다.
 		
-		for (int i = 0; i < test.size(); i++) {
-			searchCompanyList.add(companyService.searchCompany(test.get(i))); 
-			
+		for (int i = 0; i < list.size(); i++) {
+			searchCompanyList.add(companyService.searchCompany(list.get(i))); 
+		}
+		// 위에 담긴 list에 있는 회사 종목을 하나씩 꺼내어 검색한 뒤에 회사정보를 koreaStocks 엔티티로  리턴한다.
+		// koreaStocks 엔티티를 searchCompanyList에 담는다.
+		
+		request.setAttribute("search", searchCompanyList);
+		
+		//회사 이름 = > list String
+		for (String string : list) {
+			System.out.println(string);
 		}
 		
 		
-//		if (companyService.searchCompany(companyName) != null) {
-//			searchCompanyList.add(companyService.searchCompany(companyName));
-//		}
-
-		
-		request.setAttribute("search", searchCompanyList);
-
-
-		/*
-		 * 네이버 테마별 크롤링을 위한
-		 * 코드==========================================================================
-		 */
-
-		// request.setAttribute("sectorList",companyService.getCompanyListFromNaverByThema(companyName));
-		// System.out.println(companyService.getCompanyListFromNaverByThema(companyName));
-
-		
-		//회사 이름 = > list String
-		
-//		for (String string : test) {
-//			System.out.println(string);
-//		}
-		
-		
 		request.getRequestDispatcher("list.jsp").forward(request, response);
-
+		
+//		companyName_ = "";
+//		companyName = "";
+//		
+//		if (searchCompanyList != null) {
+//			searchCompanyList = null;
+//		}
 	}
 }

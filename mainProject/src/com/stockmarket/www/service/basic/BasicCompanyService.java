@@ -49,7 +49,7 @@ public class BasicCompanyService implements CompanyService {
 
 	}
 
-	public List<String> search(String search) {
+	public List<String> searchCompanyNames(String search) {
 		List<String> result = null;
 		
 		//1차 : 검색어 + "주식" && "종목" && "테마"의 네이버검색 결과를 종목명과 매칭한다
@@ -179,7 +179,7 @@ public class BasicCompanyService implements CompanyService {
 		BasicCompanyService service = new BasicCompanyService();
 
 //		service.search("핑크퐁");
-		service.search("새벽배송");
+//		service.search("새벽배송");
 //		service.search("키움증권");
 //		service.search("지우개");
 //		service.search("카카오톡");
