@@ -112,6 +112,12 @@ window.addEventListener("load", function(){
 				return;
 			}
 			
+			if(data[3].value < 0) {
+				alert("잘못된 수량입력 입니다");
+				data[3].value = "";
+				return;
+			}
+			
 			if(e.target.value == "매       수") {
 				var trade = "buy";
 				if(confirm(data[3].value + "주 매수를 진행하시겠습니까?") == false) {
@@ -132,9 +138,9 @@ window.addEventListener("load", function(){
 	        ajax.open("GET", "../../card/trade/trade?replaceEvent=on&button=" + trade + "&Purse/Sold=" + qty.value);
 	        ajax.onload = function() {
 	        	var obj = JSON.parse(ajax.responseText);
-		        data[0].innerHTML = obj.avgPrice + "원";
-		        data[1].innerHTML = obj.quantity + "주";
-		        data[2].innerHTML = obj.vMoney + "원";
+		        data[0].innerHTML = obj.avgPrice.toLocaleString() + "원";
+		        data[1].innerHTML = obj.quantity.toLocaleString() + "주";
+		        data[2].innerHTML = obj.vMoney.toLocaleString() + "원";
 		        data[3].value = "";
 			//result - 0:ok, 1:vmoney부족, 2: 거래정지목록, 
 			//		   3:장내시간이 아님, 4:수량이 0이하인 경우 거래x, 
