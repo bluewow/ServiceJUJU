@@ -112,6 +112,12 @@ window.addEventListener("load", function(){
 				return;
 			}
 			
+			if(data[3].value < 0) {
+				alert("잘못된 수량입력 입니다");
+				data[3].value = "";
+				return;
+			}
+			
 			if(e.target.value == "매       수") {
 				var trade = "buy";
 				if(confirm(data[3].value + "주 매수를 진행하시겠습니까?") == false) {
@@ -131,17 +137,21 @@ window.addEventListener("load", function(){
 			var ajax = new XMLHttpRequest();
 	        ajax.open("GET", "../../card/trade/trade?replaceEvent=on&button=" + trade + "&Purse/Sold=" + qty.value);
 	        ajax.onload = function() {
-	        	var result = JSON.parse(ajax.responseText);
-		        data[0].innerHTML = result[0].toLocaleString() + "원";
-		        data[1].innerHTML = result[1].toLocaleString() + "주";
-		        data[2].innerHTML = result[2].toLocaleString() + "원";
+	        	var obj = JSON.parse(ajax.responseText);
+		        data[0].innerHTML = obj.avgPrice.toLocaleString() + "원";
+		        data[1].innerHTML = obj.quantity.toLocaleString() + "주";
+		        data[2].innerHTML = obj.vMoney.toLocaleString() + "원";
 		        data[3].value = "";
 			//result - 0:ok, 1:vmoney부족, 2: 거래정지목록, 
 			//		   3:장내시간이 아님, 4:수량이 0이하인 경우 거래x, 
 			//		    5:수량이 0이 되는 경우 6:보유종목이 아닌경우 거래x
-		        switch(result[3]) {
+		        switch(obj.result) {
 		        case 0:
 		        	alert("체결되었습니다");
+		        	var frame = parent.document.querySelector("#holding-window");
+					frame.contentWindow.postMessage(
+							obj.codeNum , 
+							"http://localhost:8080/card/managestocks/holdinglist.jsp");
 		        	break;
 		        case 1:
 		        	alert("가상머니가 부족합니다");

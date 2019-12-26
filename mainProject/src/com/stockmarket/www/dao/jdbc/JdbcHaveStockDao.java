@@ -1,3 +1,4 @@
+
 package com.stockmarket.www.dao.jdbc;
 
 import java.sql.PreparedStatement;
@@ -7,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.stockmarket.www.controller.system.AppContext;
 import com.stockmarket.www.dao.HaveStockDao;
 import com.stockmarket.www.entity.CurStock;
 import com.stockmarket.www.entity.HaveStock;
 import com.stockmarket.www.entity.HaveStockView;
 
 public class JdbcHaveStockDao implements HaveStockDao {
-	
 
 	@Override
 	public List<HaveStockView> getList(int id) {
@@ -23,15 +24,22 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		List<HaveStockView> stockList = new ArrayList<>();
 		// List 필요할 듯.... .... ....... // 담을 그릇 ㅠㅠㅠㅠㅠㅠㅠㅠ 힝 ㅠㅠㅠㅠㅠㅠ
 //		AppContext.getKosdaq();
-//		AppContext.getKospi();
-//		List<CurStock> list = new ArrayList<>();
-//		if (AppContext.getKosdaq() != null) {
-//			list.addAll(AppContext.getKosdaq());
-//		}
 //		if (AppContext.getKospi() != null) {
-//			list.addAll(AppContext.getKospi());
+//			System.out.println(AppContext.getKospi().get(0).getCodeNum());
 //		}
-
+//		List<CurStock> list = new ArrayList<>();
+//		
+//		new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				if (AppContext.getKosdaq() != null) {
+//					list.addAll(AppContext.getKosdaq());
+//				}
+//				if (AppContext.getKospi() != null) {
+//					list.addAll(AppContext.getKospi());
+//				}
+//			}
+//		}).start();
 		// 더미 / 나중에 지워야함.
 		List<CurStock> list = new ArrayList<>();
 		list.add(new CurStock("035420", "3,000", "상승", "3,000", "+", "2.5"));
@@ -62,10 +70,10 @@ public class JdbcHaveStockDao implements HaveStockDao {
 						String price = data.getPrice();
 						String gain = data.getGain();
 						String percent = data.getPercent();
-						
-		                  HaveStockView haveStockView = new HaveStockView(memberId, stockId, quantity, sum, stockName,
-		                        price, gain, percent);
-		                  stockList.add(haveStockView);
+
+						HaveStockView haveStockView = new HaveStockView(memberId, stockId, quantity, sum, stockName,
+								price, gain, percent);
+						stockList.add(haveStockView);
 						break;
 					}
 				}
@@ -88,8 +96,6 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		String sql = "SELECT * FROM HAVE_STOCK WHERE MEMBER_ID = ? AND STOCK_ID = ?";
 
 		JdbcDaoContext context = new JdbcDaoContext();
-
-
 
 		try {
 
@@ -120,18 +126,37 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		String sql = "SELECT * FROM HAVESTOCK_VIEW WHERE MEMBER_ID = ? AND STOCK_ID = ?";
 
 		JdbcDaoContext context = new JdbcDaoContext();
-		
-		List<CurStock> list = new ArrayList<>();
-		list.add(new CurStock("035420", "3,000", "상승", "3,000", "+", "2.5"));
-		list.add(new CurStock("000660", "5,000", "하강", "3,000", "-", "3.4"));
-		list.add(new CurStock("020560", "6,000", "보합", "3,000", "0.0", "1.5"));
-		list.add(new CurStock("005930", "2,000", "상승", "3,000", "+", "1.6"));
-		list.add(new CurStock("005380", "1,000", "상승", "3,000", "+", "8.9"));
-		list.add(new CurStock("095660", "10,500", "상승", "3,000", "+", "10.2"));
-		list.add(new CurStock("000880", "3,500", "하강", "3,000", "-", "14.2"));
-		list.add(new CurStock("215600", "7,000", "하강", "3,000", "-", "10"));
 
-		try {	
+		List<CurStock> list = new ArrayList<>();
+
+//		list.add(new CurStock("035420", "3,000", "상승", "3,000", "+", "2.5"));
+//		list.add(new CurStock("000660", "5,000", "하강", "3,000", "-", "3.4"));
+//		list.add(new CurStock("020560", "6,000", "보합", "3,000", "0.0", "1.5"));
+//		list.add(new CurStock("005930", "2,000", "상승", "3,000", "+", "1.6"));
+//		list.add(new CurStock("005380", "1,000", "상승", "3,000", "+", "8.9"));
+//		list.add(new CurStock("095660", "10,500", "상승", "3,000", "+", "10.2"));
+//		list.add(new CurStock("000880", "3,500", "하강", "3,000", "-", "14.2"));
+//		list.add(new CurStock("215600", "7,000", "하강", "3,000", "-", "10"));
+
+		AppContext.getKosdaq();
+		AppContext.getKospi();
+		if (AppContext.getKosdaq() != null) {
+			list.addAll(AppContext.getKosdaq());
+		}
+		if (AppContext.getKospi() != null) {
+			list.addAll(AppContext.getKospi());
+		}
+
+//		list.add(new CurStock("035420", "13,000", "상승", "3,000", "+", "2.5"));
+//		list.add(new CurStock("000660", "15,000", "하강", "3,000", "-", "3.4"));
+//		list.add(new CurStock("020560", "16,000", "보합", "3,000", "0.0", "1.5"));
+//		list.add(new CurStock("005930", "12,000", "상승", "3,000", "+", "1.6"));
+//		list.add(new CurStock("005380", "11,000", "상승", "3,000", "+", "8.9"));
+//		list.add(new CurStock("095660", "10,500", "상승", "3,000", "+", "10.2"));
+//		list.add(new CurStock("000880", "13,500", "하강", "3,000", "-", "14.2"));
+//		list.add(new CurStock("215600", "17,000", "하강", "3,000", "-", "10"));
+
+		try {
 
 			PreparedStatement st = context.getPreparedStatement(sql);
 			st.setInt(1, memberId);
@@ -150,8 +175,8 @@ public class JdbcHaveStockDao implements HaveStockDao {
 						String gain = data.getGain();
 						String percent = data.getPercent();
 
-
-						haveStockView = new HaveStockView(memberId_, stockId_, quantity, sum, stockName, price, gain, percent);
+						haveStockView = new HaveStockView(memberId_, stockId_, quantity, sum, stockName, price, gain,
+								percent);
 						break;
 					}
 				}
@@ -168,14 +193,13 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		return haveStockView;
 	}
 
-
 	@Override
 	public int update(HaveStock haveStock) {
 		int result = 0;
 		String sql = "UPDATE HAVE_STOCK SET QUANTITY=?, SUM=? WHERE MEMBER_ID = ? AND STOCK_ID = ?";
 
 		JdbcDaoContext context = new JdbcDaoContext();
-		
+
 		try {
 			PreparedStatement st = context.getPreparedStatement(sql);
 			st.setInt(1, haveStock.getQuantity());
@@ -203,7 +227,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		String sql = "INSERT INTO HAVE_STOCK(MEMBER_ID, STOCK_ID, QUANTITY, SUM) VALUES (?,?,?,?)";
 
 		JdbcDaoContext context = new JdbcDaoContext();
-		
+
 		try {
 			PreparedStatement st = context.getPreparedStatement(sql);
 			st.setInt(1, haveStock.getMemberId());
@@ -230,7 +254,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		String sql = "DELETE HAVE_STOCK WHERE MEMBER_ID = ? AND STOCK_ID = ?";
 
 		JdbcDaoContext context = new JdbcDaoContext();
-		
+
 		try {
 			PreparedStatement st = context.getPreparedStatement(sql);
 			st.setInt(1, memberId);
@@ -280,4 +304,3 @@ public class JdbcHaveStockDao implements HaveStockDao {
 	}
 
 }
-

@@ -35,7 +35,8 @@
 			<li id="recommendKeyword_fixed">추천검색어 </li>
 
 			<c:forEach var="r" items="${recommendKeyword}">
-				<a href="list?companyName=${r}"><span>${r}</span></a>
+				<%-- <a href="list?companyName=${r}"><span>${r}</span></a> --%>
+				<span id = ajaxTest>${r}</span>
 			</c:forEach>
 			
 		</ul>

@@ -9,11 +9,16 @@ public interface CommunityBoardDao {
 	List<CommunityBoard> getReplyList(int boardId);
 	
 	CommunityBoard getCommunityBoardDetail(int id);
+
+	int getReplyCnt(String field, String query, String stockName);
+	int lastReplyNum(int boardId);
 	
 	int insertCommunityBoard(CommunityBoard communityBoard);
-	int getReplyCnt(String field, String query, String stockName);
+	int updateCommunityBoard(CommunityBoard communityBoard);
+	int deleteCommunityBoard(int boardId);
+
 	int insertReply(CommunityBoard insertReply);
-	int lastReplyNum(int boardId);
 	int updateReply(CommunityBoard updateReply);
 	int deleteReply(int replyId);
+	int deleteReplys(int boardId);
 }
