@@ -24,12 +24,14 @@ import com.stockmarket.www.dao.MemberDao;
 import com.stockmarket.www.dao.RecordAssetDao;
 import com.stockmarket.www.dao.StockDetailDao;
 import com.stockmarket.www.dao.UpjongDao;
+import com.stockmarket.www.dao.koreaStocksDao;
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
 import com.stockmarket.www.dao.jdbc.JDBCRecordAssetDao;
 import com.stockmarket.www.dao.jdbc.JdbcHaveStockDao;
 import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
 import com.stockmarket.www.dao.jdbc.JdbcStockDetailDao;
 import com.stockmarket.www.dao.jdbc.JdbcUpjongDao;
+import com.stockmarket.www.dao.jdbc.JdbckoreaStocksDao;
 import com.stockmarket.www.entity.CurStock;
 import com.stockmarket.www.entity.HaveStockView;
 import com.stockmarket.www.entity.Member;
@@ -54,11 +56,13 @@ public class BasicSystemService implements SystemService {
 	RecordAssetDao recordAssetDao;
 	StockDetailDao stockDetailDao;
 	koreaStocks koreaStocks;
+	koreaStocksDao koreaStocksDao;
 
 	public BasicSystemService() {
 
 		stockDetailDao = new JdbcStockDetailDao();
 		upjongDao = new JdbcUpjongDao();
+		koreaStocksDao = new JdbckoreaStocksDao();
 	}
 
 	/*-------------------------- refreshStockPrice ----------------------------*/
@@ -127,6 +131,7 @@ public class BasicSystemService implements SystemService {
 
 		try {
 			doc = Jsoup.connect(url).ignoreContentType(true).timeout(5000).post();
+			
 		} catch (IOException e) {
 			AppContext.setLog("코스피/코스닥 excel 파일다운로드시 IOException 발생", BasicSystemService.class.getName());
 			e.printStackTrace();
@@ -140,15 +145,15 @@ public class BasicSystemService implements SystemService {
 		}
 
 		// 반복되는 th, td tag 로 sorting 한다
-		write(contents, "th");
+		//write(contents, "th");
 		write(contents, "td");
-		try {
-			// KOSPI.csv or KOSDAQ.csv 를 생성한다
-			data.makeCSV("WebContent/fileUpload/" + market, companyList);
-		} catch (IOException e) {
-			AppContext.setLog("코스피/코스닥 csv 파일 생성중 IOException 발생", BasicSystemService.class.getName());
-			e.printStackTrace();
-		}
+//		try {
+//			// KOSPI.csv or KOSDAQ.csv 를 생성한다
+//			data.makeCSV("WebContent/fileUpload/" + market, companyList);
+//		} catch (IOException e) {
+//			AppContext.setLog("코스피/코스닥 csv 파일 생성중 IOException 발생", BasicSystemService.class.getName());
+//			e.printStackTrace();
+//		}
 		return true;
 	}
 
@@ -166,6 +171,7 @@ public class BasicSystemService implements SystemService {
 
 				}
 				companyList.add(data);
+				
 				koreaStocks = new koreaStocks();
                 koreaStocks.setCompanyName(data[0]);
                 koreaStocks.setStockCode(data[1]);
@@ -176,16 +182,19 @@ public class BasicSystemService implements SystemService {
                 koreaStocks.setRepresentativeName(data[6]);
                 koreaStocks.setWebsite(data[7]);
                 koreaStocks.setLocation(data[8]);
+                
                 koreaList.add(koreaStocks);
 				
 				
 			}
 		}
-		
-//		for (int i = 0; i < koreaList.size(); i++) {
-//			System.out.println(koreaList.get(i));
-//			//System.out.println(i);
-//		}
+		int test = 0;
+		for (int i = 0; i < koreaList.size(); i++) {
+			System.out.println(koreaList.get(i));
+			test++;
+		}
+		System.out.println(test);
+		koreaStocksDao.insert(koreaList);
 	}
 	/*-------------------------- insert Asset Record ----------------------------*/
 
@@ -355,7 +364,7 @@ public class BasicSystemService implements SystemService {
 				break;
 			case 3: // kospi.csv kosdaq.csv 파일 생성 TEST
 				sys.updateMarket("KOSPI");
-				// sys.updateMarket("KOSDAQ");
+				sys.updateMarket("KOSDAQ");
 				System.out.println("finished");
 				break;
 			case 4: // single tone Test for 코스피/코스닥 크롤링 데이터
@@ -422,6 +431,11 @@ public class BasicSystemService implements SystemService {
 			case 10:
 				JdbcUpjongDao upjongDao = new JdbcUpjongDao();
 				upjongDao.delete();
+			
+			case 11:
+				JdbckoreaStocksDao koreaDao = new JdbckoreaStocksDao();
+				System.out.println(koreaDao.getList());
+				System.out.println("koreaDao.getList 종료");
 			}
 
 			System.out.println("종료");

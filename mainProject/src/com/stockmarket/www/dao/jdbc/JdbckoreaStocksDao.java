@@ -1,8 +1,11 @@
 package com.stockmarket.www.dao.jdbc;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
 
 import com.stockmarket.www.dao.koreaStocksDao;
 import com.stockmarket.www.entity.koreaStocks;
@@ -12,7 +15,39 @@ public class JdbckoreaStocksDao implements koreaStocksDao {
 	@Override
 	public List<koreaStocks> getList() {
 		
-		return null;
+		List<koreaStocks> list = new ArrayList<>();
+		
+		String sql = "SELECT * FROM KOREASTOCKS";
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+		PreparedStatement pst =null;
+		ResultSet rs = null;
+		
+		try {
+			pst = daoContext.getPreparedStatement(sql);
+			rs = pst.executeQuery();
+
+			while(rs.next()) { 
+				koreaStocks korea = new koreaStocks(
+						rs.getString("companyName"),
+						rs.getString("stockCode"),
+						rs.getString("sectors"),
+						rs.getString("mainProduct"),
+						rs.getString("stockedDay"),
+						rs.getString("settlementMonth"),
+						rs.getString("representativeName"),
+						rs.getString("website"),
+						rs.getString("location"));
+				
+				list.add(korea);
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			daoContext.close(rs, pst);
+		}
+		return list;
 	}
 
 	@Override
