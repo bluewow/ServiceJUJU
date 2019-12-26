@@ -15,8 +15,9 @@ import com.stockmarket.www.entity.CaptureMemo;
 import com.stockmarket.www.entity.CaptureMemoView;
 
 public class JdbcCaptureMemoDao implements CaptureMemoDao {
+	
 	@Override
-	public List<CaptureMemoView> getList(int page) {
+	public List<CaptureMemoView> getList() {
 		List<CaptureMemoView> captureMemos = new ArrayList<>();
 		
 		String sql = "SELECT S.NAME, C.TITLE, C.REGDATE "

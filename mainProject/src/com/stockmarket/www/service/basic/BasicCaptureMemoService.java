@@ -16,10 +16,11 @@ public class BasicCaptureMemoService implements CaptureMemoService {
 	}
 
 	@Override
-	public List<CaptureMemoView> getCaptureMemoList(int page) {
-		return captureMemoDao.getList(page);
+	public List<CaptureMemoView> getCaptureMemoList() {
+		
+		return captureMemoDao.getList();
 	}
-
+	
 	@Override
 	public CaptureMemo getMemo(int id) {
 		return null;
@@ -34,9 +35,4 @@ public class BasicCaptureMemoService implements CaptureMemoService {
 	public int deleteCaptureMemo(int id) {
 		return captureMemoDao.delete(id);
 	}
-
-
-
-
-
 }
