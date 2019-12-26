@@ -426,7 +426,19 @@ public class BasicSystemService implements SystemService {
 			case 10:
 				JdbcUpjongDao upjongDao = new JdbcUpjongDao();
 				upjongDao.delete();
-				
+
+			
+			case 11:
+				JdbckoreaStocksDao koreaDao = new JdbckoreaStocksDao();
+				List<koreaStocks> list = koreaDao.getList();
+				int cnt = 0;
+				for(koreaStocks korea : list) {
+					cnt++;
+					System.out.println(korea.getCompanyName());
+				}
+				System.out.println("koreaDao.getList 종료 cnt : " + cnt);
+				break;
+
 			}
 
 			System.out.println("종료");
