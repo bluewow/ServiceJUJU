@@ -1,13 +1,21 @@
 window.addEventListener("message", function(e) {
-	if(e.data) //codeNum 
-		console.log("holding : " + e.data);
 	
+	var ajax = new XMLHttpRequest();
+	ajax.open("GET","../../card/managestocks/holdinglist?codeNum=" + e.data , true)
+   
+   // ajax.onload = function() {
+     
+   // }
+
+	console("실행"+ e.data);
+	
+	ajax.send();
+//	if(e.data) //codeNum 
+//		console.log("holding : " + e.data);
 });
 
-
-
 window.addEventListener("load",function(){
-   
+   console.log("실행");
    var section = this.document.querySelector(".manageStocks");
    var updateButton = section.querySelector(".updateButton");
    var preArea = section.querySelector(".prearea");
@@ -20,8 +28,6 @@ window.addEventListener("load",function(){
    }
 
    function holdingLoad(){
-
-      console.log("실행");
 
     var request = new XMLHttpRequest();
     request.open("GET","../../card/managestocks/holdinglist",true);
@@ -100,7 +106,6 @@ window.addEventListener("load",function(){
         //   tds[0].innertext = list[i].stockName;
         tbody.append(cloneTr);
         
-        console.log(allIncomePercent+",allSum:"+allSum+",allIncome:"+allIncome); 
         }
         
        allIncomePercent = (allIncome/allSum)*100;
@@ -139,5 +144,6 @@ window.addEventListener("load",function(){
    };
    holdingLoad();
 
+   
 });
 

@@ -24,16 +24,15 @@ public class HoldingStocksController extends HttpServlet{
    
 	private HoldingStocksService HoldingStocksInterface;
 	
-	@Override
-	public void init() throws ServletException {
-		super.init();
-	}
-	
-
 	public HoldingStocksController() {
 		HoldingStocksInterface = new BasicHoldingStocksService();
 	}
 	
+	@Override
+	public void init() throws ServletException {
+		super.init();
+	}
+		
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -41,27 +40,43 @@ public class HoldingStocksController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	
+		response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        
 		HttpSession session = request.getSession();
-		int userId = (int)session.getAttribute("id");
 		
-		List<HaveStockView> list = HoldingStocksInterface.getInterestHoldingList(userId);
+		boolean firstSetting = true;
+        int userId = (int)session.getAttribute("id");
+        
+	    String codeNum = request.getParameter("codeNum");
+	    if(codeNum != null || firstSetting ) {
+	    	updateCurrentPrice(request,response,userId);
+	    	firstSetting = false;
+	    	return;
+	    }
+		
 
 //		for(HaveStockView data : list) {
 //			System.out.println(data.getStockId());
 //		}
+
+//        System.out.println(json);
+
+//		request.setAttribute("list", HoldingStocksInterface.getInterestHoldingList(userId));
+		request.getRequestDispatcher("holdinglist.jsp").forward(request, response);
+	}
+	
+	
+	private void updateCurrentPrice(HttpServletRequest request,HttpServletResponse response , int userId) throws IOException {
+		
+		List<HaveStockView> list = HoldingStocksInterface.getInterestHoldingList(userId);
+
         Gson gson = new Gson();
 		String json = gson.toJson(list);
-
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html; charset=UTF-8");
-        
+		
         PrintWriter out = response.getWriter();
-//        System.out.println(json);
-        out.write(json);
-//		request.setAttribute("list", HoldingStocksInterface.getInterestHoldingList(userId));
-//		request.getRequestDispatcher("holdinglist.jsp").forward(request, response);
+		out.write(json);
+		
 	}
 	
 }
