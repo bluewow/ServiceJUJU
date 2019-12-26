@@ -45,7 +45,7 @@ public class BasicCompanyService implements CompanyService {
 	@Override
 	public koreaStocks searchCompany(String search) {
 
-		return koreaStocks.searchCompany(search);
+		return koreaStockDao.searchCompany(search);
 
 	}
 

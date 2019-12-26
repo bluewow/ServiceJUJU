@@ -73,13 +73,13 @@
 					<td >${status.count}</td>
 						<!-- <td name="CompanyNameClickedByUser">-->
 					<td >
-						<a href="list?companyName=${sector.companyName}" data-codenum="${sector.codeNum }" id="companyName">${sector.companyName}</a>
+						<a href="list?companyName=${sector.companyName}" data-codenum="${sector.stockCode }" id="companyName">${sector.companyName}</a>
 						<a href="${sector.website}" target="_blank"><img src="/css/company/link.png" alt=""></a>
 					</td>
 					<%-- <td name="CompanyNameClickedByUser"><a href="list?companyName=${sector.companyName}" id="companyName">${sector.companyName}</a> <a href="${sector.website}" target="_blank"><img src="/css/company/link.png" alt=""></a></td> --%>
 					<td id ="stockItemName" class="wrap">
-						<a>${sector.stockItemName}</a>
-						<div class="help">${sector.stockItemName}</div>
+						<a>${sector.mainProduct}</a>
+						<div class="help">${sector.mainProduct}</div>
 					</td>
 					<td class="attention"><img src="/css/company/interest_no.png"></td>
 					<!-- <td class="attention"><img src="/css/search/interest_no.png"></td> -->

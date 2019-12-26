@@ -78,10 +78,20 @@ public class ListController extends HttpServlet {
 		
 		searchCompanyList = new ArrayList<koreaStocks>();
 		
-		System.out.println("컨트롤러 : "+companyName);
-		if (companyService.searchCompany(companyName) != null) {
-			searchCompanyList.add(companyService.searchCompany(companyName));
+		//System.out.println("컨트롤러 : "+companyName);
+		//==========================================
+		
+		List<String> test =	companyService.search(companyName);
+		
+		for (int i = 0; i < test.size(); i++) {
+			searchCompanyList.add(companyService.searchCompany(test.get(i))); 
+			
 		}
+		
+		
+//		if (companyService.searchCompany(companyName) != null) {
+//			searchCompanyList.add(companyService.searchCompany(companyName));
+//		}
 
 		
 		request.setAttribute("search", searchCompanyList);
@@ -95,12 +105,12 @@ public class ListController extends HttpServlet {
 		// request.setAttribute("sectorList",companyService.getCompanyListFromNaverByThema(companyName));
 		// System.out.println(companyService.getCompanyListFromNaverByThema(companyName));
 
-		List<String> test =	companyService.search(companyName);
+		
 		//회사 이름 = > list String
 		
-		for (String string : test) {
-			System.out.println(string);
-		}
+//		for (String string : test) {
+//			System.out.println(string);
+//		}
 		
 		
 		request.getRequestDispatcher("list.jsp").forward(request, response);

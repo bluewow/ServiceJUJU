@@ -107,7 +107,7 @@ public class JdbckoreaStocksDao implements koreaStocksDao {
 		
 //		String sql = "SELECT * FROM KOREASTOCKS WHERE companyname=" + compnayName;
 		String sql = "SELECT * FROM KOREASTOCKS WHERE companyname=?";
-		System.out.println("sql : " + sql);
+		//System.out.println("sql : " + sql);
 		JdbcDaoContext daoContext = new JdbcDaoContext();
 		PreparedStatement pst =null;
 		ResultSet rs = null;
@@ -138,7 +138,7 @@ public class JdbckoreaStocksDao implements koreaStocksDao {
 			daoContext.close(rs, pst);
 		}
 		
-		System.out.println("jdbckorea :"+korea);	
+		//System.out.println("jdbckorea :"+korea);	
 		return korea;
 	}
 	
