@@ -15,28 +15,31 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import com.stockmarket.www.dao.UpjongDao;
+import com.stockmarket.www.dao.koreaStocksDao;
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
 import com.stockmarket.www.dao.jdbc.JdbcUpjongDao;
+import com.stockmarket.www.dao.jdbc.JdbckoreaStocksDao;
 import com.stockmarket.www.entity.Company;
+import com.stockmarket.www.entity.koreaStocks;
 import com.stockmarket.www.service.CompanyService;
 
 public class BasicCompanyService implements CompanyService {
 	private UpjongDao upjongDao;
+	private koreaStocksDao koreaStockDao;
 	private CSVStockDataDao csvStockDataDao;
-	private String csvFilePath;
 	private Map<String, Integer>crawlData = new HashMap<>(); //종목명, count 수
 	private Map<String, Integer>crawlDataOrder = new LinkedHashMap<>(); //종목명, count 수 내림차순
 	
 	// ====================================
 	public BasicCompanyService() {
 		upjongDao = new JdbcUpjongDao();
+		koreaStockDao = new JdbckoreaStocksDao();
 	}
 	
 	/* deprecated */
 	/* private CompanyService companyService; */
 	public BasicCompanyService(String csvFilePath) {
 
-		csvStockDataDao = new CSVStockDataDao(csvFilePath);
 		
 		/* companyService = new BasicCompanyService(csvFilePath); */
 	}
@@ -94,15 +97,8 @@ public class BasicCompanyService implements CompanyService {
 			 "아시아경제 2", "NH투자증권 공식", "※키움증권", "레이어", "KNN뉴스", "SBSCNBC뉴스",
 			 "플레이됨", "오토레이스", "레이저", "온라인 플레이", "구글플레이", "NEWS", "CBCNEWS",
 			 "SBS CNBC", "SBS 스페셜", "SBS 쩐의전쟁", "SBS 뉴스", "키움증권 hts"}; //크롤링 결과의 제거 대상. 지속적인 업데이트 필요
-
-		//TEMP CSV 파일 삭제예정 ---------------------------------------
-		CSVStockDataDao data = new CSVStockDataDao();
-		String Path1 = "C:\\work\\Repository\\stockMarket\\mainProject\\WebContent\\fileUpload\\KOSPI.csv";
-		String Path2 = "C:\\work\\Repository\\stockMarket\\mainProject\\WebContent\\fileUpload\\KOSDAQ.csv";
-		List<String> stockList = data.getColumnData(0, Path1);
-		stockList.addAll(data.getColumnData(0, Path2));
-		//---------------------------------------------------------
 		
+		List<koreaStocks> stockList = koreaStockDao.getList();
 		for(int i = 0; i < keyWord.length; i++) {
 			String str = search + " " + keyWord[i];
 			String url = "https://search.naver.com/search.naver?query=" + str; 
@@ -117,7 +113,7 @@ public class BasicCompanyService implements CompanyService {
 //			System.out.println(text);	//for debugging
 			// <종목명, count> 저장
 			for(int j = 0; j < stockList.size() ; j++) {
-				String stockName = stockList.get(j);
+				String stockName = stockList.get(j).getCompanyName();
 				crawlData.put(
 						stockName, 
 						crawlData.get((Object)stockName)==null? 
