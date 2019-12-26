@@ -61,7 +61,6 @@ public class ReplyController extends HttpServlet {
 			response.setContentType("text/html;charset=UTF-8"); // UTP-8로 보내는 코드
 			PrintWriter out = response.getWriter();
 			out.print(lastReplyNum);
-			out.print(result);
 
 			// 상태값에 del이면 삭제
 		} else if (status.equals("del")) {

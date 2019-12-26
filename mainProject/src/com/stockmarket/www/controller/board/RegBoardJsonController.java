@@ -17,51 +17,87 @@ import com.stockmarket.www.service.CommunityBoardService;
 import com.stockmarket.www.service.basic.BasicCommunityBoardService;
 
 @WebServlet("/card/board/stock_reg_board")
-public class RegBoardJsonController extends HttpServlet  {
+public class RegBoardJsonController extends HttpServlet {
 
 	private CommunityBoardService communityBoardService;
-	
+
 	public RegBoardJsonController() {
 		communityBoardService = new BasicCommunityBoardService();
 	}
+
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		super.init();
 	}
+
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		super.doGet(request, response);
 	}
+
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Object tempId = session.getAttribute("id");
-		int writerId = -1;
-		
-		if(tempId != null)
-			writerId = (Integer)tempId;
-		MemberDao memberDao = new JdbcMemberDao();
-		String writerNickname = memberDao.getMember(writerId).getNickName();
-		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		
-		
-		
-		CommunityBoard insertBoard = new CommunityBoard(title, content, writerNickname);
+		String status = request.getParameter("status");
+		String boardIds = request.getParameter("boardId");
 
-		int result = communityBoardService.insertCommunityBoard(insertBoard);
-		
-		response.setCharacterEncoding("UTF-8"); // UTP-8로 보내는 코드
-		response.setContentType("text/html;charset=UTF-8"); // UTP-8로 보내는 코드
-		PrintWriter out = response.getWriter();
-		System.out.println("result :"+result);
-		out.print(result);
+		// 상태값이 없으면 삽입
+		if (status == null) {
+			Object tempId = session.getAttribute("id");
+			int writerId = -1;
+
+			if (tempId != null)
+				writerId = (Integer) tempId;
+			MemberDao memberDao = new JdbcMemberDao();
+			String writerNickname = memberDao.getMember(writerId).getNickName();
+
+			CommunityBoard insertBoard = new CommunityBoard(title, content, writerNickname);
+
+			int result = communityBoardService.insertCommunityBoard(insertBoard);
+
+			response.setCharacterEncoding("UTF-8"); // UTP-8로 보내는 코드
+			response.setContentType("text/html;charset=UTF-8"); // UTP-8로 보내는 코드
+			PrintWriter out = response.getWriter();
+			System.out.println("result :" + result);
+			out.print(result);
+
+			// 상태값에 del이면 삭제
+		} else if (status.equals("del")) {
+			int boardId = -1;
+			boardId = Integer.parseInt(boardIds);
+
+			int result = communityBoardService.deleteCommunityBoard(boardId);
+			int resultReply = communityBoardService.deleteReplys(boardId);
+
+			response.setCharacterEncoding("UTF-8"); // UTP-8로 보내는 코드
+			response.setContentType("text/html;charset=UTF-8"); // UTP-8로 보내는 코드
+			PrintWriter out = response.getWriter();
+
+			out.print(result);
+
+			// 상태값에 modi면 수정
+		} else if (status.equals("modi")) {
+			int boardId = -1;
+			boardId = Integer.parseInt(boardIds);
+
+			//게시글 지우기
+			CommunityBoard updateCommunityBoard = new CommunityBoard(boardId, content, "del");
+			//게시글에 달린 댓글 지우기
+			int result = communityBoardService.updateCommunityBoard(updateCommunityBoard);
+
+			response.setCharacterEncoding("UTF-8"); // UTP-8로 보내는 코드
+			response.setContentType("text/html;charset=UTF-8"); // UTP-8로 보내는 코드
+			PrintWriter out = response.getWriter();
+
+			out.print(result);
+
+		}
 	}
-	
-	
-	
-	
+
 }

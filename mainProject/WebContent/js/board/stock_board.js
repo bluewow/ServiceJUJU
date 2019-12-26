@@ -32,8 +32,9 @@ window.addEventListener("load", function () {
 				aTagDetail.innerHTML =
 					'<span class="stock-name">' + "[" + list[i].stockName + "]" + '</span>' +
 					'<span class="title"> ' + list[i].title + ' </span>' +
-					'<span class="reply-cnt">(' + list[i].replyCnt + ')</span>';
+					'(<span class="reply-cnt">' + list[i].replyCnt + '</span>)';
 				aTagDetail.dataset.id = list[i].id;
+				aTagDetail.dataset.replyCnt = list[i].replyCnt;
 				tds[2].innerText = list[i].regdate;
 				tds[3].innerText = list[i].hit;
 				var aTagFavo = tds[4].firstElementChild;
@@ -58,7 +59,7 @@ window.addEventListener("load", function () {
 		load(e.target.innerText);
 	};
 
-
+	//========= 글내용과 댓글 불러오기 ==================
 	var titleClickHandler = function (e) {
 		var currentTr = e.target.parentNode.parentNode.parentNode;
 		var nextTr = currentTr.nextElementSibling.nextElementSibling;
@@ -122,12 +123,12 @@ window.addEventListener("load", function () {
 	//========= 댓글쓰기 ==================
 	var regButtonClickHandler = function (e) {
 
-		// 1. 입력한 값을 얻어온다.
+		// 1. 입력한 값을 얻어온다.  
 
 		var boardId = e.target.dataset.id;
 		var reContent = e.target.parentNode.parentNode.querySelector('.reply-content').value;
 		var reContentEncode = encodeURI(reContent);
-
+		var changeReplyCnt = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector('.reply-cnt');
 		String.prototype.trim = function () {
 			return this.replace(/^\s+|\s+$/g, "");
 		}
@@ -183,7 +184,7 @@ window.addEventListener("load", function () {
 				+ lastReplyNum + '">삭제</a><a href="" class="re-commit hidden" data-id="'
 				+ lastReplyNum + '">확인</a>  <a href="" class="re-cancel hidden" data-id="'
 				+ lastReplyNum + '">취소</a></span></div>';
-
+			changeReplyCnt.innerText = parseInt(changeReplyCnt.innerText) + 1;
 			div.innerHTML = content;
 			nextTr.firstElementChild.prepend(div);
 		}
@@ -259,7 +260,6 @@ window.addEventListener("load", function () {
 
 		// 3. 요청이 완료되었는지 결과를 확인한다.
 		request.onload = function () {
-			alert("수정되었습니다.");
 			targetContent.innerText = reContent;
 			targetContentBox.value = reContent;
 
@@ -282,8 +282,7 @@ window.addEventListener("load", function () {
 			commit.classList = "re-commit hidden";
 			cancel.classList = "re-cancel hidden";
 
-
-			alert("수정확인");
+			alert("수정되었습니다.");
 		}
 	}
 
@@ -316,6 +315,7 @@ window.addEventListener("load", function () {
 
 	//========= 댓글삭제 ==================
 	var replyDelClickHandler = function (e) {
+		var changeReplyCnt = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector('.reply-cnt');
 		var replyId = e.target.dataset.id;
 		var targetDiv = e.target.parentNode.parentNode;
 		var data = [
@@ -337,10 +337,39 @@ window.addEventListener("load", function () {
 
 		// 3. 요청이 완료되었는지 결과를 확인한다.
 		request.onload = function () {
+			changeReplyCnt.innerText = parseInt(changeReplyCnt.innerText) - 1;
 			alert("삭제되었습니다.");
 			targetDiv.parentNode.removeChild(targetDiv);
 		}
 	}
+	//========= 게시글 삭제 ==================
+	var delContentClickHandler = function (e) {
+		var targetDiv = e.target.parentNode.parentNode;
+		var targetDivPre = e.target.parentNode.parentNode.previousSibling.previousSibling;
+		var boardId = e.target.dataset.id;
+		var data = [["boardId", boardId],
+		["status", "del"],]
+		var sendData = [];
+
+		for (var i = 0; i < data.length; i++) {
+			sendData[i] = data[i].join("=");
+		}
+		sendData = sendData.join("&");
+
+		var request = new XMLHttpRequest();
+		request.open("POST", "../../card/board/stock_reg_board", true);
+		request.setRequestHeader('Content-Type',
+			'application/x-www-form-urlencoded');
+		request.send(sendData);
+
+		// 3. 요청이 완료되었는지 결과를 확인한다.
+		request.onload = function () {
+			targetDiv.parentNode.removeChild(targetDiv);
+			targetDivPre.parentNode.removeChild(targetDivPre);
+			alert("삭제되었습니다.");
+		}
+	}
+
 
 	//========= 내용 클릭 핸들러 ==================	
 	tbody.onclick = function (e) {
@@ -363,6 +392,9 @@ window.addEventListener("load", function () {
 
 		else if (e.target.classList.contains("re-cancel"))
 			replyCancelClickHandler(e);
+
+		else if (e.target.classList.contains("del-content"))
+			delContentClickHandler(e);
 
 
 	};

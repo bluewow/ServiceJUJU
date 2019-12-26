@@ -4,22 +4,22 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.stockmarket.www.dao.KosdaqDao;
-import com.stockmarket.www.entity.Kosdaq;
-
-public class JdbcKosdaqDao implements KosdaqDao {
+import com.stockmarket.www.dao.koreaStocksDao;
+import com.stockmarket.www.entity.koreaStocks;
+//koreaStocks = 코스피+ 코스닥
+public class JdbckoreaStocksDao implements koreaStocksDao {
 
 	@Override
-	public List<Kosdaq> getList() {
+	public List<koreaStocks> getList() {
 		
 		return null;
 	}
 
 	@Override
-	public int insert(List<Kosdaq> list) {
+	public int insert(List<koreaStocks> list) {
 		int result = 0;
 		
-		String sql = "INSERT INTO KOSDAQ (COMPANYNAME, STOCKCODE, SECTORS, MAINPRODUCT, STOCKEDDAY, SETTLEMENTMONTH, REPRESENTATIVENAME, WEBSITE, LOCATION) "
+		String sql = "INSERT INTO KOREASTOCKS (COMPANYNAME, STOCKCODE, SECTORS, MAINPRODUCT, STOCKEDDAY, SETTLEMENTMONTH, REPRESENTATIVENAME, WEBSITE, LOCATION) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
@@ -46,12 +46,13 @@ public class JdbcKosdaqDao implements KosdaqDao {
 		}
 		
 		return result;
+		
 	}
 
 	@Override
 	public int delete() {
 		int result = 0;
-		String sql = "DELETE FROM KOSDAQ";
+		String sql = "DELETE FROM KOREASTOCKS";
 		JdbcDaoContext context = new JdbcDaoContext();
 		try {
 			PreparedStatement st = context.getPreparedStatement(sql);
@@ -64,5 +65,8 @@ public class JdbcKosdaqDao implements KosdaqDao {
 		}
 		return result;
 	}
+
+	
+	
 
 }
