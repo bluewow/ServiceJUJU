@@ -22,7 +22,9 @@ public class koreaStocks {
 	// 지역
 	private String location;
 	
-	
+	public koreaStocks() {
+		
+	}
 	
 	public koreaStocks(String companyName, String stockCode, String sectors, String mainProduct, String stockedDay,
 			String settlementMonth, String representativeName, String website, String location) {

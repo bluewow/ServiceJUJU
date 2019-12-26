@@ -80,7 +80,7 @@
 			<td rowspan="2" class="border-bottom favo-add"><a href=""></a></td>
 		</tr>
 		<tr>
-			<td class="border-bottom del"><a href=""></a></td>
+			<td class="border-bottom del"><a href="" class=del-content></a></td>
 			<td colspan="2" class="border-bottom"></td>
 		</tr>
 		</template>
