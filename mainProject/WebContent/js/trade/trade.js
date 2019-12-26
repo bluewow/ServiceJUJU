@@ -112,6 +112,12 @@ window.addEventListener("load", function(){
 				return;
 			}
 			
+			if(data[3].value < 0) {
+				alert("잘못된 수량입력 입니다");
+				data[3].value = "";
+				return;
+			}
+			
 			if(e.target.value == "매       수") {
 				var trade = "buy";
 				if(confirm(data[3].value + "주 매수를 진행하시겠습니까?") == false) {
