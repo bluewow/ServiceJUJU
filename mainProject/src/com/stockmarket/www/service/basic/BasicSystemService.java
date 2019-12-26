@@ -147,13 +147,7 @@ public class BasicSystemService implements SystemService {
 		// 반복되는 th, td tag 로 sorting 한다
 		//write(contents, "th");
 		write(contents, "td");
-//		try {
-//			// KOSPI.csv or KOSDAQ.csv 를 생성한다
-//			data.makeCSV("WebContent/fileUpload/" + market, companyList);
-//		} catch (IOException e) {
-//			AppContext.setLog("코스피/코스닥 csv 파일 생성중 IOException 발생", BasicSystemService.class.getName());
-//			e.printStackTrace();
-//		}
+
 		return true;
 	}
 
@@ -188,12 +182,13 @@ public class BasicSystemService implements SystemService {
 				
 			}
 		}
-		int test = 0;
-		for (int i = 0; i < koreaList.size(); i++) {
-			System.out.println(koreaList.get(i));
-			test++;
-		}
-		System.out.println(test);
+		/* test */
+//		int test = 0;
+//		for (int i = 0; i < koreaList.size(); i++) {
+//			System.out.println(koreaList.get(i));
+//			test++;
+//		}
+		//System.out.println(test);
 		koreaStocksDao.insert(koreaList);
 	}
 	/*-------------------------- insert Asset Record ----------------------------*/
@@ -431,11 +426,7 @@ public class BasicSystemService implements SystemService {
 			case 10:
 				JdbcUpjongDao upjongDao = new JdbcUpjongDao();
 				upjongDao.delete();
-			
-			case 11:
-				JdbckoreaStocksDao koreaDao = new JdbckoreaStocksDao();
-				System.out.println(koreaDao.getList());
-				System.out.println("koreaDao.getList 종료");
+				
 			}
 
 			System.out.println("종료");

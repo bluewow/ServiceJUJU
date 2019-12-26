@@ -4,6 +4,7 @@ package com.stockmarket.www.service;
 import java.util.List;
 
 import com.stockmarket.www.entity.Company;
+import com.stockmarket.www.entity.koreaStocks;
 
 public interface CompanyService {
 
@@ -12,7 +13,7 @@ public interface CompanyService {
 	 * 사용자가 입력한 회사명, 종목코드, 홈페이지 주소를 Company(entity)에 담아 리턴한다.
 	 * 
 	 */
-	Company searchCompany(String search);
+	koreaStocks searchCompany(String search);
 	
 	
 	/*

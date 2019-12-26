@@ -9,4 +9,6 @@ public interface koreaStocksDao {
 	
 	int insert(List<koreaStocks> list);
 	int delete();
+	
+	koreaStocks searchCompany(String compnayName);
 }

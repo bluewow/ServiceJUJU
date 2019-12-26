@@ -3,6 +3,7 @@ package com.stockmarket.www.dao.jdbc;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,6 +101,48 @@ public class JdbckoreaStocksDao implements koreaStocksDao {
 		}
 		return result;
 	}
+
+	@Override
+	public koreaStocks searchCompany(String compnayName) {
+		
+//		String sql = "SELECT * FROM KOREASTOCKS WHERE companyname=" + compnayName;
+		String sql = "SELECT * FROM KOREASTOCKS WHERE companyname=?";
+		System.out.println("sql : " + sql);
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+		PreparedStatement pst =null;
+		ResultSet rs = null;
+		
+		koreaStocks korea = null;
+		
+		try {
+			pst = daoContext.getPreparedStatement(sql);
+			pst.setString(1,  compnayName);
+			rs = pst.executeQuery();
+			if(rs.next()) { 
+				korea = new koreaStocks(
+						rs.getString("companyName"),
+						rs.getString("stockCode"),
+						rs.getString("sectors"),
+						rs.getString("mainProduct"),
+						rs.getString("stockedDay"),
+						rs.getString("settlementMonth"),
+						rs.getString("representativeName"),
+						rs.getString("website"),
+						rs.getString("location"));
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			daoContext.close(rs, pst);
+		}
+		
+		System.out.println("jdbckorea :"+korea);	
+		return korea;
+	}
+	
+	
 
 	
 	

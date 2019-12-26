@@ -20,6 +20,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.stockmarket.www.entity.Company;
+import com.stockmarket.www.entity.koreaStocks;
 import com.stockmarket.www.service.CompanyService;
 import com.stockmarket.www.service.basic.BasicCompanyService;
 
@@ -29,10 +30,10 @@ import oracle.jdbc.proxy.annotation.Post;
 public class ListController extends HttpServlet {
 
 	private CompanyService companyService;
-	private List<Company> searchCompanyList;
+	private List<koreaStocks> searchCompanyList;
 
 	public ListController() {
-		
+		companyService = new BasicCompanyService();
 	}
 
 	@Override
@@ -58,12 +59,8 @@ public class ListController extends HttpServlet {
 		
 		request.setAttribute("recommendKeyword", recommendKeyword);
 		
-//	====CSV 파일을 읽고, 검색된 회사 정보를 찾아 jsp에 전달하는 코드
-		ServletContext application = getServletContext();
-		String csvUrlPath = "/fileUpload/KOSPI.csv";
-		String csvFilePath = application.getRealPath(csvUrlPath);
-
-		companyService = new BasicCompanyService(csvFilePath);
+//	==== 검색된 회사 정보를 찾아 jsp에 전달하는 코드
+		
 
 		String companyName = "";
 	
@@ -79,8 +76,9 @@ public class ListController extends HttpServlet {
 		    return;
 		}
 		
-		searchCompanyList = new ArrayList<Company>();
+		searchCompanyList = new ArrayList<koreaStocks>();
 		
+		System.out.println("컨트롤러 : "+companyName);
 		if (companyService.searchCompany(companyName) != null) {
 			searchCompanyList.add(companyService.searchCompany(companyName));
 		}

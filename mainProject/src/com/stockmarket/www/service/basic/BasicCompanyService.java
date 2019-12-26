@@ -17,11 +17,14 @@ import org.jsoup.nodes.Document;
 import com.stockmarket.www.dao.UpjongDao;
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
 import com.stockmarket.www.dao.jdbc.JdbcUpjongDao;
+import com.stockmarket.www.dao.jdbc.JdbckoreaStocksDao;
 import com.stockmarket.www.entity.Company;
+import com.stockmarket.www.entity.koreaStocks;
 import com.stockmarket.www.service.CompanyService;
 
 public class BasicCompanyService implements CompanyService {
 	private UpjongDao upjongDao;
+	private JdbckoreaStocksDao koreaStocks;
 	private CSVStockDataDao csvStockDataDao;
 	private String csvFilePath;
 	private Map<String, Integer>crawlData = new HashMap<>(); //종목명, count 수
@@ -30,21 +33,22 @@ public class BasicCompanyService implements CompanyService {
 	// ====================================
 	public BasicCompanyService() {
 		upjongDao = new JdbcUpjongDao();
+		koreaStocks = new JdbckoreaStocksDao();
 	}
 	
 	/* deprecated */
 	/* private CompanyService companyService; */
 	public BasicCompanyService(String csvFilePath) {
 
-		csvStockDataDao = new CSVStockDataDao(csvFilePath);
+		
 		
 		/* companyService = new BasicCompanyService(csvFilePath); */
 	}
 
 	@Override
-	public Company searchCompany(String search) {
+	public koreaStocks searchCompany(String search) {
 
-		return csvStockDataDao.searchCompany(search);
+		return koreaStocks.searchCompany(search);
 
 	}
 
