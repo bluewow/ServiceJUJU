@@ -183,13 +183,13 @@ public class BasicSystemService implements SystemService {
 			}
 		}
 		/* test */
-//		int test = 0;
-//		for (int i = 0; i < koreaList.size(); i++) {
-//			System.out.println(koreaList.get(i));
-//			test++;
-//		}
-		//System.out.println(test);
-		koreaStocksDao.insert(koreaList);
+		int test = 0;
+		for (int i = 0; i < koreaList.size(); i++) {
+			System.out.println(koreaList.get(i));
+			test++;
+		}
+		System.out.println(test);
+		//koreaStocksDao.insert(koreaList);
 	}
 	/*-------------------------- insert Asset Record ----------------------------*/
 

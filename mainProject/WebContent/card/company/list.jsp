@@ -54,26 +54,15 @@
 				</tr>
 			</thead>
 			
-			<%-- <c:choose> --%>
-			<%-- <tbody>
-				<c:forEach var="sector" items="${sectorList}" varStatus="status" >
-					<tr>
-						<td>${status.count}</td>
-						<td id="companyName">${sector.companyName}<a href="${sector.website}" target="_blank"><img src="/css/search/link.png" alt=""></a></td>
-						<td>${sector.stockItemName}</td>
-						<td class="attention"><img src="/css/search/interest_no.png" ></td>
-					</tr>
-				</c:forEach>
-			</tbody> --%>
 			
-			<%-- <c:set var ="n" value="${search}"/> --%>
 			<tbody>
 				<c:forEach var="sector" items="${search}" varStatus="status" >
 				<tr>
-					<td >${status.count}</td>
-						<!-- <td name="CompanyNameClickedByUser">-->
-					<td >
-						<a href="list?companyName=${sector.companyName}" data-codenum="${sector.stockCode }" id="companyName">${sector.companyName}</a>
+					<td>${status.count}</td>
+						
+					<td>
+						<div data-codenum="${sector.stockCode }" class="companyName">${sector.companyName}</div>
+						<%-- <a href="list?companyName=${sector.companyName}" data-codenum="${sector.stockCode }" id="companyName">${sector.companyName}</a> --%>
 						<a href="${sector.website}" target="_blank"><img src="/css/company/link.png" alt=""></a>
 					</td>
 					<%-- <td name="CompanyNameClickedByUser"><a href="list?companyName=${sector.companyName}" id="companyName">${sector.companyName}</a> <a href="${sector.website}" target="_blank"><img src="/css/company/link.png" alt=""></a></td> --%>
