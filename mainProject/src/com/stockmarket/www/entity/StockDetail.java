@@ -2,7 +2,7 @@ package com.stockmarket.www.entity;
 
 public class StockDetail {
 	int change_val;				//전일비
-	int	frgn_stock; 			//??
+	double	frgn_stock; 			//??
 	int	acc_quant;				//거래량 -
 	String bizdate;				//날짜 -
 	String risefall;			//??
@@ -32,7 +32,7 @@ public class StockDetail {
 	}
 
 
-	public int getFrgn_stock() {
+	public double getFrgn_stock() {
 		return frgn_stock;
 	}
 
