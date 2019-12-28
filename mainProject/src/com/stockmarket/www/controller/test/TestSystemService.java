@@ -19,6 +19,7 @@ public class TestSystemService {
 	public void test() {
 		int testIndex = 0;
 		BasicSystemService sys = new BasicSystemService();
+		StockDetailDao stockDetailDao = new JdbcStockDetailDao();
 		
 		while (true) {
 			Scanner sc = new Scanner(System.in);
@@ -72,27 +73,29 @@ public class TestSystemService {
 				System.out.println("케이스 5");
 				sys.insertRecordAsset();
 				break;
-			case 7:
-				sys.setStockDataAll("095660");
+			case 7:	//stockDetailDao 에 크롤링 데이터를 저장하다
+//				sys.setStockDataAll("095660");
+				sys.setStockDataAll("005930");
 //				service.getAllDailyPrice("004170");
 				return;
-			case 8: // stockdetailDao 의 저장된 데이터를 가져온다
-				StockDetailDao s;
-				s = new JdbcStockDetailDao();
-				List<StockDetail> stock = s.get("095660");
+			case 8:
+//				stockDetailDao.deleteAll();
+				return;
+			case 9: // stockdetailDao 의 저장된 데이터를 가져온다
+				List<StockDetail> stock = sys.getStockDetail("095660");
 				for (StockDetail obj : stock)
 					System.out.println(obj.toString());
 
 				return;
-			case 9:
+			case 10:
 				sys.upjongCrawling();
 				return;
-			case 10:
+			case 11:
 				JdbcUpjongDao upjongDao = new JdbcUpjongDao();
 				upjongDao.delete();
 
 			
-			case 11:
+			case 12:
 				JdbckoreaStocksDao koreaDao = new JdbckoreaStocksDao();
 				List<koreaStocks> list = koreaDao.getList();
 				int cnt = 0;
@@ -117,9 +120,9 @@ public class TestSystemService {
 		System.out.println("4. ");
 		System.out.println("5. ");
 		System.out.println("6. ");
-		System.out.println("7. ");
+		System.out.println("7. stockDetailDao 에 크롤링 데이터를 저장하다 in:codeNum");
 		System.out.println("8. ");
-		System.out.println("9. ");
+		System.out.println("9. stockdetailDao 의 저장된 데이터를 가져온다 in:codeNum");
 		System.out.println("99. 종료");
 		System.out.println("-----------------------------");
 		System.out.println("숫자를 입력하시오");
