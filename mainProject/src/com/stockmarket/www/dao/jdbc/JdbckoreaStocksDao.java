@@ -14,6 +14,42 @@ import com.stockmarket.www.entity.koreaStocks;
 public class JdbckoreaStocksDao implements koreaStocksDao {
 
 	@Override
+	public koreaStocks get(String codeNum) {
+		koreaStocks stock = new koreaStocks();
+		
+		String sql = "SELECT * FROM KOREASTOCKS WHERE stockCode=?";
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+		PreparedStatement pst =null;
+		ResultSet rs = null;
+		
+		try {
+			pst = daoContext.getPreparedStatement(sql);
+			pst.setString(1,  codeNum);
+			rs = pst.executeQuery();
+			if(rs.next()) { 
+				stock = new koreaStocks(
+						rs.getString("companyName"),
+						rs.getString("stockCode"),
+						rs.getString("sectors"),
+						rs.getString("mainProduct"),
+						rs.getString("stockedDay"),
+						rs.getString("settlementMonth"),
+						rs.getString("representativeName"),
+						rs.getString("website"),
+						rs.getString("location"));
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			daoContext.close(rs, pst);
+		}
+		
+		return stock;
+	}
+	
+	@Override
 	public List<koreaStocks> getList() {
 		
 		List<koreaStocks> list = new ArrayList<>();
