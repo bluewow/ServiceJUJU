@@ -13,6 +13,7 @@ public class TestMain {
 
 			switch (testIndex) {
 			case 1:
+				clearScreen();
 				SystemServiceTest();
 				break;
 			case 2:
