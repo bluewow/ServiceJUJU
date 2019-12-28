@@ -17,6 +17,8 @@ public class TestMain {
 				SystemServiceTest();
 				break;
 			case 2:
+				clearScreen();
+				JsonTest();
 				break;
 			case 3:
 				break;
@@ -64,6 +66,10 @@ public class TestMain {
 
 	private static void SystemServiceTest() {
 		TestSystemService service = new TestSystemService();
+		service.test();
+	}
+	private static void JsonTest() {
+		TestJson service = new TestJson();
 		service.test();
 	}
 
