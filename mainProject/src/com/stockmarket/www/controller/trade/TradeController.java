@@ -2,7 +2,6 @@ package com.stockmarket.www.controller.trade;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,13 +16,11 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.google.gson.Gson;
-import com.stockmarket.www.dao.MemberDao;
+import com.stockmarket.www.dao.koreaStocksDao;
+import com.stockmarket.www.dao.jdbc.JdbckoreaStocksDao;
 import com.stockmarket.www.entity.StockDetail;
 import com.stockmarket.www.service.TradeService;
 import com.stockmarket.www.service.basic.BasicTradeService;
-
-//TODO
-//Return false 처리
 
 @WebServlet("/card/trade/trade")
 public class TradeController extends HttpServlet{
@@ -38,33 +35,27 @@ public class TradeController extends HttpServlet{
 		HttpSession session = request.getSession();
 		int memberId = (int)session.getAttribute("id");
 		
-		//일봉, 주봉, 월봉 - ajax 요청
-		String date = request.getParameter("date"); 
-		if(date != null) {
-			dateButtonStatus(date, request, response);
+		//1년 - 일봉 그래프
+		String graph = request.getParameter("graph"); 
+		if(graph != null) {
+			JSONArray json = getDataOfGraph(graph);
+	        PrintWriter out = response.getWriter();
+			out.print(json);  
 			return;
 		}
 
-		//가격정보 reflesh - ajax 요청
+		//가격정보 reflesh or 매수-매도 실행 
 		String price = request.getParameter("replaceEvent");
 		if(price != null) { //price is only "on"
 			int result = 0;
-			//매수-매도 실행
 			result = tradeProcess(memberId, request);
-			updateResultPrice(request, response, memberId, "095660", result);
+			JSONObject json = updateResultPrice(memberId, request, result);
+			response.setContentType("application/json; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.print(json);
 			return;
 		}
 
-		//종목가격 
-		//종목 등락률
-		int sum = service.getStockAssets(memberId, "095660");
-		int qty = service.getQty(memberId, "095660");
-		//Get 종목정보, 해당 종목의 보유 자산, 평균 매수가, 보유수량
-		request.setAttribute("companyName", "네오위즈");
-		request.setAttribute("myAssets", service.getAssets(memberId));
-		request.setAttribute("aveAssets", qty == 0 ? 0 : (sum / qty));
-		request.setAttribute("myQuantity", qty);
-		
 		request.getRequestDispatcher("trading.jsp").forward(request, response);
 	}
 
@@ -75,6 +66,7 @@ public class TradeController extends HttpServlet{
 	private int tradeProcess(int memberId, HttpServletRequest request) {
 		String trade = request.getParameter("button");
 		String qty = request.getParameter("Purse/Sold");
+		String codeNum = request.getParameter("codeNum");
 		 
 		//result - 0:ok, 1:vmoney부족, 2: 거래정지목록, 
 		//		   3:장내시간이 아님, 4:수량이 0이하가 되는 경우 거래x, 
@@ -84,27 +76,27 @@ public class TradeController extends HttpServlet{
 			case "buy": //구매
 				if(service.checkVmoney(memberId, Integer.parseInt(qty), 20000) != 0)
 					return 1;
-				if(service.checkHaveStock(memberId, "095660") == false)
-					service.addHaveStock(memberId, "095660");
+				if(service.checkHaveStock(memberId, codeNum) == false)
+					service.addHaveStock(memberId, codeNum);
 				
-				service.tradeBuySell(memberId, "095660", Integer.parseInt(qty), 20000);
+				service.tradeBuySell(memberId, codeNum, Integer.parseInt(qty), 20000);
 				break;
 			case "sell": //매도
-				if(service.checkHaveStock(memberId, "095660") == false)
+				if(service.checkHaveStock(memberId, codeNum) == false)
 					return 6;
-				if(service.checkMinusHaveStock(memberId, "095660", Integer.parseInt(qty))) 
+				if(service.checkMinusHaveStock(memberId, codeNum, Integer.parseInt(qty))) 
 					return 4;
 				
-				service.tradeBuySell(memberId, "095660", -Integer.parseInt(qty), 20000);
+				service.tradeBuySell(memberId, codeNum, -Integer.parseInt(qty), 20000);
 				
 				//매도후 수량이 0인 경우 db 삭제
-				if(service.checkZeroHaveStock(memberId, "095660")) { 
-					service.delHaveStock(memberId, "095660");
+				if(service.checkZeroHaveStock(memberId, codeNum)) { 
+					service.delHaveStock(memberId, codeNum);
 					return 5;
 				}
 				break;
-			default:
-				break;
+			default: //"pass"
+				return 99;
 			}
 		}
 		return 0;
@@ -112,20 +104,21 @@ public class TradeController extends HttpServlet{
 
 	
 
-	private void updateResultPrice(HttpServletRequest request, HttpServletResponse response, int memberId, String codeNum, int result) throws IOException {
+	private JSONObject updateResultPrice(int memberId,  HttpServletRequest request, int result) {
 		HashMap<Object, Object>map = new HashMap<>();
+		String codeNum = request.getParameter("codeNum");
 		int sum = service.getStockAssets(memberId, codeNum);
 		int qty = service.getQty(memberId, codeNum);
+		String companyName = service.getCompanyName(codeNum);
 		
 		map.put("avgPrice", qty == 0 ? 0 : sum / qty);
 		map.put("quantity", qty);
 		map.put("vMoney", (int) service.getAssets(memberId));
 		map.put("result", result);
 		map.put("codeNum", codeNum);
+		map.put("name", companyName);
 		JSONObject data = new JSONObject(map);
-		
-		PrintWriter out = response.getWriter();
-		out.print(data);  
+		return data;
 	}
 
 /////////////////////////////////////////////////////////
@@ -133,76 +126,18 @@ public class TradeController extends HttpServlet{
 /////////////////////////////////////////////////////////
 	
 	@SuppressWarnings("unchecked")
-	private void dateButtonStatus(String date, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private JSONArray getDataOfGraph(String codeNum) {
 		JSONArray json = new JSONArray();
 		
-		switch(date) {
-		case "일봉":	
-			List<StockDetail> list = service.getDailyPrice("095660");
-			for(int i = 0; i < list.size(); i++) {
-				JSONArray array = new JSONArray();
-				array.add(list.get(list.size()-i-1).getBizdate());
-				array.add(list.get(list.size()-i-1).getClose_val());
-				json.add(array);
-			}
-			break;
-//		case "주봉":
-//			int[][] data2 = {{5, 4}, {4, 3}, {2, 1}};
-//			data = data2;
-//			break;
-//		case "월봉":	
-//			int[][] data3 = {{10, 20}, {40, 50}, {20, 30}};
-//			data = data3;
-//			break;
+		List<StockDetail> list = service.getDailyPrice(codeNum);
+		for(int i = 0; i < list.size(); i++) {
+			//TODO 1년치
+			JSONArray array = new JSONArray();
+			array.add(list.get(list.size()-i-1).getBizdate());
+			array.add(list.get(list.size()-i-1).getClose_val());
+			json.add(array);
 		}
-        PrintWriter out = response.getWriter();
-		out.print(json);      
-	}
-
-	//TEST
-	public static void main(String[] args) {
-	        int[] numbers = {1, 1, 2, 3, 5, 8, 13};
-	        String[] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
-
-	        // Create a new instance of Gson
-	        Gson gson = new Gson();
-
-	        // Convert numbers array into JSON string.
-	        String numbersJson = gson.toJson(numbers);
-
-	        // Convert strings array into JSON string
-	        String daysJson = gson.toJson(days);
-	        System.out.println("numbersJson = " + numbersJson);
-	        System.out.println("daysJson = " + daysJson);
-
-	        // Convert from JSON string to a primitive array of int.
-	        int[] fibonacci = gson.fromJson(numbersJson, int[].class);
-	        for (int number : fibonacci) {
-	            System.out.print(number + " ");
-	        }
-	        System.out.println("");
-
-	        // Convert from JSON string to a string array.
-	        String[] weekDays = gson.fromJson(daysJson, String[].class);
-	        for (String weekDay : weekDays) {
-	            System.out.print(weekDay + " ");
-	        }
-	        System.out.println("");
-	        
-	        // Converting multidimensional array into JSON
-	        int[][] data = {{1, 2}, {3, 4}, {4, 5}};
-	        String json = gson.toJson(data);
-	        System.out.println("Data = " + json);
-	        
-	        // Convert JSON string into multidimensional array of int.
-	        int[][] dataMap = gson.fromJson(json, int[][].class);
-	        for (int[] i : dataMap) {
-	            for (int j : i) {
-	                System.out.print(j + " ");
-	            }
-	            System.out.println("");
-	        }
-	        
-	        
+		
+		return json;
 	}
 }
