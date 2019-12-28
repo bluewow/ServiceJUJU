@@ -1,5 +1,5 @@
 window.addEventListener("message", function (e) {
-	if (e.data) //codeNum
+	if (e.data && (e.data.length == 6)) //codeNum
 		console.log("stockBoard : " + e.data);
 });
 
