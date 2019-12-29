@@ -39,6 +39,11 @@ public class BasicCommunityBoardService implements CommunityBoardService {
 		return communityBoardDao.getCommunityBoardList(page, field, query, stockCode);
 	}
 
+	@Override
+	public List<CommunityBoard> getInterestBoardList(int loginId) {
+		return communityBoardDao.getInterestBoardList(loginId);
+	}
+
 	// 게시글과 댓글 보기
 	@Override
 	public CommunityBoard getBoard(int id) {
@@ -63,20 +68,6 @@ public class BasicCommunityBoardService implements CommunityBoardService {
 	public int deleteCommunityBoard(int boardId) {
 		// TODO Auto-generated method stub
 		return communityBoardDao.deleteCommunityBoard(boardId);
-	}
-
-	// 게시글 즐겨찾기 추가
-	@Override
-	public int insertFavoriteCommunityBoard(CommunityBoard communityBoard) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	// 게시글 즐겨찾기 삭제
-	@Override
-	public int deleteFavoriteCommunityBoard(CommunityBoard communityBoard) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	// 게시글 댓글개수 보기
@@ -125,6 +116,24 @@ public class BasicCommunityBoardService implements CommunityBoardService {
 	public int deleteReplys(int boardId) {
 		// TODO Auto-generated method stub
 		return communityBoardDao.deleteReplys(boardId);
+	}
+
+	@Override
+	public int selectFavoriteBoard(CommunityBoard selectFavoriteBoard) {
+		// TODO Auto-generated method stub
+		return communityBoardDao.selectFavoriteBoard(selectFavoriteBoard);
+	}
+
+	@Override
+	public int insertFavoriteCommunityBoard(CommunityBoard insertFavoriteBoard) {
+		// TODO Auto-generated method stub
+		return communityBoardDao.insertFavoriteBoard(insertFavoriteBoard);
+	}
+
+	@Override
+	public int deleteFavoriteCommunityBoard(CommunityBoard deleteFavoriteBoard) {
+		// TODO Auto-generated method stub
+		return communityBoardDao.deleteFavoriteBoard(deleteFavoriteBoard);
 	}
 
 }

@@ -40,18 +40,18 @@ public class DetailJsonController extends HttpServlet {
 		HttpSession session = request.getSession();
 		Object tempId = session.getAttribute("id");
 		int writerId = -1;
-		
-		if(tempId != null)
-			writerId = (Integer)tempId;
+
+		if (tempId != null)
+			writerId = (Integer) tempId;
 		MemberDao memberDao = new JdbcMemberDao();
 		String writerNickname = memberDao.getMember(writerId).getNickName();
-		
+
 		int boardId = Integer.parseInt(request.getParameter("id"));
 		CommunityBoard communityBoard = communityBoardService.getBoard(boardId);
-		
+
 		List<CommunityBoard> replyList = communityBoardService.getCommunityBoardReplyList(boardId);
 
-		HashMap<String,Object> hm = new HashMap<String, Object>();
+		HashMap<String, Object> hm = new HashMap<String, Object>();
 		hm.put("writerId", writerNickname);
 		hm.put("board", communityBoard);
 		hm.put("replys", replyList);
@@ -62,7 +62,6 @@ public class DetailJsonController extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.write(Json);
-		
 
 //			
 	}
@@ -70,6 +69,5 @@ public class DetailJsonController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-			super.doPost(request, response);
 	}
 }

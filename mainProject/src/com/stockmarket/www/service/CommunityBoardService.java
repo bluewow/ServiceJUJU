@@ -31,8 +31,10 @@ public interface CommunityBoardService {
 	/*
 	 * 게시판 즐겨찾기 추가 삭제
 	 * */
-	int insertFavoriteCommunityBoard(CommunityBoard communityBoard);
-	int deleteFavoriteCommunityBoard(CommunityBoard communityBoard);
+	List<CommunityBoard> getInterestBoardList(int loginId);
+	int selectFavoriteBoard(CommunityBoard selectFavoriteBoard);
+	int insertFavoriteCommunityBoard(CommunityBoard insertFavoriteBoard);
+	int deleteFavoriteCommunityBoard(CommunityBoard deleteFavoriteBoard);
 	/*
 	 * 게시글 댓글 개수 확인
 	 * */

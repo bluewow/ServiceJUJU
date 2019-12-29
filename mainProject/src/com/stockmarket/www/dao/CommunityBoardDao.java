@@ -21,4 +21,9 @@ public interface CommunityBoardDao {
 	int updateReply(CommunityBoard updateReply);
 	int deleteReply(int replyId);
 	int deleteReplys(int boardId);
+	
+	int selectFavoriteBoard(CommunityBoard selectFavoriteBoard);
+	int insertFavoriteBoard(CommunityBoard insertFavoriteBoard);
+	int deleteFavoriteBoard(CommunityBoard deleteFavoriteBoard);
+	List<CommunityBoard> getInterestBoardList(int loginId);
 }

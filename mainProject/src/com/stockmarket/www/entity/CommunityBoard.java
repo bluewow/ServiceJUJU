@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class CommunityBoard {
 	private int id;
+	private int loginId;
 	private String title;
 	private String writerId;
 	private Date regdate;
@@ -81,6 +82,23 @@ public class CommunityBoard {
 	public CommunityBoard(int replyId, String reContent, String string) {
 		this.replyId = replyId;
 		this.reContent = reContent;
+	}
+	
+//update CommunityBoard
+	public CommunityBoard(int id, String title, String content, String modi) {
+		this.id = id;
+		this.title = title;
+		this.content = content;
+	}
+
+	public CommunityBoard(int boardId, int loginId, String status) {
+		this.id = boardId;
+		this.setLoginId(loginId);
+	}
+
+	public CommunityBoard(int id, int boardId, int loginId) {
+		this.id = boardId;
+		this.setLoginId(loginId);
 	}
 
 	public int getId() {
@@ -163,11 +181,19 @@ public class CommunityBoard {
 		this.reContent = reContent;
 	}
 
+	public int getLoginId() {
+		return loginId;
+	}
+
+	public void setLoginId(int loginId) {
+		this.loginId = loginId;
+	}
+
 	@Override
 	public String toString() {
-		return "CommunityBoard [id=" + id + ", title=" + title + ", writerId=" + writerId + ", regdate=" + regdate
-				+ ", hit=" + hit + ", content=" + content + ", stockName=" + stockName + ", replyCnt=" + replyCnt
-				+ ", replyId=" + replyId + ", reContent=" + reContent + "]";
+		return "CommunityBoard [id=" + id + ", loginId=" + loginId + ", title=" + title + ", writerId=" + writerId
+				+ ", regdate=" + regdate + ", hit=" + hit + ", content=" + content + ", stockName=" + stockName
+				+ ", replyCnt=" + replyCnt + ", replyId=" + replyId + ", reContent=" + reContent + "]";
 	}
 
 }

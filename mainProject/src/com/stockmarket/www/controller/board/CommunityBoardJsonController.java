@@ -2,6 +2,7 @@ package com.stockmarket.www.controller.board;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,18 +10,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.stockmarket.www.dao.MemberDao;
+import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
 import com.stockmarket.www.entity.CommunityBoard;
 import com.stockmarket.www.service.CommunityBoardService;
 import com.stockmarket.www.service.basic.BasicCommunityBoardService;
 
 @WebServlet("/card/board/community_board_list")
 public class CommunityBoardJsonController extends HttpServlet {
-	
+
 	private CommunityBoardService communityBoardService;
-	
-	
+
 	public CommunityBoardJsonController() {
 		communityBoardService = new BasicCommunityBoardService();
 	}
@@ -34,35 +37,52 @@ public class CommunityBoardJsonController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		HttpSession session = request.getSession();
+		//로그인 세션을 불러온다.
+		Object tempId = session.getAttribute("id");
+		int loginId = -1;
+
+		if (tempId != null)
+			loginId = (Integer) tempId;
+		MemberDao memberDao = new JdbcMemberDao();
+		String loginUser = memberDao.getMember(loginId).getNickName();
+
+		//게시글목록을 불러온다.
 		int page = 1;
 		String field = "TITLE";
-		String query= "";
-		String stockName= "";
-		
+		String query = "";
+		String stockName = "";
+
 		String page_ = request.getParameter("p");
-		if(page_ != null && !page_.equals(""))
+		if (page_ != null && !page_.equals(""))
 			page = Integer.parseInt(page_);
-		
+
 		String field_ = request.getParameter("f");
-		if(field_ !=null && !field_.equals(""))
+		if (field_ != null && !field_.equals(""))
 			field = field_;
 
 		String query_ = request.getParameter("q");
-		if(query_ !=null && !query_.equals(""))
+		if (query_ != null && !query_.equals(""))
 			query = query_;
-		
+
 		String stockName_ = request.getParameter("s");
-		if(stockName_ !=null && !stockName_.equals(""))
+		if (stockName_ != null && !stockName_.equals(""))
 			stockName = stockName_;
-		List<CommunityBoard> list = communityBoardService.getCommunityBoardList(page,field,query,stockName);
-	      Gson gson = new Gson();
-	      String json = gson.toJson(list);
-	      
-	      response.setCharacterEncoding("UTF-8");
-	       response.setContentType("text/html; charset=UTF-8");
-	       
-	       PrintWriter out = response.getWriter();
-	       out.write(json); 
+		List<CommunityBoard> list = communityBoardService.getCommunityBoardList(page, field, query, stockName);
+
+		List<CommunityBoard> interestList = communityBoardService.getInterestBoardList(loginId);
+		
+		HashMap<String, Object> hm = new HashMap<String, Object>();
+		hm.put("loginUser", loginUser);
+		hm.put("list", list);
+		hm.put("interestList", interestList);
+		Gson gson = new Gson();
+		String json = gson.toJson(hm);
+
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.write(json);
 
 	}
 
