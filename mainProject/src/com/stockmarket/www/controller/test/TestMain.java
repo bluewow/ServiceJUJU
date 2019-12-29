@@ -17,6 +17,8 @@ public class TestMain {
 				SystemServiceTest();
 				break;
 			case 2:
+				clearScreen();
+				JsonTest();
 				break;
 			case 3:
 				break;
@@ -26,6 +28,15 @@ public class TestMain {
 				break;
 			case 6:
 				break;
+			case 7:
+				break;
+			case 8:
+				break;
+			case 9:
+				break;
+			case 10:
+				System.out.println("TEST END");
+				return;
 			}
 		}
 
@@ -43,7 +54,7 @@ public class TestMain {
 		System.out.println("7. ");
 		System.out.println("8. ");
 		System.out.println("9. ");
-		System.out.println("10. ");
+		System.out.println("10. 종료");
 		System.out.println("-----------------------------");
 		System.out.println("숫자를 입력하시오");
 	}
@@ -55,6 +66,10 @@ public class TestMain {
 
 	private static void SystemServiceTest() {
 		TestSystemService service = new TestSystemService();
+		service.test();
+	}
+	private static void JsonTest() {
+		TestJson service = new TestJson();
 		service.test();
 	}
 

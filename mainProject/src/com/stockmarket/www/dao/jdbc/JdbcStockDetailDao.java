@@ -87,7 +87,7 @@ public class JdbcStockDetailDao implements StockDetailDao {
 	
 	//2016년 이전 데이터는 지워버린다
 	@Override
-	public int deleteAll() {
+	public int deletePreDate() {
 		int result = 0;
 		String sql = "DELETE STOCK_DETAIL WHERE RECORD_DATE <= 20151231 ";
 		JdbcDaoContext context = new JdbcDaoContext();

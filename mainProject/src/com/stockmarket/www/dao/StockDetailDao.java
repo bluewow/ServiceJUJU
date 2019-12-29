@@ -15,7 +15,7 @@ public interface StockDetailDao {
 	int insertDaily(StockDetail stock);
 	
 	//2016년 이전 데이터는 지워버린다
-	int deleteAll();
+	int deletePreDate();
 	//상장폐지시 데이터를 지원버린다
 	int delete(String codeNum);
 	

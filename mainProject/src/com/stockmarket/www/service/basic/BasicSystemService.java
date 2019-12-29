@@ -241,7 +241,7 @@ public class BasicSystemService implements SystemService {
 			System.out.println(obj);
 		}
 		stockDetailDao.insert(stockDetail);
-		stockDetailDao.deleteAll();
+		stockDetailDao.deletePreDate();
 		System.out.println("END");
 
 	}
