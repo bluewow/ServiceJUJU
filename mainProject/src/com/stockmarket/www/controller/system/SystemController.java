@@ -4,17 +4,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import com.stockmarket.www.service.SystemService;
 import com.stockmarket.www.service.basic.BasicSystemService;
