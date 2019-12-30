@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.stockmarket.www.dao.MemberDao;
+import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
 import com.stockmarket.www.entity.CommunityBoard;
 import com.stockmarket.www.service.CommunityBoardService;
 import com.stockmarket.www.service.basic.BasicCommunityBoardService;
@@ -34,6 +36,16 @@ public class StockBoardJsonController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		HttpSession session = request.getSession();
+		//로그인 세션을 불러온다.
+		Object tempId = session.getAttribute("id");
+		int loginId = -1;
+
+		if (tempId != null)
+			loginId = (Integer) tempId;
+		MemberDao memberDao = new JdbcMemberDao();
+		String loginUser = memberDao.getMember(loginId).getNickName();
+
 		int page = 1;
 		String field = "TITLE";
 		String query = "";
@@ -54,7 +66,7 @@ public class StockBoardJsonController extends HttpServlet {
 		String stockCode_ = request.getParameter("s");
 		if (stockCode_ != null && !stockCode_.equals(""))
 			stockCode = stockCode_;
-		List<CommunityBoard> list = communityBoardService.getCommunityBoardList(page, field, query, stockCode);
+		List<CommunityBoard> list = communityBoardService.getCommunityBoardList(page, field, query, stockCode,loginId);
 		Gson gson = new Gson();
 		String json = gson.toJson(list);
 

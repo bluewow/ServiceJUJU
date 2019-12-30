@@ -7,7 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.stockmarket.www.dao.MemberDao;
+import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
 import com.stockmarket.www.service.CommunityBoardService;
 import com.stockmarket.www.service.basic.BasicCommunityBoardService;
 
@@ -27,6 +30,16 @@ public class StockBoardController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		HttpSession session = request.getSession();
+		//로그인 세션을 불러온다.
+		Object tempId = session.getAttribute("id");
+		int loginId = -1;
+
+		if (tempId != null)
+			loginId = (Integer) tempId;
+		MemberDao memberDao = new JdbcMemberDao();
+		String loginUser = memberDao.getMember(loginId).getNickName();
 
 		int page = 1;
 		String field = "title";
@@ -51,7 +64,7 @@ public class StockBoardController extends HttpServlet {
 		
 		stockCode = "095660"; //네오위즈 더미 하드코딩
 		
-		request.setAttribute("CommunityBoard", communityBoardService.getCommunityBoardList(page, stockCode)); // 컨트롤러가 할 일은 데이터를 준비하는 일
+		//request.setAttribute("CommunityBoard", communityBoardService.getCommunityBoardList(page, stockCode)); // 컨트롤러가 할 일은 데이터를 준비하는 일
 		
 		request.getRequestDispatcher("/card/board/stock_board.jsp").forward(request, response);
 		

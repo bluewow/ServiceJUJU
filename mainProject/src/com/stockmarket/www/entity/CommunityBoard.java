@@ -14,6 +14,7 @@ public class CommunityBoard {
 	private int replyCnt;
 	private int replyId;
 	private String reContent;
+	private int interest;
 
 // select
 
@@ -21,7 +22,7 @@ public class CommunityBoard {
 	}
 
 	public CommunityBoard(int id, String title, String writerId, Date regdate, int hit, String stockName,
-			int replyCnt) {
+			int replyCnt, int interest) {
 		this.id = id;
 		this.title = title;
 		this.writerId = writerId;
@@ -29,6 +30,7 @@ public class CommunityBoard {
 		this.hit = hit;
 		this.stockName = stockName;
 		this.replyCnt = replyCnt;
+		this.interest = interest;
 	}
 
 // insert, update
@@ -189,11 +191,20 @@ public class CommunityBoard {
 		this.loginId = loginId;
 	}
 
+	public int getInterest() {
+		return interest;
+	}
+
+	public void setInterest(int interest) {
+		this.interest = interest;
+	}
+
 	@Override
 	public String toString() {
 		return "CommunityBoard [id=" + id + ", loginId=" + loginId + ", title=" + title + ", writerId=" + writerId
 				+ ", regdate=" + regdate + ", hit=" + hit + ", content=" + content + ", stockName=" + stockName
-				+ ", replyCnt=" + replyCnt + ", replyId=" + replyId + ", reContent=" + reContent + "]";
+				+ ", replyCnt=" + replyCnt + ", replyId=" + replyId + ", reContent=" + reContent + ", interest="
+				+ interest + "]";
 	}
 
 }

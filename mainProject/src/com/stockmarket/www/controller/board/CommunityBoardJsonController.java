@@ -68,16 +68,14 @@ public class CommunityBoardJsonController extends HttpServlet {
 		String stockName_ = request.getParameter("s");
 		if (stockName_ != null && !stockName_.equals(""))
 			stockName = stockName_;
-		List<CommunityBoard> list = communityBoardService.getCommunityBoardList(page, field, query, stockName);
+		List<CommunityBoard> list = communityBoardService.getCommunityBoardList(page, field, query, stockName,loginId);
 
-		List<CommunityBoard> interestList = communityBoardService.getInterestBoardList(loginId);
-		
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		hm.put("loginUser", loginUser);
 		hm.put("list", list);
-		hm.put("interestList", interestList);
 		Gson gson = new Gson();
 		String json = gson.toJson(hm);
+		System.out.println(json);
 
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");

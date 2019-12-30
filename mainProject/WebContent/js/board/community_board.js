@@ -13,12 +13,12 @@ window.addEventListener("load", function () {
 			var listData = JSON.parse(request.responseText);
 			var trTemplate = section.querySelector(".tr-template");
 			var loginUser = listData.loginUser;
-
+			console.log(listData);
 			tbody.innerHTML = "";
 
 			for (var i = 0; i < listData.list.length; i++) {
 				var cloneTr = document.importNode(trTemplate.content, true);
-
+				console.log(listData.list[i].interest);
 				var tds = cloneTr.querySelectorAll("td");
 
 				tds[0].innerText = listData.list[i].id;
@@ -36,6 +36,9 @@ window.addEventListener("load", function () {
 				tds[2].innerText = listData.list[i].regdate;
 				tds[3].innerText = listData.list[i].hit;
 				tds[4].innerHTML = '<a href class="interest_no" data-id="' + listData.list[i].id + '"></a>';
+				if(listData.list[i].interest != '0')
+					tds[4].innerHTML = '<a href class="interest_yes" data-id="' + listData.list[i].id + '"></a>';
+				
 				tds[5].innerHTML = '<a href class="del-content" data-id="' + listData.list[i].id + '"></a>';
 				if (loginUser != listData.list[i].writerId)
 					tds[5].innerHTML = '<td></td>'

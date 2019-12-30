@@ -12,12 +12,17 @@ import com.stockmarket.www.entity.CommunityBoard;
 public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 	@Override
-	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockCode) {
+	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockCode, int loginId) {
 
 		List<CommunityBoard> list = new ArrayList<>();
 
-		String sql = "SELECT * FROM (SELECT ROWNUM NUM, B.* FROM(SELECT * FROM (SELECT * FROM BOARD_VIEW WHERE STOCKNAME LIKE ?) WHERE "
-				+ field + " LIKE ? ORDER BY ID DESC) B) WHERE NUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM ("
+				+ "SELECT ROWNUM NUM, B.* FROM("
+				+ "SELECT * FROM (SELECT BV.*, ("
+				+ "SELECT BOARD_ID FROM INTEREST_BOARD WHERE MEMBER_ID=? AND BOARD_ID = BV.ID"
+				+ ") INTEREST FROM BOARD_VIEW BV WHERE STOCKNAME LIKE ?) "
+				+ "WHERE " + field + " LIKE ? ORDER BY ID DESC) B) WHERE NUM BETWEEN ? AND ?";
+
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 
@@ -26,16 +31,17 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 			pst = daoContext.getPreparedStatement(sql);
 
-			pst.setString(1, "%" + stockCode + "%");
-			pst.setString(2, "%" + query + "%");
-			pst.setInt(3, 1 + 10 * (page - 1));
-			pst.setInt(4, 10 * page);
+			pst.setInt(1, loginId);
+			pst.setString(2, "%" + stockCode + "%");
+			pst.setString(3, "%" + query + "%");
+			pst.setInt(4, 1 + 10 * (page - 1));
+			pst.setInt(5, 10 * page);
 
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				CommunityBoard communityBoard = new CommunityBoard(rs.getInt("ID"), rs.getString("TITLE"),
 						rs.getString("WRITER_ID"), rs.getDate("REGDATE"), rs.getInt("HIT"), rs.getString("STOCKNAME"),
-						rs.getInt("REPLY_CNT"));
+						rs.getInt("REPLY_CNT"), rs.getInt("INTEREST"));
 				list.add(communityBoard);
 			}
 
@@ -99,35 +105,6 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 			daoContext.close(rs, pst);
 		}
 		return communityBoard;
-	}
-
-	@Override
-	public List<CommunityBoard> getInterestBoardList(int loginId) {
-
-		List<CommunityBoard> list = new ArrayList<>();
-
-		String sql = "SELECT * FROM INTEREST_BOARD WHERE MEMBER_ID=?";
-		PreparedStatement pst = null;
-		ResultSet rs = null;
-		JdbcDaoContext daoContext = new JdbcDaoContext();
-		try {
-
-			pst = daoContext.getPreparedStatement(sql);
-
-			pst.setInt(1, loginId);
-
-			rs = pst.executeQuery();
-			while (rs.next()) {
-				CommunityBoard communityBoard = new CommunityBoard(rs.getInt("ID"), rs.getInt("BOARD_ID"), rs.getInt("MEMBER_ID"));
-				list.add(communityBoard);
-			}
-
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		} finally {
-			daoContext.close(rs, pst);
-		}
-		return list;
 	}
 
 	@Override
@@ -423,6 +400,48 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		CommunityBoard lastReplyNum = new CommunityBoard();
 
 		com.lastReplyNum(1);
+	}
+
+	@Override
+	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String code) {
+
+		List<CommunityBoard> list = new ArrayList<>();
+
+		String sql = "SELECT * FROM ("
+				+ "SELECT ROWNUM NUM, B.* FROM("
+				+ "SELECT * FROM (SELECT BV.*, ("
+				+ "SELECT BOARD_ID FROM INTEREST_BOARD WHERE MEMBER_ID=? AND BOARD_ID = BV.ID"
+				+ ") INTEREST FROM BOARD_VIEW BV WHERE STOCKNAME LIKE ?) "
+				+ "WHERE " + field + " LIKE ? ORDER BY ID DESC) B) WHERE NUM BETWEEN ? AND ?";
+
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+		try {
+
+			pst = daoContext.getPreparedStatement(sql);
+
+			pst.setInt(1, 10 * page);
+			pst.setString(2, "%" + code + "%");
+			pst.setString(3, "%" + query + "%");
+			pst.setInt(4, 1 + 10 * (page - 1));
+			pst.setInt(5, 10 * page);
+
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				CommunityBoard communityBoard = new CommunityBoard(rs.getInt("ID"), rs.getString("TITLE"),
+						rs.getString("WRITER_ID"), rs.getDate("REGDATE"), rs.getInt("HIT"), rs.getString("STOCKNAME"),
+						rs.getInt("REPLY_CNT"), rs.getInt("INTEREST"));
+				list.add(communityBoard);
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			daoContext.close(rs, pst);
+		}
+		return list;
 	}
 
 }

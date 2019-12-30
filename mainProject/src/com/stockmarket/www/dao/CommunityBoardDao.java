@@ -5,6 +5,7 @@ import java.util.List;
 import com.stockmarket.www.entity.CommunityBoard;
 
 public interface CommunityBoardDao {
+	List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockCode, int loginId);
 	List<CommunityBoard> getCommunityBoardList(int page, String Field, String Query, String Code);
 	List<CommunityBoard> getReplyList(int boardId);
 	
@@ -25,5 +26,4 @@ public interface CommunityBoardDao {
 	int selectFavoriteBoard(CommunityBoard selectFavoriteBoard);
 	int insertFavoriteBoard(CommunityBoard insertFavoriteBoard);
 	int deleteFavoriteBoard(CommunityBoard deleteFavoriteBoard);
-	List<CommunityBoard> getInterestBoardList(int loginId);
 }

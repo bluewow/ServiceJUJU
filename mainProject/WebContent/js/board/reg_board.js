@@ -10,6 +10,7 @@ window.addEventListener("load", function () {
 
 		// 1. 입력한 값을 얻어온다.
 
+		
 		var title = regBoardForm.querySelector(".reg-title").value;
 		var content = regBoardForm.querySelector(".reg-content").value;
 		var boardId = e.target.dataset.id;
@@ -17,7 +18,6 @@ window.addEventListener("load", function () {
 
 		if (boardId != "") {
 			status = "modi";
-			return;
 		}
 
 		String.prototype.trim = function () {
@@ -29,7 +29,7 @@ window.addEventListener("load", function () {
 		var str2 = content;
 		str2 = str2.trim();
 
-
+		alert("aa");
 		// 댓글내용이 없으면 알림을 하고 되돌아간다.
 		if (str1 == "") {
 			alert("제목을 작성하세요");
@@ -99,6 +99,7 @@ window.addEventListener("load", function () {
 		e.preventDefault();
 
 		if (e.target.name == "cancel") {
+			console.log("clicked")
 			alert("글등록이 취소되었다!!")
 			regBoardForm.style.visibility = "hidden";
 			//========= 글쓰기 등록 버튼 클릭==================
