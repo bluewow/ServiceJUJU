@@ -46,10 +46,6 @@ public class RegBoardJsonController extends HttpServlet {
 		String content = request.getParameter("content");
 		String status = request.getParameter("status");
 		String boardIds = request.getParameter("boardId");
-		System.out.println(title);
-		System.out.println(content);
-		System.out.println(status);
-		System.out.println(boardIds);
 
 		// 상태값이 reg면 등록
 		if (status.equals("reg")) {

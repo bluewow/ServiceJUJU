@@ -10,5 +10,4 @@ public interface CaptureMemoDao {
 	int insert(CaptureMemo captureMemo);	// 캡처메모 저장
 	int update(CaptureMemo captureMemo);	// 캡처메모 수정
 	int delete(int id);						// 캡처메모 삭제 
-
 }

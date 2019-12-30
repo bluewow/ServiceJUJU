@@ -50,23 +50,21 @@ public class JdbcCaptureMemoDao implements CaptureMemoDao {
 	public int insert(CaptureMemo captureMemo) {
 		int result = 0;
 
-		String sql = "INSERT INTO CAPTURE_MEMO(CONTENT, TITLE, PER, PBR, "
+		String sql = "INSERT INTO CAPTURE_MEMO(PER, PBR, "
 				+ "ROE, DEBT_RATIO, MARKET_CAP, FOREIGN_INVESTORS, CODENUM, MEMBER_ID)" 
-				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			JdbcDaoContext daoContext = new JdbcDaoContext();
 			PreparedStatement statement = daoContext.getPreparedStatement(sql);
-			statement.setString(1, captureMemo.getContent());
-			statement.setString(2, captureMemo.getTitle());
-			statement.setDouble(3, captureMemo.getPER());
-			statement.setDouble(4, captureMemo.getPBR());
-			statement.setDouble(5, captureMemo.getROE());
-			statement.setDouble(6, captureMemo.getDebtRatio());
-			statement.setInt(7, captureMemo.getMarketCap());
-			statement.setDouble(8, captureMemo.getForeignInvestors());			
-			statement.setString(9, captureMemo.getCodeNum());
-			statement.setInt(10, captureMemo.getMemberId());
+			statement.setDouble(1, captureMemo.getPER());
+			statement.setDouble(2, captureMemo.getPBR());
+			statement.setDouble(3, captureMemo.getROE());
+			statement.setDouble(4, captureMemo.getDebtRatio());
+			statement.setInt(5, captureMemo.getMarketCap());
+			statement.setDouble(6, captureMemo.getForeignInvestors());			
+			statement.setString(7, captureMemo.getCodeNum());
+			statement.setInt(8, captureMemo.getMemberId());
 
 			result = statement.executeUpdate();
 

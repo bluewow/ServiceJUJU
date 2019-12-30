@@ -5,15 +5,16 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
+<meta charset="UTF-8">
 
-	<link rel="stylesheet" type="text/css" href="../../css/normalize.css">
-	<link rel="stylesheet" type="text/css" href="../../css/captureMemo.css">
+<link rel="stylesheet" type="text/css" href="../../css/normalize.css">
+<link rel="stylesheet" type="text/css" href="../../css/captureMemo.css">
 
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	<script src="../../js/capture/capture.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="../../js/capture/capture.js"></script>
 
-	<title>Insert title here</title>
+<title>Insert title here</title>
 </head>
 
 <body class="scrollbar custom-scrollbar-style">
@@ -27,35 +28,42 @@
 				</tr>
 			</thead>
 			<tbody class="content">
-				<c:forEach var="item" items="${list}">
+				<!-- <c:forEach var="item" items="${list}">
 					<tr class="parent">
 						<td>${item.codeNumName}</td>
 						<td class="capt-title">${item.title}</td>
 						<td class="del-button">${item.regdate}<span><a href=""></a></span></td>
 					</tr>
-				</c:forEach>
+				</c:forEach> -->
 			</tbody>
 		</table>
+		<template class="tr-template-list">
+		<tr class="parent">
+			<td class="capt-name"></td>
+			<td class="capt-title"></td>
+			<td class="del-button"><span></span></td>
+		</tr>
+		</template>	
 		<template class="tr-template">
-			<tr class="child-tr1">
-				<td class="child" colspan="3">
-					<div>
-						<div id="chart_div">
-						</div>
+		<tr class="child-tr1">
+			<td class="child" colspan="3">
+				<div>
+					<div id="chart_div"></div>
 
-						<div class="memo">
-							<div>메모</div>
-							<hr>
-							<div>
-								<textarea id="memo-content" maxlength="800" placeholder="내용을 입력하세요"></textarea>
-							</div>
-							<div class="buttons">
-								<input type="button" class="button" name="cancel" value="수정">
-							</div>
+					<div class="memo">
+						<div>메모</div>
+						<hr>
+						<div>
+							<textarea id="memo-content" maxlength="800"
+								placeholder="내용을 입력하세요"></textarea>
+						</div>
+						<div class="buttons">
+							<input type="button" class="button" name="cancel" value="수정">
 						</div>
 					</div>
-				</td>
-			</tr>
+				</div>
+			</td>
+		</tr>
 		</template>
 	</main>
 </body>
