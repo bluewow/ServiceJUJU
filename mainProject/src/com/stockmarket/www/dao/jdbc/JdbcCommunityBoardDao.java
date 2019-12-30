@@ -211,11 +211,8 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 	@Override
 	public int updateCommunityBoard(CommunityBoard updateCommunityBoard) {
-		System.out.println(updateCommunityBoard.getTitle());
-		System.out.println(updateCommunityBoard.getContent());
-		System.out.println(updateCommunityBoard.getId());
 		int result = 0;
-		String sql = "UPDATE BOARD SET TITLE=?, CONTENT=?, REGDATE=SYSTIMESTAMP WHERE ID=?";
+		String sql = "UPDATE BOARD SET TITLE=?, CONTENT=?, HIT=? WHERE ID=?";
 
 		PreparedStatement pst = null;
 		JdbcDaoContext daoContext = new JdbcDaoContext();
@@ -225,7 +222,8 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 			pst.setString(1, updateCommunityBoard.getTitle());
 			pst.setString(2, updateCommunityBoard.getContent());
-			pst.setInt(3, updateCommunityBoard.getId());
+			pst.setInt(3, updateCommunityBoard.getHit());
+			pst.setInt(4, updateCommunityBoard.getId());
 
 			result = pst.executeUpdate();
 

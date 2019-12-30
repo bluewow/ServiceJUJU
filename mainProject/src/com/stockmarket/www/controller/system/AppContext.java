@@ -29,8 +29,7 @@ import com.stockmarket.www.service.basic.BasicSystemService;
 
 public class AppContext {
 	CSVStockDataDao log = new CSVStockDataDao();
-	static List<CurStock> kospi;
-	static List<CurStock> kosdaq;
+	static List<CurStock> stockMarket;
 	
     private AppContext() { }
     private static class SingleTonHolder {
@@ -45,22 +44,12 @@ public class AppContext {
 		getInstance().log.makeCSV(reason, className);
 	}
 
-    public static List<CurStock> getKospi() {
-		return kospi;
+	public static List<CurStock> getStockMarket() {
+		return stockMarket;
 	}
 
-	public static void setKospi(List<CurStock> kospi) {
-		AppContext.kospi = kospi;
-	}
-
-	public static List<CurStock> getKosdaq() {
-		return kosdaq;
-	}
-	
-	
-
-	public static void setKosdaq(List<CurStock> kosdaq) {
-		AppContext.kosdaq = kosdaq;
+	public static void setStockMarket(List<CurStock> stockMarket) {
+		AppContext.stockMarket = stockMarket;
 	}
 
 	/*
@@ -87,7 +76,7 @@ public class AppContext {
 			AppContext.setLog("왜 1212", BasicSystemService.class.getName());
 			break;
 		case 3:
-			AppContext.getKospi();
+			AppContext.getStockMarket();
 //			AppContext.getKosdaq();
 			break;
 		}

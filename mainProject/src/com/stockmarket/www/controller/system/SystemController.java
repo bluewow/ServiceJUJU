@@ -24,8 +24,6 @@ public class SystemController extends HttpServlet {
 	//thread 함수를 한번만 실행시키기 위한 flag
 	static boolean oneShotFlag;
 	static String preHour; 
-	String pathOfKospi = null;
-	String pathOfKosdaq = null;
 	SystemService service;
 	
 	public SystemController() {
@@ -40,11 +38,6 @@ public class SystemController extends HttpServlet {
 			return;
 		}
 		oneShotFlag = true;
-		
-		//KOSPI, KOSDAQ CSV 파일의 절대경로를 가져오고 저장한다.
-		ServletContext application = request.getServletContext();
-		pathOfKospi = application.getRealPath("/KOSPI.csv");
-		pathOfKosdaq = application.getRealPath("/KOSDAQ.csv");
 		
 		Thread thread = new Thread(()->{
 			try {
@@ -73,8 +66,8 @@ public class SystemController extends HttpServlet {
 		}
 			
 		//주식가격 refresh by 크롤링 9시 ~ 18시까지 실행
-		if(Integer.parseInt(curHour) >= 9 && Integer.parseInt(curHour) <= 20)
-			service.refreshStockPrice(pathOfKospi, pathOfKosdaq);
+		if(Integer.parseInt(curHour) >= 9 && Integer.parseInt(curHour) <= 18)
+			service.refreshStockPrice();
 		
 		//18시 장종료후 19시 주식데이터 갱신 
 		if(curHour.equals("19") && preHour.equals("18")) {

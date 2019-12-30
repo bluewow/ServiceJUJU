@@ -17,16 +17,17 @@ import com.stockmarket.www.entity.CaptureMemoView;
 public class JdbcCaptureMemoDao implements CaptureMemoDao {
 	
 	@Override
-	public List<CaptureMemoView> getList() {
+	public List<CaptureMemoView> getList(int id) {
 		List<CaptureMemoView> captureMemos = new ArrayList<>();
 		
-		String sql = "SELECT S.NAME, C.TITLE, C.REGDATE "
-				+ "FROM CAPTURE_MEMO C JOIN STOCK S ON C.CODENUM = S.CODENUM";
+		String sql = "SELECT S.NAME, C.TITLE, C.REGDATE, C.MEMBER_ID "
+				+ "FROM CAPTURE_MEMO C JOIN STOCK S ON C.CODENUM = S.CODENUM WHERE MEMBER_ID=? ORDER BY REGDATE DESC";
 
 		try {
 			JdbcDaoContext daoContext = new JdbcDaoContext();
-			Statement statement = daoContext.getStatement();
-			ResultSet resultSet = statement.executeQuery(sql);
+			PreparedStatement statement = daoContext.getPreparedStatement(sql);
+			statement.setInt(1, id);
+			ResultSet resultSet = statement.executeQuery();
 
 			while (resultSet.next()) {				
 				String name = resultSet.getString("NAME");
@@ -50,23 +51,21 @@ public class JdbcCaptureMemoDao implements CaptureMemoDao {
 	public int insert(CaptureMemo captureMemo) {
 		int result = 0;
 
-		String sql = "INSERT INTO CAPTURE_MEMO(CONTENT, TITLE, PER, PBR, "
+		String sql = "INSERT INTO CAPTURE_MEMO(PER, PBR, "
 				+ "ROE, DEBT_RATIO, MARKET_CAP, FOREIGN_INVESTORS, CODENUM, MEMBER_ID)" 
-				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			JdbcDaoContext daoContext = new JdbcDaoContext();
 			PreparedStatement statement = daoContext.getPreparedStatement(sql);
-			statement.setString(1, captureMemo.getContent());
-			statement.setString(2, captureMemo.getTitle());
-			statement.setDouble(3, captureMemo.getPER());
-			statement.setDouble(4, captureMemo.getPBR());
-			statement.setDouble(5, captureMemo.getROE());
-			statement.setDouble(6, captureMemo.getDebtRatio());
-			statement.setInt(7, captureMemo.getMarketCap());
-			statement.setDouble(8, captureMemo.getForeignInvestors());			
-			statement.setString(9, captureMemo.getCodeNum());
-			statement.setInt(10, captureMemo.getMemberId());
+			statement.setDouble(1, captureMemo.getPER());
+			statement.setDouble(2, captureMemo.getPBR());
+			statement.setDouble(3, captureMemo.getROE());
+			statement.setDouble(4, captureMemo.getDebtRatio());
+			statement.setInt(5, captureMemo.getMarketCap());
+			statement.setDouble(6, captureMemo.getForeignInvestors());			
+			statement.setString(7, captureMemo.getCodeNum());
+			statement.setInt(8, captureMemo.getMemberId());
 
 			result = statement.executeUpdate();
 

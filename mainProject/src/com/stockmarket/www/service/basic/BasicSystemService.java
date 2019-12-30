@@ -43,7 +43,6 @@ import com.stockmarket.www.service.SystemService;
 
 public class BasicSystemService implements SystemService {
 	private UpjongDao upjongDao;
-	private static final int STOCK_CODE_NUM = 1;
 	// for update Market
 	// <th> 회사명|종목코드|업종|주요제품|상장일|결산월|대표자명|홈페이지|지역 </th>
 	private static final int COMPANY_INFO_COLUMN = 9;
@@ -66,21 +65,19 @@ public class BasicSystemService implements SystemService {
 	}
 
 	/*-------------------------- refreshStockPrice ----------------------------*/
-	public void refreshStockPrice(String pathOfKospi, String pathOfKosdaq) {
-		CSVStockDataDao data = new CSVStockDataDao();
-		List<String> codeNums = new ArrayList<>();
-		List<CurStock> kospi;
-		List<CurStock> kosdaq;
+	public void refreshStockPrice() {
+		List<koreaStocks> stocks = new ArrayList<>();
+		List<String> codeNum = new ArrayList<>();
+		List<CurStock> stockMarket;
 
-		// CSV 를 참조하여 KOSPI, KOSDAQ 모든 종목에 대한 종목코드를 가져온다
-		codeNums = data.getColumnData(STOCK_CODE_NUM, pathOfKospi);
-		kospi = getCurrentStockPrice(codeNums);
+		// DB 를 참조하여 KOSPI, KOSDAQ 모든 종목에 대한 종목코드를 가져온다
+		stocks = koreaStocksDao.getList();
+		for(koreaStocks entity : stocks)
+			codeNum.add(entity.getStockCode());
 
-		codeNums = data.getColumnData(STOCK_CODE_NUM, pathOfKosdaq);
-		kosdaq = getCurrentStockPrice(codeNums);
+		stockMarket = getCurrentStockPrice(codeNum);
 
-		AppContext.setKospi(kospi);
-		AppContext.setKosdaq(kosdaq);
+		AppContext.setStockMarket(stockMarket);
 	}
 
 	private List<CurStock> getCurrentStockPrice(List<String> codeNums) {
@@ -93,15 +90,16 @@ public class BasicSystemService implements SystemService {
 			try {
 				doc = Jsoup.connect(url).ignoreContentType(true).timeout(5000).get();
 			} catch (IOException e) {
-				AppContext.setLog("네이버 금융 크롤링도중 IOException 발생", BasicSystemService.class.getName());
+//				AppContext.setLog("네이버 금융 크롤링도중 IOException 발생", BasicSystemService.class.getName());
 				e.printStackTrace();
 			}
 
 			// 현재가, 상태(상승 or 하락), 금액, +/-, percent 를 가져오는 CSS query 문
 			Elements status = doc.select(".no_today span:eq(0), .no_exday em span:lt(2)");
 			if (status == null) {
-				AppContext.setLog("네이버 금융 크롤링 데이터가 null 일 경우", BasicSystemService.class.getName());
-				return null;
+				System.out.println("status is null" + "codeNums : " + codeNums);//TODO
+//				AppContext.setLog("네이버 금융 크롤링 데이터가 null 일 경우", BasicSystemService.class.getName());
+				continue;
 			}
 
 			// 요청한 페이지에 대한 실패시 데이터를 저장하지 않는다. codeNum + 크롤링 데이타 + %
@@ -182,14 +180,9 @@ public class BasicSystemService implements SystemService {
 				
 			}
 		}
-		/* test */
-		int test = 0;
-		for (int i = 0; i < koreaList.size(); i++) {
-			System.out.println(koreaList.get(i));
-			test++;
-		}
-		System.out.println(test);
-		//koreaStocksDao.insert(koreaList);
+		
+		koreaStocksDao.delete();
+		koreaStocksDao.insert(koreaList);
 	}
 	/*-------------------------- insert Asset Record ----------------------------*/
 

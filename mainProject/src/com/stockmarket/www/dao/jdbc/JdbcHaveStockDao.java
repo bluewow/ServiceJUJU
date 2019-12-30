@@ -24,8 +24,8 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		List<HaveStockView> stockList = new ArrayList<>();
 		// List 필요할 듯.... .... ....... // 담을 그릇 ㅠㅠㅠㅠㅠㅠㅠㅠ 힝 ㅠㅠㅠㅠㅠㅠ
 //		AppContext.getKosdaq();
-		if (AppContext.getKospi() != null) {
-			System.out.println(AppContext.getKospi().get(0).getCodeNum());
+		if (AppContext.getStockMarket() != null) {
+			System.out.println(AppContext.getStockMarket().get(0).getCodeNum());
 		}
 //		List<CurStock> list = new ArrayList<>();
 		

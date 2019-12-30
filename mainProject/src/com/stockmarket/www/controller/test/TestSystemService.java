@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import com.stockmarket.www.controller.system.AppContext;
 import com.stockmarket.www.dao.StockDetailDao;
+import com.stockmarket.www.dao.koreaStocksDao;
 import com.stockmarket.www.dao.jdbc.JdbcStockDetailDao;
 import com.stockmarket.www.dao.jdbc.JdbcUpjongDao;
 import com.stockmarket.www.dao.jdbc.JdbckoreaStocksDao;
@@ -29,9 +30,7 @@ public class TestSystemService {
 			switch (testIndex) {
 			case 1: // 코스피 코스닥 전종목 현재가 갱신
 				// TEST - KOSPI, KOSDAQ 데이터 크롤링 및 callback
-				sys.refreshStockPrice(
-						"C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSPI.csv",
-						"C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSDAQ.csv");
+				sys.refreshStockPrice();
 				break;
 
 			case 2:
@@ -42,28 +41,15 @@ public class TestSystemService {
 				SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				System.out.println(date.format(System.currentTimeMillis()));
 
-				sys.refreshStockPrice(
-						"C:\\Users\\acorn\\Desktop\\Work\\Recent\\mainProject\\WebContent\\fileUpload\\KOSPI.csv",
-						"C:\\Users\\acorn\\Desktop\\Work\\Recent\\mainProject\\WebContent\\fileUpload\\KOSDAQ.csv");
-
+				sys.refreshStockPrice();
 				System.out.println(date.format(System.currentTimeMillis()));
 				break;
 			case 3: // single tone Test for 코스피/코스닥 크롤링 데이터
-				List<CurStock> kospi;
-				List<CurStock> kosdaq;
+				List<CurStock> stockMarket;
+				stockMarket = AppContext.getStockMarket();
 
-				kospi = AppContext.getKospi();
-				kosdaq = AppContext.getKosdaq();
-
-				if (kospi != null) {
-					for (CurStock cur : kospi) {
-						System.out.println(cur.toString());
-					}
-				}
-				System.out.println("next");
-				sc.nextInt();
-				if (kosdaq != null) {
-					for (CurStock cur : kosdaq) {
+				if (stockMarket != null) {
+					for (CurStock cur : stockMarket) {
 						System.out.println(cur.toString());
 					}
 				}
@@ -105,6 +91,10 @@ public class TestSystemService {
 				}
 				System.out.println("koreaDao.getList 종료 cnt : " + cnt);
 				break;
+			case 13://koreaStockDao insert
+				sys.updateMarket("KOSPI");
+				sys.updateMarket("KOSDAQ");
+				break;
 			case 99:
 				System.out.println("Test - SystemService 종료");
 				return;
@@ -123,6 +113,7 @@ public class TestSystemService {
 		System.out.println("7. stockDetailDao 에 크롤링 데이터를 저장하다 in:codeNum");
 		System.out.println("8. ");
 		System.out.println("9. stockdetailDao 의 저장된 데이터를 가져온다 in:codeNum");
+		System.out.println("13. koreaStockDao insert");
 		System.out.println("99. 종료");
 		System.out.println("-----------------------------");
 		System.out.println("숫자를 입력하시오");
