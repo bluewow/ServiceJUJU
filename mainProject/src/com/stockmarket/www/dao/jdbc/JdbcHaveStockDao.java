@@ -27,7 +27,7 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		if (AppContext.getKospi() != null) {
 			System.out.println(AppContext.getKospi().get(0).getCodeNum());
 		}
-		List<CurStock> list = new ArrayList<>();
+//		List<CurStock> list = new ArrayList<>();
 		
 //		new Thread(new Runnable() {
 //			@Override
