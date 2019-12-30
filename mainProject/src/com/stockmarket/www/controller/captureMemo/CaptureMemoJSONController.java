@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -30,7 +31,15 @@ public class CaptureMemoJSONController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<CaptureMemoView> captureMemoViews = service.getList();
+		HttpSession session = request.getSession();
+		Object tempId = session.getAttribute("id");
+		
+		int id = -1;
+		
+		if(tempId != null)
+			id = (Integer)tempId;
+		
+		List<CaptureMemoView> captureMemoViews = service.getList(id);
 
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		String json = gson.toJson(captureMemoViews);
