@@ -29,8 +29,8 @@ public class CaptureMemoController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<CaptureMemoView> captureMemoViews = service.getList();
-		request.setAttribute("list", captureMemoViews);
+//		List<CaptureMemoView> captureMemoViews = service.getList();
+//		request.setAttribute("list", captureMemoViews);
 		
 		request.getRequestDispatcher("captureMemo.jsp").forward(request, response);
 	}

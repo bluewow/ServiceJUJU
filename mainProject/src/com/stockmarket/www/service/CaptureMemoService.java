@@ -8,7 +8,7 @@ import com.stockmarket.www.entity.CommunityBoard;
 
 public interface CaptureMemoService {
 //	캡쳐메모 목록
-	List<CaptureMemoView> getList();
+	List<CaptureMemoView> getList(int id);
 	
 // 캡쳐메모 내용
 	CaptureMemo get(int id);

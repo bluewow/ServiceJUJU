@@ -16,9 +16,8 @@ public class BasicCaptureMemoService implements CaptureMemoService {
 	}
 
 	@Override
-	public List<CaptureMemoView> getList() {
-		
-		return captureMemoDao.getList();
+	public List<CaptureMemoView> getList(int id) {
+		return captureMemoDao.getList(id);
 	}
 	
 	@Override

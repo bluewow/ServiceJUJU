@@ -17,16 +17,17 @@ import com.stockmarket.www.entity.CaptureMemoView;
 public class JdbcCaptureMemoDao implements CaptureMemoDao {
 	
 	@Override
-	public List<CaptureMemoView> getList() {
+	public List<CaptureMemoView> getList(int id) {
 		List<CaptureMemoView> captureMemos = new ArrayList<>();
 		
-		String sql = "SELECT S.NAME, C.TITLE, C.REGDATE "
-				+ "FROM CAPTURE_MEMO C JOIN STOCK S ON C.CODENUM = S.CODENUM";
+		String sql = "SELECT S.NAME, C.TITLE, C.REGDATE, C.MEMBER_ID "
+				+ "FROM CAPTURE_MEMO C JOIN STOCK S ON C.CODENUM = S.CODENUM WHERE MEMBER_ID=? ORDER BY REGDATE DESC";
 
 		try {
 			JdbcDaoContext daoContext = new JdbcDaoContext();
-			Statement statement = daoContext.getStatement();
-			ResultSet resultSet = statement.executeQuery(sql);
+			PreparedStatement statement = daoContext.getPreparedStatement(sql);
+			statement.setInt(1, id);
+			ResultSet resultSet = statement.executeQuery();
 
 			while (resultSet.next()) {				
 				String name = resultSet.getString("NAME");
