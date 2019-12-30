@@ -7,7 +7,6 @@ function load() {
     request.open("GET", "captureMemo-json", true);
     request.onload = function() {
         var list = JSON.parse(request.responseText);
-
         content.innerHTML = "";
 
 		for(var i = 0; i < list.length; i++) {
@@ -18,6 +17,7 @@ function load() {
 			tds[1].innerText = list[i].title;
 			var temp = document.createTextNode(list[i].regdate);
 			tds[2].firstElementChild.before(temp);
+			tds[2].firstElementChild.dataset.id = list[i].id;
 
 			content.append(cloneTr);
 		}
@@ -37,37 +37,62 @@ window.addEventListener("load", function(e) {
 	// var tid;
 
     content.onclick = function(e) {
-        var captTitle = e.target;
+        var target = e.target;
 
         // if(tid != null){
         // 	clearTimeout(tid);
         // 	tid = null;
-        // }
+		// }
+		
+		switch(target.nodeName) {
+			case "TD":	// detail 펼치기
+				if (target.parentNode.nextElementSibling != null)
+				if (target.parentNode.nextElementSibling.className != "parent") {
+					if (prevMemo != null) prevMemo.remove();
+					return;
+				}
+				
+				if (prevMemo != null) prevMemo.remove();
+				
+				var cloneTr = document.importNode(trTemplate.content, true);
+				
+				target.parentElement.after(cloneTr);
+				
+				if (content.querySelector(".child") != null)
+				prevMemo = content.querySelector(".child").parentElement;
+				
+				// console.log(prevMemo.style.height);
+				// tid = setTimeout(function(){
+					// 	prevMemo.className ="child-tr2";
+					// 	console.log(prevMemo);
+					// 	tid = null;
+					// }, 500);
+				break;
+			case "SPAN":	// 메모 삭제
+				var request = new XMLHttpRequest();
+				var data = [
+					["memoId", target.dataset.id]
+				];
+				var sendData = [];
 
-        if (!(captTitle.nodeName == "TD")) return;
-
-        if (captTitle.parentNode.nextElementSibling != null)
-            if (captTitle.parentNode.nextElementSibling.className != "parent") {
-                if (prevMemo != null) prevMemo.remove();
-                return;
-            }
-
-        if (prevMemo != null) prevMemo.remove();
-
-        var cloneTr = document.importNode(trTemplate.content, true);
-
-        captTitle.parentElement.after(cloneTr);
-
-        if (content.querySelector(".child") != null)
-            prevMemo = content.querySelector(".child").parentElement;
-
-        // console.log(prevMemo.style.height);
-        // tid = setTimeout(function(){
-        // 	prevMemo.className ="child-tr2";
-        // 	console.log(prevMemo);
-        // 	tid = null;
-        // }, 500);
-    };
+				for(var i=0; i<data.length; i++)
+            		sendData[i] = data[i].join("="); // k=2
+					
+				sendData = sendData.join("&");
+				
+				request.open("POST", "captureMemo-json-del", true);
+				request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+				request.onload = function() {
+					load();
+				}
+				request.onerror = function() {
+					alert("삭제 실패");
+				};
+				
+				request.send(sendData);
+				break;
+		}
+	};
 });
 
 window.addEventListener("message", function(e) {

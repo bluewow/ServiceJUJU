@@ -10,6 +10,11 @@ public class CaptureMemoView extends CaptureMemo {
 		this.codeNumName = name;
 	}
 	
+	public CaptureMemoView(int id, String name, String title, Date regdate) {
+		super(id, title, regdate);
+		this.codeNumName = name;
+	}
+	
 	public String getCodeNumName() {
 		return codeNumName;
 	}
