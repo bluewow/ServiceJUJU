@@ -11,7 +11,6 @@ window.addEventListener("message", function(e) {
 	    }
 		
 		function updateLoad(){2
-			   alert("안뇽");
 			var ajax = new XMLHttpRequest();
 			console.log(e.data)
 			ajax.open("GET","../../card/managestocks/holdinglist-json?codeNum=" + e.data , true)
@@ -149,7 +148,6 @@ window.addEventListener("load",function(){
    }
 
    function holdingLoad(){
-	   alert("안뇽");
 
     var request = new XMLHttpRequest();
     request.open("GET","../../card/managestocks/holdinglist-json",true);

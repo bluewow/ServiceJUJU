@@ -29,11 +29,7 @@ public class BasicHoldingStocksService implements HoldingStocksService {
 		int sum = data.getSum();
 		int quantity = data.getQuantity();
 		int intPrice = Integer.parseInt(data.getPrice().replaceAll(",", ""));
-		
-		
-		// System.out.println("수량: "+quantity);
-	    System.out.println("누적값: "+sum);
-		// System.out.println("현재값: "+presentValue);
+
 		income = (quantity * intPrice) - sum;
 		data.setIncome(income);
 		return data;
