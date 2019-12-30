@@ -48,13 +48,15 @@ public class DetailJsonController extends HttpServlet {
 
 		int boardId = Integer.parseInt(request.getParameter("id"));
 		CommunityBoard communityBoard = communityBoardService.getBoard(boardId);
-
 		List<CommunityBoard> replyList = communityBoardService.getCommunityBoardReplyList(boardId);
-
+		communityBoard.setHit(communityBoard.getHit()+1);
+		
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		hm.put("writerId", writerNickname);
 		hm.put("board", communityBoard);
 		hm.put("replys", replyList);
+		
+		int result = communityBoardService.updateCommunityBoard(communityBoard);
 
 		Gson gson = new Gson();
 		String Json = gson.toJson(hm);
