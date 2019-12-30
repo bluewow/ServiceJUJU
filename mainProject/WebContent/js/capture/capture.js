@@ -47,9 +47,9 @@ window.addEventListener("load", function(e) {
 		switch(target.nodeName) {
 			case "TD":	// detail 펼치기
 				if (target.parentNode.nextElementSibling != null)
-				if (target.parentNode.nextElementSibling.className != "parent") {
-					if (prevMemo != null) prevMemo.remove();
-					return;
+					if (target.parentNode.nextElementSibling.className != "parent") {
+						if (prevMemo != null) prevMemo.remove();
+						return;
 				}
 				
 				if (prevMemo != null) prevMemo.remove();
@@ -59,7 +59,7 @@ window.addEventListener("load", function(e) {
 				target.parentElement.after(cloneTr);
 				
 				if (content.querySelector(".child") != null)
-				prevMemo = content.querySelector(".child").parentElement;
+					prevMemo = content.querySelector(".child").parentElement;
 				
 				// console.log(prevMemo.style.height);
 				// tid = setTimeout(function(){
@@ -76,7 +76,7 @@ window.addEventListener("load", function(e) {
 				var sendData = [];
 
 				for(var i=0; i<data.length; i++)
-            		sendData[i] = data[i].join("="); // k=2
+            		sendData[i] = data[i].join("=");
 					
 				sendData = sendData.join("&");
 				
@@ -101,8 +101,6 @@ window.addEventListener("message", function(e) {
     var data = e.data.capture;
 
     if (data) {
-        //		console.log(data);
-
         var request = new XMLHttpRequest();
 
         request.open("POST", "captureMemo-json", true);
@@ -111,7 +109,6 @@ window.addEventListener("message", function(e) {
             "application/x-www-form-urlencoded"
         );
         request.onload = function() {
-            console.log(request.responseText);
             if (request.responseText == 1) load();
             else alert("캡쳐하기 실패");
         };
