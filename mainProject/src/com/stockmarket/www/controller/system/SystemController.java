@@ -73,7 +73,7 @@ public class SystemController extends HttpServlet {
 		}
 			
 		//주식가격 refresh by 크롤링 9시 ~ 18시까지 실행
-		if(Integer.parseInt(curHour) >= 9 && Integer.parseInt(curHour) <= 18)
+		if(Integer.parseInt(curHour) >= 9 && Integer.parseInt(curHour) <= 20)
 			service.refreshStockPrice(pathOfKospi, pathOfKosdaq);
 		
 		//18시 장종료후 19시 주식데이터 갱신 

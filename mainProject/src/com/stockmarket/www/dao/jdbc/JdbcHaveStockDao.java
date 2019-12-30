@@ -24,32 +24,32 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		List<HaveStockView> stockList = new ArrayList<>();
 		// List 필요할 듯.... .... ....... // 담을 그릇 ㅠㅠㅠㅠㅠㅠㅠㅠ 힝 ㅠㅠㅠㅠㅠㅠ
 //		AppContext.getKosdaq();
-//		if (AppContext.getKospi() != null) {
-//			System.out.println(AppContext.getKospi().get(0).getCodeNum());
-//		}
-//		List<CurStock> list = new ArrayList<>();
-//		
+		if (AppContext.getKospi() != null) {
+			System.out.println(AppContext.getKospi().get(0).getCodeNum());
+		}
+		List<CurStock> list = new ArrayList<>();
+		
 //		new Thread(new Runnable() {
 //			@Override
 //			public void run() {
-//				if (AppContext.getKosdaq() != null) {
-//					list.addAll(AppContext.getKosdaq());
-//				}
+////				if (AppContext.getKosdaq() != null) {
+////					list.addAll(AppContext.getKosdaq());
+////				}
 //				if (AppContext.getKospi() != null) {
 //					list.addAll(AppContext.getKospi());
 //				}
 //			}
 //		}).start();
 		// 더미 / 나중에 지워야함.
-		List<CurStock> list = new ArrayList<>();
-		list.add(new CurStock("035420", "3,000", "상승", "3,000", "+", "2.5"));
-		list.add(new CurStock("000660", "5,000", "하강", "3,000", "-", "3.4"));
-		list.add(new CurStock("020560", "6,000", "보합", "3,000", "0.0", "1.5"));
-		list.add(new CurStock("005930", "2,000", "상승", "3,000", "+", "1.6"));
-		list.add(new CurStock("005380", "1,000", "상승", "3,000", "+", "8.9"));
-		list.add(new CurStock("095660", "10,500", "상승", "3,000", "+", "10.2"));
-		list.add(new CurStock("000880", "3,500", "하강", "3,000", "-", "14.2"));
-		list.add(new CurStock("215600", "7,000", "하강", "3,000", "-", "10"));
+//		List<CurStock> list = new ArrayList<>();
+//		list.add(new CurStock("035420", "3,000", "상승", "3,000", "+", "2.5"));
+//		list.add(new CurStock("000660", "5,000", "하강", "3,000", "-", "3.4"));
+//		list.add(new CurStock("020560", "6,000", "보합", "3,000", "0.0", "1.5"));
+//		list.add(new CurStock("005930", "2,000", "상승", "3,000", "+", "1.6"));
+//		list.add(new CurStock("005380", "1,000", "상승", "3,000", "+", "8.9"));
+//		list.add(new CurStock("095660", "10,500", "상승", "3,000", "+", "10.2"));
+//		list.add(new CurStock("000880", "3,500", "하강", "3,000", "-", "14.2"));
+//		list.add(new CurStock("215600", "7,000", "하강", "3,000", "-", "10"));
 
 		try {
 			PreparedStatement st = context.getPreparedStatement(sql);
@@ -126,25 +126,28 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		String sql = "SELECT * FROM HAVESTOCK_VIEW WHERE MEMBER_ID = ? AND STOCK_ID = ?";
 
 		JdbcDaoContext context = new JdbcDaoContext();
-
+		
 		List<CurStock> list = new ArrayList<>();
-		AppContext.getKosdaq();
-		AppContext.getKospi();
-		if (AppContext.getKosdaq() != null) {
-			list.addAll(AppContext.getKosdaq());
-		}
-		if (AppContext.getKospi() != null) {
-			list.addAll(AppContext.getKospi());
-		}
+		list.add(new CurStock("035420", "3,000", "상승", "3,000", "+", "2.5"));
+		list.add(new CurStock("000660", "5,000", "하강", "3,000", "-", "3.4"));
+		list.add(new CurStock("020560", "6,000", "보합", "3,000", "0.0", "1.5"));
+		list.add(new CurStock("005930", "2,000", "상승", "3,000", "+", "1.6"));
+		list.add(new CurStock("005380", "1,000", "상승", "3,000", "+", "8.9"));
+		list.add(new CurStock("095660", "10,500", "상승", "3,000", "+", "10.2"));
+		list.add(new CurStock("000880", "3,500", "하강", "3,000", "-", "14.2"));
+		list.add(new CurStock("215600", "7,000", "하강", "3,000", "-", "10"));
 
-//		list.add(new CurStock("035420", "13,000", "상승", "3,000", "+", "2.5"));
-//		list.add(new CurStock("000660", "15,000", "하강", "3,000", "-", "3.4"));
-//		list.add(new CurStock("020560", "16,000", "보합", "3,000", "0.0", "1.5"));
-//		list.add(new CurStock("005930", "12,000", "상승", "3,000", "+", "1.6"));
-//		list.add(new CurStock("005380", "11,000", "상승", "3,000", "+", "8.9"));
-//		list.add(new CurStock("095660", "10,500", "상승", "3,000", "+", "10.2"));
-//		list.add(new CurStock("000880", "13,500", "하강", "3,000", "-", "14.2"));
-//		list.add(new CurStock("215600", "17,000", "하강", "3,000", "-", "10"));
+//		List<CurStock> list = new ArrayList<>();
+//		AppContext.getKosdaq();
+//		AppContext.getKospi();
+//		if (AppContext.getKosdaq() != null) {
+//			list.addAll(AppContext.getKosdaq());
+//		}
+//		if (AppContext.getKospi() != null) {
+//			list.addAll(AppContext.getKospi());
+//		}
+
+
 
 		try {
 

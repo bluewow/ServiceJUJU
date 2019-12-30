@@ -6,7 +6,7 @@ window.addEventListener("load",function(){
 
     var load = function(){
         var request = new XMLHttpRequest();
-        request.open("GET","../../card/asset/myAsset-json",true);
+//        request.open("GET","../../card/asset/myAsset-json",true);
 
         request.onload = function(){
         	//alert(	request.responseText);
