@@ -60,7 +60,6 @@ public class HoldingStockJSONController extends HttpServlet{
 
         Gson gson = new Gson();
 		String json = gson.toJson(list);
-
         PrintWriter out = response.getWriter();
 		out.write(json);
 		

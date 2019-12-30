@@ -56,6 +56,8 @@ public class AppContext {
 	public static List<CurStock> getKosdaq() {
 		return kosdaq;
 	}
+	
+	
 
 	public static void setKosdaq(List<CurStock> kosdaq) {
 		AppContext.kosdaq = kosdaq;
