@@ -42,14 +42,17 @@ public class BasicAssetDistrService implements AssetDistrService {
 	public List<HaveStockView> getHaveStockList(int memberId) {
 		
 		List<HaveStockView> arrayList = new ArrayList<>();
+		float profits = getSumAll(memberId);
+		// System.out.println("profits: "+profits);
 		
 		List<HaveStockView> list = new ArrayList<>();
 		list.addAll(haveStockDao.getList(memberId));
 		for (HaveStockView data : list) {
 			HaveStockView haveStockView = new HaveStockView();
 			float profit = getSumByStockId(data.getStockId(), memberId);
-			float profits = getSumAll(memberId);
+			// System.out.println(data.getStockName()+"profit: "+profit);
 			float ratio = (profit / profits) * 100;
+			// System.out.println(data.getStockName()+"ratio: "+ratio);
 			
 			haveStockView.setStockName(data.getStockName());
 			haveStockView.setRatio(ratio);
@@ -80,6 +83,7 @@ public class BasicAssetDistrService implements AssetDistrService {
 	private float getSumAll(int memberId) {
 
 		long assetPresnt = assetTrendService.getAssetPresent(memberId);
+		// System.out.println("assetPrsent: "+assetPresnt);
 		long vMoney = memberDao.getMember(memberId).getvMoney();
 
 		return assetPresnt - vMoney;
@@ -97,7 +101,6 @@ public class BasicAssetDistrService implements AssetDistrService {
 				arrayList.remove(4+i);
 				i++;
 			}
-			
 			arrayList.get(3).setStockName("기타");
 			arrayList.get(3).setRatio(ratio);	
 		}

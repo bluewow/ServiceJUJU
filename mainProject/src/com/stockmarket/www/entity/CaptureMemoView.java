@@ -10,6 +10,14 @@ public class CaptureMemoView extends CaptureMemo {
 		this.codeNumName = name;
 	}
 	
+	public String getCodeNumName() {
+		return codeNumName;
+	}
+
+	public void setCodeNumName(String codeNumName) {
+		this.codeNumName = codeNumName;
+	}
+
 	@Override
 	public String toString() {
 		return super.toString() + "["+ codeNumName + "]";

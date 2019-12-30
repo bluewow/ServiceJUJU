@@ -24,12 +24,14 @@ import com.stockmarket.www.dao.MemberDao;
 import com.stockmarket.www.dao.RecordAssetDao;
 import com.stockmarket.www.dao.StockDetailDao;
 import com.stockmarket.www.dao.UpjongDao;
+import com.stockmarket.www.dao.koreaStocksDao;
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
 import com.stockmarket.www.dao.jdbc.JDBCRecordAssetDao;
 import com.stockmarket.www.dao.jdbc.JdbcHaveStockDao;
 import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
 import com.stockmarket.www.dao.jdbc.JdbcStockDetailDao;
 import com.stockmarket.www.dao.jdbc.JdbcUpjongDao;
+import com.stockmarket.www.dao.jdbc.JdbckoreaStocksDao;
 import com.stockmarket.www.entity.CurStock;
 import com.stockmarket.www.entity.HaveStockView;
 import com.stockmarket.www.entity.Member;
@@ -54,11 +56,13 @@ public class BasicSystemService implements SystemService {
 	RecordAssetDao recordAssetDao;
 	StockDetailDao stockDetailDao;
 	koreaStocks koreaStocks;
+	koreaStocksDao koreaStocksDao;
 
 	public BasicSystemService() {
 
 		stockDetailDao = new JdbcStockDetailDao();
 		upjongDao = new JdbcUpjongDao();
+		koreaStocksDao = new JdbckoreaStocksDao();
 	}
 
 	/*-------------------------- refreshStockPrice ----------------------------*/
@@ -127,6 +131,7 @@ public class BasicSystemService implements SystemService {
 
 		try {
 			doc = Jsoup.connect(url).ignoreContentType(true).timeout(5000).post();
+			
 		} catch (IOException e) {
 			AppContext.setLog("코스피/코스닥 excel 파일다운로드시 IOException 발생", BasicSystemService.class.getName());
 			e.printStackTrace();
@@ -140,15 +145,9 @@ public class BasicSystemService implements SystemService {
 		}
 
 		// 반복되는 th, td tag 로 sorting 한다
-		write(contents, "th");
+		//write(contents, "th");
 		write(contents, "td");
-		try {
-			// KOSPI.csv or KOSDAQ.csv 를 생성한다
-			data.makeCSV("WebContent/fileUpload/" + market, companyList);
-		} catch (IOException e) {
-			AppContext.setLog("코스피/코스닥 csv 파일 생성중 IOException 발생", BasicSystemService.class.getName());
-			e.printStackTrace();
-		}
+
 		return true;
 	}
 
@@ -166,6 +165,7 @@ public class BasicSystemService implements SystemService {
 
 				}
 				companyList.add(data);
+				
 				koreaStocks = new koreaStocks();
                 koreaStocks.setCompanyName(data[0]);
                 koreaStocks.setStockCode(data[1]);
@@ -176,16 +176,20 @@ public class BasicSystemService implements SystemService {
                 koreaStocks.setRepresentativeName(data[6]);
                 koreaStocks.setWebsite(data[7]);
                 koreaStocks.setLocation(data[8]);
+                
                 koreaList.add(koreaStocks);
 				
 				
 			}
 		}
-		
-//		for (int i = 0; i < koreaList.size(); i++) {
-//			System.out.println(koreaList.get(i));
-//			//System.out.println(i);
-//		}
+		/* test */
+		int test = 0;
+		for (int i = 0; i < koreaList.size(); i++) {
+			System.out.println(koreaList.get(i));
+			test++;
+		}
+		System.out.println(test);
+		//koreaStocksDao.insert(koreaList);
 	}
 	/*-------------------------- insert Asset Record ----------------------------*/
 
@@ -237,7 +241,7 @@ public class BasicSystemService implements SystemService {
 			System.out.println(obj);
 		}
 		stockDetailDao.insert(stockDetail);
-		stockDetailDao.deleteAll();
+		stockDetailDao.deletePreDate();
 		System.out.println("END");
 
 	}
@@ -316,116 +320,4 @@ public class BasicSystemService implements SystemService {
 		upjongDao.insert(upjongList);
 		System.out.println("end" + totalCnt);
 	}
-
-	/*
-	 * =======================================================================
-	 * ============================= for Test ================================
-	 * =======================================================================
-	 */
-	public static void main(String[] args) throws IOException {
-		int testIndex = 0;
-		BasicSystemService sys = new BasicSystemService();
-
-		while (true) {
-			Scanner sc = new Scanner(System.in);
-			System.out.println("숫자를 입력하시오");
-			testIndex = sc.nextInt();
-
-			switch (testIndex) {
-			case 1: // 코스피 코스닥 전종목 현재가 갱신
-				// TEST - KOSPI, KOSDAQ 데이터 크롤링 및 callback
-				sys.refreshStockPrice(
-						"C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSPI.csv",
-						"C:\\work\\study\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\stockMarket\\KOSDAQ.csv");
-				break;
-
-			case 2:
-				// refreshStockPrice 함수 처리 시간 체크(100Mbps 이하 환경(기현집) 에서 약 7분 소요) 2019-11-24
-				// 20:37:54 ~ 2019-11-24 20:44:53
-				// refreshStockPrice 함수 처리 시간 체크(100Mbps 환경에서 약 4~5분 소요) 2019-11-28 16:21:19 ~
-				// 2019-11-28 16:17:33
-				SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				System.out.println(date.format(System.currentTimeMillis()));
-
-				sys.refreshStockPrice(
-						"C:\\Users\\acorn\\Desktop\\Work\\Recent\\mainProject\\WebContent\\fileUpload\\KOSPI.csv",
-						"C:\\Users\\acorn\\Desktop\\Work\\Recent\\mainProject\\WebContent\\fileUpload\\KOSDAQ.csv");
-
-				System.out.println(date.format(System.currentTimeMillis()));
-				break;
-			case 3: // kospi.csv kosdaq.csv 파일 생성 TEST
-				sys.updateMarket("KOSPI");
-				// sys.updateMarket("KOSDAQ");
-				System.out.println("finished");
-				break;
-			case 4: // single tone Test for 코스피/코스닥 크롤링 데이터
-				List<CurStock> kospi;
-				List<CurStock> kosdaq;
-
-				kospi = AppContext.getKospi();
-				kosdaq = AppContext.getKosdaq();
-
-				if (kospi != null) {
-					for (CurStock cur : kospi) {
-						System.out.println(cur.toString());
-					}
-				}
-				System.out.println("next");
-				sc.nextInt();
-				if (kosdaq != null) {
-					for (CurStock cur : kosdaq) {
-						System.out.println(cur.toString());
-					}
-				}
-				System.out.println("finished-4");
-				break;
-			case 5: // 보유 자산 리스트 업로드 테스트
-				System.out.println("케이스 5");
-				sys.insertRecordAsset();
-				break;
-			case 6: // search test
-//				searchTest("지우개");
-//				searchTest("새벽배송");
-//				searchTest("카카오톡");
-//				searchTest("카카오");
-//				searchTest("반도체");
-//				searchTest("김정은");
-//				searchTest("미사일");
-//				searchTest("키움증권");
-//				searchTest("브라운더스트");
-//				searchTest("철도");
-//				searchTest("기저귀");
-//				searchTest("4차산업");
-//				searchTest("손흥민");
-//				searchTest("트럼프");
-//				searchTest("비트코인");
-//				searchTest("네오위즈");
-//				searchTest("암호화폐");
-//				searchTest("로봇");
-//				searchTest("SLAM");
-//				searchTest("조국");
-			case 7:
-				sys.setStockDataAll("095660");
-//				service.getAllDailyPrice("004170");
-				return;
-			case 8: // stockdetailDao 의 저장된 데이터를 가져온다
-				StockDetailDao s;
-				s = new JdbcStockDetailDao();
-				List<StockDetail> stock = s.get("095660");
-				for (StockDetail obj : stock)
-					System.out.println(obj.toString());
-
-				return;
-			case 9:
-				sys.upjongCrawling();
-				return;
-			case 10:
-				JdbcUpjongDao upjongDao = new JdbcUpjongDao();
-				upjongDao.delete();
-			}
-
-			System.out.println("종료");
-		}
-	}// finished main
-
 }

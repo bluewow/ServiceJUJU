@@ -46,9 +46,13 @@ public class RegBoardJsonController extends HttpServlet {
 		String content = request.getParameter("content");
 		String status = request.getParameter("status");
 		String boardIds = request.getParameter("boardId");
+		System.out.println(title);
+		System.out.println(content);
+		System.out.println(status);
+		System.out.println(boardIds);
 
-		// 상태값이 없으면 삽입
-		if (status == null) {
+		// 상태값이 reg면 등록
+		if (status.equals("reg")) {
 			Object tempId = session.getAttribute("id");
 			int writerId = -1;
 
@@ -67,7 +71,7 @@ public class RegBoardJsonController extends HttpServlet {
 			System.out.println("result :" + result);
 			out.print(result);
 
-			// 상태값에 del이면 삭제
+			// 상태값이del이면 삭제
 		} else if (status.equals("del")) {
 			int boardId = -1;
 			boardId = Integer.parseInt(boardIds);
@@ -81,14 +85,12 @@ public class RegBoardJsonController extends HttpServlet {
 
 			out.print(result);
 
-			// 상태값에 modi면 수정
+			// 상태값이 modi면 수정
 		} else if (status.equals("modi")) {
 			int boardId = -1;
 			boardId = Integer.parseInt(boardIds);
 
-			//게시글 지우기
-			CommunityBoard updateCommunityBoard = new CommunityBoard(boardId, content, "del");
-			//게시글에 달린 댓글 지우기
+			CommunityBoard updateCommunityBoard = new CommunityBoard(boardId, title, content, "modi");
 			int result = communityBoardService.updateCommunityBoard(updateCommunityBoard);
 
 			response.setCharacterEncoding("UTF-8"); // UTP-8로 보내는 코드
@@ -96,8 +98,6 @@ public class RegBoardJsonController extends HttpServlet {
 			PrintWriter out = response.getWriter();
 
 			out.print(result);
-
 		}
 	}
-
 }

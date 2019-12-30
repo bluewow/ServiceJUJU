@@ -1,90 +1,159 @@
 @charset "UTF-8";
-
-
+div {
+    margin: 0;
+    padding: 0;
+}
 
 #captureScroll{
-    min-width: 430px;
-	max-width: 100%;
-	height: 750px;
-	padding-left: 50px;
-	padding-right: 50px;
-	padding-top: 40px;
+    min-width: 400px;
+    width: 90%;
+	max-width: 700px;
+    height: 100%;
+    margin: 0 auto;
+	/* padding-left: 50px; */
+	/* padding-right: 50px; */
+	/* padding-top: 40px; */
+}
 
-}
-.reg-submit{
-    font-size: 1em;
-	width:60px;
-	background-color: #35cebe;
-	color: #f4f5f6;
-	padding: 6px 10px;
-	border-radius: 16px;
-	border: none;
-	outline: none;
-	cursor: pointer;
-
-}
-.reg-submit:hover {
-    opacity: 0.7;
-}
-.reg-cancel{
-    font-size: 1em;
-	width:60px;
-	background-color: #35cebe;
-	color: f4f5f6;
-	padding: 6px 10px;
-	border-radius: 16px;
-	border: none;
-	outline: none;
-	cursor: pointer;
-}
-.reg-cancel:hover {
-    opacity: 0.7;
-}
-#del-button a{
-    background: url("../images/trashCan.png")no-repeat;
-    display: inline-block;
-    border: none;
-    width: 25px;
-    height: 25px;
-    text-indent: hidden;
-    cursor: pointer;
-    opacity: 0.7;
-
-}
-#del-button a:hover{
-    opacity: 1;
-}
-#del-button span{
-    display: inline-block;
-   padding: 10px;
-    
-}
 #captureTable{
     width: 100%;
     text-align: center;
     font-size: 1em;
     border-collapse: collapse;
-    padding-left: 200px;
-	padding-right: 200px;
-
-}
-#captureTable tr{
-    height: 30px;
-}
-.thead th{
     color: #58585E;
-	font-weight: bold;
-	border-bottom: 3px solid #F2F2F2;
-	padding: 5px;
+    /* padding-left: 20px; */
+	/* padding-right: 20px; */
+    
 }
-#capt-title {
-    font-weight: bold;
-    cursor:pointer;
-}
-td.border-bottom{
+
+#captureTable tr{
+    height: 45px;
     border-bottom:1.5px solid #F2F2F2;
+    vertical-align: middle;
+}
+
+#captureTable thead{
+    font-weight: bold;
+    border-bottom: 4px solid #F2F2F2;
+}
+
+#captureTable thead td{
     padding: 5px;
 }
 
+.capt-title {
+    cursor:pointer;
+}
 
+.del-button{
+    position: relative;
+    width: 30%;
+}
+
+.del-button span{
+    position: absolute;
+    right: 8px;
+    background: url("../images/trashCan.png")no-repeat center;
+    background-size: 22px 22px ;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.del-button span:hover{
+    opacity: 1;
+}
+
+.child-tr1{
+    height: 0px;
+    max-height: 0px;
+    overflow: hidden;
+    -webkit-transition-property: height;
+    -webkit-transition-duration:1s;
+    -webkit-transition-timing-function: ease;
+    transition-property:height;
+    transition-duration:1s;
+    transition-timing-function: ease;
+}
+
+.child-tr2{
+    height: 100%;
+    -webkit-transition-property: height;
+    -webkit-transition-duration:1s;
+    -webkit-transition-timing-function: ease;
+    transition-property:height;
+    transition-duration:1s;
+    transition-timing-function: ease;
+}
+
+
+.child{
+    height: 100%;
+    background: #F2F2F2;
+}
+
+.child > div {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    height: 240px;
+}
+
+.child > div > div:first-child {
+    width: 50%;
+    height: 100%;
+    padding-right: 10px;
+    min-height: inherit;
+}
+
+.memo {
+    position: relative;
+    width: 50%;
+}
+
+.memo > div:first-child {
+    height: 30px;
+    padding-top: 5px;
+    background: #fff;
+    font-weight: bold;
+    
+    /* border: 1px solid blue; */
+}
+
+#memo-content{
+    width: 100%;
+    height: 60%;
+    resize: none;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.buttons{
+    margin: 10px 0;
+    position: relative;
+    padding: 10px 10px;
+}
+
+.buttons input{
+    position: absolute;
+    right: 0px;
+    bottom: -10px;
+
+    width:60px;
+    height: 30px;
+    border: none;
+    border-radius: 16px;
+    
+    font-size: 1em;
+    background-color: #35cebe;
+    color: #f4f5f6;
+    cursor: pointer;
+}
+
+.button:hover{
+    opacity: 0.7;
+}
    

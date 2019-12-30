@@ -29,11 +29,13 @@
 	<!-- TODO 장이마감되었습니다 -->
 	<!-- --------------- page-mid -------------- -->
 	<section class="page-mid">
+<!-- 		
 		<form action="trade" method="get">
 			<input class="button button-chart day_" type="submit" name="date" value="일봉">
 			<input class="button button-chart" type="submit" name="date" value="주봉">
 			<input class="button button-chart" type="submit" name="date" value="월봉">
-		</form>
+		</form> 
+-->
 		<div id="chart_div"></div>
 	</section>
 	
@@ -53,7 +55,8 @@
 				<div class="data"><fmt:formatNumber value="${myAssets }" pattern="#,###" />원</div>
 				<input class="button button-status" type="button" value="구매/매도">
 				<div>
-					<input class="data" id="text" type="text" name="Purse/Sold" autocomplete="off">
+					<!-- enter 입력을 막음 -->
+					<input class="data" id="text" type="text" name="Purse/Sold" autocomplete="off" onkeydown="if(event.keyCode == 13) return false;"> 
 				</div>
 				<input id="sell" class="event button button-button animation" type="button" name="trade" value="매       도">
 				<%-- <input class="event button button-button animation ${shadow }" type="submit" ${disable } name="trade" value="매       도"> --%>

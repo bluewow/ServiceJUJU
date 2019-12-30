@@ -6,30 +6,24 @@
 <html lang="kr">
 
 <head>
-<meta charset="UTF-8">
-
-<title>Stock</title>
-<!-- Google Fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700"
-	rel="stylesheet">
-
-<!-- Template Styles -->
-<link rel="stylesheet" type="text/css"
-	href="../../css/font-awesome.min.css">
-
-<!-- CSS Reset -->
-<link rel="stylesheet" type="text/css" href="../../css/normalize.css">
-<link href="../../css/board/stock_board.css" type="text/css"
-	rel="stylesheet">
-<script src="../../js/board/stock_board.js"></script>
-
-<!-- Reg Board popup -->
-<link href="../../css/board/reg_board.css" type="text/css"
-	rel="stylesheet">
-<script src="../../js/board/reg_board.js"></script>
-
-
+	<meta charset="UTF-8">
+	
+	<title>Stock</title>
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700" rel="stylesheet">
+	
+	<!-- Template Styles -->
+	<link rel="stylesheet" type="text/css" href="../../css/font-awesome.min.css">
+	
+	<!-- CSS Reset -->
+	<link rel="stylesheet" type="text/css" href="../../css/normalize.css">
+	<link href="../../css/board/stock_board.css" type="text/css" rel="stylesheet">
+	<script src="../../js/board/stock_board.js"></script>
+	
+	<!-- Reg Board popup -->
+	<link href="../../css/board/reg_board.css" type="text/css"
+		rel="stylesheet">
+	<script src="../../js/board/reg_board.js"></script>
 </head>
 
 <body>
@@ -60,7 +54,7 @@
 					<td colspan="5" style="text-align: center; height: 50px; line-height: 50px;">게시된 글이 없습니다.</td>
 				</tr>
 				<tr class="detail">
-					<td colspan=5>디테일의 내용이 나올 공간
+					<td colspan=5>데이터가 불러지지 않았습니다.
 					</td>
 				</tr>
 			</tbody>
@@ -135,4 +129,5 @@
 		</form>
 	</div>
 </body>
+
 </html>

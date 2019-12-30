@@ -102,6 +102,35 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 	}
 
 	@Override
+	public List<CommunityBoard> getInterestBoardList(int loginId) {
+
+		List<CommunityBoard> list = new ArrayList<>();
+
+		String sql = "SELECT * FROM INTEREST_BOARD WHERE MEMBER_ID=?";
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+		try {
+
+			pst = daoContext.getPreparedStatement(sql);
+
+			pst.setInt(1, loginId);
+
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				CommunityBoard communityBoard = new CommunityBoard(rs.getInt("ID"), rs.getInt("BOARD_ID"), rs.getInt("MEMBER_ID"));
+				list.add(communityBoard);
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			daoContext.close(rs, pst);
+		}
+		return list;
+	}
+
+	@Override
 	public List<CommunityBoard> getReplyList(int boardId) {
 
 		List<CommunityBoard> list = new ArrayList<>();
@@ -181,7 +210,10 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 	}
 
 	@Override
-	public int updateCommunityBoard(CommunityBoard communityBoard) {
+	public int updateCommunityBoard(CommunityBoard updateCommunityBoard) {
+		System.out.println(updateCommunityBoard.getTitle());
+		System.out.println(updateCommunityBoard.getContent());
+		System.out.println(updateCommunityBoard.getId());
 		int result = 0;
 		String sql = "UPDATE BOARD SET TITLE=?, CONTENT=?, REGDATE=SYSTIMESTAMP WHERE ID=?";
 
@@ -191,9 +223,9 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		try {
 			pst = daoContext.getPreparedStatement(sql);
 
-			pst.setString(1, communityBoard.getTitle());
-			pst.setString(2, communityBoard.getContent());
-			pst.setInt(3, communityBoard.getId());
+			pst.setString(1, updateCommunityBoard.getTitle());
+			pst.setString(2, updateCommunityBoard.getContent());
+			pst.setInt(3, updateCommunityBoard.getId());
 
 			result = pst.executeUpdate();
 
@@ -305,6 +337,79 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 		try {
 			pst = daoContext.getPreparedStatement(sql);
+			result = pst.executeUpdate();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			daoContext.close(pst);
+		}
+		return result;
+	}
+
+	@Override
+	public int selectFavoriteBoard(CommunityBoard selectFavoriteBoard) {
+		int result = 0;
+		String sql = "SELECT * FROM INTEREST_BOARD WHERE MEMBER_ID=? AND BOARD_ID=?";
+
+		PreparedStatement pst = null;
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+
+		try {
+			pst = daoContext.getPreparedStatement(sql);
+
+			pst.setInt(1, selectFavoriteBoard.getId());
+			pst.setInt(2, selectFavoriteBoard.getLoginId());
+
+			result = pst.executeUpdate();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			daoContext.close(pst);
+		}
+		return result;
+	}
+
+	@Override
+	public int insertFavoriteBoard(CommunityBoard insertFavoriteBoard) {
+		int result = 0;
+		String sql = "INSERT INTO INTEREST_BOARD (ID, MEMBER_ID, BOARD_ID)" + 
+				"VALUES ((SELECT NVL(MAX(ID),0)+1 FROM INTEREST_BOARD), ?, ?)";
+
+		PreparedStatement pst = null;
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+
+		try {
+			pst = daoContext.getPreparedStatement(sql);
+
+			pst.setInt(1, insertFavoriteBoard.getLoginId());
+			pst.setInt(2, insertFavoriteBoard.getId());
+
+			result = pst.executeUpdate();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			daoContext.close(pst);
+		}
+		return result;
+	}
+
+	@Override
+	public int deleteFavoriteBoard(CommunityBoard deleteFavoriteBoard) {
+		int result = 0;
+		String sql = "DELETE FROM INTEREST_BOARD WHERE MEMBER_ID=? AND BOARD_ID=?";
+
+		PreparedStatement pst = null;
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+
+		try {
+			pst = daoContext.getPreparedStatement(sql);
+
+			pst.setInt(1, deleteFavoriteBoard.getLoginId());
+			pst.setInt(2, deleteFavoriteBoard.getId());
+
 			result = pst.executeUpdate();
 
 		} catch (ClassNotFoundException | SQLException e) {

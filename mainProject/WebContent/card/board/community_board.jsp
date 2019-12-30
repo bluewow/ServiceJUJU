@@ -10,9 +10,7 @@
 	
 	<title>Community</title>
 	<!-- Google Fonts -->
-	<link
-		href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700"
-		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700" rel="stylesheet">
 	
 	<!-- Template Styles -->
 	<link rel="stylesheet" type="text/css" href="../../css/font-awesome.min.css">
@@ -21,6 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="../../css/normalize.css">
 	<link href="../../css/board/community_board.css" type="text/css" rel="stylesheet">
 	<script src="../../js/board/community_board.js"></script>
+
 </head>
 
 <body>
@@ -49,7 +48,7 @@
 					<td colspan="5" style="text-align: center; height: 50px; line-height: 50px;">게시된 글이 없습니다.</td>
 				</tr>
 				<tr class="detail">
-					<td colspan=5>디테일의 내용이 나올 공간.
+					<td colspan=5>데이터가 불러지지 않았습니다.
 					</td>
 				</tr>
 			</tbody>
@@ -108,5 +107,20 @@
 
 		</template>
 	</section>
+		<!-- ===== 글쓰기 POPUP ========================================================================================================== -->   
+ 	<div class="pop-up-reg">
+ 		<form class="regboard-box" method="post" id="regboard">
+			<div class="pop-up-title-row">
+				<input type="text" class="reg-title" name="title" maxlength="40" placeholder="제목을 입력하세요">
+				
+			</div>
+			<div class="pop-up-content-row">
+				<textarea class="reg-content" maxlength="800" placeholder="내용을 입력하세요"></textarea>
+				<input type="button" class="reg-submit" name="submit" value="확인">
+				<input type="button" class="reg-cancel" name="cancel" value="취소">
+			</div>
+		</form>
+	</div>
 </body>
+
 </html>
