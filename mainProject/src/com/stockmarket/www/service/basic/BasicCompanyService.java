@@ -26,9 +26,6 @@ import com.stockmarket.www.service.CompanyService;
 public class BasicCompanyService implements CompanyService {
 	private UpjongDao upjongDao;
 	private koreaStocksDao koreaStockDao;
-	private CSVStockDataDao csvStockDataDao;
-	private Map<String, Integer>crawlData = new HashMap<>(); //종목명, count 수
-	private Map<String, Integer>crawlDataOrder = new LinkedHashMap<>(); //종목명, count 수 내림차순
 	
 	// ====================================
 	public BasicCompanyService() {
@@ -51,21 +48,30 @@ public class BasicCompanyService implements CompanyService {
 
 	public List<String> searchCompanyNames(String search) {
 		List<String> result = null;
+		Map<String, Integer>crawlData = new HashMap<>(); //종목명, count 수
+		Map<String, Integer>crawlDataOrder = new LinkedHashMap<>(); //종목명, count 수 내림차순
 		
 		//1차 : 검색어 + "주식" && "종목" && "테마"의 네이버검색 결과를 종목명과 매칭한다
 		//     자연어처리
 		try {
-			filterFirst(search);
+			filterFirst(search, crawlData);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		//내림차순 정렬
-		filterOrder();
+		List<Entry<String, Integer>> list = new ArrayList<>(crawlData.entrySet());
+        list.sort(Entry.<String, Integer>comparingByValue().reversed());
+
+        for (Entry<String, Integer> entry : list) 
+        	crawlDataOrder.put(entry.getKey(), entry.getValue());
+        
+//        System.out.println(crawlDataOrder);		//for debugging
+        
 		
 		//2차 : 1차 결과의 리스트  1,2,3위의 네이버업종 종목리스트와 일치하는 항목만 최종결과값에 포함한다 
 		try {
-			result = filterSecond();
+			result = filterSecond(crawlDataOrder);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -86,7 +92,7 @@ public class BasicCompanyService implements CompanyService {
 	}
 	
 	// 1차필터
-	private void filterFirst(String search) throws IOException {
+	private void filterFirst(String search, Map<String, Integer> crawlData) throws IOException {
 		String[] keyWord = {"주식", "종목", "테마" };
 		String[] removeTarget = 
 			{"큐레이션", "브레이크", "디딤돌", "트레이딩", "SBS뉴스", "트레이더", "트레이",
@@ -97,6 +103,7 @@ public class BasicCompanyService implements CompanyService {
 			 "SBS CNBC", "SBS 스페셜", "SBS 쩐의전쟁", "SBS 뉴스", "키움증권 hts"}; //크롤링 결과의 제거 대상. 지속적인 업데이트 필요
 		
 		List<koreaStocks> stockList = koreaStockDao.getList();
+		
 		for(int i = 0; i < keyWord.length; i++) {
 			String str = search + " " + keyWord[i];
 			String url = "https://search.naver.com/search.naver?query=" + str; 
@@ -124,18 +131,9 @@ public class BasicCompanyService implements CompanyService {
 		}
 	}
 	
-	private void filterOrder() {
-		List<Entry<String, Integer>> list = new ArrayList<>(crawlData.entrySet());
-        list.sort(Entry.<String, Integer>comparingByValue().reversed());
 
-        for (Entry<String, Integer> entry : list) 
-        	crawlDataOrder.put(entry.getKey(), entry.getValue());
-        
-//        System.out.println(crawlDataOrder);		//for debugging
-	}
-	
 	// 2차필터
-	private List<String> filterSecond() throws IOException {
+	private List<String> filterSecond(Map<String, Integer> crawlDataOrder) throws IOException {
 		List<String> beforeCompany = new ArrayList<String>();	//중복제거전 회사목록
 		List<String> afterCompany = new ArrayList<String>(); //중복제거된 회사목록
 		List<Integer> limit = new ArrayList<>(crawlDataOrder.values());
@@ -173,32 +171,5 @@ public class BasicCompanyService implements CompanyService {
 //			System.out.println(v);
 	
 		return afterCompany;
-	}
-
-	public static void main(String[] args) {
-		BasicCompanyService service = new BasicCompanyService();
-
-//		service.search("핑크퐁");
-//		service.search("새벽배송");
-//		service.search("키움증권");
-//		service.search("지우개");
-//		service.search("카카오톡");
-//		service.search("카카오");
-//		service.search("반도체");
-//		service.search("김정은");
-//		service.search("미사일");
-//		service.search("키움증권");
-//		service.search("브라운더스트");
-//		service.search("철도");
-//		service.search("기저귀");
-//		service.search("4차산업");
-//		service.search("손흥민");
-//		service.search("트럼프");
-//		service.search("비트코인");
-//		service.search("네오위즈");
-//		service.search("암호화폐");
-//		service.search("로봇");
-//		service.search("SLAM");
-//		service.search("조국");
 	}
 }
