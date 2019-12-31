@@ -13,20 +13,24 @@ import com.stockmarket.www.dao.HaveStockDao;
 import com.stockmarket.www.entity.CurStock;
 import com.stockmarket.www.entity.HaveStock;
 import com.stockmarket.www.entity.HaveStockView;
+import com.stockmarket.www.service.basic.BasicSystemService;
 
 public class JdbcHaveStockDao implements HaveStockDao {
+
 
 	@Override
 	public List<HaveStockView> getList(int id) {
 		String sql = "SELECT * FROM HAVESTOCK_VIEW WHERE MEMBER_ID = ?";
 		JdbcDaoContext context = new JdbcDaoContext();
 
+
 		List<HaveStockView> stockList = new ArrayList<>();
 		// List 필요할 듯.... .... ....... // 담을 그릇 ㅠㅠㅠㅠㅠㅠㅠㅠ 힝 ㅠㅠㅠㅠㅠㅠ
 //		AppContext.getKosdaq();
-		if (AppContext.getStockMarket() != null) {
-			System.out.println(AppContext.getStockMarket().get(0).getCodeNum());
-		}
+		
+//		if (AppContext.getStockMarket() != null) {
+//			System.out.println(AppContext.getStockMarket().get(0).getCodeNum());
+//		}
 //		List<CurStock> list = new ArrayList<>();
 		
 //		new Thread(new Runnable() {

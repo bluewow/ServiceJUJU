@@ -94,10 +94,10 @@ function asyncTrade(p1, p2) { //p1=buy/sell p2=수량 p3=종목코드
         case 0:
         case 5:
         	alert("체결되었습니다");
-//        	var frame = parent.document.querySelector("#holding-window");
-//			frame.contentWindow.postMessage(
-//					obj.codeNum , 
-//					"http://localhost:8080/card/managestocks/holdinglist.jsp");
+        	var frame = parent.document.querySelector("#holding-window");
+			frame.contentWindow.postMessage(
+					obj.codeNum , 
+					"http://localhost:8080/card/managestocks/holdinglist.jsp");
         	break;
         case 1:
         	alert("가상머니가 부족합니다");
