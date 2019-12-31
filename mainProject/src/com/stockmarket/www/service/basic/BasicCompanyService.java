@@ -63,8 +63,10 @@ public class BasicCompanyService implements CompanyService {
 		List<Entry<String, Integer>> list = new ArrayList<>(crawlData.entrySet());
         list.sort(Entry.<String, Integer>comparingByValue().reversed());
 
-        for (Entry<String, Integer> entry : list) 
-        	crawlDataOrder.put(entry.getKey(), entry.getValue());
+        for (Entry<String, Integer> entry : list) { 
+        	if(entry.getValue() != 1)	//count 수가 1인경우 유효하지 않다고 판단하고 제거한다
+        		crawlDataOrder.put(entry.getKey(), entry.getValue());
+        }
         
 //        System.out.println(crawlDataOrder);		//for debugging
         
