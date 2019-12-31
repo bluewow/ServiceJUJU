@@ -22,7 +22,7 @@ public interface CommunityBoardDao {
 	int deleteReply(int replyId);
 	int deleteReplys(int boardId);
 	
-	int selectFavoriteBoard(CommunityBoard selectFavoriteBoard);
-	int insertFavoriteBoard(CommunityBoard insertFavoriteBoard);
-	int deleteFavoriteBoard(CommunityBoard deleteFavoriteBoard);
+	int selectInterestBoard(CommunityBoard selectInterestBoard);
+	int deleteInterestBoard(CommunityBoard deleteInterestBoard);
+	int insertInterestBoard(CommunityBoard insertInterestBoard);
 }

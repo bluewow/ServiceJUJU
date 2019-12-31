@@ -396,6 +396,62 @@ window.addEventListener("load", function () {
 		}
 	}
 
+	// ========= 즐겨찾기 추가 ==================
+	var interestNoClickHandler = function (e) {
+		var boardId = e.target.dataset.id;
+		var data = [
+			["boardId", boardId],
+			["status", "insert"]
+		]
+		var sendData = [];
+
+		for (var i = 0; i < data.length; i++) {
+			sendData[i] = data[i].join("=");
+		}
+		sendData = sendData.join("&");
+
+		var request = new XMLHttpRequest();
+		request.open("POST", "../../card/board/interest", true);
+		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		request.send(sendData);
+
+		// 3. 요청이 완료되었는지 결과를 확인한다.
+		request.onload = function () {
+			alert("추가되었습니다.");
+			e.target.classList.remove("interest_no");
+			e.target.classList.add("interest_yes");
+			
+		}
+	}
+
+	// ========= 즐겨찾기 삭제 ==================
+	var interestYesClickHandler = function (e) {
+		var boardId = e.target.dataset.id;
+		var data = [
+			["boardId", boardId],
+			["status", "delete"]
+		]
+		var sendData = [];
+
+		for (var i = 0; i < data.length; i++) {
+			sendData[i] = data[i].join("=");
+		}
+		sendData = sendData.join("&");
+
+		var request = new XMLHttpRequest();
+		request.open("POST", "../../card/board/interest", true);
+		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		request.send(sendData);
+
+		// 3. 요청이 완료되었는지 결과를 확인한다.
+		request.onload = function () {
+			alert("삭제되었습니다.");
+			e.target.classList.remove("interest_yes");
+			e.target.classList.add("interest_no");
+			
+		}
+	}
+
 	// ========= 내용 클릭 핸들러 ==================
 	tbody.onclick = function (e) {
 		e.preventDefault();
@@ -425,6 +481,12 @@ window.addEventListener("load", function () {
 
 		else if (e.target.classList.contains("content-modi"))
 			modiContentClickHandler(e);
+
+		else if (e.target.classList.contains("interest_no"))
+			interestNoClickHandler(e);
+
+		else if (e.target.classList.contains("interest_yes"))
+			interestYesClickHandler(e);
 
 	};
 
