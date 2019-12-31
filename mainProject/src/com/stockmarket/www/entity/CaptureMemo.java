@@ -29,6 +29,12 @@ public class CaptureMemo {
 		this.title = title;
 		this.regdate = regdate;
 	}
+	
+	public CaptureMemo(int id, String title, Date regdate) {
+		this.id = id;
+		this.title = title;
+		this.regdate = regdate;
+	}
 
 	// for insert
 	public CaptureMemo(String title, String content, double PER, double PBR, double ROE,

@@ -51,10 +51,12 @@
 					<div id="chart_div"></div>
 
 					<div class="memo">
-						<div>메모</div>
+						<div><input maxlength="20"
+							placeholder="제목" ></textarea>
+						</div>
 						<hr>
 						<div>
-							<textarea id="memo-content" maxlength="800"
+							<textarea class="scrollbar custom-scrollbar-style" id="memo-content" maxlength="800"
 								placeholder="내용을 입력하세요"></textarea>
 						</div>
 						<div class="buttons">

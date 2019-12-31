@@ -12,8 +12,7 @@ window.addEventListener("load", function () {
 	var regSubmit = regBoardForm.querySelector(".pop-up-content-row");
 
 	load = function (page) {
-
-
+		
 		var request = new XMLHttpRequest();
 		request.open("GET", "../../card/board/stock_board_list?p=" + page);
 

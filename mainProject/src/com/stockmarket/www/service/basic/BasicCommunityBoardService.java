@@ -14,34 +14,12 @@ public class BasicCommunityBoardService implements CommunityBoardService {
 	public BasicCommunityBoardService() {
 		communityBoardDao = new JdbcCommunityBoardDao();
 	}
-
 	// 게시판 목록 보기
 	@Override
-	public List<CommunityBoard> getCommunityBoardList() {
-		return getCommunityBoardList(1, "title", "", "");
-	}
-
-	// 게시판 목록 보기
-	@Override
-	public List<CommunityBoard> getCommunityBoardList(int page, String stockCode) {
-		return getCommunityBoardList(page, "title", "", stockCode);
-	}
-
-	// 게시판 목록 보기
-	@Override
-	public List<CommunityBoard> getCommunityBoardList(int page) {
-		return getCommunityBoardList(page, "title", "", "");
-	}
-
-	// 게시판 목록 보기
-	@Override
-	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockCode) {
-		return communityBoardDao.getCommunityBoardList(page, field, query, stockCode);
-	}
-
-	@Override
-	public List<CommunityBoard> getInterestBoardList(int loginId) {
-		return communityBoardDao.getInterestBoardList(loginId);
+	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockCode,
+			int loginId) {
+		// TODO Auto-generated method stub
+		return communityBoardDao.getCommunityBoardList(page, field, query, stockCode, loginId);
 	}
 
 	// 게시글과 댓글 보기
