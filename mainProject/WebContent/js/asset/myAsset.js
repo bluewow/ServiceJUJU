@@ -13,11 +13,10 @@ window.addEventListener("load",function(){
         request.open("GET","../../card/asset/myAsset-json",true);
 
         request.onload = function(){
-        	alert(request.responseText);
+        	//alert(request.responseText);
 
             var distrListTemplate = section.querySelector(".template-list-stock");
             var list = JSON.parse(request.responseText);
-            alert("len: "+list[0].distJson.length);
 
             tbody.innerHTML = "";
 
@@ -69,13 +68,6 @@ window.addEventListener("load",function(){
 
               var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
               chart.draw(data, options);
-              
-              // var ratioTexts = section.querySelectorAll("#donut_single svg text");
-              // console.log(ratioTexts[1]);
-              // console.log(ratioTexts[1].textContent);
-              // for (var i = 0; i < ratioTexts.length; i++) {
-            	//   ratioTexts[i].textContent = parseFloat(ratioTexts[i].textContent); 
-              // }
                          	  
         };
         request.send();
