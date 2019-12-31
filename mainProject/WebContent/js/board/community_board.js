@@ -13,12 +13,10 @@ window.addEventListener("load", function () {
 			var listData = JSON.parse(request.responseText);
 			var trTemplate = section.querySelector(".tr-template");
 			var loginUser = listData.loginUser;
-			console.log(listData);
 			tbody.innerHTML = "";
 
 			for (var i = 0; i < listData.list.length; i++) {
 				var cloneTr = document.importNode(trTemplate.content, true);
-				console.log(listData.list[i].interest);
 				var tds = cloneTr.querySelectorAll("td");
 
 				tds[0].innerText = listData.list[i].id;
