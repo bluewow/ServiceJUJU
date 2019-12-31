@@ -177,10 +177,26 @@ public class JdbckoreaStocksDao implements koreaStocksDao {
 		//System.out.println("jdbckorea :"+korea);	
 		return korea;
 	}
-	
-	
 
-	
-	
+	@Override
+	public int update(String src, String target) {
+		int result = 0;
+		String sql = "update koreastocks SET companyname=? where companyname=?";
 
+		PreparedStatement pst = null;
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+
+		try {
+			pst = daoContext.getPreparedStatement(sql);
+			pst.setString(1, src);
+			pst.setString(2, target);
+			result = pst.executeUpdate();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			daoContext.close(pst);
+		}
+		return result;
+	}
 }

@@ -183,6 +183,7 @@ public class BasicSystemService implements SystemService {
 		
 		koreaStocksDao.delete();
 		koreaStocksDao.insert(koreaList);
+		koreaStocksDao.update("KT","케이티");
 	}
 	/*-------------------------- insert Asset Record ----------------------------*/
 
