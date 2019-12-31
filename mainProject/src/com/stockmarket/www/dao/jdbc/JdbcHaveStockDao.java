@@ -89,6 +89,72 @@ public class JdbcHaveStockDao implements HaveStockDao {
 
 		return stockList;
 	}
+	
+	@Override
+	public HaveStockView getView(int memberId, String stockId) {
+		HaveStockView haveStockView = null;
+		String sql = "SELECT * FROM HAVESTOCK_VIEW WHERE MEMBER_ID = ? AND STOCK_ID = ?";
+		
+		JdbcDaoContext context = new JdbcDaoContext();
+		
+		List<CurStock> list = new ArrayList<>();
+		
+		list.add(new CurStock("035420", "3,000", "상승", "3,000", "+", "2.5"));
+		list.add(new CurStock("000660", "5,000", "하강", "3,000", "-", "3.4"));
+		list.add(new CurStock("020560", "6,000", "보합", "3,000", "0.0", "1.5"));
+		list.add(new CurStock("005930", "2,000", "상승", "3,000", "+", "1.6"));
+		list.add(new CurStock("005380", "1,000", "상승", "3,000", "+", "8.9"));
+		list.add(new CurStock("095660", "10,500", "상승", "3,000", "+", "10.2"));
+		list.add(new CurStock("000880", "3,500", "하강", "3,000", "-", "14.2"));
+		list.add(new CurStock("215600", "7,000", "하강", "3,000", "-", "10"));
+		
+//		List<CurStock> list = new ArrayList<>();
+//		AppContext.getKosdaq();
+//		AppContext.getKospi();
+//		if (AppContext.getKosdaq() != null) {
+//			list.addAll(AppContext.getKosdaq());
+//		}
+//		if (AppContext.getKospi() != null) {
+//			list.addAll(AppContext.getKospi());
+//		}
+		
+		
+		try {
+			
+			PreparedStatement st = context.getPreparedStatement(sql);
+			st.setInt(1, memberId);
+			st.setString(2, stockId);
+			ResultSet rs = st.executeQuery();
+			
+			if (rs.next()) {
+				int memberId_ = rs.getInt("MEMBER_ID");
+				String stockId_ = rs.getString("STOCK_ID");
+				int quantity = rs.getInt("QUANTITY");
+				int sum = rs.getInt("SUM");
+				String stockName = rs.getString("NAME");
+				for (CurStock data : list) {
+					if (stockId_.equals(data.getCodeNum())) {
+						String price = data.getPrice();
+						String gain = data.getGain();
+						String percent = data.getPercent();
+						
+						haveStockView = new HaveStockView(memberId_, stockId_, quantity, sum, stockName, price, gain,
+								percent);
+						break;
+					}
+				}
+			}
+			context.close(rs, st);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return haveStockView;
+	}
 
 	@Override
 	public HaveStock get(int memberId, String stockId) {
@@ -120,71 +186,6 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		return haveStock;
 	}
 
-	@Override
-	public HaveStockView getView(int memberId, String stockId) {
-		HaveStockView haveStockView = null;
-		String sql = "SELECT * FROM HAVESTOCK_VIEW WHERE MEMBER_ID = ? AND STOCK_ID = ?";
-
-		JdbcDaoContext context = new JdbcDaoContext();
-		
-		List<CurStock> list = new ArrayList<>();
-
-		list.add(new CurStock("035420", "3,000", "상승", "3,000", "+", "2.5"));
-		list.add(new CurStock("000660", "5,000", "하강", "3,000", "-", "3.4"));
-		list.add(new CurStock("020560", "6,000", "보합", "3,000", "0.0", "1.5"));
-		list.add(new CurStock("005930", "2,000", "상승", "3,000", "+", "1.6"));
-		list.add(new CurStock("005380", "1,000", "상승", "3,000", "+", "8.9"));
-		list.add(new CurStock("095660", "10,500", "상승", "3,000", "+", "10.2"));
-		list.add(new CurStock("000880", "3,500", "하강", "3,000", "-", "14.2"));
-		list.add(new CurStock("215600", "7,000", "하강", "3,000", "-", "10"));
-
-//		List<CurStock> list = new ArrayList<>();
-//		AppContext.getKosdaq();
-//		AppContext.getKospi();
-//		if (AppContext.getKosdaq() != null) {
-//			list.addAll(AppContext.getKosdaq());
-//		}
-//		if (AppContext.getKospi() != null) {
-//			list.addAll(AppContext.getKospi());
-//		}
-
-
-		try {
-
-			PreparedStatement st = context.getPreparedStatement(sql);
-			st.setInt(1, memberId);
-			st.setString(2, stockId);
-			ResultSet rs = st.executeQuery();
-
-			if (rs.next()) {
-				int memberId_ = rs.getInt("MEMBER_ID");
-				String stockId_ = rs.getString("STOCK_ID");
-				int quantity = rs.getInt("QUANTITY");
-				int sum = rs.getInt("SUM");
-				String stockName = rs.getString("NAME");
-				for (CurStock data : list) {
-					if (stockId_.equals(data.getCodeNum())) {
-						String price = data.getPrice();
-						String gain = data.getGain();
-						String percent = data.getPercent();
-
-						haveStockView = new HaveStockView(memberId_, stockId_, quantity, sum, stockName, price, gain,
-								percent);
-						break;
-					}
-				}
-			}
-			context.close(rs, st);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return haveStockView;
-	}
 
 	@Override
 	public int update(HaveStock haveStock) {

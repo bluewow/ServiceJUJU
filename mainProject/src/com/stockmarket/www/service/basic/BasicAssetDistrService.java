@@ -56,6 +56,7 @@ public class BasicAssetDistrService implements AssetDistrService {
 			
 			haveStockView.setStockName(data.getStockName());
 			haveStockView.setRatio(ratio);
+			haveStockView.setAssetValue(((long)profit));
 		
 			arrayList.add(haveStockView);
 		}
@@ -88,20 +89,24 @@ public class BasicAssetDistrService implements AssetDistrService {
 
 		return assetPresnt - vMoney;
 	}
+	
 
 	// 보유 주식이 5개 이상인 경우 4개 이후부터 기타로 묶고 4개 이후 리스트 삭제
 	private void cutListForFour(List<HaveStockView> arrayList) {
 		
 		if(arrayList.size()>=5) {
 			float ratio = 0;
-			for (int i = 0; i < arrayList.size()-3; i++)
+			long assetValue = 0;
+			for (int i = 0; i < arrayList.size()-3; i++) {
 				ratio += arrayList.get(3+i).getRatio();
+				assetValue += arrayList.get(3+i).getAssetValue();
+			}
 			while (arrayList.size()>4) {
 				int i = 0;
 				arrayList.remove(4+i);
 				i++;
 			}
-			arrayList.get(3).setStockName("기타");
+			arrayList.get(3).setStockName("그 외");
 			arrayList.get(3).setRatio(ratio);	
 		}
 	}
