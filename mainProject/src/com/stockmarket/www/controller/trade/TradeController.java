@@ -16,7 +16,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.google.gson.Gson;
-import com.stockmarket.www.dao.koreaStocksDao;
+import com.stockmarket.www.dao.KoreaStocksDao;
 import com.stockmarket.www.dao.jdbc.JdbckoreaStocksDao;
 import com.stockmarket.www.entity.StockDetail;
 import com.stockmarket.www.service.TradeService;

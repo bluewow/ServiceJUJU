@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import com.stockmarket.www.dao.koreaStocksDao;
+import com.stockmarket.www.dao.KoreaStocksDao;
 import com.stockmarket.www.entity.koreaStocks;
 //koreaStocks = 코스피+ 코스닥
-public class JdbckoreaStocksDao implements koreaStocksDao {
+public class JdbckoreaStocksDao implements KoreaStocksDao {
 
 	@Override
 	public koreaStocks get(String codeNum) {

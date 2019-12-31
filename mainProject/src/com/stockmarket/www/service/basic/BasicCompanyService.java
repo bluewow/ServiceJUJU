@@ -15,7 +15,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import com.stockmarket.www.dao.UpjongDao;
-import com.stockmarket.www.dao.koreaStocksDao;
+import com.stockmarket.www.dao.KoreaStocksDao;
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
 import com.stockmarket.www.dao.jdbc.JdbcUpjongDao;
 import com.stockmarket.www.dao.jdbc.JdbckoreaStocksDao;
@@ -25,7 +25,7 @@ import com.stockmarket.www.service.CompanyService;
 
 public class BasicCompanyService implements CompanyService {
 	private UpjongDao upjongDao;
-	private koreaStocksDao koreaStockDao;
+	private KoreaStocksDao koreaStockDao;
 	
 	// ====================================
 	public BasicCompanyService() {

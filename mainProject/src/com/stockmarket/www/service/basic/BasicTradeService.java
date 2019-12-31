@@ -5,7 +5,7 @@ import java.util.List;
 import com.stockmarket.www.dao.HaveStockDao;
 import com.stockmarket.www.dao.MemberDao;
 import com.stockmarket.www.dao.StockDetailDao;
-import com.stockmarket.www.dao.koreaStocksDao;
+import com.stockmarket.www.dao.KoreaStocksDao;
 import com.stockmarket.www.dao.jdbc.JdbcHaveStockDao;
 import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
 import com.stockmarket.www.dao.jdbc.JdbcStockDetailDao;
@@ -134,7 +134,7 @@ public class BasicTradeService implements TradeService{
 	
 	@Override
 	public String getCompanyName(String codeNum) {
-		koreaStocksDao koreaStockDao = new JdbckoreaStocksDao();
+		KoreaStocksDao koreaStockDao = new JdbckoreaStocksDao();
 		
 		return koreaStockDao.get(codeNum).getCompanyName();
 	}

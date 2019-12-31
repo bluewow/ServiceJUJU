@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import com.stockmarket.www.controller.system.AppContext;
 import com.stockmarket.www.dao.StockDetailDao;
-import com.stockmarket.www.dao.koreaStocksDao;
+import com.stockmarket.www.dao.KoreaStocksDao;
 import com.stockmarket.www.dao.jdbc.JdbcStockDetailDao;
 import com.stockmarket.www.dao.jdbc.JdbcUpjongDao;
 import com.stockmarket.www.dao.jdbc.JdbckoreaStocksDao;
@@ -96,7 +96,7 @@ public class TestSystemService {
 				sys.updateMarket("KOSDAQ");
 				break;
 			case 14:	//케이티 -> KT 로 수작업
-				koreaStocksDao koreaStocksDao = new JdbckoreaStocksDao();
+				KoreaStocksDao koreaStocksDao = new JdbckoreaStocksDao();
 				koreaStocksDao.update("KT","케이티");;
 				break;
 			case 99:

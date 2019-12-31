@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.stockmarket.www.entity.koreaStocks;
 
-public interface koreaStocksDao {
+public interface KoreaStocksDao {
 	public koreaStocks get(String codeNum);
 	List<koreaStocks> getList();
 	
