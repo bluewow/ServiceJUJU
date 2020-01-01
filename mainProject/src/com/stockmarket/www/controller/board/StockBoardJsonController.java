@@ -2,6 +2,7 @@ package com.stockmarket.www.controller.board;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -46,10 +47,11 @@ public class StockBoardJsonController extends HttpServlet {
 		MemberDao memberDao = new JdbcMemberDao();
 		String loginUser = memberDao.getMember(loginId).getNickName();
 
+		//게시글목록을 불러온다.
 		int page = 1;
 		String field = "TITLE";
 		String query = "";
-		String stockCode = "네오위즈";
+		String stockName = "";
 
 		String page_ = request.getParameter("p");
 		if (page_ != null && !page_.equals(""))
@@ -63,18 +65,21 @@ public class StockBoardJsonController extends HttpServlet {
 		if (query_ != null && !query_.equals(""))
 			query = query_;
 
-		String stockCode_ = request.getParameter("s");
-		if (stockCode_ != null && !stockCode_.equals(""))
-			stockCode = stockCode_;
-		List<CommunityBoard> list = communityBoardService.getCommunityBoardList(page, field, query, stockCode,loginId);
-		Gson gson = new Gson();
-		String json = gson.toJson(list);
+		String stockName_ = request.getParameter("s");
+		if (stockName_ != null && !stockName_.equals(""))
+			stockName = stockName_;
+		List<CommunityBoard> list = communityBoardService.getCommunityBoardList(page, field, query, stockName,loginId);
 
+		HashMap<String, Object> hm = new HashMap<String, Object>();
+		hm.put("loginUser", loginUser);
+		hm.put("list", list);
+		Gson gson = new Gson();
+		String json = gson.toJson(hm);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-
 		PrintWriter out = response.getWriter();
 		out.write(json);
+
 	}
 
 	@Override

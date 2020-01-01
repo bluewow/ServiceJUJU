@@ -75,7 +75,6 @@ public class CommunityBoardJsonController extends HttpServlet {
 		hm.put("list", list);
 		Gson gson = new Gson();
 		String json = gson.toJson(hm);
-
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
