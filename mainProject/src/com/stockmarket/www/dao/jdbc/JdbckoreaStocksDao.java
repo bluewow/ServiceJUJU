@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import com.stockmarket.www.dao.koreaStocksDao;
+import com.stockmarket.www.dao.KoreaStocksDao;
 import com.stockmarket.www.entity.koreaStocks;
 //koreaStocks = 코스피+ 코스닥
-public class JdbckoreaStocksDao implements koreaStocksDao {
+public class JdbckoreaStocksDao implements KoreaStocksDao {
 
 	@Override
 	public koreaStocks get(String codeNum) {
@@ -177,10 +177,26 @@ public class JdbckoreaStocksDao implements koreaStocksDao {
 		//System.out.println("jdbckorea :"+korea);	
 		return korea;
 	}
-	
-	
 
-	
-	
+	@Override
+	public int update(String src, String target) {
+		int result = 0;
+		String sql = "update koreastocks SET companyname=? where companyname=?";
 
+		PreparedStatement pst = null;
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+
+		try {
+			pst = daoContext.getPreparedStatement(sql);
+			pst.setString(1, src);
+			pst.setString(2, target);
+			result = pst.executeUpdate();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			daoContext.close(pst);
+		}
+		return result;
+	}
 }

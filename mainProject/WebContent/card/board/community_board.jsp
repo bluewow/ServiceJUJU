@@ -27,6 +27,7 @@
 		<nav id="my-menu">
 			<a href="" id="my-button">My</a>
 			<a href="" id="favo-button">관심</a>
+			<a href="" id="reg-button" class="hidden">글쓰기</a>
 		</nav>
 	</section>
 	<section id="communityScroll">
@@ -78,7 +79,7 @@
 			<td colspan=5>
 			</td>
 			</tr>
-			<tr>
+			<tr class="reply-content-row">
 			<td colspan=5>
 				<table class="replyTable">
 					<colgroup>

@@ -97,21 +97,21 @@ public class BasicCommunityBoardService implements CommunityBoardService {
 	}
 
 	@Override
-	public int selectFavoriteBoard(CommunityBoard selectFavoriteBoard) {
+	public int selectInterestBoard(CommunityBoard selectInterestBoard) {
 		// TODO Auto-generated method stub
-		return communityBoardDao.selectFavoriteBoard(selectFavoriteBoard);
+		return communityBoardDao.selectInterestBoard(selectInterestBoard);
 	}
 
 	@Override
-	public int insertFavoriteCommunityBoard(CommunityBoard insertFavoriteBoard) {
+	public int insertInterestBoard(CommunityBoard insertInterestBoard) {
 		// TODO Auto-generated method stub
-		return communityBoardDao.insertFavoriteBoard(insertFavoriteBoard);
+		return communityBoardDao.insertInterestBoard(insertInterestBoard);
 	}
 
 	@Override
-	public int deleteFavoriteCommunityBoard(CommunityBoard deleteFavoriteBoard) {
+	public int deleteInterestBoard(CommunityBoard deleteInterestBoard) {
 		// TODO Auto-generated method stub
-		return communityBoardDao.deleteFavoriteBoard(deleteFavoriteBoard);
+		return communityBoardDao.deleteInterestBoard(deleteInterestBoard);
 	}
 
 }

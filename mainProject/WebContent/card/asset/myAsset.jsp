@@ -12,11 +12,13 @@
 
 	<!-- Layout Styles -->
 
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<link rel="stylesheet" type="text/css" href="../../css/myAsset.css">
 	<script src="../../js/asset/myAsset.js"></script>
 </head>
 
 <body class="scrollbar custom-scrollbar-style">
+
 	<main id="card">
 		<section id="card-top">
 			<div id="titleAssetTrend" class="wrap">
@@ -34,7 +36,7 @@
 							<li><a href="">월봉</a></li>
 						</ul>
 					</div>
-					<p><fmt:formatNumber value="${assetPesent}"/></p>
+					<p><fmt:formatNumber value="${assetPresent}"/></p>
 				</div>
 			</div>
 			<div id="assetTrend">
@@ -54,7 +56,7 @@
 			<div id="assetDistribution">
 				<div id="graph-assetDistr">
 					<h2 class="visable-none">원형그래프</h2>
-					<div class="graph"><img src="../../images/distr_graph_sample.png"></div>
+					<div class="graph"><div id="donut_single" style="width: 700px; height: 300px; fill: none;"></div></div>
 				</div>
 
 				<div id="list-stock">

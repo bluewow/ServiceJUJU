@@ -323,7 +323,7 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 	}
 
 	@Override
-	public int selectFavoriteBoard(CommunityBoard selectFavoriteBoard) {
+	public int selectInterestBoard(CommunityBoard selectInterestBoard) {
 		int result = 0;
 		String sql = "SELECT * FROM INTEREST_BOARD WHERE MEMBER_ID=? AND BOARD_ID=?";
 
@@ -333,8 +333,8 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		try {
 			pst = daoContext.getPreparedStatement(sql);
 
-			pst.setInt(1, selectFavoriteBoard.getId());
-			pst.setInt(2, selectFavoriteBoard.getLoginId());
+			pst.setInt(1, selectInterestBoard.getId());
+			pst.setInt(2, selectInterestBoard.getLoginId());
 
 			result = pst.executeUpdate();
 
@@ -347,10 +347,10 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 	}
 
 	@Override
-	public int insertFavoriteBoard(CommunityBoard insertFavoriteBoard) {
+	public int insertInterestBoard(CommunityBoard insertInterestBoard) {
 		int result = 0;
-		String sql = "INSERT INTO INTEREST_BOARD (ID, MEMBER_ID, BOARD_ID)" + 
-				"VALUES ((SELECT NVL(MAX(ID),0)+1 FROM INTEREST_BOARD), ?, ?)";
+		String sql = "INSERT INTO INTEREST_BOARD (MEMBER_ID, BOARD_ID)" + 
+				"VALUES (?, ?)";
 
 		PreparedStatement pst = null;
 		JdbcDaoContext daoContext = new JdbcDaoContext();
@@ -358,8 +358,8 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		try {
 			pst = daoContext.getPreparedStatement(sql);
 
-			pst.setInt(1, insertFavoriteBoard.getLoginId());
-			pst.setInt(2, insertFavoriteBoard.getId());
+			pst.setInt(1, insertInterestBoard.getLoginId());
+			pst.setInt(2, insertInterestBoard.getId());
 
 			result = pst.executeUpdate();
 
@@ -372,7 +372,7 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 	}
 
 	@Override
-	public int deleteFavoriteBoard(CommunityBoard deleteFavoriteBoard) {
+	public int deleteInterestBoard(CommunityBoard deleteInterestBoard) {
 		int result = 0;
 		String sql = "DELETE FROM INTEREST_BOARD WHERE MEMBER_ID=? AND BOARD_ID=?";
 
@@ -382,8 +382,8 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		try {
 			pst = daoContext.getPreparedStatement(sql);
 
-			pst.setInt(1, deleteFavoriteBoard.getLoginId());
-			pst.setInt(2, deleteFavoriteBoard.getId());
+			pst.setInt(1, deleteInterestBoard.getLoginId());
+			pst.setInt(2, deleteInterestBoard.getId());
 
 			result = pst.executeUpdate();
 
@@ -400,48 +400,6 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		CommunityBoard lastReplyNum = new CommunityBoard();
 
 		com.lastReplyNum(1);
-	}
-
-	@Override
-	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String code) {
-
-		List<CommunityBoard> list = new ArrayList<>();
-
-		String sql = "SELECT * FROM ("
-				+ "SELECT ROWNUM NUM, B.* FROM("
-				+ "SELECT * FROM (SELECT BV.*, ("
-				+ "SELECT BOARD_ID FROM INTEREST_BOARD WHERE MEMBER_ID=? AND BOARD_ID = BV.ID"
-				+ ") INTEREST FROM BOARD_VIEW BV WHERE STOCKNAME LIKE ?) "
-				+ "WHERE " + field + " LIKE ? ORDER BY ID DESC) B) WHERE NUM BETWEEN ? AND ?";
-
-		PreparedStatement pst = null;
-		ResultSet rs = null;
-
-		JdbcDaoContext daoContext = new JdbcDaoContext();
-		try {
-
-			pst = daoContext.getPreparedStatement(sql);
-
-			pst.setInt(1, 10 * page);
-			pst.setString(2, "%" + code + "%");
-			pst.setString(3, "%" + query + "%");
-			pst.setInt(4, 1 + 10 * (page - 1));
-			pst.setInt(5, 10 * page);
-
-			rs = pst.executeQuery();
-			while (rs.next()) {
-				CommunityBoard communityBoard = new CommunityBoard(rs.getInt("ID"), rs.getString("TITLE"),
-						rs.getString("WRITER_ID"), rs.getDate("REGDATE"), rs.getInt("HIT"), rs.getString("STOCKNAME"),
-						rs.getInt("REPLY_CNT"), rs.getInt("INTEREST"));
-				list.add(communityBoard);
-			}
-
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		} finally {
-			daoContext.close(rs, pst);
-		}
-		return list;
 	}
 
 }

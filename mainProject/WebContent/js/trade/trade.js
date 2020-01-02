@@ -3,7 +3,7 @@ var codeNum = "005930"; //삼성전자
 window.addEventListener("message", function(e) {
 	if(e.data && (e.data.length == 6)) { //codeNum
 		codeNum = e.data;
-		asyncGraph(e.data);					// 종목에 맞는 그래프로 변경
+//		asyncGraph(e.data);					// 종목에 맞는 그래프로 변경
 		asyncTrade("pass", 0, e.data);		// 매수/매도 창 데이터 갱신
 	}
 });
@@ -11,7 +11,7 @@ window.addEventListener("message", function(e) {
 window.addEventListener("load", function(){
 	//load google chart
 	google.charts.load('current', {packages: ['corechart', 'line']});
-	asyncGraph(codeNum);
+//	asyncGraph(codeNum);
 	asyncTrade("pass", 0);		
 	dailyGraphFunc();	// 그래프 변경
 	tradeFunc();		// 매수/매도 이벤트 처리

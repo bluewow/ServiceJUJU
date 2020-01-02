@@ -19,12 +19,12 @@ import com.stockmarket.www.entity.CommunityBoard;
 import com.stockmarket.www.service.CommunityBoardService;
 import com.stockmarket.www.service.basic.BasicCommunityBoardService;
 
-@WebServlet("/card/board/favorie")
-public class FavoriteJsonController extends HttpServlet {
+@WebServlet("/card/board/interest")
+public class interestJsonController extends HttpServlet {
 
 	private CommunityBoardService communityBoardService;
 
-	public FavoriteJsonController() {
+	public interestJsonController() {
 		communityBoardService = new BasicCommunityBoardService();
 	}
 
@@ -45,18 +45,34 @@ public class FavoriteJsonController extends HttpServlet {
 		if (tempId != null)
 			loginId = (Integer) tempId;
 		
-		if(status=="check") {
+		if (status.equals("check")) {
+			CommunityBoard selectInterestBoard = new CommunityBoard(boardId, loginId, status);
+			int result = communityBoardService.selectInterestBoard(selectInterestBoard);
 
-		CommunityBoard selectFavoriteBoard = new CommunityBoard(boardId, loginId, status);
-		
-		int result = communityBoardService.selectFavoriteBoard(selectFavoriteBoard);
-		
-		System.out.println(result);
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.write(result);
-		};
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.write(result);
+		} else if (status.equals("insert")) {
+			CommunityBoard insertInterestBoard = new CommunityBoard(boardId, loginId, status);
+			int result = communityBoardService.insertInterestBoard(insertInterestBoard);
+
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.write(result);
+
+		} else if (status.equals("delete")) {
+			CommunityBoard deleteInterestBoard = new CommunityBoard(boardId, loginId, status);
+			int result = communityBoardService.deleteInterestBoard(deleteInterestBoard);
+
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.write(result);
+
+		}
+		;
 //			
 	}
 }

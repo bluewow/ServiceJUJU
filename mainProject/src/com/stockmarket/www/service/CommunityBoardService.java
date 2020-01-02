@@ -28,9 +28,9 @@ public interface CommunityBoardService {
 	/*
 	 * 게시판 즐겨찾기 추가 삭제
 	 * */
-	int selectFavoriteBoard(CommunityBoard selectFavoriteBoard);
-	int insertFavoriteCommunityBoard(CommunityBoard insertFavoriteBoard);
-	int deleteFavoriteCommunityBoard(CommunityBoard deleteFavoriteBoard);
+	int selectInterestBoard(CommunityBoard selectFavoriteBoard);
+	int insertInterestBoard(CommunityBoard insertInterestBoard);
+	int deleteInterestBoard(CommunityBoard deleteInterestBoard);
 	/*
 	 * 게시글 댓글 개수 확인
 	 * */
@@ -43,6 +43,7 @@ public interface CommunityBoardService {
 	int lastReplyNum(int boardId);
 	int deleteReply(int replyId);
 	int deleteReplys(int boardId);
+
 
 
 }

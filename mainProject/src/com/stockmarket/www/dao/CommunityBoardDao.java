@@ -6,7 +6,6 @@ import com.stockmarket.www.entity.CommunityBoard;
 
 public interface CommunityBoardDao {
 	List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockCode, int loginId);
-	List<CommunityBoard> getCommunityBoardList(int page, String Field, String Query, String Code);
 	List<CommunityBoard> getReplyList(int boardId);
 	
 	CommunityBoard getCommunityBoardDetail(int id);
@@ -23,7 +22,7 @@ public interface CommunityBoardDao {
 	int deleteReply(int replyId);
 	int deleteReplys(int boardId);
 	
-	int selectFavoriteBoard(CommunityBoard selectFavoriteBoard);
-	int insertFavoriteBoard(CommunityBoard insertFavoriteBoard);
-	int deleteFavoriteBoard(CommunityBoard deleteFavoriteBoard);
+	int selectInterestBoard(CommunityBoard selectInterestBoard);
+	int deleteInterestBoard(CommunityBoard deleteInterestBoard);
+	int insertInterestBoard(CommunityBoard insertInterestBoard);
 }

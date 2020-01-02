@@ -15,7 +15,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import com.stockmarket.www.dao.UpjongDao;
-import com.stockmarket.www.dao.koreaStocksDao;
+import com.stockmarket.www.dao.KoreaStocksDao;
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
 import com.stockmarket.www.dao.jdbc.JdbcUpjongDao;
 import com.stockmarket.www.dao.jdbc.JdbckoreaStocksDao;
@@ -25,7 +25,7 @@ import com.stockmarket.www.service.CompanyService;
 
 public class BasicCompanyService implements CompanyService {
 	private UpjongDao upjongDao;
-	private koreaStocksDao koreaStockDao;
+	private KoreaStocksDao koreaStockDao;
 	
 	// ====================================
 	public BasicCompanyService() {
@@ -63,8 +63,10 @@ public class BasicCompanyService implements CompanyService {
 		List<Entry<String, Integer>> list = new ArrayList<>(crawlData.entrySet());
         list.sort(Entry.<String, Integer>comparingByValue().reversed());
 
-        for (Entry<String, Integer> entry : list) 
-        	crawlDataOrder.put(entry.getKey(), entry.getValue());
+        for (Entry<String, Integer> entry : list) { 
+        	if(entry.getValue() != 1)	//count 수가 1인경우 유효하지 않다고 판단하고 제거한다
+        		crawlDataOrder.put(entry.getKey(), entry.getValue());
+        }
         
 //        System.out.println(crawlDataOrder);		//for debugging
         
@@ -93,14 +95,16 @@ public class BasicCompanyService implements CompanyService {
 	
 	// 1차필터
 	private void filterFirst(String search, Map<String, Integer> crawlData) throws IOException {
-		String[] keyWord = {"주식", "종목", "테마" };
+		String[] keyWord = {"주식", "종목", "테마", ""};
 		String[] removeTarget = 
 			{"큐레이션", "브레이크", "디딤돌", "트레이딩", "SBS뉴스", "트레이더", "트레이",
 			 "레이더", "레이튼", "플레이어", "레이시온", "오디오", "스튜디오", "키움증권 클립", 
 			 "키움증권 2", "키움증권 재생중", "한국경제TV 재생", "아시아경제 https" , "아시아경제 최신",
 			 "아시아경제 2", "NH투자증권 공식", "※키움증권", "레이어", "KNN뉴스", "SBSCNBC뉴스",
 			 "플레이됨", "오토레이스", "레이저", "온라인 플레이", "구글플레이", "NEWS", "CBCNEWS",
-			 "SBS CNBC", "SBS 스페셜", "SBS 쩐의전쟁", "SBS 뉴스", "키움증권 hts"}; //크롤링 결과의 제거 대상. 지속적인 업데이트 필요
+			 "SBS CNBC", "SBS 스페셜", "SBS 쩐의전쟁", "SBS 뉴스", "키움증권 hts", "테스트", 
+			 "테스티아", "키움증권 계좌", ". 키움증권", "키움증권!", "시뮬레이션", "머레이", "동양로",
+			 "동양동", "핸드폰디자인", "두산백과통신", "ssg", "SSG", "대상으로"}; //크롤링 결과의 제거 대상. 지속적인 업데이트 필요
 		
 		List<koreaStocks> stockList = koreaStockDao.getList();
 		
@@ -110,7 +114,7 @@ public class BasicCompanyService implements CompanyService {
 			String text = null;
 
 			Document doc = naverCrawling(url);
-			text = doc.select("#main_pack").text(); //본문 text
+			text = doc.select("#main_pack").text().trim(); //본문 text
 			for(String s : removeTarget) {			//지정된 문자를 제거한다
 				text = text.replaceAll(s, "");
 			}
@@ -154,7 +158,7 @@ public class BasicCompanyService implements CompanyService {
 				}
 			}
 			
-			if(index >= 2) {	//count 수 기준으로 1, 2 등까지 적용한다
+			if(index >= 3) {	//count 수 기준으로 1, 2 등까지 적용한다
 				if(limit.get(index - 1) == limit.get(index)) 
 					continue;
 

@@ -24,7 +24,7 @@ import com.stockmarket.www.dao.MemberDao;
 import com.stockmarket.www.dao.RecordAssetDao;
 import com.stockmarket.www.dao.StockDetailDao;
 import com.stockmarket.www.dao.UpjongDao;
-import com.stockmarket.www.dao.koreaStocksDao;
+import com.stockmarket.www.dao.KoreaStocksDao;
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
 import com.stockmarket.www.dao.jdbc.JDBCRecordAssetDao;
 import com.stockmarket.www.dao.jdbc.JdbcHaveStockDao;
@@ -55,7 +55,7 @@ public class BasicSystemService implements SystemService {
 	RecordAssetDao recordAssetDao;
 	StockDetailDao stockDetailDao;
 	koreaStocks koreaStocks;
-	koreaStocksDao koreaStocksDao;
+	KoreaStocksDao koreaStocksDao;
 
 	public BasicSystemService() {
 
@@ -183,6 +183,7 @@ public class BasicSystemService implements SystemService {
 		
 		koreaStocksDao.delete();
 		koreaStocksDao.insert(koreaList);
+		koreaStocksDao.update("KT","케이티");
 	}
 	/*-------------------------- insert Asset Record ----------------------------*/
 

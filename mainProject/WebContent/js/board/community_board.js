@@ -4,21 +4,32 @@ window.addEventListener("load", function () {
 	var tbody = section.querySelector("table tbody");
 	var pager = section.querySelector(".pager");
 
+	//리스트 불러오기
 	var load = function (page) {
 
 		var request = new XMLHttpRequest();
 		request.open("GET", "../../card/board/community_board_list?p=" + page);
 
 		request.onload = function () {
+			//페이지 번호 넘버링
+			var startNum = (page - 2);
+			if (startNum <= 1)
+				startNum = 1;
+			pager.innerHTML = '<a href="?p='
+				+ startNum + '">' + startNum + '</a> <a href="?p='
+				+ (startNum + 1) + '">' + (startNum + 1) + '</a> <a href="?p='
+				+ (startNum + 2) + '">' + (startNum + 2) + '</a> <a href="?p='
+				+ (startNum + 3) + '">' + (startNum + 3) + '</a> <a href="?p='
+				+ (startNum + 4) + '">' + (startNum + 4) + '</a>';
+			
+			
 			var listData = JSON.parse(request.responseText);
 			var trTemplate = section.querySelector(".tr-template");
 			var loginUser = listData.loginUser;
-			console.log(listData);
 			tbody.innerHTML = "";
 
 			for (var i = 0; i < listData.list.length; i++) {
 				var cloneTr = document.importNode(trTemplate.content, true);
-				console.log(listData.list[i].interest);
 				var tds = cloneTr.querySelectorAll("td");
 
 				tds[0].innerText = listData.list[i].id;
@@ -36,14 +47,14 @@ window.addEventListener("load", function () {
 				tds[2].innerText = listData.list[i].regdate;
 				tds[3].innerText = listData.list[i].hit;
 				tds[4].innerHTML = '<a href class="interest_no" data-id="' + listData.list[i].id + '"></a>';
-				if(listData.list[i].interest != '0')
+				if (listData.list[i].interest != '0')
 					tds[4].innerHTML = '<a href class="interest_yes" data-id="' + listData.list[i].id + '"></a>';
-				
+
 				tds[5].innerHTML = '<a href class="del-content" data-id="' + listData.list[i].id + '"></a>';
 				if (loginUser != listData.list[i].writerId)
 					tds[5].innerHTML = '<td></td>'
 				tds[6].innerText = listData.list[i].writerId;
-			
+
 				tbody.append(cloneTr);
 			}
 			;
@@ -60,19 +71,21 @@ window.addEventListener("load", function () {
 		e.preventDefault();
 		load(e.target.innerText);
 	};
-
+	
 	// ========= 글내용과 댓글 불러오기 ==================
 	var titleClickHandler = function (e) {
 		var currentTr = e.target.parentNode.parentNode.parentNode;
+		var target = currentTr.nextElementSibling;
+		console.log(target);
 		var nextTr = currentTr.nextElementSibling.nextElementSibling;
 
 		// 이미 내용이 있으면 닫아주세요.
-		if (nextTr.classList.contains("content-row")) {
-			var row = nextTr.nextElementSibling;
-			row.parentNode.removeChild(row);
-			nextTr.parentNode.removeChild(nextTr);
-			return;
-		}
+		//		if (nextTr.classList.contains("content-row")) {
+		//			var row = nextTr.nextElementSibling;
+		//			row.parentNode.removeChild(row);
+		//			nextTr.parentNode.removeChild(nextTr);
+		//			return;
+		//		}
 		// 내용을 로딩중이면 표시해주세요.
 		if (e.target.parentNode.parentNode.lastChild.nodeName == "IMG") {
 			alert("로딩중입니다~");
@@ -87,8 +100,7 @@ window.addEventListener("load", function () {
 
 		// 데이터를 요청
 		var request = new XMLHttpRequest();
-		request.open("GET", "../../card/board/detail?id=" + id,
-			true);
+		request.open("GET", "../../card/board/detail?id=" + id, true);
 
 		// 요청값을 받아오면 실행
 		request.onload = function () {
@@ -97,7 +109,7 @@ window.addEventListener("load", function () {
 			var cloneTr = document.importNode(template.content, true);
 			var td = cloneTr.querySelector(".content-row td");
 			td.innerHTML = '<span class="content-detail">'
-				+ detail.board.content + '</span><br><a href="" class="content-modi" data-id="'
+				+ detail.board.content + '</span><br><a href="" class="content-modi hidden" data-id="'
 				+ detail.board.id + '">수정</a>';
 			var replyContent = cloneTr.querySelector(".replyTable tbody tr td");
 			var contentSum = "";
@@ -105,24 +117,39 @@ window.addEventListener("load", function () {
 			aTagDetail.dataset.id = id;
 			aTagDetail.dataset.writerId = detail.writerId;
 			for (var i = 0; i < detail.replys.length; i++) {
-				contentSum += '<div><span class="re-writer">'
-					+ detail.replys[i].writerId
-					+ ' : </span><span class="re-content">'
-					+ detail.replys[i].reContent
-					+ '</span><input type="text" class="reply-modi-content hidden" name="title" maxlength="200" placeholder="주제와 무관한 댓글, 악플은 징계 대상이 됩니다." value="'
-					+ detail.replys[i].reContent
-					+ '"></input><span class="modi-box"><a href="" class="re-modi" data-id="'
-					+ detail.replys[i].replyId
-					+ '">수정</a>  <a href="" class="re-del" data-id="'
-					+ detail.replys[i].replyId
-					+ '">삭제</a><a href="" class="re-commit hidden" data-id="'
-					+ detail.replys[i].replyId
-					+ '">확인</a>  <a href="" class="re-cancel hidden" data-id="'
-					+ detail.replys[i].replyId
-					+ '">취소</a></span></div>';
+				if(detail.loginUser == detail.replys[i].writerId){
+					contentSum += '<div><span class="re-writer">'
+						+ detail.replys[i].writerId
+						+ ' : </span><span class="re-content">'
+						+ detail.replys[i].reContent
+						+ '</span><input type="text" class="reply-modi-content hidden" name="title" maxlength="200" placeholder="주제와 무관한 댓글, 악플은 징계 대상이 됩니다." value="'
+						+ detail.replys[i].reContent
+						+ '"></input><span class="modi-box"><a href="" class="re-modi" data-id="'
+						+ detail.replys[i].replyId
+						+ '">수정</a>  <a href="" class="re-del" data-id="'
+						+ detail.replys[i].replyId
+						+ '">삭제</a><a href="" class="re-commit hidden" data-id="'
+						+ detail.replys[i].replyId
+						+ '">확인</a>  <a href="" class="re-cancel hidden" data-id="'
+						+ detail.replys[i].replyId
+						+ '">취소</a></span></div>';
+				} else {
+					contentSum += '<div><span class="re-writer">'
+						+ detail.replys[i].writerId
+						+ ' : </span><span class="re-content">'
+						+ detail.replys[i].reContent
+						+ '</span><input type="text" class="reply-modi-content hidden" name="title" maxlength="200" placeholder="주제와 무관한 댓글, 악플은 징계 대상이 됩니다." value="'
+						+ detail.replys[i].reContent
+						+ '"></input></div>';
+				}				
+
 			}
 			replyContent.innerHTML = contentSum;
-			tbody.insertBefore(cloneTr, nextTr);
+
+			targetContent = cloneTr.querySelector(".content-row");
+			targetreply = cloneTr.querySelector(".reply-content-row");
+			target.insertAdjacentElement('afterend', targetreply);
+			target.insertAdjacentElement('afterend', targetContent);
 
 			ajaxIcon.remove();
 			ajaxIcon = undefined;
@@ -398,6 +425,62 @@ window.addEventListener("load", function () {
 		}
 	}
 
+	// ========= 즐겨찾기 추가 ==================
+	var interestNoClickHandler = function (e) {
+		var boardId = e.target.dataset.id;
+		var data = [
+			["boardId", boardId],
+			["status", "insert"]
+		]
+		var sendData = [];
+
+		for (var i = 0; i < data.length; i++) {
+			sendData[i] = data[i].join("=");
+		}
+		sendData = sendData.join("&");
+
+		var request = new XMLHttpRequest();
+		request.open("POST", "../../card/board/interest", true);
+		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		request.send(sendData);
+
+		// 3. 요청이 완료되었는지 결과를 확인한다.
+		request.onload = function () {
+			alert("추가되었습니다.");
+			e.target.classList.remove("interest_no");
+			e.target.classList.add("interest_yes");
+
+		}
+	}
+
+	// ========= 즐겨찾기 삭제 ==================
+	var interestYesClickHandler = function (e) {
+		var boardId = e.target.dataset.id;
+		var data = [
+			["boardId", boardId],
+			["status", "delete"]
+		]
+		var sendData = [];
+
+		for (var i = 0; i < data.length; i++) {
+			sendData[i] = data[i].join("=");
+		}
+		sendData = sendData.join("&");
+
+		var request = new XMLHttpRequest();
+		request.open("POST", "../../card/board/interest", true);
+		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		request.send(sendData);
+
+		// 3. 요청이 완료되었는지 결과를 확인한다.
+		request.onload = function () {
+			alert("삭제되었습니다.");
+			e.target.classList.remove("interest_yes");
+			e.target.classList.add("interest_no");
+
+		}
+	}
+
 	// ========= 내용 클릭 핸들러 ==================
 	tbody.onclick = function (e) {
 		e.preventDefault();
@@ -427,6 +510,12 @@ window.addEventListener("load", function () {
 
 		else if (e.target.classList.contains("content-modi"))
 			modiContentClickHandler(e);
+
+		else if (e.target.classList.contains("interest_no"))
+			interestNoClickHandler(e);
+
+		else if (e.target.classList.contains("interest_yes"))
+			interestYesClickHandler(e);
 
 	};
 

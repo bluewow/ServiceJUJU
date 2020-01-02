@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import com.stockmarket.www.controller.system.AppContext;
 import com.stockmarket.www.dao.StockDetailDao;
-import com.stockmarket.www.dao.koreaStocksDao;
+import com.stockmarket.www.dao.KoreaStocksDao;
 import com.stockmarket.www.dao.jdbc.JdbcStockDetailDao;
 import com.stockmarket.www.dao.jdbc.JdbcUpjongDao;
 import com.stockmarket.www.dao.jdbc.JdbckoreaStocksDao;
@@ -95,6 +95,10 @@ public class TestSystemService {
 				sys.updateMarket("KOSPI");
 				sys.updateMarket("KOSDAQ");
 				break;
+			case 14:	//케이티 -> KT 로 수작업
+				KoreaStocksDao koreaStocksDao = new JdbckoreaStocksDao();
+				koreaStocksDao.update("KT","케이티");;
+				break;
 			case 99:
 				System.out.println("Test - SystemService 종료");
 				return;
@@ -114,6 +118,7 @@ public class TestSystemService {
 		System.out.println("8. ");
 		System.out.println("9. stockdetailDao 의 저장된 데이터를 가져온다 in:codeNum");
 		System.out.println("13. koreaStockDao insert");
+		System.out.println("14. update 케이티 -> KT ");
 		System.out.println("99. 종료");
 		System.out.println("-----------------------------");
 		System.out.println("숫자를 입력하시오");

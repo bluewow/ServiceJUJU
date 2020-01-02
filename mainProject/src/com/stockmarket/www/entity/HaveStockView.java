@@ -8,11 +8,13 @@ public class HaveStockView extends HaveStock {
 	private String gain;
 	private String percent;
 	private float ratio;
+	private long assetValue; 
 	
 	public HaveStockView() {
 		// TODO Auto-generated constructor stub
 	}
 	
+	// haveStockDao용
 	public HaveStockView(int memberId, String stockId, int quantity, int sum, String stockName, String price,
 			String gain, String percent) {
 		super(memberId, stockId, quantity, sum);
@@ -22,7 +24,8 @@ public class HaveStockView extends HaveStock {
 		this.percent = percent;
 	}
 	
-	public HaveStockView(int memberId, String stockId, int quantity, int sum, String stockName, String price,
+	// distrService용
+	public HaveStockView(int memberId, String stockId, int quantity, int sum, String stockName, String price, long assetValue,
 			String gain, String percent, float ratio) {
 		super(memberId, stockId, quantity, sum);
 		this.stockName = stockName;
@@ -30,6 +33,7 @@ public class HaveStockView extends HaveStock {
 		this.gain = gain;
 		this.percent = percent;
 		this.ratio = ratio;
+		this.assetValue = assetValue;
 	}
 
 	public HaveStockView(int income) {
@@ -76,11 +80,19 @@ public class HaveStockView extends HaveStock {
 	public void setRatio(float ratio) {
 		this.ratio = ratio;
 	}
+	
+	public long getAssetValue() {
+		return assetValue;
+	}
+
+	public void setAssetValue(long assetValue) {
+		this.assetValue = assetValue;
+	}
 
 	@Override
 	public String toString() {
 		return "HaveStockView [stockName=" + stockName + ", price=" + price + ", intPrice=" + income + ", gain="
-				+ gain + ", percent=" + percent +", ratio=" + ratio + super.toString() + "]";
+				+ gain + ", percent=" + percent +", ratio=" + ratio + ", assetValue="+assetValue + super.toString() + "]";
 	}
 
 
