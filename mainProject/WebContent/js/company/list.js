@@ -31,7 +31,6 @@ window.addEventListener("load", function(){
 	if (UncertifiedLogin != null) {
 		UncertifiedLogin.onclick = function(){
 			alert("로그인이 필요한 서비스입니다.");
-			
 		};
 	}
 	
