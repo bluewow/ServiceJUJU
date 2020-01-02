@@ -29,7 +29,6 @@ window.addEventListener("load", function () {
 		var str2 = content;
 		str2 = str2.trim();
 
-		alert("aa");
 		// 댓글내용이 없으면 알림을 하고 되돌아간다.
 		if (str1 == "") {
 			alert("제목을 작성하세요");
@@ -56,7 +55,6 @@ window.addEventListener("load", function () {
 				sendData[i] = data[i].join("=");
 			}
 			sendData = sendData.join("&");
-			console.log(sendData);
 			// 2. 값을 서버에 보낸다.
 
 			var request = new XMLHttpRequest();
@@ -99,12 +97,10 @@ window.addEventListener("load", function () {
 		e.preventDefault();
 
 		if (e.target.name == "cancel") {
-			console.log("clicked")
 			alert("글등록이 취소되었다!!")
 			regBoardForm.style.visibility = "hidden";
 			//========= 글쓰기 등록 버튼 클릭==================
 		} else if (e.target.name == "submit") {
-			console.log("clicked")
 			regButtonClickHandler(e);
 
 

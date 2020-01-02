@@ -127,7 +127,6 @@ window.addEventListener("load", function () {
 	var titleClickHandler = function (e) {
 		var currentTr = e.target.parentNode.parentNode.parentNode;
 		var target = currentTr.nextElementSibling;
-		console.log(target);
 		var nextTr = currentTr.nextElementSibling.nextElementSibling;
 
 		// 이미 내용이 있으면 닫아주세요.
@@ -433,7 +432,6 @@ window.addEventListener("load", function () {
 		var regBoardForm = document.querySelector(".pop-up-reg");
 		var regSubmit = regBoardForm.querySelector(".pop-up-content-row");
 
-		console.log(e.target.parentNode.parentNode.previousElementSibling.previousElementSibling)
 		var targetTitle = e.target.parentNode.parentNode.previousElementSibling.previousElementSibling.querySelector(".title");
 		var title = targetTitle.innerText;
 		var titleEncode = encodeURI(title);

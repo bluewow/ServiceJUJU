@@ -71,11 +71,6 @@ public class StockBoardJsonController extends HttpServlet {
 		if (stockCode_ != null && !stockCode_.equals(""))
 			stockCode = stockCode_;
 
-		System.out.println("page" + page);
-		System.out.println("field" + field);
-		System.out.println("query" + query);
-		System.out.println("stockCode" + stockCode);
-		
 		StockDao stockDao = new JdbcStockDao();
 		String stockName = stockDao.getStockName(stockCode);
 
@@ -92,7 +87,6 @@ public class StockBoardJsonController extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.write(json);
 
-		System.out.println("json" + json);
 	}
 
 	@Override
