@@ -104,7 +104,7 @@ public class BasicCompanyService implements CompanyService {
 			 "플레이됨", "오토레이스", "레이저", "온라인 플레이", "구글플레이", "NEWS", "CBCNEWS",
 			 "SBS CNBC", "SBS 스페셜", "SBS 쩐의전쟁", "SBS 뉴스", "키움증권 hts", "테스트", 
 			 "테스티아", "키움증권 계좌", ". 키움증권", "키움증권!", "시뮬레이션", "머레이", "동양로",
-			 "동양동", "핸드폰디자인", "두산백과통신", }; //크롤링 결과의 제거 대상. 지속적인 업데이트 필요
+			 "동양동", "핸드폰디자인", "두산백과통신", "ssg", "SSG", "대상으로"}; //크롤링 결과의 제거 대상. 지속적인 업데이트 필요
 		
 		List<koreaStocks> stockList = koreaStockDao.getList();
 		
