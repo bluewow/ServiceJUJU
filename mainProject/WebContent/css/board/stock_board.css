@@ -101,6 +101,7 @@
 	padding-left: 4%;
 	padding-right: 4%;
 	padding-top: 4%;
+	text-align:center;
 }
 
 .del a {
@@ -296,4 +297,15 @@ a {
 
 .reply-submit-button {
 	padding-left: 4%
+}
+
+.button-on {
+	background-color: #13bfd7 !important;
+	color: #ffffff !important;
+}
+
+.pager {
+	display:inline-block;
+	width:200px;
+	margin:auto;
 }

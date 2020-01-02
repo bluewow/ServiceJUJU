@@ -1,15 +1,66 @@
 window.addEventListener("load", function () {
 
+	var sectionTop = document.querySelector("#communityTop");
+	var myButton = sectionTop.querySelector("#my-button");
+	var interestButton = sectionTop.querySelector("#favo-button");
 	var section = document.querySelector("#communityScroll");
 	var tbody = section.querySelector("table tbody");
 	var pager = section.querySelector(".pager");
+	var sortBoard = "";
+	
+	
+	//마이버튼 클릭
+	myButton.onclick = function (e) {
+		if (e.target.nodeName != "A")
+			return;
 
+		e.preventDefault();
+		if(sortBoard=="") {
+			sortBoard = "my";
+			myButton.classList.add("button-on");
+		} else if(sortBoard=="interest") {
+			sortBoard = "my";
+			myButton.classList.add("button-on");
+			interestButton.classList.remove("button-on");
+		} else if(sortBoard=="my") {
+			sortBoard = "";
+			myButton.classList.remove("button-on");
+		}
+		load(1, sortBoard);
+	};
+	
+	//즐겨찾기버튼 클릭
+	interestButton.onclick = function (e) {
+		if (e.target.nodeName != "A")
+			return;
+
+		e.preventDefault();
+		if(sortBoard=="") {
+			sortBoard = "interest";
+			interestButton.classList.add("button-on");
+		} else if(sortBoard=="my") {
+			sortBoard = "interest";
+			interestButton.classList.add("button-on");
+			myButton.classList.remove("button-on");
+		} else if(sortBoard=="interest") {
+			sortBoard = "";
+			interestButton.classList.remove("button-on");
+		}
+		load(1, sortBoard);
+	};
+	
 	//리스트 불러오기
-	var load = function (page) {
+	var load = function (page, sortBoard) {
 
 		var request = new XMLHttpRequest();
-		request.open("GET", "../../card/board/community_board_list?p=" + page);
-
+		if(sortBoard=="")
+			request.open("GET", "../../card/board/stock_board_list?p=" + page);
+		else if(sortBoard=="my")
+			request.open("GET", "../../card/board/stock_board_list?f=writer_id&q=my&p=" + page);
+		else if(sortBoard=="interest")
+			request.open("GET", "../../card/board/stock_board_list?f=interest&p=" + page);
+	
+		
 		request.onload = function () {
 			//페이지 번호 넘버링
 			var startNum = (page - 2);
@@ -62,14 +113,14 @@ window.addEventListener("load", function () {
 		request.send();
 	}
 
-	load(1)
+	load(1, sortBoard)
 
 	pager.onclick = function (e) {
 		if (e.target.nodeName != "A")
 			return;
 
 		e.preventDefault();
-		load(e.target.innerText);
+		load(e.target.innerText, sortBoard);
 	};
 	
 	// ========= 글내용과 댓글 불러오기 ==================
@@ -80,12 +131,14 @@ window.addEventListener("load", function () {
 		var nextTr = currentTr.nextElementSibling.nextElementSibling;
 
 		// 이미 내용이 있으면 닫아주세요.
-		//		if (nextTr.classList.contains("content-row")) {
-		//			var row = nextTr.nextElementSibling;
-		//			row.parentNode.removeChild(row);
-		//			nextTr.parentNode.removeChild(nextTr);
-		//			return;
-		//		}
+		if(nextTr) {
+			if (nextTr.classList.contains("content-row")) {
+				var row = nextTr.nextElementSibling;
+				row.parentNode.removeChild(row);
+				nextTr.parentNode.removeChild(nextTr);
+				return;
+				};
+		};
 		// 내용을 로딩중이면 표시해주세요.
 		if (e.target.parentNode.parentNode.lastChild.nodeName == "IMG") {
 			alert("로딩중입니다~");

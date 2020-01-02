@@ -28,7 +28,7 @@
 <body>
 	<section id="stockTop">
 		<nav id="my-menu">
-			<a href="" id="selected-stock">네오위즈</a>
+			<a href="" id="selected-stock">종목을 선택하세요</a>
 			<a href="" id="my-button">My</a>
 			<a href="" id="favo-button">관심</a>
 			<a href="" id="reg-button">글쓰기</a>
@@ -50,10 +50,10 @@
 		<table class="stockTable">
 			<tbody class="content">
 				<tr>
-					<td colspan="5" style="text-align: center; height: 50px; line-height: 50px;">게시된 글이 없습니다.</td>
+					<td colspan="5" style="text-align: center; height: 50px; line-height: 50px;"><br>작성된 글이 없거나 종목이 선택되지 않았습니다.</td>
 				</tr>
 				<tr class="detail">
-					<td colspan=5>데이터가 불러지지 않았습니다.
+					<td colspan=5><br><br><br>검색창에서 종목을 선택해 주세요.
 					</td>
 				</tr>
 			</tbody>
