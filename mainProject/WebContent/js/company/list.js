@@ -48,13 +48,18 @@ window.addEventListener("load", function(){
 		    		 var attention = e.target.dataset.attention;
 		    		 var interestlistWindow = parent.document.querySelector("#interestlist-window");
 		    		 
+		    		 console.log(attention);
+		    		 
 		    		 interestlistWindow.contentWindow.postMessage(
-				    		   codenum, "http://localhost:8080/card/managestocks/interestlist.jsp");
+		    				 attention, "http://localhost:8080/card/board/stock_board.jsp");
 		    	};
 			};
 			
 		};
 		
-	}
+	};
 	
  });
+
+
+
