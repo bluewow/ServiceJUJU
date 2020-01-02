@@ -128,9 +128,9 @@ window.addEventListener("message", function(e) {
 		   };
 		   updateLoad();  
 
-//		   setInterval(function() {
-//			   updateLoad();  
-//		   }, 70000);
+		   setInterval(function() {
+			   updateLoad();  
+		   }, 70000);
 		   
 		  
 		 

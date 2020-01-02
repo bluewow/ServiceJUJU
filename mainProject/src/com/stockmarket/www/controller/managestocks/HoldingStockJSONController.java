@@ -47,8 +47,6 @@ public class HoldingStockJSONController extends HttpServlet{
 		
 	    if(codeNum != null || firstSetting ) {
 	    	updateCurrentPrice(request,response,userId);
-	    	firstSetting = false;
-	    	
 	    	return;
 	    }
 		

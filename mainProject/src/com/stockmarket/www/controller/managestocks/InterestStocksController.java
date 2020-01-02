@@ -52,7 +52,6 @@ public class InterestStocksController extends HttpServlet {
 		interestStocksInterface.deleteStock(userId,delStockName);
 		
 		if(codeNum != null || firstSetting) {
-			firstSetting =false;
 			request.setAttribute("list", interestViewInterface.getInterestViewList(userId));
 			request.getRequestDispatcher("interestlist.jsp").forward(request, response);	
 		}
