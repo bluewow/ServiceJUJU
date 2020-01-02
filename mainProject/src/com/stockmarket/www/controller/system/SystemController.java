@@ -16,6 +16,7 @@ import com.stockmarket.www.service.basic.BasicSystemService;
 @WebServlet("/main")
 public class SystemController extends HttpServlet {
 	//thread 함수를 한번만 실행시키기 위한 flag
+    
 	static boolean oneShotFlag;
 	static String preHour; 
 	SystemService service;
@@ -27,6 +28,8 @@ public class SystemController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		
 		if(oneShotFlag == true) {
 			request.getRequestDispatcher("main.jsp").forward(request, response);
 			return;
@@ -59,20 +62,20 @@ public class SystemController extends HttpServlet {
 			service.updateMarket("KOSDAQ");
 		}
 			
-		//주식가격 refresh by 크롤링 9시 ~ 18시까지 실행
-		if(Integer.parseInt(curHour) >= 9 && Integer.parseInt(curHour) <= 18)
+		//주식가격 refresh by 크롤링 9시 ~ 19시까지 실행
+		if(Integer.parseInt(curHour) >= 9 && Integer.parseInt(curHour) <= 19) {
 			service.refreshStockPrice();
-		
+		}
 		//18시 장종료후 19시 주식데이터 갱신 
-		if(curHour.equals("19") && preHour.equals("18")) {
+		if(curHour.equals("20") && preHour.equals("19")) {
 //			TODO
 		}
 		
-		if(curHour.equals("18") && preHour.equals("17")) {
+		if(curHour.equals("19") && preHour.equals("18")) {
 			System.out.println("실행 중인가");
 			service.insertRecordAsset();
 		}
-		
+	
 		
 		//현재 시간을 preHour flag 에 저장
 		preHour = curHour;

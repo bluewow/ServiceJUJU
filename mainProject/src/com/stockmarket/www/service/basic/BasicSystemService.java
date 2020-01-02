@@ -76,8 +76,8 @@ public class BasicSystemService implements SystemService {
 			codeNum.add(entity.getStockCode());
 
 		stockMarket = getCurrentStockPrice(codeNum);
-
 		AppContext.setStockMarket(stockMarket);
+        System.out.println("1차 크롤링데이터:"+AppContext.getStockMarket().get(0).toString());
 	}
 
 	private List<CurStock> getCurrentStockPrice(List<String> codeNums) {
@@ -209,7 +209,7 @@ public class BasicSystemService implements SystemService {
 				// System.out.println(data.getPrice()+","+data.getQuantity());
 				value += Integer.parseInt(data.getPrice().replaceAll(",", "")) * data.getQuantity();
 				result += recordAssetDao.insert(new RecordAsset(memberId, regdate, value));
-				System.out.println(result);
+				System.out.println("result:"+result);
 				break;
 			}
 		}

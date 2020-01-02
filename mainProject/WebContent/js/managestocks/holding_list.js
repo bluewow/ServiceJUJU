@@ -126,7 +126,14 @@ window.addEventListener("message", function(e) {
 		    };
 		    ajax.send();
 		   };
-		   updateLoad();   
+		   updateLoad();  
+
+//		   setInterval(function() {
+//			   updateLoad();  
+//		   }, 70000);
+		   
+		  
+		 
    // ajax.onload = function() {
      
    // }
