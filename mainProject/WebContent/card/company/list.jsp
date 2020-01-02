@@ -79,7 +79,7 @@
 					</c:if>
 					
 					<c:if test="${logIn != -1}">
-						<td  class="attention"><img data-attention="${sector.stockCode}" id="certifiedLoing" src="/css/company/interest_no.png">
+						<td class="attention"><img data-attention="${sector.stockCode}" id="certifiedLoing" src="/css/company/interest_no.png">
 						</td>
 					</c:if>
 					
