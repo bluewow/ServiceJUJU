@@ -21,8 +21,8 @@
 	<script src="../../js/board/stock_board.js"></script>
 	
 	<!-- Reg Board popup -->
-	<link href="../../css/board/reg_board.css" type="text/css" rel="stylesheet">
-	<script src="../../js/board/reg_board.js"></script>
+	<!-- <link href="../../css/board/reg_board.css" type="text/css" rel="stylesheet"> -->
+	<!-- <script src="../../js/board/reg_board.js"></script> -->
 </head>
 
 <body>
