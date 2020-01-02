@@ -74,6 +74,7 @@ public class ListController extends HttpServlet {
 		
 		searchCompanyList = new ArrayList<koreaStocks>();
 		
+		//System.out.println(companyService.searchCompanyNames("커피"));
 		
 		List<String> list =	companyService.searchCompanyNames(companyName);
 		// 기현이 형의 검색 알고리즘을 통해 회사 이름을 List에 String 형식으로 담는다.
@@ -84,21 +85,29 @@ public class ListController extends HttpServlet {
 		// 위에 담긴 list에 있는 회사 종목을 하나씩 꺼내어 검색한 뒤에 회사정보를 koreaStocks 엔티티로  리턴한다.
 		// koreaStocks 엔티티를 searchCompanyList에 담는다.
 		
+		// 로그인 유무 확인
+		HttpSession session = request.getSession();
+		Object tempId = session.getAttribute("id");
+		int id = -1;
+
+		if (tempId != null)
+			id = (Integer) tempId;
+		
+		
+		
+		System.out.println(id);
+		
 		request.setAttribute("search", searchCompanyList);
+		request.setAttribute("logIn", id);
 		
 		//회사 이름 = > list String
-		for (String string : list) {
-			System.out.println(string);
-		}
+//		for (String string : list) {
+//			System.out.println(string);
+//		}
 		
 		
 		request.getRequestDispatcher("list.jsp").forward(request, response);
 		
-//		companyName_ = "";
-//		companyName = "";
-//		
-//		if (searchCompanyList != null) {
-//			searchCompanyList = null;
-//		}
+
 	}
 }
