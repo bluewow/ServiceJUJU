@@ -45,12 +45,18 @@ public class InterestStocksController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("id");
+		boolean firstSetting = true;
 		
 		String delStockName = request.getParameter("delStockName");
+		String  codeNum = request.getParameter("codeNum");
 		interestStocksInterface.deleteStock(userId,delStockName);
- 
-		request.setAttribute("list", interestViewInterface.getInterestViewList(userId));
-		request.getRequestDispatcher("interestlist.jsp").forward(request, response);
+		
+		if(codeNum != null || firstSetting) {
+			request.setAttribute("list", interestViewInterface.getInterestViewList(userId));
+			request.getRequestDispatcher("interestlist.jsp").forward(request, response);	
+		}
+		
+
 		
 	}
 }

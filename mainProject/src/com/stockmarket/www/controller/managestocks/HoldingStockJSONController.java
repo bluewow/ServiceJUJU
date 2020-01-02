@@ -47,8 +47,6 @@ public class HoldingStockJSONController extends HttpServlet{
 		
 	    if(codeNum != null || firstSetting ) {
 	    	updateCurrentPrice(request,response,userId);
-	    	firstSetting = false;
-	    	
 	    	return;
 	    }
 		
@@ -60,7 +58,6 @@ public class HoldingStockJSONController extends HttpServlet{
 
         Gson gson = new Gson();
 		String json = gson.toJson(list);
-
         PrintWriter out = response.getWriter();
 		out.write(json);
 		

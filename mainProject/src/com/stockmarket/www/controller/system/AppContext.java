@@ -60,7 +60,6 @@ public class AppContext {
 	public static void main(String[] args) {
 		AppContext app_1 = AppContext.getInstance();
 		AppContext app_2 = AppContext.getInstance();
-		
 		Scanner sc = new Scanner(System.in);
 		
 		switch(sc.nextInt()) {

@@ -10,9 +10,9 @@ window.addEventListener("message", function(e) {
 			  return num.toString().replace(regexp, ',');
 	    }
 		
-		function updateLoad(){2
+		function updateLoad(){
 			var ajax = new XMLHttpRequest();
-			console.log(e.data)
+
 			ajax.open("GET","../../card/managestocks/holdinglist-json?codeNum=" + e.data , true)
 		    
 		    //서블릿의 실행이 완료되었을때 실행 
@@ -126,7 +126,14 @@ window.addEventListener("message", function(e) {
 		    };
 		    ajax.send();
 		   };
-		   updateLoad();   
+		   updateLoad();  
+
+		   setInterval(function() {
+			   updateLoad();  
+		   }, 70000);
+		   
+		  
+		 
    // ajax.onload = function() {
      
    // }
@@ -157,9 +164,7 @@ window.addEventListener("load",function(){
 //        var cardFooter = section.querySelector(".card-footer");
         
     	
-        var list = JSON.parse(request.responseText);
-        
-        console.log( JSON.parse(request.responseText));    
+        var list = JSON.parse(request.responseText);    
         var won = "원";
         var allIncomePercent =0;
         var allIncome = 0;

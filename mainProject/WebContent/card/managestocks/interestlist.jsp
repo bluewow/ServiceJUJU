@@ -18,7 +18,7 @@
 	function goDelete() {
 		var form = document.getElementById("deleteForm");
 		form.submit();
-	}
+	}	
 </script>
 
 

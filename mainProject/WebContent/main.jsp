@@ -109,7 +109,6 @@
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="search"
                            role="tabpanel" aria-labelledby="search-tab">
-                           
                            <iframe id="companyListWindow" src="./card/company/list">
                            </iframe>
                         </div>
@@ -118,7 +117,6 @@
                </div>
             </div>
          </section>
-
          <!-- 분석 매매 예측 카드 -->
          <section class="column column-33">
             <div id="card2" class="card">
