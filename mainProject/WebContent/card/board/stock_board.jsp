@@ -21,8 +21,7 @@
 	<script src="../../js/board/stock_board.js"></script>
 	
 	<!-- Reg Board popup -->
-	<link href="../../css/board/reg_board.css" type="text/css"
-		rel="stylesheet">
+	<link href="../../css/board/reg_board.css" type="text/css" rel="stylesheet">
 	<script src="../../js/board/reg_board.js"></script>
 </head>
 
@@ -84,7 +83,7 @@
 			<td colspan=5>
 			</td>
 			</tr>
-			<tr>
+			<tr class="reply-content-row">
 			<td colspan=5>
 				<table class="replyTable">
 					<colgroup>
@@ -113,7 +112,6 @@
 
 		</template>
 	</section>
-	
 	<!-- ===== 글쓰기 POPUP ========================================================================================================== -->   
  	<div class="pop-up-reg">
  		<form class="regboard-box" method="post" id="regboard">

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.stockmarket.www.dao.MemberDao;
+import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
 import com.stockmarket.www.entity.CommunityBoard;
 import com.stockmarket.www.entity.Member;
 import com.stockmarket.www.service.CommunityBoardService;
@@ -35,13 +37,19 @@ public class DetailController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		int boardId = Integer.parseInt(request.getParameter("id"));
 		HttpSession session = request.getSession();
-		Object userId = session.getAttribute("id");
+		Object tempId = session.getAttribute("id");
+		int loginId = -1;
 
-		CommunityBoard list = communityBoardService.getBoard(boardId);
+		if (tempId != null)
+			loginId = (Integer) tempId;
+		MemberDao memberDao = new JdbcMemberDao();
+		String loginUser = memberDao.getMember(loginId).getNickName();
+		int boardId = Integer.parseInt(request.getParameter("id"));
+
+		//CommunityBoard list = communityBoardService.getBoard(boardId);
 		request.setAttribute("detail", communityBoardService.getBoard(boardId));
-		
+		request.setAttribute("loginUser", loginUser);
 		request.getRequestDispatcher("../../card/board/detail.jsp").forward(request, response);
 
 //			

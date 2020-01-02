@@ -52,7 +52,7 @@ public class DetailJsonController extends HttpServlet {
 		communityBoard.setHit(communityBoard.getHit()+1);
 		
 		HashMap<String, Object> hm = new HashMap<String, Object>();
-		hm.put("writerId", writerNickname);
+		hm.put("loginUser", writerNickname);
 		hm.put("board", communityBoard);
 		hm.put("replys", replyList);
 		

@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.stockmarket.www.dao.MemberDao;
-import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
 import com.stockmarket.www.service.CommunityBoardService;
 import com.stockmarket.www.service.basic.BasicCommunityBoardService;
 
@@ -30,45 +28,41 @@ public class StockBoardController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		// 세션을 이용하여 현재 사용자의 아이디를 가져온다.
 		HttpSession session = request.getSession();
-		//로그인 세션을 불러온다.
 		Object tempId = session.getAttribute("id");
-		int loginId = -1;
+		int id = -1;
 
 		if (tempId != null)
-			loginId = (Integer) tempId;
-		MemberDao memberDao = new JdbcMemberDao();
-		String loginUser = memberDao.getMember(loginId).getNickName();
+			id = (Integer) tempId;
+
 
 		int page = 1;
 		String field = "title";
-		String query= "";
-		String stockCode= "";
-		
+		String query = "";
+		String stockCode = "";
+
 		String page_ = request.getParameter("p");
-		if(page_ != null && !page_.equals(""))
+		if (page_ != null && !page_.equals(""))
 			page = Integer.parseInt(page_);
-		
+
 		String field_ = request.getParameter("f");
-		if(field_ !=null && !field_.equals(""))
+		if (field_ != null && !field_.equals(""))
 			field = field_;
 
 		String query_ = request.getParameter("q");
-		if(query_ !=null && !query_.equals(""))
+		if (query_ != null && !query_.equals(""))
 			query = query_;
-		
+
 		String stockCode_ = request.getParameter("s");
-		if(stockCode_ !=null && !stockCode_.equals(""))
+		if (stockCode_ != null && !stockCode_.equals(""))
 			stockCode = stockCode_;
-		
-		stockCode = "095660"; //네오위즈 더미 하드코딩
-		
-		//request.setAttribute("CommunityBoard", communityBoardService.getCommunityBoardList(page, stockCode)); // 컨트롤러가 할 일은 데이터를 준비하는 일
-		
+
+		request.setAttribute("CommunityBoard", communityBoardService.getCommunityBoardList(page, field, query, stockCode, id)); // 컨트롤러가 할 일은 데이터를 준비하는 일
+		request.setAttribute("loginId", id);
+
 		request.getRequestDispatcher("/card/board/stock_board.jsp").forward(request, response);
-		
-		
+
 	}
 
 	@Override
