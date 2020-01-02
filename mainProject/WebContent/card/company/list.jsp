@@ -14,6 +14,7 @@
 <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
 <link rel="stylesheet" type="text/css" href="../../css/company/list.css">
 <script src="../../js/company/list.js"></script>
+<!-- <script src="../../js/company/InterestCheck.js"></script> -->
 </head>
 <!-- style="overflow:scroll" -->
 <body class="scrollbar custom-scrollbar-style">
@@ -62,16 +63,26 @@
 						
 					<td>
 						<div data-codenum="${sector.stockCode }" class="companyName">${sector.companyName}</div>
-						<%-- <a href="list?companyName=${sector.companyName}" data-codenum="${sector.stockCode }" id="companyName">${sector.companyName}</a> --%>
 						<a href="${sector.website}" target="_blank"><img src="/css/company/link.png" alt=""></a>
 					</td>
-					<%-- <td name="CompanyNameClickedByUser"><a href="list?companyName=${sector.companyName}" id="companyName">${sector.companyName}</a> <a href="${sector.website}" target="_blank"><img src="/css/company/link.png" alt=""></a></td> --%>
+					
 					<td id ="stockItemName" class="wrap">
 						<a>${sector.mainProduct}</a>
 						<div class="help">${sector.mainProduct}</div>
 					</td>
-					<td class="attention"><img src="/css/company/interest_no.png"></td>
-					<!-- <td class="attention"><img src="/css/search/interest_no.png"></td> -->
+					
+					<!-- 로그인 체크 -->
+					
+					<c:if test="${logIn == -1}">
+						<td class="attention"><img id="UncertifiedLogin" src="/css/company/interest_no.png">
+						</td>
+					</c:if>
+					
+					<c:if test="${logIn != -1}">
+						<td  class="attention"><img data-attention="${sector.stockCode}" id="certifiedLoing" src="/css/company/interest_no.png">
+						</td>
+					</c:if>
+					
 				</tr>
 				</c:forEach>
 			</tbody>

@@ -24,10 +24,37 @@ window.addEventListener("load", function(){
 	    }
 	}
 	
-//	var recommendKeyword = document.querySelector("#ajaxTest");
-//	recommendKeyword.onclick = function(e){
-//		alert("연결 확인");
-//		var ajax = new XMLHttpRequest();
-//		ajax.open("GET", "../../card/trade/list?companyName=${r}");
-//	}
-});
+	
+	var UncertifiedLogin = document.querySelector("#UncertifiedLogin");
+	var certifiedLoing = document.querySelector("#certifiedLoing");
+	
+	if (UncertifiedLogin != null) {
+		UncertifiedLogin.onclick = function(){
+			alert("로그인이 필요한 서비스입니다.");
+			
+		};
+	}
+	
+	if (certifiedLoing != null) {
+		certifiedLoing.onclick = function(e){
+			alert("로그인 됨");
+			
+			var attention = document.querySelectorAll(".attention");
+		    if(attention == null) 
+		    	return;
+			
+		    for (var i = 0; i < attention.length; i++) {
+		    	attention[i].onclick = function(e){
+		    		 var attention = e.target.dataset.attention;
+		    		 var interestlistWindow = parent.document.querySelector("#interestlist-window");
+		    		 
+		    		 interestlistWindow.contentWindow.postMessage(
+				    		   codenum, "http://localhost:8080/card/managestocks/interestlist.jsp");
+		    	};
+			};
+			
+		};
+		
+	}
+	
+ });

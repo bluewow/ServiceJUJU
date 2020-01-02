@@ -235,7 +235,7 @@
                         </div>
                         <div class="tab-pane fade" id="Interest" role="tabpanel"
                            aria-labelledby="Interest-tab">
-                           <iframe src="./card/managestocks/interestlist"> </iframe>
+                           <iframe id="interestlist-window" src="./card/managestocks/interestlist"> </iframe>
                         </div>
                      </div>
                   </section>
