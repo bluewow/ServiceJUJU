@@ -9,13 +9,13 @@ import java.util.List;
 
 
 import com.stockmarket.www.dao.KoreaStocksDao;
-import com.stockmarket.www.entity.koreaStocks;
+import com.stockmarket.www.entity.KoreaStocks;
 //koreaStocks = 코스피+ 코스닥
 public class JdbckoreaStocksDao implements KoreaStocksDao {
 
 	@Override
-	public koreaStocks get(String codeNum) {
-		koreaStocks stock = new koreaStocks();
+	public KoreaStocks get(String codeNum) {
+		KoreaStocks stock = new KoreaStocks();
 		
 		String sql = "SELECT * FROM KOREASTOCKS WHERE stockCode=?";
 		JdbcDaoContext daoContext = new JdbcDaoContext();
@@ -27,7 +27,7 @@ public class JdbckoreaStocksDao implements KoreaStocksDao {
 			pst.setString(1,  codeNum);
 			rs = pst.executeQuery();
 			if(rs.next()) { 
-				stock = new koreaStocks(
+				stock = new KoreaStocks(
 						rs.getString("companyName"),
 						rs.getString("stockCode"),
 						rs.getString("sectors"),
@@ -50,9 +50,9 @@ public class JdbckoreaStocksDao implements KoreaStocksDao {
 	}
 	
 	@Override
-	public List<koreaStocks> getList() {
+	public List<KoreaStocks> getList() {
 		
-		List<koreaStocks> list = new ArrayList<>();
+		List<KoreaStocks> list = new ArrayList<>();
 		
 		String sql = "SELECT * FROM KOREASTOCKS";
 		JdbcDaoContext daoContext = new JdbcDaoContext();
@@ -64,7 +64,7 @@ public class JdbckoreaStocksDao implements KoreaStocksDao {
 			rs = pst.executeQuery();
 
 			while(rs.next()) { 
-				koreaStocks korea = new koreaStocks(
+				KoreaStocks korea = new KoreaStocks(
 						rs.getString("companyName"),
 						rs.getString("stockCode"),
 						rs.getString("sectors"),
@@ -88,7 +88,7 @@ public class JdbckoreaStocksDao implements KoreaStocksDao {
 	}
 
 	@Override
-	public int insert(List<koreaStocks> list) {
+	public int insert(List<KoreaStocks> list) {
 		int result = 0;
 		
 		String sql = "INSERT INTO KOREASTOCKS (COMPANYNAME, STOCKCODE, SECTORS, MAINPRODUCT, STOCKEDDAY, SETTLEMENTMONTH, REPRESENTATIVENAME, WEBSITE, LOCATION) "
@@ -139,7 +139,7 @@ public class JdbckoreaStocksDao implements KoreaStocksDao {
 	}
 
 	@Override
-	public koreaStocks searchCompany(String compnayName) {
+	public KoreaStocks searchCompany(String compnayName) {
 		
 //		String sql = "SELECT * FROM KOREASTOCKS WHERE companyname=" + compnayName;
 		String sql = "SELECT * FROM KOREASTOCKS WHERE companyname=?";
@@ -148,14 +148,14 @@ public class JdbckoreaStocksDao implements KoreaStocksDao {
 		PreparedStatement pst =null;
 		ResultSet rs = null;
 		
-		koreaStocks korea = null;
+		KoreaStocks korea = null;
 		
 		try {
 			pst = daoContext.getPreparedStatement(sql);
 			pst.setString(1,  compnayName);
 			rs = pst.executeQuery();
 			if(rs.next()) { 
-				korea = new koreaStocks(
+				korea = new KoreaStocks(
 						rs.getString("companyName"),
 						rs.getString("stockCode"),
 						rs.getString("sectors"),

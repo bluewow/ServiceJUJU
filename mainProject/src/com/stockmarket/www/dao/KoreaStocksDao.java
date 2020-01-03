@@ -2,15 +2,15 @@ package com.stockmarket.www.dao;
 
 import java.util.List;
 
-import com.stockmarket.www.entity.koreaStocks;
+import com.stockmarket.www.entity.KoreaStocks;
 
 public interface KoreaStocksDao {
-	public koreaStocks get(String codeNum);
-	List<koreaStocks> getList();
+	public KoreaStocks get(String codeNum);
+	List<KoreaStocks> getList();
 	
-	int insert(List<koreaStocks> list);
+	int insert(List<KoreaStocks> list);
 	int update(String src, String target);
 	int delete();
 	
-	koreaStocks searchCompany(String compnayName);
+	KoreaStocks searchCompany(String compnayName);
 }

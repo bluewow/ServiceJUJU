@@ -38,7 +38,7 @@ import com.stockmarket.www.entity.Member;
 import com.stockmarket.www.entity.RecordAsset;
 import com.stockmarket.www.entity.StockDetail;
 import com.stockmarket.www.entity.Upjong;
-import com.stockmarket.www.entity.koreaStocks;
+import com.stockmarket.www.entity.KoreaStocks;
 import com.stockmarket.www.service.SystemService;
 
 public class BasicSystemService implements SystemService {
@@ -54,7 +54,7 @@ public class BasicSystemService implements SystemService {
 	HaveStockDao haveStockDao;
 	RecordAssetDao recordAssetDao;
 	StockDetailDao stockDetailDao;
-	koreaStocks koreaStocks;
+	KoreaStocks koreaStocks;
 	KoreaStocksDao koreaStocksDao;
 
 	public BasicSystemService() {
@@ -66,13 +66,13 @@ public class BasicSystemService implements SystemService {
 
 	/*-------------------------- refreshStockPrice ----------------------------*/
 	public void refreshStockPrice() {
-		List<koreaStocks> stocks = new ArrayList<>();
+		List<KoreaStocks> stocks = new ArrayList<>();
 		List<String> codeNum = new ArrayList<>();
 		List<CurStock> stockMarket;
 
 		// DB 를 참조하여 KOSPI, KOSDAQ 모든 종목에 대한 종목코드를 가져온다
 		stocks = koreaStocksDao.getList();
-		for(koreaStocks entity : stocks)
+		for(KoreaStocks entity : stocks)
 			codeNum.add(entity.getStockCode());
 
 		stockMarket = getCurrentStockPrice(codeNum);
@@ -151,7 +151,7 @@ public class BasicSystemService implements SystemService {
 
 	private void write(Elements contents, String tag) {
 		int cnt = 0;
-		List<koreaStocks> koreaList = new ArrayList<>();
+		List<KoreaStocks> koreaList = new ArrayList<>();
 		for (Element element : contents.select(tag)) {
 			dataBuffer[cnt] = element.text();
 			cnt++;
@@ -164,7 +164,7 @@ public class BasicSystemService implements SystemService {
 				}
 				companyList.add(data);
 				
-				koreaStocks = new koreaStocks();
+				koreaStocks = new KoreaStocks();
                 koreaStocks.setCompanyName(data[0]);
                 koreaStocks.setStockCode(data[1]);
                 koreaStocks.setSectors(data[2]);
