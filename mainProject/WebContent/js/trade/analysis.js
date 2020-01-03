@@ -85,7 +85,7 @@ function chartUpdate() {
 		tooltip: { show : true },
 		gauge : {
 			fullCircle : false,
-			startingAngle : -90,
+			startingAngle : 80.11,
 			expand : false, 
 			label: {
 	            show: false
