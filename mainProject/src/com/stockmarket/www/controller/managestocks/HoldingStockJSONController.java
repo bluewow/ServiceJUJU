@@ -55,7 +55,7 @@ public class HoldingStockJSONController extends HttpServlet{
 	private void updateCurrentPrice(HttpServletRequest request,HttpServletResponse response , int userId) throws IOException {
 		
 		List<HaveStockView> list = HoldingStocksInterface.getInterestHoldingList(userId);
-
+		
         Gson gson = new Gson();
 		String json = gson.toJson(list);
         PrintWriter out = response.getWriter();

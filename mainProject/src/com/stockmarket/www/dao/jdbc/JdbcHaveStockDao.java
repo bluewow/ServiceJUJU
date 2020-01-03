@@ -28,18 +28,14 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		// List 필요할 듯.... .... ....... // 담을 그릇 ㅠㅠㅠㅠㅠㅠㅠㅠ 힝 ㅠㅠㅠㅠㅠㅠ
 //		AppContext.getKosdaq();
 		
-//		if (AppContext.getStockMarket() != null) {
-//			System.out.println("크롤링 데이터"+AppContext.getStockMarket().get(0).toString());
-//		}
-//		else{
-//			System.out.println("대기");
-//		}
+
 		List<CurStock> list = new ArrayList<>();
 		
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				if (AppContext.getStockMarket() != null) {
+					
 					list.addAll(AppContext.getStockMarket());
 				}
 			}

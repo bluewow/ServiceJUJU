@@ -77,7 +77,7 @@ public class BasicSystemService implements SystemService {
 
 		stockMarket = getCurrentStockPrice(codeNum);
 		AppContext.setStockMarket(stockMarket);
-        System.out.println("1차 크롤링데이터:"+AppContext.getStockMarket().get(0).toString());
+        System.out.println("크롤링 완료 서비스 시작!:"+AppContext.getStockMarket().get(0).toString());
 	}
 
 	private List<CurStock> getCurrentStockPrice(List<String> codeNums) {

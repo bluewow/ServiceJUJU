@@ -4,4 +4,6 @@ window.addEventListener("message", function(e) {
 	ajax.open("GET","../../card/managestocks/interestlist?codeNum=" + e.data , true);
 	
 	ajax.send();
+	
+
 });

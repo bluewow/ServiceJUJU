@@ -127,12 +127,6 @@ window.addEventListener("message", function(e) {
 		    ajax.send();
 		   };
 		   updateLoad();  
-
-		   setInterval(function() {
-			   updateLoad();  
-		   }, 70000);
-		   
-		  
 		 
    // ajax.onload = function() {
      
@@ -141,6 +135,8 @@ window.addEventListener("message", function(e) {
 //	if(e.data) //codeNum 
 //		console.log("holding : " + e.data);
 });
+
+
 
 window.addEventListener("load",function(){
    var section = this.document.querySelector(".manageStocks");
@@ -269,8 +265,13 @@ window.addEventListener("load",function(){
     };
     request.send();
    };
+
+   setInterval(function() {
+  	   holdingLoad();  
+   }, 5000);
    
    holdingLoad();
-   
 });
+
+
 
