@@ -46,6 +46,7 @@ public class RegBoardJsonController extends HttpServlet {
 		String content = request.getParameter("content");
 		String status = request.getParameter("status");
 		String boardIds = request.getParameter("boardId");
+		String stockCode = request.getParameter("stockCode");
 
 		// 상태값이 reg면 등록
 		if (status.equals("reg")) {
@@ -57,14 +58,13 @@ public class RegBoardJsonController extends HttpServlet {
 			MemberDao memberDao = new JdbcMemberDao();
 			String writerNickname = memberDao.getMember(writerId).getNickName();
 
-			CommunityBoard insertBoard = new CommunityBoard(title, content, writerNickname);
+			CommunityBoard insertBoard = new CommunityBoard(title, content, writerNickname, stockCode);
 
 			int result = communityBoardService.insertCommunityBoard(insertBoard);
 
 			response.setCharacterEncoding("UTF-8"); // UTP-8로 보내는 코드
 			response.setContentType("text/html;charset=UTF-8"); // UTP-8로 보내는 코드
 			PrintWriter out = response.getWriter();
-			System.out.println("result :" + result);
 			out.print(result);
 
 			// 상태값이del이면 삭제

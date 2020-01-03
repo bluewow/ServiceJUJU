@@ -1,39 +1,126 @@
 window.addEventListener("message", function (e) {
-	if (e.data && (e.data.length == 6)) //codeNum
-		console.log("stockBoard : " + e.data);
-});
+	 //codeNum 확인
+	//if (e.data && (e.data.length == 6))
+	//	console.log("stockBoard : " + e.data);
 
-window.addEventListener("load", function () {
-
+	var sectionTop = document.querySelector("#stockTop");
+	var selectStock = sectionTop.querySelector("#selected-stock");
+	var myButton = sectionTop.querySelector("#my-button");
+	var interestButton = sectionTop.querySelector("#favo-button");
 	var section = document.querySelector("#stockScroll");
 	var tbody = section.querySelector("table tbody");
 	var pager = section.querySelector(".pager");
+	var regBoard = sectionTop.querySelector("#reg-button");
 	var regBoardForm = document.querySelector(".pop-up-reg");
 	var regSubmit = regBoardForm.querySelector(".pop-up-content-row");
+	var stockCode = e.data;
+	var sortBoard = "";
 
-	load = function (page) {
+	//마이버튼 클릭	
+	myButton.onclick = function (e) {
+		if (e.target.nodeName != "A")
+			return;
+
+		e.preventDefault();
+		if(sortBoard=="") {
+			sortBoard = "my";
+			myButton.classList.add("button-on");
+		} else if(sortBoard=="interest") {
+			sortBoard = "my";
+			myButton.classList.add("button-on");
+			interestButton.classList.remove("button-on");
+		} else if(sortBoard=="my") {
+			sortBoard = "";
+			myButton.classList.remove("button-on");
+		}
+		load(1, stockCode, sortBoard);
+	};
+	
+	//즐겨찾기버튼 클릭	
+	interestButton.onclick = function (e) {
+		if (e.target.nodeName != "A")
+			return;
+
+		e.preventDefault();
+		if(sortBoard=="") {
+			sortBoard = "interest";
+			interestButton.classList.add("button-on");
+		} else if(sortBoard=="my") {
+			sortBoard = "interest";
+			interestButton.classList.add("button-on");
+			myButton.classList.remove("button-on");
+		} else if(sortBoard=="interest") {
+			sortBoard = "";
+			interestButton.classList.remove("button-on");
+		}
+		load(1, stockCode, sortBoard);
+	};
+	
+	//리스트 불러오기	
+	load = function (page, stockCode, sortBoard) {
 
 		var request = new XMLHttpRequest();
-		request.open("GET", "../../card/board/stock_board_list?p=" + page);
+		if(sortBoard=="")
+			request.open("GET", "../../card/board/stock_board_list?p=" + page+"&s="+stockCode);
+		else if(sortBoard=="my")
+			request.open("GET", "../../card/board/stock_board_list?f=writer_id&q=my&p=" + page+"&s="+stockCode);
+		else if(sortBoard=="interest")
+			request.open("GET", "../../card/board/stock_board_list?f=interest&p=" + page+"&s="+stockCode);
 
+		
 		request.onload = function () {
 			//페이지 번호 넘버링
 			var startNum = (page - 2);
 			if (startNum <= 1)
 				startNum = 1;
-			pager.innerHTML = '<a href="?p='
-				+ startNum + '">' + startNum + '</a> <a href="?p='
-				+ (startNum + 1) + '">' + (startNum + 1) + '</a> <a href="?p='
-				+ (startNum + 2) + '">' + (startNum + 2) + '</a> <a href="?p='
-				+ (startNum + 3) + '">' + (startNum + 3) + '</a> <a href="?p='
-				+ (startNum + 4) + '">' + (startNum + 4) + '</a>';
 			
+			pager.querySelector(".pn1").innerText = startNum+0;
+			pager.querySelector(".pn2").innerText = startNum+1;
+			pager.querySelector(".pn3").innerText = startNum+2;
+			pager.querySelector(".pn4").innerText = startNum+3;
+			pager.querySelector(".pn5").innerText = startNum+4;
+			
+			if(page==startNum+0){
+				pager.querySelector(".pn1").classList.add("select-page");
+				pager.querySelector(".pn2").classList.remove("select-page");
+				pager.querySelector(".pn3").classList.remove("select-page");
+				pager.querySelector(".pn4").classList.remove("select-page");
+				pager.querySelector(".pn5").classList.remove("select-page");
+			}
+			else if(page==startNum+1){
+				pager.querySelector(".pn1").classList.remove("select-page");
+				pager.querySelector(".pn2").classList.add("select-page");
+				pager.querySelector(".pn3").classList.remove("select-page");
+				pager.querySelector(".pn4").classList.remove("select-page");
+				pager.querySelector(".pn5").classList.remove("select-page");
+			}
+			else if(page==startNum+2){
+				pager.querySelector(".pn1").classList.remove("select-page");
+				pager.querySelector(".pn2").classList.remove("select-page");
+				pager.querySelector(".pn3").classList.add("select-page");
+				pager.querySelector(".pn4").classList.remove("select-page");
+				pager.querySelector(".pn5").classList.remove("select-page");
+			}
+			else if(page==startNum+3){
+				pager.querySelector(".pn1").classList.remove("select-page");
+				pager.querySelector(".pn2").classList.remove("select-page");
+				pager.querySelector(".pn3").classList.remove("select-page");
+				pager.querySelector(".pn4").classList.add("select-page");
+				pager.querySelector(".pn5").classList.remove("select-page");
+			}
+			else if(page==startNum+4){
+				pager.querySelector(".pn1").classList.remove("select-page");
+				pager.querySelector(".pn2").classList.remove("select-page");
+				pager.querySelector(".pn3").classList.remove("select-page");
+				pager.querySelector(".pn4").classList.remove("select-page");
+				pager.querySelector(".pn5").classList.add("select-page");
+			}		
 			
 			var listData = JSON.parse(request.responseText);
 			var trTemplate = section.querySelector(".tr-template");
 			var loginUser = listData.loginUser;
+			selectStock.innerText = listData.stockName;
 			tbody.innerHTML = "";
-
 			for (var i = 0; i < listData.list.length; i++) {
 				var cloneTr = document.importNode(trTemplate.content, true);
 				var tds = cloneTr.querySelectorAll("td");
@@ -67,22 +154,20 @@ window.addEventListener("load", function () {
 		};
 		request.send();
 	}
-
-	load(1);
+	load(1, stockCode, sortBoard);
 
 	pager.onclick = function (e) {
 		if (e.target.nodeName != "A")
 			return;
 
 		e.preventDefault();
-		load(e.target.innerText);
+		load(e.target.innerText, stockCode, sortBoard);
 	};
 
 	// ========= 글내용과 댓글 불러오기 ==================
 	var titleClickHandler = function (e) {
 		var currentTr = e.target.parentNode.parentNode.parentNode;
 		var target = currentTr.nextElementSibling;
-		console.log(target);
 		var nextTr = target.nextElementSibling;
 
 		// 이미 내용이 있으면 닫아주세요.
@@ -161,7 +246,6 @@ window.addEventListener("load", function () {
 
 			}
 			replyContent.innerHTML = contentSum;
-			console.log(cloneTr)
 			targetContent = cloneTr.querySelector(".content-row");
 			targetreply = cloneTr.querySelector(".reply-content-row");
 			target.insertAdjacentElement('afterend', targetreply);
@@ -174,7 +258,7 @@ window.addEventListener("load", function () {
 	};
 
 	// ========= 댓글쓰기 ==================
-	var regButtonClickHandler = function (e) {
+	var regReplyButtonClickHandler = function (e) {
 
 		// 1. 입력한 값을 얻어온다.
 
@@ -396,7 +480,6 @@ window.addEventListener("load", function () {
 		var regBoardForm = document.querySelector(".pop-up-reg");
 		var regSubmit = regBoardForm.querySelector(".pop-up-content-row");
 
-		console.log(e.target.parentNode.parentNode.previousElementSibling.previousElementSibling)
 		var targetTitle = e.target.parentNode.parentNode.previousElementSibling.previousElementSibling.querySelector(".title");
 		var title = targetTitle.innerText;
 		var titleEncode = encodeURI(title);
@@ -507,7 +590,7 @@ window.addEventListener("load", function () {
 
 		else if (e.target.parentNode.classList
 			.contains("reply-submit-button"))
-			regButtonClickHandler(e);
+			regReplyButtonClickHandler(e);
 
 		else if (e.target.classList.contains("re-modi"))
 			replyModiClickHandler(e);
@@ -534,6 +617,107 @@ window.addEventListener("load", function () {
 			interestYesClickHandler(e);
 
 	};
+	regButtonClickHandler = function (e) {
 
-})
+		// 1. 입력한 값을 얻어온다.
 
+		
+		var title = regBoardForm.querySelector(".reg-title").value;
+		var content = regBoardForm.querySelector(".reg-content").value;
+		var boardId = e.target.dataset.id;
+		var status = "reg";
+
+		if (boardId != "") {
+			status = "modi";
+		}
+
+		String.prototype.trim = function () {
+			return this.replace(/^\s+|\s+$/g, "");
+		}
+
+		var str1 = title;
+		str1 = str1.trim();
+		var str2 = content;
+		str2 = str2.trim();
+
+		// 댓글내용이 없으면 알림을 하고 되돌아간다.
+		if (str1 == "") {
+			alert("제목을 작성하세요");
+			return;
+		} else if (str2 == "") {
+			alert("내용을 작성하세요");
+			return;
+		} else {
+
+
+
+			title = encodeURI(title);
+			content = encodeURI(content);
+
+			var data = [
+				["boardId", boardId],
+				["title", title],
+				["content", content],
+				["status", status],
+				["stockCode", stockCode]
+			]
+			var sendData = [];
+
+			for (var i = 0; i < data.length; i++) {
+				sendData[i] = data[i].join("=");
+			}
+			sendData = sendData.join("&");
+			// 2. 값을 서버에 보낸다.
+
+			var request = new XMLHttpRequest();
+			request.open("POST", "../../card/board/stock_reg_board", true);
+			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			request.send(sendData);
+
+			// 3. 요청이 완료되었는지 결과를 확인한다.
+			e.target.parentNode.firstElementChild.value = null;
+			e.target.parentNode.parentNode.firstElementChild.firstElementChild.value = null;
+			alert("등록되었습니다.");
+
+			load(1, stockCode, sortBoard);
+		}
+	};
+
+
+
+
+	//========= 글쓰기 버튼 클릭==================
+	regBoard.onclick = function (e) {
+		if (e.target.nodeName != "A")
+			return;
+
+		e.preventDefault();
+		if (e.target.id == "reg-button") {
+			regBoardForm.querySelector(".reg-title").value = null;
+			regBoardForm.querySelector(".reg-content").value = null;
+			var regBtData = regBoardForm.querySelector(".reg-submit");
+			regBtData.dataset.id = "";
+			regBoardForm.style.visibility = "visible";
+		}
+	};
+
+	//========= 글쓰기 취소 버튼 클릭 ==================
+	regSubmit.onclick = function (e) {
+		if (e.target.nodeName != "INPUT")
+			return;
+
+		e.preventDefault();
+
+		if (e.target.name == "cancel") {
+			alert("글등록이 취소되었다!!")
+			regBoardForm.style.visibility = "hidden";
+			//========= 글쓰기 등록 버튼 클릭==================
+		} else if (e.target.name == "submit") {
+			regButtonClickHandler(e);
+
+
+			regBoardForm.style.visibility = "hidden";
+		}
+	};
+
+});

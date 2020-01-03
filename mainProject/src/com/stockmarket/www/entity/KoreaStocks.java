@@ -1,7 +1,7 @@
 package com.stockmarket.www.entity;
 //koreaStocks = 코스피+ 코스닥
 
-public class koreaStocks {
+public class KoreaStocks {
 	
 	// 회사명
 	private String companyName;
@@ -22,11 +22,11 @@ public class koreaStocks {
 	// 지역
 	private String location;
 	
-	public koreaStocks() {
+	public KoreaStocks() {
 		
 	}
 	
-	public koreaStocks(String companyName, String stockCode, String sectors, String mainProduct, String stockedDay,
+	public KoreaStocks(String companyName, String stockCode, String sectors, String mainProduct, String stockedDay,
 			String settlementMonth, String representativeName, String website, String location) {
 		
 		this.companyName = companyName;

@@ -20,7 +20,7 @@ import com.stockmarket.www.dao.csv.CSVStockDataDao;
 import com.stockmarket.www.dao.jdbc.JdbcUpjongDao;
 import com.stockmarket.www.dao.jdbc.JdbckoreaStocksDao;
 import com.stockmarket.www.entity.Company;
-import com.stockmarket.www.entity.koreaStocks;
+import com.stockmarket.www.entity.KoreaStocks;
 import com.stockmarket.www.service.CompanyService;
 
 public class BasicCompanyService implements CompanyService {
@@ -40,7 +40,7 @@ public class BasicCompanyService implements CompanyService {
 	}
 
 	@Override
-	public koreaStocks searchCompany(String search) {
+	public KoreaStocks searchCompany(String search) {
 
 		return koreaStockDao.searchCompany(search);
 
@@ -106,7 +106,7 @@ public class BasicCompanyService implements CompanyService {
 			 "테스티아", "키움증권 계좌", ". 키움증권", "키움증권!", "시뮬레이션", "머레이", "동양로",
 			 "동양동", "핸드폰디자인", "두산백과통신", "ssg", "SSG", "대상으로"}; //크롤링 결과의 제거 대상. 지속적인 업데이트 필요
 		
-		List<koreaStocks> stockList = koreaStockDao.getList();
+		List<KoreaStocks> stockList = koreaStockDao.getList();
 		
 		for(int i = 0; i < keyWord.length; i++) {
 			String str = search + " " + keyWord[i];

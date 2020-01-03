@@ -12,7 +12,7 @@ import com.stockmarket.www.dao.jdbc.JdbcUpjongDao;
 import com.stockmarket.www.dao.jdbc.JdbckoreaStocksDao;
 import com.stockmarket.www.entity.CurStock;
 import com.stockmarket.www.entity.StockDetail;
-import com.stockmarket.www.entity.koreaStocks;
+import com.stockmarket.www.entity.KoreaStocks;
 import com.stockmarket.www.service.basic.BasicSystemService;
 
 public class TestSystemService {
@@ -83,9 +83,9 @@ public class TestSystemService {
 			
 			case 12:
 				JdbckoreaStocksDao koreaDao = new JdbckoreaStocksDao();
-				List<koreaStocks> list = koreaDao.getList();
+				List<KoreaStocks> list = koreaDao.getList();
 				int cnt = 0;
-				for(koreaStocks korea : list) {
+				for(KoreaStocks korea : list) {
 					cnt++;
 					System.out.println(korea.getCompanyName());
 				}

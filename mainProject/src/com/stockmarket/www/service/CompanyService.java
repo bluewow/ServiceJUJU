@@ -4,14 +4,14 @@ package com.stockmarket.www.service;
 import java.util.List;
 
 import com.stockmarket.www.entity.Company;
-import com.stockmarket.www.entity.koreaStocks;
+import com.stockmarket.www.entity.KoreaStocks;
 
 public interface CompanyService {
 
 	/*
 	 * 
 	 */
-	koreaStocks searchCompany(String search);
+	KoreaStocks searchCompany(String search);
 	
 	
 	/*

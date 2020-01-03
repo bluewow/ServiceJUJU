@@ -14,7 +14,9 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.stockmarket.www.dao.MemberDao;
+import com.stockmarket.www.dao.StockDao;
 import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
+import com.stockmarket.www.dao.jdbc.JdbcStockDao;
 import com.stockmarket.www.entity.CommunityBoard;
 import com.stockmarket.www.service.CommunityBoardService;
 import com.stockmarket.www.service.basic.BasicCommunityBoardService;
@@ -38,7 +40,7 @@ public class StockBoardJsonController extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		//로그인 세션을 불러온다.
+		// 로그인 세션을 불러온다.
 		Object tempId = session.getAttribute("id");
 		int loginId = -1;
 
@@ -47,11 +49,11 @@ public class StockBoardJsonController extends HttpServlet {
 		MemberDao memberDao = new JdbcMemberDao();
 		String loginUser = memberDao.getMember(loginId).getNickName();
 
-		//게시글목록을 불러온다.
+		// 게시글목록을 불러온다.
 		int page = 1;
 		String field = "TITLE";
 		String query = "";
-		String stockName = "";
+		String stockCode = "";
 
 		String page_ = request.getParameter("p");
 		if (page_ != null && !page_.equals(""))
@@ -62,17 +64,22 @@ public class StockBoardJsonController extends HttpServlet {
 			field = field_;
 
 		String query_ = request.getParameter("q");
-		if (query_ != null && !query_.equals(""))
-			query = query_;
+		if (query_==("my")) 
+			query = loginUser;
 
-		String stockName_ = request.getParameter("s");
-		if (stockName_ != null && !stockName_.equals(""))
-			stockName = stockName_;
-		List<CommunityBoard> list = communityBoardService.getCommunityBoardList(page, field, query, stockName,loginId);
+		String stockCode_ = request.getParameter("s");
+		if (stockCode_ != null && !stockCode_.equals(""))
+			stockCode = stockCode_;
+
+		StockDao stockDao = new JdbcStockDao();
+		String stockName = stockDao.getStockName(stockCode);
+
+		List<CommunityBoard> list = communityBoardService.getCommunityBoardList(page, field, query, stockCode, loginId);
 
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		hm.put("loginUser", loginUser);
 		hm.put("list", list);
+		hm.put("stockName", stockName);
 		Gson gson = new Gson();
 		String json = gson.toJson(hm);
 		response.setCharacterEncoding("UTF-8");
@@ -83,7 +90,8 @@ public class StockBoardJsonController extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		super.doPost(request, response);
 	}
 }

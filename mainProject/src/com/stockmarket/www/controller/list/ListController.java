@@ -20,7 +20,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.stockmarket.www.entity.Company;
-import com.stockmarket.www.entity.koreaStocks;
+import com.stockmarket.www.entity.KoreaStocks;
 import com.stockmarket.www.service.CompanyService;
 import com.stockmarket.www.service.basic.BasicCompanyService;
 
@@ -30,7 +30,7 @@ import oracle.jdbc.proxy.annotation.Post;
 public class ListController extends HttpServlet {
 
 	private CompanyService companyService;
-	private List<koreaStocks> searchCompanyList;
+	private List<KoreaStocks> searchCompanyList;
 
 	public ListController() {
 		companyService = new BasicCompanyService();
@@ -72,7 +72,7 @@ public class ListController extends HttpServlet {
 		    return;
 		}
 		
-		searchCompanyList = new ArrayList<koreaStocks>();
+		searchCompanyList = new ArrayList<KoreaStocks>();
 		
 		//System.out.println(companyService.searchCompanyNames("커피"));
 		

@@ -17,6 +17,32 @@ import com.stockmarket.www.entity.CaptureMemoView;
 public class JdbcCaptureMemoDao implements CaptureMemoDao {
 	
 	@Override
+	public CaptureMemo get(int id) {
+		String sql = "SELECT * FROM CAPTURE_MEMO WHERE ID=?";
+		CaptureMemoView captureMemo = null;
+		try {
+			JdbcDaoContext daoContext = new JdbcDaoContext();
+			PreparedStatement statement = daoContext.getPreparedStatement(sql);
+			statement.setInt(1, id);
+			ResultSet resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {		
+				String name = resultSet.getString("NAME");
+				String title = resultSet.getString("TITLE");
+				Date regdate = resultSet.getDate("regdate");
+				
+//				captureMemo = new CaptureMemo(id, name, title, regdate);
+			}
+			daoContext.close(resultSet, statement);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return captureMemo;
+	}
+	
+	@Override
 	public List<CaptureMemoView> getList(int uid) {
 		List<CaptureMemoView> captureMemos = new ArrayList<>();
 		

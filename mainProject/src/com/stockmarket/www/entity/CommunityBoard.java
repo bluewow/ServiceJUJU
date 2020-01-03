@@ -11,6 +11,7 @@ public class CommunityBoard {
 	private int hit;
 	private String content;
 	private String stockName;
+	private String stockCode;
 	private int replyCnt;
 	private int replyId;
 	private String reContent;
@@ -56,11 +57,12 @@ public class CommunityBoard {
 		this.id = boardId;
 	}
 
-	public CommunityBoard(String title, String content, String writerId) {
+	public CommunityBoard(String title, String content, String writerId, String stockCode) {
 		super();
 		this.title = title;
 		this.content = content;
 		this.writerId = writerId;
+		this.stockCode = stockCode;
 	}
 
 	public CommunityBoard(int boardId) {
@@ -199,12 +201,20 @@ public class CommunityBoard {
 		this.interest = interest;
 	}
 
+	public String getStockCode() {
+		return stockCode;
+	}
+
+	public void setStockCode(String stockCode) {
+		this.stockCode = stockCode;
+	}
+
 	@Override
 	public String toString() {
 		return "CommunityBoard [id=" + id + ", loginId=" + loginId + ", title=" + title + ", writerId=" + writerId
 				+ ", regdate=" + regdate + ", hit=" + hit + ", content=" + content + ", stockName=" + stockName
-				+ ", replyCnt=" + replyCnt + ", replyId=" + replyId + ", reContent=" + reContent + ", interest="
-				+ interest + "]";
+				+ ", stockCode=" + stockCode + ", replyCnt=" + replyCnt + ", replyId=" + replyId + ", reContent="
+				+ reContent + ", interest=" + interest + "]";
 	}
 
 }

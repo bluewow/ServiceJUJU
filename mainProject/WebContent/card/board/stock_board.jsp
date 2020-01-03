@@ -21,14 +21,14 @@
 	<script src="../../js/board/stock_board.js"></script>
 	
 	<!-- Reg Board popup -->
-	<link href="../../css/board/reg_board.css" type="text/css" rel="stylesheet">
-	<script src="../../js/board/reg_board.js"></script>
+	<!-- <link href="../../css/board/reg_board.css" type="text/css" rel="stylesheet"> -->
+	<!-- <script src="../../js/board/reg_board.js"></script> -->
 </head>
 
 <body>
 	<section id="stockTop">
 		<nav id="my-menu">
-			<a href="" id="selected-stock">네오위즈</a>
+			<a href="" id="selected-stock">종목을 선택하세요</a>
 			<a href="" id="my-button">My</a>
 			<a href="" id="favo-button">관심</a>
 			<a href="" id="reg-button">글쓰기</a>
@@ -50,17 +50,17 @@
 		<table class="stockTable">
 			<tbody class="content">
 				<tr>
-					<td colspan="5" style="text-align: center; height: 50px; line-height: 50px;">게시된 글이 없습니다.</td>
+					<td colspan="5" style="text-align: center; height: 50px; line-height: 50px;"><br>작성된 글이 없거나 종목이 선택되지 않았습니다.</td>
 				</tr>
 				<tr class="detail">
-					<td colspan=5>데이터가 불러지지 않았습니다.
+					<td colspan=5><br><br><br>검색창에서 종목을 선택해 주세요.
 					</td>
 				</tr>
 			</tbody>
 		</table>
 		</div>
 		<div class="pager">
-			<a href="?p=1">1</a> <a href="?p=2">2</a> <a href="?p=3">3</a> <a href="?p=3">4</a> <a href="?p=3">5</a>
+			<a class="pn1">1</a> <a class="pn2">2</a> <a class="pn3">3</a> <a class="pn4">4</a> <a class="pn5">5</a>
 		</div>
 
 		<template class="tr-template">

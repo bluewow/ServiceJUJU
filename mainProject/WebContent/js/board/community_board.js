@@ -1,27 +1,113 @@
 window.addEventListener("load", function () {
 
+	var sectionTop = document.querySelector("#communityTop");
+	var myButton = sectionTop.querySelector("#my-button");
+	var interestButton = sectionTop.querySelector("#favo-button");
 	var section = document.querySelector("#communityScroll");
 	var tbody = section.querySelector("table tbody");
 	var pager = section.querySelector(".pager");
+	var sortBoard = "";
+	
+	
+	//마이버튼 클릭
+	myButton.onclick = function (e) {
+		if (e.target.nodeName != "A")
+			return;
 
+		e.preventDefault();
+		if(sortBoard=="") {
+			sortBoard = "my";
+			myButton.classList.add("button-on");
+		} else if(sortBoard=="interest") {
+			sortBoard = "my";
+			myButton.classList.add("button-on");
+			interestButton.classList.remove("button-on");
+		} else if(sortBoard=="my") {
+			sortBoard = "";
+			myButton.classList.remove("button-on");
+		}
+		load(1, sortBoard);
+	};
+	
+	//즐겨찾기버튼 클릭
+	interestButton.onclick = function (e) {
+		if (e.target.nodeName != "A")
+			return;
+
+		e.preventDefault();
+		if(sortBoard=="") {
+			sortBoard = "interest";
+			interestButton.classList.add("button-on");
+		} else if(sortBoard=="my") {
+			sortBoard = "interest";
+			interestButton.classList.add("button-on");
+			myButton.classList.remove("button-on");
+		} else if(sortBoard=="interest") {
+			sortBoard = "";
+			interestButton.classList.remove("button-on");
+		}
+		load(1, sortBoard);
+	};
+	
 	//리스트 불러오기
-	var load = function (page) {
+	var load = function (page, sortBoard) {
 
 		var request = new XMLHttpRequest();
-		request.open("GET", "../../card/board/community_board_list?p=" + page);
-
+		if(sortBoard=="")
+			request.open("GET", "../../card/board/stock_board_list?p=" + page);
+		else if(sortBoard=="my")
+			request.open("GET", "../../card/board/stock_board_list?f=writer_id&q=my&p=" + page);
+		else if(sortBoard=="interest")
+			request.open("GET", "../../card/board/stock_board_list?f=interest&p=" + page);
+	
+		
 		request.onload = function () {
 			//페이지 번호 넘버링
 			var startNum = (page - 2);
 			if (startNum <= 1)
 				startNum = 1;
-			pager.innerHTML = '<a href="?p='
-				+ startNum + '">' + startNum + '</a> <a href="?p='
-				+ (startNum + 1) + '">' + (startNum + 1) + '</a> <a href="?p='
-				+ (startNum + 2) + '">' + (startNum + 2) + '</a> <a href="?p='
-				+ (startNum + 3) + '">' + (startNum + 3) + '</a> <a href="?p='
-				+ (startNum + 4) + '">' + (startNum + 4) + '</a>';
 			
+			pager.querySelector(".pn1").innerText = startNum+0;
+			pager.querySelector(".pn2").innerText = startNum+1;
+			pager.querySelector(".pn3").innerText = startNum+2;
+			pager.querySelector(".pn4").innerText = startNum+3;
+			pager.querySelector(".pn5").innerText = startNum+4;
+			
+			if(page==startNum+0){
+				pager.querySelector(".pn1").classList.add("select-page");
+				pager.querySelector(".pn2").classList.remove("select-page");
+				pager.querySelector(".pn3").classList.remove("select-page");
+				pager.querySelector(".pn4").classList.remove("select-page");
+				pager.querySelector(".pn5").classList.remove("select-page");
+			}
+			else if(page==startNum+1){
+				pager.querySelector(".pn1").classList.remove("select-page");
+				pager.querySelector(".pn2").classList.add("select-page");
+				pager.querySelector(".pn3").classList.remove("select-page");
+				pager.querySelector(".pn4").classList.remove("select-page");
+				pager.querySelector(".pn5").classList.remove("select-page");
+			}
+			else if(page==startNum+2){
+				pager.querySelector(".pn1").classList.remove("select-page");
+				pager.querySelector(".pn2").classList.remove("select-page");
+				pager.querySelector(".pn3").classList.add("select-page");
+				pager.querySelector(".pn4").classList.remove("select-page");
+				pager.querySelector(".pn5").classList.remove("select-page");
+			}
+			else if(page==startNum+3){
+				pager.querySelector(".pn1").classList.remove("select-page");
+				pager.querySelector(".pn2").classList.remove("select-page");
+				pager.querySelector(".pn3").classList.remove("select-page");
+				pager.querySelector(".pn4").classList.add("select-page");
+				pager.querySelector(".pn5").classList.remove("select-page");
+			}
+			else if(page==startNum+4){
+				pager.querySelector(".pn1").classList.remove("select-page");
+				pager.querySelector(".pn2").classList.remove("select-page");
+				pager.querySelector(".pn3").classList.remove("select-page");
+				pager.querySelector(".pn4").classList.remove("select-page");
+				pager.querySelector(".pn5").classList.add("select-page");
+			}
 			
 			var listData = JSON.parse(request.responseText);
 			var trTemplate = section.querySelector(".tr-template");
@@ -62,30 +148,31 @@ window.addEventListener("load", function () {
 		request.send();
 	}
 
-	load(1)
+	load(1, sortBoard);
 
 	pager.onclick = function (e) {
 		if (e.target.nodeName != "A")
 			return;
 
 		e.preventDefault();
-		load(e.target.innerText);
+		load(e.target.innerText, sortBoard);
 	};
 	
 	// ========= 글내용과 댓글 불러오기 ==================
 	var titleClickHandler = function (e) {
 		var currentTr = e.target.parentNode.parentNode.parentNode;
 		var target = currentTr.nextElementSibling;
-		console.log(target);
 		var nextTr = currentTr.nextElementSibling.nextElementSibling;
 
 		// 이미 내용이 있으면 닫아주세요.
-		//		if (nextTr.classList.contains("content-row")) {
-		//			var row = nextTr.nextElementSibling;
-		//			row.parentNode.removeChild(row);
-		//			nextTr.parentNode.removeChild(nextTr);
-		//			return;
-		//		}
+		if(nextTr) {
+			if (nextTr.classList.contains("content-row")) {
+				var row = nextTr.nextElementSibling;
+				row.parentNode.removeChild(row);
+				nextTr.parentNode.removeChild(nextTr);
+				return;
+				};
+		};
 		// 내용을 로딩중이면 표시해주세요.
 		if (e.target.parentNode.parentNode.lastChild.nodeName == "IMG") {
 			alert("로딩중입니다~");
@@ -380,7 +467,6 @@ window.addEventListener("load", function () {
 		var regBoardForm = document.querySelector(".pop-up-reg");
 		var regSubmit = regBoardForm.querySelector(".pop-up-content-row");
 
-		console.log(e.target.parentNode.parentNode.previousElementSibling.previousElementSibling)
 		var targetTitle = e.target.parentNode.parentNode.previousElementSibling.previousElementSibling.querySelector(".title");
 		var title = targetTitle.innerText;
 		var titleEncode = encodeURI(title);

@@ -22,7 +22,7 @@ public class BasicCaptureMemoService implements CaptureMemoService {
 	
 	@Override
 	public CaptureMemo get(int id) {
-		return null;
+		return captureMemoDao.get(id);
 	}
 
 	@Override

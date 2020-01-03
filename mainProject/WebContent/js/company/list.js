@@ -25,14 +25,17 @@ window.addEventListener("load", function(){
 	}
 	
 	
-	var UncertifiedLogin = document.querySelector("#UncertifiedLogin");
+	var UncertifiedLogin = document.querySelectorAll("#UncertifiedLogin");
 	var certifiedLoing = document.querySelector("#certifiedLoing");
 	
 	if (UncertifiedLogin != null) {
-		UncertifiedLogin.onclick = function(){
-			alert("로그인이 필요한 서비스입니다.");
-		};
-	}
+		for (var i = 0; i < UncertifiedLogin.length; i++){
+			
+			UncertifiedLogin[i].onclick = function(){
+				alert("로그인이 필요한 서비스입니다.");
+			};
+		}
+	};
 	
 	if (certifiedLoing != null) {
 		certifiedLoing.onclick = function(e){

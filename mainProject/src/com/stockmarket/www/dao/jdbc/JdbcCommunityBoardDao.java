@@ -13,15 +13,19 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 	@Override
 	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockCode, int loginId) {
-
+		
 		List<CommunityBoard> list = new ArrayList<>();
 
 		String sql = "SELECT * FROM ("
-				+ "SELECT ROWNUM NUM, B.* FROM("
-				+ "SELECT * FROM (SELECT BV.*, ("
-				+ "SELECT BOARD_ID FROM INTEREST_BOARD WHERE MEMBER_ID=? AND BOARD_ID = BV.ID"
-				+ ") INTEREST FROM BOARD_VIEW BV WHERE STOCKNAME LIKE ?) "
-				+ "WHERE " + field + " LIKE ? ORDER BY ID DESC) B) WHERE NUM BETWEEN ? AND ?";
+						+ "SELECT ROWNUM NUM, B.* FROM("
+							+ "SELECT * FROM ("
+								+ "SELECT BV.*, ("
+									+ "SELECT BOARD_ID FROM INTEREST_BOARD WHERE MEMBER_ID=? AND BOARD_ID = BV.ID"
+								+ ") INTEREST FROM BOARD_VIEW BV"
+							+ ") WHERE "+field+" LIKE ? AND STOCKCODE LIKE ? ORDER BY ID DESC"
+						+ ") B"
+					+ ") WHERE NUM BETWEEN ? AND ?";
+
 
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -32,8 +36,8 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 			pst = daoContext.getPreparedStatement(sql);
 
 			pst.setInt(1, loginId);
-			pst.setString(2, "%" + stockCode + "%");
-			pst.setString(3, "%" + query + "%");
+			pst.setString(2, "%" + query + "%");
+			pst.setString(3, "%" + stockCode + "%");
 			pst.setInt(4, 1 + 10 * (page - 1));
 			pst.setInt(5, 10 * page);
 
@@ -164,7 +168,7 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 	public int insertCommunityBoard(CommunityBoard communityBoard) {
 		int result = 0;
 		String sql = "INSERT INTO BOARD (ID, TITLE, WRITER_ID, CONTENT, STOCKCODE) "
-				+ "VALUES ((SELECT NVL(MAX(ID),0)+1 FROM BOARD), ?, ?, ?, '095660')";
+				+ "VALUES ((SELECT NVL(MAX(ID),0)+1 FROM BOARD), ?, ?, ?, ?)";
 
 		PreparedStatement pst = null;
 		JdbcDaoContext daoContext = new JdbcDaoContext();
@@ -175,6 +179,7 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 			pst.setString(1, communityBoard.getTitle());
 			pst.setString(2, communityBoard.getWriterId());
 			pst.setString(3, communityBoard.getContent());
+			pst.setString(4, communityBoard.getStockCode());
 
 			result = pst.executeUpdate();
 
