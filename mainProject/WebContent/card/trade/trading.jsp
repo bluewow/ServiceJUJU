@@ -22,7 +22,7 @@
 	<!-- --------------- page-top -------------- -->
 	<header class="page-top">
 		<div id="stockName">
-			<div>${companyName }</div>
+			<div></div><!-- 종목명 -->
 			<div>204,000</div>
 		</div>
 	</header>
