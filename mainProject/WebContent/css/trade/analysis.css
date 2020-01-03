@@ -14,25 +14,26 @@
     margin-right: auto;
 }
 
-
 .page-top {
 	height: 18%;
-}
+	padding: 0% 8%;
+	}
+	
+	.page-top > #stockName {
+		text-align:left;
+		font-weight: bold;
+		font-size: 26px;
+		line-height: 150%;
+		padding-top: 5%;
+	}
 
 .page-mid > div {
 	display: flex;
 	justify-content: space-around;
 }
-/*     display: flex;
-    height: 78%;
-	}
-	.page-mid div {
-		display: flex;
-	    flex-direction: column;
-	    justify-content: space-around; */
-	}
-	
+
 .page-bottom {
 
 }
-	
+
+

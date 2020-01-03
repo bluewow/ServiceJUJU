@@ -34,33 +34,35 @@
 	<!-- --------------- page-top -------------- -->
 	<header class="page-top">
 		<div id="stockName">
-			<div>${companyName }</div>
+			<div></div><!-- 종목명 -->
 			<div>204,000</div>
 		</div>
-		<c:if test="${not empty sessionScope.id }">
+<%-- 		<c:if test="${not empty sessionScope.id }">
 			<input id="capture" type="button" value="캡쳐하기">
-		</c:if>
+		</c:if> --%>
 	</header>
 
 	<!-- --------------- page-mid -------------- -->
 	<section class="page-mid">
 		<div>
-			<div id="pieChartA"></div>
- 			<div id="pieChartB"></div>
-			<div id="pieChartC"></div> 
+			<div>
+				<br>
+				<div id="chartA"></div>
+				<br>
+	 			<div id="chartB"></div>
+			</div>
+			<div>
+				<br>
+				<div id="chartC"></div>
+				<br>
+				<div id="chartD"></div>
+			</div> 
 	    </div>
-	    <div>
-	    	<div id="timeChart"></div>
-	    </div>
-	    <div>
-    		<div id="side"></div>
-    		<div id="side2"></div>
-		</div>
 	</section>
 
 	<!-- --------------- page-bottom -------------- -->
 	<section class="page-bottom">
-		
+		<div id="chartE"></div>
 	</section>
 	
 </div>

@@ -8,29 +8,27 @@ import org.jsoup.select.Elements;
 
 import com.google.gson.Gson;
 import com.stockmarket.www.controller.system.AppContext;
-import com.stockmarket.www.dao.MemberDao;
-import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
+import com.stockmarket.www.dao.KoreaStocksDao;
+import com.stockmarket.www.dao.jdbc.JdbckoreaStocksDao;
 import com.stockmarket.www.entity.CaptureMemo;
-import com.stockmarket.www.entity.Member;
+import com.stockmarket.www.entity.KoreaStocks;
 import com.stockmarket.www.service.AnalysisService;
 
 public class BasicAnalysisService implements AnalysisService{
-
+	KoreaStocksDao koreaStocksDao;
+	
+	public BasicAnalysisService() {
+		koreaStocksDao = new JdbckoreaStocksDao();
+	}
+	
 	@Override
-	public void content() {
-		
+	public String getStockName(String codeNum) {
+		KoreaStocks koreaStocks = koreaStocksDao.get(codeNum);
+			
+		return koreaStocks.getCompanyName();  
 	}
 
-	@Override
-	public void predict() {
-		
-	}
-
-	@Override
-	public void refreshPrice() {
-		
-	}
-
+	
 	@Override
 	public String captureDataCrawling(String codeNum, int memberId) {
 		Document doc = null;
@@ -72,5 +70,7 @@ public class BasicAnalysisService implements AnalysisService{
 		String json = gson.toJson(capture);
 		return json;
 	}
+
+
 
 }
