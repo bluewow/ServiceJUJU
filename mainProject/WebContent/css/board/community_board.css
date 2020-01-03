@@ -309,3 +309,22 @@ a {
 	width:200px;
 	margin:auto;
 }
+
+
+.select-page {
+	font-weight: bold;
+	font-size: 1em;
+	width: 24px;
+	background-color: #13bfd7;
+	color: #ffffff;
+	padding: 1px 6px;
+	border-radius: 16px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+}
+
+.select-page:hover {
+	opacity: 0.7;
+}

@@ -66,13 +66,48 @@ window.addEventListener("load", function () {
 			var startNum = (page - 2);
 			if (startNum <= 1)
 				startNum = 1;
-			pager.innerHTML = '<a href="?p='
-				+ startNum + '">' + startNum + '</a> <a href="?p='
-				+ (startNum + 1) + '">' + (startNum + 1) + '</a> <a href="?p='
-				+ (startNum + 2) + '">' + (startNum + 2) + '</a> <a href="?p='
-				+ (startNum + 3) + '">' + (startNum + 3) + '</a> <a href="?p='
-				+ (startNum + 4) + '">' + (startNum + 4) + '</a>';
 			
+			pager.querySelector(".pn1").innerText = startNum+0;
+			pager.querySelector(".pn2").innerText = startNum+1;
+			pager.querySelector(".pn3").innerText = startNum+2;
+			pager.querySelector(".pn4").innerText = startNum+3;
+			pager.querySelector(".pn5").innerText = startNum+4;
+			
+			if(page==startNum+0){
+				pager.querySelector(".pn1").classList.add("select-page");
+				pager.querySelector(".pn2").classList.remove("select-page");
+				pager.querySelector(".pn3").classList.remove("select-page");
+				pager.querySelector(".pn4").classList.remove("select-page");
+				pager.querySelector(".pn5").classList.remove("select-page");
+			}
+			else if(page==startNum+1){
+				pager.querySelector(".pn1").classList.remove("select-page");
+				pager.querySelector(".pn2").classList.add("select-page");
+				pager.querySelector(".pn3").classList.remove("select-page");
+				pager.querySelector(".pn4").classList.remove("select-page");
+				pager.querySelector(".pn5").classList.remove("select-page");
+			}
+			else if(page==startNum+2){
+				pager.querySelector(".pn1").classList.remove("select-page");
+				pager.querySelector(".pn2").classList.remove("select-page");
+				pager.querySelector(".pn3").classList.add("select-page");
+				pager.querySelector(".pn4").classList.remove("select-page");
+				pager.querySelector(".pn5").classList.remove("select-page");
+			}
+			else if(page==startNum+3){
+				pager.querySelector(".pn1").classList.remove("select-page");
+				pager.querySelector(".pn2").classList.remove("select-page");
+				pager.querySelector(".pn3").classList.remove("select-page");
+				pager.querySelector(".pn4").classList.add("select-page");
+				pager.querySelector(".pn5").classList.remove("select-page");
+			}
+			else if(page==startNum+4){
+				pager.querySelector(".pn1").classList.remove("select-page");
+				pager.querySelector(".pn2").classList.remove("select-page");
+				pager.querySelector(".pn3").classList.remove("select-page");
+				pager.querySelector(".pn4").classList.remove("select-page");
+				pager.querySelector(".pn5").classList.add("select-page");
+			}
 			
 			var listData = JSON.parse(request.responseText);
 			var trTemplate = section.querySelector(".tr-template");
@@ -113,7 +148,7 @@ window.addEventListener("load", function () {
 		request.send();
 	}
 
-	load(1, sortBoard)
+	load(1, sortBoard);
 
 	pager.onclick = function (e) {
 		if (e.target.nodeName != "A")

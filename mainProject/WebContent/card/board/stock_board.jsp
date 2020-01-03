@@ -60,7 +60,7 @@
 		</table>
 		</div>
 		<div class="pager">
-			<a href="?p=1">1</a> <a href="?p=2">2</a> <a href="?p=3">3</a> <a href="?p=3">4</a> <a href="?p=3">5</a>
+			<a class="pn1">1</a> <a class="pn2">2</a> <a class="pn3">3</a> <a class="pn4">4</a> <a class="pn5">5</a>
 		</div>
 
 		<template class="tr-template">
