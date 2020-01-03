@@ -1,65 +1,60 @@
 // 메모 목록 로드
 function load() {
-	var trTemplate = document.querySelector(".tr-template-list");
-    var content = document.querySelector(".content");
-	var request = new XMLHttpRequest();
+	$.getJSON("captureMemo-json")
+	.done(function (list) {
+		var trTemplate = document.querySelector(".tr-template-list");
+		var content = $(".content");
+		
+		content.html("");
 	
-    request.open("GET", "captureMemo-json", true);
-    request.onload = function() {
-        var list = JSON.parse(request.responseText);
-        content.innerHTML = "";
-
 		for(var i = 0; i < list.length; i++) {
 			var cloneTr = document.importNode(trTemplate.content, true);
-			var tds = cloneTr.querySelectorAll("td");
+			var tds = $(cloneTr).children();
 			
-			tds[0].innerText = list[i].codeNumName;
-			tds[1].innerText = list[i].title;
-			var temp = document.createTextNode(list[i].regdate);
-			tds[2].firstElementChild.before(temp);
-			tds[2].firstElementChild.dataset.id = list[i].id;
-
+			tds.children().eq(0).text(list[i].codeNumName);
+			tds.children().eq(1).text(list[i].title);
+			tds.children().eq(2).children().first().before(list[i].regdate);
+			tds.children().eq(2).children().first().attr("dataset.id", list[i].id);
+	
 			content.append(cloneTr);
 		}
-    };
-    request.onerror = function() {
-        alert("로딩 실패");
-    };
-    request.send();
+	})
+	.fail(function () {
+		alert("로딩 실패");
+	});
 }
 
-window.addEventListener("load", function(e) {
+$(function(e) {
 	load();
 
-	var content = this.document.querySelector(".content");
+	var content = $(".content");
 	var trTemplate = document.querySelector(".tr-template");
 	var prevMemo;
 	// var tid;
 
-    content.onclick = function(e) {
-        var target = e.target;
+    content.click(function(e) {
+        var target = $(e.target);
 
         // if(tid != null){
         // 	clearTimeout(tid);
         // 	tid = null;
 		// }
-		
-		switch(target.nodeName) {
+		switch(target.prop("nodeName")) {
 			case "TD":	// detail 펼치기
-				if (target.parentNode.nextElementSibling != null)
-					if (target.parentNode.nextElementSibling.className != "parent") {
-						if (prevMemo != null) prevMemo.remove();
+				if (target.parent().next().length != 0) {
+					if (target.parent().next().attr("class") != "parent") {
+						if (prevMemo.length != 0) prevMemo.remove();
 						return;
+					}					
 				}
 				
 				if (prevMemo != null) prevMemo.remove();
 				
-				var cloneTr = document.importNode(trTemplate.content, true);
+				var clone = document.importNode(trTemplate.content, true);
+				target.parent().get(0).after(clone);
 				
-				target.parentElement.after(cloneTr);
-				
-				if (content.querySelector(".child") != null)
-					prevMemo = content.querySelector(".child").parentElement;
+				if (content.find(".child").first().length != 0)
+					prevMemo = content.find(".child").first().parent();
 				
 				// console.log(prevMemo.style.height);
 				// tid = setTimeout(function(){
@@ -67,32 +62,37 @@ window.addEventListener("load", function(e) {
 					// 	console.log(prevMemo);
 					// 	tid = null;
 					// }, 500);
+
+				// 메모 수정
+				$(".button").click(function () {
+					var data = {};
+					data.id = target.parent().find("td").last().children().attr("dataset.id");
+					data.title = $(".memo > div").eq(0).children().first().val();
+					data.content = $(".memo > div").eq(1).children().first().val();
+					
+					$.post("captureMemo-json-update", JSON.stringify(data))
+					.done(function (result) {
+						if(result == 1) {
+							target.parent().find("td").eq(1).text($(".memo > div").eq(0).children().first().val());
+						}
+					})
+					.fail(function () {
+						alert("수정 실패");
+					})
+				});
+
 				break;
 			case "SPAN":	// 메모 삭제
-				var request = new XMLHttpRequest();
-				var data = [
-					["memoId", target.dataset.id]
-				];
-				var sendData = [];
-
-				for(var i=0; i<data.length; i++)
-            		sendData[i] = data[i].join("=");
-					
-				sendData = sendData.join("&");
-				
-				request.open("POST", "captureMemo-json-del", true);
-				request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-				request.onload = function() {
+				$.post("captureMemo-json-del", "memoId=" + target.attr("dataset.id"))
+				.done(function() {
 					load();
-				}
-				request.onerror = function() {
+				})
+				.fail(function() {
 					alert("삭제 실패");
-				};
-				
-				request.send(sendData);
+				});
 				break;
 		}
-	};
+	});
 });
 
 window.addEventListener("message", function(e) {
