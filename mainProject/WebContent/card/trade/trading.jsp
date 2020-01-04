@@ -11,6 +11,8 @@
 <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
 <!-- ref analysis.css -->
 <link rel="stylesheet" href="../../css/trade/trading.css">
+<!-- download fontawesome.com -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="../../js/trade/trade.js"></script>
@@ -22,8 +24,11 @@
 	<!-- --------------- page-top -------------- -->
 	<header class="page-top">
 		<div id="stockName">
-			<div></div><!-- 종목명 -->
-			<div>204,000</div>
+			<div></div>		<!-- 종목명 -->
+			<div></div>		<!-- 현재가 -->
+			<span></span> 	<!-- up/down 기호-->
+			<span></span>	<!-- 원 -->
+			<span></span>	<!-- % -->
 		</div>
 	</header>
 	<!-- TODO 장이마감되었습니다 -->

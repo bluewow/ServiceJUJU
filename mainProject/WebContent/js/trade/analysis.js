@@ -5,8 +5,7 @@ window.addEventListener("message", function(e) {
 		codeNum = e.data;
 		updateEvent();
 		chartUpdate();
-		
-		var x = document.querySelectorAll("text");
+	
 	}
 });
 
@@ -17,13 +16,31 @@ window.addEventListener("load", function() {
 });
 
 function updateEvent() {
-	var name = document.querySelectorAll("#stockName div");
-
+	var stockNameDiv = document.querySelectorAll("#stockName div");
+	var stockNameSpan = document.querySelectorAll("#stockName span");
+	
 	var ajax = new XMLHttpRequest();
 	ajax.open("GET", "../../card/trade/analysis?codeNum=" + codeNum);
 	ajax.onload = function() {
-		var obj = ajax.responseText;
-		name[0].innerHTML = obj;
+		var obj = JSON.parse(ajax.responseText);
+		stockNameDiv[0].innerHTML = obj.name;
+		stockNameDiv[1].innerHTML = obj.price.toLocaleString();
+		if(obj.status == "up") {
+			stockNameSpan[0].classList.add("fa", "fa-caret-up");
+			stockNameSpan[1].innerHTML = obj.unit.toLocaleString();
+			stockNameSpan[2].innerHTML = "(+"+ obj.ratio + "%)";
+			for(var i = 0; i < stockNameSpan.length; i++) {
+				stockNameSpan[i].style.color = "red";
+			}
+		}
+		if(obj.status == "down") {
+			stockNameSpan[0].classList.add("fa", "fa-caret-down");
+			stockNameSpan[1].innerHTML = obj.unit.toLocaleString();
+			stockNameSpan[2].innerHTML = "(-"+ obj.ratio + "%)";
+			for(var i = 0; i < stockNameSpan.length; i++) {
+				stockNameSpan[i].style.color = "blue";
+			}
+		}
 	}
 	ajax.send();
 }

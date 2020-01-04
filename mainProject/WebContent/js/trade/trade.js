@@ -3,17 +3,16 @@ var codeNum = "005930"; //삼성전자
 window.addEventListener("message", function(e) {
 	if(e.data && (e.data.length == 6)) { //codeNum
 		codeNum = e.data;
-//		asyncGraph(e.data);					// 종목에 맞는 그래프로 변경
+		updateEvent();
+		
 		asyncTrade("pass", 0, e.data);		// 매수/매도 창 데이터 갱신
 	}
 });
 
 window.addEventListener("load", function(){
-	//load google chart
-	google.charts.load('current', {packages: ['corechart', 'line']});
-//	asyncGraph(codeNum);
+	updateEvent();
+	
 	asyncTrade("pass", 0);		
-	dailyGraphFunc();	// 그래프 변경
 	tradeFunc();		// 매수/매도 이벤트 처리
 
 
@@ -27,59 +26,53 @@ function asyncGraph() {
     			drawBasic(JSON.parse(ajax.responseText)));
     }
     ajax.send();
-    
-	//그림그리기 위한 data
-	function drawBasic(list) {
+}
 
-	//-------------------- Set Data --------------------------
-	  var data = new google.visualization.DataTable();
-	  data.addColumn('string', 'day');
-	  data.addColumn('number', '원');
+function updateEvent() {
+	var stockNameDiv = document.querySelectorAll("#stockName div");
+	var stockNameSpan = document.querySelectorAll("#stockName span");
 
-	  data.addRows(list);
-	  
-	  //-------------------- Set Option --------------------------
-	  var options = {
-		      legend: {
-		          position: 'none'
-		      }, //non-display column name
-		      series:{
-		      	0: {color: '#13bfd7'},
-		      } //graph color
-	  }; 
-
-
-	  //-------------------- Draw LineChart --------------------------
-	  function resize() {
-	  	var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-	  	chart.draw(data, options);
-	  }
-	  
-	  //반응형
-	  window.onload = resize();
-	  window.onresize = resize;
-
-	}	
+	var ajax = new XMLHttpRequest();
+	ajax.open("GET", "../../card/trade/trade?codeNum=" + codeNum);
+	ajax.onload = function() {
+		var obj = JSON.parse(ajax.responseText);
+		stockNameDiv[0].innerHTML = obj.name;
+		stockNameDiv[1].innerHTML = obj.price.toLocaleString();
+		if(obj.status == "up") {
+			stockNameSpan[0].classList.add("fa", "fa-caret-up");
+			stockNameSpan[1].innerHTML = obj.unit.toLocaleString();
+			stockNameSpan[2].innerHTML = "(+"+ obj.ratio + "%)";
+			for(var i = 0; i < stockNameSpan.length; i++) {
+				stockNameSpan[i].style.color = "red";
+			}
+		}
+		if(obj.status == "down") {
+			stockNameSpan[0].classList.add("fa", "fa-caret-down");
+			stockNameSpan[1].innerHTML = obj.unit.toLocaleString();
+			stockNameSpan[2].innerHTML = "(-"+ obj.ratio + "%)";
+			for(var i = 0; i < stockNameSpan.length; i++) {
+				stockNameSpan[i].style.color = "blue";
+			}
+		}
+	}
+	ajax.send();
 }
 
 function asyncTrade(p1, p2) { //p1=buy/sell p2=수량 p3=종목코드
 	var button = document.querySelector("#page-bottom-box");
-	var name = document.querySelectorAll("#stockName div"); 
 	var data = button.querySelectorAll(".data");
 	var sellButton = button.querySelector("#sell");
 	
 	var ajax = new XMLHttpRequest();
     ajax.open("GET", "../../card/trade/trade?replaceEvent=on&button="
-    		+ p1 + "&Purse/Sold=" + p2 + "&codeNum=" + codeNum);
+    		+ p1 + "&Purse/Sold=" + p2 + "&codeNum" + codeNum );
     ajax.onload = function() {
     	var obj = JSON.parse(ajax.responseText);
         data[0].innerHTML = obj.avgPrice.toLocaleString() + "원";
         data[1].innerHTML = obj.quantity.toLocaleString() + "주";
         data[2].innerHTML = obj.vMoney.toLocaleString() + "원";
         data[3].value = "";
-        name[0].innerHTML = obj.name;
-        name[1].innerHTML = "";
-        
+
 		if(data[1].innerHTML == "0주") {
 			sellButton.className = "event button button-button shadow"
 			sellButton.disabled = true;
@@ -115,19 +108,6 @@ function asyncTrade(p1, p2) { //p1=buy/sell p2=수량 p3=종목코드
         }
     }    
     ajax.send();
-}
-
-//그래프 변경
-function dailyGraphFunc() {
-    var dateButton = document.querySelector(".page-mid");
-
-    dateButton.onclick = function(e) {
-        if(e.target.nodeName != "INPUT")
-        	return;
-        
-        e.preventDefault();
-        asyncGraph(e.target.value);
-    }
 }
 
 //  매수/매도 이벤트 처리

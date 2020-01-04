@@ -44,7 +44,21 @@ public class TradeController extends HttpServlet{
 			return;
 		}
 
-		//가격정보 reflesh or 매수-매도 실행 
+		String codeNum = request.getParameter("codeNum");
+		if(codeNum != null) {
+			HashMap<Object, Object>map = new HashMap<>();
+			map.put("name", service.getCompanyName(codeNum));
+			map.put("price", 20000);
+			map.put("status", "up"); //or down
+			map.put("unit", 40000);
+			map.put("ratio", "1.13");
+			response.setContentType("application/json; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.print(new JSONObject(map));
+			return;
+		}
+		
+		//매수-매도 실행 
 		String price = request.getParameter("replaceEvent");
 		if(price != null) { //price is only "on"
 			int result = 0;

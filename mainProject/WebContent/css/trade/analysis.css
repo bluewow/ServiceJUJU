@@ -36,4 +36,12 @@
 
 }
 
+#stockName > div:nth-child(2) {
+	display: contents
+}
+
+#stockName > span {
+	font-size: medium;
+}
+
 

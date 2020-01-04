@@ -2,6 +2,7 @@ package com.stockmarket.www.controller.trade;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
 
 import com.stockmarket.www.service.AnalysisService;
 import com.stockmarket.www.service.basic.BasicAnalysisService;
@@ -39,9 +42,15 @@ public class AnalysisController extends HttpServlet{
 		
 		String codeNum = request.getParameter("codeNum");
 		if(codeNum != null) {
+			HashMap<Object, Object>map = new HashMap<>();
+			map.put("name", service.getStockName(codeNum));
+			map.put("price", 20000);
+			map.put("status", "up"); //or down
+			map.put("unit", 40000);
+			map.put("ratio", "1.13");
 			response.setContentType("application/json; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.print(service.getStockName(codeNum));
+			out.print(new JSONObject(map));
 			return;
 		}
 		

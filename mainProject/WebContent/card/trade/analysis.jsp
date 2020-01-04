@@ -34,8 +34,11 @@
 	<!-- --------------- page-top -------------- -->
 	<header class="page-top">
 		<div id="stockName">
-			<div></div><!-- 종목명 -->
-			<div>204,000</div>
+			<div></div>		<!-- 종목명 -->
+			<div></div>		<!-- 현재가 -->
+			<span></span> 	<!-- up/down 기호-->
+			<span></span>	<!-- 원 -->
+			<span></span>	<!-- % -->
 		</div>
 <%-- 		<c:if test="${not empty sessionScope.id }">
 			<input id="capture" type="button" value="캡쳐하기">
@@ -63,6 +66,8 @@
 	<!-- --------------- page-bottom -------------- -->
 	<section class="page-bottom">
 		<div id="chartE"></div>
+		<div>누적측정률</div>
+		<div>최신측정률</div>
 	</section>
 	
 </div>
