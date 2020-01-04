@@ -38,7 +38,7 @@ public class SystemController extends HttpServlet {
 		
 		Thread thread = new Thread(()->{
 			try {
-				while(true) 
+				while(true) {
 					systemThread();
 					//10분주기 - refreshStockPrice 함수실행시 약 7분소요로 10분주기로 변경
 					Thread.sleep(1000 * 60 * 10);
