@@ -95,7 +95,6 @@ public class ListController extends HttpServlet {
 		
 		
 		
-		//System.out.println(id);
 		
 		request.setAttribute("search", searchCompanyList);
 		request.setAttribute("logIn", id);

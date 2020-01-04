@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -20,11 +19,11 @@ import com.google.gson.JsonParser;
 import com.stockmarket.www.controller.system.AppContext;
 import com.stockmarket.www.controller.system.SystemLib;
 import com.stockmarket.www.dao.HaveStockDao;
+import com.stockmarket.www.dao.KoreaStocksDao;
 import com.stockmarket.www.dao.MemberDao;
 import com.stockmarket.www.dao.RecordAssetDao;
 import com.stockmarket.www.dao.StockDetailDao;
 import com.stockmarket.www.dao.UpjongDao;
-import com.stockmarket.www.dao.KoreaStocksDao;
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
 import com.stockmarket.www.dao.jdbc.JDBCRecordAssetDao;
 import com.stockmarket.www.dao.jdbc.JdbcHaveStockDao;
@@ -34,11 +33,11 @@ import com.stockmarket.www.dao.jdbc.JdbcUpjongDao;
 import com.stockmarket.www.dao.jdbc.JdbckoreaStocksDao;
 import com.stockmarket.www.entity.CurStock;
 import com.stockmarket.www.entity.HaveStockView;
+import com.stockmarket.www.entity.KoreaStocks;
 import com.stockmarket.www.entity.Member;
 import com.stockmarket.www.entity.RecordAsset;
 import com.stockmarket.www.entity.StockDetail;
 import com.stockmarket.www.entity.Upjong;
-import com.stockmarket.www.entity.KoreaStocks;
 import com.stockmarket.www.service.SystemService;
 
 public class BasicSystemService implements SystemService {
@@ -46,8 +45,6 @@ public class BasicSystemService implements SystemService {
 	// for update Market
 	// <th> 회사명|종목코드|업종|주요제품|상장일|결산월|대표자명|홈페이지|지역 </th>
 	private static final int COMPANY_INFO_COLUMN = 9;
-	private static final String KOSPI = "stockMkt";
-	private static final String KOSDAQ = "kosdaqMkt";
 	List<String[]> companyList;
 	String[] dataBuffer;
 	MemberDao memberDao;
@@ -77,7 +74,6 @@ public class BasicSystemService implements SystemService {
 
 		stockMarket = getCurrentStockPrice(codeNum);
 		AppContext.setStockMarket(stockMarket);
-        System.out.println("크롤링 완료 서비스 시작!:"+AppContext.getStockMarket().get(0).toString());
 	}
 
 	private List<CurStock> getCurrentStockPrice(List<String> codeNums) {
@@ -113,7 +109,6 @@ public class BasicSystemService implements SystemService {
 	@Override
 	public boolean updateMarket(String market) {
 		Document doc = null;
-		CSVStockDataDao data = new CSVStockDataDao();
 		companyList = new ArrayList<String[]>();
 		dataBuffer = new String[COMPANY_INFO_COLUMN];
 		String type = null;
@@ -218,7 +213,6 @@ public class BasicSystemService implements SystemService {
 	}
 
 	public void setStockDataAll(String codeNum) {
-		List<StockDetail> list = new ArrayList<StockDetail>();
 		Gson gson = new Gson();
 
 		// 일별시세 게시판
@@ -265,7 +259,6 @@ public class BasicSystemService implements SystemService {
 		// IndustryAtag.next() => 업종 명만 뽑아냄
 		ArrayList<String> upjongAtag = new ArrayList<>();
 		ArrayList<String> upjonName = new ArrayList<>();
-		int cnt = 0;
 
 		// 1. 업종명과 해당링크를 얻는다.
 		while (IndustryAtag.hasNext())

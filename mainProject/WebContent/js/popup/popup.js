@@ -82,7 +82,7 @@ window.addEventListener("load", function(){
 	//팝업 hidden 처리
 	////////////////////////////
 	function hiddenFunc() {
-	    window.onclick = function(e) {
+	    window.onmousedown = function(e) {
 	        var wrapper = document.querySelector(".pop-up-wrapper");
 	        var loginPopup = document.querySelector(".pop-up");
 	        var signupPopup = document.querySelector(".sign-up-pop-up");

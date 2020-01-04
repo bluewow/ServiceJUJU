@@ -72,7 +72,6 @@ public class SystemController extends HttpServlet {
 		}
 		
 		if(curHour.equals("19") && preHour.equals("18")) {
-			System.out.println("실행 중인가");
 			service.insertRecordAsset();
 		}
 	
