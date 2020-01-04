@@ -40,12 +40,15 @@ public class SystemController extends HttpServlet {
 			try {
 				while(true) 
 					systemThread();
-				
+					//10분주기 - refreshStockPrice 함수실행시 약 7분소요로 10분주기로 변경
+					Thread.sleep(1000 * 60 * 10);
+				}
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+	
 			} catch (IOException e) {
 				e.printStackTrace();
-			}	
+			} 
+			
 		});
 		
 		thread.start();
@@ -56,7 +59,7 @@ public class SystemController extends HttpServlet {
 		SimpleDateFormat date = new SimpleDateFormat("HH"); //HH : 0~23시  기타형식예 "yyyy-MM-dd HH:mm:ss"
 		String curHour = date.format(System.currentTimeMillis());
 		
-		//오전 5시 하루에 한번 KOSPI.csv KOSDAQ.csv 파일을 갱신한다.
+		//오전 5시 하루에 한번 koreaStocks 을 갱신한다.
 		if(curHour.equals("5") && preHour.equals("4")) {
 			service.updateMarket("KOSPI");
 			service.updateMarket("KOSDAQ");
@@ -72,18 +75,15 @@ public class SystemController extends HttpServlet {
 		}
 		
 		if(curHour.equals("19") && preHour.equals("18")) {
-			System.out.println("실행 중인가");
 			service.insertRecordAsset();
 		}
 	
-		
 		//현재 시간을 preHour flag 에 저장
 		preHour = curHour;
 		
 		SimpleDateFormat date1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //HH : 0~23시  기타형식예 "yyyy-MM-dd HH:mm:ss"
 		System.out.println(date1.format(System.currentTimeMillis()));
-		//10분주기 - refreshStockPrice 함수실행시 약 7분소요로 10분주기로 변경
-		Thread.sleep(1000 * 60 * 10);
+
 	}
 
 /*
