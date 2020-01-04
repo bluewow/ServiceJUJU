@@ -11,28 +11,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/card/comcompany/list-json")
+@WebServlet("/card/company/list-json")
 public class ListControllerJSONController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("불러지니?");
+		response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+		
+		//System.out.println("불러지니?");
 		
 		HttpSession session = request.getSession();
 		Object tempId = session.getAttribute("id");
-		//랭크 참조..
-		
 		int id = -1;
 		
 		if(tempId != null)
 			id = (Integer)tempId;
 		
-		String companyName = request.getParameter("cn");
+		String attention = request.getParameter("attention");
+		System.out.println(attention);
 		
-		/*
-		 * System.out.println(id); System.out.println(companyName);
-		 */
-		
+		System.out.println(id);
 				
 	}
 	
