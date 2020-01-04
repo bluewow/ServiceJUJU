@@ -20,13 +20,13 @@ public class CurStock {
 	public CurStock() {
 	}
 	
-	public CurStock(String codeNum, String price, String gain, String stuatsPrice, String statusPercent,
+	public CurStock(String codeNum, String price, String gain, String gainPrice, String statusPercent,
 			String percent) {
 		super();
 		this.codeNum = codeNum;
 		this.price = price;
 		this.gain = gain;
-		this.gainPrice = stuatsPrice;
+		this.gainPrice = gainPrice;
 		this.signMark = statusPercent;
 		this.percent = percent;
 	}
