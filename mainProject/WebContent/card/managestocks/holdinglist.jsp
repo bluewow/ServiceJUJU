@@ -16,7 +16,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 </head>
 
 <body class="scrollbar custom-scrollbar-style">
-<div class="manageStocks">
+<div class="holdingList">
 <!-- <button class="updateButton">
 데이터 갱신
 </button> -->

@@ -63,11 +63,11 @@ public class SystemController extends HttpServlet {
 		}
 			
 		//주식가격 refresh by 크롤링 9시 ~ 19시까지 실행
-		if(Integer.parseInt(curHour) >= 9 && Integer.parseInt(curHour) <= 19) {
+		if(Integer.parseInt(curHour) >= 9 && Integer.parseInt(curHour) <= 24) {
 			service.refreshStockPrice();
 		}
 		//18시 장종료후 19시 주식데이터 갱신 
-		if(curHour.equals("20") && preHour.equals("19")) {
+		if(curHour.equals("21") && preHour.equals("20")) {
 //			TODO
 		}
 		

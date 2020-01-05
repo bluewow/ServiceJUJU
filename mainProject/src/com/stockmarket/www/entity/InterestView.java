@@ -4,7 +4,6 @@ public class InterestView {
 	private String stockname;
 	private String price;
 	private String percent;
-	private int id;
 	
 	public InterestView() {
 		// TODO Auto-generated constructor stub
@@ -36,10 +35,9 @@ public class InterestView {
 		this.percent = percent;
 	}
 
-	public InterestView(String stockname, String price, int id) {
+	public InterestView(String stockname, String price) {
 		this.stockname = stockname;
 		this.price = price;
-		this.id = id;
 	}
 
 	public String getStockname() {
@@ -48,14 +46,8 @@ public class InterestView {
 	public void setStockname(String stockname) {
 		this.stockname = stockname;
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	@Override
 	public String toString() {
-		return "InterestView [stockname=" + stockname + ", id=" + id + "]";
+		return "InterestView [stockname=" + stockname+ "]";
 	}
 }

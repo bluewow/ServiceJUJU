@@ -20,10 +20,10 @@ import com.stockmarket.www.service.basic.BasicHoldingStocksService;
 public class HoldingStockJSONController extends HttpServlet{
 	
 	
-	private HoldingStocksService HoldingStocksInterface;
+	private HoldingStocksService holdingStocksInterface;
 
 	public HoldingStockJSONController(){
-		HoldingStocksInterface = new BasicHoldingStocksService();
+		holdingStocksInterface = new BasicHoldingStocksService();
 	}
 //	
 //	@Override
@@ -54,7 +54,7 @@ public class HoldingStockJSONController extends HttpServlet{
 	
 	private void updateCurrentPrice(HttpServletRequest request,HttpServletResponse response , int userId) throws IOException {
 		
-		List<HaveStockView> list = HoldingStocksInterface.getInterestHoldingList(userId);
+		List<HaveStockView> list = holdingStocksInterface.getInterestHoldingList(userId);
 		
         Gson gson = new Gson();
 		String json = gson.toJson(list);

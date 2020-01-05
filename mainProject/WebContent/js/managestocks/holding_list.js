@@ -1,5 +1,5 @@
 window.addEventListener("message", function(e) {
-	   var section = this.document.querySelector(".manageStocks");
+	   var section = this.document.querySelector(".holdingList");
 	   var updateButton = section.querySelector(".updateButton");
 	   var preArea = section.querySelector(".prearea");
 	   var backArea = section.querySelector(".backarea");
@@ -139,7 +139,7 @@ window.addEventListener("message", function(e) {
 
 
 window.addEventListener("load",function(){
-   var section = this.document.querySelector(".manageStocks");
+   var section = this.document.querySelector(".holdingList");
    var updateButton = section.querySelector(".updateButton");
    var preArea = section.querySelector(".prearea");
    var backArea = section.querySelector(".backarea");

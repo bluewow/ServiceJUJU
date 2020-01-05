@@ -13,7 +13,7 @@ import com.stockmarket.www.dao.HaveStockDao;
 import com.stockmarket.www.entity.CurStock;
 import com.stockmarket.www.entity.HaveStock;
 import com.stockmarket.www.entity.HaveStockView;
-import com.stockmarket.www.service.basic.BasicSystemService;
+
 
 public class JdbcHaveStockDao implements HaveStockDao {
 
