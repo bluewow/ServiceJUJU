@@ -1,7 +1,10 @@
 package com.stockmarket.www.controller.test;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import com.stockmarket.www.controller.system.AppContext;
@@ -53,7 +56,18 @@ public class TestSystemService {
 						System.out.println(cur.toString());
 					}
 				}
-				System.out.println("finished-4");
+				System.out.println("finished-3");
+				break;
+			case 4: //호가창
+				List<CurStock> testMarket;
+				CurStock test = null;
+				List<String> codeNum = new ArrayList<>();
+				codeNum.add("095660");
+				testMarket = sys.getCurrentStockPrice(codeNum);
+				for(CurStock stock : testMarket) 
+					test = stock;
+				
+				System.out.println(test.toString());
 				break;
 			case 5: // 보유 자산 리스트 업로드 테스트
 				System.out.println("케이스 5");
@@ -111,7 +125,7 @@ public class TestSystemService {
 		System.out.println("1.코스피 코스닥 전종목 현재가 갱신");
 		System.out.println("2.함수 처리 시간 체크 ");
 		System.out.println("3.single tone Test for 코스피/코스닥 크롤링 데이터 ");
-		System.out.println("4. ");
+		System.out.println("4.호가창 테스트");
 		System.out.println("5. ");
 		System.out.println("6. ");
 		System.out.println("7. stockDetailDao 에 크롤링 데이터를 저장하다 in:codeNum");

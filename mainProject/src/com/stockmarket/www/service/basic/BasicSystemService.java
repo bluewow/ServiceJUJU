@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -76,10 +77,11 @@ public class BasicSystemService implements SystemService {
 		AppContext.setStockMarket(stockMarket);
 	}
 
-	private List<CurStock> getCurrentStockPrice(List<String> codeNums) {
+	public List<CurStock> getCurrentStockPrice(List<String> codeNums) {
 		Document doc = null;
 		CurStock curStockInfo = new CurStock();
 		List<CurStock> data = new ArrayList<>();
+		Map<Integer, Integer> map = new LinkedHashMap();
 
 		for (String codeNum : codeNums) {
 			String url = "https://finance.naver.com/item/main.nhn?code=" + codeNum;
@@ -92,15 +94,27 @@ public class BasicSystemService implements SystemService {
 
 			// 현재가, 상태(상승 or 하락), 금액, +/-, percent 를 가져오는 CSS query 문
 			Elements status = doc.select(".no_today span:eq(0), .no_exday em span:lt(2)");
-			if (status == null) {
+			// 호가창 데이터
+			Elements trade = doc.select("#tab_con2");
+			if (status == null || trade == null) {
 				System.out.println("status is null" + "codeNums : " + codeNums);//TODO
 //				AppContext.setLog("네이버 금융 크롤링 데이터가 null 일 경우", BasicSystemService.class.getName());
 				continue;
 			}
+			
+			String buffer = trade.select(".f_down").text().replace(",", "");
+			String buffersDown[] = buffer.split(" ");
+			for(int i = 0; i < 20; i=i+2) {
+				map.put(Integer.parseInt(buffersDown[i+1]), Integer.parseInt(buffersDown[i]));
+			}
+			buffer = trade.select(".f_up").text().replace(",", "");
+			String buffersUp[] = buffer.split(" ");
+			for(int i = 0; i < 20; i=i+2) {
+				map.put(Integer.parseInt(buffersUp[i]), Integer.parseInt(buffersUp[i+1]));
+			}
 
-			// 요청한 페이지에 대한 실패시 데이터를 저장하지 않는다. codeNum + 크롤링 데이타 + %
-			if (status.text().length() != 0)
-				data.add(curStockInfo.parser(codeNum + " " + status.text()));
+//			System.out.println(curStockInfo.toString()); for debugging
+			data.add(curStockInfo.parser(codeNum + " " + status.text(), map));
 		}
 		return data;
 	}
