@@ -11,11 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.stockmarket.www.entity.CommunityBoard;
+import com.stockmarket.www.service.CompanyService;
+import com.stockmarket.www.service.basic.BasicCompanyService;
+
 @WebServlet("/card/company/list-json")
 public class ListControllerJSONController extends HttpServlet{
-
+	private CompanyService companyService;
+	
+	public ListControllerJSONController() {
+		companyService = new BasicCompanyService();
+	}
+	
+	
+	
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 		
@@ -30,9 +41,24 @@ public class ListControllerJSONController extends HttpServlet{
 		
 		String attention = request.getParameter("attention");
 		System.out.println(attention);
+		String status = request.getParameter("status");
 		
-		System.out.println(id);
-				
+		System.out.println("status : " + status);
+		
+		if (status.equals("insert")) {
+			int result  = 0;
+			result =companyService.insertInterest(id, attention);
+			
+			System.out.println("즐겨찾기 추가" + result);
+			System.out.println("attention : " +attention );
+			
+		} else if (status.equals("delete")) {
+			int result =0;
+			
+			result = companyService.deleteInterest(id, attention);
+			System.out.println("즐겨찾기 삭제 " + result);
+			System.out.println("attention : " + attention );
+		};
 	}
 	
 	

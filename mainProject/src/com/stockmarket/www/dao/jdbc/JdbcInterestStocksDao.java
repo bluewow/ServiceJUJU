@@ -46,34 +46,53 @@ public class JdbcInterestStocksDao implements InterestStocksDao {
 	}
 
 	@Override
-	public int insert(int id, String email, String stockName) {
-		return 0;
+	public int insert(int memberId, String StockCode) {
+		int result = 0;
+		
+		String sql = "INSERT INTO INTEREST_STOCK (MEMBER_ID, STOCK_ID) "
+				+ "VALUES (?, ?)";
+		try {
+			JdbcDaoContext daoContext = new JdbcDaoContext();
+			PreparedStatement statement = daoContext.getPreparedStatement(sql);
+			
+			statement.setInt(1, memberId);
+			statement.setString(2, StockCode);
+			result = statement.executeUpdate();
+			
+			statement.close();
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+		
 	}
 
 	@Override
-	public int delete(int id, String delStockName) {
-		JdbcDaoContext daoContext = new JdbcDaoContext();
-		PreparedStatement st = null;
+	public int delete(int memberId, String StockCode) {
 		
 		String sql = "delete interest_stock where member_id=? and stock_id=?";
 
 		int result = 0;
 
 		try {
-			st = daoContext.getPreparedStatement(sql);
-			String stockName = jdbcstockdao.getStockCodeNum(delStockName);
-			st.setInt(1, id);
-			st.setString(2, stockName);
-
+			JdbcDaoContext daoContext = new JdbcDaoContext();
+			PreparedStatement st = daoContext.getPreparedStatement(sql);
+			
+			st.setInt(1, memberId);
+			st.setString(2, StockCode);
 			result = st.executeUpdate();
-
-// 			System.out.println("stockname:" + stockName +"," + id + delStockName);
+			
+			st.close();
+ 			System.out.println("StockCode : " + StockCode +"," + "memberId" + memberId);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			daoContext.close(st);
+		 
 		}
 		return result;
 	}

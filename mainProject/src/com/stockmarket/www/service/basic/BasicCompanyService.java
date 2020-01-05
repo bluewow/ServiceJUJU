@@ -15,8 +15,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import com.stockmarket.www.dao.UpjongDao;
+import com.stockmarket.www.dao.InterestStocksDao;
 import com.stockmarket.www.dao.KoreaStocksDao;
 import com.stockmarket.www.dao.csv.CSVStockDataDao;
+import com.stockmarket.www.dao.jdbc.JdbcInterestStocksDao;
 import com.stockmarket.www.dao.jdbc.JdbcUpjongDao;
 import com.stockmarket.www.dao.jdbc.JdbckoreaStocksDao;
 import com.stockmarket.www.entity.Company;
@@ -26,11 +28,14 @@ import com.stockmarket.www.service.CompanyService;
 public class BasicCompanyService implements CompanyService {
 	private UpjongDao upjongDao;
 	private KoreaStocksDao koreaStockDao;
+	private InterestStocksDao interestStocksDao;
 	
 	// ====================================
 	public BasicCompanyService() {
 		upjongDao = new JdbcUpjongDao();
 		koreaStockDao = new JdbckoreaStocksDao();
+		interestStocksDao = new JdbcInterestStocksDao();
+		
 	}
 	
 	/* deprecated */
@@ -175,5 +180,17 @@ public class BasicCompanyService implements CompanyService {
 //			System.out.println(v);
 	
 		return afterCompany;
+	}
+
+	@Override
+	public int insertInterest(int memberId, String StockCode) {
+		
+		return interestStocksDao.insert(memberId, StockCode);
+	}
+
+	@Override
+	public int deleteInterest(int memberId, String StockCode) {
+		
+		return interestStocksDao.delete(memberId, StockCode);
 	}
 }
