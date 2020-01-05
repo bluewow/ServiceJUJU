@@ -74,12 +74,12 @@
 					<!-- 로그인 체크 -->
 					
 					<c:if test="${logIn == -1}">
-						<td class="attention"><img id="UncertifiedLogin" src="/css/company/interest_no.png">
+						<td class="interest_no" id="UncertifiedLogin">
 						</td>
 					</c:if>
 					
 					<c:if test="${logIn != -1}">
-						<td class="attention"><img data-attention="${sector.stockCode}" id="certifiedLoing" src="/css/company/interest_no.png">
+						<td class="interest_no" data-attention="${sector.stockCode}" id="certifiedLoing">
 						</td>
 					</c:if>
 					

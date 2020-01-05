@@ -84,8 +84,6 @@ table{
     position: relative;
     top: 10px; 
     right: 50px;
-
-    /* 위치 조절 top, right =>  자동 조절 됨*/
 }
 
 .company-address-image{
@@ -170,4 +168,10 @@ span{
     text-decoration: none;
 }
 
+.interest_no{
+	background: url("/css/company/interest_no.png") no-repeat;
+}
+.interest_yes{
+	background: url("/css/company/interest_yes.png") no-repeat;
+}
 

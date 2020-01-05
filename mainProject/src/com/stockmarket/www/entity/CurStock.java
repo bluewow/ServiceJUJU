@@ -1,5 +1,8 @@
 package com.stockmarket.www.entity;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /*
  * 
  * 크롤링 데이터 형태
@@ -16,6 +19,7 @@ public class CurStock {
 	private String gainPrice; //
 	private String signMark; //+ or -
 	private String percent; //%
+	private Map<Integer, Integer> quantityMap;
 	
 	public CurStock() {
 	}
@@ -31,18 +35,17 @@ public class CurStock {
 		this.percent = percent;
 	}
 
-	public CurStock parser(String text) {
-		CurStock curStockInfo = new CurStock();
-		
+	public CurStock parser(String text, Map<Integer, Integer> map) {
 		String[] data = text.split(" ");
-		curStockInfo.codeNum = data[0];
-		curStockInfo.price = data[1];
-		curStockInfo.gain = data[2];
-		curStockInfo.gainPrice = data[3];
-		curStockInfo.signMark = data[4];
-		curStockInfo.percent = data[5];
-		
-		return curStockInfo;
+		codeNum = data[0];
+		price = data[1];
+		gain = data[2];
+		gainPrice = data[3];
+		signMark = data[4];
+		percent = data[5];
+		quantityMap = map;
+
+		return this;
 	}
 	
 	public String getCodeNum() {
@@ -93,18 +96,22 @@ public class CurStock {
 		this.percent = percent;
 	}
 
-	@Override
-	public String toString() {
-		return "CurrentStockInfo [codeNum=" + codeNum + ", price=" + price + ", gain=" + gain + ", stuatsPrice="
-				+ gainPrice + ", signMark=" + signMark + ", percent=" + percent + "]";
-	}
-
-
-	public static void main(String[] args) {
-		CurStock stock = new CurStock();
-
-		/*종목코드, 현재가, 상승 or 하강, 가격, +/-, %*/
-		System.out.println(stock.parser("095660 13,000 상승 3,000 + 23.2").toString());
+	public Map<Integer, Integer> getQuantityMap() {
+		return quantityMap;
 	}
 	
+	public void setQuantityMap(Map<Integer, Integer> quantityMap) {
+		this.quantityMap = quantityMap;
+	}
+
+	@Override
+	public String toString() {
+		return "CurStock [codeNum=" + codeNum + ", price=" + price + ", gain=" + gain + ", gainPrice=" + gainPrice
+				+ ", signMark=" + signMark + ", percent=" + percent + ", quantityMap=" + quantityMap.toString() + "]";
+	}
+	
+	
+
+
+
 }
