@@ -104,11 +104,8 @@ public class JdbcInterestStocksDao implements InterestStocksDao {
 		JdbcDaoContext daoContext = new JdbcDaoContext();
 		PreparedStatement pst =null;
 		ResultSet rs = null;
-		
-		
-
+		List<InterestStocks> list = new ArrayList<>();
 		try {
-			List<InterestStocks> list = new ArrayList<>();
 			pst = daoContext.getPreparedStatement(sql);
 			pst.setInt(1, memberId);
 			rs = pst.executeQuery();
@@ -121,9 +118,6 @@ public class JdbcInterestStocksDao implements InterestStocksDao {
 				
 				list.add(interestStocks);
 			}
-			
-			return list;
-
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -132,9 +126,7 @@ public class JdbcInterestStocksDao implements InterestStocksDao {
 			daoContext.close(rs, pst);
 		}
 		
-				
-				
-		return null;
+		return list;
 	}
 
 	@Override
