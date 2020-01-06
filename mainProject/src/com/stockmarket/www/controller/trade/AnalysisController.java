@@ -62,6 +62,8 @@ public class AnalysisController extends HttpServlet{
 								stock.getPercent(),
 								stock.getQuantityMap());
 						break;
+					} else {
+						curStock = new CurStock(codeNum, "[데이터 수집중...]", "보합", "0", "none", "0", null);
 					}
 				}
 			}
