@@ -51,20 +51,22 @@ public class JdbcInterestStocksDao implements InterestStocksDao {
 		
 		String sql = "INSERT INTO INTEREST_STOCK (MEMBER_ID, STOCK_ID) "
 				+ "VALUES (?, ?)";
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+		PreparedStatement statement = null;
+		
 		try {
-			JdbcDaoContext daoContext = new JdbcDaoContext();
-			PreparedStatement statement = daoContext.getPreparedStatement(sql);
+			statement = daoContext.getPreparedStatement(sql);
 			
 			statement.setInt(1, memberId);
 			statement.setString(2, StockCode);
 			result = statement.executeUpdate();
-			
-			statement.close();
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			daoContext.close(statement);
 		}
 		return result;
 		
@@ -76,23 +78,22 @@ public class JdbcInterestStocksDao implements InterestStocksDao {
 		String sql = "delete interest_stock where member_id=? and stock_id=?";
 
 		int result = 0;
-
+		PreparedStatement st = null;
+		JdbcDaoContext daoContext = new JdbcDaoContext();
 		try {
-			JdbcDaoContext daoContext = new JdbcDaoContext();
-			PreparedStatement st = daoContext.getPreparedStatement(sql);
+			st = daoContext.getPreparedStatement(sql);
 			
 			st.setInt(1, memberId);
 			st.setString(2, StockCode);
 			result = st.executeUpdate();
 			
-			st.close();
  			//System.out.println("StockCode : " + StockCode +"," + "memberId" + memberId);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-		 
+			daoContext.close(st);
 		}
 		return result;
 	}
