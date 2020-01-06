@@ -79,10 +79,9 @@ public class BasicSystemService implements SystemService {
 
 	public List<CurStock> getCurrentStockPrice(List<String> codeNums) {
 		Document doc = null;
-		CurStock curStockInfo = new CurStock();
 		List<CurStock> data = new ArrayList<>();
 		Map<Integer, Integer> map = new LinkedHashMap();
-
+	
 		for (String codeNum : codeNums) {
 			String url = "https://finance.naver.com/item/main.nhn?code=" + codeNum;
 			try {
@@ -91,30 +90,38 @@ public class BasicSystemService implements SystemService {
 //				AppContext.setLog("네이버 금융 크롤링도중 IOException 발생", BasicSystemService.class.getName());
 				e.printStackTrace();
 			}
-
+			if(doc.text().contains("동시에 접속하는 이용자 수가 많거나 인터넷 네트워크 상태가 불안정하여 현재 웹페이지의 접속이 불가합니다")) {
+				continue;	//TODO 해당 codeNum이 검색이 되지 않는 경우
+			}
+			
 			// 현재가, 상태(상승 or 하락), 금액, +/-, percent 를 가져오는 CSS query 문
 			Elements status = doc.select(".no_today span:eq(0), .no_exday em span:lt(2)");
 			// 호가창 데이터
 			Elements trade = doc.select("#tab_con2");
 			if (status == null || trade == null) {
-				System.out.println("status is null" + "codeNums : " + codeNums);//TODO
+				System.out.println("status, trade is null" + "codeNums : " + codeNums);
 //				AppContext.setLog("네이버 금융 크롤링 데이터가 null 일 경우", BasicSystemService.class.getName());
 				continue;
 			}
 			
-			String buffer = trade.select(".f_down").text().replace(",", "");
-			String buffersDown[] = buffer.split(" ");
-			for(int i = 0; i < 20; i=i+2) {
-				map.put(Integer.parseInt(buffersDown[i+1]), Integer.parseInt(buffersDown[i]));
+			if(trade.text().length() >100) { //거래정지된 목록의 호가창을 배제하기 위해서... TODO 다른 방법을 찾기
+				String buffer = trade.select(".f_down").text().trim().replace(",", "");
+				String buffersDown[] = buffer.split(" ");
+				for(int i = 0; i < buffersDown.length - 1; i=i+2) {
+					if(!buffersDown[i].equals("") && !buffersDown[i+1].equals(""))
+						map.put(Integer.parseInt(buffersDown[i+1]), Integer.parseInt(buffersDown[i]));
+				}
+				buffer = trade.select(".f_up").text().trim().replace(",", "");
+				String buffersUp[] = buffer.split(" ");
+				for(int i = 0; i < buffersUp.length - 1; i=i+2) {
+					if(!buffersUp[i].equals("") && !buffersUp[i+1].equals(""))
+						map.put(Integer.parseInt(buffersUp[i]), Integer.parseInt(buffersUp[i+1]));
+				}
 			}
-			buffer = trade.select(".f_up").text().replace(",", "");
-			String buffersUp[] = buffer.split(" ");
-			for(int i = 0; i < 20; i=i+2) {
-				map.put(Integer.parseInt(buffersUp[i]), Integer.parseInt(buffersUp[i+1]));
-			}
-
-//			System.out.println(curStockInfo.toString()); for debugging
+			
+			CurStock curStockInfo = new CurStock();
 			data.add(curStockInfo.parser(codeNum + " " + status.text(), map));
+//			System.out.println(curStockInfo.toString()); //for debugging
 		}
 		return data;
 	}

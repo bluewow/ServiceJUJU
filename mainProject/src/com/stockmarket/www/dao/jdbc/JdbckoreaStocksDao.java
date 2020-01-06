@@ -94,9 +94,11 @@ public class JdbckoreaStocksDao implements KoreaStocksDao {
 		String sql = "INSERT INTO KOREASTOCKS (COMPANYNAME, STOCKCODE, SECTORS, MAINPRODUCT, STOCKEDDAY, SETTLEMENTMONTH, REPRESENTATIVENAME, WEBSITE, LOCATION) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+		PreparedStatement statement = null;
 		try {
-			JdbcDaoContext daoContext = new JdbcDaoContext();
-			PreparedStatement statement = daoContext.getPreparedStatement(sql);
+			statement = daoContext.getPreparedStatement(sql);
+			
 			for(int i = 0 ; i <list.size(); i++) {
 				statement.setString(1, list.get(i).getCompanyName());
 				statement.setString(2, list.get(i).getStockCode());
@@ -109,12 +111,14 @@ public class JdbckoreaStocksDao implements KoreaStocksDao {
 				statement.setString(9, list.get(i).getLocation());
 				result = statement.executeUpdate();
 			}
-			statement.close();
+			
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			daoContext.close(statement);
 		}
 		
 		return result;
@@ -126,14 +130,17 @@ public class JdbckoreaStocksDao implements KoreaStocksDao {
 		int result = 0;
 		String sql = "DELETE FROM KOREASTOCKS";
 		JdbcDaoContext context = new JdbcDaoContext();
+		PreparedStatement st = null;
 		try {
-			PreparedStatement st = context.getPreparedStatement(sql);
+			st = context.getPreparedStatement(sql);
 			result = st.executeUpdate();
-			context.close(st);
+			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			context.close(st);
 		}
 		return result;
 	}
