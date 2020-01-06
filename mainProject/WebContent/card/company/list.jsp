@@ -79,6 +79,9 @@
 					</c:if>
 					
 					<c:if test="${logIn != -1}">
+						<c:forEach var="interestStocks" items="${interestStocks}" varStatus="status" >
+							
+						</c:forEach>
 						<td class="interest_no" data-attention="${sector.stockCode}" id="certifiedLoing">
 						</td>
 					</c:if>
