@@ -24,8 +24,8 @@ public class CurStock {
 	public CurStock() {
 	}
 	
-	public CurStock(String codeNum, String price, String gain,
-					String gainPrice, String signMark, String percent) {
+	
+	public CurStock(String codeNum, String price, String gain, String gainPrice, String signMark, String percent) {
 		super();
 		this.codeNum = codeNum;
 		this.price = price;
@@ -33,6 +33,19 @@ public class CurStock {
 		this.gainPrice = gainPrice;
 		this.signMark = signMark;
 		this.percent = percent;
+	}
+
+	public CurStock(String codeNum, String price, String gain,
+					String gainPrice, String signMark, 
+					String percent,	Map<Integer, Integer> map) {
+		super();
+		this.codeNum = codeNum;
+		this.price = price;
+		this.gain = gain;
+		this.gainPrice = gainPrice;
+		this.signMark = signMark;
+		this.percent = percent;
+		this.quantityMap = map;
 	}
 
 	public CurStock parser(String text, Map<Integer, Integer> map) {
@@ -107,7 +120,7 @@ public class CurStock {
 	@Override
 	public String toString() {
 		return "CurStock [codeNum=" + codeNum + ", price=" + price + ", gain=" + gain + ", gainPrice=" + gainPrice
-				+ ", signMark=" + signMark + ", percent=" + percent + ", quantityMap=" + quantityMap.toString() + "]";
+				+ ", signMark=" + signMark + ", percent=" + percent + "]";
 	}
 	
 	
