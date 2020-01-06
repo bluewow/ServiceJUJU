@@ -113,5 +113,10 @@ public class BasicCommunityBoardService implements CommunityBoardService {
 		// TODO Auto-generated method stub
 		return communityBoardDao.deleteInterestBoard(deleteInterestBoard);
 	}
+	@Override
+	public int deleteinterestBoards(int boardId) {
+		// TODO Auto-generated method stub
+		return communityBoardDao.deleteInterestBoards(boardId);
+	}
 
 }

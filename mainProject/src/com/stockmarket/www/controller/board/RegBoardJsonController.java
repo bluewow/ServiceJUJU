@@ -71,7 +71,7 @@ public class RegBoardJsonController extends HttpServlet {
 		} else if (status.equals("del")) {
 			int boardId = -1;
 			boardId = Integer.parseInt(boardIds);
-
+			int resultInterest = communityBoardService.deleteinterestBoards(boardId);
 			int result = communityBoardService.deleteCommunityBoard(boardId);
 			int resultReply = communityBoardService.deleteReplys(boardId);
 
