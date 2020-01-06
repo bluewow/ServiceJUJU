@@ -31,6 +31,7 @@ public interface CommunityBoardService {
 	int selectInterestBoard(CommunityBoard selectFavoriteBoard);
 	int insertInterestBoard(CommunityBoard insertInterestBoard);
 	int deleteInterestBoard(CommunityBoard deleteInterestBoard);
+	int deleteinterestBoards(int boardId);
 	/*
 	 * 게시글 댓글 개수 확인
 	 * */
@@ -43,6 +44,7 @@ public interface CommunityBoardService {
 	int lastReplyNum(int boardId);
 	int deleteReply(int replyId);
 	int deleteReplys(int boardId);
+
 
 
 

@@ -25,4 +25,5 @@ public interface CommunityBoardDao {
 	int selectInterestBoard(CommunityBoard selectInterestBoard);
 	int deleteInterestBoard(CommunityBoard deleteInterestBoard);
 	int insertInterestBoard(CommunityBoard insertInterestBoard);
+	int deleteInterestBoards(int boardId);
 }
