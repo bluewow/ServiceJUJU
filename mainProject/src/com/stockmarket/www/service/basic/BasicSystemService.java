@@ -74,7 +74,7 @@ public class BasicSystemService implements SystemService {
 			codeNum.add(entity.getStockCode());
 
 		stockMarket = getCurrentStockPrice(codeNum);
-		AppContext.setStockMarket(stockMarket);
+//		AppContext.setStockMarket(stockMarket);
 	}
 
 	public List<CurStock> getCurrentStockPrice(List<String> codeNums) {
@@ -121,6 +121,7 @@ public class BasicSystemService implements SystemService {
 			
 			CurStock curStockInfo = new CurStock();
 			data.add(curStockInfo.parser(codeNum + " " + status.text(), map));
+			AppContext.setStockMarket(data);
 //			System.out.println(curStockInfo.toString()); //for debugging
 		}
 		return data;
