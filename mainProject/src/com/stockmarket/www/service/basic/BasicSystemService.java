@@ -74,7 +74,7 @@ public class BasicSystemService implements SystemService {
 			codeNum.add(entity.getStockCode());
 
 		stockMarket = getCurrentStockPrice(codeNum);
-		AppContext.setStockMarket(stockMarket);
+//		AppContext.setStockMarket(stockMarket);
 	}
 
 	public List<CurStock> getCurrentStockPrice(List<String> codeNums) {
@@ -89,7 +89,11 @@ public class BasicSystemService implements SystemService {
 			} catch (IOException e) {
 //				AppContext.setLog("네이버 금융 크롤링도중 IOException 발생", BasicSystemService.class.getName());
 				e.printStackTrace();
+				continue;
 			}
+			if(doc == null) 
+				continue; 
+			
 			if(doc.text().contains("동시에 접속하는 이용자 수가 많거나 인터넷 네트워크 상태가 불안정하여 현재 웹페이지의 접속이 불가합니다")) {
 				continue;	//TODO 해당 codeNum이 검색이 되지 않는 경우
 			}
@@ -121,6 +125,7 @@ public class BasicSystemService implements SystemService {
 			
 			CurStock curStockInfo = new CurStock();
 			data.add(curStockInfo.parser(codeNum + " " + status.text(), map));
+			AppContext.setStockMarket(data);
 //			System.out.println(curStockInfo.toString()); //for debugging
 		}
 		return data;

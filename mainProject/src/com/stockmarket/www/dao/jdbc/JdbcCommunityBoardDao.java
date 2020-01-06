@@ -407,4 +407,26 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 		com.lastReplyNum(1);
 	}
 
+	@Override
+	public int deleteInterestBoards(int boardId) {
+		int result = 0;
+		String sql = "DELETE FROM INTEREST_BOARD WHERE BOARD_ID=?";
+
+		PreparedStatement pst = null;
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+
+		try {
+			pst = daoContext.getPreparedStatement(sql);
+			pst.setInt(1, boardId);
+
+			result = pst.executeUpdate();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			daoContext.close(pst);
+		}
+		return result;
+	}
+
 }

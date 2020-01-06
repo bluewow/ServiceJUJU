@@ -1,53 +1,45 @@
 package com.stockmarket.www.entity;
 
 public class InterestStocks {
-	private int id;
-	private String stockName;
-	private int currentPrice;
-	private int quantity;
+	
+	private int memberId;
+	private String StockCode;
+	
 	public InterestStocks() {
 		
 	}
-	public InterestStocks(String stockName) {
-	this.stockName = stockName;
-	}
-	public InterestStocks(int id, String stockName, int currentPrice, int quantity) {
-		this.id = id;
-		this.stockName = stockName;
-		this.currentPrice = currentPrice;
-		this.quantity = quantity;
-	}
 	
+	public InterestStocks(int memberId, String stockCode) {
+		
+		this.memberId = memberId;
+		this.StockCode = stockCode;
+	}
 
-	public int getId() {
-		return id;
+
+	public int getMemberId() {
+		return memberId;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public void setMemberId(int memberId) {
+		this.memberId = memberId;
 	}
-	public String getStockName() {
-		return stockName;
+
+	public String getStockCode() {
+		return StockCode;
 	}
-	public void setStockName(String stockName) {
-		this.stockName = stockName;
-	}
-	public int getCurrentPrice() {
-		return currentPrice;
-	}
-	public void setCurrentPrice(int currentPrice) {
-		this.currentPrice = currentPrice;
-	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+
+	public void setStockCode(String stockCode) {
+		StockCode = stockCode;
 	}
 
 	@Override
 	public String toString() {
-		return "InterestStocks [id=" + id + ", stockName=" + stockName + ", currentPrice=" + currentPrice
-				+ ", quantity=" + quantity + "]";
+		return "InterestStocks [memberId=" + memberId + ", StockCode=" + StockCode + "]";
 	}
 
+	
+	
+	
+	
+	
 }
