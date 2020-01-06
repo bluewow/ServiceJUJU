@@ -20,6 +20,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.stockmarket.www.entity.Company;
+import com.stockmarket.www.entity.InterestStocks;
 import com.stockmarket.www.entity.KoreaStocks;
 import com.stockmarket.www.service.CompanyService;
 import com.stockmarket.www.service.basic.BasicCompanyService;
@@ -31,6 +32,7 @@ public class ListController extends HttpServlet {
 
 	private CompanyService companyService;
 	private List<KoreaStocks> searchCompanyList;
+	private List<InterestStocks> interestStocksList;
 
 	public ListController() {
 		companyService = new BasicCompanyService();
@@ -74,7 +76,6 @@ public class ListController extends HttpServlet {
 		
 		searchCompanyList = new ArrayList<KoreaStocks>();
 		
-		//System.out.println(companyService.searchCompanyNames("커피"));
 		
 		List<String> list =	companyService.searchCompanyNames(companyName);
 		// 기현이 형의 검색 알고리즘을 통해 회사 이름을 List에 String 형식으로 담는다.
@@ -93,9 +94,21 @@ public class ListController extends HttpServlet {
 		if (tempId != null)
 			id = (Integer) tempId;
 		
+		interestStocksList = new ArrayList<InterestStocks>();
+		
+		if (id != -1) {
+			interestStocksList.addAll(companyService.getInterestStocks(3));
+		}
+		
+		// 아이디로 검색을 했으니깐.. 
+		
+		// 데이터 베이스 안에 있는 아이디에 해당하는 종목 코드와
+		
+		// 검색된 결과의 종목코드가 같은 것이 있는지 확인한다.
 		
 		
 		
+		request.setAttribute("interestStocks", interestStocksList);
 		request.setAttribute("search", searchCompanyList);
 		request.setAttribute("logIn", id);
 		

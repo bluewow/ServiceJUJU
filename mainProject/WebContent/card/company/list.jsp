@@ -79,6 +79,12 @@
 					</c:if>
 					
 					<c:if test="${logIn != -1}">
+						
+							
+								<td class="interest_yes" data-attention="${sector.stockCode}" id="certifiedLoing">
+								</td>
+							
+						
 						<td class="interest_no" data-attention="${sector.stockCode}" id="certifiedLoing">
 						</td>
 					</c:if>

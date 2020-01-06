@@ -22,6 +22,7 @@ import com.stockmarket.www.dao.jdbc.JdbcInterestStocksDao;
 import com.stockmarket.www.dao.jdbc.JdbcUpjongDao;
 import com.stockmarket.www.dao.jdbc.JdbckoreaStocksDao;
 import com.stockmarket.www.entity.Company;
+import com.stockmarket.www.entity.InterestStocks;
 import com.stockmarket.www.entity.KoreaStocks;
 import com.stockmarket.www.service.CompanyService;
 
@@ -192,5 +193,11 @@ public class BasicCompanyService implements CompanyService {
 	public int deleteInterest(int memberId, String StockCode) {
 		
 		return interestStocksDao.delete(memberId, StockCode);
+	}
+
+	@Override
+	public List<InterestStocks> getInterestStocks(int memberId) {
+		
+		return interestStocksDao.getInterestStocks(memberId);
 	}
 }
