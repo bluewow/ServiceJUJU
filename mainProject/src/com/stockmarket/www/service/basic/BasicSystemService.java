@@ -79,7 +79,6 @@ public class BasicSystemService implements SystemService {
 
 	public List<CurStock> getCurrentStockPrice(List<String> codeNums) {
 		Document doc = null;
-		CurStock curStockInfo = new CurStock();
 		List<CurStock> data = new ArrayList<>();
 		Map<Integer, Integer> map = new LinkedHashMap();
 	
@@ -119,7 +118,8 @@ public class BasicSystemService implements SystemService {
 						map.put(Integer.parseInt(buffersUp[i]), Integer.parseInt(buffersUp[i+1]));
 				}
 			}
-
+			
+			CurStock curStockInfo = new CurStock();
 			data.add(curStockInfo.parser(codeNum + " " + status.text(), map));
 //			System.out.println(curStockInfo.toString()); //for debugging
 		}
