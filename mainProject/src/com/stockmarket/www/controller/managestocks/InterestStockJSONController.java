@@ -66,6 +66,7 @@ public class InterestStockJSONController extends HttpServlet{
         Gson interestGson = new Gson();
 		String interestJson = interestGson.toJson(interestlist);
         PrintWriter out = response.getWriter();
+        System.out.println(interestJson);
 		out.write(interestJson);
 		
 	}

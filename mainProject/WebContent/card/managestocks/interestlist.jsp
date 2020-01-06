@@ -25,7 +25,7 @@
 </head>
 
 <body class="scrollbar custom-scrollbar-style">
-	<div class="btposition">
+	<div class="interestList">
 		<table>
 			<thead>
 				<tr>

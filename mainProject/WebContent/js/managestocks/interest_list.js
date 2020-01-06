@@ -1,10 +1,9 @@
 window.addEventListener("message", function(e) {
-	console.log(e.data);
-	var ajax = new XMLHttpRequest();
-	ajax.open("GET", "../../card/managestocks/interestlist-json?codeNum="+ e.data, true);
-
-	ajax.send();
-
+	if(e.data && (e.data.length == 6)){
+		var ajax = new XMLHttpRequest();
+		ajax.open("GET", "../../card/managestocks/interestlist-json?codeNum="+ e.data, true);
+		ajax.send();
+	}
 });
 
 window.addEventListener("load", function() {
@@ -14,25 +13,25 @@ window.addEventListener("load", function() {
 
 	function interestLoad() {
 
-		var request = new XMLHttpRequest();
-		request.open("GET", "../../card/managestocks/interestlist-json", true);
+		var interestAjax = new XMLHttpRequest();
+		interestAjax.open("GET", "../../card/managestocks/interestlist-json", true);
 
 		// 서블릿의 실행이 완료되었을때 실행
-		request.onload = function() {
+		interestAjax.onload = function() {
 			// var cardFooter = section.querySelector(".card-footer");
 
-			var list = JSON.parse(request.responseText);
-			console.log("크롤링 데이터:"+list[i].price+list[i].percent);
+			var list = JSON.parse(interestAjax.responseText);
 			tbody.innerHTML = "";
 
 			for (var i = 0; i < list.length; i++) {
-
+                console.log()
+				
 				var template = section.querySelector(".template");
 				var cloneTr = document.importNode(template.content, true);
 				var tds = cloneTr.querySelectorAll("td");
 				var formData = section.querySelector("#deleteInput");
 
-				tds[0].firstElementChild.innerText = list[i].stockName;
+				tds[0].firstElementChild.innerText = list[i].stockname;
 
 				if (list[i].gain == "상승") {
 					tds[1].firstElementChild.innerText = list[i].price;
@@ -55,7 +54,7 @@ window.addEventListener("load", function() {
 				
 			}
 		};
-		request.send();
+		interestAjax.send();
 	};
 	
 	setInterval(function() {
