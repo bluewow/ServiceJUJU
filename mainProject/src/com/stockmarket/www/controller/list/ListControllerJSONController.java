@@ -40,24 +40,24 @@ public class ListControllerJSONController extends HttpServlet{
 			id = (Integer)tempId;
 		
 		String attention = request.getParameter("attention");
-		System.out.println(attention);
+		//System.out.println(attention);
 		String status = request.getParameter("status");
 		
-		System.out.println("status : " + status);
+		//System.out.println("status : " + status);
 		
 		if (status.equals("insert")) {
 			int result  = 0;
 			result =companyService.insertInterest(id, attention);
 			
-			System.out.println("즐겨찾기 추가" + result);
-			System.out.println("attention : " +attention );
+			//System.out.println("즐겨찾기 추가" + result);
+			//System.out.println("attention : " +attention );
 			
 		} else if (status.equals("delete")) {
 			int result =0;
 			
 			result = companyService.deleteInterest(id, attention);
-			System.out.println("즐겨찾기 삭제 " + result);
-			System.out.println("attention : " + attention );
+			//System.out.println("즐겨찾기 삭제 " + result);
+			//System.out.println("attention : " + attention );
 		};
 	}
 	

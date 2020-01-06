@@ -96,4 +96,17 @@ public class JdbcInterestStocksDao implements InterestStocksDao {
 		}
 		return result;
 	}
+
+	@Override
+	public String getInterestStocks(int id) {
+		String sql = "SELECT * FROM INTEREST_STOCK WHERE MEMBER_ID=?";
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+		PreparedStatement pst =null;
+		ResultSet rs = null;
+		
+		
+				
+				
+		return null;
+	}
 }
