@@ -49,7 +49,7 @@ public class AnalysisController extends HttpServlet{
 			List<CurStock> stocks = AppContext.getStockMarket();
 			CurStock curStock = null; 
 			if(stocks == null) {
-				curStock = new CurStock(codeNum, "[데이터 수집중...]", "보합", "0", "none", "0");
+				curStock = new CurStock(codeNum, "[데이터 수집중...]", "보합", "0", "none", "0", null);
 			} else {
 				for(CurStock stock : stocks) {
 					if(stock.getCodeNum().equals(codeNum)) {
@@ -59,7 +59,8 @@ public class AnalysisController extends HttpServlet{
 								stock.getGain(), 
 								stock.getGainPrice(), 
 								stock.getSignMark(), 
-								stock.getPercent());
+								stock.getPercent(),
+								stock.getQuantityMap());
 						break;
 					}
 				}
