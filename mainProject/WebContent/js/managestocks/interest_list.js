@@ -25,14 +25,13 @@ window.addEventListener("load", function() {
 
 			for (var i = 0; i < list.length; i++) {
                 console.log()
-				
+			
 				var template = section.querySelector(".template");
 				var cloneTr = document.importNode(template.content, true);
 				var tds = cloneTr.querySelectorAll("td");
 				var formData = section.querySelector("#deleteInput");
 
 				tds[0].firstElementChild.innerText = list[i].stockname;
-
 				if (list[i].gain == "상승") {
 					tds[1].firstElementChild.innerText = list[i].price;
 					tds[1].lastElementChild.innerText = list[i].percent;
@@ -56,10 +55,10 @@ window.addEventListener("load", function() {
 		};
 		interestAjax.send();
 	};
-	
-	setInterval(function() {
-		interestLoad();
-	}, 5000);
+//	
+//	setInterval(function() {
+//		interestLoad();
+//	}, 10000);
 	
 	interestLoad();
 

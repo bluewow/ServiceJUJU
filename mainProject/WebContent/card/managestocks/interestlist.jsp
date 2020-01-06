@@ -20,8 +20,6 @@
 		form.submit();
 	}	
 </script>
-
-
 </head>
 
 <body class="scrollbar custom-scrollbar-style">

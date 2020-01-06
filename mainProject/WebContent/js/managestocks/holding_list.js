@@ -266,10 +266,10 @@ window.addEventListener("load",function(){
     holdingRequest.send();
    };
 
-   setInterval(function() {
-  	   holdingLoad();  
-   }, 5000);
-   
+//   setInterval(function() {
+//  	   holdingLoad();  
+//   }, 5000);
+//   
    holdingLoad();
 });
 
