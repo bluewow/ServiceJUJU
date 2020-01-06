@@ -12,7 +12,6 @@
 <link rel="stylesheet" type="text/css" href="../../css/holding.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="../../js/managestocks/interest_list.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <script type="text/javascript">

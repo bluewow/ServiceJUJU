@@ -231,11 +231,11 @@
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="Purchaselist"
                            role="tabpanel" aria-labelledby="Purchaselist-tab">
-                           <iframe id="holding-window" src="./card/managestocks/holdinglist"> </iframe>
+                           <iframe id="holding-window" src="./card/managestocks/holdinglist"></iframe>
                         </div>
                         <div class="tab-pane fade" id="Interest" role="tabpanel"
                            aria-labelledby="Interest-tab">
-                           <iframe id="interestlist-window" src="./card/managestocks/interestlist"> </iframe>
+                           <iframe id="interestlist-window" src="./card/managestocks/interestlist"></iframe>
                         </div>
                      </div>
                   </section>

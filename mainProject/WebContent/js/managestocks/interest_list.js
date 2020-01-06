@@ -1,8 +1,7 @@
 window.addEventListener("message", function(e) {
 	console.log(e.data);
 	var ajax = new XMLHttpRequest();
-	ajax.open("GET", "../../card/managestocks/interestlist-json?codeNum="
-			+ e.data, true);
+	ajax.open("GET", "../../card/managestocks/interestlist-json?codeNum="+ e.data, true);
 
 	ajax.send();
 
@@ -23,6 +22,7 @@ window.addEventListener("load", function() {
 			// var cardFooter = section.querySelector(".card-footer");
 
 			var list = JSON.parse(request.responseText);
+			console.log("크롤링 데이터:"+list[i].price+list[i].percent);
 			tbody.innerHTML = "";
 
 			for (var i = 0; i < list.length; i++) {

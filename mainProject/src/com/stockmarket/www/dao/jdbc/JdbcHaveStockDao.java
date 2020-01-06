@@ -31,25 +31,25 @@ public class JdbcHaveStockDao implements HaveStockDao {
 
 		List<CurStock> list = new ArrayList<>();
 		
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				if (AppContext.getStockMarket() != null) {
-					
-					list.addAll(AppContext.getStockMarket());
-				}
-			}
-		}).start();
+//		new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				if (AppContext.getStockMarket() != null) {
+//					
+//					list.addAll(AppContext.getStockMarket());
+//				}
+//			}
+//		}).start();
 		// 더미 / 나중에 지워야함.
 //		List<CurStock> list = new ArrayList<>();
-//		list.add(new CurStock("035420", "3,000", "상승", "3,000", "+", "2.5"));
-//		list.add(new CurStock("000660", "5,000", "하강", "3,000", "-", "3.4"));
-//		list.add(new CurStock("020560", "6,000", "보합", "3,000", "0.0", "1.5"));
-//		list.add(new CurStock("005930", "2,000", "상승", "3,000", "+", "1.6"));
-//		list.add(new CurStock("005380", "1,000", "상승", "3,000", "+", "8.9"));
-//		list.add(new CurStock("095660", "10,500", "상승", "3,000", "+", "10.2"));
-//		list.add(new CurStock("000880", "3,500", "하강", "3,000", "-", "14.2"));
-//		list.add(new CurStock("215600", "7,000", "하강", "3,000", "-", "10"));
+		list.add(new CurStock("035420", "3,000", "상승", "3,000", "+", "2.5"));
+		list.add(new CurStock("000660", "5,000", "하강", "3,000", "-", "3.4"));
+		list.add(new CurStock("020560", "6,000", "보합", "3,000", "0.0", "1.5"));
+		list.add(new CurStock("005930", "2,000", "상승", "3,000", "+", "1.6"));
+		list.add(new CurStock("005380", "1,000", "상승", "3,000", "+", "8.9"));
+		list.add(new CurStock("095660", "10,500", "상승", "3,000", "+", "10.2"));
+		list.add(new CurStock("000880", "3,500", "하강", "3,000", "-", "14.2"));
+		list.add(new CurStock("215600", "7,000", "하강", "3,000", "-", "10"));
 
 		try {
 			PreparedStatement st = context.getPreparedStatement(sql);

@@ -24,7 +24,7 @@
 </head>
 
 <body class="scrollbar custom-scrollbar-style">
-	<div class="interesList">
+	<div class="interestList">
 		<table>
 			<thead>
 				<tr>

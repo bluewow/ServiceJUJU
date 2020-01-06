@@ -11,16 +11,16 @@ window.addEventListener("message", function(e) {
 	    }
 		
 		function updateLoad(){
-			var ajax = new XMLHttpRequest();
+			var holdingAjax = new XMLHttpRequest();
 
-			ajax.open("GET","../../card/managestocks/holdinglist-json?codeNum=" + e.data , true)
+			holdingAjax.open("GET","../../card/managestocks/holdinglist-json?codeNum=" + e.data , true)
 		    
 		    //서블릿의 실행이 완료되었을때 실행 
-		    ajax.onload = function(){
+	    	holdingAjax.onload = function(){
 //		        var cardFooter = section.querySelector(".card-footer");
 		        
 		    	
-		        var list = JSON.parse(ajax.responseText);
+		        var list = JSON.parse(holdingAjax.responseText);
 		        
   
 		        var won = "원";
@@ -124,7 +124,7 @@ window.addEventListener("message", function(e) {
 		       backArea.firstElementChild.nextElementSibling.innerText = addComma(allSum) + won;
 		       
 		    };
-		    ajax.send();
+		    holdingAjax.send();
 		   };
 		   updateLoad();  
 		 
@@ -152,15 +152,15 @@ window.addEventListener("load",function(){
 
    function holdingLoad(){
 
-    var request = new XMLHttpRequest();
-    request.open("GET","../../card/managestocks/holdinglist-json",true);
+    var holdingRequest = new XMLHttpRequest();
+    holdingRequest.open("GET","../../card/managestocks/holdinglist-json",true);
     
     //서블릿의 실행이 완료되었을때 실행 
-    request.onload = function(){
+    holdingRequest.onload = function(){
 //        var cardFooter = section.querySelector(".card-footer");
         
     	
-        var list = JSON.parse(request.responseText);    
+        var list = JSON.parse(holdingRequest.responseText);    
         var won = "원";
         var allIncomePercent =0;
         var allIncome = 0;
@@ -263,7 +263,7 @@ window.addEventListener("load",function(){
        backArea.firstElementChild.nextElementSibling.innerText = addComma(allSum) + won;
        
     };
-    request.send();
+    holdingRequest.send();
    };
 
    setInterval(function() {
