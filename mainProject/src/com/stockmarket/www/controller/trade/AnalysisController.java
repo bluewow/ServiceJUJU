@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,21 +47,21 @@ public class AnalysisController extends HttpServlet{
 		String codeNum = request.getParameter("codeNum");
 		if(codeNum != null) {
 			HashMap<Object, Object>map = new HashMap<>();
-			List<CurStock> stocks = AppContext.getStockMarket();
+			Map<String, CurStock> stocks = AppContext.getStockMarket();
 			CurStock curStock = null; 
 			if(stocks == null) {
 				curStock = new CurStock(codeNum, "[데이터 수집중...]", "보합", "0", "none", "0", null);
 			} else {
-				for(CurStock stock : stocks) {
-					if(stock.getCodeNum().equals(codeNum)) {
+				for(String getCodeNume : stocks.keySet()) {
+					if(getCodeNume.equals(codeNum)) {
 						curStock = new CurStock(
 								codeNum,
-								stock.getPrice(),
-								stock.getGain(), 
-								stock.getGainPrice(), 
-								stock.getSignMark(), 
-								stock.getPercent(),
-								stock.getQuantityMap());
+								stocks.get(getCodeNume).getPrice(),
+								stocks.get(getCodeNume).getGain(), 
+								stocks.get(getCodeNume).getGainPrice(), 
+								stocks.get(getCodeNume).getSignMark(), 
+								stocks.get(getCodeNume).getPercent(),
+								stocks.get(getCodeNume).getQuantityMap());
 						break;
 					} else {
 						curStock = new CurStock(codeNum, "[데이터 수집중...]", "보합", "0", "none", "0", null);

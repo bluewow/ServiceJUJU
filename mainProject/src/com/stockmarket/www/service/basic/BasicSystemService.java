@@ -83,13 +83,13 @@ public class BasicSystemService implements SystemService {
 
 	public void getCurrentStockPrice(List<String> codeNums) throws InterruptedException {
 		Document doc = null;
-		List<CurStock> data = new ArrayList<>();
+		Map<String, CurStock> data = new HashMap<>();
 		Map<Integer, Integer> map = new LinkedHashMap();
 	
 		for (String codeNum : codeNums) {
 			String url = "https://finance.naver.com/item/main.nhn?code=" + codeNum;
 			try {
-				doc = Jsoup.connect(url).ignoreContentType(true).timeout(5000).get();
+				doc = Jsoup.connect(url).ignoreContentType(true).timeout(60000).get();
 			} catch (IOException e) {
 //				AppContext.setLog("네이버 금융 크롤링도중 IOException 발생", BasicSystemService.class.getName());
 				e.printStackTrace();
@@ -128,7 +128,7 @@ public class BasicSystemService implements SystemService {
 			}
 			
 			CurStock curStockInfo = new CurStock();
-			data.add(curStockInfo.parser(codeNum + " " + status.text(), map));
+			data.put(codeNum, curStockInfo.parser(codeNum + " " + status.text(), map));
 			AppContext.setStockMarket(data);
 //			System.out.println(curStockInfo.toString()); //for debugging
 			Thread.sleep(10);
