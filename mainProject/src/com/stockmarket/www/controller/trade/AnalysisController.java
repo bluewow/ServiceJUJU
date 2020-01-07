@@ -49,7 +49,7 @@ public class AnalysisController extends HttpServlet{
 			HashMap<Object, Object>map = new HashMap<>();
 			Map<String, CurStock> stocks = AppContext.getStockMarket();
 			CurStock curStock = null; 
-			
+
 			for(String getCodeNume : stocks.keySet()) {
 				if(getCodeNume.equals(codeNum)) {
 //					System.out.println(stocks.get(getCodeNume).toString()); //for debugging
@@ -62,10 +62,11 @@ public class AnalysisController extends HttpServlet{
 							stocks.get(getCodeNume).getPercent(),
 							stocks.get(getCodeNume).getQuantityMap());
 					break;
-				} else {
-					curStock = new CurStock(codeNum, "[데이터 수집중...]", "보합", "0", "none", "0", null);
-				}
+				} 
 			}
+			
+			if(curStock == null)
+				curStock = new CurStock(codeNum, "[데이터 수집중...]", "보합", "0", "none", "0", null);
 			
 //			System.out.println(curStock.toString());  //for debugging
 			map.put("name", service.getStockName(codeNum));
