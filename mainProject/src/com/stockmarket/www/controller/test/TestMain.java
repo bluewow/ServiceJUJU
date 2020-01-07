@@ -21,6 +21,8 @@ public class TestMain {
 				JsonTest();
 				break;
 			case 3:
+				clearScreen();
+				NormalTest();
 				break;
 			case 4:
 				break;
@@ -46,8 +48,8 @@ public class TestMain {
 		clearScreen();
 		System.out.println("-----------------------------");
 		System.out.println("1.SystemService Test");
-		System.out.println("2. ");
-		System.out.println("3. ");
+		System.out.println("2.JSON Test ");
+		System.out.println("3.Java grammar Test  ");
 		System.out.println("4. ");
 		System.out.println("5. ");
 		System.out.println("6. ");
@@ -70,6 +72,10 @@ public class TestMain {
 	}
 	private static void JsonTest() {
 		TestJson service = new TestJson();
+		service.test();
+	}
+	private static void NormalTest() {
+		TestNormal service = new TestNormal();
 		service.test();
 	}
 
