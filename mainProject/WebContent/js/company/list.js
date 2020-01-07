@@ -60,7 +60,7 @@ window.addEventListener("load", function() {
 				if (e.target.classList.contains("interest_no")) {
 					var data = [ [ "attention", attention ],
 							[ "status", "insert" ] ]
-
+					
 					var sendData = [];
 
 					for (var i = 0; i < data.length; i++)
@@ -85,7 +85,7 @@ window.addEventListener("load", function() {
 					var data = [ [ "attention", attention ],
 							[ "status", "delete" ] ]
 					var sendData = [];
-
+					console.log(attention);
 					for (var i = 0; i < data.length; i++) {
 						sendData[i] = data[i].join("=");
 					}
