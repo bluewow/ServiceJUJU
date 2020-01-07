@@ -107,8 +107,11 @@ public class ListController extends HttpServlet {
 		// 검색된 결과의 종목코드가 같은 것이 있는지 확인한다.
 		
 		
+		if (interestStocksList != null) {
+			request.setAttribute("interestStocks", interestStocksList);
+		}
 		
-		request.setAttribute("interestStocks", interestStocksList);
+		
 		request.setAttribute("search", searchCompanyList);
 		request.setAttribute("logIn", id);
 		

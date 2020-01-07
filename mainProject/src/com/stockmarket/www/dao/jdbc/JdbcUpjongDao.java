@@ -45,9 +45,9 @@ public class JdbcUpjongDao implements UpjongDao {
 		JdbcDaoContext daoContext = new JdbcDaoContext();
 		PreparedStatement pst =null;
 		ResultSet rs = null;
+		List<String> list = new ArrayList<String>();
 		
 		try {
-			List<String> list = new ArrayList<String>();
 			pst = daoContext.getPreparedStatement(sql);
 			pst.setString(1, upjong);
 			rs = pst.executeQuery();
@@ -55,7 +55,7 @@ public class JdbcUpjongDao implements UpjongDao {
 			while(rs.next()) {
 				list.add(rs.getString("STOCKNAME"));
 			}
-			return list;
+			
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -64,7 +64,8 @@ public class JdbcUpjongDao implements UpjongDao {
 		} finally {
 			daoContext.close(rs, pst);
 		}
-		return null;
+		
+		return list;
 	}
 	
 	@Override
@@ -74,20 +75,25 @@ public class JdbcUpjongDao implements UpjongDao {
 		String sql = "INSERT INTO Upjong (UPJONG, STOCKNAME) "
 				+ "VALUES (?, ?)";
 		
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+		PreparedStatement statement = null;
 		try {
-			JdbcDaoContext daoContext = new JdbcDaoContext();
-			PreparedStatement statement = daoContext.getPreparedStatement(sql);
+			statement = daoContext.getPreparedStatement(sql);
+			
 			for(int i = 0 ; i <list.size(); i++) {
 				statement.setString(1, list.get(i).getUpjong());
 				statement.setString(2, list.get(i).getStockName());
-				result = statement.executeUpdate();
 			}
-			statement.close();
+			
+			result = statement.executeUpdate();
+			
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			daoContext.close(statement);
 		}
 		return result;
 	}
@@ -96,16 +102,21 @@ public class JdbcUpjongDao implements UpjongDao {
 	public int delete() {
 		int result = 0;
 		String sql = "DELETE FROM UPJONG";
-		JdbcDaoContext context = new JdbcDaoContext();
+		JdbcDaoContext daoContext = new JdbcDaoContext();
+		PreparedStatement st = null;
+		
 		try {
-			PreparedStatement st = context.getPreparedStatement(sql);
+			st = daoContext.getPreparedStatement(sql);
 			result = st.executeUpdate();
-			context.close(st);
+			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			daoContext.close(st);
 		}
+		
 		return result;
 	}
 	

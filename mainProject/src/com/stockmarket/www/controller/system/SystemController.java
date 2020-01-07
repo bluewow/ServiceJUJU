@@ -38,16 +38,18 @@ public class SystemController extends HttpServlet {
 		
 		Thread thread = new Thread(()->{
 			try {
-				while(true) 
+				while(!Thread.currentThread().isInterrupted())
 					systemThread();
 				
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
-			}	
+			} finally {
+				System.out.println("Thread is dead");
+			}
 		});
-		
+		thread.setDaemon(true);
 		thread.start();
 		request.getRequestDispatcher("main.jsp").forward(request, response);
 	}
@@ -83,7 +85,7 @@ public class SystemController extends HttpServlet {
 		//현재 시간을 preHour flag 에 저장
 		preHour = curHour;
 		
-		Thread.sleep(1000 * 60 * 10);
+		Thread.sleep(1000 * 60 * 1); //1분의 대기 - 반복적인 crawling 에 대한 우려
 	}
 
 /*

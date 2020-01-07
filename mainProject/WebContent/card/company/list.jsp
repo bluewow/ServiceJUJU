@@ -79,16 +79,22 @@
 					</c:if>
 					
 					<c:if test="${logIn != -1}">
-						
-							
-								<td class="interest_yes" data-attention="${sector.stockCode}" id="certifiedLoing">
-								</td>
-							
-						
+					<!-- 값이 들어감  -->
+						<c:set target="${interestStocks}" var="interestStocksListCheck" scope ="session" />
+						<c:if test="${not empty interestStocks }">
+							<!-- 값이 들어감 -->
+							<c:forEach var="interestStocks" items="${interestStocks}" varStatus="status1" >
+								<c:choose>
+									<c:when test="${sector.stockCode eq interestStocks.stockCode}">
+										<td class="interest_yes" data-attention="${sector.stockCode}" id="certifiedLoing">
+										</td>
+									</c:when>
+								</c:choose>
+							</c:forEach>
+						</c:if>
 						<td class="interest_no" data-attention="${sector.stockCode}" id="certifiedLoing">
 						</td>
 					</c:if>
-					
 				</tr>
 				</c:forEach>
 			</tbody>
