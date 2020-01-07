@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.stockmarket.www.service.CaptureMemoService;
 import com.stockmarket.www.service.basic.BasicCaptureMemoService;
 
-@WebServlet("/card/capturememo/captureMemo-json-del")
-public class CaptureMemoDelJSONController extends HttpServlet {
+@WebServlet("/card/capturememo/captureMemo-delete-json")
+public class CaptureMemoDeleteJSONController extends HttpServlet {
 	private CaptureMemoService service;
 
-	public CaptureMemoDelJSONController() {
+	public CaptureMemoDeleteJSONController() {
 		service = new BasicCaptureMemoService();
 	}
 
