@@ -92,7 +92,6 @@ public class RegBoardJsonController extends HttpServlet {
 			response.setCharacterEncoding("UTF-8"); // UTP-8로 보내는 코드
 			response.setContentType("text/html;charset=UTF-8"); // UTP-8로 보내는 코드
 			PrintWriter out = response.getWriter();
-
 			out.print(result);
 		}
 	}

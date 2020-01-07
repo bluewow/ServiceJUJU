@@ -45,16 +45,13 @@ public class InterestStockJSONController extends HttpServlet{
 		boolean firstSetting = true;
 	
 		int userId = (int)session.getAttribute("id");
-		String delStockname = request.getParameter("delStockname");
 		String codeNum = request.getParameter("codeNum");
 		
-		interestStocksInterface.deleteStock(userId,delStockname);
 		
 	    if(codeNum != null || firstSetting ) {
 	    	updateCurrentPrice(request,response,userId);
 	    	return;
 	    }
-		
 		
 	}
 	
@@ -67,6 +64,27 @@ public class InterestStockJSONController extends HttpServlet{
         PrintWriter out = response.getWriter();
 		out.write(interestJson);
 		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+		
+        HttpSession session = request.getSession();
+        
+		int userId = (int)session.getAttribute("id");
+		String delStockName = request.getParameter("delStockName");
+
+		
+		interestStocksInterface.deleteStock(userId,delStockName);
+		
+		List<InterestView> interestlist = interestViewInterface.getInterestViewList(userId);
+		
+        Gson interestGson = new Gson();
+		String interestJson = interestGson.toJson(interestlist);
+        PrintWriter out = response.getWriter();
+		out.write(interestJson);
 	}
 	
 

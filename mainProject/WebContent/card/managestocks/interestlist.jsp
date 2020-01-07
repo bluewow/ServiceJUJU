@@ -36,11 +36,8 @@
 			</tbody>
 		</table>
 
-		<form id="deleteForm" action="interestlist" method="get">
-			<input id="deleteInput" type="hidden" name="delStockName" value="" />
-		</form>
 
-		<template class="template">
+	<template class="template">
 		<tr>
 	    <td style="text-align: center">
          <span>stockName</span>
@@ -51,10 +48,10 @@
 		<td class="down"><span></span> <span class="fa fa-caret-down"></span><br>
 			-<span></span>%</td>
 		<td><span></span> <span></span><br> <span></span>%</td>
-		<td style="text-align: center"><button style="border: none; background: white" class="fa fa-trash-o"></button>
+		<td style="text-align: center"><button id="deleteButton" style="border: none; background: white" class="fa fa-trash-o"></button>
 		</td>
 		</tr>
-		</template>
+	</template>
 	</div>
 </body>
 </html>

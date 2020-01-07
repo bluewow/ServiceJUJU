@@ -9,18 +9,18 @@ window.addEventListener("message", function(e) {
 window.addEventListener("load", function() {
 	var section = this.document.querySelector(".interestList");
 	var tbody = section.querySelector("table tbody");
-
+	var delButton = section.querySelector("#deleteButton");
+		
 	function interestLoad() {
 
 		var interestAjax = new XMLHttpRequest();
 		interestAjax.open("GET", "../../card/managestocks/interestlist-json", true);
-        
+        		
 		// 서블릿의 실행이 완료되었을때 실행
 		interestAjax.onload = function() {
 			// var cardFooter = section.querySelector(".card-footer");
 
 			var list = JSON.parse(interestAjax.responseText);
-			console.log(list[0].price);
 			tbody.innerHTML = "";
 
 			for (var i = 0; i < list.length; i++) {
@@ -48,22 +48,50 @@ window.addEventListener("load", function() {
 					}
 				}
 			
-				formData.value = list[i].stockname	
 				tbody.append(cloneTr);
 				
-				tds[4].
+				tds[4].firstElementChild.dataset.delStockName = list[i].stockName;
 				
-				console.log(tds[i]);
-
+				
 			}
 		};
 		interestAjax.send();
 	};
+	
+	interestLoad();
+	
+//	tbody.onclick = function(e){
+//		e.preventDefault();
+//		
+//		if(e.target == )
+//		
+//		var deltarget = e.target.dataset.delStockName;
+//		var data = ["delStockName", delStockName];
+//		var sendData = []; 
+//	
+//	    sendData[0] = data[0].join("=");
+//		
+//		sendData = sendData.join("&");
+//		
+//		var delRequest = new XMLHttpRequest();
+//		delRequest.open("POST","../../card/managestocks/interestlist-json", true)
+//        delRequest.setRequestHeader('Content-Type',
+//		'application/x-www-form-urlencoded');
+//		delRequest.send(sendData);
+//		
+//		delRequest.onload = function (){
+//			alert("삭제되었습니다.");
+//		}
+//	};
+	
+	
+	
+	
 //	
 //	setInterval(function() {
 //		interestLoad();
 //	}, 10000);
 	
-	interestLoad();
+	
 
 });
