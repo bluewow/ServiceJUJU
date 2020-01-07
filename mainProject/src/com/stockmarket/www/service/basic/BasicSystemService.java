@@ -73,11 +73,15 @@ public class BasicSystemService implements SystemService {
 		for(KoreaStocks entity : stocks)
 			codeNum.add(entity.getStockCode());
 
-		stockMarket = getCurrentStockPrice(codeNum);
-//		AppContext.setStockMarket(stockMarket);
+		try {
+			getCurrentStockPrice(codeNum);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public List<CurStock> getCurrentStockPrice(List<String> codeNums) {
+	public void getCurrentStockPrice(List<String> codeNums) throws InterruptedException {
 		Document doc = null;
 		List<CurStock> data = new ArrayList<>();
 		Map<Integer, Integer> map = new LinkedHashMap();
@@ -127,8 +131,8 @@ public class BasicSystemService implements SystemService {
 			data.add(curStockInfo.parser(codeNum + " " + status.text(), map));
 			AppContext.setStockMarket(data);
 //			System.out.println(curStockInfo.toString()); //for debugging
+			Thread.sleep(10);
 		}
-		return data;
 	}
 
 	/*-------------------------- update Market ----------------------------*/
