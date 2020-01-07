@@ -83,7 +83,6 @@ public class BasicSystemService implements SystemService {
 
 	public void getCurrentStockPrice(List<String> codeNums) throws InterruptedException {
 		Document doc = null;
-		Map<String, CurStock> data = new HashMap<>();
 		Map<Integer, Integer> map = new LinkedHashMap();
 	
 		for (String codeNum : codeNums) {
@@ -128,8 +127,7 @@ public class BasicSystemService implements SystemService {
 			}
 			
 			CurStock curStockInfo = new CurStock();
-			data.put(codeNum, curStockInfo.parser(codeNum + " " + status.text(), map));
-			AppContext.setStockMarket(data);
+			AppContext.getStockMarket().put(codeNum, curStockInfo.parser(codeNum + " " + status.text(), map));
 //			System.out.println(curStockInfo.toString()); //for debugging
 			Thread.sleep(10);
 		}
