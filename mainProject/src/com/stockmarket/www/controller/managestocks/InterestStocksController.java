@@ -54,7 +54,7 @@ public class InterestStocksController extends HttpServlet {
 //			{
 //				System.out.println(data.toString());
 //			}
-			request.getRequestDispatcher("interestlist2.jsp").forward(request, response);	
+			request.getRequestDispatcher("interestlist.jsp").forward(request, response);	
 		
 
 		
