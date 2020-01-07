@@ -86,13 +86,16 @@ class CaptureMemo {
 		})
 	}
 
-	deleteDetail(){
-		$.post("captureMemo-delete-json", "memoId=" + target.attr("dataset.id"))
-		.done(function() {
-			captureMemo.loadList();
-		})
-		.fail(function() {
-			alert("삭제 실패");
+	deleteDetail(target){
+		return new Promise(function(resovle, reject){
+			let memoId = target.parent().parent().attr("dataset.id");
+			$.post("captureMemo-delete-json", "memoId=" + memoId)
+			.done(function() {
+				resovle();
+			})
+			.fail(function() {
+				alert("삭제 실패");
+			});
 		});
 	}
 }
@@ -119,7 +122,10 @@ $(function() {
 				});
 				break;
 			case "SPAN":	// 메모 삭제
-				captureMemo.deleteDetail();
+				captureMemo.deleteDetail(target)
+				.then(function(){
+					captureMemo.loadList();
+				});
 				break;
 		}
 	});
