@@ -58,14 +58,12 @@ public class TestSystemService {
 				}
 				System.out.println("finished-3");
 				break;
-			case 4: //호가창
+			case 4: //호가창 TODO
 				List<CurStock> testMarket;
 				CurStock test = null;
 				List<String> codeNum = new ArrayList<>();
 				codeNum.add("095660");
-				testMarket = sys.getCurrentStockPrice(codeNum);
-				for(CurStock stock : testMarket) 
-					test = stock;
+			
 				
 				System.out.println(test.toString());
 				break;
