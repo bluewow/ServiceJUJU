@@ -1,5 +1,6 @@
 package com.stockmarket.www.controller.system;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -30,7 +31,7 @@ import com.stockmarket.www.service.basic.BasicSystemService;
 
 public class AppContext {
 	CSVStockDataDao log = new CSVStockDataDao();
-	static Map<String, CurStock> stockMarket;
+	static Map<String, CurStock> stockMarket = new HashMap<>();
 	
     private AppContext() { }
     private static class SingleTonHolder {
@@ -46,11 +47,7 @@ public class AppContext {
 	}
 
 	public static Map<String, CurStock> getStockMarket() {
-		return stockMarket;
-	}
-
-	public static void setStockMarket(Map<String, CurStock> stockMarket) {
-		AppContext.stockMarket = stockMarket;
+		return getInstance().stockMarket;
 	}
 
 	/*
