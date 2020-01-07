@@ -48,24 +48,22 @@ public class TestSystemService {
 				System.out.println(date.format(System.currentTimeMillis()));
 				break;
 			case 3: // single tone Test for 코스피/코스닥 크롤링 데이터
-				List<CurStock> stockMarket;
-				stockMarket = AppContext.getStockMarket();
-
-				if (stockMarket != null) {
-					for (CurStock cur : stockMarket) {
-						System.out.println(cur.toString());
-					}
-				}
-				System.out.println("finished-3");
+//				List<CurStock> stockMarket;
+//				stockMarket = AppContext.getStockMarket();
+//
+//				if (stockMarket != null) {
+//					for (CurStock cur : stockMarket) {
+//						System.out.println(cur.toString());
+//					}
+//				}
+//				System.out.println("finished-3");
 				break;
-			case 4: //호가창
+			case 4: //호가창 TODO
 				List<CurStock> testMarket;
 				CurStock test = null;
 				List<String> codeNum = new ArrayList<>();
 				codeNum.add("095660");
-				testMarket = sys.getCurrentStockPrice(codeNum);
-				for(CurStock stock : testMarket) 
-					test = stock;
+			
 				
 				System.out.println(test.toString());
 				break;
@@ -124,7 +122,7 @@ public class TestSystemService {
 		System.out.println("-----------------------------");
 		System.out.println("1.코스피 코스닥 전종목 현재가 갱신");
 		System.out.println("2.함수 처리 시간 체크 ");
-		System.out.println("3.single tone Test for 코스피/코스닥 크롤링 데이터 ");
+//		System.out.println("3.single tone Test for 코스피/코스닥 크롤링 데이터 ");
 		System.out.println("4.호가창 테스트");
 		System.out.println("5. ");
 		System.out.println("6. ");
