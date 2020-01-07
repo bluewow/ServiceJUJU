@@ -17,8 +17,7 @@ window.addEventListener("load", function () {
 		e.preventDefault();
 		if(sortBoard=="") {
 			sortBoard = "my";
-			myButton.classList.add("button-on");
-		} else if(sortBoard=="interest") {
+			myButton.classList.add("button-on"); 
 			sortBoard = "my";
 			myButton.classList.add("button-on");
 			interestButton.classList.remove("button-on");

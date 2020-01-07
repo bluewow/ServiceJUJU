@@ -45,11 +45,10 @@ public class InterestStockJSONController extends HttpServlet{
 		boolean firstSetting = true;
 	
 		int userId = (int)session.getAttribute("id");
-		String delStockName = request.getParameter("delStockName");
+		String delStockname = request.getParameter("delStockname");
 		String codeNum = request.getParameter("codeNum");
 		
-		interestStocksInterface.deleteStock(userId,delStockName);
-		
+		interestStocksInterface.deleteStock(userId,delStockname);
 		
 	    if(codeNum != null || firstSetting ) {
 	    	updateCurrentPrice(request,response,userId);
@@ -66,7 +65,6 @@ public class InterestStockJSONController extends HttpServlet{
         Gson interestGson = new Gson();
 		String interestJson = interestGson.toJson(interestlist);
         PrintWriter out = response.getWriter();
-        System.out.println(interestJson);
 		out.write(interestJson);
 		
 	}

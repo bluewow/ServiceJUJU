@@ -36,11 +36,9 @@ public class HoldingStockJSONController extends HttpServlet{
 		response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 		
-
 		HttpSession session = request.getSession();
 		
 		boolean firstSetting = true;
-	
 		
 		String codeNum = request.getParameter("codeNum");
 		int userId = (int)session.getAttribute("id");
@@ -60,6 +58,5 @@ public class HoldingStockJSONController extends HttpServlet{
 		String json = gson.toJson(list);
         PrintWriter out = response.getWriter();
 		out.write(json);
-		
 	}
 }
