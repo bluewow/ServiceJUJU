@@ -64,11 +64,12 @@
                <h1 style="display: none;">user section</h1>
                <div class="user-section">
                   <div class="personal">
-                  <a href="#">
-                  	 <img src="http://via.placeholder.com/50x50"
-                    	 alt="profile photo" class="circle float-left profile-photo"
-                     	width="50" height="auto">
-                  </a>
+					<c:if test="${empty sessionScope.id }">
+                  	 <img src="http://via.placeholder.com/50x50" alt="profile photo" class="circle float-left profile-photo" width="50" height="auto">
+                  	</c:if>
+					<c:if test="${not empty sessionScope.id }">
+                  	 <img src="/images/profile/${sessionScope.profileImg}.png" alt="profile photo" class="circle float-left profile-photo" width="50" height="auto">
+                  	</c:if>
                   	<c:if test="${empty sessionScope.id }">
                   		<input class="animation-2" type="button" value="로그인">
                   	</c:if>
@@ -363,29 +364,52 @@
 
  	<div class="pop-up-wrapper">
 	   <div class="profile-pop-up">
-			<div class="pop-up-top">STOCK MARKET<br>프로필수정</div>
+			<div class="pop-up-top">
+
+				<span class="pop-up-top-image">
+					<a href="#">
+			    		<img src="/images/profile/1.png" 
+			    			alt="profile photo" class="circle float-left profile-photo-modi"
+			                >
+	                </a>
+                </span>
+				<span class="pop-up-top-subline">프로필 수정</span><br>
+                <span class="pop-up-top-id">${sessionScope.nickName }</span>
+            </div>
 	   		<div class="pop-up-border">
 	   			<div class="pop-up-context">
-		   			<!-- 	<div class="text">이메일</div>
-		   				<input class="box" type="text" name="userEmail" placeholder="Enter the Email..." form="user">
-		   				
-		   				<div class="text">닉네임</div>
-		   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
-		   				
-		   				<div class="text">비밀번호</div>
-		   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
+						<div class="text">현재 비밀번호</div>
+		   				<input class="box" type="password" name="currentPwd" placeholder="1 ~ 16자 이내로 입력 하세요" form="signup">
 	   					
-	   					<div class="text">비밀번호 확인</div>
-		   				<input class="box" type="password" name="pwd" placeholder="Enter the Password..." form="user">
+	   					<div class="text">새로운 비밀번호</div>
+		   				<input class="box" type="password" name="newPwd" placeholder="1 ~ 16자 이내로 입력 하세요" form="signup">
 		   				
-	   					<form class="login-box" action="login" method="post" id="user">
-		   					<input class="top-bottom-margin" type="button" value="회원가입">
-	   					</form> -->
+		   				<div class="text">비밀번호 확인</div>
+		   				<input class="box" type="password" name="checkPwd" placeholder="1 ~ 16자 이내로 입력 하세요" form="signup">
+		   				
+		   				<form class="login-box" action="login" method="post" id="user">
+		   					<input class="top-bottom-margin" type="button" value="확인">
+	   					</form> 
 	   			</div>
 	   		</div>
 	   </div>
    </div>
    
+<!-- ===== 프로필 이미지 선택하기 pop-up ========================================================================================================== -->   
+ 	<div class="pop-up-profile-image">
+ 		<form class="profile-image-box" method="post" id="profile-image">
+			<div class="profile-image-list">
+							<c:forEach var="i" begin="1" end="36">
+							<img src="/images/profile/${i}.png" class="images">
+							</c:forEach>	
+			</div>
+			<div class="profile-image-select">
+				<input type="button" class="profile-submit" name="submit" value="확인">
+				<input type="button" class="profile-cancel" name="cancel" value="취소">
+			</div>
+		</form>
+	</div>
+
    <!-- =============================================================================================================== -->
       
    </main>

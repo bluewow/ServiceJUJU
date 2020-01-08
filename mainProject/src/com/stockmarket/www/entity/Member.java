@@ -7,6 +7,7 @@ public class Member {
 	private String password;
 	private long vMoney;
 	private String cardPos;
+	private int profileImg;
 	
 	public Member() {
 	
@@ -23,13 +24,14 @@ public class Member {
 	}
 	
 	// select를 위한 생성자
-	public Member(int id, String email, String nickName, String password, int vMoney, String cardPos) {
+	public Member(int id, String email, String nickName, String password, int vMoney, String cardPos, int profileImg) {
 		this.id = id;
 		this.email = email;
 		this.password = password;
 		this.nickName = nickName;
 		this.vMoney = vMoney;
-		this.cardPos = cardPos;		
+		this.cardPos = cardPos;
+		this.profileImg = profileImg;
 	}
 
 	// getter and setter
@@ -70,6 +72,18 @@ public class Member {
 
 	public void setCardPos(String cardPos) {
 		this.cardPos = cardPos;
+	}
+
+
+
+	public int getProfileImg() {
+		return profileImg;
+	}
+
+
+
+	public void setProfileImg(int profileImg) {
+		this.profileImg = profileImg;
 	}
 	
 	

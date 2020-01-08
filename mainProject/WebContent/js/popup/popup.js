@@ -131,9 +131,30 @@ window.addEventListener("load", function(){
 	//프로필설정 팝업
 	///////////////////////////
 	function profileFunc() {
-
-	}
 	
+	    var profilePopup = document.querySelector(".profile-pop-up");
+	    var profileImage = profilePopup.querySelector(".pop-up-top-image")
+
+	    profileImage.onclick = function(e) {
+	        if(e.target.nodeName != "IMG")
+	            return;
+
+	        //prevent Event Bubble
+	        e.preventDefault();
+	        	alert("image");
+	        	var profileImageList = document.querySelector(".pop-up-profile-image");
+	        	console.log(profileImageList);
+	        	
+	}
+	    profilePopup.onclick = function(e) {
+        if(e.target.nodeName != "INPUT")
+            return;
+
+        //prevent Event Bubble
+        e.preventDefault();
+        	alert("aasdsad")
+}
+	}
 });
 
 

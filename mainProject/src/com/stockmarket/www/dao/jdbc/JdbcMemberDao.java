@@ -30,9 +30,10 @@ public class JdbcMemberDao implements MemberDao {
 				String password = resultSet.getString("PASSWORD");
 				int vmoney = resultSet.getInt("VMONEY");
 				Date regdate = resultSet.getDate("REGDATE");
-				String cardPos = resultSet.getString("CARD_POS");				
+				String cardPos = resultSet.getString("CARD_POS");
+				int profileImg = resultSet.getInt("PROFILE_IMG");
 
-				Member member = new Member(id, email, nickName, password, vmoney, cardPos);
+				Member member = new Member(id, email, nickName, password, vmoney, cardPos, profileImg);
 				members.add(member);
 			}
 			
@@ -67,9 +68,10 @@ public class JdbcMemberDao implements MemberDao {
 				String password = resultSet.getString("PASSWORD");
 				int vmoney = resultSet.getInt("VMONEY");
 				Date regdate = resultSet.getDate("REGDATE");
-				String cardPos = resultSet.getString("CARD_POS");	
+				String cardPos = resultSet.getString("CARD_POS");
+				int profileImg = resultSet.getInt("PROFILE_IMG");	
 
-				Member member = new Member(id, email, nickName, password, vmoney, cardPos);
+				Member member = new Member(id, email, nickName, password, vmoney, cardPos, profileImg);
 				members.add(member);
 			}
 			
@@ -98,9 +100,10 @@ public class JdbcMemberDao implements MemberDao {
 				String nickName = resultSet.getString("NICKNAME");
 				String password = resultSet.getString("PASSWORD");
 				int vmoney = resultSet.getInt("VMONEY");
-				String cardPos = resultSet.getString("CARD_POS");	
+				String cardPos = resultSet.getString("CARD_POS");
+				int profileImg = resultSet.getInt("PROFILE_IMG");	
 
-				member = new Member(id, email, nickName, password, vmoney, cardPos);
+				member = new Member(id, email, nickName, password, vmoney, cardPos, profileImg);
 			}
 			
 			daoContext.close(resultSet, statement);
@@ -133,8 +136,9 @@ public class JdbcMemberDao implements MemberDao {
 				String password = resultSet.getString("PASSWORD");
 				int vmoney = resultSet.getInt("VMONEY");
 				String cardPos = resultSet.getString("CARD_POS");	
+				int profileImg = resultSet.getInt("PROFILE_IMG");
 
-				member = new Member(id, email, nickName, password, vmoney, cardPos);
+				member = new Member(id, email, nickName, password, vmoney, cardPos, profileImg);
 			}
 			daoContext.close(resultSet, statement);
 		} catch (ClassNotFoundException e) {
