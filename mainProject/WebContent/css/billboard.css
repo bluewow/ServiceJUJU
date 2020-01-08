@@ -1,3 +1,5 @@
+@charset "UTF-8";
+@import url("customStyle.css");
 /*!
  * Copyright (c) 2017 ~ present NAVER Corp.
  * billboard.js project is licensed under the MIT license
@@ -12,9 +14,16 @@
   font: 10px sans-serif;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
+.bb .bb-axis{
+  font-family:"에스코어 드림"; 
+  font-weight: 500;	
+  font-size: 1.1em;
+  color: rgb(150, 150, 150);
+}
+
 .bb path, .bb line {
   fill: none;
-  stroke: #000; }
+  stroke: "none"; }
 
 .bb text, .bb .bb-button {
   -webkit-user-select: none;
@@ -41,7 +50,12 @@
 
 /*-- Grid --*/
 .bb-grid line {
-  stroke: #aaa; }
+  stroke: rgba(255, 255, 255, 0);
+  --stroke: #aaa; }
+
+.bb-ygrid-lines line {
+  stroke: #aaa;
+}
 
 .bb-grid text {
   fill: #aaa; }
@@ -91,6 +105,10 @@
 /*-- Zoom region --*/
 .bb-zoom-brush {
   fill-opacity: .1; }
+
+.bb-zoom-rect{
+  height: 270;
+}
 
 /*-- Brush --*/
 .bb-brush .extent {
@@ -214,6 +232,9 @@
     padding: 5px;
     border-radius: 5px;
     cursor: pointer; }
+
+
+}
 
 
 /*# sourceMappingURL=billboard.css.map*/

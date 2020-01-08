@@ -68,7 +68,7 @@ public class SystemController extends HttpServlet {
 			service.updateMarket("KOSDAQ");
 		}
 			
-		//주식가격 refresh by 크롤링 9시 ~ 19시까지 실행
+		//주식가격 refresh by 크롤링 9시 ~ 20시까지 실행
 		if(Integer.parseInt(curHour) >= 9 && Integer.parseInt(curHour) <= 19) {
 			service.refreshStockPrice();
 		}

@@ -36,6 +36,20 @@ public class CaptureMemo {
 		this.regdate = regdate;
 	}
 
+	public CaptureMemo(int id, String title, Date regdate, String content, double PER, double PBR, double ROE,
+			double debtRatio, int marketCap, double foreignInvestors) {
+		this.id = id;
+		this.title = title;
+		this.regdate = regdate;
+		this.content = content;
+		this.PER = PER;
+		this.PBR = PBR;
+		this.ROE = ROE;
+		this.debtRatio = debtRatio;
+		this.marketCap = marketCap;
+		this.foreignInvestors = foreignInvestors;
+	}
+
 	// for insert
 	public CaptureMemo(String title, String content, double PER, double PBR, double ROE,
 			double debtRatio, int marketCap, String codeNum, int memberId) {

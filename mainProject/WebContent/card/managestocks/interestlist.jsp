@@ -12,14 +12,10 @@
 <link rel="stylesheet" type="text/css" href="../../css/holding.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="../../js/managestocks/interest_list.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<script type="text/javascript">
-	function goDelete() {
-		var form = document.getElementById("deleteForm");
-		form.submit();
-	}	
-</script>
+
 </head>
 
 <body class="scrollbar custom-scrollbar-style">
@@ -33,32 +29,29 @@
 				</tr>
 			</thead>
 			<tbody>
+				<tr>
+					<td colspan="5">관심종목이 없습니다</td>
+				</tr>
 
-
-				<c:forEach var="n" items="${list}">
-
-					<tr>
-						<td style="text-align: center">${n.stockname}</td>
-						<td class="up">${n.price}<span class="fa fa-caret-up"></span> <span>${n.percent}%</span></td>
-						<td style="text-align: center"><button style="border:none; background:white" class="fa fa-trash-o" onclick="goDelete()"></button>
-						</td>
-					</tr>
-					
-					        <form id="deleteForm" action="interestlist" method="get">
-                            <input type="hidden" name="delStockName" value="${n.stockname}" />
-					         </form>
-				</c:forEach>
-
-				<!--        <tr>
-         <td style="text-align:center;">네오위즈 홀딩스</td>
-         <td class="down">24,150   <span class="fa fa-caret-down"></span><br>
-         <span>4.17%</span></td>
-         <td style="text-align:center;">16주</td>
-         <td class="down"><span>4,418</span><br>
-         <span>1.15%</span></td>
-      </tr>  -->
 			</tbody>
 		</table>
-		</div>
+
+
+	<template class="template">
+		<tr>
+	    <td style="text-align: center">
+         <span>stockName</span>
+        </td>
+		
+		<td class="up"><span></span> <span class="fa fa-caret-up"></span><br>
+			<span></span>%</td>
+		<td class="down"><span></span> <span class="fa fa-caret-down"></span><br>
+			-<span></span>%</td>
+		<td><span></span> <span></span><br> <span></span>%</td>
+		<td style="text-align: center"><button id="deleteButton" style="border: none; background: white" class="fa fa-trash-o"></button>
+		</td>
+		</tr>
+	</template>
+	</div>
 </body>
 </html>

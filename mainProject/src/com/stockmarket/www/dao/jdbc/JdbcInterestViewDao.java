@@ -60,7 +60,8 @@ public class JdbcInterestViewDao implements InterestViewDao {
 					if (stockDao.getStockCodeNum(stockName).equals(data.getCodeNum())) {
 						String price = data.getPrice();
 						String percent = data.getPercent();
-						InterestView interestview = new InterestView(stockName, price, percent);
+						String gain =data.getGain();
+						InterestView interestview = new InterestView(stockName, price, percent,gain);
 						interestlist.add(interestview);
 						break;
 					}

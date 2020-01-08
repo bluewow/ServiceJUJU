@@ -19,19 +19,26 @@ public class JdbcCaptureMemoDao implements CaptureMemoDao {
 	@Override
 	public CaptureMemo get(int id) {
 		String sql = "SELECT * FROM CAPTURE_MEMO WHERE ID=?";
-		CaptureMemoView captureMemo = null;
+		CaptureMemo captureMemo = null;
 		try {
 			JdbcDaoContext daoContext = new JdbcDaoContext();
 			PreparedStatement statement = daoContext.getPreparedStatement(sql);
 			statement.setInt(1, id);
 			ResultSet resultSet = statement.executeQuery();
 
-			while (resultSet.next()) {		
-				String name = resultSet.getString("NAME");
+			while (resultSet.next()) {
 				String title = resultSet.getString("TITLE");
-				Date regdate = resultSet.getDate("regdate");
+				String content = resultSet.getString("CONTENT");
+				double PER = resultSet.getDouble("PER");
+				double PBR = resultSet.getDouble("PBR");
+				double ROE = resultSet.getDouble("ROE");
+				double debtRatio = resultSet.getDouble("DEBT_RATIO");
+				int marketCap = resultSet.getInt("MARKET_CAP");
+				double foreignInvestors = resultSet.getDouble("FOREIGN_INVESTORS");
+				Date regdate = resultSet.getDate("REGDATE");
 				
-//				captureMemo = new CaptureMemo(id, name, title, regdate);
+				captureMemo = new CaptureMemo(
+						id, title, regdate, content, PER, PBR, ROE, debtRatio, marketCap, foreignInvestors);
 			}
 			daoContext.close(resultSet, statement);
 		} catch (ClassNotFoundException e) {
@@ -138,7 +145,7 @@ public class JdbcCaptureMemoDao implements CaptureMemoDao {
 			JdbcDaoContext daoContext = new JdbcDaoContext();
 			PreparedStatement statement = daoContext.getPreparedStatement(sql);
 			statement.setString(1, captureMemo.getTitle());
-			statement.setString(2, captureMemo.getTitle());
+			statement.setString(2, captureMemo.getContent());
 			statement.setInt(3, captureMemo.getId());
 
 			result = statement.executeUpdate();

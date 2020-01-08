@@ -4,7 +4,16 @@ public class InterestView {
 	private String stockname;
 	private String price;
 	private String percent;
+	private String gain;
 	
+	public String getGain() {
+		return gain;
+	}
+
+	public void setGain(String gain) {
+		this.gain = gain;
+	}
+
 	public InterestView() {
 		// TODO Auto-generated constructor stub
 	}
@@ -13,10 +22,13 @@ public class InterestView {
 		this.stockname = stockname;
 	}
 	
-	public InterestView(String stockname, String price, String percent) {
+
+	public InterestView(String stockname, String price, String percent, String gain) {
+		super();
 		this.stockname = stockname;
 		this.price = price;
 		this.percent = percent;
+		this.gain = gain;
 	}
 
 	public String getPrice() {

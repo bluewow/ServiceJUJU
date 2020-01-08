@@ -13,8 +13,6 @@ public class Member {
 	
 	}
 	
-	
-	
 	// insert, update를 위한 생성자
 	public Member(String email, String nickName, String password, int vMoney) {
 		this.email = email;

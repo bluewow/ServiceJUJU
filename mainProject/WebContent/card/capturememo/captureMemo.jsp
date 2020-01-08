@@ -46,7 +46,7 @@
 		</tr>
 		</template>	
 		<template class="tr-template">
-		<tr class="child-tr1">
+		<tr class="child-tr">
 			<td class="child" colspan="3">
 				<div>
 					<div id="chart_div"></div>
