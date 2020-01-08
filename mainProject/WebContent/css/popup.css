@@ -219,9 +219,10 @@ input.top-bottom-margin {
 	margin:4%;
 	display:inline-block;
 	width:90%;
-	height:84.5%;
+	height:93%;
 	overflow-y: scroll;
 	background: white;
+	border-radius:0px;
 }
 .images {
 	height:70px;

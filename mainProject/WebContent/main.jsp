@@ -398,14 +398,15 @@
 <!-- ===== 프로필 이미지 선택하기 pop-up ========================================================================================================== -->   
  	<div class="pop-up-profile-image">
  		<form class="profile-image-box" method="post" id="profile-image">
-			<div class="profile-image-list">
+			<div class="profile-image-list scrollbar custom-scrollbar-style">
 							<c:forEach var="i" begin="1" end="36">
-							<img src="/images/profile/${i}.png" class="images">
+								<c:if test="${i != sessionScope.profileImg }">
+                  					 <img src="/images/profile/${i}.png" class="images" data-id="${i}">
+								</c:if>
+								<c:if test="${i == sessionScope.profileImg }">
+                  					 <img src="/images/profile/${i}.png" class="images image-selected" data-id="${i}">
+								</c:if>
 							</c:forEach>	
-			</div>
-			<div class="profile-image-select">
-				<input type="button" class="profile-submit" name="submit" value="확인">
-				<input type="button" class="profile-cancel" name="cancel" value="취소">
 			</div>
 		</form>
 	</div>
