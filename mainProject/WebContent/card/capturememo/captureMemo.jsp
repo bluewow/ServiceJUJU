@@ -13,7 +13,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
+
 <script src="../../js/capture/capture.js"></script>
+
+<!--d3js CDN-->
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<!--다운 받아서 포함 시키기-->
+<script src = "../../js/billboard.js"></script>
+<link rel="stylesheet" href="../../css/billboard.css">
+<script src="../../js/capture/capture-chart.js"></script>
 
 <title>Insert title here</title>
 </head>
@@ -49,7 +58,7 @@
 		<tr class="child-tr">
 			<td class="child" colspan="3">
 				<div>
-					<div id="chart_div"></div>
+					<div id="radarChart"></div>
 
 					<div class="memo">
 						<div><input maxlength="20"

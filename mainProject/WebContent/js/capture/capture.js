@@ -54,6 +54,36 @@ class CaptureMemo {
 			this.prevMemo = this.content.find(".child").first().parent();
 	}
 
+	createChart(){
+		var chart = bb.generate({
+			data: {
+				x: "x",
+				columns: [
+			["x", "Data A", "Data B", "Data C", "Data D", "Data E"],
+			["data1", 330, 350, 200, 380, 150],
+			["data2", 130, 100, 30, 200, 80],
+			["data3", 230, 153, 85, 300, 250]
+				],
+				type: "radar",
+				labels: true
+			},
+			radar: {
+				axis: {
+				max: 400
+				},
+				level: {
+				depth: 4
+				},
+				direction: {
+				clockwise: true
+				}
+			},
+			bindto: "#radarChart"
+			});
+			
+			chart.load();
+	};
+
 	getDetail(target){
 		return new Promise(function(resovle, reject){
 			let memoId = target.parent().attr("dataset.id");
@@ -100,7 +130,7 @@ class CaptureMemo {
 	}
 }
 
-$(function() {
+window.addEventListener("load", function() {
 	let captureMemo = new CaptureMemo();
 	captureMemo.loadList();
 
@@ -113,6 +143,7 @@ $(function() {
 				captureMemo.getDetail(target)
 				.then(function(result){
 					captureMemo.createDetail(result, target);
+					captureMemo.createChart();
 				})
 				.then(function(){
 					// 메모 수정
@@ -152,26 +183,3 @@ window.addEventListener("message", function(e) {
         request.send(data);
     }
 });
-
-// google.charts.load('current', {'packages':['corechart']});
-//       google.charts.setOnLoadCallback(drawChart);
-
-//       function drawChart() {
-//         var data = google.visualization.arrayToDataTable([
-//           ['Year', 'Sales', 'Expenses'],
-//           ['2013',  1000,      400],
-//           ['2014',  1170,      460],
-//           ['2015',  660,       1120],
-//           ['2016',  1030,      540]
-//         ]);
-
-//         var options = {
-// 		  title: 'Company Performance',
-// 		  backgroundColor: {fill: "#efefef"},
-//           hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
-//           vAxis: {minValue: 0}
-//         };
-
-//         var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-//         chart.draw(data, options);
-//       }
