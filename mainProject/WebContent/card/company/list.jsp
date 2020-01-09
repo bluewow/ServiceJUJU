@@ -80,20 +80,30 @@
 					
 					<c:if test="${logIn != -1}">
 					<!-- 값이 들어감  -->
-						<c:set target="${interestStocks}" var="interestStocksListCheck" scope ="session" />
-						<c:if test="${not empty interestStocks }">
-							<!-- 값이 들어감 -->
-							<c:forEach var="interestStocks" items="${interestStocks}" varStatus="status1" >
-								<c:choose>
-									<c:when test="${sector.stockCode eq interestStocks.stockCode}">
-										<td class="interest_yes" data-attention="${sector.stockCode}" id="certifiedLoing">
-										</td>
-									</c:when>
-								</c:choose>
-							</c:forEach>
-						</c:if>
-						<td class="interest_no" data-attention="${sector.stockCode}" id="certifiedLoing">
-						</td>
+						<c:set target="${interestStocks}" var="interestStocksListCheck"/>
+							<c:choose>
+								<c:when test="${not empty interestStocks }">
+									<!-- 값이 들어감 -->
+									<c:forEach var="interestStocks" items="${interestStocks}" varStatus="status1" >
+										<h1>${sector.stockCode} ${interestStocks.stockCode}</h1>
+											<c:choose>
+												<c:when test="${sector.stockCode eq interestStocks.stockCode}">
+														<h1>${sector.stockCode} ${interestStocks.stockCode}</h1>
+													<td class="interest_yes" data-attention="${sector.stockCode}" id="certifiedLoing">
+													</td>
+												</c:when>
+												<c:otherwise>
+													<td class="interest_no" data-attention="${sector.stockCode}" id="certifiedLoing">
+		                        					</td>
+												</c:otherwise>
+											</c:choose>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<td class="interest_no" data-attention="${sector.stockCode}" id="certifiedLoing">
+		                        	</td>
+								</c:otherwise>
+							</c:choose>
 					</c:if>
 				</tr>
 				</c:forEach>
