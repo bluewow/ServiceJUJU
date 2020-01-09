@@ -22,7 +22,6 @@ window.addEventListener("load", function() {
 
 			var list = JSON.parse(interestAjax.responseText);
 			tbody.innerHTML = "";
-
 			for (var i = 0; i < list.length; i++) {
 
 				var template = section.querySelector(".template");
@@ -50,7 +49,7 @@ window.addEventListener("load", function() {
 			
 				tbody.append(cloneTr);
 				
-				tds[4].firstElementChild.dataset.delStockName = list[i].stockName;
+				tds[4].firstElementChild.dataset.delStockName = list[i].stockname;
 				
 				
 			}
@@ -60,29 +59,31 @@ window.addEventListener("load", function() {
 	
 	interestLoad();
 	
-//	tbody.onclick = function(e){
-//		e.preventDefault();
-//		
-//		if(e.target == )
-//		
-//		var deltarget = e.target.dataset.delStockName;
-//		var data = ["delStockName", delStockName];
-//		var sendData = []; 
-//	
-//	    sendData[0] = data[0].join("=");
-//		
-//		sendData = sendData.join("&");
-//		
-//		var delRequest = new XMLHttpRequest();
-//		delRequest.open("POST","../../card/managestocks/interestlist-json", true)
-//        delRequest.setRequestHeader('Content-Type',
-//		'application/x-www-form-urlencoded');
-//		delRequest.send(sendData);
-//		
-//		delRequest.onload = function (){
-//			alert("삭제되었습니다.");
-//		}
-//	};
+	tbody.onclick = function(e){
+		e.preventDefault();
+		if(event.target.nodeName == "BUTTON")
+		{
+		var deltarget = e.target.dataset.delStockName;
+		var data = [["delStockName", deltarget]];
+		var sendData = []; 
+	
+	    sendData[0] = data[0].join('=');
+		
+		sendData = sendData.join('&');
+		
+		var delRequest = new XMLHttpRequest();
+		delRequest.open("POST","../../card/managestocks/interestlist-json", true)
+        delRequest.setRequestHeader('Content-Type',
+		'application/x-www-form-urlencoded');
+		console.log(delRequest.responseText);
+		delRequest.onload = function (){
+
+			alert("삭제되었습니다.");
+			deltarget.parentNode.parentNode.removeChild(deltarget);
+		  }	
+		delRequest.send(sendData);		
+		}
+	};
 	
 	
 	

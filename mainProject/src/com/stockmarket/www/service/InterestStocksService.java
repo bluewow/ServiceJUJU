@@ -8,5 +8,5 @@ public interface InterestStocksService {
 	
 	List<InterestStocks> getInterestStockList(); 
 
-	void deleteStock(int userid, String delStockName);
+	int deleteStock(int userid, String delStockName);
 }

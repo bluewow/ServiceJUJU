@@ -76,15 +76,10 @@ public class InterestStockJSONController extends HttpServlet{
 		int userId = (int)session.getAttribute("id");
 		String delStockName = request.getParameter("delStockName");
 
-		
-		interestStocksInterface.deleteStock(userId,delStockName);
-		
-		List<InterestView> interestlist = interestViewInterface.getInterestViewList(userId);
-		
-        Gson interestGson = new Gson();
-		String interestJson = interestGson.toJson(interestlist);
+		int result = interestStocksInterface.deleteStock(userId,delStockName);
+			
         PrintWriter out = response.getWriter();
-		out.write(interestJson);
+		out.write(result);
 	}
 	
 
