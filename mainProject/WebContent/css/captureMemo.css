@@ -67,7 +67,7 @@ div {
     opacity: 1;
 }
 
-.child-tr1{
+.child-tr{
     height: 0px;
     max-height: 0px;
     overflow: hidden;
@@ -88,7 +88,6 @@ div {
     transition-duration:1s;
     transition-timing-function: ease;
 }
-
 
 .child{
     height: 100%;

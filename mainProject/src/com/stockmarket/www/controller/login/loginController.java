@@ -91,6 +91,7 @@ public class loginController extends HttpServlet{
 			if(member.getId() != 0) {
 				session.setAttribute("id", member.getId());
 				session.setAttribute("nickName", member.getNickName());
+				session.setAttribute("profileImg", member.getProfileImg());
 			}
 		} 
 	}

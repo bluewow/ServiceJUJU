@@ -5,6 +5,7 @@ window.addEventListener("load", function(){
 	hiddenFunc();	//팝업 hidden
 	signUpFunc();	//회원가입 팝업
 	profileFunc();	//프로필설정 팝업
+	profileImgFunc();	//프로필이미지설정 팝업
 	
 	////////////////////////////
 	//로그인 팝업 
@@ -87,12 +88,14 @@ window.addEventListener("load", function(){
 	        var loginPopup = document.querySelector(".pop-up");
 	        var signupPopup = document.querySelector(".sign-up-pop-up");
 	        var profilePopup = document.querySelector(".profile-pop-up");
+		    var profileImage = document.querySelector(".pop-up-profile-image");
 
 	        if (e.target == wrapper) {
 	            wrapper.style.visibility = "hidden";
 	            loginPopup.style.visibility = "hidden";
 	            signupPopup.style.visibility = "hidden";
 	            profilePopup.style.visibility = "hidden";
+	            profileImage.style.visibility = "hidden";
 	        }
 	    }
 	}
@@ -131,9 +134,55 @@ window.addEventListener("load", function(){
 	//프로필설정 팝업
 	///////////////////////////
 	function profileFunc() {
+	
+	    var profilePopup = document.querySelector(".profile-pop-up");
+	    var profileImage = profilePopup.querySelector(".pop-up-top-image");	
+	    var sectionImg = document.querySelector(".pop-up-profile-image");
+	    var profileImageList = sectionImg.querySelector(".profile-image-list");
+	    var currentSelect = profileImageList.getElementsByClassName("image-selected")[0];
+	    
+	    //프로필 이미지 클릭 시
+	    profileImage.onclick = function(e) {
+	        if(e.target.nodeName != "IMG")
+	            return;
+
+	        //prevent Event Bubble
+	        e.preventDefault();
+	        	var profileImageList = document.querySelector(".pop-up-profile-image");
+	        	profileImageList.style.visibility = "visible";
+	        	
+	    }
+	    
+	    //
+	    profilePopup.onclick = function(e) {
+        if(e.target.nodeName != "INPUT")
+            return;
+
+        //prevent Event Bubble
+        e.preventDefault();
+        	alert("aasdsad")
+	    }
+
+	    //프로필 이미지 리스트중 하나를 클릭했을 시
+	    profileImageList.onclick = function(e) {
+	        if(e.target.nodeName != "IMG")
+	            return;
+
+	        //prevent Event Bubble
+	        e.preventDefault();
+	        
+	        currentSelect.classList.remove("image-selected");
+	        e.target.classList.add("image-selected");
+	        currentSelect = e.target;
+	        sectionImg.style.visibility = "hidden";
+	        
+	        console.log(e.target.dataset.id)
+	        var selectPhoto = e.target.dataset.id;
+	        var changePhoto = profileImage.getElementsByClassName("profile-photo-modi")[0];
+	        changePhoto.parentNode.innerHTML = `<img src="/images/profile/${selectPhoto}.png" alt="profile photo" class="circle float-left profile-photo-modi">`
+	}
 
 	}
-	
 });
 
 

@@ -8,6 +8,10 @@ window.addEventListener("load", function () {
 	var pager = section.querySelector(".pager");
 	var sortBoard = "";
 	
+	//태그 막기
+	String.prototype.removeTag = function () {
+		return this.replace(/(<([^>]+)>)/ig,"");
+	}
 	
 	//마이버튼 클릭
 	myButton.onclick = function (e) {
@@ -119,14 +123,9 @@ window.addEventListener("load", function () {
 
 				tds[0].innerText = listData.list[i].id;
 				var aTagDetail = tds[1].firstElementChild;
-				aTagDetail.innerHTML = '<span class="stock-name">'
-					+ "[" + listData.list[i].stockName + "]"
-					+ '</span>'
-					+ '<span class="title"> '
-					+ listData.list[i].title
-					+ ' </span>'
-					+ '(<span class="reply-cnt">'
-					+ listData.list[i].replyCnt + '</span>)';
+				aTagDetail.innerHTML = String.raw`<span class="stock-name">[${listData.list[i].stockName}]</span>
+				<span class="title">${listData.list[i].title} </span>
+				(<span class="reply-cnt">${listData.list[i].replyCnt}</span>)`;
 				aTagDetail.dataset.id = listData.list[i].id;
 				aTagDetail.dataset.replyCnt = listData.list[i].replyCnt;
 				tds[2].innerText = listData.list[i].regdate;
@@ -141,8 +140,7 @@ window.addEventListener("load", function () {
 				tds[6].innerText = listData.list[i].writerId;
 
 				tbody.append(cloneTr);
-			}
-			;
+			};
 		};
 		request.send();
 	}
@@ -193,15 +191,18 @@ window.addEventListener("load", function () {
 			var detail = JSON.parse(request.responseText);
 			var template = section.querySelector(".detail-template");
 			var cloneTr = document.importNode(template.content, true);
+			var rTcontent =detail.board.content;
+			rTcontent= rTcontent.removeTag;
 			var td = cloneTr.querySelector(".content-row td");
 			td.innerHTML = '<span class="content-detail">'
-				+ detail.board.content + '</span><br><a href="" class="content-modi hidden" data-id="'
+				+ rTcontent + '</span><br><a href="" class="content-modi hidden" data-id="'
 				+ detail.board.id + '">수정</a>';
 			var replyContent = cloneTr.querySelector(".replyTable tbody tr td");
 			var contentSum = "";
 			var aTagDetail = cloneTr.querySelector(".reg-reply-button");
 			aTagDetail.dataset.id = id;
-			aTagDetail.dataset.writerId = detail.writerId;
+			console.log(detail)
+			aTagDetail.dataset.writerId = detail.loginUser;
 			for (var i = 0; i < detail.replys.length; i++) {
 				if(detail.loginUser == detail.replys[i].writerId){
 					contentSum += '<div><span class="re-writer">'
@@ -351,6 +352,9 @@ window.addEventListener("load", function () {
 		String.prototype.trim = function () {
 			return this.replace(/^\s+|\s+$/g, "");
 		}
+		String.prototype.removeTag = function () {
+			return this.replace(/(<([^>]+)>)/ig,"");
+		}
 
 		var str = reContent;
 		str = str.trim();
@@ -360,6 +364,7 @@ window.addEventListener("load", function () {
 			alert("내용을 작성하세요");
 			return;
 		}
+		str = str.removeTag;
 
 		var data = [["replyId", replyId],
 		["reContent", reContentEncode],
@@ -460,28 +465,6 @@ window.addEventListener("load", function () {
 		}
 	}
 
-	// ========= 게시글 수정 ==================
-	var modiContentClickHandler = function (e) {
-
-		var regBoardForm = document.querySelector(".pop-up-reg");
-		var regSubmit = regBoardForm.querySelector(".pop-up-content-row");
-
-		var targetTitle = e.target.parentNode.parentNode.previousElementSibling.previousElementSibling.querySelector(".title");
-		var title = targetTitle.innerText;
-		var titleEncode = encodeURI(title);
-
-		var targetContent = e.target.parentNode.parentNode.querySelector(".content-detail");
-		var content = targetContent.innerText;
-		var contentEncode = encodeURI(content);
-
-		regBoardForm.style.visibility = "visible";
-		regBoardForm.querySelector(".reg-title").value = title;
-		regBoardForm.querySelector(".reg-content").value = content;
-		var regBtData = regBoardForm.querySelector(".reg-submit");
-		regBtData.dataset.id = e.target.dataset.id;
-
-	}
-
 	// ========= 게시글 삭제 ==================
 	var delContentClickHandler = function (e) {
 		var targetDiv = e.target.parentNode.parentNode;
@@ -506,7 +489,7 @@ window.addEventListener("load", function () {
 		// 3. 요청이 완료되었는지 결과를 확인한다.
 		request.onload = function () {
 			alert("삭제되었습니다.");
-			load(1);
+			load(1, sortBoard);
 		}
 	}
 

@@ -1,7 +1,7 @@
 window.addEventListener("message", function (e) {
 	 //codeNum 확인
-	//if (e.data && (e.data.length == 6))
-	//	console.log("stockBoard : " + e.data);
+	if (e.data && (e.data.length == 6)){
+		console.log("stockBoard : " + e.data);
 
 	var sectionTop = document.querySelector("#stockTop");
 	var selectStock = sectionTop.querySelector("#selected-stock");
@@ -216,7 +216,7 @@ window.addEventListener("message", function (e) {
 			var contentSum = "";
 			var aTagDetail = cloneTr.querySelector(".reg-reply-button");
 			aTagDetail.dataset.id = id;
-			aTagDetail.dataset.writerId = detail.writerId;
+			aTagDetail.dataset.writerId = detail.loginUser;
 			for (var i = 0; i < detail.replys.length; i++) {
 				if(detail.loginUser == detail.replys[i].writerId){
 					contentSum += '<div><span class="re-writer">'
@@ -719,5 +719,5 @@ window.addEventListener("message", function (e) {
 			regBoardForm.style.visibility = "hidden";
 		}
 	};
-
+	}
 });
