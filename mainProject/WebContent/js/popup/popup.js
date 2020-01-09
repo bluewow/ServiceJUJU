@@ -5,7 +5,6 @@ window.addEventListener("load", function(){
 	hiddenFunc();	//팝업 hidden
 	signUpFunc();	//회원가입 팝업
 	profileFunc();	//프로필설정 팝업
-	profileImgFunc();	//프로필이미지설정 팝업
 	
 	////////////////////////////
 	//로그인 팝업 
@@ -87,7 +86,6 @@ window.addEventListener("load", function(){
 	        var wrapper = document.querySelector(".pop-up-wrapper");
 	        var loginPopup = document.querySelector(".pop-up");
 	        var signupPopup = document.querySelector(".sign-up-pop-up");
-	        var profilePopup = document.querySelector(".profile-pop-up");
 		    var profileImage = document.querySelector(".pop-up-profile-image");
 
 	        if (e.target == wrapper) {
@@ -139,8 +137,14 @@ window.addEventListener("load", function(){
 	    var profileImage = profilePopup.querySelector(".pop-up-top-image");	
 	    var sectionImg = document.querySelector(".pop-up-profile-image");
 	    var profileImageList = sectionImg.querySelector(".profile-image-list");
-	    var currentSelect = profileImageList.getElementsByClassName("image-selected")[0];
-	    
+        var submitButton = profilePopup.querySelector(".login-box");
+        
+    	var profileImg = profilePopup.querySelector(".profile-photo-modi");
+    	var currentPwd = profilePopup.querySelector(".currentPwd");
+    	var newPwd = profilePopup.querySelector(".newPwd");
+    	var checkPwd = profilePopup.querySelector(".checkPwd");
+	    console.log(submitButton)
+	    var currentSelect;
 	    //프로필 이미지 클릭 시
 	    profileImage.onclick = function(e) {
 	        if(e.target.nodeName != "IMG")
@@ -148,19 +152,40 @@ window.addEventListener("load", function(){
 
 	        //prevent Event Bubble
 	        e.preventDefault();
-	        	var profileImageList = document.querySelector(".pop-up-profile-image");
-	        	profileImageList.style.visibility = "visible";
+	        var nowImg = e.target.dataset.id;
+	        sectionImg.style.visibility = "visible";
+	        var list = "";
+	        	for(var i=1; i<=36; i++) {
+	        		if(i==nowImg) 
+		        		var photos =  `<img src="/images/profile/${i}.png" 
+			        	alt="profile photo" class="images image-selected"
+			        	 data-id="${i}">`
+	        		else if(i!=nowImg) 
+		        		var photos =  `<img src="/images/profile/${i}.png" 
+			        	alt="profile photo" class="images"
+			        	 data-id="${i}">`
+	        	        list = list + photos;
+	        	}
+
+	        profileImageList.innerHTML = list;
+		    currentSelect = profileImageList.getElementsByClassName("image-selected")[0];
 	        	
 	    }
 	    
-	    //
-	    profilePopup.onclick = function(e) {
+	    //확인버튼 클릭 시
+	    submitButton.onclick = function(e) {
         if(e.target.nodeName != "INPUT")
             return;
 
         //prevent Event Bubble
         e.preventDefault();
-        	alert("aasdsad")
+        	alert("aasdsd");
+        	console.log(profileImg)
+        	console.log(currentPwd)
+        	console.log(newPwd)
+        	console.log(checkPwd)
+        	
+
 	    }
 
 	    //프로필 이미지 리스트중 하나를 클릭했을 시
@@ -173,15 +198,17 @@ window.addEventListener("load", function(){
 	        
 	        currentSelect.classList.remove("image-selected");
 	        e.target.classList.add("image-selected");
-	        currentSelect = e.target;
 	        sectionImg.style.visibility = "hidden";
 	        
-	        console.log(e.target.dataset.id)
 	        var selectPhoto = e.target.dataset.id;
 	        var changePhoto = profileImage.getElementsByClassName("profile-photo-modi")[0];
-	        changePhoto.parentNode.innerHTML = `<img src="/images/profile/${selectPhoto}.png" alt="profile photo" class="circle float-left profile-photo-modi">`
-	}
-
+	        changePhoto.parentNode.innerHTML = 
+	        	`<img src="/images/profile/${selectPhoto}.png" 
+	        	alt="profile photo" class="circle float-left profile-photo-modi"
+	        	 data-id="${selectPhoto}">`
+	    }
+	    
+	    
 	}
 });
 

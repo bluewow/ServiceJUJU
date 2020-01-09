@@ -262,4 +262,5 @@ public class JdbcMemberDao implements MemberDao {
 //		int result= memberDao.insertMember(member);
 //		System.out.println(result);
 //	}
+
 }
