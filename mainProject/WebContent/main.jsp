@@ -408,6 +408,9 @@
 								</c:if>
 							</c:forEach>	 --%>
 			</div>
+			<div>
+	   			<input class="profile-img-select-submit" type="button" value="확인">
+			</div>
 		</form>
 	</div>
  </div>

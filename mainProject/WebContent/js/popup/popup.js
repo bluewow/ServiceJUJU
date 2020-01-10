@@ -87,7 +87,7 @@ window.addEventListener("load", function(){
 	        var loginPopup = document.querySelector(".pop-up");
 	        var signupPopup = document.querySelector(".sign-up-pop-up");
 		    var profileImage = document.querySelector(".pop-up-profile-image");
-
+		    var profilePopup = document.querySelector(".profile-pop-up");
 	        if (e.target == wrapper) {
 	            wrapper.style.visibility = "hidden";
 	            loginPopup.style.visibility = "hidden";
@@ -139,6 +139,8 @@ window.addEventListener("load", function(){
 	    var profileImageList = sectionImg.querySelector(".profile-image-list");
         var submitButton = profilePopup.querySelector(".login-box");
         
+        var imgSelectButton = sectionImg.querySelector(".profile-img-select-submit");
+        
     	var profileImg = profilePopup.querySelector(".profile-photo-modi");
     	var currentPwd = profilePopup.querySelector(".currentPwd");
     	var newPwd = profilePopup.querySelector(".newPwd");
@@ -168,8 +170,7 @@ window.addEventListener("load", function(){
 	        	}
 
 	        profileImageList.innerHTML = list;
-		    currentSelect = profileImageList.getElementsByClassName("image-selected")[0];
-	        	
+	        currentSelect = profileImageList.getElementsByClassName("image-selected")[0];
 	    }
 	    
 	    //확인버튼 클릭 시
@@ -179,35 +180,78 @@ window.addEventListener("load", function(){
 
         //prevent Event Bubble
         e.preventDefault();
-        	alert("aasdsd");
-        	console.log(profileImg)
-        	console.log(currentPwd)
-        	console.log(newPwd)
-        	console.log(checkPwd)
-        	
+        
+        //데이터 준비
+    	var data = [
+			["currentPwd", currentPwd.value],
+			["newPwd", newPwd.value]
+			]
+		var sendData = [];
 
+		for (var i = 0; i < data.length; i++) {
+			sendData[i] = data[i].join("=");
+			}
+		
+		sendData = sendData.join("&");
+
+		//데이터 전송
+		console.log(sendData)
+		var request = new XMLHttpRequest();
+		request.open("POST", "../../member-profile", true);
+		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		request.send(sendData);	
+			
 	    }
 
 	    //프로필 이미지 리스트중 하나를 클릭했을 시
 	    profileImageList.onclick = function(e) {
 	        if(e.target.nodeName != "IMG")
 	            return;
-
-	        //prevent Event Bubble
 	        e.preventDefault();
 	        
 	        currentSelect.classList.remove("image-selected");
 	        e.target.classList.add("image-selected");
-	        sectionImg.style.visibility = "hidden";
-	        
-	        var selectPhoto = e.target.dataset.id;
+	        currentSelect = profileImageList.getElementsByClassName("image-selected")[0];
+	    }
+	    
+	    //프로필 이미지 선택 후 확인버튼 클릭시
+        imgSelectButton.onclick = function(e) {
+	        if(e.target.nodeName != "INPUT")
+	            return;
+	        e.preventDefault();
+	        var selectPhoto = currentSelect.dataset.id;
 	        var changePhoto = profileImage.getElementsByClassName("profile-photo-modi")[0];
 	        changePhoto.parentNode.innerHTML = 
 	        	`<img src="/images/profile/${selectPhoto}.png" 
 	        	alt="profile photo" class="circle float-left profile-photo-modi"
-	        	 data-id="${selectPhoto}">`
-	    }
-	    
+	        	data-id="${selectPhoto}">`;
+	        //데이터 준비
+	    	var data = [
+				["profileImg", selectPhoto]
+				]
+			var sendData = [];
+
+			for (var i = 0; i < data.length; i++) {
+				sendData[i] = data[i].join("=");
+				}
+			
+			sendData = sendData.join("&");
+
+			//데이터 전송
+			console.log(sendData)
+			//데이터 전송
+			var request = new XMLHttpRequest();
+			request.open("POST", "../../member-profile", true);
+			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			request.send(sendData);	
+			
+			request.onload = function () {
+				var lastReplyNum = request.responseText;
+				alert("등록되었습니다."+lastReplyNum);
+				sectionImg.style.visibility = "hidden";
+			}
+	        
+        }
 	    
 	}
 });

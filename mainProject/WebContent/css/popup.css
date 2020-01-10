@@ -219,7 +219,7 @@ input.top-bottom-margin {
 	margin:4%;
 	display:inline-block;
 	width:90%;
-	height:93%;
+	height:85%;
 	overflow-y: scroll;
 	background: white;
 	border-radius:0px;
@@ -240,4 +240,15 @@ input.top-bottom-margin {
 }
 .image-selected {
 	border:solid 5px #88b4f7;
+}
+
+.profile-img-select-submit {
+    background-color: #F2F2F2 !important;
+    margin: 0% 0% 0% 0%;
+    color: #585B5E !important;
+    font-size: 0.7em !important;
+    border: none;
+    width: 80%;
+    border-radius: 10px;
+    text-align: center;
 }
