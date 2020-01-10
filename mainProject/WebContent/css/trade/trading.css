@@ -17,23 +17,6 @@
 	outline: none;
 }
 
-.animation:active {
-	position: relative;
-	top: 3px;
-	background-color: #13bfd7;
-	color: white;
-}
-
-.animation:hover {
-  background-color: #13bfd7;
-  color: white;
-  transition: 1s;
-}
-
-
-.button-chart {
-	margin: 0% 1%;
-}
 
 .button-status {
     padding: 1% 18%;
@@ -50,8 +33,24 @@
 	color: rgb(124, 125, 127); 
 }
 
+.text {
+	width: 30%;
+	border: 1px solid #ccc;
+  	border-radius: 4px;
+	outline: none;
+	text-align: center;
+	background: none;
+	height: 30px;
+ 	margin-right: 10px
+}
 
- 
+.caret-up {
+	position: absolute;	
+} 
+.caret-down {
+	position: absolute;
+	top: 15px;
+}
 /* ----------- Chart ------------ */
 
 
@@ -66,34 +65,22 @@
 }
 
 .page-top {
-	height: 18%;
+	height: 10%;
 	padding: 0% 8%;
-	 }
-	.page-top > #stockName {
-		text-align:left;
-		font-weight: bold;
-		font-size: 26px;
-		line-height: 150%;
-		padding-top: 5%;
-	}
-	#stockName > div:nth-child(2) {
-		display: contents
-	}
-	#stockName > span {
-		font-size: medium;
-	}
-	
+}
+
 
 .page-mid {
-	min-height: 40%;
-	}
-	.page-mid .day_, .week_, .month_ {
-		background-color: #13bfd7; 
-		color: white;
-	}
+	padding: 0% 8%;
+	display: flex;
+	margin-bottom: 5%;
+	justify-content: space-between;
+	/* min-height: 45%; */
+}
 
 .page-bottom {
-	min-height: 40%;
+	/* min-height: 40%; */
+	    padding: 0% 4%;
 	}
 	.page-bottom > #page-bottom-box {
  		display: flex;
@@ -104,12 +91,21 @@
 		width: 50%;
 	} 
 
-#text {
-	width: 40%;
-	border: 1px solid #ccc;
-  	border-radius: 4px;
-  	box-shadow: 3px 3px 3px #888;
-	outline: none;
-	text-align: center;
-	
+#title {
+    font-size: 26px;
+    font-weight: bold; 
+    padding-top: 5%;
 }
+
+#chartSell {
+	border: 3px solid #2D9AF2;
+    border-radius: 10px;
+    background: #2D9AF222;
+}
+
+#chartBuy {
+	border: 3px solid #F40006;
+    border-radius: 10px;
+    background: #F4000622;
+}
+
