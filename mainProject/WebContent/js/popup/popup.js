@@ -145,7 +145,6 @@ window.addEventListener("load", function(){
     	var currentPwd = profilePopup.querySelector(".currentPwd");
     	var newPwd = profilePopup.querySelector(".newPwd");
     	var checkPwd = profilePopup.querySelector(".checkPwd");
-	    console.log(submitButton)
 	    var currentSelect;
 	    //프로필 이미지 클릭 시
 	    profileImage.onclick = function(e) {
@@ -238,8 +237,6 @@ window.addEventListener("load", function(){
 			sendData = sendData.join("&");
 
 			//데이터 전송
-			console.log(sendData)
-			//데이터 전송
 			var request = new XMLHttpRequest();
 			request.open("POST", "../../member-profile", true);
 			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -247,7 +244,12 @@ window.addEventListener("load", function(){
 			
 			request.onload = function () {
 				var lastReplyNum = request.responseText;
-				alert("등록되었습니다."+lastReplyNum);
+				alert("프로필 이미지가 변경되었습니다.");
+			    var profilePhoto = document.querySelector(".profile-photo");
+			    profilePhoto.parentNode.innerHTML =
+			    	`<img src="/images/profile/${selectPhoto}.png" 
+			    	alt="profile photo" class="circle float-left profile-photo"
+			    	 width="50" height="auto">`;
 				sectionImg.style.visibility = "hidden";
 			}
 	        

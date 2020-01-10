@@ -64,7 +64,6 @@ public class memberJsonController extends HttpServlet {
 
 			// 프로필이미지값이 들어있으면 프로필 이미지 수정
 		} else if (profileImg != null) {
-			System.out.println(profileImg);
 			Object tempId = session.getAttribute("id");
 			
 			int id = -1;
