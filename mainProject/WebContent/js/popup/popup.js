@@ -230,7 +230,6 @@ window.addEventListener("load", function(){
 		sendData = sendData.join("&");
 
 		//데이터 전송
-		console.log(sendData)
 		var request = new XMLHttpRequest();
 		request.open("POST", "../../member-profile", true);
 		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -239,7 +238,6 @@ window.addEventListener("load", function(){
 		//결과를 응답받고 출력
 		request.onload = function () {
 			var returnData = request.responseText;
-			console.log(returnData)
 			if(returnData=="1"){
 				alert("비밀번호가 변경되었습니다.")
 				currentPwd.value=null;
