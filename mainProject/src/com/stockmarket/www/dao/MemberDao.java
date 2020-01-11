@@ -17,4 +17,5 @@ public interface MemberDao {
 	
 	//프로필 이미지 교체 (imgChange는 더미)
 	int updateMember(int writerId, int profileImg, String imgChange);
+	int updateMember(int id, String newPwd, String pwdChange);
 }

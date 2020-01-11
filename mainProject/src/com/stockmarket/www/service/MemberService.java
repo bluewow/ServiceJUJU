@@ -11,4 +11,6 @@ public interface MemberService {
 	Member getMember(int id);
 
 	int updateMember(int id, int profileImg, String imgChange);
+
+	int updateMember(int id, String newPwd, String imgChange);
 }

@@ -28,4 +28,9 @@ public class BasicMemberService implements MemberService {
 	public int updateMember(int id, int profileImg, String imgChange) {
 		return memberDao.updateMember(id, profileImg, imgChange);
 	}
+
+	@Override
+	public int updateMember(int id, String newPwd, String pwdChange) {
+		return memberDao.updateMember(id, newPwd, pwdChange);
+		}
 }

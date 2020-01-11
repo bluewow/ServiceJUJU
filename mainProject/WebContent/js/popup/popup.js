@@ -142,7 +142,6 @@ window.addEventListener("load", function(){
 		if(loginStatus.value!="로그인") {
 			var userId = loginStatus.value;
 			var sendData = "loginNickname="+userId;
-			console.log(sendData);
 	
 			var request = new XMLHttpRequest(); 
 			request.open("POST", "../../member-profile", true);
@@ -151,9 +150,7 @@ window.addEventListener("load", function(){
 			
 			request.onload = function () {
 				var photoImg = JSON.parse(request.responseText);
-				console.log(photoImg)
 			    var profilePhoto = document.querySelector(".profile-photo");
-				console.log(profilePhoto.parentNode)
 				
 			    profilePhoto.parentNode.innerHTML =
 			    	`<img src="/images/profile/${photoImg}.png" 
@@ -172,16 +169,15 @@ window.addEventListener("load", function(){
 	//프로필설정 팝업
 	///////////////////////////
 	function profileFunc() {
-	
+
+        var wrapper = document.querySelector(".pop-up-wrapper");
 	    var profilePopup = document.querySelector(".profile-pop-up");
 	    var profileImage = profilePopup.querySelector(".pop-up-top-image");	
 	    var sectionImg = document.querySelector(".pop-up-profile-image");
 	    var profileImageList = sectionImg.querySelector(".profile-image-list");
         var submitButton = profilePopup.querySelector(".login-box");
-        
         var imgSelectButton = sectionImg.querySelector(".profile-img-select-submit");
-        
-    	var profileImg = profilePopup.querySelector(".profile-photo-modi");
+        var profileImg = profilePopup.querySelector(".profile-photo-modi");
     	var currentPwd = profilePopup.querySelector(".currentPwd");
     	var newPwd = profilePopup.querySelector(".newPwd");
     	var checkPwd = profilePopup.querySelector(".checkPwd");
@@ -239,7 +235,33 @@ window.addEventListener("load", function(){
 		request.open("POST", "../../member-profile", true);
 		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		request.send(sendData);	
-			
+		
+		//결과를 응답받고 출력
+		request.onload = function () {
+			var returnData = request.responseText;
+			console.log(returnData)
+			if(returnData=="1"){
+				alert("비밀번호가 변경되었습니다.")
+				currentPwd.value=null;
+				newPwd.value=null;
+				checkPwd.value=null;
+	            wrapper.style.visibility = "hidden";
+	            profilePopup.style.visibility = "hidden";
+	            
+			} else if(returnData=="wrong") {
+				alert("현재 비밀번호가 맞지 않습니다.")
+				currentPwd.value=null;
+				newPwd.value=null;
+				checkPwd.value=null;
+				
+			} else if(returnData=="same"){
+				alert("현재 비밀번호가 변경하려는 비밀번호와 동일합니다.")
+				currentPwd.value=null;
+				newPwd.value=null;
+				checkPwd.value=null;
+		}
+		
+		}
 	    }
 
 	    //프로필 이미지 리스트중 하나를 클릭했을 시
