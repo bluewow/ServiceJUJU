@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.stockmarket.www.dao.MemberDao;
+import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
+import com.stockmarket.www.entity.Member;
 import com.stockmarket.www.service.MemberService;
 import com.stockmarket.www.service.basic.BasicMemberService;
 
@@ -38,12 +41,27 @@ public class memberJsonController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		String loginNickname = request.getParameter("loginNickname");
 		String profileImg = request.getParameter("profileImg");
 		String currentPwd = request.getParameter("currentPwd");
 		String newPwd = request.getParameter("newPwd");
 
-		// 프로필이미지값이 널이면 비밀번호 수정
-		if (profileImg == null) {
+		
+		if (loginNickname != null) {
+			Object tempId = session.getAttribute("id");
+			
+			int id = -1;
+
+			if (tempId != null)
+				id = (Integer) tempId;
+			MemberDao memberDao = new JdbcMemberDao();
+			int ProfileImgNum = memberDao.getMember(id).getProfileImg();
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.print(ProfileImgNum);
+			// 프로필이미지값이 널이면 비밀번호 수정
+		} else if (profileImg == null) {
 			System.out.println(currentPwd);
 			System.out.println(newPwd);
 //			Object tempId = session.getAttribute("id");
