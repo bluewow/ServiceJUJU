@@ -64,12 +64,7 @@
                <h1 style="display: none;">user section</h1>
                <div class="user-section">
                   <div class="personal">
-					<c:if test="${empty sessionScope.id }">
                   	 <img src="http://via.placeholder.com/50x50" alt="profile photo" class="circle float-left profile-photo" width="50" height="auto">
-                  	</c:if>
-					<c:if test="${not empty sessionScope.id }">
-                  	 <img src="/images/profile/${sessionScope.profileImg}.png" alt="profile photo" class="circle float-left profile-photo" width="50" height="auto">
-                  	</c:if>
                   	<c:if test="${empty sessionScope.id }">
                   		<input class="animation-2" type="button" value="로그인">
                   	</c:if>
@@ -368,8 +363,8 @@
 
 				<span class="pop-up-top-image">
 					<a href="#">
-			    		<img src="/images/profile/${sessionScope.profileImg }.png" 
-			    			alt="profile photo" data-id="${sessionScope.profileImg}" class="circle float-left profile-photo-modi">
+			    		<img src="/images/profile/1.png" 
+			    			alt="profile photo" data-id="1" class="circle float-left profile-photo-modi">
 	                </a>
                 </span>
 				<span class="pop-up-top-subline">프로필 수정</span><br>
