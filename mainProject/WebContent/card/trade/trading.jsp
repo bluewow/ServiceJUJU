@@ -9,17 +9,15 @@
 <meta charset="utf-8">
 <!-- CSS Reset -->
 <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
-<!-- ref analysis.css -->
-<link rel="stylesheet" href="../../css/trade/trading.css">
 <!-- download fontawesome.com -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
-<!--다운 받아서 포함 시키기-->
 <link rel="stylesheet" href="../../css/billboard.css">
-<script src = "../../js/billboard.js"></script>
+<script src = "../../js/billboard.js"></script> 
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!-- ref analysis.css -->
+<link rel="stylesheet" href="../../css/trade/trading.css">
 <script type="text/javascript" src="../../js/trade/trade.js"></script>
 	 
 	 
@@ -33,8 +31,8 @@
 	<!-- TODO 장이마감되었습니다 -->
 	<!-- --------------- page-mid -------------- -->
 	<section class="page-mid">
-		<div id="chartSell"></div>
-		<div id="chartBuy"></div>
+		<div class="chart-string">매도잔량<div id="chartSell"></div></div>
+		<div class="chart-string">매수잔량<div id="chartBuy"></div></div>
 	</section>
 	
 	<!-- --------------- page-bottom -------------- -->
@@ -70,7 +68,6 @@
 		</form>
 	</section>
 </div>	
-
 
 </body>
 </html>

@@ -98,14 +98,21 @@
 }
 
 #chartSell {
+	margin-top: 10px;
 	border: 3px solid #2D9AF2;
     border-radius: 10px;
     background: #2D9AF222;
 }
 
 #chartBuy {
+	margin-top: 10px;
 	border: 3px solid #F40006;
     border-radius: 10px;
     background: #F4000622;
+}
+
+.chart-string {
+	text-align: center;
+	font-weight: bold;
 }
 

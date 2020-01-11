@@ -8,12 +8,12 @@ window.addEventListener("message", function(e) {
 	}
 });
 
+
 window.addEventListener("load", function(){
 	bb.defaults();
 	chartUpdate();
 	asyncTrade("pass", 0);		
 	tradeFunc();		// 매수/매도 이벤트 처리
-
 
 });
 
@@ -63,9 +63,9 @@ function chartSell() {
 	        ],
 	        colors:{data:"#2D9AF277"}
 	    },
-	    title: {
-	        text: "매도잔량"
-	    }
+//	    title: {
+//	        text: "매도잔량"
+//	    }
 	});
 }
 
@@ -80,9 +80,9 @@ function chartBuy() {
 	        ],	
 	        colors:{data:"#F4000677"}
 	    },
-	    title: {
-	        text: "매수잔량"
-	    }
+//	    title: {
+//	        text: "매수잔량"
+//	    }
 	});
 }
 
