@@ -35,19 +35,6 @@ public class CurStock {
 		this.percent = percent;
 	}
 
-	public CurStock(String codeNum, String price, String gain,
-					String gainPrice, String signMark, 
-					String percent,	Map<Integer, Integer> map) {
-		super();
-		this.codeNum = codeNum;
-		this.price = price;
-		this.gain = gain;
-		this.gainPrice = gainPrice;
-		this.signMark = signMark;
-		this.percent = percent;
-		this.quantityMap = map;
-	}
-
 	public CurStock parser(String text, Map<Integer, Integer> map) {
 		String[] data = text.split(" ");
 		codeNum = data[0];
