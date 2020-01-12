@@ -36,6 +36,7 @@ window.addEventListener("load", function(){
 	
 	update();
 	buttonEvent();
+	actionEvent();
 //	tradeFunc();		// 매수/매도 이벤트 처리
 
 });
@@ -88,11 +89,17 @@ function buttonEvent() {
 	}
 }
 
+function actionEvent() {
+	
+	
+	
+}
+
 function update() {
 	var button = document.querySelector("#page-bottom-box");
 	var data = button.querySelectorAll(".data");
-	var sellButton = button.querySelector("#sell");
 	var text = button.querySelectorAll(".text");
+	var sellButton = button.querySelector("#sell");
 	priceObj = new Price();
 	
 	var ajax = new XMLHttpRequest();
@@ -138,12 +145,7 @@ function update() {
     	if(obj.buyPrice)
     		text[0].value = obj.buyPrice[0];	//단가
     
-    	/*var obj = JSON.parse(ajax.responseText);
-        data[0].innerHTML = obj.vMoney.toLocaleString() + "원";
-        data[1].innerHTML = obj.quantity.toLocaleString() + "주";
-//        data[2].innerHTML = obj.vMoney.toLocaleString() + "원";
-//        data[3].value = "";
-
+    	//버튼 상태체크
 		if(data[1].innerHTML == "0주") {
 			sellButton.className = "event button button-button shadow"
 			sellButton.disabled = true;
@@ -151,6 +153,8 @@ function update() {
 			sellButton.className = "event button button-button animation"
 			sellButton.disabled = false;
 		}
+/*
+		
         
 		//result - 0:ok, 1:vmoney부족, 2: 거래정지목록, 3:장내시간이 아님, 
         //		   4:수량이 0이하인 경우 거래x, 5:수량이 0이 되는 경우  6:보유종목이 아닌경우 거래x
