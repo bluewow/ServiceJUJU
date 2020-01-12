@@ -59,14 +59,13 @@ public class AnalysisController extends HttpServlet{
 							stocks.get(getCodeNume).getGain(), 
 							stocks.get(getCodeNume).getGainPrice(), 
 							stocks.get(getCodeNume).getSignMark(), 
-							stocks.get(getCodeNume).getPercent(),
-							stocks.get(getCodeNume).getQuantityMap());
+							stocks.get(getCodeNume).getPercent());
 					break;
 				} 
 			}
 			
 			if(curStock == null)
-				curStock = new CurStock(codeNum, "[데이터 수집중...]", "보합", "0", "none", "0", null);
+				curStock = new CurStock(codeNum, "[데이터 수집중...]", "보합", "0", "none", "0");
 			
 //			System.out.println(curStock.toString());  //for debugging
 			map.put("name", service.getStockName(codeNum));
