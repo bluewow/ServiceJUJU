@@ -44,7 +44,7 @@
 
 				<input class="button button-status" type="button" value="   단가   ">
 				<div style="position: relative;">
-					<input type="text" value="" class="data text">
+					<input type="text" value="" class="text">
 					<i class="fa fa-caret-up fa-lg caret-up animation-1" aria-hidden="true"></i>
 					<i class="fa fa-caret-down fa-lg caret-down animation-2" aria-hidden="true"></i>
 				</div>
@@ -58,7 +58,7 @@
 				
 				<input class="button button-status" type="button" value="   수량   ">
 				<div style="position: relative;">
-					<input class="data text" type="text">
+					<input type="text" class="text" >
 					<i class="fa fa-caret-up fa-lg caret-up animation-1" aria-hidden="true"></i>
 					<i class="fa fa-caret-down fa-lg caret-down animation-2" aria-hidden="true"></i>
 				</div>
