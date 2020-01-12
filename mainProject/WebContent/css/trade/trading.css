@@ -51,6 +51,14 @@
 	position: absolute;
 	top: 15px;
 }
+
+.animation-1:active {
+	top: 1px;
+}
+.animation-2:active {
+	top: 16px;
+}
+
 /* ----------- Chart ------------ */
 
 

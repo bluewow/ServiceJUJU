@@ -19,7 +19,8 @@ public class CurStock {
 	private String gainPrice; //
 	private String signMark; //+ or -
 	private String percent; //%
-	private Map<Integer, Integer> quantityMap;
+	private Map<Integer, Integer> sellQuantityMap;
+	private Map<Integer, Integer> buyQuantityMap;
 	
 	public CurStock() {
 	}
@@ -35,7 +36,7 @@ public class CurStock {
 		this.percent = percent;
 	}
 
-	public CurStock parser(String text, Map<Integer, Integer> map) {
+	public CurStock parser(String text, Map<Integer, Integer> sell, Map<Integer, Integer> buy) {
 		String[] data = text.split(" ");
 		codeNum = data[0];
 		price = data[1];
@@ -43,7 +44,8 @@ public class CurStock {
 		gainPrice = data[3];
 		signMark = data[4];
 		percent = data[5];
-		quantityMap = map;
+		sellQuantityMap = sell;
+		buyQuantityMap = buy;
 
 		return this;
 	}
@@ -96,13 +98,22 @@ public class CurStock {
 		this.percent = percent;
 	}
 
-	public Map<Integer, Integer> getQuantityMap() {
-		return quantityMap;
+	public Map<Integer, Integer> getSellQuantityMap() {
+		return sellQuantityMap;
 	}
 	
-	public void setQuantityMap(Map<Integer, Integer> quantityMap) {
-		this.quantityMap = quantityMap;
+	public void setSellQuantityMap(Map<Integer, Integer> quantityMap) {
+		this.sellQuantityMap = quantityMap;
 	}
+	
+	public Map<Integer, Integer> getBuyQuantityMap() {
+		return buyQuantityMap;
+	}
+	
+	public void setBuyQuantityMap(Map<Integer, Integer> quantityMap) {
+		this.buyQuantityMap = quantityMap;
+	}
+	
 
 	@Override
 	public String toString() {
