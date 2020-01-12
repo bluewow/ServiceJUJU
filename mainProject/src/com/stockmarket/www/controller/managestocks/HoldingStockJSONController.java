@@ -2,6 +2,7 @@ package com.stockmarket.www.controller.managestocks;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,6 +21,10 @@ import com.stockmarket.www.service.basic.BasicHoldingStocksService;
 public class HoldingStockJSONController extends HttpServlet{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1822211939058642758L;
 	private HoldingStocksService holdingStocksInterface;
 
 	public HoldingStockJSONController(){
@@ -47,7 +52,9 @@ public class HoldingStockJSONController extends HttpServlet{
 		
 		if(!holdingStocksInterface.getInterestHoldingList(userId).isEmpty()) {
         
-		List<HaveStockView> list = holdingStocksInterface.getInterestHoldingList(userId);
+	    List<HaveStockView> list = new ArrayList<HaveStockView>();
+		list = holdingStocksInterface.getInterestHoldingList(userId);
+		
 		
         Gson gson = new Gson();
 		String json = gson.toJson(list);

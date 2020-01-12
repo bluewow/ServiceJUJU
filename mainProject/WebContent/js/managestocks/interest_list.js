@@ -90,6 +90,8 @@ window.addEventListener("load", function() {
 		var interestAjax = new XMLHttpRequest();
 		interestAjax.open("GET", "../../card/managestocks/interestlist-json", true);
         		
+		if(interestAjax.responseText != "")
+			{
 		// 서블릿의 실행이 완료되었을때 실행
 		interestAjax.onload = function() {
 			// var cardFooter = section.querySelector(".card-footer");
@@ -129,6 +131,10 @@ window.addEventListener("load", function() {
 			}
 		};
 		interestAjax.send();
+	   }
+		else{
+			return;
+		}
 	};
 	
 	interestLoad();
@@ -159,9 +165,8 @@ window.addEventListener("load", function() {
 		}
 	};
 	
-	
 	setInterval(function() {
 		interestLoad();
-	}, 10000);
+	}, 5000);
 	
 });

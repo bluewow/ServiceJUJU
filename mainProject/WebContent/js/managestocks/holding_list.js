@@ -166,6 +166,8 @@ window
 								true);
 
 						// 서블릿의 실행이 완료되었을때 실행
+						if(holdingRequest.responseText != "")
+						{
 						holdingRequest.onload = function() {
 							// var cardFooter =
 							// section.querySelector(".card-footer");
@@ -219,22 +221,7 @@ window
 									}
 								}
 
-								// if(IncomePercent>0)
-								// {
-								// divs[0].firstElementChild
-								// }
-								// console.log("tds"+i+"번째:"+tds[i].lastElementChild.innerText);
-								//        
-
-								// for(var i =0 ; i<tds.length ;i++){
-								// console.log(tds[i]);
-								// }
 								tds[4].firstElementChild.innerText = list[i].quantity;
-								// var cloneTr =
-								// document.importNode(trTemplate.Content,
-								// true);
-								// var tds = cloneTr.querySelectorAll("td");
-								// tds[0].innertext = list[i].stockName;
 								tbody.append(cloneTr);
 
 							}
@@ -282,8 +269,12 @@ window
 
 						};
 						holdingRequest.send();
-					}
-					;
+						}
+						else{
+							return;
+						}
+					};
+
 					holdingLoad();
 
 					setInterval(function() {

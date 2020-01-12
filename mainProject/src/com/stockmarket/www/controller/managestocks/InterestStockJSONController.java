@@ -2,6 +2,7 @@ package com.stockmarket.www.controller.managestocks;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -21,7 +22,7 @@ import com.stockmarket.www.service.basic.BasicInterestViewService;
 @WebServlet("/card/managestocks/interestlist-json")
 public class InterestStockJSONController extends HttpServlet{
 	
-	
+	private static final long serialVersionUID = 1L;
 	private InterestStocksService interestStocksInterface;
 	private InterestViewService interestViewInterface;
 	
@@ -53,14 +54,14 @@ public class InterestStockJSONController extends HttpServlet{
 		
 		if(!interestViewInterface.getInterestViewList(userId).isEmpty()) {
 
-		List<InterestView> interestlist = interestViewInterface.getInterestViewList(userId);
+		List<InterestView> interestlist = new ArrayList<InterestView>();
+		interestlist = interestViewInterface.getInterestViewList(userId);
 
         Gson interestGson = new Gson();
 		String interestJson = interestGson.toJson(interestlist);
         PrintWriter out = response.getWriter();
 		out.write(interestJson);
 		}
-		
 	}
 	
 	@Override
@@ -73,8 +74,6 @@ public class InterestStockJSONController extends HttpServlet{
 		int userId = (int)session.getAttribute("id");
 		String delStockName = request.getParameter("delStockName");
 
-		System.out.println(userId+delStockName);
-		
 		int result = interestStocksInterface.deleteStock(userId,delStockName);	
         PrintWriter out = response.getWriter();
 		out.write(result);
