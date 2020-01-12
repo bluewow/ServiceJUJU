@@ -18,4 +18,5 @@ public interface CaptureMemoService {
 	int delete(int id);
 	int insert(CaptureMemoView memoView);
 
+	String captureDataCrawling(String codeNum, int memberId);
 }
