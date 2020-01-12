@@ -35,7 +35,7 @@ public class RankingController extends HttpServlet{
 		
 		// 본인의 랭킹을 가져온다.
 		Member myInfo = service.getMember(id);
-		System.out.println(myInfo.getProfileImg());
+		
 		request.setAttribute("myRank", service.getMemberRank(id));
 		request.setAttribute("myInfo", myInfo);
 		
