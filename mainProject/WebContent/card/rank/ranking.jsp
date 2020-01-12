@@ -40,20 +40,20 @@
 						<tr>
 							<c:if test="${status.count == 1}">
 								<td class="rank"
-									style="background: url('../../images/medal_geom.png') no-repeat center;">${status.count}</td>
+									style="background: url('../../images/medal_geom.png') no-repeat 50% 12px;">${status.count}</td>
 							</c:if>
 							<c:if test="${status.count == 2}">
 								<td class="rank"
-									style="background: url('../../images/medal_eon.png') no-repeat center;">${status.count}</td>
+									style="background: url('../../images/medal_eon.png') no-repeat 50% 12px;">${status.count}</td>
 							</c:if>
 							<c:if test="${status.count == 3}">
 								<td class="rank"
-									style="background: url('../../images/medal_dong.png') no-repeat center;">${status.count}</td>
+									style="background: url('../../images/medal_dong.png') no-repeat 50% 12px;">${status.count}</td>
 							</c:if>
 							<c:if test="${status.count > 3}">
 								<td class="rank">${status.count}</td>
 							</c:if>
-							<td class="profileImg"></td>
+							<td class="profileImg"><img src="/images/profile/${ranker.profileImg}.png" alt="profile photo" class="circle float-left profile-photo"></td>
 							<td class="name">${ranker.nickName}</td>
 							<td class="assets"><fmt:formatNumber
 									value="${ranker.vMoney}" type="number" /></td>
@@ -70,7 +70,7 @@
 				<tbody id="myRank">
 					<tr>
 						<td class="rank">${myRank}</td>
-						<td class="profileImg"></td>
+						<td class="profileImg"><img src="/images/profile/${myInfo.profileImg}.png" alt="profile photo" class="circle float-left profile-photo"></td>
 						<td class="name">${myInfo.nickName}</td>
 						<td class="assets"><fmt:formatNumber type="number"
 								value="${myInfo.vMoney}" /></td>
