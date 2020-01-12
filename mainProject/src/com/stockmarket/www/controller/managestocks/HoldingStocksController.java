@@ -54,6 +54,8 @@ public class HoldingStocksController extends HttpServlet{
 //        System.out.println(json);
 
 //		request.setAttribute("list", HoldingStocksInterface.getInterestHoldingList(userId));
+        
+        
 		request.getRequestDispatcher("holdinglist.jsp").forward(request, response);
 	}
 	

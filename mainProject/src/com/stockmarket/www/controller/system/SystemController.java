@@ -101,7 +101,7 @@ public class SystemController extends HttpServlet {
 			System.out.println("success-1");
 
 		//주식가격 refresh by 크롤링 9시 ~ 18시까지 실행
-		if(Integer.parseInt(curHour) >= 9 && Integer.parseInt(curHour) <= 18)
+		if(Integer.parseInt(curHour) >= 9 && Integer.parseInt(curHour) <= 19)
 			System.out.println("success-2");
 			
 		//18시 장종료후 19시에 주식데이터 갱신

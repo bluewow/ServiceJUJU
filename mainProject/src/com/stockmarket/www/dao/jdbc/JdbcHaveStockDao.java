@@ -5,7 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 import com.stockmarket.www.controller.system.AppContext;
@@ -30,27 +33,27 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		
 		PreparedStatement st = null;
 		ResultSet rs = null;
-		List<CurStock> list = new ArrayList<>();
+		Map<String, CurStock> map = new HashMap<String, CurStock>();
 		
-//		new Thread(new Runnable() {
-//			@Override
-//			public void run() {
-//				if (AppContext.getStockMarket() != null) {
-//					
-//					list.addAll(AppContext.getStockMarket());
-//				}
-//			}
-//		}).start();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				if (AppContext.getStockMarket() != null) {
+					
+					map.putAll(AppContext.getStockMarket());
+				}
+			}
+		}).start();
 		// 더미 / 나중에 지워야함.
 //		List<CurStock> list = new ArrayList<>();
-		list.add(new CurStock("035420", "3,000", "상승", "3,000", "+", "2.5"));
-		list.add(new CurStock("000660", "5,000", "하강", "3,000", "-", "3.4"));
-		list.add(new CurStock("020560", "6,000", "보합", "3,000", "0.0", "1.5"));
-		list.add(new CurStock("005930", "2,000", "상승", "3,000", "+", "1.6"));
-		list.add(new CurStock("005380", "1,000", "상승", "3,000", "+", "8.9"));
-		list.add(new CurStock("095660", "10,500", "상승", "3,000", "+", "10.2"));
-		list.add(new CurStock("000880", "3,500", "하강", "3,000", "-", "14.2"));
-		list.add(new CurStock("215600", "7,000", "하강", "3,000", "-", "10"));
+//		list.add(new CurStock("035420", "3,000", "상승", "3,000", "+", "2.5"));
+//		list.add(new CurStock("000660", "4,000", "하강", "3,000", "-", "3.4"));
+//		list.add(new CurStock("020560", "6,000", "보합", "3,000", "0.0", "1.5"));
+//		list.add(new CurStock("005930", "2,000", "상승", "3,000", "+", "1.6"));
+//		list.add(new CurStock("005380", "1,000", "상승", "3,000", "+", "8.9"));
+//		list.add(new CurStock("095660", "11,500", "상승", "3,000", "+", "10.2"));
+//		list.add(new CurStock("000880", "3,500", "하강", "3,000", "-", "14.2"));
+//		list.add(new CurStock("215600", "7,000", "하강", "3,000", "-", "10"));
 
 		try {
 			st = context.getPreparedStatement(sql);
@@ -66,12 +69,11 @@ public class JdbcHaveStockDao implements HaveStockDao {
 				// while (memberId.equals(new CurStock(stockId).getCodeNum())) {
 				// if (stockId.equals(list.getCodeNum())){ // foreach.....(if...break)forEach문을
 				// 종료시키기 위한 if;
-				for (CurStock data : list) {
-					if (stockId.equals(data.getCodeNum())) {
-						String price = data.getPrice();
-						String gain = data.getGain();
-						String percent = data.getPercent();
-
+				for (Entry<String, CurStock> data : map.entrySet()) {
+					if (stockId.equals(data.getValue().getCodeNum())) {
+						String price = data.getValue().getPrice();
+						String gain = data.getValue().getGain();
+						String percent = data.getValue().getPercent();
 						HaveStockView haveStockView = new HaveStockView(memberId, stockId, quantity, sum, stockName,
 								price, gain, percent);
 						stockList.add(haveStockView);
@@ -89,7 +91,6 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		} finally {
 			context.close(rs, st);
 		}
-
 		return stockList;
 	}
 	
