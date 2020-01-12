@@ -23,7 +23,7 @@ public class RankingController extends HttpServlet{
 		// 가상머니 소유자를 상위 50위까지 가져온다.
 		List<Member> rankers = service.getMemberList();
 		request.setAttribute("rankers", rankers);
-
+		
 		// 세션을 이용하여 현재 사용자의 아이디를 가져온다.
 		HttpSession session = request.getSession();
 		Object tempId = session.getAttribute("id");
@@ -35,7 +35,7 @@ public class RankingController extends HttpServlet{
 		
 		// 본인의 랭킹을 가져온다.
 		Member myInfo = service.getMember(id);
-		
+		System.out.println(myInfo.getProfileImg());
 		request.setAttribute("myRank", service.getMemberRank(id));
 		request.setAttribute("myInfo", myInfo);
 		

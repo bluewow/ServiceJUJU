@@ -70,8 +70,9 @@ public class BasicSystemService implements SystemService {
 
 		// DB 를 참조하여 KOSPI, KOSDAQ 모든 종목에 대한 종목코드를 가져온다
 		stocks = koreaStocksDao.getList();
-		for(KoreaStocks entity : stocks)
+		for(KoreaStocks entity : stocks) {
 			codeNum.add(entity.getStockCode());
+		}
 
 		try {
 			getCurrentStockPrice(codeNum);
@@ -83,7 +84,6 @@ public class BasicSystemService implements SystemService {
 
 	public void getCurrentStockPrice(List<String> codeNums) throws InterruptedException {
 		Document doc = null;
-		Map<Integer, Integer> map = new LinkedHashMap();
 	
 		for (String codeNum : codeNums) {
 			String url = "https://finance.naver.com/item/main.nhn?code=" + codeNum;
@@ -111,23 +111,25 @@ public class BasicSystemService implements SystemService {
 				continue;
 			}
 			
+			Map<Integer, Integer> sell = new LinkedHashMap();
+			Map<Integer, Integer> buy = new LinkedHashMap();
 			if(trade.text().length() >100) { //거래정지된 목록의 호가창을 배제하기 위해서... TODO 다른 방법을 찾기
 				String buffer = trade.select(".f_down").text().trim().replace(",", "");
 				String buffersDown[] = buffer.split(" ");
 				for(int i = 0; i < buffersDown.length - 1; i=i+2) {
 					if(!buffersDown[i].equals("") && !buffersDown[i+1].equals(""))
-						map.put(Integer.parseInt(buffersDown[i+1]), Integer.parseInt(buffersDown[i]));
+						sell.put(Integer.parseInt(buffersDown[i+1]), Integer.parseInt(buffersDown[i]));
 				}
 				buffer = trade.select(".f_up").text().trim().replace(",", "");
 				String buffersUp[] = buffer.split(" ");
 				for(int i = 0; i < buffersUp.length - 1; i=i+2) {
 					if(!buffersUp[i].equals("") && !buffersUp[i+1].equals(""))
-						map.put(Integer.parseInt(buffersUp[i]), Integer.parseInt(buffersUp[i+1]));
+						buy.put(Integer.parseInt(buffersUp[i]), Integer.parseInt(buffersUp[i+1]));
 				}
 			}
 			
 			CurStock curStockInfo = new CurStock();
-			AppContext.getStockMarket().put(codeNum, curStockInfo.parser(codeNum + " " + status.text(), map));
+			AppContext.getStockMarket().put(codeNum, curStockInfo.parser(codeNum + " " + status.text(), sell, buy));
 //			System.out.println(curStockInfo.toString()); //for debugging
 			Thread.sleep(10);
 		}

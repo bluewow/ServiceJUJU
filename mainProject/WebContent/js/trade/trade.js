@@ -4,108 +4,99 @@ window.addEventListener("message", function(e) {
 	if(e.data && (e.data.length == 6)) { //codeNum
 		codeNum = e.data;
 		
-		asyncTrade("pass", 0, e.data);		// 매수/매도 창 데이터 갱신
+		updateStatus();		// 매수/매도 창 데이터 갱신
 	}
 });
 
-
 window.addEventListener("load", function(){
 	bb.defaults();
-	chartUpdate();
-	asyncTrade("pass", 0);		
-	tradeFunc();		// 매수/매도 이벤트 처리
-
-});
-
-function chartUpdate() {
-	chartSell();
-	chartBuy();
-}
-
-bb.defaults({
-	data: {
-		type: "bar",
-		labels:{
-			colors : "black",
-			centered : true,
-		  	position:{ x:10 },
-		},
-	},
-	axis: {
-        rotated: true,
-        y: {
-            show: false,
-            max: 6000,
-        },
-        x: { type: "category" }
-    },
-    legend: { show: false },
-    tooltip: { show: false },
-    bar: { padding: 5 },
-    size: {
-    	width: 200,
-        height: 350
-    },
-//    onresize: function(ctx) {
-//    	//TODO
-//    }
-	
-});
-
-function chartSell() {
-	var chart = bb.generate({
+	chartSell = bb.generate({
 		bindto : "#chartSell",
 	    data: {
 	    	x: "x",
 	        columns: [	   
-	        	["x",2200,2300,2400,2500,2550,2600,2650,2700,2750,2800],
-	        	["data", 100,8000,700,16,51,21,45,66,237,1300],
+	        	["x"],
+	        	["data"],
 	        ],
 	        colors:{data:"#2D9AF277"}
 	    },
-//	    title: {
-//	        text: "매도잔량"
-//	    }
 	});
-}
 
-function chartBuy() {
-	var chart = bb.generate({
+	chartBuy = bb.generate({
 		bindto : "#chartBuy",
 	    data: {
 	    	x: "x",
 	        columns: [	            
-	        	["x",1650,1700,1750,1800,1850,1900,1950,2000,2050,2100],
-	        	["data", 1,0,2,4,5,6,7,8,9,2500],
+	        	["x"],
+	        	["data"],
 	        ],	
 	        colors:{data:"#F4000677"}
 	    },
-//	    title: {
-//	        text: "매수잔량"
-//	    }
 	});
+	
+	updateStatus();
+	buttonEvent();
+//	tradeFunc();		// 매수/매도 이벤트 처리
+
+});
+
+function buttonEvent() {
+	var arrow = document.querySelectorAll("i");
+	
+	arrow[0].onclick = function(e) {
+//	   console.log(e);
+
+	};
+	arrow[1].onclick = function(e) {
+//		console.log(e);
+	}
+	arrow[2].onclick = function(e) {
+//		console.log(e);
+	}
+	arrow[3].onclick = function(e) {
+//		console.log(e);
+	}
 }
 
-function asyncGraph() { 
-    var ajax = new XMLHttpRequest();
-    ajax.open("GET", "../../card/trade/trade?graph=" + codeNum);
-    ajax.onload = function() {
-    	google.charts.setOnLoadCallback(
-    			drawBasic(JSON.parse(ajax.responseText)));
-    }
-    ajax.send();
-}
-
-function asyncTrade(p1, p2) { //p1=buy/sell p2=수량 p3=종목코드
+function updateStatus() {
 	var button = document.querySelector("#page-bottom-box");
 	var data = button.querySelectorAll(".data");
 	var sellButton = button.querySelector("#sell");
 	
 	var ajax = new XMLHttpRequest();
-    ajax.open("GET", "../../card/trade/trade?replaceEvent=on&button="
-    		+ p1 + "&Purse/Sold=" + p2 + "&codeNum" + codeNum );
+    ajax.open("GET", "../../card/trade/trade?&codeNum=" + codeNum );
     ajax.onload = function() {
     	var obj = JSON.parse(ajax.responseText);
+    	var sellPrice = new Array("x");
+    	var sellQty = new Array("data");
+    	var buyPrice = new Array("x");
+    	var buyQty = new Array("data");
+    	
+    	data[0].innerHTML = obj.vMoney.toLocaleString() + "원";
+        data[1].innerHTML = obj.qty.toLocaleString() + "주";
+        
+        if(obj.sellPrice) {
+	    	for(var i=0; i < obj.sellPrice.length; i++) {
+	    		sellPrice.push(obj.sellPrice[i]);
+	    		sellQty.push(obj.sellQty[i]);
+	    	}
+        } 
+        if(obj.buyPrice) {
+	    	for(var i=0; i < obj.buyPrice.length; i++) {
+	    		buyPrice.push(obj.buyPrice[i]);
+	    		buyQty.push(obj.buyQty[i]);
+	    	}
+        }
+        
+        bb.instance[0].load({
+    		columns: [sellPrice, sellQty],
+    	});
+        
+    	bb.instance[1].load({
+    		columns: [buyPrice, buyQty]
+    	});
+    	
+    	/*var obj = JSON.parse(ajax.responseText);
         data[0].innerHTML = obj.vMoney.toLocaleString() + "원";
         data[1].innerHTML = obj.quantity.toLocaleString() + "주";
 //        data[2].innerHTML = obj.vMoney.toLocaleString() + "원";
@@ -143,10 +134,49 @@ function asyncTrade(p1, p2) { //p1=buy/sell p2=수량 p3=종목코드
         	break;
     	default:
     		break;
-        }
+        }*/
     }    
     ajax.send();
 }
+
+bb.defaults({
+	data: {
+		type: "bar",
+		labels:{
+			colors : "black",
+			centered : true,
+		  	position:{ x:15 },
+		},
+	},
+	axis: {
+        rotated: true,
+        y: {
+            show: false,
+            max: 6000,
+        },
+        x: { type: "category" }
+    },
+    render: {
+    	   observe: false
+    	},
+    onrendered: function() {
+    	this.main.selectAll(".bb-texts text").each(function(d) {
+    		const x = +this.getAttribute("x");
+
+    		this.setAttribute("x", (
+    			d.value >= 6000 ? 0 : 15
+    		));
+    	});
+    },
+    legend: { show: false },
+    tooltip: { show: false },
+    bar: { padding: 5 },
+    size: {
+    	width: 200,
+        height: 350
+    },
+});
+
 
 //  매수/매도 이벤트 처리
 function tradeFunc() {

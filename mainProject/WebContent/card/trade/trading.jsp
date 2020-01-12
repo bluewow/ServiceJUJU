@@ -40,13 +40,13 @@
 		<form id="page-bottom-box" action="trade" method="get">
 			<div class="show-button-align">
 				<input class="button button-status" type="button" value="자산상황">
-				<div class="data"><fmt:formatNumber value="${myAssets }" pattern="#,###" />원</div>
+				<div class="data"><fmt:formatNumber value="" pattern="#,###" />원</div>
 
 				<input class="button button-status" type="button" value="   단가   ">
 				<div style="position: relative;">
-					<input type="text" value="" name="quantity" class="button text">
-					<i class="fa fa-caret-up fa-lg caret-up" aria-hidden="true"></i>
-					<i class="fa fa-caret-down fa-lg caret-down" aria-hidden="true"></i>
+					<input type="text" value="" class="text">
+					<i class="fa fa-caret-up fa-lg caret-up animation-1" aria-hidden="true"></i>
+					<i class="fa fa-caret-down fa-lg caret-down animation-2" aria-hidden="true"></i>
 				</div>
 				
 
@@ -54,13 +54,13 @@
 			</div>
 			<div class="show-button-align">
 				<input class="button button-status" type="button" value="보유수량">
-				<div class="data"><fmt:formatNumber value="${myQuantity }" pattern="#,###" />주</div>	
+				<div class="data"><fmt:formatNumber value="" pattern="#,###" />주</div>	
 				
 				<input class="button button-status" type="button" value="   수량   ">
 				<div style="position: relative;">
-					<input class="data text" type="text" name="Purse/Sold" autocomplete="off" onkeydown="if(event.keyCode == 13) return false;">
-					<i class="fa fa-caret-up fa-lg caret-up" aria-hidden="true"></i>
-					<i class="fa fa-caret-down fa-lg caret-down" aria-hidden="true"></i>
+					<input type="text" class="text" >
+					<i class="fa fa-caret-up fa-lg caret-up animation-1" aria-hidden="true"></i>
+					<i class="fa fa-caret-down fa-lg caret-down animation-2" aria-hidden="true"></i>
 				</div>
 				
 				<input id="sell" class="event button button-button animation" type="button" name="trade" value="매       도">
