@@ -96,8 +96,10 @@ public class ListController extends HttpServlet {
 		
 		interestStocksList = new ArrayList<InterestStocks>();
 		
+		
+		
 		if (id != -1) {
-			interestStocksList.addAll(companyService.getInterestStocks(3));
+			interestStocksList.addAll(companyService.getInterestStocks(id));
 		}
 		
 		// 아이디로 검색을 했으니깐.. 
@@ -107,9 +109,12 @@ public class ListController extends HttpServlet {
 		// 검색된 결과의 종목코드가 같은 것이 있는지 확인한다.
 		
 		
+		
 		if (interestStocksList != null) {
 			request.setAttribute("interestStocks", interestStocksList);
 		}
+		
+		
 		
 		
 		request.setAttribute("search", searchCompanyList);

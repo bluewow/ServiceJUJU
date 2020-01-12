@@ -131,7 +131,9 @@
 
 /*-- Title --*/
 .bb-title {
-  font: 14px sans-serif; }
+  font: 18px sans-serif; 
+  font-weight: bold;
+}
 
 /*-- Tooltip --*/
 .bb-tooltip-container {

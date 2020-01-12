@@ -14,4 +14,8 @@ public interface MemberDao {
 	int updateMember(int id, long vmoney);
 	int updateMember(int id, String cardPos);
 	int insertMember(Member member);
+	
+	//프로필 이미지 교체 (imgChange는 더미)
+	int updateMember(int writerId, int profileImg, String imgChange);
+	int updateMember(int id, String newPwd, String pwdChange);
 }

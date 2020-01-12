@@ -64,12 +64,7 @@
                <h1 style="display: none;">user section</h1>
                <div class="user-section">
                   <div class="personal">
-					<c:if test="${empty sessionScope.id }">
                   	 <img src="http://via.placeholder.com/50x50" alt="profile photo" class="circle float-left profile-photo" width="50" height="auto">
-                  	</c:if>
-					<c:if test="${not empty sessionScope.id }">
-                  	 <img src="/images/profile/${sessionScope.profileImg}.png" alt="profile photo" class="circle float-left profile-photo" width="50" height="auto">
-                  	</c:if>
                   	<c:if test="${empty sessionScope.id }">
                   		<input class="animation-2" type="button" value="로그인">
                   	</c:if>
@@ -369,8 +364,7 @@
 				<span class="pop-up-top-image">
 					<a href="#">
 			    		<img src="/images/profile/1.png" 
-			    			alt="profile photo" class="circle float-left profile-photo-modi"
-			                >
+			    			alt="profile photo" data-id="1" class="circle float-left profile-photo-modi">
 	                </a>
                 </span>
 				<span class="pop-up-top-subline">프로필 수정</span><br>
@@ -379,13 +373,13 @@
 	   		<div class="pop-up-border">
 	   			<div class="pop-up-context">
 						<div class="text">현재 비밀번호</div>
-		   				<input class="box" type="password" name="currentPwd" placeholder="1 ~ 16자 이내로 입력 하세요" form="signup">
+		   				<input class="box currentPwd" type="password" name="currentPwd" placeholder="1 ~ 16자 이내로 입력 하세요" maxlength='16' form="signup">
 	   					
 	   					<div class="text">새로운 비밀번호</div>
-		   				<input class="box" type="password" name="newPwd" placeholder="1 ~ 16자 이내로 입력 하세요" form="signup">
+		   				<input class="box newPwd" type="password" name="newPwd" placeholder="1 ~ 16자 이내로 입력 하세요" maxlength='16' form="signup">
 		   				
 		   				<div class="text">비밀번호 확인</div>
-		   				<input class="box" type="password" name="checkPwd" placeholder="1 ~ 16자 이내로 입력 하세요" form="signup">
+		   				<input class="box checkPwd" type="password" name="checkPwd" placeholder="1 ~ 16자 이내로 입력 하세요" maxlength='16' form="signup">
 		   				
 		   				<form class="login-box" action="login" method="post" id="user">
 		   					<input class="top-bottom-margin" type="button" value="확인">
@@ -396,21 +390,25 @@
    </div>
    
 <!-- ===== 프로필 이미지 선택하기 pop-up ========================================================================================================== -->   
+<div class="pop-up-wrapper">
  	<div class="pop-up-profile-image">
  		<form class="profile-image-box" method="post" id="profile-image">
 			<div class="profile-image-list scrollbar custom-scrollbar-style">
-							<c:forEach var="i" begin="1" end="36">
+							<%-- <c:forEach var="i" begin="1" end="36">
 								<c:if test="${i != sessionScope.profileImg }">
                   					 <img src="/images/profile/${i}.png" class="images" data-id="${i}">
 								</c:if>
 								<c:if test="${i == sessionScope.profileImg }">
                   					 <img src="/images/profile/${i}.png" class="images image-selected" data-id="${i}">
 								</c:if>
-							</c:forEach>	
+							</c:forEach>	 --%>
+			</div>
+			<div>
+	   			<input class="profile-img-select-submit" type="button" value="확인">
 			</div>
 		</form>
 	</div>
-
+ </div>
    <!-- =============================================================================================================== -->
       
    </main>

@@ -52,7 +52,7 @@ public class CaptureMemo {
 
 	// for insert
 	public CaptureMemo(String title, String content, double PER, double PBR, double ROE,
-			double debtRatio, int marketCap, String codeNum, int memberId) {
+			double debtRatio, int marketCap, double foreignInvestors, String codeNum, int memberId) {
 		this.title = title;
 		this.content = content;
 		this.PER = PER;
@@ -60,6 +60,7 @@ public class CaptureMemo {
 		this.ROE = ROE;
 		this.debtRatio = debtRatio;
 		this.marketCap = marketCap;
+		this.foreignInvestors = foreignInvestors;
 		this.codeNum = codeNum;
 		this.memberId = memberId;
 	}
@@ -75,6 +76,22 @@ public class CaptureMemo {
 		this.ROE = ROE;
 		this.debtRatio = debtRatio;
 		this.marketCap = marketCap;
+		this.codeNum = codeNum;
+		this.memberId = memberId;
+	}
+
+	public CaptureMemo(int id, String title, Date regdate, String content, double PER, double PBR, double ROE,
+			double debtRatio, int marketCap, double foreignInvestors, String codeNum, int memberId) {
+		this.id = id;
+		this.title = title;
+		this.regdate = regdate;
+		this.content = content;
+		this.PER = PER;
+		this.PBR = PBR;
+		this.ROE = ROE;
+		this.debtRatio = debtRatio;
+		this.marketCap = marketCap;
+		this.foreignInvestors = foreignInvestors;
 		this.codeNum = codeNum;
 		this.memberId = memberId;
 	}

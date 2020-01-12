@@ -50,7 +50,7 @@ public class BasicAnalysisService implements AnalysisService{
 		Elements element = doc.select(per + "," + pbr  + "," +  roe  + "," + marketCap 
 										+ "," + foreignInvestors + "," + debtRatio);
 
-		String text = element.text().replace("%","").replace(",", "");
+		String text = element.text().replace("%","").replace(",", "").replace("조 ","");
 		//결과값 순서 : 부채비율 - 시가총액 - 외국인지분율 -  PER  - PBR    + ROE 계산
 		//			data[0]- data[1]-  data[2]- data[3]-data[4] + @
 		String[] data = text.split(" ");
@@ -64,6 +64,7 @@ public class BasicAnalysisService implements AnalysisService{
 				roe, 							//ROE
 				Double.parseDouble(data[0]), 	//debtRatio
 				Integer.parseInt(data[1]),	 	//marketCap
+				Double.parseDouble(data[2]),	//foreignInvestors
 				codeNum,					 	//codeNum
 				memberId);    					//invalid memberId
 		

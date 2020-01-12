@@ -8,22 +8,14 @@
 
 <meta charset="utf-8">
 <!-- CSS Reset --> 
-
 <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
-<!-- progress bar -->
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
 <!-- download fontawesome.com -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!--d3js CDN-->
 <script src="https://d3js.org/d3.v4.min.js"></script>
-<!--다운 받아서 포함 시키기-->
 <link rel="stylesheet" href="../../css/billboard.css">
 <script src = "../../js/billboard.js"></script>
-    
+
 <!-- ref analysis.css -->
 <link rel="stylesheet" href="../../css/trade/analysis.css">
 <script type="text/javascript" src="../../js/trade/analysis.js"></script>
@@ -50,15 +42,15 @@
 		<div>
 			<div>
 				<br>
-				<div id="chartA"></div>
+				<div class="chart-string">종목동향<div id="chartA"></div></div>
 				<br>
-	 			<div id="chartB"></div>
+	 			<div class="chart-string">수급<div id="chartB"></div></div>
 			</div>
 			<div>
 				<br>
-				<div id="chartC"></div>
+				<div class="chart-string">컨텐츠<div id="chartC"></div></div>
 				<br>
-				<div id="chartD"></div>
+				<div class="chart-string">강도<div id="chartD"></div></div>
 			</div> 
 	    </div>
 	</section>
@@ -72,4 +64,5 @@
 	
 </div>
 </body>
+    
 </html>

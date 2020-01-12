@@ -1,11 +1,11 @@
 window.addEventListener("load", function(){
 	
+	profilePhotoFunc();
 	loginFunc();	//로그인 팝업
 	buttonFunc();	//로그인/로그아웃/프로필 버튼 
 	hiddenFunc();	//팝업 hidden
 	signUpFunc();	//회원가입 팝업
 	profileFunc();	//프로필설정 팝업
-	profileImgFunc();	//프로필이미지설정 팝업
 	
 	////////////////////////////
 	//로그인 팝업 
@@ -87,9 +87,8 @@ window.addEventListener("load", function(){
 	        var wrapper = document.querySelector(".pop-up-wrapper");
 	        var loginPopup = document.querySelector(".pop-up");
 	        var signupPopup = document.querySelector(".sign-up-pop-up");
-	        var profilePopup = document.querySelector(".profile-pop-up");
 		    var profileImage = document.querySelector(".pop-up-profile-image");
-
+		    var profilePopup = document.querySelector(".profile-pop-up");
 	        if (e.target == wrapper) {
 	            wrapper.style.visibility = "hidden";
 	            loginPopup.style.visibility = "hidden";
@@ -129,18 +128,60 @@ window.addEventListener("load", function(){
 	        }
 	    }
 	}
+	
+	////////////////////////////
+	//처음 프로필 화면
+	////////////////////////////
+	function profilePhotoFunc() {
+		var loginStatus = document.querySelector(".personal").childNodes[1].nextElementSibling;
+	    var profilePopup = document.querySelector(".profile-pop-up");
+	    var profileImage = profilePopup.querySelector(".pop-up-top-image");
+        var changePhoto = profileImage.getElementsByClassName("profile-photo-modi")[0];
 
+
+		if(loginStatus.value!="로그인") {
+			var userId = loginStatus.value;
+			var sendData = "loginNickname="+userId;
+	
+			var request = new XMLHttpRequest(); 
+			request.open("POST", "../../member-profile", true);
+			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			request.send(sendData);
+			
+			request.onload = function () {
+				var photoImg = JSON.parse(request.responseText);
+			    var profilePhoto = document.querySelector(".profile-photo");
+				
+			    profilePhoto.parentNode.innerHTML =
+			    	`<img src="/images/profile/${photoImg}.png" 
+			    	alt="profile photo" class="circle float-left profile-photo"
+			    	 width="50" height="auto">
+			    	<input class="small animation-2" type="button" value="${userId}">
+			    	 <input class="animation-2" type="button" value="로그아웃">`;
+		        changePhoto.parentNode.innerHTML = 
+		        	`<img src="/images/profile/${photoImg}.png" 
+		        	alt="profile photo" class="circle float-left profile-photo-modi"
+		        	data-id="${photoImg}">`;
+			}
+		}
+	}
 	////////////////////////////
 	//프로필설정 팝업
 	///////////////////////////
 	function profileFunc() {
-	
+
+        var wrapper = document.querySelector(".pop-up-wrapper");
 	    var profilePopup = document.querySelector(".profile-pop-up");
 	    var profileImage = profilePopup.querySelector(".pop-up-top-image");	
 	    var sectionImg = document.querySelector(".pop-up-profile-image");
 	    var profileImageList = sectionImg.querySelector(".profile-image-list");
-	    var currentSelect = profileImageList.getElementsByClassName("image-selected")[0];
-	    
+        var submitButton = profilePopup.querySelector(".login-box");
+        var imgSelectButton = sectionImg.querySelector(".profile-img-select-submit");
+        var profileImg = profilePopup.querySelector(".profile-photo-modi");
+    	var currentPwd = profilePopup.querySelector(".currentPwd");
+    	var newPwd = profilePopup.querySelector(".newPwd");
+    	var checkPwd = profilePopup.querySelector(".checkPwd");
+	    var currentSelect;
 	    //프로필 이미지 클릭 시
 	    profileImage.onclick = function(e) {
 	        if(e.target.nodeName != "IMG")
@@ -148,40 +189,136 @@ window.addEventListener("load", function(){
 
 	        //prevent Event Bubble
 	        e.preventDefault();
-	        	var profileImageList = document.querySelector(".pop-up-profile-image");
-	        	profileImageList.style.visibility = "visible";
-	        	
+	        var nowImg = e.target.dataset.id;
+	        sectionImg.style.visibility = "visible";
+	        var list = "";
+	        	for(var i=1; i<=36; i++) {
+	        		if(i==nowImg) 
+		        		var photos =  `<img src="/images/profile/${i}.png" 
+			        	alt="profile photo" class="images image-selected"
+			        	 data-id="${i}">`
+	        		else if(i!=nowImg) 
+		        		var photos =  `<img src="/images/profile/${i}.png" 
+			        	alt="profile photo" class="images"
+			        	 data-id="${i}">`
+	        	        list = list + photos;
+	        	}
+
+	        profileImageList.innerHTML = list;
+	        currentSelect = profileImageList.getElementsByClassName("image-selected")[0];
 	    }
 	    
-	    //
-	    profilePopup.onclick = function(e) {
+	    //확인버튼 클릭 시
+	    submitButton.onclick = function(e) {
         if(e.target.nodeName != "INPUT")
             return;
 
         //prevent Event Bubble
         e.preventDefault();
-        	alert("aasdsad")
+        
+        //데이터 준비
+    	var data = [
+			["currentPwd", currentPwd.value],
+			["newPwd", newPwd.value]
+			]
+		var sendData = [];
+
+		for (var i = 0; i < data.length; i++) {
+			sendData[i] = data[i].join("=");
+			}
+		
+		sendData = sendData.join("&");
+
+		//데이터 전송
+		var request = new XMLHttpRequest();
+		request.open("POST", "../../member-profile", true);
+		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		request.send(sendData);	
+		
+		//결과를 응답받고 출력
+		request.onload = function () {
+			var returnData = request.responseText;
+			if(returnData=="1"){
+				alert("비밀번호가 변경되었습니다.")
+				currentPwd.value=null;
+				newPwd.value=null;
+				checkPwd.value=null;
+	            wrapper.style.visibility = "hidden";
+	            profilePopup.style.visibility = "hidden";
+	            
+			} else if(returnData=="wrong") {
+				alert("현재 비밀번호가 맞지 않습니다.")
+				currentPwd.value=null;
+				newPwd.value=null;
+				checkPwd.value=null;
+				
+			} else if(returnData=="same"){
+				alert("현재 비밀번호가 변경하려는 비밀번호와 동일합니다.")
+				currentPwd.value=null;
+				newPwd.value=null;
+				checkPwd.value=null;
+		}
+		
+		}
 	    }
 
 	    //프로필 이미지 리스트중 하나를 클릭했을 시
 	    profileImageList.onclick = function(e) {
 	        if(e.target.nodeName != "IMG")
 	            return;
-
-	        //prevent Event Bubble
 	        e.preventDefault();
 	        
 	        currentSelect.classList.remove("image-selected");
 	        e.target.classList.add("image-selected");
-	        currentSelect = e.target;
-	        sectionImg.style.visibility = "hidden";
-	        
-	        console.log(e.target.dataset.id)
-	        var selectPhoto = e.target.dataset.id;
+	        currentSelect = profileImageList.getElementsByClassName("image-selected")[0];
+	    }
+	    
+	    //프로필 이미지 선택 후 확인버튼 클릭시
+        imgSelectButton.onclick = function(e) {
+	        if(e.target.nodeName != "INPUT")
+	            return;
+	        e.preventDefault();
+	        var selectPhoto = currentSelect.dataset.id;
 	        var changePhoto = profileImage.getElementsByClassName("profile-photo-modi")[0];
-	        changePhoto.parentNode.innerHTML = `<img src="/images/profile/${selectPhoto}.png" alt="profile photo" class="circle float-left profile-photo-modi">`
-	}
+	        changePhoto.parentNode.innerHTML = 
+	        	`<img src="/images/profile/${selectPhoto}.png" 
+	        	alt="profile photo" class="circle float-left profile-photo-modi"
+	        	data-id="${selectPhoto}">`;
+	        //데이터 준비
+	    	var data = [
+				["profileImg", selectPhoto]
+				]
+			var sendData = [];
 
+			for (var i = 0; i < data.length; i++) {
+				sendData[i] = data[i].join("=");
+				}
+			
+			sendData = sendData.join("&");
+
+			//데이터 전송
+			var request = new XMLHttpRequest();
+			request.open("POST", "../../member-profile", true);
+			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			request.send(sendData);	
+			
+			request.onload = function () {
+				var loginStatus = document.querySelector(".personal").childNodes[1].nextElementSibling;
+				var userId = loginStatus.value;
+				var lastReplyNum = request.responseText;
+				alert("프로필 이미지가 변경되었습니다.");
+			    var profilePhoto = document.querySelector(".profile-photo");
+			    profilePhoto.parentNode.innerHTML =
+			    	`<img src="/images/profile/${selectPhoto}.png" 
+			    	alt="profile photo" class="circle float-left profile-photo"
+			    	 width="50" height="auto">
+			    	<input class="small animation-2" type="button" value="${userId}">
+			    	 <input class="animation-2" type="button" value="로그아웃">`;
+				sectionImg.style.visibility = "hidden";
+			}
+	        
+        }
+	    
 	}
 });
 

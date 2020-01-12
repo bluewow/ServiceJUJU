@@ -248,6 +248,53 @@ public class JdbcMemberDao implements MemberDao {
 		}
 		return result;
 	}
+
+	@Override
+	public int updateMember(int id, int profileImg, String imgChange) {
+		String sql = "UPDATE MEMBER SET PROFILE_IMG = ? WHERE ID = ?";
+
+		int result = 0;
+		
+		try {
+			JdbcDaoContext daoContext = new JdbcDaoContext();
+			PreparedStatement statement = daoContext.getPreparedStatement(sql);
+
+			statement.setInt(1, profileImg);
+			statement.setInt(2, id);
+
+			result = statement.executeUpdate();
+
+			daoContext.close(statement);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	@Override
+	public int updateMember(int id, String newPwd, String pwdChange) {
+		String sql = "UPDATE MEMBER SET PASSWORD = ? WHERE ID = ?";
+
+		int result = 0;
+		
+		try {
+			JdbcDaoContext daoContext = new JdbcDaoContext();
+			PreparedStatement statement = daoContext.getPreparedStatement(sql);
+
+			statement.setString(1, newPwd);
+			statement.setInt(2, id);
+
+			result = statement.executeUpdate();
+
+			daoContext.close(statement);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 /*
  * =======================================================================
  * ============================= for Test ================================
@@ -262,4 +309,6 @@ public class JdbcMemberDao implements MemberDao {
 //		int result= memberDao.insertMember(member);
 //		System.out.println(result);
 //	}
+
+
 }

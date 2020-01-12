@@ -44,4 +44,7 @@
 	font-size: medium;
 }
 
-
+.chart-string {
+	text-align: center;
+	font-weight: bold;
+}

@@ -36,9 +36,14 @@ public class JdbcCaptureMemoDao implements CaptureMemoDao {
 				int marketCap = resultSet.getInt("MARKET_CAP");
 				double foreignInvestors = resultSet.getDouble("FOREIGN_INVESTORS");
 				Date regdate = resultSet.getDate("REGDATE");
+				String codeNum = resultSet.getString("CODENUM");
+				int memberId = resultSet.getInt("MEMBER_ID");
 				
 				captureMemo = new CaptureMemo(
-						id, title, regdate, content, PER, PBR, ROE, debtRatio, marketCap, foreignInvestors);
+						id, title, regdate, content, 
+						PER, PBR, ROE, debtRatio, marketCap, 
+						foreignInvestors, codeNum, memberId
+				);
 			}
 			daoContext.close(resultSet, statement);
 		} catch (ClassNotFoundException e) {
