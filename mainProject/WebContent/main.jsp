@@ -124,7 +124,7 @@
                            id="analysis-tab" data-toggle="tab" href="#analysis" role="tab"
                            aria-controls="index1" aria-selected="true">분 석</a></li>
                         <li class="nav-item"><a class="nav-link nav-link-s "
-                           id="trading-tab" data-toggle="tab" href="#trading" role="tab"
+                           id="capture-tab" data-toggle="tab" href="#capture" role="tab"
                            aria-controls="index2" aria-selected="false">캡 쳐</a></li>
                      </ul>
                      <div class="tab-content" id="myTabContent">
@@ -132,7 +132,7 @@
                            role="tabpanel" aria-labelledby="analysis-tab">
                            <iframe height="100%" id="analysis-window" src="./card/trade/analysis"></iframe>
                         </div>
-                        <div class="tab-pane fade" id="trading" role="tabpanel"
+                        <div class="tab-pane fade" id="capture" role="tabpanel"
                            aria-labelledby="trading-tab">
                            <iframe id="capture-window" src="/card/capturememo/captureMemo"></iframe>
                         </div>
@@ -153,11 +153,11 @@
                      <ul class="nav nav-tabs" id="myTab" role="tablist style"
                         style="border: none">
                         <li class="nav-item"><a class="nav-link nav-link-s active"
-                           id="capture-tab" data-toggle="tab" href="#capture" role="tab"
+                           id="trading-tab" data-toggle="tab" href="#trading" role="tab"
                            aria-controls="index1" aria-selected="true">매 매</a></li>
                      </ul>
                      <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="capture"
+                        <div class="tab-pane fade show active" id="trading"
                            role="tabpanel" aria-labelledby="capture-tab"></div>
                             <iframe id="trade-window" src="./card/trade/trade"> </iframe>
                      </div>

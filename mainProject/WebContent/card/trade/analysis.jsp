@@ -26,15 +26,17 @@
 	<!-- --------------- page-top -------------- -->
 	<header class="page-top">
 		<div id="stockName">
-			<div></div>		<!-- 종목명 -->
+			<div></div>	<!-- 종목명 -->
+			<c:if test="${not empty sessionScope.id }">
+				<input class="animation" id="capture" type="button" value="캡쳐하기">
+			</c:if>
+			<br>
 			<div></div>		<!-- 현재가 -->
 			<span></span> 	<!-- up/down 기호-->
 			<span></span>	<!-- 원 -->
 			<span></span>	<!-- % -->
 		</div>
-<%-- 		<c:if test="${not empty sessionScope.id }">
-			<input id="capture" type="button" value="캡쳐하기">
-		</c:if> --%>
+
 	</header>
 
 	<!-- --------------- page-mid -------------- -->

@@ -13,12 +13,41 @@ window.addEventListener("load", function() {
 	bb.defaults();
 	refleshPrice();
 	chartUpdate();
+	captureAction();
 });
+
+function captureAction() {
+	var button = document.querySelector("#capture");
+	
+	if(button == null)
+		return;
+	
+	button.onclick = function(e) {
+		var ajax = new XMLHttpRequest();
+		ajax.open("GET", "../../card/trade/analysis?capture=on&codeNum=" + codeNum);
+		ajax.onload = function() {
+			//data send to capture Card
+			var frame = parent.document.querySelector("#capture-window");
+			frame.contentWindow.postMessage(
+					{capture: ajax.responseText }, 
+					"http://localhost:8080/card/capturememo/captureMemo.jsp");
+			
+			var tab = parent.document.querySelector("#capture-tab");
+			tab.click();
+			/*tab.contentWindow.postMessage(
+					{capture: ajax.responseText }, 
+					"http://localhost:8080/card/capturememo/captureMemo.jsp");*/
+		}
+		ajax.send();
+	}
+}
 
 function curStockUpdateForm(obj) {
 	var stockNameDiv = document.querySelectorAll("#stockName div");
 	var stockNameSpan = document.querySelectorAll("#stockName span");
 	
+	stockNameDiv[0].style.display = "contents";
+	stockNameDiv[1].style.display = "contents";
 	stockNameDiv[0].innerHTML = obj.name;
 	stockNameDiv[1].innerHTML = obj.price;
 	//보합
