@@ -38,7 +38,6 @@ class CaptureMemo {
 		if (target.parent().next().attr("class") == "child-tr") {
 			if (this.prevMemo.length != 0) {
 				this.prevMemo.remove();
-				this.chart.remove();
 				this.prevMemo = undefined;
 			}
 			return;
@@ -69,9 +68,14 @@ class CaptureMemo {
 	}
 
 	createChart(data1, data2){
+		if(this.chart != undefined){
+			this.chart = undefined;
+			return;
+		}
+		
 		data2 = JSON.parse(data2);
 		
-		this.chart = bb.generate({
+		this.chart = $(bb.generate({
 //			size:{
 //				height:200,
 //				width:340
@@ -101,7 +105,7 @@ class CaptureMemo {
 			},
 			tooltip: { show : false },
 			bindto: "#radarChart"
-			});
+			}));
 	};
 
 	getDetail(target){
