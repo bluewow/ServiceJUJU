@@ -34,11 +34,9 @@ window.addEventListener("load", function(){
 	    },
 	});
 	
+	tick();
 	update();
 	buttonEvent();
-	actionEvent();
-//	tradeFunc();		// 매수/매도 이벤트 처리
-
 });
 
 class Price {
@@ -66,7 +64,11 @@ class Price {
 function buttonEvent() {
 	var arrow = document.querySelectorAll("i");
 	var text = document.querySelectorAll(".text");
+	var buy = document.querySelector("#buy");
+	var sell = document.querySelector("#sell");
+	var data = document.querySelectorAll(".data");
 	
+
 	arrow[0].onclick = function(e) {	//단가 up
 		var index = priceObj.getIndex() - 1;
 		if(priceObj.getPrice(index) != null) {
@@ -82,24 +84,55 @@ function buttonEvent() {
 		}
 	}
 	arrow[2].onclick = function(e) {	//수량 up
-//		console.log(e);
+		text[1].value = Number(text[1].value) + 1;
 	}
 	arrow[3].onclick = function(e) {	//수량 down
-//		console.log(e);
+		if(text[1].value == 0)
+			return;
+		
+		text[1].value = Number(text[1].value) - 1;
+	}
+	
+	buy.onclick = function(e) {
+		var asset = data[0].value;
+		var price = Number(text[0].value);
+		var qty = text[1].value;
+		
+		if(qty == "" || qty < 0) {
+			alert("수량을 잘못 입력하였습니다.");
+			text[1].value = 0;
+			return;
+		}
+		
+		if(asset < price * qty) {
+			alert("가상머니가 부족합니다");
+			text[1].value = 0;
+			return;
+		}
+		
+		text[1].value = 0;
+    	var frame = parent.document.querySelector("#holding-window");
+		frame.contentWindow.postMessage(
+				codeNum, "http://localhost:8080/card/managestocks/holdinglist.jsp");
+	}
+	
+	sell.onclick = function(e) {
+		
+		text[1].value = 0;
+    	var frame = parent.document.querySelector("#holding-window");
+		frame.contentWindow.postMessage(
+				codeNum, "http://localhost:8080/card/managestocks/holdinglist.jsp");
 	}
 }
 
-function actionEvent() {
-	
-	
-	
-}
 
 function update() {
 	var button = document.querySelector("#page-bottom-box");
 	var data = button.querySelectorAll(".data");
 	var text = button.querySelectorAll(".text");
 	var sellButton = button.querySelector("#sell");
+	var buyButton = button.querySelector("#buy");
+	let titleAss = document.querySelector("#title-ass");
 	priceObj = new Price();
 	
 	var ajax = new XMLHttpRequest();
@@ -111,6 +144,7 @@ function update() {
     	var buyPrice = new Array("x");
     	var buyQty = new Array("data");
     	
+    	data[0].value = obj.vMoney;
     	data[0].innerHTML = obj.vMoney.toLocaleString() + "원"; //자산상황
         data[1].innerHTML = obj.qty.toLocaleString() + "주";	//보유수량
         
@@ -142,17 +176,35 @@ function update() {
     		columns: [buyPrice, buyQty]
     	});
     	
-    	if(obj.buyPrice)
-    		text[0].value = obj.buyPrice[0];	//단가
+    	if(obj.buyPrice) 	//단가 기본세팅
+    		text[0].value = (obj.buyPrice[0]!=undefined )? obj.buyPrice[0]:0;
+
+    	//수량 기본세팅
+    	text[1].value = 0;
     
-    	//버튼 상태체크
-		if(data[1].innerHTML == "0주") {
+    	if(titleAss.innerHTML != "") {
+    		sellButton.className = "event button button-button shadow"
+    			sellButton.disabled = true;
+    		buyButton.className = "event button button-button shadow"
+    			buyButton.disabled = true;
+    	} else {
+    		sellButton.className = "event button button-button animation"
+    			sellButton.disabled = false;
+    		buyButton.className = "event button button-button animation"
+    			buyButton.disabled = false;
+    	}
+    	
+		if(data[1].innerHTML == "0주") {    	//버튼 상태체크
 			sellButton.className = "event button button-button shadow"
 			sellButton.disabled = true;
 		} else {
 			sellButton.className = "event button button-button animation"
 			sellButton.disabled = false;
 		}
+		
+			
+//		if(titleAss.v)
+//			buyButton
 /*
 		
         
@@ -223,82 +275,30 @@ bb.defaults({
     },
 });
 
+function tick() {
+	let titleAss = document.querySelector("#title-ass");
+	let date = new Date();
+	let week = ['일', '월', '화', '수', '목', '금', '토'];
+	var dayOfWeek = week[date.getDay()];
 
-//  매수/매도 이벤트 처리
-function tradeFunc() {
-//	var button = document.querySelector("#page-bottom-box");
-//	var event = button.querySelector("input.event");
-//	var data = button.querySelectorAll(".data");
-//	var qty = button.querySelector("#text");
-//	var sellButton = button.querySelector("#sell");
-//	
-//	button.onclick = function(e) {
-//		if(e.target.name != event.name)
-//	      	return;
-//	    
-//		if(!data[3].value) {
-//			alert("수량을 입력해 주세요");
-//			return;
-//		}
-//		
-//		if(data[3].value <= 0) {
-//			alert("잘못된 수량입력 입니다");
-//			data[3].value = "";
-//			return;
-//		}
-//		
-//		if(e.target.value == "매       수") {
-//			var trade = "buy";
-//			if(confirm(data[3].value + "주 매수를 진행하시겠습니까?") == false) {
-//				data[3].value = "";
-//				return;
-//			}
-//			
-//		}
-//		else if(e.target.value =="매       도") {
-//			var trade = "sell";
-//			if(confirm(data[3].value + "주 매도를 진행하시겠습니까?") == false) {
-//				data[3].value = "";
-//				return;
-//			}
-//		}
-//			
-//		asyncTrade(trade, qty.value);
-//	}
+	if(dayOfWeek == '일' || dayOfWeek =="토") {
+		titleAss.innerHTML = "휴장일 입니다";
+		return;
+	}
+	
+	if(date.getHours() <= 9 || date.getHours() >=15) {	//9:00 ~ 15:20 거래시간
+		if(date.getHours() == 15 && date.getMinutes() <= 20) {
+			titleAss.innerHTML = "";
+			return;
+		} else {
+			titleAss.innerHTML = "거래종료 (오픈시간 09:00~15:20)";
+			return;
+		}
+		titleAss.innerHTML = "거래종료 (오픈시간 09:00~15:20)";
+		return;
+	}
 }
 
-//function incrementValue(e) {
-//	e.preventDefault();
-//	var fieldName = $(e.target).data('field');
-//	var parent = $(e.target).closest('div');
-//	var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
-//	
-//	if (!isNaN(currentVal)) {
-//	  parent.find('input[name=' + fieldName + ']').val(currentVal + 1);
-//	} else {
-//	  parent.find('input[name=' + fieldName + ']').val(0);
-//	}
-//}
-//
-//function decrementValue(e) {
-//	e.preventDefault();
-//	var fieldName = $(e.target).data('field');
-//	var parent = $(e.target).closest('div');
-//	var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
-//	
-//	if (!isNaN(currentVal) && currentVal > 0) {
-//	  parent.find('input[name=' + fieldName + ']').val(currentVal - 1);
-//	} else {
-//	  parent.find('input[name=' + fieldName + ']').val(0);
-//	}
-//}
-//
-//$('.input-group').on('click', '.button-plus', function(e) {
-//	  incrementValue(e);
-//	});
-//
-//	$('.input-group').on('click', '.button-minus', function(e) {
-//	  decrementValue(e);
-//	});
+setInterval(tick, 1000);
 
-	
+
