@@ -125,16 +125,16 @@
                            aria-controls="index1" aria-selected="true">분 석</a></li>
                         <li class="nav-item"><a class="nav-link nav-link-s "
                            id="trading-tab" data-toggle="tab" href="#trading" role="tab"
-                           aria-controls="index2" aria-selected="false">매 매</a></li>
+                           aria-controls="index2" aria-selected="false">캡 쳐</a></li>
                      </ul>
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="analysis"
                            role="tabpanel" aria-labelledby="analysis-tab">
-                           <iframe height="100%" id="analysis-window" src="./card/trade/analysis"> </iframe>
+                           <iframe height="100%" id="analysis-window" src="./card/trade/analysis"></iframe>
                         </div>
                         <div class="tab-pane fade" id="trading" role="tabpanel"
                            aria-labelledby="trading-tab">
-                           <iframe id="trade-window" src="./card/trade/trade"> </iframe>
+                           <iframe id="capture-window" src="/card/capturememo/captureMemo"></iframe>
                         </div>
 
                      </div>
@@ -154,13 +154,12 @@
                         style="border: none">
                         <li class="nav-item"><a class="nav-link nav-link-s active"
                            id="capture-tab" data-toggle="tab" href="#capture" role="tab"
-                           aria-controls="index1" aria-selected="true">캡 쳐</a></li>
+                           aria-controls="index1" aria-selected="true">매 매</a></li>
                      </ul>
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="capture"
                            role="tabpanel" aria-labelledby="capture-tab"></div>
-                            <iframe id="capture-window" src="/card/capturememo/captureMemo">
-                           </iframe>
+                            <iframe id="trade-window" src="./card/trade/trade"> </iframe>
                      </div>
                   </section>
                </div>
