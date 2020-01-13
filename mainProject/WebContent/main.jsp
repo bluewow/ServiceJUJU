@@ -284,7 +284,7 @@
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="rangking"
                            role="tabpanel" aria-labelledby="rangking-tab">
-                           <iframe src="./card/rank/ranking">
+                           <iframe id="ranking-board-window" src="./card/rank/ranking">
                            </iframe>
                         </div>
                      </div>

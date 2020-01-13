@@ -20,6 +20,7 @@
 <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
 
 <link href="../../css/rank.css" type="text/css" rel="stylesheet">
+	<script src="../../js/ranking/ranking.js"></script>
 </head>
 <!-- ======================================================================= -->
 <body class="scrollbar custom-scrollbar-style">

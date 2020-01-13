@@ -308,12 +308,21 @@ window.addEventListener("load", function(){
 				var lastReplyNum = request.responseText;
 				alert("프로필 이미지가 변경되었습니다.");
 			    var profilePhoto = document.querySelector(".profile-photo");
+			    
+			    //변경된 이미지를 프로필 팝업과 메인페이지 변경하는 코드
 			    profilePhoto.parentNode.innerHTML =
 			    	`<img src="/images/profile/${selectPhoto}.png" 
 			    	alt="profile photo" class="circle float-left profile-photo"
 			    	 width="50" height="auto">
 			    	<input class="small animation-2" type="button" value="${userId}">
 			    	 <input class="animation-2" type="button" value="로그아웃">`;
+			   
+			    //변경된 이미지를 랭크보드로 넘겨주는 코드
+			    var rankingBoardWindow = parent.document.querySelector("#ranking-board-window");
+			    var sendData = ["selectPhoto", selectPhoto]
+			    rankingBoardWindow.contentWindow.postMessage(sendData,
+				"http://localhost:8080/card/rank/ranking.jsp");
+		
 				sectionImg.style.visibility = "hidden";
 			}
 	        
