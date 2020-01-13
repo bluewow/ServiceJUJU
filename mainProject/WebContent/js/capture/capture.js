@@ -3,6 +3,7 @@ class CaptureMemo {
 		this.prevMemo;
 		this.content = $(".content");
 		this.trTemplate = document.querySelector(".tr-template");
+		this.chart;
 	}
 
 	setPrevMemo(prevMemo) {
@@ -37,6 +38,7 @@ class CaptureMemo {
 		if (target.parent().next().attr("class") == "child-tr") {
 			if (this.prevMemo.length != 0) {
 				this.prevMemo.remove();
+				this.chart.remove();
 				this.prevMemo = undefined;
 			}
 			return;
@@ -68,19 +70,8 @@ class CaptureMemo {
 
 	createChart(data1, data2){
 		data2 = JSON.parse(data2);
-		console.log(data1);
-		console.log(data2);
-		// let {PER, PBR, ROE, debtRatio, marketCap} = data1;
 		
-		// for(let v in data1) {
-		// 	if(v == "PER" || v == "PBR" || v == "ROE" || v == "debtRatio" || v == "marketCap"){
-		// 		console.log(v + ", " + data2[v]);
-		// 		data2[v] = data2[v] / data1[v] * 100 
-		// 		console.log(v + ", " + data2[v]);
-		// 	}
-		// }
-
-		let chart = bb.generate({
+		this.chart = bb.generate({
 //			size:{
 //				height:200,
 //				width:340
