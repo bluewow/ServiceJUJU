@@ -28,7 +28,7 @@ public class JdbcMemberDao implements MemberDao {
 				String email = resultSet.getString("EMAIL");
 				String nickName = resultSet.getString("NICKNAME");
 				String password = resultSet.getString("PASSWORD");
-				int vmoney = resultSet.getInt("VMONEY");
+				long vmoney = resultSet.getLong("VMONEY");
 				Date regdate = resultSet.getDate("REGDATE");
 				String cardPos = resultSet.getString("CARD_POS");
 				int profileImg = resultSet.getInt("PROFILE_IMG");
@@ -66,7 +66,7 @@ public class JdbcMemberDao implements MemberDao {
 				String email = resultSet.getString("EMAIL");
 				String nickName = resultSet.getString("NICKNAME");
 				String password = resultSet.getString("PASSWORD");
-				int vmoney = resultSet.getInt("VMONEY");
+				long vmoney = resultSet.getLong("VMONEY");
 				Date regdate = resultSet.getDate("REGDATE");
 				String cardPos = resultSet.getString("CARD_POS");
 				int profileImg = resultSet.getInt("PROFILE_IMG");	
@@ -99,7 +99,7 @@ public class JdbcMemberDao implements MemberDao {
 				String email = resultSet.getString("EMAIL");
 				String nickName = resultSet.getString("NICKNAME");
 				String password = resultSet.getString("PASSWORD");
-				int vmoney = resultSet.getInt("VMONEY");
+				long vmoney = resultSet.getLong("VMONEY");
 				String cardPos = resultSet.getString("CARD_POS");
 				int profileImg = resultSet.getInt("PROFILE_IMG");	
 
@@ -134,7 +134,7 @@ public class JdbcMemberDao implements MemberDao {
 				String email = resultSet.getString("EMAIL");
 				String nickName = resultSet.getString("NICKNAME");
 				String password = resultSet.getString("PASSWORD");
-				int vmoney = resultSet.getInt("VMONEY");
+				long vmoney = resultSet.getLong("VMONEY");
 				String cardPos = resultSet.getString("CARD_POS");	
 				int profileImg = resultSet.getInt("PROFILE_IMG");
 
