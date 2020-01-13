@@ -4,7 +4,7 @@ window.addEventListener("message", function(e) {
 	if(e.data && (e.data.length == 6)) { //codeNum
 		codeNum = e.data;
 		
-		updateStatus();		// 매수/매도 창 데이터 갱신
+		update();		// 매수/매도 창 데이터 갱신
 	}
 });
 
@@ -34,34 +34,73 @@ window.addEventListener("load", function(){
 	    },
 	});
 	
-	updateStatus();
+	update();
 	buttonEvent();
+	actionEvent();
 //	tradeFunc();		// 매수/매도 이벤트 처리
 
 });
 
+class Price {
+	constructor(){
+		this.index;
+		this.price;
+	}
+	getPrice(index) {
+		if(isNaN(index)) {
+			return null;
+		}
+		return this.price[index];
+	}
+	setPrice(price) {
+		this.price = price;
+	}
+	setIndex(index) {
+		this.index = index;
+	}
+	getIndex() {
+		return this.index;
+	}
+}
+
 function buttonEvent() {
 	var arrow = document.querySelectorAll("i");
+	var text = document.querySelectorAll(".text");
 	
-	arrow[0].onclick = function(e) {
-//	   console.log(e);
-
+	arrow[0].onclick = function(e) {	//단가 up
+		var index = priceObj.getIndex() - 1;
+		if(priceObj.getPrice(index) != null) {
+			priceObj.index--;
+			text[0].value = priceObj.getPrice(priceObj.index);
+		}
 	};
-	arrow[1].onclick = function(e) {
+	arrow[1].onclick = function(e) {	//단가 down
+		var index = priceObj.getIndex() + 1;
+		if(priceObj.getPrice(index) != null) {
+			priceObj.index++;
+			text[0].value = priceObj.getPrice(priceObj.index);	
+		}
+	}
+	arrow[2].onclick = function(e) {	//수량 up
 //		console.log(e);
 	}
-	arrow[2].onclick = function(e) {
-//		console.log(e);
-	}
-	arrow[3].onclick = function(e) {
+	arrow[3].onclick = function(e) {	//수량 down
 //		console.log(e);
 	}
 }
 
-function updateStatus() {
+function actionEvent() {
+	
+	
+	
+}
+
+function update() {
 	var button = document.querySelector("#page-bottom-box");
 	var data = button.querySelectorAll(".data");
+	var text = button.querySelectorAll(".text");
 	var sellButton = button.querySelector("#sell");
+	priceObj = new Price();
 	
 	var ajax = new XMLHttpRequest();
     ajax.open("GET", "../../card/trade/trade?&codeNum=" + codeNum );
@@ -72,36 +111,41 @@ function updateStatus() {
     	var buyPrice = new Array("x");
     	var buyQty = new Array("data");
     	
-    	data[0].innerHTML = obj.vMoney.toLocaleString() + "원";
-        data[1].innerHTML = obj.qty.toLocaleString() + "주";
+    	data[0].innerHTML = obj.vMoney.toLocaleString() + "원"; //자산상황
+        data[1].innerHTML = obj.qty.toLocaleString() + "주";	//보유수량
         
-        if(obj.sellPrice) {
+        if(obj.sellPrice) {	//매도잔량 데이터
 	    	for(var i=0; i < obj.sellPrice.length; i++) {
 	    		sellPrice.push(obj.sellPrice[i]);
 	    		sellQty.push(obj.sellQty[i]);
 	    	}
         } 
-        if(obj.buyPrice) {
+        if(obj.buyPrice) {	//매수잔량 데이터
 	    	for(var i=0; i < obj.buyPrice.length; i++) {
 	    		buyPrice.push(obj.buyPrice[i]);
 	    		buyQty.push(obj.buyQty[i]);
 	    	}
         }
         
-        bb.instance[0].load({
+        if(obj.sellPrice && obj.buyPrice) { //array 객체생성 - 단가 list
+        	var array = new Array();
+        	array = obj.sellPrice.concat(obj.buyPrice);
+        	priceObj.setIndex(obj.sellPrice.length);
+        	priceObj.setPrice(array);
+        }
+        
+        bb.instance[0].load({	//매도잔량 차트
     		columns: [sellPrice, sellQty],
     	});
         
-    	bb.instance[1].load({
+    	bb.instance[1].load({	//매수잔량 차트
     		columns: [buyPrice, buyQty]
     	});
     	
-    	/*var obj = JSON.parse(ajax.responseText);
-        data[0].innerHTML = obj.vMoney.toLocaleString() + "원";
-        data[1].innerHTML = obj.quantity.toLocaleString() + "주";
-//        data[2].innerHTML = obj.vMoney.toLocaleString() + "원";
-//        data[3].value = "";
-
+    	if(obj.buyPrice)
+    		text[0].value = obj.buyPrice[0];	//단가
+    
+    	//버튼 상태체크
 		if(data[1].innerHTML == "0주") {
 			sellButton.className = "event button button-button shadow"
 			sellButton.disabled = true;
@@ -109,6 +153,8 @@ function updateStatus() {
 			sellButton.className = "event button button-button animation"
 			sellButton.disabled = false;
 		}
+/*
+		
         
 		//result - 0:ok, 1:vmoney부족, 2: 거래정지목록, 3:장내시간이 아님, 
         //		   4:수량이 0이하인 경우 거래x, 5:수량이 0이 되는 경우  6:보유종목이 아닌경우 거래x
