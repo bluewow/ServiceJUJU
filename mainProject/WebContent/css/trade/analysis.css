@@ -35,10 +35,6 @@
 		border: none; 	
 		outline: none;
 	}
-	
-	#capture:active {
-	top: 39px;
-}
 
 .page-mid > div {
 	display: flex;
