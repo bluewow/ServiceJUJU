@@ -32,11 +32,8 @@ function captureAction() {
 					{capture: ajax.responseText }, 
 					"http://localhost:8080/card/capturememo/captureMemo.jsp");
 			
-			var tab = parent.document.querySelector("#capture-tab");
-			tab.click();
-			/*tab.contentWindow.postMessage(
-					{capture: ajax.responseText }, 
-					"http://localhost:8080/card/capturememo/captureMemo.jsp");*/
+			//캡쳐버튼시 카드이동
+			parent.document.querySelector("#capture-tab").click(); 
 		}
 		ajax.send();
 	}
