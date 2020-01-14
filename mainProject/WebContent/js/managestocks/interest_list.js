@@ -1,5 +1,6 @@
 window.addEventListener("message", function(e) {
 	if(e.data && (e.data.length == 6)){
+		console.log(e.data);
 		var ajax = new XMLHttpRequest();
 		ajax.open("GET", "../../card/managestocks/interestlist-json?codeNum="+ e.data, true);
 		ajax.send();

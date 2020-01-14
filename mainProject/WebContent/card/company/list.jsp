@@ -14,10 +14,31 @@
 <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
 <link rel="stylesheet" type="text/css" href="../../css/company/list.css">
 <script src="../../js/company/list.js"></script>
-<!-- <script src="../../js/company/InterestCheck.js"></script> -->
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.3.1023/styles/kendo.default-v2.min.css"/>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2019.3.1023/js/kendo.all.min.js"></script>
 </head>
-<!-- style="overflow:scroll" -->
+
+
+
+
 <body class="scrollbar custom-scrollbar-style">
+	
+	
+	<section id="recommendKeyword">
+		<ul>
+			<li id="recommendKeyword_fixed">인기 검색어 또는 종목명을 검색해보세요.</li>
+
+			<%-- <c:forEach var="r" items="${recommendKeyword}">
+				<a href="list?companyName=${r}"><span>${r}</span></a>
+				<span id = ajaxTest>${r}</span>
+			</c:forEach> --%>
+			
+		</ul>
+	</section>
+	
+	
 	<div>
 	<section id="search-form">
 		<h1 class="d-none">주식회사검색</h1>
@@ -31,17 +52,7 @@
 		</form>
 	</section>
 		
-	<section id="recommendKeyword">
-		<ul>
-			<li id="recommendKeyword_fixed">추천검색어 </li>
-
-			<c:forEach var="r" items="${recommendKeyword}">
-				<%-- <a href="list?companyName=${r}"><span>${r}</span></a> --%>
-				<span id = ajaxTest>${r}</span>
-			</c:forEach>
-			
-		</ul>
-	</section>
+	
 	
 	<section id ="search-result">
 		<h1 class="d-none">주식회사 검색 결과</h1>
@@ -61,15 +72,23 @@
 				<tr>
 					<td>${status.count}</td>
 						
-					<td>
-						<div data-codenum="${sector.stockCode }" class="companyName">${sector.companyName}</div>
-						<a href="${sector.website}" target="_blank"><img src="/css/company/link.png" alt=""></a>
+					<td id="companyNameWebsite">
+						<div data-codenum="${sector.stockCode }" class="companyName">${sector.companyName}
+						<a href="${sector.website}" target="_blank"><img src="/css/company/link.png"></a></div>
 					</td>
 					
-					<td id ="stockItemName" class="wrap">
+					<%-- <td id ="stockItemName" class="wrap">
 						<a>${sector.mainProduct}</a>
 						<div class="help">${sector.mainProduct}</div>
-					</td>
+					</td> --%>
+					
+					<div id="example">
+						<td>${sector.mainProduct}</td>
+					</div>
+					
+					
+					
+					
 					
 					<!-- 로그인 체크 -->
 					
@@ -85,10 +104,8 @@
 								<c:when test="${not empty interestStocks }">
 									<!-- 값이 들어감 -->
 									<c:forEach var="interestStocks" items="${interestStocks}" varStatus="status1" >
-										<h1>${sector.stockCode} ${interestStocks.stockCode}</h1>
 											<c:choose>
 												<c:when test="${sector.stockCode eq interestStocks.stockCode}">
-														<h1>${sector.stockCode} ${interestStocks.stockCode}</h1>
 													<td class="interest_yes" data-attention="${sector.stockCode}" id="certifiedLoing">
 													</td>
 												</c:when>
@@ -108,6 +125,29 @@
 				</tr>
 				</c:forEach>
 			</tbody>
+			
+			
+			<script>
+		      $("#example").kendoTooltip({
+		        filter: "td",
+		        show: function(e){
+		          if(this.content.text() !=""){
+		            $('[role="tooltip"]').css("visibility", "visible");
+		          }
+		        },
+		        hide: function(){
+		          $('[role="tooltip"]').css("visibility", "hidden");
+		        },
+		        content: function(e){
+		          var element = e.target[0];
+		          if(element.offsetWidth < element.scrollWidth){
+		            return e.target.text();
+		          }else{
+		            return "";
+		          }
+		        }
+		      })
+			</script>
 			
 		</table>
 	</section>
