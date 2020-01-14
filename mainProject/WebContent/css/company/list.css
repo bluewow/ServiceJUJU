@@ -1,82 +1,65 @@
 @charset "UTF-8";
-
-/* 요소(element) 초기화 && 제목요소*/ 
+/* 요소(element) 초기화 && 제목요소*/
 h1, div, ul, ol, li, table{
-	margin:0;
+    margin:0;
     padding:0;
-    font-size:inherit;   
-	font-weight:inherit; 
+    font-size:inherit;  
+    font-weight:inherit;
 }
-
-fieldset, img, abbr,acronym { border:0 none; } 
-
+fieldset, img, abbr,acronym { border:0 none; }
 li{
     display: inline-flex;
 }
 /* 목록 */
-ol, ul { 
-	list-style: none;
+ol, ul {
+    list-style: none;
 }
-
 body{
-	overflow: scroll;
+    overflow: scroll;
 }
-
 .d-none{
-    display: none;  
+    display: none; 
 }
-
 #search-div{
     margin-top: 4%;
     margin-right: 2%;
     padding-left: 30px;
     width:105%;
 }
-
-
 #search-text{
     height: 40px;
-	width: calc(100% - 70px);
-	display: inline-block; 
+    width: calc(100% - 70px);
+    display: inline-block;
 }
-
-
 #recommendKeyword {
-	padding-top: 30px;
-	padding-left: 10%;
+    padding-top: 30px;
+    padding-left: 10%;
 }
-
-
-
 #recommendKeyword_fixed{
-	display: inline-block;
-	text-align: center;
+    display: inline-block;
+    text-align: center;
     font-size: 80%;
     font-weight: bold;
 }
-
 #bodyScroll{
-	overflow: scroll;
-	width: 98%;
-	height: 100%;
-	padding: 10px;
+    overflow: scroll;
+    width: 98%;
+    height: 100%;
+    padding: 10px;
 }
-
 #search-result{
     padding-top: 3%;
-    
+   
 }
-
 table{
     text-align: center;
     border-collapse: collapse;
-	width: 90%;
+    width: 90%;
     margin-right: 10%;
     margin-left: 4%;
     font-size: 80%;
-    
+   
  }
-
 .search-button{
     background: url(../../images/button_search.png) no-repeat;
     background-size: cover;
@@ -85,117 +68,81 @@ table{
     border: none;
     cursor: pointer;
     position: relative;
-    top: 10px; 
+    top: 10px;
     right: 50px;
 }
-
 .company-address-image{
     background: url(../images/link.png) no-repeat;
     border: none;
     width: 2px;
-    height: 2px; 
+    height: 2px;
 }
-
-
-
 thead{
     text-align:center;
-	border-bottom:3px solid #ada8a8;
+    border-bottom:3px solid #ada8a8;
     border-left:none;
-     
+    
 }
-
 tbody{
     border-bottom: 1px solid #ccc;
 }
-
 td{
-    padding: 10px; 
+    padding: 10px;
     /* border-bottom: 1px solid #ccc;  */
     /* width:27px; */
     /* display: inline-block; */
 }
-
 /* span{
-	font-size: 80%;
+    font-size: 80%;
     color: red;
     margin-left: 2%;
 }
  */
 #companyName:hover {
-	/* box-shadow:200px 0 0 0 rgba(0,0,0,0.5) inset; */
-	cursor: pointer;
-
+    /* box-shadow:200px 0 0 0 rgba(0,0,0,0.5) inset; */
+    cursor: pointer;
 }
-
-/* #stockItemName {
-	border : 4px dashed red;
-	display: inline-block;
+#stockItemName {
+    /* border : 4px dashed red; */
+    display: inline-block;
     width: 80px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-} */
-
-#stockItemName {
-	max-width: 30px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    !important;
 }
-
-[role="tooltip"]{
-   visibility: hidden;
-}
-
-
-/* .wrap a:hover + .help{display:block}
-
+.wrap a:hover + .help{display:block}
 .wrap .help{
     display: none;
     position: fixed;
     top:35%;
     right:26%;
-   	padding:5px;
+    padding:5px;
     background:#eee
 }
-
-
-
-
 .wrap a:hover + .help{
-    
+   
     display: inline-block;
 }
-
 .wrap{
-	padding-top :14px;
+    padding-top :14px;
 }
-
 .wrap a:link {
     text-decoration: none;
 }
-
 .wrap a:visited{
     text-decoration: none;
 }
-
 .wrap a:hover{
     text-decoration: none;
-} */
-
+}
 .interest_no{
-	background: url("/css/company/interest_no.png") no-repeat;
-	background-position: center;
+    background: url("/css/company/interest_no.png") no-repeat;
+    background-position: center;
 }
 .interest_yes{
-	background: url("/css/company/interest_yes.png") no-repeat;
-	background-position: center;
+    background: url("/css/company/interest_yes.png") no-repeat;
+    background-position: center;
 }
-
 .companyNameWebsite{
-	display: inline-block;
+    display: inline-block;
 }
-
-
