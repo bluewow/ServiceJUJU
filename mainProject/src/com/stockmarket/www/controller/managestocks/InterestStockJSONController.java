@@ -55,11 +55,10 @@ public class InterestStockJSONController extends HttpServlet{
 		
 		
 		if(interestViewInterface.getInterestViewList(userId).isEmpty()) {
-			System.out.println("inter:"+interestViewInterface.getInterestViewList(userId));
 		    Gson gson = new Gson();
 			String json = gson.toJson(-1);
 	        PrintWriter out = response.getWriter();
-			out.write(json);
+	        out.write(json);
 		}
 		else {
 		List<InterestView> interestlist = new ArrayList<InterestView>();

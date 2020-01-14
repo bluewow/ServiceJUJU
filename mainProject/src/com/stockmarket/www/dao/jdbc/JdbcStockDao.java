@@ -37,7 +37,7 @@ public class JdbcStockDao implements StockDao {
 
 	@Override
 	public String getStockCodeNum(String name) {
-		String sql = "SELECT * FROM STOCK WHERE name=?";
+		String sql = "SELECT * FROM KOREASTOCKS WHERE COMPANYNAME=?";
 		JdbcDaoContext daoContext = new JdbcDaoContext();
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -48,7 +48,7 @@ public class JdbcStockDao implements StockDao {
 			rs = pst.executeQuery();
 
 			if (rs.next()) {
-				return rs.getString("CODENUM");
+				return rs.getString("STOCKCODE");
 			}
 
 		} catch (ClassNotFoundException e) {

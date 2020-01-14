@@ -1,5 +1,6 @@
 window.addEventListener("message", function(e) {
 	if(e.data && (e.data.length == 6)){
+		console.log(e.data)
 		var section = this.document.querySelector(".interestList");
 		var tbody = section.querySelector("table tbody");
 		var delButton = section.querySelector("#deleteButton");
@@ -90,13 +91,14 @@ window.addEventListener("load", function() {
 		var interestAjax = new XMLHttpRequest();
 		interestAjax.open("GET", "../../card/managestocks/interestlist-json", true);
 		// 서블릿의 실행이 완료되었을때 실행	
-		console.log(interestAjax.responseText);
-		if(interestAjax.responseText == -1)
-		{
-	      return;
-		}
-		else{
+
 		interestAjax.onload = function() {
+			
+			if(interestAjax.responseText == -1)
+			{
+		      return;
+			}
+			else{
 			// var cardFooter = section.querySelector(".card-footer");
 
 			var list = JSON.parse(interestAjax.responseText);

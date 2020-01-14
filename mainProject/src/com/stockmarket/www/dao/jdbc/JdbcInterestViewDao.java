@@ -21,8 +21,8 @@ public class JdbcInterestViewDao implements InterestViewDao {
 	@Override
 	public List<InterestView> getInterestStockList(int id) {
 		JdbcDaoContext daoContext = new JdbcDaoContext();
-		
 		stockDao = new JdbcStockDao();
+		
 		PreparedStatement st = null;
 		ResultSet rs = null;
 
@@ -59,6 +59,7 @@ public class JdbcInterestViewDao implements InterestViewDao {
 
 			while (rs.next()){
 				String stockName = rs.getString("STOCKNAME");
+				System.out.println(stockName);
 				for (Entry<String, CurStock> data : map.entrySet()) {
 					if (stockDao.getStockCodeNum(stockName).equals(data.getValue().getCodeNum())) {
 						String price = data.getValue().getPrice();
