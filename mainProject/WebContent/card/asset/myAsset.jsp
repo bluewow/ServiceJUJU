@@ -13,7 +13,10 @@
 	<!-- Layout Styles -->
 
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	<link rel="stylesheet" type="text/css" href="../../css/myAsset.css">
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<link rel="stylesheet" href="../../css/myasset/billboard.css">
+	<script src="../../js/asset/billboard.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../css/myasset/myAsset.css">
 	<script src="../../js/asset/myAsset.js"></script>
 </head>
 
@@ -30,7 +33,7 @@
 				</div>
 				<div>
 					<div class="my-asset-info wrap">
-						<ul class="buttons">
+						<ul class="buttons" style=display:none>
 							<li class="selected-button"><a href="">일봉</a></li>
 							<li><a href="">주봉</a></li>
 							<li><a href="">월봉</a></li>
@@ -41,12 +44,10 @@
 			</div>
 			<div id="assetTrend">
 				<div id="graph-assetTrend">
-					<h1>선형 그래프</h1>
+					<h1 class="visable-none">선형 그래프</h1>
+					<div id="chart"></div>
 				</div>
 
-				<div id="setPeriodgraph-assetTrend">
-					<h1>기간 지정 그래프</h1>
-				</div>
 			</div>
 		</section>
 		<section id="card-bottom">
@@ -56,7 +57,14 @@
 			<div id="assetDistribution">
 				<div id="graph-assetDistr">
 					<h2 class="visable-none">원형그래프</h2>
-					<div class="graph"><div id="donut_single" style="width: 700px; height: 300px; fill: none;"></div></div>
+					<div class="graph">
+						<div id="donutChart"></div>
+						<!-- <div id="donut_single" style="width: 700px; height: 300px; fill: none;"></div>
+						<div id="labelOverlay">
+							<p class="used-size">보유 비중<span></span></p>
+							<p class="total-size">(%)</p>
+						  </div> -->
+					</div>
 				</div>
 
 				<div id="list-stock">
@@ -64,20 +72,8 @@
 						<div class="list">	
 							<table>
 								<tr>
-									<td><img src="../../images/distr_list_01.png"></td>
-									<td>광동사운드</td>
-								</tr>
-								<tr>
-									<td><img src="../../images/distr_list_02.png"></td>
-									<td>네오위즈</td>
-								</tr>
-								<tr>
-									<td><img src="../../images/distr_list_03.png"></td>
-									<td>네오위즈홀딩스</td>
-								</tr>
-								<tr>
-									<td><img src="../../images/distr_list_04.png"></td>
-									<td>디지캡</td>
+									<td></td>
+									<td></td>
 								</tr>
 							</table>
 						</div>
@@ -90,7 +86,6 @@
 							<img src="">
 						</td>
 						<td>
-							stockName
 						</td>
 					</tr>
 

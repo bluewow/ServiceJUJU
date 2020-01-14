@@ -14,7 +14,7 @@ public class JDBCRecordAssetDao implements RecordAssetDao {
 	@Override
 	public List<RecordAsset> getList(int id) {
 		List<RecordAsset> recordList = new ArrayList<>();
-		String sql = "SELECT * FROM RECORD_ASSET WHERE MEMBER_ID = ?";
+		String sql = "SELECT * FROM RECORD_ASSET WHERE MEMBER_ID = ? ORDER BY REGDATE ASC";
 		
 		JdbcDaoContext context = new JdbcDaoContext();
 
