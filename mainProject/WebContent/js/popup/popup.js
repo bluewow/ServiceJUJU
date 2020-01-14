@@ -194,10 +194,6 @@ window.addEventListener("load", function(){
 	        } else if(e.target.nodeName == "checkPwd") {
 	        
 	        } else if(e.target.value == "회원가입") {
-			    alert(email.value);
-			    alert(nickname.value);
-			    alert(pwd.value);
-			    alert(pwdConfirm.value);
 			    
 			    checkEmail(email.value);
 			    checkPassword(email.value, pwd.value);
