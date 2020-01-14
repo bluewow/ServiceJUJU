@@ -33,4 +33,9 @@ public class BasicMemberService implements MemberService {
 	public int updateMember(int id, String newPwd, String pwdChange) {
 		return memberDao.updateMember(id, newPwd, pwdChange);
 		}
+
+	@Override
+	public Boolean isDuplicatedId(String nickname) {
+		return memberDao.isDuplicatedId(nickname);
+	}
 }

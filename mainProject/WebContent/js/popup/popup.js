@@ -1,5 +1,42 @@
 window.addEventListener("load", function(){
 	
+	//이메일주소 정규식
+	function checkEmail(email){
+		
+		if(!/^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/.test(email)){
+			alert('올바른 이메일 주소를 입력하세요.');	
+			return false;	
+			}
+		return true;
+	}
+	//비밀번호 정규식
+	function checkPassword(id,password){
+	
+		if(!/^[a-zA-Z0-9]{8,16}$/.test(password)){
+			alert('숫자와 영문자 조합으로 8~16자리를 사용해야 합니다.');	
+			return false;	
+			}
+	
+		var checkNumber = password.search(/[0-9]/g);	
+		var checkEnglish = password.search(/[a-z]/ig);
+
+		if(checkNumber <0 || checkEnglish <0){
+			alert("숫자와 영문자를 혼용하여야 합니다.");
+			return false;
+			}
+	
+		if(/(\w)\1\1\1/.test(password)){
+			alert('444같은 문자를 4번 이상 사용하실 수 없습니다.');
+			return false;
+			}
+		
+		if(password.search(id) > -1){
+			alert("비밀번호에 아이디가 포함되었습니다.");
+			return false;
+			}
+		return true;
+	}
+	
 	profilePhotoFunc();
 	loginFunc();	//로그인 팝업
 	buttonFunc();	//로그인/로그아웃/프로필 버튼 
@@ -104,7 +141,43 @@ window.addEventListener("load", function(){
 	////////////////////////////
 	function signUpFunc() {
 	    var signupPopup = document.querySelector(".sign-up-pop-up");
+	    var email = signupPopup.querySelector(".signup-email");
+	    var nickname = signupPopup.querySelector(".signup-nickname");
+	    var pwd = signupPopup.querySelector(".signup-pwd");
+	    var pwdConfirm = signupPopup.querySelector(".signup-pwd-confirm");
 
+		var duplicatedStateSpan = document.querySelector("#duplicated-state");
+		var tid = null;
+		var idChecked = false;
+		
+	    nickname.oninput = function(e){
+			var request = new XMLHttpRequest();
+			request.open("GET", "../../member-profile?nickname="+nickname.value);
+			request.onload = function(){
+				if(request.responseText == "false"){
+					idChecked = true;
+					duplicatedStateSpan.innerText = "사용가능한 닉네임입니다.";
+				}
+				else{
+					idChecked = false;
+					duplicatedStateSpan.innerText = "이미 사용중인 닉네임입니다.";
+				}
+			};
+			
+			if(tid != null){
+				clearTimeout(tid);
+				tid = null;
+			}
+			
+			tid = setTimeout(function() {							
+    			request.send();
+    			tid = null;
+			}, 500);
+		};
+
+	    
+	    
+	    
 	    signupPopup.onclick = function(e) {
 	        if(e.target.nodeName != "INPUT")
 	            return;
@@ -121,10 +194,17 @@ window.addEventListener("load", function(){
 	        } else if(e.target.nodeName == "checkPwd") {
 	        
 	        } else if(e.target.value == "회원가입") {
-//	            var form = signupPopup.querySelector(".login-box");
+			    alert(email.value);
+			    alert(nickname.value);
+			    alert(pwd.value);
+			    alert(pwdConfirm.value);
+			    
+			    checkEmail(email.value);
+			    checkPassword(email.value, pwd.value);
+
+
 	        	document.querySelector("#signup").submit();
 
-//	        	form.submit();
 	        }
 	    }
 	}

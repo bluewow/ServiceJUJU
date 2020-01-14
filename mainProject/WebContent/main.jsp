@@ -335,16 +335,16 @@
 	   		<div class="pop-up-border">
 	   			<div class="pop-up-context">
 		   				<div class="text">이메일</div>
-		   				<input class="box" type="text" name="userEmail" placeholder="이메일을 입력하세요" form="signup">
+		   				<input class="box signup-email" type="text" name="userEmail" placeholder="이메일을 입력하세요" form="signup" required>
 		   				
 		   				<div class="text">닉네임</div>
-		   				<input class="box" type="text" name="nickName" placeholder="4 ~ 14자 이내로 입력하세요 " form="signup">
-		   				
+		   				<input class="box signup-nickname" type="text" name="nickName" placeholder="4 ~ 14자 이내로 입력하세요 " form="signup" required>
+		   				<br><span id="duplicated-state"></span>
 		   				<div class="text">비밀번호</div>
-		   				<input class="box" type="password" name="pwd" placeholder="1 ~ 16자 이내로 입력 하세요" form="signup">
+		   				<input class="box signup-pwd" type="password" name="pwd" placeholder="1 ~ 16자 이내로 입력 하세요" form="signup" required>
 	   					
 	   					<div class="text">비밀번호 확인</div>
-		   				<input class="box" type="password" name="checkPwd" form="signup">
+		   				<input class="box signup-pwd-confirm" type="password" name="checkPwd" form="signup">
 		   				
 	   					<form class="login-box" action="login" method="post" id="signup">
 	   						<input type="hidden" name="form" value="회원가입" form="signup">

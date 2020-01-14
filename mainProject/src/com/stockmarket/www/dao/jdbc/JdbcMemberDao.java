@@ -295,6 +295,34 @@ public class JdbcMemberDao implements MemberDao {
 		}
 		return result;
 	}
+
+	@Override
+	public Boolean isDuplicatedId(String nickname) {
+		String sql = "SELECT * FROM MEMBER WHERE NICKNAME=?";
+		
+		String member = null;
+		try {
+			JdbcDaoContext daoContext = new JdbcDaoContext();
+			PreparedStatement statement = daoContext.getPreparedStatement(sql);
+
+			statement.setString(1, nickname);
+
+			ResultSet resultSet = statement.executeQuery();
+
+			if (resultSet.next()) {
+				member = resultSet.getString("NICKNAME");
+			}
+			daoContext.close(resultSet, statement);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(member != null)
+			return true;
+		
+		return false;
+	}
 /*
  * =======================================================================
  * ============================= for Test ================================
