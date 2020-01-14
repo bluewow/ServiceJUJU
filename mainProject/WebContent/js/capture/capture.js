@@ -3,6 +3,7 @@ class CaptureMemo {
 		this.prevMemo;
 		this.content = $(".content");
 		this.trTemplate = document.querySelector(".tr-template");
+		this.chart;
 	}
 
 	setPrevMemo(prevMemo) {
@@ -67,20 +68,14 @@ class CaptureMemo {
 	}
 
 	createChart(data1, data2){
-		data2 = JSON.parse(data2);
-		console.log(data1);
-		console.log(data2);
-		// let {PER, PBR, ROE, debtRatio, marketCap} = data1;
+		if(this.chart != undefined){
+			this.chart = undefined;
+			return;
+		}
 		
-		// for(let v in data1) {
-		// 	if(v == "PER" || v == "PBR" || v == "ROE" || v == "debtRatio" || v == "marketCap"){
-		// 		console.log(v + ", " + data2[v]);
-		// 		data2[v] = data2[v] / data1[v] * 100 
-		// 		console.log(v + ", " + data2[v]);
-		// 	}
-		// }
-
-		let chart = bb.generate({
+		data2 = JSON.parse(data2);
+		
+		this.chart = $(bb.generate({
 //			size:{
 //				height:200,
 //				width:340
@@ -110,7 +105,7 @@ class CaptureMemo {
 			},
 			tooltip: { show : false },
 			bindto: "#radarChart"
-			});
+			}));
 	};
 
 	getDetail(target){
@@ -207,7 +202,8 @@ window.addEventListener("message", function(e) {
             "application/x-www-form-urlencoded"
         );
         request.onload = function() {
-            if (request.responseText == 1) load();
+			let captureMemo = new CaptureMemo();
+            if (request.responseText == 1) captureMemo.loadList();
             else alert("캡쳐하기 실패");
         };
 

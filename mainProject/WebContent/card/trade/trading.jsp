@@ -27,8 +27,11 @@
 	<!-- --------------- page-top -------------- -->
 	<header class="page-top">
 		<div id="title">호가창</div>
+		<div id="title-ass"></div>
+		<!-- 해당종목은 거래정지 종목입니다
+		거래종료 (오픈시간 09:00~15:20) -->
+		
 	</header>
-	<!-- TODO 장이마감되었습니다 -->
 	<!-- --------------- page-mid -------------- -->
 	<section class="page-mid">
 		<div class="chart-string">매도잔량<div id="chartSell"></div></div>
@@ -39,18 +42,18 @@
 		<section class="page-bottom">
 		<form id="page-bottom-box" action="trade" method="get">
 			<div class="show-button-align">
-				<input class="button button-status" type="button" value="자산상황">
+				<input class="button button-status" type="button" value="가상머니">
 				<div class="data"><fmt:formatNumber value="" pattern="#,###" />원</div>
 
 				<input class="button button-status" type="button" value="   단가   ">
 				<div style="position: relative;">
-					<input type="text" value="" class="text">
+					<input type="text" value="" class="text" readonly>
 					<i class="fa fa-caret-up fa-lg caret-up animation-1" aria-hidden="true"></i>
 					<i class="fa fa-caret-down fa-lg caret-down animation-2" aria-hidden="true"></i>
 				</div>
 				
 
-				<input class="event button button-button animation" type="button" name="trade" value="매       수">
+				<input id="buy" class="event button button-button animation" type="button" name="trade" value="매       수">
 			</div>
 			<div class="show-button-align">
 				<input class="button button-status" type="button" value="보유수량">
@@ -58,7 +61,7 @@
 				
 				<input class="button button-status" type="button" value="   수량   ">
 				<div style="position: relative;">
-					<input type="text" class="text" >
+					<input type="number" class="text" value=0>
 					<i class="fa fa-caret-up fa-lg caret-up animation-1" aria-hidden="true"></i>
 					<i class="fa fa-caret-down fa-lg caret-down animation-2" aria-hidden="true"></i>
 				</div>

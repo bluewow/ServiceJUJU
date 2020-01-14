@@ -37,7 +37,8 @@ public class AnalysisController extends HttpServlet{
 			HttpSession session = request.getSession();
 			int memberId = (int)session.getAttribute("id");
 			
-			String result = service.captureDataCrawling("095660", memberId);
+			String codeNum = request.getParameter("codeNum");
+			String result = service.captureDataCrawling(codeNum, memberId);
 			
 			PrintWriter out = response.getWriter();
 			out.print(result);      
