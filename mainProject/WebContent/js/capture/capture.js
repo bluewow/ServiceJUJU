@@ -202,7 +202,8 @@ window.addEventListener("message", function(e) {
             "application/x-www-form-urlencoded"
         );
         request.onload = function() {
-            if (request.responseText == 1) load();
+			let captureMemo = new CaptureMemo();
+            if (request.responseText == 1) captureMemo.loadList();
             else alert("캡쳐하기 실패");
         };
 
