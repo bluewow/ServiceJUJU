@@ -1,7 +1,7 @@
 window.addEventListener("message", function (e) {
 	 //codeNum 확인
 	if (e.data && (e.data.length == 6)){
-		console.log("stockBoard : " + e.data);
+		//console.log("stockBoard : " + e.data);
 
 	var sectionTop = document.querySelector("#stockTop");
 	var selectStock = sectionTop.querySelector("#selected-stock");
