@@ -28,9 +28,6 @@
 	<header class="page-top">
 		<div id="title">호가창</div>
 		<div id="title-ass"></div>
-		<!-- 해당종목은 거래정지 종목입니다
-		거래종료 (오픈시간 09:00~15:20) -->
-		
 	</header>
 	<!-- --------------- page-mid -------------- -->
 	<section class="page-mid">
@@ -61,7 +58,7 @@
 				
 				<input class="button button-status" type="button" value="   수량   ">
 				<div style="position: relative;">
-					<input type="number" class="text" value=0>
+					<input type="number" class="text" value=0 >
 					<i class="fa fa-caret-up fa-lg caret-up animation-1" aria-hidden="true"></i>
 					<i class="fa fa-caret-down fa-lg caret-down animation-2" aria-hidden="true"></i>
 				</div>

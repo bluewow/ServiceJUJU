@@ -39,6 +39,17 @@ public class TradeController extends HttpServlet{
 		HttpSession session = request.getSession();
 		int memberId = (int)session.getAttribute("id");
 		
+		//매수-매도 실행 
+		String qty = request.getParameter("qty");
+		if(qty != null) { 
+			tradeProcess(memberId, request);
+			JSONObject json = update(memberId, request);
+			PrintWriter out = response.getWriter();
+			out.print(json);
+			return;
+		}
+
+		//for update
 		String codeNum = request.getParameter("codeNum");
 		if(codeNum != null) {
 			Map<String, CurStock> stocks = AppContext.getStockMarket();
@@ -90,18 +101,6 @@ public class TradeController extends HttpServlet{
 			return;
 		}
 		
-		//매수-매도 실행 
-		String price = request.getParameter("replaceEvent");
-		if(price != null) { //price is only "on"
-			int result = 0;
-			result = tradeProcess(memberId, request);
-			JSONObject json = updateResultPrice(memberId, request, result);
-			response.setContentType("application/json; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.print(json);
-			return;
-		}
-
 		request.getRequestDispatcher("trading.jsp").forward(request, response);
 	}
 
@@ -109,60 +108,29 @@ public class TradeController extends HttpServlet{
 /////////////////// 매수 - 매도 관련 함수 /////////////////////
 /////////////////////////////////////////////////////////
 	
-	private int tradeProcess(int memberId, HttpServletRequest request) {
-		String trade = request.getParameter("button");
-		String qty = request.getParameter("Purse/Sold");
-		String codeNum = request.getParameter("codeNum");
-		 
-		//result - 0:ok, 1:vmoney부족, 2: 거래정지목록, 
-		//		   3:장내시간이 아님, 4:수량이 0이하가 되는 경우 거래x, 
-		//		   5:수량이 0이 되는 경우 6:보유종목이 아닌경우 거래x
-		if(trade != null && qty != null && qty != "") {
-			switch(trade) {
-			case "buy": //구매
-				if(service.checkVmoney(memberId, Integer.parseInt(qty), 20000) != 0)
-					return 1;
-				if(service.checkHaveStock(memberId, codeNum) == false)
-					service.addHaveStock(memberId, codeNum);
-				
-				service.tradeBuySell(memberId, codeNum, Integer.parseInt(qty), 20000);
-				break;
-			case "sell": //매도
-				if(service.checkHaveStock(memberId, codeNum) == false)
-					return 6;
-				if(service.checkMinusHaveStock(memberId, codeNum, Integer.parseInt(qty))) 
-					return 4;
-				
-				service.tradeBuySell(memberId, codeNum, -Integer.parseInt(qty), 20000);
-				
-				//매도후 수량이 0인 경우 db 삭제
-				if(service.checkZeroHaveStock(memberId, codeNum)) { 
-					service.delHaveStock(memberId, codeNum);
-					return 5;
-				}
-				break;
-			default: //"pass"
-				return 99;
-			}
-		}
-		return 0;
-	}
+private void tradeProcess(int memberId, HttpServletRequest request) {
+	String qty = request.getParameter("qty");
+	String codeNum = request.getParameter("codeNum");
+	String price = request.getParameter("price");
+	
+	if(service.checkHaveStock(memberId, codeNum) == false)
+		service.addHaveStock(memberId, codeNum);	//DB 추가
+	
+	service.trade(memberId, codeNum, Integer.parseInt(qty), Integer.parseInt(price));
+	
+	if(service.checkZeroHaveStock(memberId, codeNum)) 
+		service.delHaveStock(memberId, codeNum);	//DB 삭제
+}
 
 	
 
-	private JSONObject updateResultPrice(int memberId,  HttpServletRequest request, int result) {
+	private JSONObject update(int memberId,  HttpServletRequest request) {
 		HashMap<Object, Object>map = new HashMap<>();
 		String codeNum = request.getParameter("codeNum");
-		int sum = service.getStockAssets(memberId, codeNum);
 		int qty = service.getQty(memberId, codeNum);
-		String companyName = service.getCompanyName(codeNum);
 		
-		map.put("avgPrice", qty == 0 ? 0 : sum / qty);
-		map.put("quantity", qty);
+		map.put("qty", qty);
 		map.put("vMoney", (int) service.getAssets(memberId));
-		map.put("result", result);
-		map.put("codeNum", codeNum);
-		map.put("name", companyName);
 		JSONObject data = new JSONObject(map);
 		return data;
 	}
