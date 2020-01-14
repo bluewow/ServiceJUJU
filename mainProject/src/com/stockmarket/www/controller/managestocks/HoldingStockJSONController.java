@@ -21,9 +21,6 @@ import com.stockmarket.www.service.basic.BasicHoldingStocksService;
 public class HoldingStockJSONController extends HttpServlet{
 	
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1822211939058642758L;
 	private HoldingStocksService holdingStocksInterface;
 
@@ -40,7 +37,7 @@ public class HoldingStockJSONController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-		
+
 		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("id");
 	
@@ -50,16 +47,20 @@ public class HoldingStockJSONController extends HttpServlet{
 	
 	private void updateCurrentPrice(HttpServletRequest request,HttpServletResponse response , int userId) throws IOException {
 		
-		if(!holdingStocksInterface.getInterestHoldingList(userId).isEmpty()) {
-        
-	    List<HaveStockView> list = new ArrayList<HaveStockView>();
-		list = holdingStocksInterface.getInterestHoldingList(userId);
-		
-		
+		if(holdingStocksInterface.getInterestHoldingList(userId).isEmpty()) {
+	   
         Gson gson = new Gson();
-		String json = gson.toJson(list);
+		String json = gson.toJson(-1);
         PrintWriter out = response.getWriter();
 		out.write(json);
+		}
+		else{
+			List<HaveStockView> list = new ArrayList<HaveStockView>();
+			list = holdingStocksInterface.getInterestHoldingList(userId);
+	        Gson gson = new Gson();
+			String json = gson.toJson(list);
+	        PrintWriter out = response.getWriter();
+			out.write(json);
 		}
 	}
 }

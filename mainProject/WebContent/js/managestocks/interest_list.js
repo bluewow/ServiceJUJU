@@ -89,10 +89,13 @@ window.addEventListener("load", function() {
 
 		var interestAjax = new XMLHttpRequest();
 		interestAjax.open("GET", "../../card/managestocks/interestlist-json", true);
-        		
-		if(interestAjax.responseText != "")
-			{
-		// 서블릿의 실행이 완료되었을때 실행
+		// 서블릿의 실행이 완료되었을때 실행	
+		console.log(interestAjax.responseText);
+		if(interestAjax.responseText == -1)
+		{
+	      return;
+		}
+		else{
 		interestAjax.onload = function() {
 			// var cardFooter = section.querySelector(".card-footer");
 
@@ -131,13 +134,16 @@ window.addEventListener("load", function() {
 			}
 		};
 		interestAjax.send();
-	   }
-		else{
-			return;
 		}
-	};
+		
+	   }
+
 	
 	interestLoad();
+	
+	setInterval(function() {
+		interestLoad();
+	}, 5000);
 	
 	tbody.onclick = function(e){
 		e.preventDefault();
@@ -164,9 +170,4 @@ window.addEventListener("load", function() {
 		delRequest.send(sendData);		
 		}
 	};
-	
-	setInterval(function() {
-		interestLoad();
-	}, 5000);
-	
 });

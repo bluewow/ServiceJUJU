@@ -22,7 +22,8 @@ import com.stockmarket.www.service.basic.BasicInterestViewService;
 @WebServlet("/card/managestocks/interestlist-json")
 public class InterestStockJSONController extends HttpServlet{
 	
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = -794157807520021418L;
 	private InterestStocksService interestStocksInterface;
 	private InterestViewService interestViewInterface;
 	
@@ -39,7 +40,6 @@ public class InterestStockJSONController extends HttpServlet{
 
 		response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-		
 		HttpSession session = request.getSession();
 		
 	
@@ -52,11 +52,18 @@ public class InterestStockJSONController extends HttpServlet{
 	
 	private void updateCurrentPrice(HttpServletRequest request,HttpServletResponse response , int userId) throws IOException {
 		
-		if(!interestViewInterface.getInterestViewList(userId).isEmpty()) {
-
+		
+		
+		if(interestViewInterface.getInterestViewList(userId).isEmpty()) {
+			System.out.println("inter:"+interestViewInterface.getInterestViewList(userId));
+		    Gson gson = new Gson();
+			String json = gson.toJson(-1);
+	        PrintWriter out = response.getWriter();
+			out.write(json);
+		}
+		else {
 		List<InterestView> interestlist = new ArrayList<InterestView>();
 		interestlist = interestViewInterface.getInterestViewList(userId);
-
         Gson interestGson = new Gson();
 		String interestJson = interestGson.toJson(interestlist);
         PrintWriter out = response.getWriter();

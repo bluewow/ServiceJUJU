@@ -112,7 +112,6 @@ public class SystemController extends HttpServlet {
 			System.out.println("success-4");
 			service.insertRecordAsset();
 		}
-		
 		preHour = curHour;
 	}
 	

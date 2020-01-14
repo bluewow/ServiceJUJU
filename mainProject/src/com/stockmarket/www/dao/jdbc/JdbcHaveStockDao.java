@@ -39,7 +39,6 @@ public class JdbcHaveStockDao implements HaveStockDao {
 			@Override
 			public void run() {
 				if (AppContext.getStockMarket() != null) {
-					
 					map.putAll(AppContext.getStockMarket());
 				}
 			}

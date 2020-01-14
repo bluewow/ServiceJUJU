@@ -159,19 +159,22 @@ window
 					}
 
 					function holdingLoad() {
-
+						
 						var holdingRequest = new XMLHttpRequest();
 						holdingRequest.open("GET",
 								"../../card/managestocks/holdinglist-json",
 								true);
 
 						// 서블릿의 실행이 완료되었을때 실행
-						if(holdingRequest.responseText != "")
-						{
+//						if(holdingRequest.responseText != "")
+//						{
 						holdingRequest.onload = function() {
 							// var cardFooter =
 							// section.querySelector(".card-footer");
-
+							if(holdingRequest.responseText == -1){
+								return;
+							}
+							else{
 							var list = JSON.parse(holdingRequest.responseText);
 							var won = "원";
 							var allIncomePercent = 0;
@@ -266,19 +269,20 @@ window
 
 							backArea.firstElementChild.nextElementSibling.innerText = addComma(allSum)
 									+ won;
-
-						};
+						    };
+						}
 						holdingRequest.send();
 						}
-						else{
-							return;
-						}
-					};
-
+//						else{
+//							return;
+//						}
+					
 					holdingLoad();
 
 					setInterval(function() {
 						holdingLoad();
 					}, 5000);
+					});
 
-				});
+
+
