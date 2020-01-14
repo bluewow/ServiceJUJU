@@ -14,7 +14,7 @@ window.addEventListener("load", function () {
     request.open("GET", "../../card/asset/myAsset-json", true);
 
     request.onload = function () {
-      alert(request.responseText);
+      // alert(request.responseText);
 
       var list = JSON.parse(request.responseText);
 
@@ -74,12 +74,12 @@ window.addEventListener("load", function () {
       let valueLength = 10 ** (maxLength - 1);
       let roundValueLength = 10 ** (maxLength - 2);
       let maxTick;
-      console.log("valueLength: " + valueLength);
+      // console.log("valueLength: " + valueLength);
       if (roundValue >= 5)
         maxTick = Math.trunc(max / valueLength) * valueLength + 5 * roundValueLength;
       else if (roundValue < 5) {
-        console.log("1: " + Math.ceil(max / valueLength));
-        console.log("2: " + max / valueLength);
+        // console.log("1: " + Math.ceil(max / valueLength));
+        // console.log("2: " + max / valueLength);
         maxTick = Math.trunc(max / valueLength) * valueLength;
       }
       // console.log("maxLength: " + maxLength);
@@ -197,7 +197,7 @@ window.addEventListener("load", function () {
       
       //chart.resize({height: 500, width: 300});
       
-      console.log(trendChart);
+      // console.log(trendChart);
       
       // 자산 분포도 그래프
       var distrListTemplate = section.querySelector(".template-list-stock");
@@ -237,13 +237,13 @@ window.addEventListener("load", function () {
           type: "donut",
           colors: distrColorData,
           onclick: function(d, element) {
-            console.log("onclick", d, element);
+            // console.log("onclick", d, element);
           },
           onover: function(d, element) {
-        console.log("onover", d, element);
+        // console.log("onover", d, element);
       },
       onout: function(d, i) {
-        console.log("onout", d, i);
+        // console.log("onout", d, i);
       }
     },
         donut: {
@@ -270,7 +270,7 @@ window.addEventListener("load", function () {
       }
     }
   });
-  console.log(distrChart.internal.charts[1]);
+  // console.log(distrChart.internal.charts[1]);
   
   
   // var distrData = new google.visualization.DataTable();
