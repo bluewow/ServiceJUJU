@@ -120,7 +120,7 @@ window.addEventListener("message", function (e) {
 			var trTemplate = section.querySelector(".tr-template");
 			var loginUser = listData.loginUser;
 			selectStock.innerText = listData.stockName;
-			tbody.innerHTML = "";
+			tbody.innerHTML = "이 종목은 게시된 글이 없습니다.<br><br>첫번째 글을 남겨보세요.";
 			for (var i = 0; i < listData.list.length; i++) {
 				var cloneTr = document.importNode(trTemplate.content, true);
 				var tds = cloneTr.querySelectorAll("td");

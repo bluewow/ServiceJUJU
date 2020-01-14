@@ -1,6 +1,6 @@
 window.addEventListener("message", function(e) {
 	if(e.data && (e.data.length == 6)){
-		console.log(e.data)
+
 		var section = this.document.querySelector(".interestList");
 		var tbody = section.querySelector("table tbody");
 		var delButton = section.querySelector("#deleteButton");

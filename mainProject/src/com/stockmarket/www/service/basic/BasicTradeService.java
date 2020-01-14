@@ -120,7 +120,7 @@ public class BasicTradeService implements TradeService{
 	}
 	
 	@Override
-	public void tradeBuySell(int id, String codeNum, int qty, int curStockPrice) {
+	public void trade(int id, String codeNum, int qty, int curStockPrice) {
 		Member member = memberDao.getMember(id);
 		HaveStock haveStock = stockDao.get(id, codeNum);
 		
