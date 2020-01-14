@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <title>stock market</title>
 
+    <link rel="stylesheet" href="./css/index-search.css" type="text/css">
     <link rel="stylesheet" href="./css/index.css" type="text/css">
     <link rel="stylesheet" href="./css/main.css" type="text/css">
     <link rel="stylesheet" href="./css/font-awesome.min.css" type="text/css">
@@ -21,9 +22,20 @@
             <div class="bg-img"></div>
             <div class="main-contents">
                 <h1>주식을 쇼핑하다</h1>
-                <form action="/main">
-                    <input type="submit" name="search" value="시작하기">
-                </form>
+                <div class="search">
+					  <input type="checkbox" id="trigger" class="search__checkbox" />
+					  <label class="search__label-init" for="trigger"></label>
+					  <label class="search__label-active" for="trigger"></label>
+					  <div class="search__border"></div>
+					  <input type="text" class="search__input" />
+					  <div class="search__close"></div>
+				</div>
+				<div class="notice">
+					검색 아이콘을 클릭 후, 원하는 회사, 관심있는 분야, 종목을 검색해보세요.
+				</div>
+				<div class="link">
+					<a href="./main.jsp">메인화면 바로가기</a>
+				</div>
             </div>
         </div>
     </main>
