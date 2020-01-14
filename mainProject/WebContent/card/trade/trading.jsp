@@ -9,67 +9,68 @@
 <meta charset="utf-8">
 <!-- CSS Reset -->
 <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
-<!-- ref analysis.css -->
-<link rel="stylesheet" href="../../css/trade/trading.css">
 <!-- download fontawesome.com -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<link rel="stylesheet" href="../../css/billboard.css">
+<script src = "../../js/billboard.js"></script> 
+
+<!-- ref analysis.css -->
+<link rel="stylesheet" href="../../css/trade/trading.css">
 <script type="text/javascript" src="../../js/trade/trade.js"></script>
 	 
 	 
 </head>
-<body class="scrollbar custom-scrollbar-style">
+<body>
 <div id="trading-container">
 	<!-- --------------- page-top -------------- -->
 	<header class="page-top">
-		<div id="stockName">
-			<div></div>		<!-- 종목명 -->
-			<div></div>		<!-- 현재가 -->
-			<span></span> 	<!-- up/down 기호-->
-			<span></span>	<!-- 원 -->
-			<span></span>	<!-- % -->
-		</div>
+		<div id="title">호가창</div>
+		<div id="title-ass"></div>
+		<!-- 해당종목은 거래정지 종목입니다
+		거래종료 (오픈시간 09:00~15:20) -->
+		
 	</header>
-	<!-- TODO 장이마감되었습니다 -->
 	<!-- --------------- page-mid -------------- -->
 	<section class="page-mid">
-<!-- 		
-		<form action="trade" method="get">
-			<input class="button button-chart day_" type="submit" name="date" value="일봉">
-			<input class="button button-chart" type="submit" name="date" value="주봉">
-			<input class="button button-chart" type="submit" name="date" value="월봉">
-		</form> 
--->
-		<div id="chart_div"></div>
+		<div class="chart-string">매도잔량<div id="chartSell"></div></div>
+		<div class="chart-string">매수잔량<div id="chartBuy"></div></div>
 	</section>
 	
 	<!-- --------------- page-bottom -------------- -->
 		<section class="page-bottom">
 		<form id="page-bottom-box" action="trade" method="get">
 			<div class="show-button-align">
-				<input class="button button-status" type="button" value="평균 단가">
-				<div class="data"><fmt:formatNumber value="${aveAssets}" pattern="#,###" />원</div>
-				<input class="button button-status" type="button" value="보유 수량">
-				<div class="data"><fmt:formatNumber value="${myQuantity }" pattern="#,###" />주</div>	
-				<input class="event button button-button animation" type="button" name="trade" value="매       수">
+				<input class="button button-status" type="button" value="가상머니">
+				<div class="data"><fmt:formatNumber value="" pattern="#,###" />원</div>
 
+				<input class="button button-status" type="button" value="   단가   ">
+				<div style="position: relative;">
+					<input type="text" value="" class="text" readonly>
+					<i class="fa fa-caret-up fa-lg caret-up animation-1" aria-hidden="true"></i>
+					<i class="fa fa-caret-down fa-lg caret-down animation-2" aria-hidden="true"></i>
+				</div>
+				
+
+				<input id="buy" class="event button button-button animation" type="button" name="trade" value="매       수">
 			</div>
 			<div class="show-button-align">
-				<input class="button button-status" type="button" value="가상 머니">
-				<div class="data"><fmt:formatNumber value="${myAssets }" pattern="#,###" />원</div>
-				<input class="button button-status" type="button" value="구매/매도">
-				<div>
-					<!-- enter 입력을 막음 -->
-					<input class="data" id="text" type="text" name="Purse/Sold" autocomplete="off" onkeydown="if(event.keyCode == 13) return false;"> 
+				<input class="button button-status" type="button" value="보유수량">
+				<div class="data"><fmt:formatNumber value="" pattern="#,###" />주</div>	
+				
+				<input class="button button-status" type="button" value="   수량   ">
+				<div style="position: relative;">
+					<input type="number" class="text" value=0>
+					<i class="fa fa-caret-up fa-lg caret-up animation-1" aria-hidden="true"></i>
+					<i class="fa fa-caret-down fa-lg caret-down animation-2" aria-hidden="true"></i>
 				</div>
+				
 				<input id="sell" class="event button button-button animation" type="button" name="trade" value="매       도">
-				<%-- <input class="event button button-button animation ${shadow }" type="submit" ${disable } name="trade" value="매       도"> --%>
 			</div>
 		</form>
 	</section>
 </div>	
-
 
 </body>
 </html>

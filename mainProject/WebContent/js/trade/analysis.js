@@ -3,7 +3,7 @@ var codeNum = "005930"; // 삼성전자
 window.addEventListener("message", function(e) {
 	if (e.data && (e.data.length == 6)) { // codeNum
 		codeNum = e.data;
-		updateEvent();
+		refleshPrice();
 		chartUpdate();
 	
 	}
@@ -11,14 +11,40 @@ window.addEventListener("message", function(e) {
 
 window.addEventListener("load", function() {
 	bb.defaults();
-	updateEvent();
+	refleshPrice();
 	chartUpdate();
+	captureAction();
 });
+
+function captureAction() {
+	var button = document.querySelector("#capture");
+	
+	if(button == null)
+		return;
+	
+	button.onclick = function(e) {
+		var ajax = new XMLHttpRequest();
+		ajax.open("GET", "../../card/trade/analysis?capture=on&codeNum=" + codeNum);
+		ajax.onload = function() {
+			//data send to capture Card
+			var frame = parent.document.querySelector("#capture-window");
+			frame.contentWindow.postMessage(
+					{capture: ajax.responseText }, 
+					"http://localhost:8080/card/capturememo/captureMemo.jsp");
+			
+			//캡쳐버튼시 카드이동
+			parent.document.querySelector("#capture-tab").click(); 
+		}
+		ajax.send();
+	}
+}
 
 function curStockUpdateForm(obj) {
 	var stockNameDiv = document.querySelectorAll("#stockName div");
 	var stockNameSpan = document.querySelectorAll("#stockName span");
 	
+	stockNameDiv[0].style.display = "contents";
+	stockNameDiv[1].style.display = "contents";
 	stockNameDiv[0].innerHTML = obj.name;
 	stockNameDiv[1].innerHTML = obj.price;
 	//보합
@@ -40,7 +66,7 @@ function curStockUpdateForm(obj) {
 	}
 }
 
-function updateEvent() {
+function refleshPrice() {
 	var ajax = new XMLHttpRequest();
 	ajax.open("GET", "../../card/trade/analysis?codeNum=" + codeNum);
 	ajax.onload = function() {
@@ -69,61 +95,33 @@ bb.defaults({
 	legend : { show : false },
 	clipPath: false,
 	tooltip: { show : false },
+	size : { height : 150, width : 150 },
 });
 
 function chartUpdate() {
 	var chartA = bb.generate({
 		bindto : "#chartA",
 		color : { pattern : [ "#FF7F0E"] },
-		size : { height : 150, width : 150 },
-		title: { text : "종목 동향"}
+//		title: { text : "종목 동향"}
 	});
 
 	var chartB = bb.generate({
 		bindto : "#chartB",
 		color : { pattern : [ "#1F77B4"] },
-		size : { height : 150, width : 150 },
-		title: { text : "수급"}
+//		title: { text : "수급"}
 	});
 	
 
 	var chartC = bb.generate({
 		bindto : "#chartC",
 		color : { pattern : [ "#2CA02C"] },
-		size : { height : 150, width : 150 },
-		title: { text : "컨텐츠"}
+//		title: { text : "컨텐츠"}
 	});
 
 	var chartD = bb.generate({
 		bindto : "#chartD",
 		color : { pattern : [ "#FF4040"] },
-		size : { height : 150, width : 150 },
-		title: { text : "강도"}
-	});
-	
-	var chartE = bb.generate({
-		bindto : "#chartE",
-		title: { text : "분석 결과"},
-		tooltip: { show : true },
-		gauge : {
-			fullCircle : false,
-			startingAngle : 80.11,
-			expand : false, 
-			label: {
-	            show: false
-	        },
-		},
-		 color: {
-			    pattern: [
-			      "#2CA02C",
-			      "#FF7F0E",
-			      "#FF4040",
-			    ],
-			    threshold: {
-			      values: [
-			        33, 66, 100,
-			      ] }
-		 },
+//		title: { text : "강도"}
 	});
 	
 	setTimeout(function() {
@@ -138,9 +136,6 @@ function chartUpdate() {
 		});
 		chartD.load({
 			columns : [ [ "", 20 ] ]
-		});
-		chartE.load({
-			columns : [ [ "투자경고", 30 ] ]
 		});
 	}, 0);
 }

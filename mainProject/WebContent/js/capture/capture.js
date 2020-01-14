@@ -3,6 +3,7 @@ class CaptureMemo {
 		this.prevMemo;
 		this.content = $(".content");
 		this.trTemplate = document.querySelector(".tr-template");
+		this.chart;
 	}
 
 	setPrevMemo(prevMemo) {
@@ -54,34 +55,57 @@ class CaptureMemo {
 			this.prevMemo = this.content.find(".child").first().parent();
 	}
 
-	createChart(){
-		var chart = bb.generate({
+	chartDataCrawling(data1) {
+		return new Promise(function(resovle, reject){
+			$.getJSON("captureMemo-data-crawling-json?id="+data1.id)
+				.done(function(data2) {
+					resovle(data2);
+				})
+				.fail(function() {
+					alert("데이터 크롤링 실패");
+				});
+		});
+	}
+
+	createChart(data1, data2){
+		if(this.chart != undefined){
+			this.chart = undefined;
+			return;
+		}
+		
+		data2 = JSON.parse(data2);
+		
+		this.chart = $(bb.generate({
+//			size:{
+//				height:200,
+//				width:340
+//			},
 			data: {
 				x: "x",
 				columns: [
-			["x", "Data A", "Data B", "Data C", "Data D", "Data E"],
-			["data1", 330, 350, 200, 380, 150],
-			["data2", 130, 100, 30, 200, 80],
-			["data3", 230, 153, 85, 300, 250]
+					["x", "PER", "PBR", "ROE", "부채 비율(%)", "시가 총액(억)", "외국인 지분율(%)"],
+					["캡쳐일", data1.PER, data1.PBR, data1.ROE, data1.debtRatio, data1.marketCap, data1.foreignInvestors],
+					["현재", data2.PER, data2.PBR, data2.ROE, data2.debtRatio, data2.marketCap, data2.foreignInvestors]
 				],
 				type: "radar",
 				labels: true
 			},
+			legend: {
+//			    position: "inset"
+			},
 			radar: {
 				axis: {
-				max: 400
 				},
 				level: {
-				depth: 4
+					depth: 0
 				},
 				direction: {
-				clockwise: true
+					clockwise: true
 				}
 			},
+			tooltip: { show : false },
 			bindto: "#radarChart"
-			});
-			
-			chart.load();
+			}));
 	};
 
 	getDetail(target){
@@ -103,7 +127,6 @@ class CaptureMemo {
 		data.id = target.parent().attr("dataset.id");
 		data.title = $(".memo > div").eq(0).children().first().val();
 		data.content = $(".memo > div").eq(1).children().first().val();
-		console.log(data);
 		
 		$.post("captureMemo-json-update", JSON.stringify(data))
 		.done(function(result) {
@@ -141,11 +164,14 @@ window.addEventListener("load", function() {
 			case "TD":	
 				// detail 펼치기
 				captureMemo.getDetail(target)
-				.then(function(result){
-					captureMemo.createDetail(result, target);
-					captureMemo.createChart();
-				})
-				.then(function(){
+				.then(function(data1){
+					captureMemo.createDetail(data1, target);
+					
+					captureMemo.chartDataCrawling(data1)
+					.then(function(data2){
+						captureMemo.createChart(data1, data2);
+					});
+					
 					// 메모 수정
 					$(".button").click(function() {
 						captureMemo.updateDetail(target);

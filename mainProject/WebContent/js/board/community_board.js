@@ -7,12 +7,7 @@ window.addEventListener("load", function () {
 	var tbody = section.querySelector("table tbody");
 	var pager = section.querySelector(".pager");
 	var sortBoard = "";
-	
-	//태그 막기
-	String.prototype.removeTag = function () {
-		return this.replace(/(<([^>]+)>)/ig,"");
-	}
-	
+
 	//마이버튼 클릭
 	myButton.onclick = function (e) {
 		if (e.target.nodeName != "A")
@@ -191,11 +186,10 @@ window.addEventListener("load", function () {
 			var detail = JSON.parse(request.responseText);
 			var template = section.querySelector(".detail-template");
 			var cloneTr = document.importNode(template.content, true);
-			var rTcontent =detail.board.content;
-			rTcontent= rTcontent.removeTag;
+			var content =detail.board.content;
 			var td = cloneTr.querySelector(".content-row td");
 			td.innerHTML = '<span class="content-detail">'
-				+ rTcontent + '</span><br><a href="" class="content-modi hidden" data-id="'
+				+ content + '</span><br><a href="" class="content-modi hidden" data-id="'
 				+ detail.board.id + '">수정</a>';
 			var replyContent = cloneTr.querySelector(".replyTable tbody tr td");
 			var contentSum = "";
@@ -251,6 +245,10 @@ window.addEventListener("load", function () {
 
 		var boardId = e.target.dataset.id;
 		var reContent = e.target.parentNode.parentNode.querySelector('.reply-content').value;
+
+		//태그 없애는 정규식
+		reContent = reContent.replace(/(<([^>]+)>)/ig,"");
+		
 		var reContentEncode = encodeURI(reContent);
 		var changeReplyCnt = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector('.reply-cnt');
 
@@ -347,13 +345,14 @@ window.addEventListener("load", function () {
 		var targetSpan = e.target.parentNode;
 
 		var reContent = targetContentBox.value;
+
+		//태그 없애는 정규식
+		reContent = reContent.replace(/(<([^>]+)>)/ig,"");
+		
 		var reContentEncode = encodeURI(reContent);
 
 		String.prototype.trim = function () {
 			return this.replace(/^\s+|\s+$/g, "");
-		}
-		String.prototype.removeTag = function () {
-			return this.replace(/(<([^>]+)>)/ig,"");
 		}
 
 		var str = reContent;
@@ -364,7 +363,6 @@ window.addEventListener("load", function () {
 			alert("내용을 작성하세요");
 			return;
 		}
-		str = str.removeTag;
 
 		var data = [["replyId", replyId],
 		["reContent", reContentEncode],

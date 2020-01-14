@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,9 +17,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.google.gson.Gson;
+import com.stockmarket.www.controller.system.AppContext;
 import com.stockmarket.www.dao.KoreaStocksDao;
 import com.stockmarket.www.dao.jdbc.JdbckoreaStocksDao;
+import com.stockmarket.www.entity.CurStock;
 import com.stockmarket.www.entity.StockDetail;
+import com.stockmarket.www.entity.TradeCardData;
 import com.stockmarket.www.service.TradeService;
 import com.stockmarket.www.service.basic.BasicTradeService;
 
@@ -35,26 +39,54 @@ public class TradeController extends HttpServlet{
 		HttpSession session = request.getSession();
 		int memberId = (int)session.getAttribute("id");
 		
-		//1년 - 일봉 그래프
-		String graph = request.getParameter("graph"); 
-		if(graph != null) {
-			JSONArray json = getDataOfGraph(graph);
-	        PrintWriter out = response.getWriter();
-			out.print(json);  
-			return;
-		}
-
 		String codeNum = request.getParameter("codeNum");
 		if(codeNum != null) {
-			HashMap<Object, Object>map = new HashMap<>();
-			map.put("name", service.getCompanyName(codeNum));
-			map.put("price", 20000);
-			map.put("status", "up"); //or down
-			map.put("unit", 40000);
-			map.put("ratio", "1.13");
-			response.setContentType("application/json; charset=UTF-8");
+			Map<String, CurStock> stocks = AppContext.getStockMarket();
+			CurStock curStock = null; 
+			TradeCardData data = null;
+			
+			//크롤링 데이터가 유효한 경우 curStock 을 set 한다
+			for(String getCodeNume : stocks.keySet()) {
+				if(getCodeNume.equals(codeNum)) {
+					curStock = new CurStock(); 
+					curStock.setSellQuantityMap(stocks.get(getCodeNume).getSellQuantityMap());
+					curStock.setBuyQuantityMap(stocks.get(getCodeNume).getBuyQuantityMap());
+					break;
+				}
+			}
+
+			//크롤링 데이터가 없는 경우, 가상머니와 보유수량만 반환한다
+			if(curStock == null) {
+				data = new TradeCardData();
+				data.setvMoney(service.getAssets(memberId));
+				data.setQuantity(service.getQty(memberId, codeNum));
+			}
+				
+			//매도,매수 나우어 반환한다
+			if(curStock != null) {
+				data = new TradeCardData(
+						curStock.getSellQuantityMap().size(), curStock.getBuyQuantityMap().size());
+				data.setvMoney(service.getAssets(memberId));
+				data.setQuantity(service.getQty(memberId, codeNum));
+				int i = 0;
+				for(Integer sell : curStock.getSellQuantityMap().keySet()) {
+					data.setSellPrice(i, sell);
+					data.setSellQuantity(i, curStock.getSellQuantityMap().get(sell));
+					i++;
+				}
+				i = 0;
+				for(Integer buy : curStock.getBuyQuantityMap().keySet()) {
+					data.setBuyPrice(i, buy);
+					data.setBuyQuantity(i, curStock.getBuyQuantityMap().get(buy));
+					i++;
+				}
+//				System.out.println(data.toString());
+			}
+			
+			Gson gson = new Gson();
+			String json = gson.toJson(data);
 			PrintWriter out = response.getWriter();
-			out.print(new JSONObject(map));
+			out.print(json);
 			return;
 		}
 		
@@ -133,25 +165,5 @@ public class TradeController extends HttpServlet{
 		map.put("name", companyName);
 		JSONObject data = new JSONObject(map);
 		return data;
-	}
-
-/////////////////////////////////////////////////////////
-/////////////////// 일봉/주봉/월봉 관련 함수 /////////////////////
-/////////////////////////////////////////////////////////
-	
-	@SuppressWarnings("unchecked")
-	private JSONArray getDataOfGraph(String codeNum) {
-		JSONArray json = new JSONArray();
-		
-		List<StockDetail> list = service.getDailyPrice(codeNum);
-		for(int i = 0; i < list.size(); i++) {
-			//TODO 1년치
-			JSONArray array = new JSONArray();
-			array.add(list.get(list.size()-i-1).getBizdate());
-			array.add(list.get(list.size()-i-1).getClose_val());
-			json.add(array);
-		}
-		
-		return json;
 	}
 }

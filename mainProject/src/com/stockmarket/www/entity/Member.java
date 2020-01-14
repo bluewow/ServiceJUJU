@@ -14,7 +14,7 @@ public class Member {
 	}
 	
 	// insert, update를 위한 생성자
-	public Member(String email, String nickName, String password, int vMoney) {
+	public Member(String email, String nickName, String password, long vMoney) {
 		this.email = email;
 		this.password = password;
 		this.nickName = nickName;
@@ -22,7 +22,7 @@ public class Member {
 	}
 	
 	// select를 위한 생성자
-	public Member(int id, String email, String nickName, String password, int vMoney, String cardPos, int profileImg) {
+	public Member(int id, String email, String nickName, String password, long vMoney, String cardPos, int profileImg) {
 		this.id = id;
 		this.email = email;
 		this.password = password;
@@ -84,5 +84,14 @@ public class Member {
 		this.profileImg = profileImg;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return id + "," + 
+		  email + "," + 
+		  nickName + "," +
+		  password + "," +
+		  vMoney + "," +
+		 cardPos + "," +
+		 profileImg;
+	}
 }

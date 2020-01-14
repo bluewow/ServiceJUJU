@@ -124,17 +124,17 @@
                            id="analysis-tab" data-toggle="tab" href="#analysis" role="tab"
                            aria-controls="index1" aria-selected="true">분 석</a></li>
                         <li class="nav-item"><a class="nav-link nav-link-s "
-                           id="trading-tab" data-toggle="tab" href="#trading" role="tab"
-                           aria-controls="index2" aria-selected="false">매 매</a></li>
+                           id="capture-tab" data-toggle="tab" href="#capture" role="tab"
+                           aria-controls="index2" aria-selected="false">캡 쳐</a></li>
                      </ul>
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="analysis"
                            role="tabpanel" aria-labelledby="analysis-tab">
-                           <iframe height="100%" id="analysis-window" src="./card/trade/analysis"> </iframe>
+                           <iframe height="100%" id="analysis-window" src="./card/trade/analysis"></iframe>
                         </div>
-                        <div class="tab-pane fade" id="trading" role="tabpanel"
+                        <div class="tab-pane fade" id="capture" role="tabpanel"
                            aria-labelledby="trading-tab">
-                           <iframe id="trade-window" src="./card/trade/trade"> </iframe>
+                           <iframe id="capture-window" src="/card/capturememo/captureMemo"></iframe>
                         </div>
 
                      </div>
@@ -153,14 +153,13 @@
                      <ul class="nav nav-tabs" id="myTab" role="tablist style"
                         style="border: none">
                         <li class="nav-item"><a class="nav-link nav-link-s active"
-                           id="capture-tab" data-toggle="tab" href="#capture" role="tab"
-                           aria-controls="index1" aria-selected="true">캡 쳐</a></li>
+                           id="trading-tab" data-toggle="tab" href="#trading" role="tab"
+                           aria-controls="index1" aria-selected="true">매 매</a></li>
                      </ul>
                      <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="capture"
+                        <div class="tab-pane fade show active" id="trading"
                            role="tabpanel" aria-labelledby="capture-tab"></div>
-                            <iframe id="capture-window" src="/card/capturememo/captureMemo">
-                           </iframe>
+                            <iframe id="trade-window" src="./card/trade/trade"> </iframe>
                      </div>
                   </section>
                </div>
@@ -285,7 +284,7 @@
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="rangking"
                            role="tabpanel" aria-labelledby="rangking-tab">
-                           <iframe src="./card/rank/ranking">
+                           <iframe id="ranking-board-window" src="./card/rank/ranking">
                            </iframe>
                         </div>
                      </div>
@@ -336,16 +335,16 @@
 	   		<div class="pop-up-border">
 	   			<div class="pop-up-context">
 		   				<div class="text">이메일</div>
-		   				<input class="box" type="text" name="userEmail" placeholder="이메일을 입력하세요" form="signup">
+		   				<input class="box signup-email" type="text" name="userEmail" placeholder="이메일을 입력하세요" form="signup" required>
 		   				
 		   				<div class="text">닉네임</div>
-		   				<input class="box" type="text" name="nickName" placeholder="4 ~ 14자 이내로 입력하세요 " form="signup">
-		   				
+		   				<input class="box signup-nickname" type="text" name="nickName" placeholder="4 ~ 14자 이내로 입력하세요 " form="signup" required>
+		   				<br><span id="duplicated-state"></span>
 		   				<div class="text">비밀번호</div>
-		   				<input class="box" type="password" name="pwd" placeholder="1 ~ 16자 이내로 입력 하세요" form="signup">
+		   				<input class="box signup-pwd" type="password" name="pwd" placeholder="1 ~ 16자 이내로 입력 하세요" form="signup" required>
 	   					
 	   					<div class="text">비밀번호 확인</div>
-		   				<input class="box" type="password" name="checkPwd" form="signup">
+		   				<input class="box signup-pwd-confirm" type="password" name="checkPwd" form="signup">
 		   				
 	   					<form class="login-box" action="login" method="post" id="signup">
 	   						<input type="hidden" name="form" value="회원가입" form="signup">

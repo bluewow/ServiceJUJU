@@ -3,10 +3,11 @@ package com.stockmarket.www.service;
 import java.util.List;
 
 import com.stockmarket.www.entity.Member;
+import com.stockmarket.www.entity.MemberView;
 
 public interface RankingService {
-	List<Member> getMemberList();
+	List<MemberView> getMemberList();
 	
-	Member getMember(int id);
+	MemberView getMember(int id);
 	int getMemberRank(int id);
 }

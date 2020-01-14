@@ -3,83 +3,210 @@ var codeNum = "005930"; //삼성전자
 window.addEventListener("message", function(e) {
 	if(e.data && (e.data.length == 6)) { //codeNum
 		codeNum = e.data;
-		updateEvent();
 		
-		asyncTrade("pass", 0, e.data);		// 매수/매도 창 데이터 갱신
+		update();		// 매수/매도 창 데이터 갱신
 	}
 });
 
 window.addEventListener("load", function(){
-	updateEvent();
+	bb.defaults();
+	chartSell = bb.generate({
+		bindto : "#chartSell",
+	    data: {
+	    	x: "x",
+	        columns: [	   
+	        	["x"],
+	        	["data"],
+	        ],
+	        colors:{data:"#2D9AF277"}
+	    },
+	});
+
+	chartBuy = bb.generate({
+		bindto : "#chartBuy",
+	    data: {
+	    	x: "x",
+	        columns: [	            
+	        	["x"],
+	        	["data"],
+	        ],	
+	        colors:{data:"#F4000677"}
+	    },
+	});
 	
-	asyncTrade("pass", 0);		
-	tradeFunc();		// 매수/매도 이벤트 처리
-
-
+	tick();
+	update();
+	buttonEvent();
 });
 
-function asyncGraph() { 
-    var ajax = new XMLHttpRequest();
-    ajax.open("GET", "../../card/trade/trade?graph=" + codeNum);
-    ajax.onload = function() {
-    	google.charts.setOnLoadCallback(
-    			drawBasic(JSON.parse(ajax.responseText)));
-    }
-    ajax.send();
+class Price {
+	constructor(){
+		this.index;
+		this.price;
+	}
+	getPrice(index) {
+		if(isNaN(index)) {
+			return null;
+		}
+		return this.price[index];
+	}
+	setPrice(price) {
+		this.price = price;
+	}
+	setIndex(index) {
+		this.index = index;
+	}
+	getIndex() {
+		return this.index;
+	}
 }
 
-function updateEvent() {
-	var stockNameDiv = document.querySelectorAll("#stockName div");
-	var stockNameSpan = document.querySelectorAll("#stockName span");
+function buttonEvent() {
+	var arrow = document.querySelectorAll("i");
+	var text = document.querySelectorAll(".text");
+	var buy = document.querySelector("#buy");
+	var sell = document.querySelector("#sell");
+	var data = document.querySelectorAll(".data");
+	
 
-	var ajax = new XMLHttpRequest();
-	ajax.open("GET", "../../card/trade/trade?codeNum=" + codeNum);
-	ajax.onload = function() {
-		var obj = JSON.parse(ajax.responseText);
-		stockNameDiv[0].innerHTML = obj.name;
-		stockNameDiv[1].innerHTML = obj.price.toLocaleString();
-		if(obj.status == "up") {
-			stockNameSpan[0].classList.add("fa", "fa-caret-up");
-			stockNameSpan[1].innerHTML = obj.unit.toLocaleString();
-			stockNameSpan[2].innerHTML = "(+"+ obj.ratio + "%)";
-			for(var i = 0; i < stockNameSpan.length; i++) {
-				stockNameSpan[i].style.color = "red";
-			}
+	arrow[0].onclick = function(e) {	//단가 up
+		var index = priceObj.getIndex() - 1;
+		if(priceObj.getPrice(index) != null) {
+			priceObj.index--;
+			text[0].value = priceObj.getPrice(priceObj.index);
 		}
-		if(obj.status == "down") {
-			stockNameSpan[0].classList.add("fa", "fa-caret-down");
-			stockNameSpan[1].innerHTML = obj.unit.toLocaleString();
-			stockNameSpan[2].innerHTML = "(-"+ obj.ratio + "%)";
-			for(var i = 0; i < stockNameSpan.length; i++) {
-				stockNameSpan[i].style.color = "blue";
-			}
+	};
+	arrow[1].onclick = function(e) {	//단가 down
+		var index = priceObj.getIndex() + 1;
+		if(priceObj.getPrice(index) != null) {
+			priceObj.index++;
+			text[0].value = priceObj.getPrice(priceObj.index);	
 		}
 	}
-	ajax.send();
+	arrow[2].onclick = function(e) {	//수량 up
+		text[1].value = Number(text[1].value) + 1;
+	}
+	arrow[3].onclick = function(e) {	//수량 down
+		if(text[1].value == 0)
+			return;
+		
+		text[1].value = Number(text[1].value) - 1;
+	}
+	
+	buy.onclick = function(e) {
+		var asset = data[0].value;
+		var price = Number(text[0].value);
+		var qty = text[1].value;
+		
+		if(qty == "" || qty < 0) {
+			alert("수량을 잘못 입력하였습니다.");
+			text[1].value = 0;
+			return;
+		}
+		
+		if(asset < price * qty) {
+			alert("가상머니가 부족합니다");
+			text[1].value = 0;
+			return;
+		}
+		
+		text[1].value = 0;
+    	var frame = parent.document.querySelector("#holding-window");
+		frame.contentWindow.postMessage(
+				codeNum, "http://localhost:8080/card/managestocks/holdinglist.jsp");
+	}
+	
+	sell.onclick = function(e) {
+		
+		text[1].value = 0;
+    	var frame = parent.document.querySelector("#holding-window");
+		frame.contentWindow.postMessage(
+				codeNum, "http://localhost:8080/card/managestocks/holdinglist.jsp");
+	}
 }
 
-function asyncTrade(p1, p2) { //p1=buy/sell p2=수량 p3=종목코드
+
+function update() {
 	var button = document.querySelector("#page-bottom-box");
 	var data = button.querySelectorAll(".data");
+	var text = button.querySelectorAll(".text");
 	var sellButton = button.querySelector("#sell");
+	var buyButton = button.querySelector("#buy");
+	let titleAss = document.querySelector("#title-ass");
+	priceObj = new Price();
 	
 	var ajax = new XMLHttpRequest();
-    ajax.open("GET", "../../card/trade/trade?replaceEvent=on&button="
-    		+ p1 + "&Purse/Sold=" + p2 + "&codeNum" + codeNum );
+    ajax.open("GET", "../../card/trade/trade?&codeNum=" + codeNum );
     ajax.onload = function() {
     	var obj = JSON.parse(ajax.responseText);
-        data[0].innerHTML = obj.avgPrice.toLocaleString() + "원";
-        data[1].innerHTML = obj.quantity.toLocaleString() + "주";
-        data[2].innerHTML = obj.vMoney.toLocaleString() + "원";
-        data[3].value = "";
+    	var sellPrice = new Array("x");
+    	var sellQty = new Array("data");
+    	var buyPrice = new Array("x");
+    	var buyQty = new Array("data");
+    	
+    	data[0].value = obj.vMoney;
+    	data[0].innerHTML = obj.vMoney.toLocaleString() + "원"; //자산상황
+        data[1].innerHTML = obj.qty.toLocaleString() + "주";	//보유수량
+        
+        if(obj.sellPrice) {	//매도잔량 데이터
+	    	for(var i=0; i < obj.sellPrice.length; i++) {
+	    		sellPrice.push(obj.sellPrice[i]);
+	    		sellQty.push(obj.sellQty[i]);
+	    	}
+        } 
+        if(obj.buyPrice) {	//매수잔량 데이터
+	    	for(var i=0; i < obj.buyPrice.length; i++) {
+	    		buyPrice.push(obj.buyPrice[i]);
+	    		buyQty.push(obj.buyQty[i]);
+	    	}
+        }
+        
+        if(obj.sellPrice && obj.buyPrice) { //array 객체생성 - 단가 list
+        	var array = new Array();
+        	array = obj.sellPrice.concat(obj.buyPrice);
+        	priceObj.setIndex(obj.sellPrice.length);
+        	priceObj.setPrice(array);
+        }
+        
+        bb.instance[0].load({	//매도잔량 차트
+    		columns: [sellPrice, sellQty],
+    	});
+        
+    	bb.instance[1].load({	//매수잔량 차트
+    		columns: [buyPrice, buyQty]
+    	});
+    	
+    	if(obj.buyPrice) 	//단가 기본세팅
+    		text[0].value = (obj.buyPrice[0]!=undefined )? obj.buyPrice[0]:0;
 
-		if(data[1].innerHTML == "0주") {
+    	//수량 기본세팅
+    	text[1].value = 0;
+    
+    	if(titleAss.innerHTML != "") {
+    		sellButton.className = "event button button-button shadow"
+    			sellButton.disabled = true;
+    		buyButton.className = "event button button-button shadow"
+    			buyButton.disabled = true;
+    	} else {
+    		sellButton.className = "event button button-button animation"
+    			sellButton.disabled = false;
+    		buyButton.className = "event button button-button animation"
+    			buyButton.disabled = false;
+    	}
+    	
+		if(data[1].innerHTML == "0주") {    	//버튼 상태체크
 			sellButton.className = "event button button-button shadow"
 			sellButton.disabled = true;
 		} else {
 			sellButton.className = "event button button-button animation"
 			sellButton.disabled = false;
 		}
+		
+			
+//		if(titleAss.v)
+//			buyButton
+/*
+		
         
 		//result - 0:ok, 1:vmoney부족, 2: 거래정지목록, 3:장내시간이 아님, 
         //		   4:수량이 0이하인 경우 거래x, 5:수량이 0이 되는 경우  6:보유종목이 아닌경우 거래x
@@ -105,51 +232,73 @@ function asyncTrade(p1, p2) { //p1=buy/sell p2=수량 p3=종목코드
         	break;
     	default:
     		break;
-        }
+        }*/
     }    
     ajax.send();
 }
 
-//  매수/매도 이벤트 처리
-function tradeFunc() {
-	var button = document.querySelector("#page-bottom-box");
-	var event = button.querySelector("input.event");
-	var data = button.querySelectorAll(".data");
-	var qty = button.querySelector("#text");
-	var sellButton = button.querySelector("#sell");
+bb.defaults({
+	data: {
+		type: "bar",
+		labels:{
+			colors : "black",
+			centered : true,
+		  	position:{ x:15 },
+		},
+	},
+	axis: {
+        rotated: true,
+        y: {
+            show: false,
+            max: 6000,
+        },
+        x: { type: "category" }
+    },
+    render: {
+    	   observe: false
+    	},
+    onrendered: function() {
+    	this.main.selectAll(".bb-texts text").each(function(d) {
+    		const x = +this.getAttribute("x");
+
+    		this.setAttribute("x", (
+    			d.value >= 6000 ? 0 : 15
+    		));
+    	});
+    },
+    legend: { show: false },
+    tooltip: { show: false },
+    bar: { padding: 5 },
+    size: {
+    	width: 200,
+        height: 350
+    },
+});
+
+function tick() {
+	let titleAss = document.querySelector("#title-ass");
+	let date = new Date();
+	let week = ['일', '월', '화', '수', '목', '금', '토'];
+	var dayOfWeek = week[date.getDay()];
+
+	if(dayOfWeek == '일' || dayOfWeek =="토") {
+		titleAss.innerHTML = "휴장일 입니다";
+		return;
+	}
 	
-	button.onclick = function(e) {
-		if(e.target.name != event.name)
-	      	return;
-	    
-		if(!data[3].value) {
-			alert("수량을 입력해 주세요");
+	if(date.getHours() <= 9 || date.getHours() >=15) {	//9:00 ~ 15:20 거래시간
+		if(date.getHours() == 15 && date.getMinutes() <= 20) {
+			titleAss.innerHTML = "";
+			return;
+		} else {
+			titleAss.innerHTML = "거래종료 (오픈시간 09:00~15:20)";
 			return;
 		}
-		
-		if(data[3].value <= 0) {
-			alert("잘못된 수량입력 입니다");
-			data[3].value = "";
-			return;
-		}
-		
-		if(e.target.value == "매       수") {
-			var trade = "buy";
-			if(confirm(data[3].value + "주 매수를 진행하시겠습니까?") == false) {
-				data[3].value = "";
-				return;
-			}
-			
-		}
-		else if(e.target.value =="매       도") {
-			var trade = "sell";
-			if(confirm(data[3].value + "주 매도를 진행하시겠습니까?") == false) {
-				data[3].value = "";
-				return;
-			}
-		}
-			
-		asyncTrade(trade, qty.value);
+		titleAss.innerHTML = "거래종료 (오픈시간 09:00~15:20)";
+		return;
 	}
 }
+
+setInterval(tick, 1000);
+
 
