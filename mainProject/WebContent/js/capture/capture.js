@@ -76,34 +76,31 @@ class CaptureMemo {
 		data2 = JSON.parse(data2);
 		
 		this.chart = $(bb.generate({
-//			size:{
-//				height:200,
-//				width:340
-//			},
 			data: {
-				x: "x",
 				columns: [
-					["x", "PER", "PBR", "ROE", "부채 비율(%)", "시가 총액(억)", "외국인 지분율(%)"],
-					["캡쳐일", data1.PER, data1.PBR, data1.ROE, data1.debtRatio, data1.marketCap, data1.foreignInvestors],
-					["현재", data2.PER, data2.PBR, data2.ROE, data2.debtRatio, data2.marketCap, data2.foreignInvestors]
+					["캡쳐일", data1.PER, data1.PBR, data1.ROE, data1.debtRatio, data1.foreignInvestors],
+					["현재", data2.PER, data2.PBR, data2.ROE, data2.debtRatio, data2.foreignInvestors]
 				],
-				type: "radar",
+				type: "bar",
 				labels: true
 			},
-			legend: {
-//			    position: "inset"
+			axis: {
+			    x: {
+			      type: "category",
+			      categories: [
+			        "PER",
+			        "PBR",
+			        "ROE",
+			        "부채 비율(%)",
+			        "외국인 지분율(%)",
+			        ]
+			    }
 			},
-			radar: {
-				axis: {
-				},
-				level: {
-					depth: 0
-				},
-				direction: {
-					clockwise: true
+			bar: {
+				width: {
+					ratio:0.5
 				}
 			},
-			tooltip: { show : false },
 			bindto: "#radarChart"
 			}));
 	};
