@@ -72,6 +72,13 @@
 	top: 16px;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 /* ----------- Chart ------------ */
 
 
@@ -79,8 +86,8 @@
 	
 #trading-container {
 	width: 90%;
-	min-width: 300px;
-    max-width: 600px;
+	min-width: 460px;
+    max-width: 741px;
 	margin-left: auto;
     margin-right: auto;
 }
@@ -88,13 +95,14 @@
 .page-top {
 	height: 10%;
 	padding: 0% 8%;
+	display: flex;
+    align-items: baseline;
 }
-
 
 .page-mid {
 	padding: 0% 8%;
 	display: flex;
-	margin-bottom: 5%;
+	margin-bottom: 2%;
 	justify-content: space-between;
 	/* min-height: 45%; */
 }
@@ -117,6 +125,14 @@
     font-weight: bold; 
     padding-top: 5%;
 }
+
+#title-ass {
+    font-size: 16px;
+    font-weight: bold;
+    color : red; 
+    padding-left: 5%;
+}
+
 
 #chartSell {
 	margin-top: 10px;

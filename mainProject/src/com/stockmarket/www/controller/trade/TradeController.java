@@ -55,12 +55,14 @@ public class TradeController extends HttpServlet{
 				}
 			}
 
+			//크롤링 데이터가 없는 경우, 가상머니와 보유수량만 반환한다
 			if(curStock == null) {
 				data = new TradeCardData();
 				data.setvMoney(service.getAssets(memberId));
 				data.setQuantity(service.getQty(memberId, codeNum));
 			}
 				
+			//매도,매수 나우어 반환한다
 			if(curStock != null) {
 				data = new TradeCardData(
 						curStock.getSellQuantityMap().size(), curStock.getBuyQuantityMap().size());

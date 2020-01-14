@@ -33,8 +33,15 @@ public class memberJsonController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doGet(request, response);
+		//닉네임 중복확인
+		String nickname = request.getParameter("nickname");
+		Boolean result = memberService.isDuplicatedId(nickname);
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
+		
+		
 	}
 
 	@Override

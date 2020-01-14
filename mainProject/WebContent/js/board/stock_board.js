@@ -1,7 +1,7 @@
 window.addEventListener("message", function (e) {
 	 //codeNum 확인
 	if (e.data && (e.data.length == 6)){
-		console.log("stockBoard : " + e.data);
+		//console.log("stockBoard : " + e.data);
 
 	var sectionTop = document.querySelector("#stockTop");
 	var selectStock = sectionTop.querySelector("#selected-stock");
@@ -120,7 +120,7 @@ window.addEventListener("message", function (e) {
 			var trTemplate = section.querySelector(".tr-template");
 			var loginUser = listData.loginUser;
 			selectStock.innerText = listData.stockName;
-			tbody.innerHTML = "";
+			tbody.innerHTML = "이 종목은 게시된 글이 없습니다.<br><br>첫번째 글을 남겨보세요.";
 			for (var i = 0; i < listData.list.length; i++) {
 				var cloneTr = document.importNode(trTemplate.content, true);
 				var tds = cloneTr.querySelectorAll("td");
@@ -264,6 +264,10 @@ window.addEventListener("message", function (e) {
 
 		var boardId = e.target.dataset.id;
 		var reContent = e.target.parentNode.parentNode.querySelector('.reply-content').value;
+
+		//태그 없애는 정규식
+		reContent = reContent.replace(/(<([^>]+)>)/ig,"");
+		
 		var reContentEncode = encodeURI(reContent);
 		var changeReplyCnt = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector('.reply-cnt');
 
@@ -360,6 +364,10 @@ window.addEventListener("message", function (e) {
 		var targetSpan = e.target.parentNode;
 
 		var reContent = targetContentBox.value;
+		
+		//태그 없애는 정규식
+		reContent = reContent.replace(/(<([^>]+)>)/ig,"");
+		
 		var reContentEncode = encodeURI(reContent);
 
 		String.prototype.trim = function () {
@@ -374,7 +382,6 @@ window.addEventListener("message", function (e) {
 			alert("내용을 작성하세요");
 			return;
 		}
-
 		var data = [["replyId", replyId],
 		["reContent", reContentEncode],
 		["status", "modi"],]
@@ -630,6 +637,12 @@ window.addEventListener("message", function (e) {
 		if (boardId != "") {
 			status = "modi";
 		}
+		
+		//태그 없애는 정규식
+		title = title.replace(/(<([^>]+)>)/ig,"");
+		content = content.replace(/(<([^>]+)>)/ig,"");
+		
+		//인코딩
 
 		String.prototype.trim = function () {
 			return this.replace(/^\s+|\s+$/g, "");
@@ -648,9 +661,6 @@ window.addEventListener("message", function (e) {
 			alert("내용을 작성하세요");
 			return;
 		} else {
-
-
-
 			title = encodeURI(title);
 			content = encodeURI(content);
 

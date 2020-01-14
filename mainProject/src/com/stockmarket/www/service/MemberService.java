@@ -13,4 +13,6 @@ public interface MemberService {
 	int updateMember(int id, int profileImg, String imgChange);
 
 	int updateMember(int id, String newPwd, String imgChange);
+
+	Boolean isDuplicatedId(String nickname);
 }

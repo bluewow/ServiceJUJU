@@ -165,6 +165,9 @@ public class BasicCompanyService implements CompanyService {
 			}
 			
 			if(index >= 3) {	//count 수 기준으로 1, 2 등까지 적용한다
+				if(limit.size() == index) //마지막 list 시 바로 종료한다
+					break;
+				
 				if(limit.get(index - 1) == limit.get(index)) 
 					continue;
 

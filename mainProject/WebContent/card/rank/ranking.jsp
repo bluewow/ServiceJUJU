@@ -20,6 +20,7 @@
 <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
 
 <link href="../../css/rank.css" type="text/css" rel="stylesheet">
+	<script src="../../js/ranking/ranking.js"></script>
 </head>
 <!-- ======================================================================= -->
 <body class="scrollbar custom-scrollbar-style">
@@ -56,9 +57,9 @@
 							<td class="profileImg"><img src="/images/profile/${ranker.profileImg}.png" alt="profile photo" class="circle float-left profile-photo"></td>
 							<td class="name">${ranker.nickName}</td>
 							<td class="assets"><fmt:formatNumber
-									value="${ranker.vMoney}" type="number" /></td>
+									value="${ranker.totalAsset}" type="number" /></td>
 							<td class="assetsGrowth"><fmt:formatNumber
-									value="${(ranker.vMoney - 1000000) / 1000000}" type="number"
+									value="${(ranker.totalAsset - 1000000) / 1000000}" type="number"
 									pattern="0.00%" /></td>
 						</tr>
 					</c:forEach>
@@ -73,9 +74,9 @@
 						<td class="profileImg"><img src="/images/profile/${myInfo.profileImg}.png" alt="profile photo" class="circle float-left profile-photo"></td>
 						<td class="name">${myInfo.nickName}</td>
 						<td class="assets"><fmt:formatNumber type="number"
-								value="${myInfo.vMoney}" /></td>
+								value="${myInfo.totalAsset}" /></td>
 						<td class="assetsGrowth"><fmt:formatNumber
-								value="${(myInfo.vMoney - 1000000) / 1000000}" type="number"
+								value="${(myInfo.totalAsset - 1000000) / 1000000}" type="number"
 								pattern="0.00%" /></td>
 					</tr>
 				</tbody>

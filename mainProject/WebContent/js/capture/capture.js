@@ -3,6 +3,7 @@ class CaptureMemo {
 		this.prevMemo;
 		this.content = $(".content");
 		this.trTemplate = document.querySelector(".tr-template");
+		this.chart;
 	}
 
 	setPrevMemo(prevMemo) {
@@ -67,50 +68,41 @@ class CaptureMemo {
 	}
 
 	createChart(data1, data2){
-		data2 = JSON.parse(data2);
-		console.log(data1);
-		console.log(data2);
-		// let {PER, PBR, ROE, debtRatio, marketCap} = data1;
+		if(this.chart != undefined){
+			this.chart = undefined;
+			return;
+		}
 		
-		// for(let v in data1) {
-		// 	if(v == "PER" || v == "PBR" || v == "ROE" || v == "debtRatio" || v == "marketCap"){
-		// 		console.log(v + ", " + data2[v]);
-		// 		data2[v] = data2[v] / data1[v] * 100 
-		// 		console.log(v + ", " + data2[v]);
-		// 	}
-		// }
-
-		let chart = bb.generate({
-//			size:{
-//				height:200,
-//				width:340
-//			},
+		data2 = JSON.parse(data2);
+		
+		this.chart = $(bb.generate({
 			data: {
-				x: "x",
 				columns: [
-					["x", "PER", "PBR", "ROE", "부채 비율(%)", "시가 총액(억)", "외국인 지분율(%)"],
-					["캡쳐일", data1.PER, data1.PBR, data1.ROE, data1.debtRatio, data1.marketCap, data1.foreignInvestors],
-					["현재", data2.PER, data2.PBR, data2.ROE, data2.debtRatio, data2.marketCap, data2.foreignInvestors]
+					["캡쳐일", data1.PER, data1.PBR, data1.ROE, data1.debtRatio, data1.foreignInvestors],
+					["현재", data2.PER, data2.PBR, data2.ROE, data2.debtRatio, data2.foreignInvestors]
 				],
-				type: "radar",
+				type: "bar",
 				labels: true
 			},
-			legend: {
-//			    position: "inset"
+			axis: {
+			    x: {
+			      type: "category",
+			      categories: [
+			        "PER",
+			        "PBR",
+			        "ROE",
+			        "부채 비율(%)",
+			        "외국인 지분율(%)",
+			        ]
+			    }
 			},
-			radar: {
-				axis: {
-				},
-				level: {
-					depth: 0
-				},
-				direction: {
-					clockwise: true
+			bar: {
+				width: {
+					ratio:0.5
 				}
 			},
-			tooltip: { show : false },
 			bindto: "#radarChart"
-			});
+			}));
 	};
 
 	getDetail(target){
@@ -207,7 +199,8 @@ window.addEventListener("message", function(e) {
             "application/x-www-form-urlencoded"
         );
         request.onload = function() {
-            if (request.responseText == 1) load();
+			let captureMemo = new CaptureMemo();
+            if (request.responseText == 1) captureMemo.loadList();
             else alert("캡쳐하기 실패");
         };
 
