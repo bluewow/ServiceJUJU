@@ -40,6 +40,7 @@ public class HoldingStockJSONController extends HttpServlet{
 
 		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("id");
+//		System.out.println("holding");
 	
 		updateCurrentPrice(request,response,userId);
 		

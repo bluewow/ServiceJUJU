@@ -43,25 +43,26 @@
 	<section class="page-mid">
 		<div>
 			<div>
-				<br>
 				<div class="chart-string">종목동향<div id="chartA"></div></div>
 				<br>
 	 			<div class="chart-string">수급<div id="chartB"></div></div>
+	 			<br>
+	 			<div class="chart-string">영향력<div id="chartC"></div></div>
 			</div>
 			<div>
+				<div class="chart-string">컨텐츠<div id="chartD"></div></div>
 				<br>
-				<div class="chart-string">컨텐츠<div id="chartC"></div></div>
+				<div class="chart-string">강도<div id="chartE"></div></div>
 				<br>
-				<div class="chart-string">강도<div id="chartD"></div></div>
+				<div class="chart-string">분석결과<div id="chartF"></div></div>
 			</div> 
 	    </div>
 	</section>
 
 	<!-- --------------- page-bottom -------------- -->
 	<section class="page-bottom">
-		<div id="chartE"></div>
-		<div>누적측정률</div>
-		<div>최신측정률</div>
+<!-- 		<div>누적측정률</div>
+		<div>최신측정률</div> -->
 	</section>
 	
 </div>

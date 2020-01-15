@@ -16,13 +16,10 @@ import com.stockmarket.www.entity.CurStock;
 import com.stockmarket.www.entity.InterestView;
 
 public class JdbcInterestViewDao implements InterestViewDao {
-	StockDao stockDao;
 
 	@Override
 	public List<InterestView> getInterestStockList(int id) {
 		JdbcDaoContext daoContext = new JdbcDaoContext();
-		stockDao = new JdbcStockDao();
-		
 		PreparedStatement st = null;
 		ResultSet rs = null;
 
@@ -59,9 +56,11 @@ public class JdbcInterestViewDao implements InterestViewDao {
 
 			while (rs.next()){
 				String stockName = rs.getString("STOCKNAME");
-				System.out.println(stockName);
+				String stockId = rs.getString("STOCKCODE");
+
 				for (Entry<String, CurStock> data : map.entrySet()) {
-					if (stockDao.getStockCodeNum(stockName).equals(data.getValue().getCodeNum())) {
+
+					if (stockId.equals(data.getValue().getCodeNum())){
 						String price = data.getValue().getPrice();
 						String gain = data.getValue().getGain();
 						String percent = data.getValue().getPercent();

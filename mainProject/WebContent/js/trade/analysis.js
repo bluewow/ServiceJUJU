@@ -102,27 +102,38 @@ function chartUpdate() {
 	var chartA = bb.generate({
 		bindto : "#chartA",
 		color : { pattern : [ "#FF7F0E"] },
-//		title: { text : "종목 동향"}
 	});
 
 	var chartB = bb.generate({
 		bindto : "#chartB",
 		color : { pattern : [ "#1F77B4"] },
-//		title: { text : "수급"}
 	});
 	
 
 	var chartC = bb.generate({
 		bindto : "#chartC",
-		color : { pattern : [ "#2CA02C"] },
-//		title: { text : "컨텐츠"}
+		color : { pattern : [ "#FF4040"] },
 	});
 
 	var chartD = bb.generate({
 		bindto : "#chartD",
-		color : { pattern : [ "#FF4040"] },
-//		title: { text : "강도"}
+		color : { pattern : [ "#2CA02C"] },
+		
 	});
+	
+	var chartE = bb.generate({
+		bindto : "#chartE",
+		color : { pattern : [ "#FED201"] },
+	});
+	
+	var chartF = bb.generate({
+		data: {
+			type: "pie"
+		},
+		bindto : "#chartF",
+		color : { pattern : [ "#FF4040"] },
+	});
+	
 	
 	setTimeout(function() {
 		chartA.load({
@@ -136,6 +147,12 @@ function chartUpdate() {
 		});
 		chartD.load({
 			columns : [ [ "", 20 ] ]
+		});
+		chartE.load({
+			columns : [ [ "", 20 ] ]
+		});
+		chartF.load({
+			columns : [ [ "", 100 ] ]
 		});
 	}, 0);
 }
