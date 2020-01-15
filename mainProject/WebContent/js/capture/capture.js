@@ -10,7 +10,7 @@ class CaptureMemo {
 		this.prevMemo = prevMemo;
 	}
 
-	loadList() {
+	loadList(callback) {
 		$.getJSON("captureMemo-json")
 		.done(function(list) {
 			let trTemplate = document.querySelector(".tr-template-list");
@@ -28,6 +28,9 @@ class CaptureMemo {
 				tds.attr("dataset.id", list[i].id);
 				content.append(cloneTr);
 			}
+			
+			if(callback != null)
+				callback();
 		})
 		.fail(function() {
 			alert("로딩 실패");
@@ -200,7 +203,24 @@ window.addEventListener("message", function(e) {
         );
         request.onload = function() {
 			let captureMemo = new CaptureMemo();
-            if (request.responseText == 1) captureMemo.loadList();
+            if (request.responseText == 1) captureMemo.loadList(()=>{
+				let target = $(".content tr:first td").eq(1);
+				
+				captureMemo.getDetail(target)
+				.then(function(data1){
+					captureMemo.createDetail(data1, target);
+					
+					captureMemo.chartDataCrawling(data1)
+					.then(function(data2){
+						captureMemo.createChart(data1, data2);
+					});
+					
+					// 메모 수정
+					$(".button").click(function() {
+						captureMemo.updateDetail(target);
+					});
+				});
+			});
             else alert("캡쳐하기 실패");
         };
 
