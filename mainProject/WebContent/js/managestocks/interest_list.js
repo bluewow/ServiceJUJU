@@ -92,7 +92,6 @@ window.addEventListener("load", function () {
 		// 서블릿의 실행이 완료되었을때 실행	
 
 		interestAjax.onload = function () {
-			console.log(interestAjax.responseText);
 
 			if (interestAjax.responseText == -1) {
 				return;
