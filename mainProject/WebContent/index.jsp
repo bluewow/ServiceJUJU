@@ -37,7 +37,7 @@
 					검색 아이콘을 클릭 후, 원하는 회사, 관심있는 분야, 종목을 검색해보세요.
 				</div>
 				<div class="link">
-					<a href="./main.jsp">메인화면 바로가기</a>
+					<a href="./main">메인화면 바로가기</a>
 				</div>
             </div>
         </div>
