@@ -28,6 +28,10 @@ body::-webkit-scrollbar {
   position: relative;
 }
 /* ============================================================ */
+#main-page .main-contents {
+  background: url("../images/index_title.png") no-repeat center;
+  top: -20%;
+}
 #main-page div:first-child{
   width: 85%;
   height: 100%;
@@ -60,7 +64,10 @@ body::-webkit-scrollbar {
   color: #f9f9f9;
   margin-top: 210px;
 }
-
+#main-page .main-contents h2 {
+  opacity:0;
+  margin-top: 210px;
+}
 #main-page .main-contents a {
   width: 180px;
   height: 60px;

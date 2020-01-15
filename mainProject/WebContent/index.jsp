@@ -21,7 +21,9 @@
             <h1 id="logo">STOCK<br>MARKET</h1>
             <div class="bg-img"></div>
             <div class="main-contents">
-                <h1>주식을 쇼핑하다</h1>
+            	<div class="title-img">
+               		 <h2>주식을 쇼핑하다</h2>
+				</div>
                 <div class="search">
 					  <input type="checkbox" id="trigger" class="search__checkbox" />
 					  <label class="search__label-init" for="trigger"></label>

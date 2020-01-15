@@ -6,7 +6,7 @@
 
 .notice {
   position: absolute;
-  top: 50%;
+  top: 95%;
   left: 50%;
   margin-left: -16rem;
   margin-top: -3rem;
@@ -18,7 +18,7 @@
 
 .link {
   position: absolute;
-  top: -50%;
+  top: 13%;
   left: 95%;
   margin-left: -16rem;
   margin-top: -3rem;
@@ -28,7 +28,7 @@
 
 .search {
   position: absolute;
-  top: 25%;
+  top: 70%;
   left: 50%;
   margin-left: -16rem;
   margin-top: -3rem;
