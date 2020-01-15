@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="css/normalize.css" type="text/css">
     <script src="js/index.js"></script>
 </head>
-
 <body>
     <main id="main-page" class="page">
         <div>

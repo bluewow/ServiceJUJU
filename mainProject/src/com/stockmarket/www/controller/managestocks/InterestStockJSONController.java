@@ -44,15 +44,11 @@ public class InterestStockJSONController extends HttpServlet{
 		
 	
 		int userId = (int)session.getAttribute("id");
-
 	    updateCurrentPrice(request,response,userId);
-
 		
 	}
 	
 	private void updateCurrentPrice(HttpServletRequest request,HttpServletResponse response , int userId) throws IOException {
-		
-		
 		
 		if(interestViewInterface.getInterestViewList(userId).isEmpty()) {
 		    Gson gson = new Gson();
