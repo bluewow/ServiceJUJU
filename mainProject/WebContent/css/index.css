@@ -28,6 +28,10 @@ body::-webkit-scrollbar {
   position: relative;
 }
 /* ============================================================ */
+#main-page .main-contents {
+  background: url("../images/index_title.png") no-repeat center;
+  top: -20%;
+}
 #main-page div:first-child{
   width: 85%;
   height: 100%;
@@ -38,11 +42,11 @@ body::-webkit-scrollbar {
   color: #f9f9f9;
 }
 
-#main-page .main-contents {
+#main-page .main-contents:not(.link) {
   position: relative;
   text-align: center;
   width: 100%;
-  height: 400px;
+  height: 600px;
 }
 
 #main-page .bg-img {
@@ -60,18 +64,21 @@ body::-webkit-scrollbar {
   color: #f9f9f9;
   margin-top: 210px;
 }
-
-#main-page .main-contents input {
+#main-page .main-contents h2 {
+  opacity:0;
+  margin-top: 210px;
+}
+#main-page .main-contents a {
   width: 180px;
   height: 60px;
   border-radius: 10px;
   color: #f9f9f9;
-  font-size: 24px;
+  font-size: 18px;
   cursor: pointer;
   z-index: 3330;
   
 }
-#main-page .main-contents input:hover {
+#main-page .main-contents a:hover {
   background: #35cebe;
   border:  #35cebe;
   opacity: 0.5;
