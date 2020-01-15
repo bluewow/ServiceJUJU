@@ -52,7 +52,7 @@
 			<div>
 				<div class="chart-string">컨텐츠<div id="chartD"></div></div>
 				<br>
-				<div class="chart-string">강도<div id="chartE"></div></div>
+				<div class="chart-string">규모<div id="chartE"></div></div>
 				<br>
 				<div class="chart-string">분석결과<div id="chartF"></div></div>
 			</div> 
