@@ -4,15 +4,16 @@
 @import "moblie.css";
 @import "tablet.css";
 
+
 body {
     background: #fff;
     height: 100%;
     width: 100%;
     overflow-x: hidden;
-    font-size: 1.6em;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 2.3em;
+    font-family: "에스코어 드림", sans-serif;
     color: #333; }
-  
+    
   h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
     letter-spacing: -.1rem;
@@ -121,10 +122,10 @@ body {
   
   /*Forms Elements & Buttons*/
   input[type='email'], input[type='number'], input[type='password'], input[type='search'], input[type='tel'], input[type='text'], input[type='url'], textarea, select {
-    border: 1px solid #f9f9f9; }
+    border: 1px solid #f9f9f9 !important; }
   
   input[type='email']:focus, input[type='number']:focus, input[type='password']:focus, input[type='search']:focus, input[type='tel']:focus, input[type='text']:focus, input[type='url']:focus, textarea:focus, select:focus {
-    border: 1px solid #35cebe; }
+    border: 1px solid #35cebe !important; }
   
   .button, button, input[type='button'], input[type='reset'], input[type='submit'] {
     background-color: #35cebe;
@@ -173,7 +174,7 @@ body {
     color: #35cebe; }
   
   input[type='email'], input[type='number'], input[type='password'], input[type='search'], input[type='tel'], input[type='text'], input[type='url'], textarea, select {
-    border: 0.1rem solid #eee;
+    border: 0.1rem solid #eee !important;
     border-radius: .4rem;
     box-shadow: none; }
   
@@ -245,4 +246,3 @@ body {
       height: 10px;
       border-radius: 499rem; }
       
-    
