@@ -95,7 +95,7 @@ bb.defaults({
 	legend : { show : false },
 	clipPath: false,
 	tooltip: { show : false },
-	size : { height : 150, width : 150 },
+	size : { height : 140, width : 140 },
 });
 
 function chartUpdate() {

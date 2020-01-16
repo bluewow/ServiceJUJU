@@ -34,35 +34,36 @@ public class QuickSort {
 			int rightPoint = high;
 
 			while (true) {
-				while (arr[++leftPoint] < pivotValue) { // 왼쪽포인터가 피봇보다 클때까지 
-					
-				} 
-				
-				while (rightPoint > low && arr[--rightPoint] > pivotValue) { // 오른쪽포인터가 피봇보다 클때까지 
-					} 
-				
-				if (leftPoint >= rightPoint) { // 정렬이 된 경우 
-					break; 
-					} else { // 찾은 경우 
-						swapValue(arr, leftPoint, rightPoint); 
-						} 
-				} 
-			
-			// 피봇 값을 가운데로 옮김 
-			swapValue(arr, leftPoint, high); 
-			quickSort(arr, low, leftPoint - 1); 
+				while (arr[++leftPoint] < pivotValue) { // 왼쪽포인터가 피봇보다 클때까지
+
+				}
+
+				while (rightPoint > low && arr[--rightPoint] > pivotValue) { // 오른쪽포인터가 피봇보다 클때까지
+				}
+
+				if (leftPoint >= rightPoint) { // 정렬이 된 경우
+					break;
+				} else { // 찾은 경우
+					swapValue(arr, leftPoint, rightPoint);
+				}
+			}
+
+			// 피봇 값을 가운데로 옮김
+			swapValue(arr, leftPoint, high);
+			quickSort(arr, low, leftPoint - 1);
 			quickSort(arr, leftPoint + 1, high);
-			} 
 		}
-														
-	static void swapValue(int[] arr, int i, int j) { 
-		int temp = arr[i]; 
-		arr[i] = arr[j]; 
-		arr[j] = temp; 
-		} 
-	
-	static void displayArray(int[] arr) { 
-		for (int i = 0; i < arr.length; i++) { 
-			System.out.print(arr[i] + " "); }
-		} 
+	}
+
+	static void swapValue(int[] arr, int i, int j) {
+		int temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
+	}
+
+	static void displayArray(int[] arr) {
+		for (int i = 0; i < arr.length; i++) {
+			System.out.print(arr[i] + " ");
+		}
+	}
 }

@@ -1,5 +1,18 @@
 var timer;
 
+//인덱스창에서 엔터키가 눌렸을 때 실행할 내용
+function enterkey() {
+    if (window.event.keyCode == 13) {
+    	var searchInput = document.querySelector(".search__input").value;
+
+    	var EncodeData = encodeURI(searchInput);
+    	alert(EncodeData)
+
+    	location.href="./main?k="+EncodeData;
+    	
+    }
+}
+
 window.addEventListener("mousewheel", function(e) {
     var currentPosition = Math.round(window.pageYOffset / innerHeight);
     var stage = document.querySelectorAll(".page");

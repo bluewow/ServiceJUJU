@@ -33,7 +33,7 @@
         <form action ="list" method="get">
             <div id ="search-div">
                 <!-- <label for= "search-text"> -->
-                    <input id ="search-text" type="text" name="companyName">
+                    <input id ="search-text" type="text" name="companyName" value="asdsad">
                     <button class="search-button"></button>
                 <!-- </label> -->
             </div>

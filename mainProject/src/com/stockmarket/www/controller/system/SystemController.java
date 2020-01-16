@@ -6,11 +6,13 @@ import java.util.Scanner;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.stockmarket.www.service.SystemService;
+import com.stockmarket.www.service.basic.BasicSystemAnalysis;
 import com.stockmarket.www.service.basic.BasicSystemService;
 
 @WebServlet("/main")
@@ -20,17 +22,25 @@ public class SystemController extends HttpServlet {
 	static boolean oneShotFlag;
 	static String preHour; 
 	SystemService service;
+	BasicSystemAnalysis analysisService;
 	
 	public SystemController() {
 		oneShotFlag = false;
 		service = new BasicSystemService();
+		analysisService = new BasicSystemAnalysis();
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		//검색했을 때 키워드 값 넘겨받기
+		request.setCharacterEncoding("UTF-8");
+		String keyword = request.getParameter("k");
+		Cookie cookie = new Cookie("keyword", keyword);
+		cookie.setPath("/");
+		response.addCookie(cookie);
 		
 		if(oneShotFlag == true) {
+			request.setAttribute("keyword", keyword);
 			request.getRequestDispatcher("main.jsp").forward(request, response);
 			return;
 		}
@@ -51,6 +61,7 @@ public class SystemController extends HttpServlet {
 		});
 		thread.setDaemon(true);
 		thread.start();
+		
 		request.getRequestDispatcher("main.jsp").forward(request, response);
 	}
 
@@ -72,7 +83,7 @@ public class SystemController extends HttpServlet {
 		if(Integer.parseInt(curHour) >= 9 && Integer.parseInt(curHour) <= 19) {
 			service.refreshStockPrice();
 		}
-		//18시 장종료후 19시 주식데이터 갱신 
+		//18시 장종료후 19시 주식데이터 갱신 stockDetail 데이터
 		if(curHour.equals("20") && preHour.equals("19")) {
 //			TODO
 		}
@@ -80,8 +91,13 @@ public class SystemController extends HttpServlet {
 		if(curHour.equals("19") && preHour.equals("18")) {
 			service.insertRecordAsset();
 		}
-	
 		
+		//매일 오전 8시 분석데이터 갱신
+		if(curHour.equals("8") && preHour.equals("7")) {
+			analysisService.algorismImpl();
+		}
+			
+	
 		//현재 시간을 preHour flag 에 저장
 		preHour = curHour;
 		
