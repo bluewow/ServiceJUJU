@@ -54,12 +54,12 @@
 <body class="scrollbar custom-scrollbar-style">
    <!-- =============================================================================================================== -->
    <header class="navbar">
-      <h1 style="display: none;">Stock Market</h1>
+      <h1 style="display: none;">STOCK MARKET</h1>
       <section class="row">
          <h1 style="display: none;">header</h1>
          <section class="column column-30 col-site-title">
             <h1 style="display: none;">site title</h1>
-            <a href="#" class="site-title float-left">Stock Market</a>
+            <a href="#" class="site-title float-left">STOCK MARKET</a>
             <section class="column column-30">
                <h1 style="display: none;">user section</h1>
                <div class="user-section">
@@ -179,14 +179,14 @@
                         style="border: none">
                         <li class="nav-item"><a class="nav-link active"
                            id="news-tab" data-toggle="tab" href="#news" role="tab"
-                           aria-controls="index1" aria-selected="true">뉴스&이슈</a></li>
+                           aria-controls="index1" aria-selected="true">뉴 스</a></li>
                         <li class="nav-item"><a class="nav-link" id="community-tab"
                            data-toggle="tab" href="#community" role="tab"
-                           aria-controls="index2" aria-selected="false">전체 커뮤니티</a></li>
+                           aria-controls="index2" aria-selected="false">&nbsp;&nbsp;전체 커뮤니티&nbsp;&nbsp;</a></li>
                         <li class="nav-item"><a class="nav-link"
                            id="eventcommunity-tab" data-toggle="tab"
                            href="#eventcommunity" role="tab" aria-controls="index3"
-                           aria-selected="false">종목별 커뮤니티</a></li>
+                           aria-selected="false">&nbsp;&nbsp;종목 커뮤니티&nbsp;&nbsp;</a></li>
                      </ul>
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="news" role="tabpanel"
@@ -218,10 +218,10 @@
                         style="border: none">
                         <li class="nav-item"><a class="nav-link active"
                            id="Purchaselist-tab" data-toggle="tab" href="#Purchaselist"
-                           role="tab" aria-controls="index1" aria-selected="true">보유목록</a></li>
+                           role="tab" aria-controls="index1" aria-selected="true">&nbsp;&nbsp;보유 종목&nbsp;&nbsp;</a></li>
                         <li class="nav-item"><a class="nav-link" id="Interest-tab"
                            data-toggle="tab" href="#Interest" role="tab"
-                           aria-controls="index2" aria-selected="false">관심목록</a></li>
+                           aria-controls="index2" aria-selected="false">&nbsp;&nbsp;관심 종목&nbsp;&nbsp;</a></li>
                      </ul>
                      <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="Purchaselist"
@@ -247,7 +247,7 @@
                            style="border: none">
                            <li class="nav-item"><a class="nav-link active"
                               id="assetgraph-tab" data-toggle="tab" href="#assetgraph"
-                              role="tab" aria-controls="index1" aria-selected="true">MY 자산</a></li>
+                              role="tab" aria-controls="index1" aria-selected="true">&nbsp;&nbsp;MY 자산&nbsp;&nbsp;</a></li>
                
                         </ul>
                         <div class="tab-content" id="myTabContent">

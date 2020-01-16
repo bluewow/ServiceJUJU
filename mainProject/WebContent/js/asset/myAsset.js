@@ -14,7 +14,7 @@ window.addEventListener("load", function () {
     request.open("GET", "../../card/asset/myAsset-json", true);
 
     request.onload = function () {
-      // alert(request.responseText);
+      alert(request.responseText);
 
       var list = JSON.parse(request.responseText);
 
@@ -237,13 +237,13 @@ window.addEventListener("load", function () {
           type: "donut",
           colors: distrColorData,
           onclick: function(d, element) {
-            // console.log("onclick", d, element);
+            console.log("onclick", d, element);
           },
           onover: function(d, element) {
-        // console.log("onover", d, element);
+        console.log("onover", d, element);
       },
       onout: function(d, i) {
-        // console.log("onout", d, i);
+        console.log("onout", d, i);
       }
     },
         donut: {
@@ -256,7 +256,7 @@ window.addEventListener("load", function () {
           show: false
         },
         size: {
-          height:190
+          height:180
         },
         tooltip: {
           format: {
@@ -264,52 +264,15 @@ window.addEventListener("load", function () {
               return "";		
             },
             value: function(value, ratio){
-              var format = d3.format(',')
-              return format(value)+","+ratio;
+              var valueFormat = d3.format(',');
+              var ratioFormat = d3.format(".1f");
+              return valueFormat(value)+" ("+ratioFormat(ratio*100)+")";
             }
       }
     }
   });
-  // console.log(distrChart.internal.charts[1]);
+  console.log(distrChart.internal.charts[1]);
   
-  
-  // var distrData = new google.visualization.DataTable();
-  // distrData.addColumn('string', 'stockName');
-  // distrData.addColumn('number', 'ratio');
-  // distrData.addColumn({ type: 'string', role: 'tooltip' });
-  
-  // function formatNumber(num) {
-    //   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-    // }
-    // for (var i = 0; i < list[0].distJson.length; i++) {
-      
-      //   var stockName = list[0].distJson[i].stockName;
-      //   var assetValue = formatNumber(list[0].distJson[i].assetValue);
-      //   var ratio = list[0].distJson[i].ratio;
-
-      //   distrData.addRows([
-      //     [stockName, ratio, stockName + ": " + assetValue + "원"]
-      //   ]);
-      // }
-
-      // var distrOptions = {
-      //   pieHole: 0.45,
-      //   pieSliceTextStyle: {
-      //     color: 'black',
-      //   },
-      //   pieSliceBorderColor: "none",
-      //   backgroundColor: "none",
-      //   colors: ['#F2F2F2', '#BF737C', '#689ABC', '#585B5E'],
-      //   legend: 'none',
-      //   pieSliceText: "value"
-      // };
-
-      // var formatter = new google.visualization.NumberFormat({ pattern: '#.#' });
-      // formatter.format(distrData, 1);
-
-      // var distrChart = new google.visualization.PieChart(document.getElementById('donut_single'));
-      // distrChart.draw(distrData, distrOptions);
-
     };
     request.send();
   };

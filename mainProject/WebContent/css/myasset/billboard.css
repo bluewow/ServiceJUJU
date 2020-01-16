@@ -318,7 +318,7 @@
 
 /*-- Subcahrt custom --*/
 .bb .overlay {
-  --fill: #bbbbbb30;
+  fill: #efefef30;
   stroke: #efefef;
   stroke-width: 1.5px;
 }
@@ -336,8 +336,8 @@
 
   /* distr-chart custom */
 
-  #graph-assetDistr .bb-chart-arcs{
-	transform: translate(195.297, 150) !important;
+  #graph-assetDistr svg{
+	margin-top: 18px;
   }
 
 /*# sourceMappingURL=billboard.css.map*/
