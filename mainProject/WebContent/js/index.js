@@ -6,7 +6,6 @@ function enterkey() {
     	var searchInput = document.querySelector(".search__input").value;
 
     	var EncodeData = encodeURI(searchInput);
-    	alert(EncodeData)
 
     	location.href="./main?k="+EncodeData;
     	

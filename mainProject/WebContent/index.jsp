@@ -23,7 +23,9 @@
             <div class="bg-img"></div>
             <div class="main-contents">
             	<div class="title-img">
-               		 <h2>주식을 쇼핑하다</h2>
+	            	<div>
+	               		 <a href="./main"><img src="../images/index_title.png"/></a>
+               		</div>
 				</div>
                 <div class="search">
 					  <input type="checkbox" id="trigger" class="search__checkbox" />
