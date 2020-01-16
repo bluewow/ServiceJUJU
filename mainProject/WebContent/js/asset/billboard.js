@@ -6266,7 +6266,7 @@ var Options_Options = function Options() {
     },
     title_position: "center"
   };
-};
+};` `
 
 
 // CONCATENATED MODULE: ./src/config/config.js
