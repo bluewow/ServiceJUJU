@@ -30,7 +30,7 @@
 					  <label class="search__label-init" for="trigger"></label>
 					  <label class="search__label-active" for="trigger"></label>
 					  <div class="search__border"></div>
-					  <input type="text" class="search__input" onkeyup="enterkey()" />
+					  <input type="text" class="search__input" onkeyup="enterkey()" style="border: none !important;"/>
 					  <div class="search__close"></div>
 				</div>
 				<div class="notice">
