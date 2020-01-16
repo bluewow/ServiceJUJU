@@ -35,14 +35,19 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		ResultSet rs = null;
 		Map<String, CurStock> map = new HashMap<String, CurStock>();
 		
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				if (AppContext.getStockMarket() != null) {
+//		new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				if (AppContext.getStockMarket() != null) {
+//					map.putAll(AppContext.getStockMarket());
+//				}
+//			}
+//		}).start();
+		
+
+				if (AppContext.getStockMarket().keySet() != null)
 					map.putAll(AppContext.getStockMarket());
-				}
-			}
-		}).start();
+		
 		// 더미 / 나중에 지워야함.
 //		List<CurStock> list = new ArrayList<>();
 //		list.add(new CurStock("035420", "3,000", "상승", "3,000", "+", "2.5"));
@@ -103,6 +108,10 @@ public class JdbcHaveStockDao implements HaveStockDao {
 		List<CurStock> list = new ArrayList<>();
 		PreparedStatement st = null;
 		ResultSet rs = null;
+		Map<String, CurStock> map = new HashMap<String, CurStock>();
+		
+		if (AppContext.getStockMarket().keySet() != null)
+			map.putAll(AppContext.getStockMarket());
 		
 		list.add(new CurStock("035420", "3,000", "상승", "3,000", "+", "2.5"));
 		list.add(new CurStock("000660", "5,000", "하강", "3,000", "-", "3.4"));
