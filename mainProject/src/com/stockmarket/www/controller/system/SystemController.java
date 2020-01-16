@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,9 +29,16 @@ public class SystemController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		//검색했을 때 키워드 값 넘겨받기
+		request.setCharacterEncoding("UTF-8");
+		String keyword = request.getParameter("k");
+		Cookie cookie = new Cookie("keyword", keyword);
+		cookie.setPath("/");
+		response.addCookie(cookie);
+		
 		
 		if(oneShotFlag == true) {
+			request.setAttribute("keyword", keyword);
 			request.getRequestDispatcher("main.jsp").forward(request, response);
 			return;
 		}
@@ -51,6 +59,7 @@ public class SystemController extends HttpServlet {
 		});
 		thread.setDaemon(true);
 		thread.start();
+		
 		request.getRequestDispatcher("main.jsp").forward(request, response);
 	}
 

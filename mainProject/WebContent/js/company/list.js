@@ -1,4 +1,9 @@
 window.addEventListener("load", function() {
+	var searchText = document.querySelector("#search-text");
+	console.log(searchText)
+	console.log(document.cookie)
+	searchText.setAttribute('value', document.cookie);
+	
 	// codeNum 전달이벤트
 	sendEvent();
 

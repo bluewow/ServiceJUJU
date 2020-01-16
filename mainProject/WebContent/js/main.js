@@ -1,7 +1,6 @@
 window.addEventListener("load", function() {
 	var stage = document.querySelector("#dragdiv");
 	var currentCard;
-
 	function load(e) {
 		var request = new XMLHttpRequest();
 
@@ -122,4 +121,6 @@ window.addEventListener("load", function() {
         
         request.send(data);
 	}
+	
+	
 });
