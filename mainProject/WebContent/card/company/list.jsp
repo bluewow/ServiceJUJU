@@ -65,11 +65,14 @@
                         <a href="${sector.website}" target="_blank"><img src="/css/company/link.png"></a></div>
                     </td>
                     
-                    <td id ="stockItemName" class="wrap">
+                   <%--  <td id ="stockItemName" class="wrap">
                         <a>${sector.mainProduct}</a>
                         <div class="help">${sector.mainProduct}</div>
-                    </td>
+                    </td> --%>
                     
+                    <td>
+                    <a href="#" id ="stockItemName" title="${sector.mainProduct}" >${sector.mainProduct}</a> 
+                    </td>
                     
                     
                     <!-- 로그인 체크 -->
