@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.stockmarket.www.dao.MemberDao;
 import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
 import com.stockmarket.www.entity.CommunityBoard;
@@ -58,7 +59,7 @@ public class DetailJsonController extends HttpServlet {
 		
 		int result = communityBoardService.updateCommunityBoard(communityBoard);
 
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
 		String Json = gson.toJson(hm);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");

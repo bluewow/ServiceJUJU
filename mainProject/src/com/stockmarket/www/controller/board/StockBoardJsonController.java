@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.stockmarket.www.dao.MemberDao;
 import com.stockmarket.www.dao.StockDao;
 import com.stockmarket.www.dao.jdbc.JdbcMemberDao;
@@ -83,12 +84,15 @@ public class StockBoardJsonController extends HttpServlet {
 		hm.put("loginUser", loginUser);
 		hm.put("list", list);
 		hm.put("stockName", stockName);
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
+		
 		String json = gson.toJson(hm);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.write(json);
+		System.out.println(list);
+		System.out.println(json);
 
 	}
 
