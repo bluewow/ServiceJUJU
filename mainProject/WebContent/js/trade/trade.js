@@ -98,7 +98,7 @@ bb.defaults({
     bar: { padding: 5 },
     size: {
     	width: 200,
-        height: 350
+        height: 320
     },
 });
 
