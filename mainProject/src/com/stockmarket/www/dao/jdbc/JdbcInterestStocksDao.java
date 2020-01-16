@@ -76,7 +76,6 @@ public class JdbcInterestStocksDao implements InterestStocksDao {
 	public int delete(int memberId, String StockCode) {
 		
 		String sql = "delete interest_stock where member_id=? and stock_id=?";
-
 		int result = 0;
 		PreparedStatement st = null;
 		JdbcDaoContext daoContext = new JdbcDaoContext();

@@ -16,6 +16,8 @@ window.addEventListener("load", function() {
 						.querySelector("#analysis-window");
 				var tradeWindow = parent.document
 						.querySelector("#trade-window");
+				var interestWindow = parent.document
+				.querySelector("#interestlist-window");
 
 				stockBoardWindow.contentWindow.postMessage(codenum,
 						"http://localhost:8080/card/board/stock_board.jsp");
@@ -23,6 +25,9 @@ window.addEventListener("load", function() {
 						"http://localhost:8080/card/trade/analysis.jsp");
 				tradeWindow.contentWindow.postMessage(codenum,
 						"http://localhost:8080/card/trade/trading.jsp");
+				interestWindow.contentWindow.postMessage(codenum,
+				"http://localhost:8080/card/managestocks/interestlist.jsp");
+				
 			}
 		}
 	}

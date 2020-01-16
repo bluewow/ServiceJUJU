@@ -34,26 +34,11 @@ public class InterestStocksController extends HttpServlet {
 		interestViewInterface = new BasicInterestViewService();
 	}
 
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-//        String stockName = request.getParameter("stockname");
-//        System.out.println(stockName);
-//		super.doPost(request, response);
-	}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		int userId = (int)session.getAttribute("id");
-		
-			request.setAttribute("list", interestViewInterface.getInterestViewList(userId));
 			
-//			for(InterestView data : interestlist)
-//			{
-//				System.out.println(data.toString());
-//			}
 			request.getRequestDispatcher("interestlist.jsp").forward(request, response);	
 		
 

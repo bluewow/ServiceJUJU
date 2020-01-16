@@ -89,7 +89,7 @@ public class JdbcCommunityBoardDao implements CommunityBoardDao {
 	@Override
 	public CommunityBoard getCommunityBoardDetail(int id) {
 
-		String sql = "SELECT b.ID ID, B.TITLE TITLE, B.WRITER_ID WRITER_ID, B.REGDATE REGDATE, B.CONTENT CONTENT, B.HIT HIT , S.NAME STOCKNAME FROM BOARD B LEFT OUTER JOIN STOCK S ON b.STOCKCODE = s.CODENUM WHERE ID=?";
+		String sql = "SELECT b.ID ID, B.TITLE TITLE, B.WRITER_ID WRITER_ID, B.REGDATE REGDATE, B.CONTENT CONTENT, B.HIT HIT , S.COMPANYNAME STOCKNAME FROM BOARD B LEFT OUTER JOIN KOREASTOCKS S ON b.STOCKCODE = s.STOCKCODE WHERE ID=?";
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		CommunityBoard communityBoard = null;

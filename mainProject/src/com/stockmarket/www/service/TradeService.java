@@ -38,7 +38,7 @@ public interface TradeService {
 	void delHaveStock(int memberId, String codeNum);
 	
 	/* 매수/매도 실행 */
-	void tradeBuySell(int id, String codeNum, int qty, int curStockPrice);
+	void trade(int id, String codeNum, int qty, int curStockPrice);
 	
 	/* 일봉 데이터를 가져온다 */
 	List<StockDetail> getDailyPrice(String codeNum);

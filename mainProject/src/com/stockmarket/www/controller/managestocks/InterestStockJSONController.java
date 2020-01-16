@@ -2,6 +2,7 @@ package com.stockmarket.www.controller.managestocks;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -22,6 +23,7 @@ import com.stockmarket.www.service.basic.BasicInterestViewService;
 public class InterestStockJSONController extends HttpServlet{
 	
 	
+	private static final long serialVersionUID = -794157807520021418L;
 	private InterestStocksService interestStocksInterface;
 	private InterestViewService interestViewInterface;
 	
@@ -38,32 +40,30 @@ public class InterestStockJSONController extends HttpServlet{
 
 		response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-		
-
 		HttpSession session = request.getSession();
 		
-		boolean firstSetting = true;
 	
 		int userId = (int)session.getAttribute("id");
-		String codeNum = request.getParameter("codeNum");
-		
-		
-	    if(codeNum != null || firstSetting ) {
-	    	updateCurrentPrice(request,response,userId);
-	    	return;
-	    }
+	    updateCurrentPrice(request,response,userId);
 		
 	}
 	
 	private void updateCurrentPrice(HttpServletRequest request,HttpServletResponse response , int userId) throws IOException {
 		
-		List<InterestView> interestlist = interestViewInterface.getInterestViewList(userId);
-		
+		if(interestViewInterface.getInterestViewList(userId).isEmpty()) {
+		    Gson gson = new Gson();
+			String json = gson.toJson(-1);
+	        PrintWriter out = response.getWriter();
+	        out.write(json);
+		}
+		else {
+		List<InterestView> interestlist = new ArrayList<InterestView>();
+		interestlist = interestViewInterface.getInterestViewList(userId);
         Gson interestGson = new Gson();
 		String interestJson = interestGson.toJson(interestlist);
         PrintWriter out = response.getWriter();
 		out.write(interestJson);
-		
+		}
 	}
 	
 	@Override
@@ -76,15 +76,9 @@ public class InterestStockJSONController extends HttpServlet{
 		int userId = (int)session.getAttribute("id");
 		String delStockName = request.getParameter("delStockName");
 
-		
-		interestStocksInterface.deleteStock(userId,delStockName);
-		
-		List<InterestView> interestlist = interestViewInterface.getInterestViewList(userId);
-		
-        Gson interestGson = new Gson();
-		String interestJson = interestGson.toJson(interestlist);
+		int result = interestStocksInterface.deleteStock(userId,delStockName);	
         PrintWriter out = response.getWriter();
-		out.write(interestJson);
+		out.write(result);
 	}
 	
 

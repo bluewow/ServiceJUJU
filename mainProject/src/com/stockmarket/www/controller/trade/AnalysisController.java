@@ -50,7 +50,6 @@ public class AnalysisController extends HttpServlet{
 			HashMap<Object, Object>map = new HashMap<>();
 			Map<String, CurStock> stocks = AppContext.getStockMarket();
 			CurStock curStock = null; 
-
 			for(String getCodeNume : stocks.keySet()) {
 				if(getCodeNume.equals(codeNum)) {
 //					System.out.println(stocks.get(getCodeNume).toString()); //for debugging

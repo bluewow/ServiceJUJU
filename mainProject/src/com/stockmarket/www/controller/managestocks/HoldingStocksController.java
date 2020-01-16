@@ -34,12 +34,11 @@ public class HoldingStocksController extends HttpServlet{
 		
 		response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-       /* 
+
 		HttpSession session = request.getSession();
 		
-		boolean firstSetting = true;
         int userId = (int)session.getAttribute("id");
-        
+    	/*	  
 	    String codeNum = request.getParameter("codeNum");
 	    if(codeNum != null || firstSetting ) {
 	    	updateCurrentPrice(request,response,userId);
@@ -53,7 +52,8 @@ public class HoldingStocksController extends HttpServlet{
 
 //        System.out.println(json);
 
-//		request.setAttribute("list", HoldingStocksInterface.getInterestHoldingList(userId));
+		request.setAttribute("list", HoldingStocksInterface.getInterestHoldingList(userId));
+        
 		request.getRequestDispatcher("holdinglist.jsp").forward(request, response);
 	}
 	
