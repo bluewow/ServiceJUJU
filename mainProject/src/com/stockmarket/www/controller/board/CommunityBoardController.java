@@ -58,7 +58,7 @@ public class CommunityBoardController extends HttpServlet {
 		String stockCode_ = request.getParameter("s");
 		if (stockCode_ != null && !stockCode_.equals(""))
 			stockCode = stockCode_;
-
+		
 		request.setAttribute("CommunityBoard", communityBoardService.getCommunityBoardList(page, field, query, stockCode, id)); // 컨트롤러가 할 일은 데이터를 준비하는 일
 		request.setAttribute("loginId", id);
 

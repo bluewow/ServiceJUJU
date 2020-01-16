@@ -65,6 +65,9 @@ public class CommunityBoardJsonController extends HttpServlet {
 		if (query_ != null && !query_.equals(""))
 			query = query_;
 
+		if(query.equals("my"))
+			query = loginUser;
+
 		String stockName_ = request.getParameter("s");
 		if (stockName_ != null && !stockName_.equals(""))
 			stockName = stockName_;

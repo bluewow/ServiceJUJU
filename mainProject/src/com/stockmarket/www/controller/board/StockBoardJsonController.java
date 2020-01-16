@@ -48,7 +48,6 @@ public class StockBoardJsonController extends HttpServlet {
 			loginId = (Integer) tempId;
 		MemberDao memberDao = new JdbcMemberDao();
 		String loginUser = memberDao.getMember(loginId).getNickName();
-
 		// 게시글목록을 불러온다.
 		int page = 1;
 		String field = "TITLE";
@@ -64,12 +63,16 @@ public class StockBoardJsonController extends HttpServlet {
 			field = field_;
 
 		String query_ = request.getParameter("q");
-		if (query_==("my")) 
+		if (query_ != null && !query_.equals("")) 
+			query = query_;
+		
+		if(query.equals("my"))
 			query = loginUser;
 
 		String stockCode_ = request.getParameter("s");
 		if (stockCode_ != null && !stockCode_.equals(""))
 			stockCode = stockCode_;
+		
 
 		StockDao stockDao = new JdbcStockDao();
 		String stockName = stockDao.getStockName(stockCode);

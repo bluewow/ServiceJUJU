@@ -719,7 +719,7 @@ window.addEventListener("message", function (e) {
 		e.preventDefault();
 
 		if (e.target.name == "cancel") {
-			alert("글등록이 취소되었다!!")
+			alert("글등록이 취소되었습니다!!")
 			regBoardForm.style.visibility = "hidden";
 			//========= 글쓰기 등록 버튼 클릭==================
 		} else if (e.target.name == "submit") {

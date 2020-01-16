@@ -16,14 +16,17 @@ window.addEventListener("load", function () {
 		e.preventDefault();
 		if(sortBoard=="") {
 			sortBoard = "my";
-			myButton.classList.add("button-on"); 
+			myButton.classList.add("button-on");
+
+		} else if(sortBoard=="interest") {
 			sortBoard = "my";
 			myButton.classList.add("button-on");
 			interestButton.classList.remove("button-on");
-		} else if(sortBoard=="my") {
+		} else {
 			sortBoard = "";
 			myButton.classList.remove("button-on");
 		}
+		console.log(sortBoard)
 		load(1, sortBoard);
 	};
 	
@@ -52,11 +55,11 @@ window.addEventListener("load", function () {
 
 		var request = new XMLHttpRequest();
 		if(sortBoard=="")
-			request.open("GET", "../../card/board/stock_board_list?p=" + page);
+			request.open("GET", "../../card/board/community_board_list?p=" + page);
 		else if(sortBoard=="my")
-			request.open("GET", "../../card/board/stock_board_list?f=writer_id&q=my&p=" + page);
+			request.open("GET", "../../card/board/community_board_list?f=writer_id&q=my&p=" + page);
 		else if(sortBoard=="interest")
-			request.open("GET", "../../card/board/stock_board_list?f=interest&p=" + page);
+			request.open("GET", "../../card/board/community_board_list?f=interest&p=" + page);
 	
 		
 		request.onload = function () {
