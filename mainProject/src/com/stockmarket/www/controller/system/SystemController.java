@@ -39,7 +39,6 @@ public class SystemController extends HttpServlet {
 		cookie.setPath("/");
 		response.addCookie(cookie);
 		
-		
 		if(oneShotFlag == true) {
 			request.setAttribute("keyword", keyword);
 			request.getRequestDispatcher("main.jsp").forward(request, response);

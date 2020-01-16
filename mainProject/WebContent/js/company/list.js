@@ -1,9 +1,23 @@
 window.addEventListener("load", function() {
-	var searchText = document.querySelector("#search-text");
-	console.log(searchText)
-	console.log(document.cookie)
-	searchText.setAttribute('value', document.cookie);
 	
+	//쿠키 삭제하는 함수
+	function deleteCookie( cookieName ) {
+		var expireDate = new Date();
+		//어제 날짜를 쿠키 소멸 날짜로 설정한다.
+		expireDate.setDate( expireDate.getDate() - 1 );
+		document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString() + "; path=/";
+	}
+
+		//메인페이지에서 검색버튼 누르면 자동검색
+		var searchText = document.querySelector("#search-text");
+		var textSub = document.cookie.substr(8,20);
+		searchText.setAttribute('value', textSub);
+		if(textSub!=""){
+			document.querySelector(".search-button").click();
+			textSub="";
+			deleteCookie("keyword");
+			}
+		
 	// codeNum 전달이벤트
 	sendEvent();
 
