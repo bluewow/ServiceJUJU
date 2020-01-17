@@ -230,13 +230,13 @@ td {
     /* transition: transform .2s ease-out; */
     transform: translateY(0%) translateX(5%) scale(1) !important;
     transform-origin: bottom left;
-
 	/* display: inline-block;
     width: 80px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis; */
 }
+
 
 .tooltip:before {
 	content: " ";
@@ -249,3 +249,7 @@ td {
 	bottom: -5px;
 	left: 5px;
 }
+
+  
+a{text-decoration: none ,color:#000000;}
+
