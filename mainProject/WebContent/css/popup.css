@@ -134,14 +134,16 @@ input.top-bottom-margin {
  .personal input {
     background-color: transparent !important; 
     border: none;
-    font-size: 1em; 
+    font-size: 0.9em; 
     font-weight: 500;
 
 }
  .personal .small {
+ 	margin-top: 10px;
 	padding-left: 0px;
-	font-size: 1.2em;
-	font-weight:700;
+	padding-right: 0px;
+	font-size: 0.9em;
+	font-weight:500;
 }
 
 /*

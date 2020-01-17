@@ -231,7 +231,7 @@ window.addEventListener("load", function(){
 			    profilePhoto.parentNode.innerHTML =
 			    	`<img src="/images/profile/${photoImg}.png" 
 			    	alt="profile photo" class="circle float-left profile-photo"
-			    	 width="50" height="auto">
+			    	 width="60" height="auto">
 			    	<input class="small animation-2" type="button" value="${userId}">
 			    	 <input class="animation-2" type="button" value="로그아웃">`;
 		        changePhoto.parentNode.innerHTML = 

@@ -28,7 +28,7 @@ public class JdbcInterestViewDao implements InterestViewDao {
 		List<InterestView> interestlist = new ArrayList<>();
 
 		Map<String, CurStock> map = new HashMap<String, CurStock>();
-		
+
 //		List<CurStock> list = new ArrayList<>();
 //		list.add(new CurStock("035420", "3,000", "상승", "3,000", "+", "2.5"));
 //		list.add(new CurStock("000660", "5,000", "하강", "3,000", "-", "3.4"));
@@ -40,31 +40,25 @@ public class JdbcInterestViewDao implements InterestViewDao {
 //		list.add(new CurStock("215600", "7,000", "하강", "3,000", "-", "10"));
 
 //		
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				if (AppContext.getStockMarket() != null) {
-					map.putAll(AppContext.getStockMarket());
-				}
-			}
-		}).start();
+		if (AppContext.getStockMarket() != null)
+			map.putAll(AppContext.getStockMarket());
 
 		try {
 			st = daoContext.getPreparedStatement(sql);
 			st.setInt(1, id);
 			rs = st.executeQuery();
 
-			while (rs.next()){
+			while (rs.next()) {
 				String stockName = rs.getString("STOCKNAME");
 				String stockId = rs.getString("STOCKCODE");
 
 				for (Entry<String, CurStock> data : map.entrySet()) {
 
-					if (stockId.equals(data.getValue().getCodeNum())){
+					if (stockId.equals(data.getValue().getCodeNum())) {
 						String price = data.getValue().getPrice();
 						String gain = data.getValue().getGain();
 						String percent = data.getValue().getPercent();
-						InterestView interestview = new InterestView(stockName, price, percent,gain);
+						InterestView interestview = new InterestView(stockName, price, percent, gain);
 						interestlist.add(interestview);
 						break;
 					}

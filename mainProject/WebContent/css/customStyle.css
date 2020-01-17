@@ -3,6 +3,12 @@
 /* 에스코어 드림 폰트 */
 @font-face {
 	font-family: "에스코어 드림";
+	src: url(../fonts/SCDREAM4.OTF) format('opentype');
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: "에스코어 드림";
 	src: url(../fonts/SCDREAM5.OTF) format('opentype');
 	font-weight: 500;
 }
@@ -23,6 +29,36 @@
 	font-family: "에스코어 드림";
 	src: url(../fonts/SCDREAM9.OTF) format('opentype');
 	font-weight: 900;
+}
+
+/* 서울 한강체 */
+@font-face{
+	font-family: "서울한강체";
+	src: url(../fonts/SEOULHANGANGL.TTF) format('truetype');
+	font-weight: lighter;
+}
+
+@font-face{
+	font-family: "서울한강체";
+	src: url(../fonts/SEOULHANGANGM.TTF) format('truetype');
+	font-weight: normal;
+}
+
+@font-face{
+	font-family: "서울한강 장체";
+	src: url(../fonts/서울한강 장체L.TTF) format('truetype');
+	font-weight: lighter;
+}
+
+@font-face{
+	font-family: "서울한강 장체";
+	src: url(../fonts/서울한강 장체M.TTF) format('truetype');
+	font-weight: normal;
+}
+@font-face{
+	font-family: 제주;
+	src: url(../fonts/JejuMyeongjo.ttf) format('truetype');
+	--font-weight: normal;
 }
 
 /* 커서 포인터 수정 */

@@ -16,38 +16,63 @@ button{
 
 }
 table {
-	margin-top:20px;
-	width:100%;
+	text-align: center;
+	border-collapse: collapse;
+	width: 93%;
+	margin-right: 10%;
+	margin-left: 4%;
+	font-size: 100%;
+	margin-top: 5%;
 }
-td{
-	 text-align:center;
-	 border-bottom: 1px solid #ada8a8;
-	 margin-top: 10px;
-	 padding: 10px;
+tr{
+	border-bottom-style: solid;
+    border-width: 1.5px;
+    border-color: #efefef;
+}
+
+thead{
+	border-bottom-style: solid;
+	border-bottom: 3.5px solid #efefef;
+	border-left: none;
 }
 th{
+	font-family: "에스코어 드림";
+	font-weight: 500;
+	font-size: 1em;
+	color: #585B5E;	
 	text-align:center;
 	border-bottom:3px solid #ada8a8;
 	border-left:none;
+	padding: 0px 10px 5px 10px
 }
-tr{
+td{
+	font-family: "서울한강체";
+	font-weight: bold;
+	font-size: 1em;
+	color: #585B5E;
+	 text-align:right;
+	 border-bottom: 1px solid #ada8a8;
+	 --margin-top: 10px;
 	 padding: 10px;
 }
 
 span{
-	font-size:small;
+	font-size:1em;
 	
 }
 
+tr:nth-child(6) {
+    color: beige !important;
+}
 
 .down{
-	color:blue;
-	text-align:center;
+	color:#689ABC;
+	text-align:right;
 }
 
 .up{
-	color:red;
-	text-align:center;
+	color:#BF737C;
+	text-align:right;
 }
 
 #scroll {

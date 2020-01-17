@@ -8,6 +8,6 @@
 <link rel="stylesheet" type="text/css" href="../../css/normalize.css">
 </head>
 <body class="scrollbar custom-scrollbar-style">
-	<img src="../../images/requestLogin.png" style="max-width:100%; height:auto">
+	<img src="../../images/requestLogin.png" style="max-width:100%; height:auto; padding-top: 11px;">
 </body>
 </html>
