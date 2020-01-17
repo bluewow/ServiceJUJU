@@ -26,7 +26,6 @@ window.addEventListener("load", function () {
 			sortBoard = "";
 			myButton.classList.remove("button-on");
 		}
-		console.log(sortBoard)
 		load(1, sortBoard);
 	};
 	
@@ -198,7 +197,6 @@ window.addEventListener("load", function () {
 			var contentSum = "";
 			var aTagDetail = cloneTr.querySelector(".reg-reply-button");
 			aTagDetail.dataset.id = id;
-			console.log(detail)
 			aTagDetail.dataset.writerId = detail.loginUser;
 			for (var i = 0; i < detail.replys.length; i++) {
 				if(detail.loginUser == detail.replys[i].writerId){

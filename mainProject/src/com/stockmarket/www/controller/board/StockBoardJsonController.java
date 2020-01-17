@@ -84,8 +84,7 @@ public class StockBoardJsonController extends HttpServlet {
 		hm.put("loginUser", loginUser);
 		hm.put("list", list);
 		hm.put("stockName", stockName);
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
-		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		String json = gson.toJson(hm);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");

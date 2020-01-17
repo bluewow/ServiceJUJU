@@ -59,7 +59,7 @@ public class DetailJsonController extends HttpServlet {
 		
 		int result = communityBoardService.updateCommunityBoard(communityBoard);
 
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		String Json = gson.toJson(hm);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
