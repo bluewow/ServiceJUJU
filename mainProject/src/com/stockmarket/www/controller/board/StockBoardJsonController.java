@@ -91,8 +91,6 @@ public class StockBoardJsonController extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.write(json);
-		System.out.println(list);
-		System.out.println(json);
 
 	}
 
