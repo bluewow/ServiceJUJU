@@ -1,4 +1,4 @@
-<<<<<<< HEAD:mainProject/WebContent/css/holding.css
+
 @charset "UTF-8";
 
 header{
@@ -37,7 +37,7 @@ thead{
 	border-left: none;
 }
 th{
-	font-family: "에스코어 드림";
+	font-family: "�뿉�뒪肄붿뼱 �뱶由�";
 	font-weight: 500;
 	font-size: 1em;
 	color: #585B5E;	
@@ -47,7 +47,7 @@ th{
 	padding: 0px 10px 5px 10px
 }
 td{
-	font-family: "서울한강체";
+	font-family: "�꽌�슱�븳媛뺤껜";
 	font-weight: bold;
 	font-size: 1em;
 	color: #585B5E;
@@ -245,4 +245,4 @@ bottom:10;
 }
 .backarea :nth-child(4){
  margin-top:10px;
->>>>>>> 12b12e7d7805beafec1e4387cd9464c1288447a4:mainProject/WebContent/css/managestocks.css
+
