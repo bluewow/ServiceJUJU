@@ -47,10 +47,10 @@
         <table>
             <thead>
                 <tr>
-                    <td>번호</td>
-                    <td>종목명</td>
-                    <td>산업분류</td>
-                    <td>관심</td>
+                    <th>번호</th>
+                    <th>종목명</th>
+                    <th>산업분류</th>
+                    <th>관심</th>
                 </tr>
             </thead>
             
