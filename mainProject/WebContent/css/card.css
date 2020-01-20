@@ -32,6 +32,10 @@
 	
 }
 
+.card .card-block .nav-tabs .nav-link:hover {
+	color:#585B5E;
+}
+
 .card .card-block .nav-tabs .nav-link-s {
 	text-align: center;
 	width: 110px;

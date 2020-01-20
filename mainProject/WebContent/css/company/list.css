@@ -110,7 +110,6 @@ table {
 
 thead {
 	text-align: center;
-	border-bottom-style: solid;
 	border-bottom: 3.5px solid #efefef;
 	border-left: none;
 }
@@ -120,6 +119,7 @@ th {
 	font-weight: 500;
 	font-size: 1em;
 	color: #585B5E;	
+	padding: 10px;
 }
 
 tbody {

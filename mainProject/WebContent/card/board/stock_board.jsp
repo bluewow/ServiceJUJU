@@ -29,7 +29,7 @@
 	<section id="stockTop">
 		<nav id="my-menu">
 			<a href="" id="selected-stock">종목을 선택하세요</a>
-			<a href="" id="my-button">My</a>
+			<a href="" id="my-button">MY</a>
 			<a href="" id="favo-button">관심</a>
 			<a href="" id="reg-button">글쓰기</a>
 		</nav>
@@ -50,10 +50,12 @@
 		<table class="stockTable">
 			<tbody class="content">
 				<tr>
-					<td colspan="5" style="text-align: center; height: 50px; line-height: 50px;"><br>작성된 글이 없거나 종목이 선택되지 않았습니다.</td>
+					<td colspan="5" style="text-align: center; height: 50px; line-height: 50px;">
+					<br><br>작성된 글이 없거나 종목이 선택되지 않았습니다.<br><br>검색창에서 종목을 선택해 주세요.
+					</td>
 				</tr>
 				<tr class="detail">
-					<td colspan=5><br><br><br>검색창에서 종목을 선택해 주세요.
+					<td colspan=5>
 					</td>
 				</tr>
 			</tbody>

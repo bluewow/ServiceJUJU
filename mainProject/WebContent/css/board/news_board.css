@@ -24,16 +24,23 @@
 	border-collapse: collapse;
 }
 
+#newsTable thead td{
+	padding: 10px 10px 0px 10px;
+}
+
+#newsTable tbody td{
+	padding: 10px;
+}
+
 #newsTable tr {
-	height: 40px;
+	
 }
 
 #newsTable td {
 	font-family: 서울한강체;
 	color: #585b5e;
-	border-bottom: 1px solid #444444;
-	border-bottom-color: #85888a;
-	padding: 10px;
+	height: 40px;
+	border-bottom: 1.5px solid #efefef;
 }
 
 #newsTable thead td {
