@@ -25,7 +25,7 @@
 <body>
 	<section id="communityTop">
 		<nav id="my-menu">
-			<a href="" id="my-button">My</a>
+			<a href="" id="my-button">MY</a>
 			<a href="" id="favo-button">관심</a>
 			<a href="" id="reg-button" class="hidden">글쓰기</a>
 		</nav>
