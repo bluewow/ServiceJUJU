@@ -77,7 +77,7 @@ public class CommunityBoardJsonController extends HttpServlet {
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		hm.put("loginUser", loginUser);
 		hm.put("list", list);
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		String json = gson.toJson(hm);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
