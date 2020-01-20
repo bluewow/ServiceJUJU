@@ -46,14 +46,18 @@ th{
 	padding: 0px 10px 5px 10px
 }
 td{
+	
 	font-family: "서울한강체";
 	font-weight: bold;
 	font-size: 1em;
 	color: #585B5E;
-	 text-align:right;
+	text-align:right;
 	 border-bottom: 1px solid #ada8a8;
 	 --margin-top: 10px;
 	 padding: 10px;
+}
+.firstTd{
+	text-align:center;
 }
 
 span{

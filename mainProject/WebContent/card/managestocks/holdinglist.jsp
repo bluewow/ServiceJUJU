@@ -30,7 +30,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
    </tr>
    </thead>
    <tbody >
-      <tr><td colspan="5">보유한종목이 없습니다</td></tr>
+      <tr><td class="firstTd" colspan="5">보유한종목이 없습니다</td></tr>
    </tbody>
 
   <!-- <tbody>
@@ -91,14 +91,14 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
       
       <td class="up">
          <span></span>
-        <span>원</span> 
+        <span></span> 
          <br> 
          <span></span>
          %
       </td>
       <td class="down">
          <span></span>
-         <span>원</span>  
+         <span></span>  
          <br> 
          <span></span>
          <span></span>
@@ -106,7 +106,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
       </td>
        <td>
          <span></span>
-         <span>원</span>
+         <span></span>
          <br> 
          <span></span>
          %
@@ -120,11 +120,10 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 		</div>
 		<div>손익금</div>
 		<div>-</div> 
-
 	</div>
     <div class="backarea">
-		<div>매수금</div>
-		<div>-</div>  
+		<div >매수금</div>
+		<div >-</div>  
 		<div>평가금</div>
 		<div>-</div>  
 	</div>
