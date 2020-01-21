@@ -239,14 +239,14 @@ window
 							}
 
 							if (allIncomePercent > 0) {
-								preArea.firstElementChild.nextElementSibling.style.color = "red";
-								preArea.firstElementChild.nextElementSibling.innerText = allIncomePercent
+								preArea.firstElementChild.firstElementChild.nextElementSibling.style.color = "red";
+								preArea.firstElementChild.firstElementChild.nextElementSibling.innerText = allIncomePercent
 										+ "%";
-								preArea.lastElementChild.style.color = "red";
-								preArea.lastElementChild.innerText = addComma(allIncome)
+								preArea.lastElementChild.lastElementChild.style.color = "red";
+								preArea.lastElementChild.lastElementChild.innerText = addComma(allIncome)
 										+ won;
-								backArea.lastElementChild.style.color = "red";
-								backArea.lastElementChild.innerText = addComma(Valuation)
+								backArea.lastElementChild.lastElementChild.style.color = "red";
+								backArea.lastElementChild.lastElementChild.innerText = addComma(Valuation)
 										+ won;
 
 							} else if (allIncomePercent < 0) {
@@ -256,18 +256,18 @@ window
 								preArea.lastElementChild.style.color = "blue";
 								preArea.lastElementChild.innerText = addComma(allIncome)
 										+ won;
-								backArea.lastElementChild.style.color = "blue";
-								backArea.lastElementChild.innerText = addComma(Valuation)
+								backArea.lastElementChild.lastElementChild.style.color = "blue";
+								backArea.lastElementChild.lastElementChild.innerText = addComma(Valuation)
 										+ won;
 							} else {
 								preArea.firstElementChild.nextElementSibling.innerText = "0%";
 								preArea.lastElementChild.innerText = addComma(allIncome)
 										+ won;
-								backArea.lastElementChild.innerText = addComma(Valuation)
+								backArea.lastElementChild.lastElementChild.innerText = addComma(Valuation)
 										+ won;
 							}
 
-							backArea.firstElementChild.nextElementSibling.innerText = addComma(allSum)
+							backArea.firstElementChild.firstElementChild.nextElementSibling.innerText = addComma(allSum)
 									+ won;
 						    };
 						}
