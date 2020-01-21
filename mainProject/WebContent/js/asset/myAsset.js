@@ -70,7 +70,7 @@ window.addEventListener("load", function () {
       // console.log("max: " + max);
       // make tick max
       let maxLength = max.toString().length;
-      let roundValue = max.toString()[1]
+      let roundValue = max.toString()[1];
       let valueLength = 10 ** (maxLength - 1);
       let roundValueLength = 10 ** (maxLength - 2);
       let maxTick;

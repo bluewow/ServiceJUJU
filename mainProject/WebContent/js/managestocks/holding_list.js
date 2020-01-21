@@ -98,37 +98,38 @@ window.addEventListener("message",function(e) {
 							var Valuation = allSum + allIncome;
 
 							if (allIncomePercent > 0) {
-								preArea.firstElementChild.nextElementSibling.className = "up";
-								preArea.firstElementChild.nextElementSibling.innerText = allIncomePercent
+								preArea.firstElementChild.firstElementChild.nextElementSibling.className = "up";
+								preArea.firstElementChild.firstElementChild.nextElementSibling.innerText = allIncomePercent
 										+ "%";
-								preArea.lastElementChild.className = "up";
-								preArea.lastElementChild.innerText = addComma(allIncome)
+								preArea.lastElementChild.lastElementChild.className = "up";
+								preArea.lastElementChild.lastElementChild.innerText = addComma(allIncome)
 										+ won;
-								backArea.lastElementChild.className = "up";
-								backArea.lastElementChild.innerText = addComma(Valuation)
+								backArea.lastElementChild.lastElementChild.className = "up";
+								backArea.lastElementChild.lastElementChild.innerText = addComma(Valuation)
 										+ won;
+
 							} else if (allIncomePercent < 0) {
-								preArea.firstElementChild.nextElementSibling.className = "down";
-								preArea.firstElementChild.nextElementSibling.innerText = allIncomePercent
+								preArea.firstElementChild.firstElementChild.nextElementSibling.className = "down";
+								preArea.firstElementChild.firstElementChild.nextElementSibling.innerText = allIncomePercent
 										+ "%";
-								preArea.lastElementChild.className = "down";
-								preArea.lastElementChild.innerText = addComma(allIncome)
+								preArea.lastElementChild.lastElementChild.className = "down";
+								preArea.lastElementChild.lastElementChild.innerText = addComma(allIncome)
 										+ won;
-								backArea.lastElementChild.className = "down";
-								backArea.lastElementChild.innerText = addComma(Valuation)
+								backArea.lastElementChild.lastElementChild.className = "down";
+								backArea.lastElementChild.lastElementChild.innerText = addComma(Valuation)
 										+ won;
 							} else {
-								preArea.firstElementChild.nextElementSibling.innerText = "0%";
-								preArea.lastElementChild.innerText = addComma(allIncome)
+								preArea.firstElementChild.firstElementChild.nextElementSibling.innerText = "0%";
+								preArea.lastElementChild.lastElementChild.innerText = addComma(allIncome)
 										+ won;
-								backArea.lastElementChild.innerText = addComma(Valuation)
+								backArea.lastElementChild.lastElementChild.innerText = addComma(Valuation)
 										+ won;
 							}
-							backArea.firstElementChild.nextElementSibling.style.textAlign = "right";
-							backArea.firstElementChild.nextElementSibling.innerText = addComma(allSum)
+							backArea.firstElementChild.firstElementChild.nextElementSibling.style.textAlign = "right";
+							backArea.firstElementChild.firstElementChild.nextElementSibling.innerText = addComma(allSum)
+
 									+ won;
-s
-						};
+						    };
 						holdingAjax.send();
 					}
 					;
@@ -239,36 +240,36 @@ window
 							}
 
 							if (allIncomePercent > 0) {
-								preArea.firstElementChild.nextElementSibling.className = "up";
-								preArea.firstElementChild.nextElementSibling.innerText = allIncomePercent
+								preArea.firstElementChild.firstElementChild.nextElementSibling.className = "up";
+								preArea.firstElementChild.firstElementChild.nextElementSibling.innerText = allIncomePercent
 										+ "%";
-								preArea.lastElementChild.className = "up";
-								preArea.lastElementChild.innerText = addComma(allIncome)
+								preArea.lastElementChild.lastElementChild.className = "up";
+								preArea.lastElementChild.lastElementChild.innerText = addComma(allIncome)
 										+ won;
-								backArea.lastElementChild.className = "up";
-								backArea.lastElementChild.innerText = addComma(Valuation)
+								backArea.lastElementChild.lastElementChild.className = "up";
+								backArea.lastElementChild.lastElementChild.innerText = addComma(Valuation)
 										+ won;
 
 							} else if (allIncomePercent < 0) {
-								preArea.firstElementChild.nextElementSibling.className = "down";
-								preArea.firstElementChild.nextElementSibling.innerText = allIncomePercent
+								preArea.firstElementChild.firstElementChild.nextElementSibling.className = "down";
+								preArea.firstElementChild.firstElementChild.nextElementSibling.innerText = allIncomePercent
 										+ "%";
-								preArea.lastElementChild.className = "down";
-								preArea.lastElementChild.innerText = addComma(allIncome)
+								preArea.lastElementChild.lastElementChild.className = "down";
+								preArea.lastElementChild.lastElementChild.innerText = addComma(allIncome)
 										+ won;
-								backArea.lastElementChild.className = "down";
-								backArea.lastElementChild.innerText = addComma(Valuation)
+								backArea.lastElementChild.lastElementChild.className = "down";
+								backArea.lastElementChild.lastElementChild.innerText = addComma(Valuation)
 										+ won;
 							} else {
-								preArea.firstElementChild.nextElementSibling.innerText = "0%";
-								preArea.lastElementChild.innerText = addComma(allIncome)
+								preArea.firstElementChild.firstElementChild.nextElementSibling.innerText = "0%";
+								preArea.lastElementChild.lastElementChild.innerText = addComma(allIncome)
 										+ won;
-								backArea.lastElementChild.innerText = addComma(Valuation)
+								backArea.lastElementChild.lastElementChild.innerText = addComma(Valuation)
 										+ won;
 							}
+							backArea.firstElementChild.firstElementChild.nextElementSibling.style.textAlign = "right";
+							backArea.firstElementChild.firstElementChild.nextElementSibling.innerText = addComma(allSum)
 
-							backArea.firstElementChild.nextElementSibling.style.textAlign = "right";
-							backArea.firstElementChild.nextElementSibling.innerText = addComma(allSum)
 									+ won;
 						    };
 						}

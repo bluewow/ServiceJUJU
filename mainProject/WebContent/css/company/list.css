@@ -30,11 +30,16 @@ body {
 	display: none;
 }
 
+#search-form form {
+	margin-left: 8%;
+    width: 97%;
+}
+
 #search-div {
 	margin-top: 4%;
-	margin-right: 2%;
-	padding-left: 30px;
-	width: 105%;
+	-margin-right: 2%;
+	-padding-left: 30px;
+	width: inherit;
 }
 
 #search-text {

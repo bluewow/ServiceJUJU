@@ -115,17 +115,25 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
    </template>
    <div class="card-footer">
     <div class="prearea">
+    	<div>
 		<div>수익률</div>
-		<div>-
+		<div>-</div>
 		</div>
+    	<div>
 		<div>손익금</div>
 		<div>-</div> 
+    	</div>
+
 	</div>
     <div class="backarea">
-		<div >매수금</div>
-		<div >-</div>  
-		<div>평가금</div>
+    	<div>
+		<div>매수금</div>
 		<div>-</div>  
+		</div>
+		<div>
+		<div>평가금</div>
+		<div>-</div> 
+		</div> 
 	</div>
    </div>
  </div>
