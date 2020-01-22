@@ -12,7 +12,7 @@ import com.stockmarket.www.entity.CommunityBoard;
 public class JdbcCommunityBoardDao implements CommunityBoardDao {
 
 	@Override
-	public List<CommunityBoard> getCommunityBoardList(int page, String field, String query, String stockCode, int loginId) {
+	public List<CommunityBoard> getCommunityBoardList(int page+null, String field, String query, String stockCode, int loginId) {
 		
 		List<CommunityBoard> list = new ArrayList<>();
 
